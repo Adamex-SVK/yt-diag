@@ -32,6 +32,8 @@ _One `.md` per paper. Each file: key idea, method, results, relevance to our pro
 | **Model Architectures** | `2026-08-09_initial_research/model_architectures.md` | 2026-08-10 |
 | **Milestones & To-Do List** | `2026-08-09_initial_research/MILESTONES.md` | 2026-08-09 |
 | **Executive Summary** | `2026-08-09_initial_research/SUMMARY.md` | 2026-08-09 |
+| Compute Scaling (A40 + 96 cores upgrade path) | `2026-08-14_scaling_and_features/compute_scaling.md` | 2026-08-14 |
+| Additional Features (color temp, face area, voice prosody) | `2026-08-14_scaling_and_features/additional_features.md` | 2026-08-14 |
 
 ## Status
 - **Structure**: done
