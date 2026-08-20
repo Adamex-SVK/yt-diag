@@ -1,0 +1,62 @@
+{
+  "scan_date": "2026-08-14",
+  "cap_per_candidate": 500,
+  "results": [
+    {
+      "label": "comedy_skits (categoryId=23)",
+      "retrievable_count": 102,
+      "hit_cap": false,
+      "totalResults_estimate": 3509,
+      "api_calls_used": 3
+    },
+    {
+      "label": "howto_style (categoryId=26)",
+      "retrievable_count": 95,
+      "hit_cap": false,
+      "totalResults_estimate": 5605,
+      "api_calls_used": 2
+    },
+    {
+      "label": "people_blogs / vlogs (categoryId=22, bare filter \u2014 known-broken)",
+      "retrievable_count": 0,
+      "hit_cap": false,
+      "totalResults_estimate": 0,
+      "api_calls_used": 1
+    },
+    {
+      "label": "people_blogs / vlogs (categoryId=22 + q=vlog workaround)",
+      "retrievable_count": 523,
+      "hit_cap": true,
+      "totalResults_estimate": 982771,
+      "api_calls_used": 12
+    },
+    {
+      "label": "product_reviews via science_tech (categoryId=28)",
+      "retrievable_count": 107,
+      "hit_cap": false,
+      "totalResults_estimate": 4184,
+      "api_calls_used": 3
+    },
+    {
+      "label": "product_reviews via entertainment (categoryId=24, bare filter \u2014 known-broken)",
+      "retrievable_count": 0,
+      "hit_cap": false,
+      "totalResults_estimate": 0,
+      "api_calls_used": 1
+    },
+    {
+      "label": "product_reviews via entertainment (categoryId=24 + q=product review)",
+      "retrievable_count": 410,
+      "hit_cap": false,
+      "totalResults_estimate": 607258,
+      "api_calls_used": 10
+    },
+    {
+      "label": "product_reviews via keyword search (no category)",
+      "retrievable_count": 210,
+      "hit_cap": false,
+      "totalResults_estimate": 1000000,
+      "api_calls_used": 6
+    }
+  ]
+}
