@@ -317,13 +317,20 @@ def transcribe_with_whisper(audio_path):
     Lazy-loaded, reused across the whole run -- loading small.en per video
     would dominate runtime otherwise."""
     global _whisper_model
-    try:
-        import whisper
-    except ImportError:
-        warn_once("whisper", "openai-whisper not installed -- videos with missing/poor auto-captions "
-                              "will have NO transcript. Install it (requirements.txt) to get the fallback.")
-        return None
+    # Confirmed 2026-08-22: `import whisper` (which loads torch's native
+    # extensions, e.g. c10.dll) must be INSIDE the lock, not just the model
+    # load/inference below it. With --workers>1, multiple threads hitting
+    # this for the first time simultaneously raced on Windows' DLL loader
+    # ("DLL initialization routine failed") in ~15% of videos on a real
+    # school-computer run -- moving the import inside the lock serializes
+    # the whole first-import-and-load sequence, eliminating the race.
     with _whisper_lock:
+        try:
+            import whisper
+        except ImportError:
+            warn_once("whisper", "openai-whisper not installed -- videos with missing/poor auto-captions "
+                                  "will have NO transcript. Install it (requirements.txt) to get the fallback.")
+            return None
         if _whisper_model is None:
             log("loading Whisper small.en (first use this run)...")
             _whisper_model = whisper.load_model("small.en")
