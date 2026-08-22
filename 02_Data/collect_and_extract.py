@@ -657,10 +657,17 @@ def main():
     parser.add_argument("--resume", action="store_true", help="skip videos already marked .done")
     parser.add_argument("--input-ids", help="path to a CSV (video_id,category) to skip discovery")
     parser.add_argument("--cookies-from-browser", metavar="BROWSER",
-                         help="e.g. chrome, edge, firefox -- pass a real logged-in browser session to yt-dlp. "
-                              "Confirmed 2026-08-22: without this, YouTube's bot-check ('Sign in to confirm "
-                              "you're not a bot') can reject every single video on a network it doesn't trust "
-                              "(observed on a school network). Try this first if downloads are failing.")
+                         help="e.g. edge, firefox -- pass a real logged-in browser session to yt-dlp. Confirmed "
+                              "2026-08-22: without this, YouTube's bot-check ('Sign in to confirm you're not a "
+                              "bot') can reject every single video on a network it doesn't trust (observed on a "
+                              "school network). NOTE: does NOT work with current Chrome -- its App-Bound "
+                              "Encryption breaks external DB decryption (yt-dlp issue #10927); use --cookies "
+                              "with an exported cookies.txt instead if your browser is Chrome.")
+    parser.add_argument("--cookies", metavar="PATH",
+                         help="path to a Netscape-format cookies.txt (e.g. exported via the 'Get cookies.txt "
+                              "LOCALLY' Chrome extension). Use this instead of --cookies-from-browser when the "
+                              "browser is Chrome -- sidesteps issue #10927 since the export goes through "
+                              "Chrome's own extension API, not external DB decryption.")
     parser.add_argument("--pacing", type=float, default=VIDEO_PACING_SEC,
                          help="seconds to wait between videos -- firing requests back-to-back is exactly the "
                               "pattern that triggers the bot-check above")
@@ -668,6 +675,8 @@ def main():
 
     if args.cookies_from_browser:
         YT_DLP_EXTRA_ARGS.extend(["--cookies-from-browser", args.cookies_from_browser])
+    if args.cookies:
+        YT_DLP_EXTRA_ARGS.extend(["--cookies", args.cookies])
 
     check_dependencies()
     os.makedirs(OUT_DIR, exist_ok=True)
