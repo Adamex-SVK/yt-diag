@@ -48,6 +48,7 @@ Requires in venv (requirements.txt): opencv-python-headless, numpy,
 opensmile, openai-whisper.
 """
 import argparse
+import concurrent.futures
 import csv
 import json
 import math
@@ -55,6 +56,7 @@ import os
 import shutil
 import subprocess
 import sys
+import threading
 import time
 import urllib.parse
 import urllib.request
@@ -107,10 +109,13 @@ VIDEO_PACING_SEC = 5.0
 _optional_import_warned = set()
 
 
+_io_lock = threading.Lock()  # guards log/manifest file writes across worker threads
+
+
 def log(msg):
     line = f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] {msg}"
     print(line)
-    with open(LOG_PATH, "a") as f:
+    with _io_lock, open(LOG_PATH, "a", encoding="utf-8") as f:
         f.write(line + "\n")
 
 
@@ -129,7 +134,7 @@ def check_dependencies():
 
 def load_api_key():
     env_path = os.path.join(ROOT, ".env")
-    with open(env_path) as f:
+    with open(env_path, encoding="utf-8") as f:
         for line in f:
             if line.startswith("YOUTUBE_API_KEY="):
                 return line.strip().split("=", 1)[1]
@@ -190,12 +195,13 @@ def discover_video_ids(api_key, category_id, q, target_count):
 # ---------------------------------------------------------------------------
 
 def manifest_append(video_id, category, status, error=""):
-    is_new = not os.path.exists(MANIFEST_PATH)
-    with open(MANIFEST_PATH, "a", newline="") as f:
-        writer = csv.writer(f)
-        if is_new:
-            writer.writerow(["video_id", "category", "status", "error", "timestamp"])
-        writer.writerow([video_id, category, status, error, time.strftime("%Y-%m-%d %H:%M:%S")])
+    with _io_lock:
+        is_new = not os.path.exists(MANIFEST_PATH)
+        with open(MANIFEST_PATH, "a", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            if is_new:
+                writer.writerow(["video_id", "category", "status", "error", "timestamp"])
+            writer.writerow([video_id, category, status, error, time.strftime("%Y-%m-%d %H:%M:%S")])
 
 
 def is_done(video_dir):
@@ -237,7 +243,7 @@ def fetch_metadata(video_id, video_dir):
     keep["title_length"] = len(keep["title"] or "")
     keep["description_length"] = len(keep["description"] or "")
     keep["tag_count"] = len(keep["tags"] or [])
-    with open(os.path.join(video_dir, "metadata.json"), "w") as f:
+    with open(os.path.join(video_dir, "metadata.json"), "w", encoding="utf-8") as f:
         json.dump(keep, f, indent=2)
     return keep
 
@@ -301,6 +307,9 @@ def caption_quality_ok(srt_path):
 
 
 _whisper_model = None
+_whisper_lock = threading.Lock()  # one shared model instance -- serialize inference across
+                                   # worker threads rather than loading a copy per thread
+                                   # (each copy would cost ~1GB+ RAM, too much with --workers>1)
 
 
 def transcribe_with_whisper(audio_path):
@@ -314,10 +323,11 @@ def transcribe_with_whisper(audio_path):
         warn_once("whisper", "openai-whisper not installed -- videos with missing/poor auto-captions "
                               "will have NO transcript. Install it (requirements.txt) to get the fallback.")
         return None
-    if _whisper_model is None:
-        log("loading Whisper small.en (first use this run)...")
-        _whisper_model = whisper.load_model("small.en")
-    result = _whisper_model.transcribe(audio_path, fp16=False)
+    with _whisper_lock:
+        if _whisper_model is None:
+            log("loading Whisper small.en (first use this run)...")
+            _whisper_model = whisper.load_model("small.en")
+        result = _whisper_model.transcribe(audio_path, fp16=False)
     return result["text"].strip()
 
 
@@ -498,7 +508,7 @@ def extract_visual_features(thumbnail_path, frame_paths, video_dir):
         "frames_has_face_ratio": _mean("has_face", [{"has_face": 1.0 if f["has_face"] else 0.0} for f in frames]),
         "frames_mean_max_face_area_ratio": _mean("max_face_area_ratio", frames),
     }
-    with open(os.path.join(video_dir, "visual_features.json"), "w") as f:
+    with open(os.path.join(video_dir, "visual_features.json"), "w", encoding="utf-8") as f:
         json.dump(features, f, indent=2)
     return features
 
@@ -533,7 +543,7 @@ def extract_audio_features(audio_path, video_dir):
     pause_stats = _pause_stats(audio_path)
 
     features = {"egemaps": egemaps, "pauses": pause_stats}
-    with open(os.path.join(video_dir, "audio_features.json"), "w") as f:
+    with open(os.path.join(video_dir, "audio_features.json"), "w", encoding="utf-8") as f:
         json.dump(features, f, indent=2, default=float)
     return features
 
@@ -620,15 +630,15 @@ def process_video(video_id, category, frame_count, resume):
             transcript_text = transcribe_with_whisper(tmp_audio_path)
             transcript_source = "whisper" if transcript_text is not None else "none"
         if transcript_text:
-            with open(os.path.join(video_dir, "transcript.txt"), "w") as f:
+            with open(os.path.join(video_dir, "transcript.txt"), "w", encoding="utf-8") as f:
                 f.write(transcript_text)
-        with open(os.path.join(video_dir, "transcript_info.json"), "w") as f:
+        with open(os.path.join(video_dir, "transcript_info.json"), "w", encoding="utf-8") as f:
             json.dump({"source": transcript_source, "had_auto_captions": srt_path is not None}, f, indent=2)
 
         os.remove(tmp_video_path)
         if os.path.exists(tmp_audio_path):
             os.remove(tmp_audio_path)
-        with open(os.path.join(video_dir, ".done"), "w") as f:
+        with open(os.path.join(video_dir, ".done"), "w", encoding="utf-8") as f:
             f.write(time.strftime("%Y-%m-%dT%H:%M:%S"))
         manifest_append(video_id, category, "done")
         log(f"done {video_id}")
@@ -669,8 +679,15 @@ def main():
                               "browser is Chrome -- sidesteps issue #10927 since the export goes through "
                               "Chrome's own extension API, not external DB decryption.")
     parser.add_argument("--pacing", type=float, default=VIDEO_PACING_SEC,
-                         help="seconds to wait between videos -- firing requests back-to-back is exactly the "
-                              "pattern that triggers the bot-check above")
+                         help="target seconds between video *submissions* (divided across --workers) -- firing "
+                              "requests back-to-back is exactly the pattern that triggers the bot-check above")
+    parser.add_argument("--workers", type=int, default=3,
+                         help="videos processed concurrently. Confirmed 2026-08-22: single-threaded is far too "
+                              "slow for 8,000 videos (~50s/video observed -> ~5 days). Whisper inference is "
+                              "serialized internally regardless of this value (one shared model instance, too "
+                              "much RAM to load a copy per worker) -- concurrency mainly overlaps downloads/"
+                              "frame-extraction across videos. Start conservative (3) and watch for renewed "
+                              "429/bot-check errors before raising it; drop to 1 if they reappear.")
     args = parser.parse_args()
 
     if args.cookies_from_browser:
@@ -684,7 +701,7 @@ def main():
     targets = list(CATEGORIES) if args.category == "all" else [args.category]
 
     if args.input_ids:
-        with open(args.input_ids) as f:
+        with open(args.input_ids, encoding="utf-8") as f:
             reader = csv.DictReader(f)
             jobs = [(row["video_id"], row["category"]) for row in reader if row["category"] in targets]
     else:
@@ -697,10 +714,14 @@ def main():
             log(f"discovered {len(ids)} IDs for {cat}")
             jobs.extend((vid, cat) for vid in ids)
 
-    log(f"processing {len(jobs)} videos")
-    for video_id, category in jobs:
-        process_video(video_id, category, args.frames, args.resume)
-        time.sleep(args.pacing)
+    log(f"processing {len(jobs)} videos with {args.workers} worker(s)")
+    stagger = args.pacing / max(args.workers, 1)
+    with concurrent.futures.ThreadPoolExecutor(max_workers=args.workers) as executor:
+        futures = []
+        for video_id, category in jobs:
+            futures.append(executor.submit(process_video, video_id, category, args.frames, args.resume))
+            time.sleep(stagger)  # stagger submissions so `workers` tasks don't all start in one burst
+        concurrent.futures.wait(futures)
 
     log("run complete")
 
