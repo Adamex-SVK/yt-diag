@@ -66,10 +66,13 @@ LOG_PATH = os.path.join(os.path.dirname(__file__), "collection_log.txt")
 
 # Ticket #4 (closed 2026-08-20): product_reviews = Entertainment (24) +
 # keyword workaround -- bare categoryId=24/22 return 0 due to a search.list
-# filter quirk (cc_availability_scan_findings.md), q= unlocks real volume.
+# filter quirk (cc_availability_scan_findings.md). Confirmed 2026-08-22 that
+# this quirk has spread to EVERY bare categoryId query (comedy=23, howto=26
+# now also return 0 with no q) -- verified directly against the live API,
+# not just observed once. Every category now carries a keyword as a result.
 CATEGORIES = {
-    "comedy": {"categoryId": "23", "q": None},
-    "howto": {"categoryId": "26", "q": None},
+    "comedy": {"categoryId": "23", "q": "comedy"},
+    "howto": {"categoryId": "26", "q": "tutorial"},
     "vlogs": {"categoryId": "22", "q": "vlog"},
     "product_reviews": {"categoryId": "24", "q": "product review"},
 }
@@ -93,6 +96,13 @@ PAUSE_THRESHOLD_SEC = 0.3  # additional_features.md 2.3: silence >300ms = a paus
 # yt-dlp call, not just download_video(), since this is a moving target on
 # YouTube's side and metadata/captions calls could start needing it too.
 YT_DLP_EXTRA_ARGS = ["--remote-components", "ejs:github"]
+
+# Confirmed 2026-08-22: firing requests for consecutive videos with no
+# pause is exactly the pattern that triggered a hard bot-check block
+# ("Sign in to confirm you're not a bot") on a school network -- 10 videos
+# in ~30s, every single one rejected. Default pacing is deliberately
+# conservative; override with --pacing if a given network tolerates faster.
+VIDEO_PACING_SEC = 5.0
 
 _optional_import_warned = set()
 
@@ -646,7 +656,18 @@ def main():
     parser.add_argument("--frames", type=int, default=FRAME_COUNT)
     parser.add_argument("--resume", action="store_true", help="skip videos already marked .done")
     parser.add_argument("--input-ids", help="path to a CSV (video_id,category) to skip discovery")
+    parser.add_argument("--cookies-from-browser", metavar="BROWSER",
+                         help="e.g. chrome, edge, firefox -- pass a real logged-in browser session to yt-dlp. "
+                              "Confirmed 2026-08-22: without this, YouTube's bot-check ('Sign in to confirm "
+                              "you're not a bot') can reject every single video on a network it doesn't trust "
+                              "(observed on a school network). Try this first if downloads are failing.")
+    parser.add_argument("--pacing", type=float, default=VIDEO_PACING_SEC,
+                         help="seconds to wait between videos -- firing requests back-to-back is exactly the "
+                              "pattern that triggers the bot-check above")
     args = parser.parse_args()
+
+    if args.cookies_from_browser:
+        YT_DLP_EXTRA_ARGS.extend(["--cookies-from-browser", args.cookies_from_browser])
 
     check_dependencies()
     os.makedirs(OUT_DIR, exist_ok=True)
@@ -670,6 +691,7 @@ def main():
     log(f"processing {len(jobs)} videos")
     for video_id, category in jobs:
         process_video(video_id, category, args.frames, args.resume)
+        time.sleep(args.pacing)
 
     log("run complete")
 
