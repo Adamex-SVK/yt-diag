@@ -307,33 +307,48 @@ def caption_quality_ok(srt_path):
 
 
 _whisper_model = None
+_whisper_available = True  # set False by preload_whisper() if openai-whisper isn't installed
 _whisper_lock = threading.Lock()  # one shared model instance -- serialize inference across
                                    # worker threads rather than loading a copy per thread
                                    # (each copy would cost ~1GB+ RAM, too much with --workers>1)
 
 
+def preload_whisper():
+    """Load Whisper/torch BEFORE any worker threads exist -- must be called
+    from main(), single-threaded, prior to creating the ThreadPoolExecutor.
+
+    Confirmed 2026-08-22: putting `import whisper` behind a lock inside
+    transcribe_with_whisper() was NOT enough -- failure rate on a real run
+    went from ~15% (3 workers) to ~25-35% (8 workers), scaling with thread
+    count even with the import serialized. That points to a known Windows-
+    specific issue, not a simple import race: some native DLLs (torch's
+    C10/MKL among them) use thread-local storage in a way that Windows must
+    retroactively initialize for every thread already alive in the process
+    at LoadLibrary time, with a hard limit -- so loading torch's DLL for the
+    first time while N worker threads already exist can fail purely from
+    thread *count*, independent of whether the import call itself is
+    serialized. Loading it once in the main thread, before any worker
+    threads are spawned, sidesteps this entirely -- once the DLL is
+    resident, later loads from any thread just bump a refcount, no re-init."""
+    global _whisper_model, _whisper_available
+    try:
+        import whisper
+    except ImportError:
+        _whisper_available = False
+        warn_once("whisper", "openai-whisper not installed -- videos with missing/poor auto-captions "
+                              "will have NO transcript. Install it (requirements.txt) to get the fallback.")
+        return
+    log("loading Whisper small.en (once, before workers start)...")
+    _whisper_model = whisper.load_model("small.en")
+
+
 def transcribe_with_whisper(audio_path):
     """data_retrieval.md #4.2/#4.3 fallback for missing/poor auto-captions.
-    Lazy-loaded, reused across the whole run -- loading small.en per video
-    would dominate runtime otherwise."""
-    global _whisper_model
-    # Confirmed 2026-08-22: `import whisper` (which loads torch's native
-    # extensions, e.g. c10.dll) must be INSIDE the lock, not just the model
-    # load/inference below it. With --workers>1, multiple threads hitting
-    # this for the first time simultaneously raced on Windows' DLL loader
-    # ("DLL initialization routine failed") in ~15% of videos on a real
-    # school-computer run -- moving the import inside the lock serializes
-    # the whole first-import-and-load sequence, eliminating the race.
+    Assumes preload_whisper() already ran in main() before any worker
+    threads started -- this only serializes the actual inference call."""
+    if not _whisper_available:
+        return None
     with _whisper_lock:
-        try:
-            import whisper
-        except ImportError:
-            warn_once("whisper", "openai-whisper not installed -- videos with missing/poor auto-captions "
-                                  "will have NO transcript. Install it (requirements.txt) to get the fallback.")
-            return None
-        if _whisper_model is None:
-            log("loading Whisper small.en (first use this run)...")
-            _whisper_model = whisper.load_model("small.en")
         result = _whisper_model.transcribe(audio_path, fp16=False)
     return result["text"].strip()
 
@@ -704,6 +719,7 @@ def main():
 
     check_dependencies()
     os.makedirs(OUT_DIR, exist_ok=True)
+    preload_whisper()  # must happen before any worker threads exist -- see preload_whisper() docstring
 
     targets = list(CATEGORIES) if args.category == "all" else [args.category]
 
