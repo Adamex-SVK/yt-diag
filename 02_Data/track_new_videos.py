@@ -78,7 +78,18 @@ DEFAULT_DISCOVER_PAGES = 5  # quota safety cap per category per tick; 50 results
 
 COHORT_FIELDS = ["video_id", "category", "channel_id", "published_at_utc",
                  "discovered_at_utc", "discovery_source", "sampling_arm",
-                 "window_start_utc", "window_end_utc", "search_rank"]
+                 "window_start_utc", "window_end_utc", "search_rank", "duration_sec"]
+# Found 2026-08-26 on the day-1 cohort: at order=date, 94% of fresh uploads
+# in our categories were <=180s (Shorts ceiling; comedy was 100%). Shorts
+# have different distribution surfaces and virality dynamics than the
+# videos this project models, so the MAIN arm requires duration >= 4min:
+# discovery uses search.list's server-side videoDuration=medium/long
+# filters, and every candidate's actual duration is verified via
+# contentDetails before admission. Day-1 sub-4min videos were retagged to
+# arm "short_form" -- still snapshotted (their growth curves are a free
+# comparison dataset) but excluded from the caps.
+MIN_DURATION_SEC = 240
+SEARCH_DURATION_FILTERS = ("medium", "long")  # 4-20min, >20min
 DISCOVERY_STATE_PATH = os.path.join(TRACK_DIR, "discovery_state.json")
 # Windows overlap on purpose: publishedAfter/Before are boundary-inclusive
 # and search indexing of brand-new videos can lag, so each tick re-covers
@@ -136,6 +147,16 @@ def iso(dt):
 
 def parse_iso(s):
     return datetime.datetime.strptime(s, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=datetime.timezone.utc)
+
+
+def parse_duration(d):
+    """ISO8601 duration (PT#H#M#S) -> seconds, or None if unparseable."""
+    import re
+    m = re.fullmatch(r"PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?", d or "")
+    if not m:
+        return None
+    h, mi, s = (int(x) if x else 0 for x in m.groups())
+    return h * 3600 + mi * 60 + s
 
 
 # ---------------------------------------------------------------------------
@@ -204,66 +225,102 @@ def discover(api_key, cohort, args):
         window_start = iso(now - datetime.timedelta(hours=args.discover_window_hours))
 
     per_category_cap = args.max_cohort // len(CATEGORIES)
+    # Caps count only the MAIN arm -- short_form videos are tracked but must
+    # never crowd regular videos out of the panel.
     counts = {}
+    main_total = 0
     for row in cohort:
-        counts[row["category"]] = counts.get(row["category"], 0) + 1
+        if row.get("sampling_arm") == "date_window":
+            counts[row["category"]] = counts.get(row["category"], 0) + 1
+            main_total += 1
     known = {row["video_id"] for row in cohort}
 
     new_rows = []
+    dropped_short = 0
     for category, spec in CATEGORIES.items():
         if counts.get(category, 0) >= per_category_cap:
             log(f"discover {category}: at cap ({per_category_cap}), skipping")
             continue
-        page_token = None
-        rank = 0
-        for _ in range(args.discover_pages):
-            params = {
-                "part": "snippet",
-                "type": "video",
-                "order": "date",
-                "publishedAfter": window_start,
-                "publishedBefore": window_end,
-                "maxResults": "50",
-                "relevanceLanguage": "en",
-                "videoCategoryId": spec["categoryId"],
-                "q": spec["q"],
-                "key": api_key,
-            }
-            if page_token:
-                params["pageToken"] = page_token
-            try:
-                data = api_get("search", params)
-            except (urllib.error.URLError, json.JSONDecodeError) as e:
-                log(f"discover {category}: search failed ({e}) -- continuing with other categories")
-                break
-            for item in data.get("items", []):
-                vid = (item.get("id") or {}).get("videoId")
-                snippet = item.get("snippet") or {}
-                rank += 1
-                if not vid or vid in known:
-                    continue
-                if counts.get(category, 0) >= per_category_cap or len(cohort) + len(new_rows) >= args.max_cohort:
+        candidates = []
+        for duration_filter in SEARCH_DURATION_FILTERS:
+            page_token = None
+            rank = 0
+            for _ in range(args.discover_pages):
+                params = {
+                    "part": "snippet",
+                    "type": "video",
+                    "order": "date",
+                    "publishedAfter": window_start,
+                    "publishedBefore": window_end,
+                    "maxResults": "50",
+                    "relevanceLanguage": "en",
+                    "videoCategoryId": spec["categoryId"],
+                    "videoDuration": duration_filter,
+                    "q": spec["q"],
+                    "key": api_key,
+                }
+                if page_token:
+                    params["pageToken"] = page_token
+                try:
+                    data = api_get("search", params)
+                except (urllib.error.URLError, json.JSONDecodeError) as e:
+                    log(f"discover {category}/{duration_filter}: search failed ({e}) -- continuing")
                     break
-                known.add(vid)
-                counts[category] = counts.get(category, 0) + 1
-                new_rows.append({
-                    "video_id": vid,
-                    "category": category,
-                    "channel_id": snippet.get("channelId", ""),
-                    "published_at_utc": snippet.get("publishedAt", ""),
-                    "discovered_at_utc": iso(now),
-                    "discovery_source": f"search:{spec['categoryId']}:{spec['q']}",
-                    "sampling_arm": "date_window",
-                    "window_start_utc": window_start,
-                    "window_end_utc": window_end,
-                    "search_rank": rank,
-                })
-            page_token = data.get("nextPageToken")
-            if not page_token:
-                break
+                for item in data.get("items", []):
+                    vid = (item.get("id") or {}).get("videoId")
+                    snippet = item.get("snippet") or {}
+                    rank += 1
+                    if not vid or vid in known:
+                        continue
+                    known.add(vid)
+                    candidates.append({
+                        "video_id": vid,
+                        "category": category,
+                        "channel_id": snippet.get("channelId", ""),
+                        "published_at_utc": snippet.get("publishedAt", ""),
+                        "discovered_at_utc": iso(now),
+                        "discovery_source": f"search:{spec['categoryId']}:{spec['q']}:{duration_filter}",
+                        "sampling_arm": "date_window",
+                        "window_start_utc": window_start,
+                        "window_end_utc": window_end,
+                        "search_rank": rank,
+                    })
+                page_token = data.get("nextPageToken")
+                if not page_token:
+                    break
+                time.sleep(0.2)
+
+        # Verify durations before admission -- the search filter should
+        # already exclude <4min, but the recorded duration_sec must be the
+        # authoritative contentDetails value, not an inference.
+        durations = {}
+        for batch in chunked(candidates):
+            ids = ",".join(c["video_id"] for c in batch)
+            try:
+                data = api_get("videos", {"part": "contentDetails", "id": ids,
+                                          "maxResults": "50", "key": api_key})
+            except (urllib.error.URLError, json.JSONDecodeError) as e:
+                log(f"discover {category}: duration check failed ({e}) -- batch not admitted this tick")
+                continue
+            for item in data.get("items", []):
+                durations[item["id"]] = parse_duration((item.get("contentDetails") or {}).get("duration"))
             time.sleep(0.2)
+        for c in candidates:
+            dur = durations.get(c["video_id"])
+            if dur is None or dur < args.min_duration_sec:
+                dropped_short += 1
+                continue
+            if counts.get(category, 0) >= per_category_cap or main_total >= args.max_cohort:
+                break
+            c["duration_sec"] = dur
+            counts[category] = counts.get(category, 0) + 1
+            main_total += 1
+            new_rows.append(c)
         log(f"discover {category}: cohort now {counts.get(category, 0)}/{per_category_cap}")
 
+    if dropped_short:
+        log(f"discover: {dropped_short} sub-{args.min_duration_sec}s candidates rejected "
+            f"(Shorts slipping past the search duration filter)")
     if new_rows:
         append_rows(COHORT_PATH, COHORT_FIELDS, new_rows)
     with open(DISCOVERY_STATE_PATH, "w", encoding="utf-8") as f:
@@ -442,6 +499,8 @@ def main():
     parser.add_argument("--min-gap-hours", type=float, default=DEFAULT_MIN_GAP_HOURS)
     parser.add_argument("--discover-window-hours", type=float, default=DEFAULT_DISCOVER_WINDOW_HOURS)
     parser.add_argument("--discover-pages", type=int, default=DEFAULT_DISCOVER_PAGES)
+    parser.add_argument("--min-duration-sec", type=int, default=MIN_DURATION_SEC,
+                        help="main-arm admission floor (Shorts protection)")
     parser.add_argument("--no-discover", action="store_true",
                         help="snapshot only (e.g. after the cohort is full/frozen)")
     args = parser.parse_args()
