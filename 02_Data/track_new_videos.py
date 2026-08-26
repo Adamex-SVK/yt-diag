@@ -65,6 +65,11 @@ COHORT_PATH = os.path.join(TRACK_DIR, "cohort.csv")
 VIDEO_SNAPSHOTS_PATH = os.path.join(TRACK_DIR, "video_snapshots.csv")
 CHANNEL_SNAPSHOTS_PATH = os.path.join(TRACK_DIR, "channel_snapshots.csv")
 LOG_PATH = os.path.join(TRACK_DIR, "tracker_log.txt")
+LOCK_PATH = os.path.join(TRACK_DIR, "tick.lock")
+# A whole tick takes minutes; a lock older than this is a crashed tick's
+# leftover and may be broken. Chosen far above any real tick duration and
+# far below the scheduler interval.
+STALE_LOCK_HOURS = 2.0
 
 # Derived from collect_and_extract.py CATEGORIES (tickets #3/#4; the
 # bare-categoryId-returns-0 quirk means every category needs a keyword),
@@ -368,8 +373,12 @@ def discover(api_key, cohort, args):
         log(f"discover: {failed_calls} API calls failed -- checkpoint NOT advanced, "
             f"next tick re-covers [{window_start} ..]")
     else:
-        with open(DISCOVERY_STATE_PATH, "w", encoding="utf-8") as f:
+        # Atomic replace: an interruption mid-write must never leave invalid
+        # JSON that would crash every later tick before it can do anything.
+        tmp = DISCOVERY_STATE_PATH + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as f:
             json.dump({"last_window_end_utc": window_end}, f)
+        os.replace(tmp, DISCOVERY_STATE_PATH)
     log(f"discover: window [{window_start} .. {window_end}], +{len(new_rows)} videos, "
         f"cohort total {len(cohort) + len(new_rows)}/{args.max_cohort}")
     return cohort + new_rows
@@ -482,6 +491,40 @@ def snapshot(api_key, cohort, args):
         f"{len(chan_rows)} channel rows, {len(cohort) - len(due)} videos skipped (aged out or not due)")
 
 
+def acquire_lock():
+    """One tick at a time: two overlapping invocations (scheduled + manual,
+    or a stalled tick meeting the next one) would both read the same state,
+    both consider everything due, and append duplicate rows / overwrite
+    state concurrently. O_EXCL creation is atomic on every platform; a lock
+    older than STALE_LOCK_HOURS is treated as a crashed tick's leftover."""
+    os.makedirs(TRACK_DIR, exist_ok=True)
+    while True:
+        try:
+            fd = os.open(LOCK_PATH, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+            os.write(fd, str(os.getpid()).encode())
+            os.close(fd)
+            return True
+        except FileExistsError:
+            try:
+                age = time.time() - os.path.getmtime(LOCK_PATH)
+            except OSError:
+                continue  # holder just released it; retry the create
+            if age > STALE_LOCK_HOURS * 3600:
+                try:
+                    os.remove(LOCK_PATH)
+                except OSError:
+                    pass
+                continue
+            return False
+
+
+def release_lock():
+    try:
+        os.remove(LOCK_PATH)
+    except OSError:
+        pass
+
+
 def fetch_url(url):
     """Plain HTTP GET returning bytes. Isolated so tests can stub it."""
     with urllib.request.urlopen(url, timeout=30) as resp:
@@ -557,14 +600,19 @@ def main():
                         help="snapshot only (e.g. after the cohort is full/frozen)")
     args = parser.parse_args()
 
-    os.makedirs(TRACK_DIR, exist_ok=True)
-    api_key = load_api_key()
-    cohort = read_csv(COHORT_PATH)
-    log(f"tick start: cohort {len(cohort)} videos")
-    if not args.no_discover:
-        cohort = discover(api_key, cohort, args)
-    snapshot(api_key, cohort, args)
-    log("tick done")
+    if not acquire_lock():
+        print(f"another tick is already running ({LOCK_PATH}) -- exiting without touching state")
+        return
+    try:
+        api_key = load_api_key()
+        cohort = read_csv(COHORT_PATH)
+        log(f"tick start: cohort {len(cohort)} videos")
+        if not args.no_discover:
+            cohort = discover(api_key, cohort, args)
+        snapshot(api_key, cohort, args)
+        log("tick done")
+    finally:
+        release_lock()
 
 
 if __name__ == "__main__":
