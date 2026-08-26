@@ -22,15 +22,22 @@ a discovery ceiling, not a target sample size, and the multimodal extraction
 pipeline could never process 5,000 new videos a day anyway.
 
 One idempotent daily "tick" does everything:
-  1. discover  -- search.list per category (same categoryId+keyword mapping
-     as collect_and_extract.py), order=date, publishedAfter = now - 24h,
-     until the per-category / cohort caps are reached
+  1. discover  -- search.list per category and query arm (categoryId +
+     keyword mapping derived from collect_and_extract.py), order=date,
+     videoDuration=medium/long, over a bounded publishedAfter/Before window
+     that continues from the last checkpoint (first run: now - 24h) with a
+     2h overlap; every candidate's contentDetails duration is verified
+     (>= --min-duration-sec) before admission, newest-first, until the
+     per-category caps are reached
   2. snapshot  -- videos.list (batched 50 per call, statistics+snippet) for
-     every cohort video still inside --track-days whose last snapshot is
-     older than --min-gap-hours; channels.list (batched 50) for their
-     channels' subscriberCount / hiddenSubscriberCount / country
+     every cohort video still inside --track-days (plus one terminal sample
+     past it) whose last snapshot is older than --min-gap-hours, recording
+     counts, categoryId and current title; channels.list (batched 50) for
+     their channels' subscriberCount / hiddenSubscriberCount / country /
+     videoCount; then the current thumbnail of each snapshotted video is
+     downloaded, hashed, and stored only if it changed
 
-Designed for an OS scheduler (Windows Task Scheduler / cron), NOT a
+Designed for an OS scheduler (launchd / Task Scheduler / cron), NOT a
 long-running sleep loop: every run records exact observed_at_utc timestamps,
 so late, missed, or doubled runs never corrupt anything -- a missed day is a
 gap in the curve, a doubled run is skipped by the min-gap check. State is
@@ -43,8 +50,9 @@ Quota per tick: discovery is the expensive part -- up to 48 search.list
 calls at the defaults (8 query arms x 2 duration filters x 3 pages; far
 less once the big categories hit their caps and skip discovery), which is
 nearly half of a 100-search-calls/day budget, hence the run-discovery-
-once-a-day advice above. Snapshots are cheap: ~(cohort/50) videos.list +
-~(channels/50) channels.list, ~100 one-unit calls/day at full cohort.
+once-a-day advice above. Snapshots are cheap per call but scale with the
+cohort: ~(cohort/50) videos.list + ~(channels/50) channels.list per pass,
+~1,200 one-unit calls/day at the mature 15,000 ceiling (~12% of budget).
 
 Usage:
     python3 02_Data/track_new_videos.py                # one full tick
@@ -82,7 +90,7 @@ STALE_LOCK_HOURS = 2.0
 # extended 2026-08-26 with two scarcity measures:
 #   - product_reviews gets extra query arms ("unboxing", "first impressions")
 #     -- at q="product review" alone it admitted only 9 main-arm videos/day,
-#     which would leave its 750 cap ~2/3 empty at the end of the 30-day
+#     which would have left its then-750 cap (3,000 since 2026-08-27) ~2/3 empty at the end of the 30-day
 #     window. Every video's exact source query is recorded in
 #     discovery_source, so the slices stay auditable.
 #   - tech_reviews (Science & Technology, categoryId 28 -- a ticket-#4
@@ -221,7 +229,8 @@ def parse_duration(d):
 
 
 # ---------------------------------------------------------------------------
-# State -- three plain CSVs, append-only for snapshots
+# State -- plain CSVs (cohort + video/channel/thumbnail snapshots; the
+# snapshot files are append-only) plus discovery_state.json and thumbnails/
 # ---------------------------------------------------------------------------
 
 def read_csv(path):
@@ -628,8 +637,21 @@ def snapshot_thumbnails(thumb_jobs):
     import concurrent.futures
 
     def fetched():
+        """Ordered results with a BOUNDED in-flight window. pool.map would
+        submit every job eagerly and retain out-of-order completions (whole
+        image blobs) until the earlier jobs are yielded, so one slow early
+        request could pile up many images in memory. A fixed-size FIFO of
+        futures preserves input order while keeping at most 2 x
+        THUMB_WORKERS results alive at any moment."""
+        from collections import deque
         with concurrent.futures.ThreadPoolExecutor(max_workers=THUMB_WORKERS) as pool:
-            yield from pool.map(fetch_one, thumb_jobs)
+            pending = deque()
+            for job in thumb_jobs:
+                pending.append(pool.submit(fetch_one, job))
+                if len(pending) >= THUMB_WORKERS * 2:
+                    yield pending.popleft().result()
+            while pending:
+                yield pending.popleft().result()
 
     for video_id, observed, quality, blob in fetched():
         if quality is None:
