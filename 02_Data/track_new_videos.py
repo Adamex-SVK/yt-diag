@@ -13,8 +13,9 @@ is NOT day-0 subs (even an hours-old observation may include video-driven
 gains, and public counts are rounded to ~3 significant figures; that is why
 hiddenSubscriberCount and the observation age are stored too).
 
-This is a FIXED, CAPPED validation cohort (--max-cohort, default 3000 --
-FEATURES.md 6: ~2,000-4,000), not everything discovery can return: quota is
+This is a FIXED, CAPPED validation cohort (--max-cohort, default 12,000 --
+raised from 3,000 on 2026-08-27, see DEFAULT_MAX_COHORT), not an unbounded
+sweep of everything discovery can return: quota is
 a discovery ceiling, not a target sample size, and the multimodal extraction
 pipeline could never process 5,000 new videos a day anyway.
 
@@ -46,7 +47,7 @@ once-a-day advice above. Snapshots are cheap: ~(cohort/50) videos.list +
 Usage:
     python3 02_Data/track_new_videos.py                # one full tick
     python3 02_Data/track_new_videos.py --no-discover  # snapshot only
-    python3 02_Data/track_new_videos.py --max-cohort 3000 --track-days 30
+    python3 02_Data/track_new_videos.py --max-cohort 12000 --track-days 30
 
 Requires in project-root .env: YOUTUBE_API_KEY=... (use a dedicated key /
 Google Cloud project so tracking never competes with collection quota).
@@ -98,7 +99,16 @@ CATEGORIES = {
 # backup category gets the same absolute cap without shrinking the others.
 MAIN_CATEGORY_COUNT = 4
 
-DEFAULT_MAX_COHORT = 3000
+# Raised 3,000 -> 12,000 on 2026-08-27 (team decision: storage/RAM are not
+# binding, quota is use-it-or-lose-it, and a larger clean panel lets the
+# post-deadline extension SELECT its extraction subset instead of taking
+# whatever a small pool offers). Quota at 12k mature: ~940 one-unit list
+# calls/day -- ~10% of budget; search spend unchanged (~48 calls/day).
+# The old wall-time constraint (serial thumbnail downloads) was removed by
+# parallelizing them (THUMB_WORKERS below). Scarce categories won't reach
+# their caps anyway; this mainly deepens comedy/howto/vlogs.
+DEFAULT_MAX_COHORT = 12000
+THUMB_WORKERS = 8  # concurrent CDN downloads; hashing/writes stay single-threaded
 DEFAULT_TRACK_DAYS = 30
 DEFAULT_MIN_GAP_HOURS = 12
 # A video whose snapshots all landed BEFORE the horizon stays eligible for
@@ -579,20 +589,37 @@ def snapshot_thumbnails(thumb_jobs):
         if row["changed"] == "true":
             versions[row["video_id"]] = versions.get(row["video_id"], 0) + 1
 
-    rows = []
-    changed = failed = 0
-    for video_id, thumbnails, observed in thumb_jobs:
-        heartbeat()  # serial downloads can be slow; keep proving liveness
+    def fetch_one(job):
+        """Runs in a worker thread: pick best-quality URL, download, return
+        (video_id, observed, quality, blob-or-None). No shared state is
+        touched here -- hashing and all writes happen in the main thread."""
+        video_id, thumbnails, observed = job
+        heartbeat()
         url = quality = None
         for q in ("maxres", "standard", "high", "medium", "default"):
             if q in thumbnails and thumbnails[q].get("url"):
                 url, quality = thumbnails[q]["url"], q
                 break
         if not url:
-            continue
+            return video_id, observed, None, None
         try:
-            blob = fetch_url(url)
+            return video_id, observed, quality, fetch_url(url)
         except (urllib.error.URLError, OSError):
+            return video_id, observed, quality, None
+
+    rows = []
+    changed = failed = 0
+    # Downloads are the slow part (~0.3s each; a 12k cohort would take an
+    # hour serially). Parallelize ONLY the network fetch; executor.map
+    # preserves job order, so CSV output stays deterministic.
+    import concurrent.futures
+    with concurrent.futures.ThreadPoolExecutor(max_workers=THUMB_WORKERS) as pool:
+        results = list(pool.map(fetch_one, thumb_jobs))
+
+    for video_id, observed, quality, blob in results:
+        if quality is None:
+            continue  # no thumbnail URL in the snippet
+        if blob is None:
             failed += 1
             continue
         digest = hashlib.sha256(blob).hexdigest()
