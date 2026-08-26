@@ -61,20 +61,40 @@ VIDEO_SNAPSHOTS_PATH = os.path.join(TRACK_DIR, "video_snapshots.csv")
 CHANNEL_SNAPSHOTS_PATH = os.path.join(TRACK_DIR, "channel_snapshots.csv")
 LOG_PATH = os.path.join(TRACK_DIR, "tracker_log.txt")
 
-# Keep in sync with collect_and_extract.py CATEGORIES (tickets #3/#4; the
-# bare-categoryId-returns-0 quirk means every category needs its keyword).
+# Derived from collect_and_extract.py CATEGORIES (tickets #3/#4; the
+# bare-categoryId-returns-0 quirk means every category needs a keyword),
+# extended 2026-08-26 with two scarcity measures:
+#   - product_reviews gets extra query arms ("unboxing", "first impressions")
+#     -- at q="product review" alone it admitted only 9 main-arm videos/day,
+#     which would leave its 750 cap ~2/3 empty at the end of the 30-day
+#     window. Every video's exact source query is recorded in
+#     discovery_source, so the slices stay auditable.
+#   - tech_reviews (Science & Technology, categoryId 28 -- a ticket-#4
+#     candidate for the product-reviews mapping) is a BACKUP category,
+#     accumulating from day 2 as insurance: if product_reviews stays too
+#     thin/noisy, the team can swap it in without losing cohort history.
+#     Swap is a team decision with Adam; until then it is tracked alongside.
 CATEGORIES = {
-    "comedy": {"categoryId": "23", "q": "comedy"},
-    "howto": {"categoryId": "26", "q": "tutorial"},
-    "vlogs": {"categoryId": "22", "q": "vlog"},
-    "product_reviews": {"categoryId": "24", "q": "product review"},
+    "comedy": {"categoryId": "23", "queries": ["comedy"]},
+    "howto": {"categoryId": "26", "queries": ["tutorial"]},
+    "vlogs": {"categoryId": "22", "queries": ["vlog"]},
+    "product_reviews": {"categoryId": "24", "queries": ["product review", "unboxing", "first impressions"]},
+    "tech_reviews": {"categoryId": "28", "queries": ["review", "unboxing"]},
 }
+# Per-category cap divides max_cohort by the MAIN categories only, so the
+# backup category gets the same absolute cap without shrinking the others.
+MAIN_CATEGORY_COUNT = 4
 
 DEFAULT_MAX_COHORT = 3000
 DEFAULT_TRACK_DAYS = 30
 DEFAULT_MIN_GAP_HOURS = 12
 DEFAULT_DISCOVER_WINDOW_HOURS = 24
-DEFAULT_DISCOVER_PAGES = 5  # quota safety cap per category per tick; 50 results/page
+# Quota safety cap per (query arm x duration filter) per tick; 50/page.
+# With 8 query arms x 2 duration filters, 3 pages bounds a tick at ~48
+# search calls worst-case (far less once the big categories hit their caps
+# and skip discovery entirely). For twice-daily scheduling, run the second
+# tick with --no-discover so search quota is spent once a day.
+DEFAULT_DISCOVER_PAGES = 3
 
 COHORT_FIELDS = ["video_id", "category", "channel_id", "published_at_utc",
                  "discovered_at_utc", "discovery_source", "sampling_arm",
@@ -224,15 +244,15 @@ def discover(api_key, cohort, args):
     else:
         window_start = iso(now - datetime.timedelta(hours=args.discover_window_hours))
 
-    per_category_cap = args.max_cohort // len(CATEGORIES)
+    per_category_cap = args.max_cohort // MAIN_CATEGORY_COUNT
     # Caps count only the MAIN arm -- short_form videos are tracked but must
-    # never crowd regular videos out of the panel.
+    # never crowd regular videos out of the panel. Each category (backup
+    # included) is bounded by its own cap; there is no global cut that could
+    # let a high-volume category starve a scarce one.
     counts = {}
-    main_total = 0
     for row in cohort:
         if row.get("sampling_arm") == "date_window":
             counts[row["category"]] = counts.get(row["category"], 0) + 1
-            main_total += 1
     known = {row["video_id"] for row in cohort}
 
     new_rows = []
@@ -242,53 +262,54 @@ def discover(api_key, cohort, args):
             log(f"discover {category}: at cap ({per_category_cap}), skipping")
             continue
         candidates = []
-        for duration_filter in SEARCH_DURATION_FILTERS:
-            page_token = None
-            rank = 0
-            for _ in range(args.discover_pages):
-                params = {
-                    "part": "snippet",
-                    "type": "video",
-                    "order": "date",
-                    "publishedAfter": window_start,
-                    "publishedBefore": window_end,
-                    "maxResults": "50",
-                    "relevanceLanguage": "en",
-                    "videoCategoryId": spec["categoryId"],
-                    "videoDuration": duration_filter,
-                    "q": spec["q"],
-                    "key": api_key,
-                }
-                if page_token:
-                    params["pageToken"] = page_token
-                try:
-                    data = api_get("search", params)
-                except (urllib.error.URLError, json.JSONDecodeError) as e:
-                    log(f"discover {category}/{duration_filter}: search failed ({e}) -- continuing")
-                    break
-                for item in data.get("items", []):
-                    vid = (item.get("id") or {}).get("videoId")
-                    snippet = item.get("snippet") or {}
-                    rank += 1
-                    if not vid or vid in known:
-                        continue
-                    known.add(vid)
-                    candidates.append({
-                        "video_id": vid,
-                        "category": category,
-                        "channel_id": snippet.get("channelId", ""),
-                        "published_at_utc": snippet.get("publishedAt", ""),
-                        "discovered_at_utc": iso(now),
-                        "discovery_source": f"search:{spec['categoryId']}:{spec['q']}:{duration_filter}",
-                        "sampling_arm": "date_window",
-                        "window_start_utc": window_start,
-                        "window_end_utc": window_end,
-                        "search_rank": rank,
-                    })
-                page_token = data.get("nextPageToken")
-                if not page_token:
-                    break
-                time.sleep(0.2)
+        for q in spec["queries"]:
+            for duration_filter in SEARCH_DURATION_FILTERS:
+                page_token = None
+                rank = 0
+                for _ in range(args.discover_pages):
+                    params = {
+                        "part": "snippet",
+                        "type": "video",
+                        "order": "date",
+                        "publishedAfter": window_start,
+                        "publishedBefore": window_end,
+                        "maxResults": "50",
+                        "relevanceLanguage": "en",
+                        "videoCategoryId": spec["categoryId"],
+                        "videoDuration": duration_filter,
+                        "q": q,
+                        "key": api_key,
+                    }
+                    if page_token:
+                        params["pageToken"] = page_token
+                    try:
+                        data = api_get("search", params)
+                    except (urllib.error.URLError, json.JSONDecodeError) as e:
+                        log(f"discover {category}/{q}/{duration_filter}: search failed ({e}) -- continuing")
+                        break
+                    for item in data.get("items", []):
+                        vid = (item.get("id") or {}).get("videoId")
+                        snippet = item.get("snippet") or {}
+                        rank += 1
+                        if not vid or vid in known:
+                            continue
+                        known.add(vid)
+                        candidates.append({
+                            "video_id": vid,
+                            "category": category,
+                            "channel_id": snippet.get("channelId", ""),
+                            "published_at_utc": snippet.get("publishedAt", ""),
+                            "discovered_at_utc": iso(now),
+                            "discovery_source": f"search:{spec['categoryId']}:{q}:{duration_filter}",
+                            "sampling_arm": "date_window",
+                            "window_start_utc": window_start,
+                            "window_end_utc": window_end,
+                            "search_rank": rank,
+                        })
+                    page_token = data.get("nextPageToken")
+                    if not page_token:
+                        break
+                    time.sleep(0.2)
 
         # Verify durations before admission -- the search filter should
         # already exclude <4min, but the recorded duration_sec must be the
@@ -310,11 +331,10 @@ def discover(api_key, cohort, args):
             if dur is None or dur < args.min_duration_sec:
                 dropped_short += 1
                 continue
-            if counts.get(category, 0) >= per_category_cap or main_total >= args.max_cohort:
+            if counts.get(category, 0) >= per_category_cap:
                 break
             c["duration_sec"] = dur
             counts[category] = counts.get(category, 0) + 1
-            main_total += 1
             new_rows.append(c)
         log(f"discover {category}: cohort now {counts.get(category, 0)}/{per_category_cap}")
 
