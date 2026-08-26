@@ -138,7 +138,9 @@ CHANNEL_SNAP_FIELDS = ["channel_id", "observed_at_utc", "subscriber_count",
 # Thumbnails (and titles, via the snapshot rows) are captured because
 # creators CHANGE them after upload -- a common optimization tactic. The
 # retrospective dataset can only ever see the current thumbnail; this cohort
-# captures the at-publish one plus every change (a potential feature:
+# captures the FIRST-OBSERVED one (discovery can lag publication by up to
+# ~24h, so pre-discovery changes are invisible -- near-publish, not
+# guaranteed at-publish) plus every subsequent change (a potential feature:
 # "creator swapped the thumbnail after a weak first day"). A new image file
 # is stored only when its hash differs from the last stored version.
 THUMBS_DIR = os.path.join(TRACK_DIR, "thumbnails")
@@ -167,6 +169,7 @@ def load_api_key():
 
 def api_get(endpoint, params):
     """Single YouTube Data API v3 GET. Isolated so tests can stub it."""
+    heartbeat()  # every API call proves this tick is alive, not wedged
     url = f"https://www.googleapis.com/youtube/v3/{endpoint}?" + urllib.parse.urlencode(params)
     with urllib.request.urlopen(url, timeout=30) as resp:
         return json.load(resp)
@@ -491,17 +494,26 @@ def snapshot(api_key, cohort, args):
         f"{len(chan_rows)} channel rows, {len(cohort) - len(due)} videos skipped (aged out or not due)")
 
 
+# Unique per process: release_lock only ever removes a lock this process
+# wrote, so a tick whose lock was (wrongly or rightly) taken over can never
+# delete the new owner's lock on its way out.
+_LOCK_TOKEN = f"{os.getpid()}:{os.urandom(8).hex()}"
+
+
 def acquire_lock():
     """One tick at a time: two overlapping invocations (scheduled + manual,
     or a stalled tick meeting the next one) would both read the same state,
     both consider everything due, and append duplicate rows / overwrite
-    state concurrently. O_EXCL creation is atomic on every platform; a lock
-    older than STALE_LOCK_HOURS is treated as a crashed tick's leftover."""
+    state concurrently. O_EXCL creation is atomic on every platform.
+    Staleness is judged by mtime age, and the RUNNING tick heartbeats the
+    lock (see heartbeat()) after every API batch -- so an old mtime means
+    the owner has done nothing for STALE_LOCK_HOURS, i.e. it is dead or
+    wedged beyond usefulness, not merely slow."""
     os.makedirs(TRACK_DIR, exist_ok=True)
     while True:
         try:
             fd = os.open(LOCK_PATH, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
-            os.write(fd, str(os.getpid()).encode())
+            os.write(fd, _LOCK_TOKEN.encode())
             os.close(fd)
             return True
         except FileExistsError:
@@ -518,7 +530,22 @@ def acquire_lock():
             return False
 
 
+def heartbeat():
+    """Refresh the lock mtime so a long-but-alive tick is never mistaken
+    for a crashed one. Called after every API/download batch."""
+    try:
+        os.utime(LOCK_PATH)
+    except OSError:
+        pass
+
+
 def release_lock():
+    try:
+        with open(LOCK_PATH, encoding="utf-8") as f:
+            if f.read() != _LOCK_TOKEN:
+                return  # not our lock (taken over after a stall) -- leave it
+    except OSError:
+        return
     try:
         os.remove(LOCK_PATH)
     except OSError:
@@ -552,6 +579,7 @@ def snapshot_thumbnails(thumb_jobs):
     rows = []
     changed = failed = 0
     for video_id, thumbnails, observed in thumb_jobs:
+        heartbeat()  # serial downloads can be slow; keep proving liveness
         url = quality = None
         for q in ("maxres", "standard", "high", "medium", "default"):
             if q in thumbnails and thumbnails[q].get("url"):
