@@ -85,9 +85,19 @@ DISCOVERY_STATE_PATH = os.path.join(TRACK_DIR, "discovery_state.json")
 # the tail of the previous window and dedupes globally by video_id.
 WINDOW_LOOKBACK_HOURS = 2.0
 VIDEO_SNAP_FIELDS = ["video_id", "observed_at_utc", "age_hours",
-                     "view_count", "like_count", "comment_count", "status"]
+                     "view_count", "like_count", "comment_count", "status",
+                     "youtube_category_id", "title"]
 CHANNEL_SNAP_FIELDS = ["channel_id", "observed_at_utc", "subscriber_count",
                        "hidden_subscriber_count", "channel_video_count", "country"]
+# Thumbnails (and titles, via the snapshot rows) are captured because
+# creators CHANGE them after upload -- a common optimization tactic. The
+# retrospective dataset can only ever see the current thumbnail; this cohort
+# captures the at-publish one plus every change (a potential feature:
+# "creator swapped the thumbnail after a weak first day"). A new image file
+# is stored only when its hash differs from the last stored version.
+THUMBS_DIR = os.path.join(TRACK_DIR, "thumbnails")
+THUMBS_CSV_PATH = os.path.join(TRACK_DIR, "thumbnail_snapshots.csv")
+THUMB_FIELDS = ["video_id", "observed_at_utc", "sha256", "quality", "file", "changed"]
 
 
 def log(msg):
@@ -140,12 +150,35 @@ def read_csv(path):
 
 
 def append_rows(path, fields, rows):
+    ensure_fields(path, fields)
     is_new = not os.path.exists(path)
     with open(path, "a", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fields)
         if is_new:
             writer.writeheader()
         writer.writerows(rows)
+
+
+def ensure_fields(path, fields):
+    """Schema migration for append-only CSVs: when a release adds columns,
+    rewrite the existing file once with the new header (old rows get empty
+    values for the new columns) so appends stay aligned."""
+    if not os.path.exists(path):
+        return
+    with open(path, newline="", encoding="utf-8") as f:
+        reader = csv.reader(f)
+        header = next(reader, None)
+    if header == fields:
+        return
+    old_rows = read_csv(path)
+    tmp = path + ".tmp"
+    with open(tmp, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
+        writer.writeheader()
+        for r in old_rows:
+            writer.writerow({k: r.get(k, "") for k in fields})
+    os.replace(tmp, path)
+    log(f"migrated {os.path.basename(path)} to new schema ({len(fields)} columns)")
 
 
 # ---------------------------------------------------------------------------
@@ -273,6 +306,7 @@ def snapshot(api_key, cohort, args):
         return
 
     snap_rows = []
+    thumb_jobs = []
     for batch in chunked(due):
         ids = ",".join(r["video_id"] for r in batch)
         try:
@@ -286,6 +320,7 @@ def snapshot(api_key, cohort, args):
         for r in batch:
             item = returned.get(r["video_id"])
             stats = (item or {}).get("statistics", {})
+            snippet = (item or {}).get("snippet", {})
             age_hours = (parse_iso(observed) - parse_iso(r["published_at_utc"])).total_seconds() / 3600.0
             snap_rows.append({
                 "video_id": r["video_id"],
@@ -297,9 +332,18 @@ def snapshot(api_key, cohort, args):
                 # "missing" = deleted/private since discovery -- kept in the
                 # cohort (attrition is itself an outcome worth reporting)
                 "status": "ok" if item else "missing",
+                # authoritative per-video category (self-selected by the
+                # creator; discovery already filters on it, this verifies)
+                "youtube_category_id": snippet.get("categoryId", ""),
+                # recorded per snapshot on purpose: creators change titles
+                # post-upload -- consecutive rows reveal every change
+                "title": snippet.get("title", ""),
             })
+            if item:
+                thumb_jobs.append((r["video_id"], snippet.get("thumbnails") or {}, observed))
         time.sleep(0.2)
     append_rows(VIDEO_SNAPSHOTS_PATH, VIDEO_SNAP_FIELDS, snap_rows)
+    snapshot_thumbnails(thumb_jobs)
 
     chan_rows = []
     channel_ids = sorted({r["channel_id"] for r in due if r["channel_id"]})
@@ -327,6 +371,68 @@ def snapshot(api_key, cohort, args):
     missing = sum(1 for r in snap_rows if r["status"] == "missing")
     log(f"snapshot: {len(snap_rows)} video rows ({missing} missing), "
         f"{len(chan_rows)} channel rows, {len(cohort) - len(due)} videos skipped (aged out or not due)")
+
+
+def fetch_url(url):
+    """Plain HTTP GET returning bytes. Isolated so tests can stub it."""
+    with urllib.request.urlopen(url, timeout=30) as resp:
+        return resp.read()
+
+
+def snapshot_thumbnails(thumb_jobs):
+    """Download each due video's current thumbnail (best available quality
+    from the snippet already fetched -- no extra API quota, only CDN GETs),
+    hash it, and store the image ONLY when the hash differs from the last
+    stored version for that video. Every check is logged as a CSV row, so
+    thumbnail-change events and their timing are recoverable exactly."""
+    if not thumb_jobs:
+        return
+    import hashlib
+
+    os.makedirs(THUMBS_DIR, exist_ok=True)
+    last_hash = {}
+    versions = {}
+    for row in read_csv(THUMBS_CSV_PATH):
+        last_hash[row["video_id"]] = row["sha256"]  # chronological file
+        if row["changed"] == "true":
+            versions[row["video_id"]] = versions.get(row["video_id"], 0) + 1
+
+    rows = []
+    changed = failed = 0
+    for video_id, thumbnails, observed in thumb_jobs:
+        url = quality = None
+        for q in ("maxres", "standard", "high", "medium", "default"):
+            if q in thumbnails and thumbnails[q].get("url"):
+                url, quality = thumbnails[q]["url"], q
+                break
+        if not url:
+            continue
+        try:
+            blob = fetch_url(url)
+        except (urllib.error.URLError, OSError):
+            failed += 1
+            continue
+        digest = hashlib.sha256(blob).hexdigest()
+        is_new = last_hash.get(video_id) != digest
+        fname = ""
+        if is_new:
+            n = versions.get(video_id, 0)
+            fname = f"{video_id}_v{n}.jpg"
+            with open(os.path.join(THUMBS_DIR, fname), "wb") as f:
+                f.write(blob)
+            versions[video_id] = n + 1
+            changed += 1
+        last_hash[video_id] = digest
+        rows.append({
+            "video_id": video_id,
+            "observed_at_utc": observed,
+            "sha256": digest,
+            "quality": quality,
+            "file": fname,  # empty = unchanged since last stored version
+            "changed": "true" if is_new else "false",
+        })
+    append_rows(THUMBS_CSV_PATH, THUMB_FIELDS, rows)
+    log(f"thumbnails: {len(rows)} checked, {changed} new/changed images stored, {failed} download failures")
 
 
 def main():
