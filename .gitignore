@@ -13,6 +13,7 @@ venv/
 # Data & model artifacts (large, not versioned — see 02_Data, 03_Models READMEs)
 02_Data/raw/
 02_Data/processed/
+02_Data/tracking/
 02_Data/frames/
 02_Data/videos/
 03_Models/checkpoints/
