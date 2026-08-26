@@ -31,6 +31,7 @@ Architecture (frozen encoders, late-fusion MLP, Integrated Gradients attribution
 
 | File | Purpose | Status |
 |------|---------|--------|
+| `FEATURES.md` | **The feature dictionary — single source of truth** for every feature: definition, source field, and role (model input vs label-only vs stratifier). Read this before touching baselines, the label, or the report's methodology section. Supersedes the drifted "12 metadata features" table in `data_retrieval.md` §5.4 | Created 2026-08-26 |
 | `cc_availability_scan.py` | CC-license availability scan (YouTube Data API v3 `search.list`) across candidate categories | Done — run 2026-08-14 |
 | `cc_availability_scan_results.json` | Raw scan output | Done |
 | `cc_availability_scan_findings.md` | Findings write-up: real CC-video counts per category, `totalResults` unreliability, `videoCategoryId` filter quirk for categoryId 22/24 | Done — feeds wayfinder tickets #3 and #4 |
