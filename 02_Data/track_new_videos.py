@@ -28,12 +28,17 @@ Designed for an OS scheduler (Windows Task Scheduler / cron), NOT a
 long-running sleep loop: every run records exact observed_at_utc timestamps,
 so late, missed, or doubled runs never corrupt anything -- a missed day is a
 gap in the curve, a doubled run is skipped by the min-gap check. State is
-three plain CSVs in 02_Data/tracking/ (gitignored), safe to copy between
-machines along with this script.
+the whole 02_Data/tracking/ directory (gitignored): four CSVs (cohort,
+video/channel/thumbnail snapshots), discovery_state.json, and thumbnails/
+-- when moving machines, copy ALL of it alongside this script, or thumbnail
+history is lost and the discovery window resets.
 
-Quota per tick (any bucket interpretation): ~4-8 search.list calls +
-~(cohort/50) videos.list + ~(channels/50) channels.list -- roughly 100
-cheap list calls/day at full cohort. Nowhere near any daily limit.
+Quota per tick: discovery is the expensive part -- up to 48 search.list
+calls at the defaults (8 query arms x 2 duration filters x 3 pages; far
+less once the big categories hit their caps and skip discovery), which is
+nearly half of a 100-search-calls/day budget, hence the run-discovery-
+once-a-day advice above. Snapshots are cheap: ~(cohort/50) videos.list +
+~(channels/50) channels.list, ~100 one-unit calls/day at full cohort.
 
 Usage:
     python3 02_Data/track_new_videos.py                # one full tick
@@ -88,6 +93,11 @@ MAIN_CATEGORY_COUNT = 4
 DEFAULT_MAX_COHORT = 3000
 DEFAULT_TRACK_DAYS = 30
 DEFAULT_MIN_GAP_HOURS = 12
+# A video whose snapshots all landed BEFORE the horizon stays eligible for
+# one terminal sample at/after it (else a video first seen at hour ~10 gets
+# its last sample at day ~29.x and views_at_30d would need extrapolation).
+# The grace bound stops long-dead videos from resurrecting after downtime.
+TERMINAL_GRACE_DAYS = 3
 DEFAULT_DISCOVER_WINDOW_HOURS = 24
 # Quota safety cap per (query arm x duration filter) per tick; 50/page.
 # With 8 query arms x 2 duration filters, 3 pages bounds a tick at ~48
@@ -257,6 +267,7 @@ def discover(api_key, cohort, args):
 
     new_rows = []
     dropped_short = 0
+    failed_calls = 0
     for category, spec in CATEGORIES.items():
         if counts.get(category, 0) >= per_category_cap:
             log(f"discover {category}: at cap ({per_category_cap}), skipping")
@@ -285,6 +296,7 @@ def discover(api_key, cohort, args):
                     try:
                         data = api_get("search", params)
                     except (urllib.error.URLError, json.JSONDecodeError) as e:
+                        failed_calls += 1
                         log(f"discover {category}/{q}/{duration_filter}: search failed ({e}) -- continuing")
                         break
                     for item in data.get("items", []):
@@ -321,12 +333,17 @@ def discover(api_key, cohort, args):
                 data = api_get("videos", {"part": "contentDetails", "id": ids,
                                           "maxResults": "50", "key": api_key})
             except (urllib.error.URLError, json.JSONDecodeError) as e:
+                failed_calls += 1
                 log(f"discover {category}: duration check failed ({e}) -- batch not admitted this tick")
                 continue
             for item in data.get("items", []):
                 durations[item["id"]] = parse_duration((item.get("contentDetails") or {}).get("duration"))
             time.sleep(0.2)
-        for c in candidates:
+        # Admit newest-first across ALL query arms and duration filters --
+        # otherwise, near the cap, earlier arms and medium-length videos
+        # would always win admission by loop order, making the capped sample
+        # depend on iteration order instead of the order=date frame.
+        for c in sorted(candidates, key=lambda r: (r["published_at_utc"], r["video_id"]), reverse=True):
             dur = durations.get(c["video_id"])
             if dur is None or dur < args.min_duration_sec:
                 dropped_short += 1
@@ -343,8 +360,16 @@ def discover(api_key, cohort, args):
             f"(Shorts slipping past the search duration filter)")
     if new_rows:
         append_rows(COHORT_PATH, COHORT_FIELDS, new_rows)
-    with open(DISCOVERY_STATE_PATH, "w", encoding="utf-8") as f:
-        json.dump({"last_window_end_utc": window_end}, f)
+    if failed_calls:
+        # Do NOT advance the checkpoint past a partially-failed window: the
+        # 2h lookback would not re-cover it, permanently dropping whatever
+        # the failed calls would have returned. Next tick re-covers the
+        # whole window; global dedup makes the re-coverage free.
+        log(f"discover: {failed_calls} API calls failed -- checkpoint NOT advanced, "
+            f"next tick re-covers [{window_start} ..]")
+    else:
+        with open(DISCOVERY_STATE_PATH, "w", encoding="utf-8") as f:
+            json.dump({"last_window_end_utc": window_end}, f)
     log(f"discover: window [{window_start} .. {window_end}], +{len(new_rows)} videos, "
         f"cohort total {len(cohort) + len(new_rows)}/{args.max_cohort}")
     return cohort + new_rows
@@ -368,11 +393,18 @@ def snapshot(api_key, cohort, args):
     due = []
     for row in cohort:
         try:
-            age = now - parse_iso(row["published_at_utc"])
+            published = parse_iso(row["published_at_utc"])
         except ValueError:
             continue  # unparseable publish time; discovery recorded it, nothing to age against
+        age = now - published
         if age > datetime.timedelta(days=args.track_days):
-            continue  # tracking window over for this video
+            # Past the horizon: still due exactly once more, for the
+            # terminal at/after-horizon sample -- unless that sample already
+            # exists, or the grace window is over.
+            last = last_seen.get(row["video_id"])
+            has_terminal = last and (parse_iso(last) - published) >= datetime.timedelta(days=args.track_days)
+            if has_terminal or age > datetime.timedelta(days=args.track_days + TERMINAL_GRACE_DAYS):
+                continue
         last = last_seen.get(row["video_id"])
         if last and (now - parse_iso(last)) < datetime.timedelta(hours=args.min_gap_hours):
             continue  # doubled run -- min-gap makes ticks idempotent

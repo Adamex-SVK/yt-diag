@@ -112,13 +112,18 @@ def main():
     # Channel countries first, one lookup per unique channel, reused across
     # all of that channel's videos.
     channel_info = {}
+    failed_channels = set()
     channel_ids = sorted({c for _, _, c in pending if c})
     for batch in chunked(channel_ids):
         try:
             data = api_get("channels", {"part": "snippet,statistics", "id": ",".join(batch),
                                         "maxResults": "50", "key": api_key})
         except (urllib.error.URLError, json.JSONDecodeError) as e:
-            print(f"WARNING: channels.list batch failed ({e}) -- those channels get empty country")
+            # A transient failure must not become permanent missing data:
+            # videos of these channels are skipped (no file written), so a
+            # re-run retries them instead of finding them "done".
+            failed_channels.update(batch)
+            print(f"WARNING: channels.list batch failed ({e}) -- those channels' videos stay pending for a re-run")
             continue
         for item in data.get("items", []):
             channel_info[item["id"]] = {
@@ -127,8 +132,13 @@ def main():
             }
         time.sleep(args.pacing)
 
-    written = missing = 0
+    written = missing = skipped_pending = 0
     for batch in chunked(pending):
+        kept = [(v, d, c) for v, d, c in batch if c not in failed_channels]
+        skipped_pending += len(batch) - len(kept)
+        if not kept:
+            continue
+        batch = kept
         ids = ",".join(vid for vid, _, _ in batch)
         try:
             data = api_get("videos", {"part": "snippet,contentDetails", "id": ids,
@@ -162,7 +172,8 @@ def main():
         time.sleep(args.pacing)
 
     print(f"Done: {written} written ({missing} missing from API), "
-          f"{len(pending) - written} still pending (failed batches -- re-run to retry)")
+          f"{len(pending) - written} still pending "
+          f"({skipped_pending} held back by failed channel batches -- re-run to retry)")
 
 
 if __name__ == "__main__":
