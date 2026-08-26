@@ -5,7 +5,10 @@ Builds the fixed-horizon outcome dataset the retrospective snapshot can never
 give us: videos discovered at age < ~1 day, then views/likes/comments and
 channel stats snapshotted daily for --track-days (default 30). From the
 snapshot curves, views_at_7d (preliminary outcome) and views_at_30d (primary)
-can be read off exactly, plus subscriber_count_at_first_observation -- which
+are interpolated from the observations bracketing each horizon (daily
+samples rarely land at exactly 168/720h; the terminal at/after-horizon
+sample guarantees day 30 is bracketed, never extrapolated), plus
+subscriber_count_at_first_observation -- which
 is NOT day-0 subs (even an hours-old observation may include video-driven
 gains, and public counts are rounded to ~3 significant figures; that is why
 hiddenSubscriberCount and the observation age are stored too).
