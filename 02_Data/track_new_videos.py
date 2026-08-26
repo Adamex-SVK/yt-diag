@@ -13,9 +13,11 @@ is NOT day-0 subs (even an hours-old observation may include video-driven
 gains, and public counts are rounded to ~3 significant figures; that is why
 hiddenSubscriberCount and the observation age are stored too).
 
-This is a FIXED, CAPPED validation cohort (--max-cohort, default 12,000 --
-raised from 3,000 on 2026-08-27, see DEFAULT_MAX_COHORT), not an unbounded
-sweep of everything discovery can return: quota is
+This is a FIXED, CAPPED validation cohort (--max-cohort, default 12,000 =
+the budget for the 4 main categories; the backup category adds the same
+per-category cap on top, so the true main-arm ceiling is 15,000 -- see
+DEFAULT_MAX_COHORT), not an unbounded sweep of everything discovery can
+return: quota is
 a discovery ceiling, not a target sample size, and the multimodal extraction
 pipeline could never process 5,000 new videos a day anyway.
 
@@ -102,11 +104,19 @@ MAIN_CATEGORY_COUNT = 4
 # Raised 3,000 -> 12,000 on 2026-08-27 (team decision: storage/RAM are not
 # binding, quota is use-it-or-lose-it, and a larger clean panel lets the
 # post-deadline extension SELECT its extraction subset instead of taking
-# whatever a small pool offers). Quota at 12k mature: ~940 one-unit list
-# calls/day -- ~10% of budget; search spend unchanged (~48 calls/day).
-# The old wall-time constraint (serial thumbnail downloads) was removed by
+# whatever a small pool offers).
+#
+# ACCOUNTING (be precise -- an earlier doc claimed "12,000 total"):
+# --max-cohort is the budget for the 4 MAIN categories; each gets
+# max_cohort/4 (3,000). The backup category (tech_reviews) gets the SAME
+# per-category cap ON TOP, so the main-arm ceiling is max_cohort * 5/4 =
+# 15,000 at this default, plus the ~742 grandfathered short_form videos.
+# Quota at that ceiling: ~315 videos.list + ~290 channels.list per
+# snapshot pass, x2 ticks/day ~= 1,200 one-unit calls/day (~12% of
+# budget); search spend is independent of the cap (~48 calls/day). The
+# old wall-time constraint (serial thumbnail downloads) was removed by
 # parallelizing them (THUMB_WORKERS below). Scarce categories won't reach
-# their caps anyway; this mainly deepens comedy/howto/vlogs.
+# their caps anyway; the raise mainly deepens comedy/howto/vlogs.
 DEFAULT_MAX_COHORT = 12000
 THUMB_WORKERS = 8  # concurrent CDN downloads; hashing/writes stay single-threaded
 DEFAULT_TRACK_DAYS = 30
@@ -609,14 +619,19 @@ def snapshot_thumbnails(thumb_jobs):
 
     rows = []
     changed = failed = 0
-    # Downloads are the slow part (~0.3s each; a 12k cohort would take an
-    # hour serially). Parallelize ONLY the network fetch; executor.map
-    # preserves job order, so CSV output stays deterministic.
+    # Downloads are the slow part (~0.3s each; a 15k cohort would take over
+    # an hour serially). Parallelize ONLY the network fetch; pool.map
+    # preserves job order, so CSV output stays deterministic. Consume the
+    # iterator lazily INSIDE the pool context: materializing it would hold
+    # every downloaded image at once (15k maxres blobs ~ 2GB) instead of
+    # hashing and releasing each as it arrives.
     import concurrent.futures
-    with concurrent.futures.ThreadPoolExecutor(max_workers=THUMB_WORKERS) as pool:
-        results = list(pool.map(fetch_one, thumb_jobs))
 
-    for video_id, observed, quality, blob in results:
+    def fetched():
+        with concurrent.futures.ThreadPoolExecutor(max_workers=THUMB_WORKERS) as pool:
+            yield from pool.map(fetch_one, thumb_jobs)
+
+    for video_id, observed, quality, blob in fetched():
         if quality is None:
             continue  # no thumbnail URL in the snippet
         if blob is None:
