@@ -1,5 +1,5 @@
 """
-One-shot backfill of publish timestamps (+ two more drifted fields) for the
+One-shot backfill of publish timestamps (+ the other fields metadata.json never captured) for the
 already-collected retrospective dataset (FEATURES.md 6).
 
 collect_and_extract.py keeps only yt-dlp's upload_date (YYYYMMDD -- date, no
@@ -10,10 +10,12 @@ from the official API in batches of 50 ids per call:
   videos.list  (snippet,contentDetails) -> published_at_utc (full ISO
                timestamp), caption_available (the "caption availability"
                feature #12, which never made it into metadata.json),
-               youtube_category_id
+               youtube_category_id, default_language / default_audio_language
+               (uploader-declared, often empty)
   channels.list (snippet,statistics)    -> channel_country (for timezone
                conversion; self-declared, often missing -- record, never
-               guess), hidden_subscriber_count
+               guess), hidden_subscriber_count, channel_created_at and
+               channel_video_count (channel age / first-upload features)
 
 Cost: ~160 videos.list + ~<=160 channels.list batched calls for the full
 8,000-video dataset -- trivial under any quota interpretation.
@@ -129,6 +131,10 @@ def main():
             channel_info[item["id"]] = {
                 "channel_country": (item.get("snippet") or {}).get("country", ""),
                 "hidden_subscriber_count": (item.get("statistics") or {}).get("hiddenSubscriberCount", ""),
+                # channel age / first-upload features. videoCount is the CURRENT
+                # count (post-outcome for old videos) -- coarse, disclose.
+                "channel_created_at": (item.get("snippet") or {}).get("publishedAt", ""),
+                "channel_video_count": (item.get("statistics") or {}).get("videoCount", ""),
             }
         time.sleep(args.pacing)
 
@@ -162,6 +168,11 @@ def main():
                     "published_at_utc": snippet.get("publishedAt"),
                     "caption_available": content.get("caption") == "true",
                     "youtube_category_id": snippet.get("categoryId", ""),
+                    # uploader-declared language fields (often empty; audio
+                    # language is set more often) -- yt-dlp had them, the
+                    # collector's metadata.json dropped them
+                    "default_language": snippet.get("defaultLanguage", ""),
+                    "default_audio_language": snippet.get("defaultAudioLanguage", ""),
                     "status": "ok",
                 }
             extra.update(channel_info.get(channel_id, {}))

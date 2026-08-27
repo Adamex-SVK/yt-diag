@@ -25,7 +25,17 @@ IDENTIFIERS = ("video_id", "channel_id", "dataset")
 META_COLUMNS = [
     "meta__duration_sec", "meta__definition_hd", "meta__title_length",
     "meta__description_length", "meta__tag_count", "meta__channel_follower_count",
-    "meta__caption_available", "meta__category",
+    "meta__caption_available",   # uploader-provided captions (contentDetails.caption)
+    "meta__auto_captions",       # YouTube auto-captions existed at collection (retrospective only)
+    "meta__category",
+    # uploader-declared language (defaultAudioLanguage, else defaultLanguage);
+    # categorical, often missing. Mostly a FILTER candidate (English-only
+    # transcripts) rather than a predictor -- see FEATURES.md 1.
+    "meta__language",
+    # channel maturity: age at publish (days), upload count, first-upload flag
+    # (prospective: count at first observation; retrospective: current count,
+    # post-outcome -- coarse)
+    "meta__channel_age_days", "meta__channel_video_count", "meta__is_first_upload",
 ]
 SCHED_COLUMNS = ["sched__hour_sin", "sched__hour_cos", "sched__weekday", "sched__is_weekend"]
 VIS_THUMB = ["cct", "brightness", "saturation", "contrast", "has_face",
