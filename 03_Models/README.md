@@ -1,49 +1,57 @@
 # 03_Models — README
 
 ## Purpose
-Model architecture designs, training configurations, hyperparameter choices. One subfolder per model variant.
+Model code, training configurations, and design rationale. Baselines and the deep multimodal model share ONE pipeline (`ytdiag/`); every variant and ablation is a feature-group configuration, never a second implementation.
 
-## Architecture overview
+## Design: one pipeline, feature groups as the unit of configuration
 
-YT-Diag fuses **three modalities** into a single end-to-end trained model:
+Two datasets feed the project and they do **not** have the same features — Adam's retrospective collection (`02_Data/processed/`: metadata, thumbnail, frames, transcript, visual + audio engineered features, v2 label) and Emmanuel's prospective tracker (`02_Data/tracking/`: metadata, publish timestamp, thumbnail history, daily view curves → fixed-horizon outcomes; no frames/transcript/audio). Rather than two pipelines, each source has an **adapter** that maps it onto one canonical table whose columns are prefixed by feature **group**:
 
-| Component | Input | Architecture | Notes |
-|-----------|-------|-------------|-------|
-| Text encoder | Title + description + transcript | Pretrained transformer (e.g. BERT/RoBERTa) | Shared across title/desc/transcript or separate? |
-| Vision encoder | Thumbnail (1280×720) | Pretrained CNN/ViT | Same backbone as frame encoder |
-| Temporal encoder | 16–24 sampled frames | Same vision backbone + lightweight temporal transformer | Following Abu-El-Haija et al. (2016) |
-| Fusion layer | All three embeddings | Cross-attention or concatenation | Key design decision |
-| Classification head | Fused representation | FC → sigmoid | Binary: viral / non-viral |
-| Attribution layer | Internal representations | Attention-based or ablation-based | Inspired by Rajaram & Manchanda (2020) |
+| Group | Prefix | What | Retrospective | Prospective |
+|---|---|---|---|---|
+| metadata | `meta__` | duration, HD, title/description length, tag count, subscriber count, caption availability, category | ✅ | ✅ (partial: no tags/description/HD) |
+| schedule | `sched__` | publish hour (sin/cos), weekday, weekend — from a full UTC timestamp | after `backfill_published_at.py` | ✅ |
+| visual engineered | `vis__` | thumbnail + frame aggregates (`visual_features.json`) | ✅ | ❌ |
+| audio engineered | `aud__` | eGeMAPS 88 + pause stats (`audio_features.json`) | ✅ | ❌ |
+| assets | `asset__` | paths/text for the deep stage: thumbnail, frames dir, transcript, title/description | ✅ | thumbnail + title only |
+| tracker-only | `track__` | thumbnail/title change counts, snapshot count | ❌ | ✅ |
 
-## Baselines (non-deep-learning)
+Roles from `02_Data/FEATURES.md` are enforced in code: label-only columns (`view_count`, outcomes, `label`) can never be selected as inputs; `asset__` columns are never tabular inputs. `features.available_groups(df)` reports honestly what a loaded table supports.
 
-- Logistic regression on 12 metadata features
-- XGBoost on 12 metadata features
-- Adapted from Wu et al. (2018) codebase
+**Label**: retrospective rows carry the v2 stratified label from `compute_labels_v2.py` (`label.json`). Prospective rows get `outcome_views` interpolated at `--horizon-days` from the bracketing snapshots (NaN until a video reaches the horizon — never extrapolated) and a within-category top-quartile label among videos that reached it (a stand-in for the v2 stratification, documented as such).
 
-## Key design decisions (TBD)
-
-1. Which pretrained text transformer? (BERT, RoBERTa, DistilBERT — trade off accuracy vs. compute)
-2. Which vision backbone? (ResNet, ViT, CLIP — CLIP interesting because it bridges text+vision)
-3. Fusion strategy: early (concatenate embeddings), mid (cross-attention), or late (ensemble)?
-4. Attribution method: integrated gradients, attention weights, or SHAP on final layer?
-5. Training strategy: joint end-to-end vs. frozen encoders + trainable fusion head?
+**Split**: channel-grouped, label-stratified 60/20/20 via `StratifiedGroupKFold` — no channel spans splits (asserted). Val is used for thresholds and model selection; the **test split is evaluated only with `--test`, once, at the end**.
 
 ## Contents
 
 | File | Purpose | Status |
 |------|---------|--------|
-| `architecture_overview.md` | Full architecture diagram and design rationale | TBD |
-| `baseline/` | Baseline model configs and results | TBD |
-| `multimodal/` | Multimodal model variants | TBD |
-| `attribution/` | Attribution layer experiments | TBD |
+| `ytdiag/features.py` | Feature registry: groups, roles, column selection with label-only guard | Done |
+| `ytdiag/adapters.py` | `load_retrospective(processed_dir)`, `load_prospective(tracking_dir, horizon_days)` → canonical table | Done — retrospective verified on synthetic tree; prospective verified on the live tracker (2,953+ rows, thumbnails resolved) |
+| `ytdiag/split.py` | Channel-grouped stratified split | Done |
+| `ytdiag/baselines.py` | Dummy floor / logistic regression / XGBoost (HistGradientBoosting fallback) on any group selection; AUC-ROC, PR-AUC, F1 at val-tuned threshold, per-category AUC | Done |
+| `ytdiag/synthetic.py` | Synthetic retrospective tree with planted signal (exact file layout of the collection pipeline) | Done |
+| `run_baselines.py` | CLI: `--source retrospective\|prospective`, `--groups meta,sched,vis,aud`, `--synthetic N`, `--test` | Done |
+| `tests/test_pipeline.py` | Registry/adapter/split/baseline checks on synthetic data + live prospective adapter smoke test | Passing |
+| deep model (`ytdiag/embed.py`, `ytdiag/fusion.py`) | Frozen DINOv2 ViT-S/14 (thumbnail, frames) + ModernBERT-base (title/description/transcript) embeddings cached to disk → late-fusion MLP over selected groups → Integrated Gradients attribution | **Next** |
+
+## How to run
+
+```bash
+python3 -m venv .venv && .venv/bin/pip install -r requirements-ml.txt   # once; torch uses MPS on Apple silicon
+.venv/bin/python 03_Models/run_baselines.py --synthetic 1200 --groups meta            # pipeline check, no data needed
+.venv/bin/python 03_Models/run_baselines.py --source retrospective --data 02_Data/processed --groups meta
+.venv/bin/python 03_Models/run_baselines.py --source retrospective --data 02_Data/processed --groups meta,sched,vis,aud
+.venv/bin/python 03_Models/run_baselines.py --source prospective --data 02_Data/tracking --horizon-days 7 --groups meta,sched
+(cd 03_Models && ../.venv/bin/python tests/test_pipeline.py)
+```
+Results land in `04_Experiments/runs/<name>/results.json` (gitignored).
 
 ## Status
-- **Architecture design**: not started (proposal committed to high-level approach only)
-- **Implementation**: not started
+- **Baseline pipeline**: built and verified 2026-08-27 on synthetic data (planted signal recovered: LR/XGB AUC ≈ 0.95 vs dummy 0.50 — a plumbing check, not a performance forecast). Real retrospective run pending Adam's collected data + `compute_labels_v2.py`; prospective baselines become possible from 2026-09-02, when the first cohort videos reach the 7-day horizon.
+- **Deep model**: not started — next.
 
 ## Notes
-- Document WHY each choice, not just WHAT. Future us will forget.
-- Track all hyperparameter decisions and their rationale.
-- Checkpoints go in GitHub repo — document paths here.
+- The four planned ablations (evaluation_and_planning.md) are group selections on this pipeline: full vs `meta`-only baselines; full minus text; full minus vision; full minus attribution.
+- Synthetic AUCs are meaningless as performance estimates; the generator plants a deliberately strong signal so pipeline bugs show up as AUC ≈ 0.5.
+- `requirements-ml.txt` is separate from `requirements.txt` (the collection stack) on purpose — the training machine doesn't need yt-dlp/Whisper.
