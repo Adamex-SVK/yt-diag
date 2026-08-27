@@ -414,8 +414,11 @@ def discover(api_key, cohort, args):
         with open(tmp, "w", encoding="utf-8") as f:
             json.dump({"last_window_end_utc": window_end}, f)
         os.replace(tmp, DISCOVERY_STATE_PATH)
+    main_total = sum(counts.values())
+    ceiling = per_category_cap * len(CATEGORIES)
     log(f"discover: window [{window_start} .. {window_end}], +{len(new_rows)} videos, "
-        f"cohort total {len(cohort) + len(new_rows)}/{args.max_cohort}")
+        f"main arm {main_total}/{ceiling} ({per_category_cap}/category x {len(CATEGORIES)} categories), "
+        f"{len(cohort) + len(new_rows) - main_total} short_form rows tracked separately")
     return cohort + new_rows
 
 
@@ -629,11 +632,12 @@ def snapshot_thumbnails(thumb_jobs):
     rows = []
     changed = failed = 0
     # Downloads are the slow part (~0.3s each; a 15k cohort would take over
-    # an hour serially). Parallelize ONLY the network fetch; pool.map
-    # preserves job order, so CSV output stays deterministic. Consume the
-    # iterator lazily INSIDE the pool context: materializing it would hold
-    # every downloaded image at once (15k maxres blobs ~ 2GB) instead of
-    # hashing and releasing each as it arrives.
+    # an hour serially). Parallelize ONLY the network fetch: fetched() below
+    # submits jobs through a bounded FIFO of futures, which preserves job
+    # order (deterministic CSV output) while never holding more than
+    # 2 x THUMB_WORKERS downloaded images at once. Do NOT replace it with
+    # pool.map -- that submits everything eagerly and retains out-of-order
+    # completions, i.e. unbounded memory (15k maxres blobs ~ 2GB).
     import concurrent.futures
 
     def fetched():
@@ -701,7 +705,8 @@ def main():
     try:
         api_key = load_api_key()
         cohort = read_csv(COHORT_PATH)
-        log(f"tick start: cohort {len(cohort)} videos")
+        main = sum(1 for r in cohort if r.get("sampling_arm") == "date_window")
+        log(f"tick start: {len(cohort)} cohort rows ({main} main arm, {len(cohort) - main} short_form)")
         if not args.no_discover:
             cohort = discover(api_key, cohort, args)
         snapshot(api_key, cohort, args)
