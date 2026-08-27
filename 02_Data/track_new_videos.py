@@ -53,11 +53,11 @@ video/channel/thumbnail snapshots), discovery_state.json, and thumbnails/
 -- when moving machines, copy ALL of it alongside this script, or thumbnail
 history is lost and the discovery window resets.
 
-Quota per tick: discovery is the expensive part -- up to 48 search.list
-calls at the defaults (8 query arms x 2 duration filters x 3 pages; far
-less once the big categories hit their caps and skip discovery), which is
-nearly half of a 100-search-calls/day budget, hence the run-discovery-
-once-a-day advice above. Snapshots are cheap per call but scale with the
+Quota per tick: discovery is the expensive part -- up to 80 search.list
+calls at the defaults (8 query arms x 2 duration filters x 5 pages; ~40 in
+practice since scarce arms exhaust in 1-2 pages, and far less once the big
+categories hit their caps and skip discovery), against a 100-search-calls/
+day budget, hence the run-discovery-once-a-day advice above. Snapshots are cheap per call but scale with the
 cohort: ~(cohort/50) videos.list + ~(channels/50) channels.list per pass,
 ~1,200 one-unit calls/day at the mature 15,000 ceiling (~12% of budget).
 
@@ -128,7 +128,7 @@ MAIN_CATEGORY_COUNT = 4
 # 15,000 at this default, plus the ~742 grandfathered short_form videos.
 # Quota at that ceiling: ~315 videos.list + ~290 channels.list per
 # snapshot pass, x2 ticks/day ~= 1,200 one-unit calls/day (~12% of
-# budget); search spend is independent of the cap (~48 calls/day). The
+# budget); search spend is independent of the cap (<=80 calls/day). The
 # old wall-time constraint (serial thumbnail downloads) was removed by
 # parallelizing them (THUMB_WORKERS below). Scarce categories won't reach
 # their caps anyway; the raise mainly deepens comedy/howto/vlogs.
@@ -148,11 +148,15 @@ DEFAULT_MIN_GAP_HOURS = 8
 TERMINAL_GRACE_DAYS = 3
 DEFAULT_DISCOVER_WINDOW_HOURS = 24
 # Quota safety cap per (query arm x duration filter) per tick; 50/page.
-# With 8 query arms x 2 duration filters, 3 pages bounds a tick at ~48
-# search calls worst-case (far less once the big categories hit their caps
-# and skip discovery entirely). For twice-daily scheduling, run the second
-# tick with --no-discover so search quota is spent once a day.
-DEFAULT_DISCOVER_PAGES = 3
+# Results come newest-first, so when an arm exhausts its pages the EARLIEST
+# hours of the window are the ones under-sampled -- a publish-hour bias.
+# Found 2026-08-27: at 3 pages the vlogs arm hit rank 150 on both duration
+# filters and comedy came close (146/124); 22Z had 7 admitted videos vs 118
+# at 01Z. 5 pages lifts per-window capacity to 250 per arm/filter; worst
+# case 8 x 2 x 5 = 80 search calls/day (~40 in practice: scarce arms
+# exhaust in 1-2 pages), under the 100-call budget. Run discovery once a
+# day (second tick --no-discover) so that budget is never shared.
+DEFAULT_DISCOVER_PAGES = 5
 
 COHORT_FIELDS = ["video_id", "category", "channel_id", "published_at_utc",
                  "discovered_at_utc", "discovery_source", "sampling_arm",
