@@ -340,7 +340,7 @@ def discover(api_key, cohort, args):
             for duration_filter in SEARCH_DURATION_FILTERS:
                 page_token = None
                 rank = 0
-                pages = args.discover_pages or spec["pages"]
+                pages = spec["pages"] if args.discover_pages is None else args.discover_pages
                 for _ in range(pages):
                     params = {
                         "part": "snippet",
@@ -717,12 +717,14 @@ def main():
     parser.add_argument("--min-gap-hours", type=float, default=DEFAULT_MIN_GAP_HOURS)
     parser.add_argument("--discover-window-hours", type=float, default=DEFAULT_DISCOVER_WINDOW_HOURS)
     parser.add_argument("--discover-pages", type=int, default=None,
-                        help="uniform override of the per-category page budgets in CATEGORIES (experiments only)")
+                        help="uniform override (>= 1) of the per-category page budgets in CATEGORIES (experiments only)")
     parser.add_argument("--min-duration-sec", type=int, default=MIN_DURATION_SEC,
                         help="main-arm admission floor (Shorts protection)")
     parser.add_argument("--no-discover", action="store_true",
                         help="snapshot only (e.g. after the cohort is full/frozen)")
     args = parser.parse_args()
+    if args.discover_pages is not None and args.discover_pages < 1:
+        parser.error("--discover-pages must be >= 1 (omit it to use the per-category budgets)")
 
     if not acquire_lock():
         print(f"another tick is already running ({LOCK_PATH}) -- exiting without touching state")
