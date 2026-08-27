@@ -122,8 +122,9 @@ STALE_LOCK_HOURS = 2.0
 # arm whose max rank keeps hitting pages*50 is still truncating.
 # 2026-08-27 (evening): comedy and vlogs arms re-phrased for English yield.
 # Search has no language filter, so non-English videos consume page slots
-# before the admission gate ever sees them: at order=date, q="comedy" was
-# 22% English and q="vlog" 20-33%. A live probe of one 24h page each found
+# before the admission gate ever sees them: at order=date, admitted videos
+# from q="comedy" were 22% English and from q="vlog" 32% (cohort-wide). A
+# live probe of one 24h page each found the old arms at 22% / 20% and
 # "stand up comedy" 64% / "sketch comedy" 72% and "day in my life" 58% /
 # "weekly vlog" 64% ("travel vlog" only 36%). Same call budget per category,
 # ~3x the English admissions. This narrows the topical frame (stand-up +
@@ -139,6 +140,11 @@ CATEGORIES = {
 # Per-category cap divides max_cohort by the MAIN categories only, so the
 # backup category gets the same absolute cap without shrinking the others.
 MAIN_CATEGORY_COUNT = 4
+# A uniform --discover-pages override is refused if it could exceed this many
+# search calls in one tick (the daily search budget is ~100; the per-category
+# budgets sum to 84). Found 2026-08-27: a leftover "--discover-pages 5" on the
+# launchd agent would have meant 10 arms x 2 filters x 5 = 100 calls.
+MAX_SEARCH_CALLS_PER_TICK = 90
 
 # Raised 3,000 -> 12,000 on 2026-08-27 (team decision: storage/RAM are not
 # binding, quota is use-it-or-lose-it, and a larger clean panel lets the
@@ -150,7 +156,7 @@ MAIN_CATEGORY_COUNT = 4
 # max_cohort/4 (3,000). The backup category (tech_reviews) gets the SAME
 # per-category cap ON TOP, so the main-arm ceiling is max_cohort * 5/4 =
 # 15,000 at this default, plus the grandfathered comparison arms (742
-# short_form, ~1,606 non_english) which are tracked but never capped.
+# short_form, ~1,550 non_english) which are tracked but never capped.
 # Quota at that ceiling: ~315 videos.list + ~290 channels.list per
 # snapshot pass, x2 ticks/day ~= 1,200 one-unit calls/day (~12% of
 # budget); search spend is independent of the cap (<=84 calls/day). The
@@ -192,7 +198,7 @@ COHORT_FIELDS = ["video_id", "category", "channel_id", "published_at_utc",
 STATIC_FIELDS = ("definition", "caption_available", "default_language", "default_audio_language")
 # Found 2026-08-27 by backfilling the language fields: only ~39% of the
 # API-returned cohort declared an English language (audio, else metadata;
-# hi 29%, en 24%, en-US 9%, id, bn, pt-PT ...). relevanceLanguage=en is a ranking hint, not a
+# audio-language tallies: hi 29%, en 24%, en-US 9%, id, bn, pt-PT ...). relevanceLanguage=en is a ranking hint, not a
 # filter. The project's text pipeline is English-only (Whisper small.en,
 # ModernBERT on English transcripts), so the MAIN arm admits only videos
 # whose uploader-declared audio language (else metadata language) starts
@@ -206,9 +212,22 @@ STATIC_FIELDS = ("definition", "caption_available", "default_language", "default
 ENGLISH_PREFIX = "en"
 
 
+NON_LANGUAGE_CODES = ("zxx", "und")  # 'no linguistic content' / 'undetermined' -- not a declared language
+
+
+def declared_language(static):
+    """First declared language: audio, else metadata; codes that are not
+    languages (zxx/und) are skipped. Mirrors 03_Models/ytdiag/adapters.py
+    _language() so the admission gate and the model's meta__language agree."""
+    for key in ("default_audio_language", "default_language"):
+        v = (static.get(key) or "").strip().lower()
+        if v and v.split("-")[0] not in NON_LANGUAGE_CODES:
+            return v
+    return ""
+
+
 def is_english(static):
-    lang = (static.get("default_audio_language") or static.get("default_language") or "").lower()
-    return lang.startswith(ENGLISH_PREFIX)
+    return declared_language(static).startswith(ENGLISH_PREFIX)
 # Found 2026-08-26 on the day-1 cohort: at order=date, 94% of fresh uploads
 # in our categories were <=180s (Shorts ceiling; comedy was 100%). Shorts
 # have different distribution surfaces and virality dynamics than the
@@ -257,7 +276,11 @@ TEXT_FIELDS = ["video_id", "observed_at_utc", "sha256", "file", "changed"]
 def log(msg):
     line = f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] {msg}"
     print(line)
-    with open(LOG_PATH, "a", encoding="utf-8") as f:
+    # resolved at call time from TRACK_DIR: a test or ad-hoc run that points
+    # TRACK_DIR elsewhere must never write into the live log (found 2026-08-27:
+    # three spurious "migrated ... (11 columns)" lines came from review runs
+    # on copies that had not overridden LOG_PATH)
+    with open(os.path.join(TRACK_DIR, os.path.basename(LOG_PATH)), "a", encoding="utf-8") as f:
         f.write(line + "\n")
 
 
@@ -358,8 +381,9 @@ def ensure_fields(path, fields):
 def discover(api_key, cohort, args):
     """Bounded-window discovery, order=date only. Each tick covers
     [previous window end - lookback, now] -- an explicit, recorded sampling
-    frame -- and pages through every nextPageToken inside it (bounded by
-    --discover-pages as a quota safety cap). order=viewCount is deliberately
+    frame -- and pages through every nextPageToken inside it (bounded by the
+    per-category page budget in CATEGORIES, or the --discover-pages uniform
+    override, experiments only). order=viewCount is deliberately
     never used for the main cohort: it selects on an early version of the
     outcome and would bias an underperformance model toward established
     successes. A popularity-enrichment arm, if ever added, must carry its
@@ -597,8 +621,10 @@ def snapshot(api_key, cohort, args):
         time.sleep(0.2)
     append_rows(VIDEO_SNAPSHOTS_PATH, VIDEO_SNAP_FIELDS, snap_rows)
     snapshot_texts(text_jobs)  # no network: never lose the near-publish text to a thumbnail-stage failure
-    snapshot_thumbnails(thumb_jobs)
 
+    # channel rows BEFORE the thumbnail stage too: the adapter takes each
+    # video's channel features from the channel row at/after its first
+    # observation, so a tick that dies in thumbnails must not lose them
     chan_rows = []
     channel_ids = sorted({r["channel_id"] for r in due if r["channel_id"]})
     for batch in chunked(channel_ids):
@@ -622,6 +648,7 @@ def snapshot(api_key, cohort, args):
             })
         time.sleep(0.2)
     append_rows(CHANNEL_SNAPSHOTS_PATH, CHANNEL_SNAP_FIELDS, chan_rows)
+    snapshot_thumbnails(thumb_jobs)
 
     missing = sum(1 for r in snap_rows if r["status"] == "missing")
     log(f"snapshot: {len(snap_rows)} video rows ({missing} missing), "
@@ -818,8 +845,8 @@ def snapshot_thumbnails(thumb_jobs):
             return video_id, observed, None, None
         try:
             return video_id, observed, quality, fetch_url(url)
-        except (urllib.error.URLError, OSError):
-            return video_id, observed, quality, None
+        except Exception:  # URLError, OSError, http.client.IncompleteRead, ... -- one bad
+            return video_id, observed, quality, None  # download must never abort the tick
 
     rows = []
     changed = failed = 0
@@ -893,8 +920,13 @@ def main():
     parser.add_argument("--backfill-static", action="store_true",
                         help="one-off: fill definition/caption/language for cohort rows admitted before 2026-08-27, then exit")
     args = parser.parse_args()
-    if args.discover_pages is not None and args.discover_pages < 1:
-        parser.error("--discover-pages must be >= 1 (omit it to use the per-category budgets)")
+    if args.discover_pages is not None:
+        if args.discover_pages < 1:
+            parser.error("--discover-pages must be >= 1 (omit it to use the per-category budgets)")
+        worst = sum(len(s["queries"]) for s in CATEGORIES.values()) * len(SEARCH_DURATION_FILTERS) * args.discover_pages
+        if worst > MAX_SEARCH_CALLS_PER_TICK:
+            parser.error(f"--discover-pages {args.discover_pages} means up to {worst} search calls per tick, "
+                         f"over the {MAX_SEARCH_CALLS_PER_TICK}-call safety limit (daily search budget is ~100)")
 
     if not acquire_lock():
         print(f"another tick is already running ({LOCK_PATH}) -- exiting without touching state")

@@ -34,7 +34,7 @@ from .features import VIS_FRAMES, VIS_THUMB, AUD_PAUSES
 
 def _schedule_features(published_at_utc):
     """sched__* from a full UTC timestamp (FEATURES.md 6). NaN if unknown."""
-    if not published_at_utc:
+    if not isinstance(published_at_utc, str) or not published_at_utc:  # None / float NaN from pandas
         return {"sched__hour_sin": np.nan, "sched__hour_cos": np.nan,
                 "sched__weekday": np.nan, "sched__is_weekend": np.nan}
     dt = datetime.datetime.strptime(published_at_utc[:19], "%Y-%m-%dT%H:%M:%S")
@@ -48,7 +48,7 @@ def _channel_features(published_at_utc, channel_created_at, channel_video_count)
     Prospective: video count at FIRST observation (near-publish). Retrospective:
     CURRENT count from the backfill (post-outcome, coarse) -- disclose."""
     age = np.nan
-    if published_at_utc and channel_created_at:
+    if isinstance(published_at_utc, str) and published_at_utc and isinstance(channel_created_at, str) and channel_created_at:
         try:
             pub = datetime.datetime.strptime(published_at_utc[:19], "%Y-%m-%dT%H:%M:%S")
             cre = datetime.datetime.strptime(channel_created_at[:19], "%Y-%m-%dT%H:%M:%S")

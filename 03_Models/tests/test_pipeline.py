@@ -152,6 +152,16 @@ def test_prospective_adapter_parsing_and_policies():
     assert df[df.video_id == "v00"].meta__channel_follower_count.iloc[0] == 5000  # row at/after first observation, not the earlier one
 
 
+def test_helpers_are_nan_safe():
+    from ytdiag.adapters import _channel_features, _flag, _language, _schedule_features
+    nan = float("nan")
+    assert all(v != v for v in _schedule_features(nan).values())  # pandas gives float NaN, not None
+    cf = _channel_features(nan, nan, nan)
+    assert cf["meta__channel_age_days"] != cf["meta__channel_age_days"] and cf["meta__is_first_upload"] != cf["meta__is_first_upload"]
+    assert _flag(True) == 1 and _flag("FALSE") == 0 and _flag("") != _flag("")
+    assert _language("zxx", "en-GB") == "en" and _language("und", "") != _language("und", "") and _language("pt-PT") == "pt"
+
+
 def test_prospective_adapter_on_live_tracking_dir_if_present():
     tracking = os.path.join(os.path.dirname(os.path.dirname(HERE)), "02_Data", "tracking")
     if not os.path.exists(os.path.join(tracking, "cohort.csv")):
