@@ -37,6 +37,13 @@ One idempotent daily "tick" does everything:
      videoCount; then the current thumbnail of each snapshotted video is
      downloaded, hashed, and stored only if it changed
 
+Scheduling rule: discovery once per YouTube quota day, which resets at
+midnight Pacific = 09:00 CEST -- so the discovery tick runs at 09:05 local
+(first run of the fresh quota day; manual runs later that day can never
+starve it) and the snapshot-only tick at 21:05 (--no-discover). Found
+2026-08-27: an 08:00 discovery tick shared its quota day with the previous
+evening's experimental runs and hit HTTP 429.
+
 Designed for an OS scheduler (launchd / Task Scheduler / cron), NOT a
 long-running sleep loop: every run records exact observed_at_utc timestamps,
 so late, missed, or doubled runs never corrupt anything -- a missed day is a
@@ -46,11 +53,12 @@ video/channel/thumbnail snapshots), discovery_state.json, and thumbnails/
 -- when moving machines, copy ALL of it alongside this script, or thumbnail
 history is lost and the discovery window resets.
 
-Quota per tick: discovery is the expensive part -- up to 48 search.list
-calls at the defaults (8 query arms x 2 duration filters x 3 pages; far
-less once the big categories hit their caps and skip discovery), which is
-nearly half of a 100-search-calls/day budget, hence the run-discovery-
-once-a-day advice above. Snapshots are cheap per call but scale with the
+Quota per tick: discovery is the expensive part -- up to 84 search.list
+calls at the per-category page budgets in CATEGORIES (sized to where the
+videos are: vlogs 10 pages, comedy 8, product_reviews 5, howto/tech 3;
+~50 in practice since scarce arms stop early, and far less once the big
+categories hit their caps and skip discovery), against a 100-search-calls/
+day budget, hence the run-discovery-once-a-day advice above. Snapshots are cheap per call but scale with the
 cohort: ~(cohort/50) videos.list + ~(channels/50) channels.list per pass,
 ~1,200 one-unit calls/day at the mature 15,000 ceiling (~12% of budget).
 
@@ -98,12 +106,21 @@ STALE_LOCK_HOURS = 2.0
 #     accumulating from day 2 as insurance: if product_reviews stays too
 #     thin/noisy, the team can swap it in without losing cohort history.
 #     Swap is a team decision with Adam; until then it is tracked alongside.
+# "pages" = search pages (50 results each) per query arm x duration filter
+# per tick -- a per-category budget, NOT a uniform cap. Search quota is
+# use-it-or-lose-it, so it goes where the videos are: at a uniform 3 pages
+# the vlogs arm exhausted rank 150 on both filters and comedy came close
+# (146/124) while howto never got past page 2. Worst-case search calls per
+# tick = sum(queries x 2 filters x pages) = 16 + 6 + 20 + 30 + 12 = 84,
+# under the 100-call daily budget; ~50 in practice (scarce arms stop early
+# when a page comes back short). Re-tune from cohort.csv search_rank: an
+# arm whose max rank keeps hitting pages*50 is still truncating.
 CATEGORIES = {
-    "comedy": {"categoryId": "23", "queries": ["comedy"]},
-    "howto": {"categoryId": "26", "queries": ["tutorial"]},
-    "vlogs": {"categoryId": "22", "queries": ["vlog"]},
-    "product_reviews": {"categoryId": "24", "queries": ["product review", "unboxing", "first impressions"]},
-    "tech_reviews": {"categoryId": "28", "queries": ["review", "unboxing"]},
+    "comedy": {"categoryId": "23", "queries": ["comedy"], "pages": 8},
+    "howto": {"categoryId": "26", "queries": ["tutorial"], "pages": 3},
+    "vlogs": {"categoryId": "22", "queries": ["vlog"], "pages": 10},
+    "product_reviews": {"categoryId": "24", "queries": ["product review", "unboxing", "first impressions"], "pages": 5},
+    "tech_reviews": {"categoryId": "28", "queries": ["review", "unboxing"], "pages": 3},
 }
 # Per-category cap divides max_cohort by the MAIN categories only, so the
 # backup category gets the same absolute cap without shrinking the others.
@@ -121,26 +138,32 @@ MAIN_CATEGORY_COUNT = 4
 # 15,000 at this default, plus the ~742 grandfathered short_form videos.
 # Quota at that ceiling: ~315 videos.list + ~290 channels.list per
 # snapshot pass, x2 ticks/day ~= 1,200 one-unit calls/day (~12% of
-# budget); search spend is independent of the cap (~48 calls/day). The
+# budget); search spend is independent of the cap (<=84 calls/day). The
 # old wall-time constraint (serial thumbnail downloads) was removed by
 # parallelizing them (THUMB_WORKERS below). Scarce categories won't reach
 # their caps anyway; the raise mainly deepens comedy/howto/vlogs.
 DEFAULT_MAX_COHORT = 12000
 THUMB_WORKERS = 8  # concurrent CDN downloads; hashing/writes stay single-threaded
 DEFAULT_TRACK_DAYS = 30
-DEFAULT_MIN_GAP_HOURS = 12
+# 8h, not 12h: the min-gap exists to make accidental doubled runs no-ops,
+# not to enforce spacing. At 12h it collided with a 12h-apart twice-daily
+# schedule (a 09:05 tick snapshots at ~09:06-09:15, so the 21:05 tick saw
+# gaps of 11h50m-11h59m and skipped nearly everything -- found 2026-08-27
+# before it bit). 8h still rejects any run within a work-shift of the last.
+DEFAULT_MIN_GAP_HOURS = 8
 # A video whose snapshots all landed BEFORE the horizon stays eligible for
 # one terminal sample at/after it (else a video first seen at hour ~10 gets
 # its last sample at day ~29.x and views_at_30d would need extrapolation).
 # The grace bound stops long-dead videos from resurrecting after downtime.
 TERMINAL_GRACE_DAYS = 3
 DEFAULT_DISCOVER_WINDOW_HOURS = 24
-# Quota safety cap per (query arm x duration filter) per tick; 50/page.
-# With 8 query arms x 2 duration filters, 3 pages bounds a tick at ~48
-# search calls worst-case (far less once the big categories hit their caps
-# and skip discovery entirely). For twice-daily scheduling, run the second
-# tick with --no-discover so search quota is spent once a day.
-DEFAULT_DISCOVER_PAGES = 3
+# Results come newest-first, so when an arm exhausts its pages the EARLIEST
+# hours of the window are the ones under-sampled -- a publish-hour bias
+# (found 2026-08-27: 22Z had 7 admitted videos vs 118 at 01Z). Page budgets
+# therefore live per category in CATEGORIES above; --discover-pages is only
+# a uniform OVERRIDE for experiments (None = use the per-category budgets).
+# Run discovery once a day (second tick --no-discover) so the search budget
+# is never shared between runs.
 
 COHORT_FIELDS = ["video_id", "category", "channel_id", "published_at_utc",
                  "discovered_at_utc", "discovery_source", "sampling_arm",
@@ -317,7 +340,8 @@ def discover(api_key, cohort, args):
             for duration_filter in SEARCH_DURATION_FILTERS:
                 page_token = None
                 rank = 0
-                for _ in range(args.discover_pages):
+                pages = spec["pages"] if args.discover_pages is None else args.discover_pages
+                for _ in range(pages):
                     params = {
                         "part": "snippet",
                         "type": "video",
@@ -692,12 +716,15 @@ def main():
     parser.add_argument("--track-days", type=int, default=DEFAULT_TRACK_DAYS)
     parser.add_argument("--min-gap-hours", type=float, default=DEFAULT_MIN_GAP_HOURS)
     parser.add_argument("--discover-window-hours", type=float, default=DEFAULT_DISCOVER_WINDOW_HOURS)
-    parser.add_argument("--discover-pages", type=int, default=DEFAULT_DISCOVER_PAGES)
+    parser.add_argument("--discover-pages", type=int, default=None,
+                        help="uniform override (>= 1) of the per-category page budgets in CATEGORIES (experiments only)")
     parser.add_argument("--min-duration-sec", type=int, default=MIN_DURATION_SEC,
                         help="main-arm admission floor (Shorts protection)")
     parser.add_argument("--no-discover", action="store_true",
                         help="snapshot only (e.g. after the cohort is full/frozen)")
     args = parser.parse_args()
+    if args.discover_pages is not None and args.discover_pages < 1:
+        parser.error("--discover-pages must be >= 1 (omit it to use the per-category budgets)")
 
     if not acquire_lock():
         print(f"another tick is already running ({LOCK_PATH}) -- exiting without touching state")
