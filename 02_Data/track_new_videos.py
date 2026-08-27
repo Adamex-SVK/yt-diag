@@ -37,6 +37,13 @@ One idempotent daily "tick" does everything:
      videoCount; then the current thumbnail of each snapshotted video is
      downloaded, hashed, and stored only if it changed
 
+Scheduling rule: discovery once per YouTube quota day, which resets at
+midnight Pacific = 09:00 CEST -- so the discovery tick runs at 09:05 local
+(first run of the fresh quota day; manual runs later that day can never
+starve it) and the snapshot-only tick at 21:05 (--no-discover). Found
+2026-08-27: an 08:00 discovery tick shared its quota day with the previous
+evening's experimental runs and hit HTTP 429.
+
 Designed for an OS scheduler (launchd / Task Scheduler / cron), NOT a
 long-running sleep loop: every run records exact observed_at_utc timestamps,
 so late, missed, or doubled runs never corrupt anything -- a missed day is a
@@ -128,7 +135,12 @@ MAIN_CATEGORY_COUNT = 4
 DEFAULT_MAX_COHORT = 12000
 THUMB_WORKERS = 8  # concurrent CDN downloads; hashing/writes stay single-threaded
 DEFAULT_TRACK_DAYS = 30
-DEFAULT_MIN_GAP_HOURS = 12
+# 8h, not 12h: the min-gap exists to make accidental doubled runs no-ops,
+# not to enforce spacing. At 12h it collided with a 12h-apart twice-daily
+# schedule (a 09:05 tick snapshots at ~09:06-09:15, so the 21:05 tick saw
+# gaps of 11h50m-11h59m and skipped nearly everything -- found 2026-08-27
+# before it bit). 8h still rejects any run within a work-shift of the last.
+DEFAULT_MIN_GAP_HOURS = 8
 # A video whose snapshots all landed BEFORE the horizon stays eligible for
 # one terminal sample at/after it (else a video first seen at hour ~10 gets
 # its last sample at day ~29.x and views_at_30d would need extrapolation).
