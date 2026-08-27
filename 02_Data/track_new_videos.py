@@ -13,22 +13,31 @@ is NOT day-0 subs (even an hours-old observation may include video-driven
 gains, and public counts are rounded to ~3 significant figures; that is why
 hiddenSubscriberCount and the observation age are stored too).
 
-This is a FIXED, CAPPED validation cohort (--max-cohort, default 12,000 --
-raised from 3,000 on 2026-08-27, see DEFAULT_MAX_COHORT), not an unbounded
-sweep of everything discovery can return: quota is
+This is a FIXED, CAPPED validation cohort (--max-cohort, default 12,000 =
+the budget for the 4 main categories; the backup category adds the same
+per-category cap on top, so the true main-arm ceiling is 15,000 -- see
+DEFAULT_MAX_COHORT), not an unbounded sweep of everything discovery can
+return: quota is
 a discovery ceiling, not a target sample size, and the multimodal extraction
 pipeline could never process 5,000 new videos a day anyway.
 
 One idempotent daily "tick" does everything:
-  1. discover  -- search.list per category (same categoryId+keyword mapping
-     as collect_and_extract.py), order=date, publishedAfter = now - 24h,
-     until the per-category / cohort caps are reached
+  1. discover  -- search.list per category and query arm (categoryId +
+     keyword mapping derived from collect_and_extract.py), order=date,
+     videoDuration=medium/long, over a bounded publishedAfter/Before window
+     that continues from the last checkpoint (first run: now - 24h) with a
+     2h overlap; every candidate's contentDetails duration is verified
+     (>= --min-duration-sec) before admission, newest-first, until the
+     per-category caps are reached
   2. snapshot  -- videos.list (batched 50 per call, statistics+snippet) for
-     every cohort video still inside --track-days whose last snapshot is
-     older than --min-gap-hours; channels.list (batched 50) for their
-     channels' subscriberCount / hiddenSubscriberCount / country
+     every cohort video still inside --track-days (plus one terminal sample
+     past it) whose last snapshot is older than --min-gap-hours, recording
+     counts, categoryId and current title; channels.list (batched 50) for
+     their channels' subscriberCount / hiddenSubscriberCount / country /
+     videoCount; then the current thumbnail of each snapshotted video is
+     downloaded, hashed, and stored only if it changed
 
-Designed for an OS scheduler (Windows Task Scheduler / cron), NOT a
+Designed for an OS scheduler (launchd / Task Scheduler / cron), NOT a
 long-running sleep loop: every run records exact observed_at_utc timestamps,
 so late, missed, or doubled runs never corrupt anything -- a missed day is a
 gap in the curve, a doubled run is skipped by the min-gap check. State is
@@ -41,8 +50,9 @@ Quota per tick: discovery is the expensive part -- up to 48 search.list
 calls at the defaults (8 query arms x 2 duration filters x 3 pages; far
 less once the big categories hit their caps and skip discovery), which is
 nearly half of a 100-search-calls/day budget, hence the run-discovery-
-once-a-day advice above. Snapshots are cheap: ~(cohort/50) videos.list +
-~(channels/50) channels.list, ~100 one-unit calls/day at full cohort.
+once-a-day advice above. Snapshots are cheap per call but scale with the
+cohort: ~(cohort/50) videos.list + ~(channels/50) channels.list per pass,
+~1,200 one-unit calls/day at the mature 15,000 ceiling (~12% of budget).
 
 Usage:
     python3 02_Data/track_new_videos.py                # one full tick
@@ -80,7 +90,7 @@ STALE_LOCK_HOURS = 2.0
 # extended 2026-08-26 with two scarcity measures:
 #   - product_reviews gets extra query arms ("unboxing", "first impressions")
 #     -- at q="product review" alone it admitted only 9 main-arm videos/day,
-#     which would leave its 750 cap ~2/3 empty at the end of the 30-day
+#     which would have left its then-750 cap (3,000 since 2026-08-27) ~2/3 empty at the end of the 30-day
 #     window. Every video's exact source query is recorded in
 #     discovery_source, so the slices stay auditable.
 #   - tech_reviews (Science & Technology, categoryId 28 -- a ticket-#4
@@ -102,11 +112,19 @@ MAIN_CATEGORY_COUNT = 4
 # Raised 3,000 -> 12,000 on 2026-08-27 (team decision: storage/RAM are not
 # binding, quota is use-it-or-lose-it, and a larger clean panel lets the
 # post-deadline extension SELECT its extraction subset instead of taking
-# whatever a small pool offers). Quota at 12k mature: ~940 one-unit list
-# calls/day -- ~10% of budget; search spend unchanged (~48 calls/day).
-# The old wall-time constraint (serial thumbnail downloads) was removed by
+# whatever a small pool offers).
+#
+# ACCOUNTING (be precise -- an earlier doc claimed "12,000 total"):
+# --max-cohort is the budget for the 4 MAIN categories; each gets
+# max_cohort/4 (3,000). The backup category (tech_reviews) gets the SAME
+# per-category cap ON TOP, so the main-arm ceiling is max_cohort * 5/4 =
+# 15,000 at this default, plus the ~742 grandfathered short_form videos.
+# Quota at that ceiling: ~315 videos.list + ~290 channels.list per
+# snapshot pass, x2 ticks/day ~= 1,200 one-unit calls/day (~12% of
+# budget); search spend is independent of the cap (~48 calls/day). The
+# old wall-time constraint (serial thumbnail downloads) was removed by
 # parallelizing them (THUMB_WORKERS below). Scarce categories won't reach
-# their caps anyway; this mainly deepens comedy/howto/vlogs.
+# their caps anyway; the raise mainly deepens comedy/howto/vlogs.
 DEFAULT_MAX_COHORT = 12000
 THUMB_WORKERS = 8  # concurrent CDN downloads; hashing/writes stay single-threaded
 DEFAULT_TRACK_DAYS = 30
@@ -211,7 +229,8 @@ def parse_duration(d):
 
 
 # ---------------------------------------------------------------------------
-# State -- three plain CSVs, append-only for snapshots
+# State -- plain CSVs (cohort + video/channel/thumbnail snapshots; the
+# snapshot files are append-only) plus discovery_state.json and thumbnails/
 # ---------------------------------------------------------------------------
 
 def read_csv(path):
@@ -395,8 +414,11 @@ def discover(api_key, cohort, args):
         with open(tmp, "w", encoding="utf-8") as f:
             json.dump({"last_window_end_utc": window_end}, f)
         os.replace(tmp, DISCOVERY_STATE_PATH)
+    main_total = sum(counts.values())
+    ceiling = per_category_cap * len(CATEGORIES)
     log(f"discover: window [{window_start} .. {window_end}], +{len(new_rows)} videos, "
-        f"cohort total {len(cohort) + len(new_rows)}/{args.max_cohort}")
+        f"main arm {main_total}/{ceiling} ({per_category_cap}/category x {len(CATEGORIES)} categories), "
+        f"{len(cohort) + len(new_rows) - main_total} short_form rows tracked separately")
     return cohort + new_rows
 
 
@@ -609,14 +631,33 @@ def snapshot_thumbnails(thumb_jobs):
 
     rows = []
     changed = failed = 0
-    # Downloads are the slow part (~0.3s each; a 12k cohort would take an
-    # hour serially). Parallelize ONLY the network fetch; executor.map
-    # preserves job order, so CSV output stays deterministic.
+    # Downloads are the slow part (~0.3s each; a 15k cohort would take over
+    # an hour serially). Parallelize ONLY the network fetch: fetched() below
+    # submits jobs through a bounded FIFO of futures, which preserves job
+    # order (deterministic CSV output) while never holding more than
+    # 2 x THUMB_WORKERS downloaded images at once. Do NOT replace it with
+    # pool.map -- that submits everything eagerly and retains out-of-order
+    # completions, i.e. unbounded memory (15k maxres blobs ~ 2GB).
     import concurrent.futures
-    with concurrent.futures.ThreadPoolExecutor(max_workers=THUMB_WORKERS) as pool:
-        results = list(pool.map(fetch_one, thumb_jobs))
 
-    for video_id, observed, quality, blob in results:
+    def fetched():
+        """Ordered results with a BOUNDED in-flight window. pool.map would
+        submit every job eagerly and retain out-of-order completions (whole
+        image blobs) until the earlier jobs are yielded, so one slow early
+        request could pile up many images in memory. A fixed-size FIFO of
+        futures preserves input order while keeping at most 2 x
+        THUMB_WORKERS results alive at any moment."""
+        from collections import deque
+        with concurrent.futures.ThreadPoolExecutor(max_workers=THUMB_WORKERS) as pool:
+            pending = deque()
+            for job in thumb_jobs:
+                pending.append(pool.submit(fetch_one, job))
+                if len(pending) >= THUMB_WORKERS * 2:
+                    yield pending.popleft().result()
+            while pending:
+                yield pending.popleft().result()
+
+    for video_id, observed, quality, blob in fetched():
         if quality is None:
             continue  # no thumbnail URL in the snippet
         if blob is None:
@@ -664,7 +705,8 @@ def main():
     try:
         api_key = load_api_key()
         cohort = read_csv(COHORT_PATH)
-        log(f"tick start: cohort {len(cohort)} videos")
+        main = sum(1 for r in cohort if r.get("sampling_arm") == "date_window")
+        log(f"tick start: {len(cohort)} cohort rows ({main} main arm, {len(cohort) - main} short_form)")
         if not args.no_discover:
             cohort = discover(api_key, cohort, args)
         snapshot(api_key, cohort, args)
