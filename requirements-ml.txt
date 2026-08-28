@@ -1,0 +1,16 @@
+# ML pipeline (03_Models) -- separate from requirements.txt, which is the
+# data-collection stack (yt-dlp/opencv/opensmile/whisper) that only needs to
+# exist on the collection machine. Install into .venv on the training
+# machine:  python3 -m venv .venv && .venv/bin/pip install -r requirements-ml.txt
+numpy>=1.26
+pandas>=2.2
+pyarrow>=15
+scikit-learn>=1.5
+# xgboost's macOS wheel needs libomp (brew install libomp); baselines.py
+# falls back to sklearn HistGradientBoosting if xgboost fails to import.
+xgboost>=2.1
+# Frozen encoders (Tier-1 architecture): DINOv2 ViT-S/14 and ModernBERT-base
+# via transformers; torch uses MPS on Apple silicon, CUDA on the A40 server.
+torch>=2.4
+transformers>=4.48
+pillow>=10
