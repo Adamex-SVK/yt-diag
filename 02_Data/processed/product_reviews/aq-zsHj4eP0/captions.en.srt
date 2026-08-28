@@ -1,0 +1,35 @@
+1
+00:00:00,000 --> 00:00:02,670
+
+This is for you. This is for me. THIS IS
+
+2
+00:00:02,670 --> 00:00:02,680
+This is for you. This is for me. THIS IS
+ 
+
+3
+00:00:02,680 --> 00:00:05,550
+This is for you. This is for me. THIS IS
+FOR ME. THIS IS FOR ME. And this is for
+
+4
+00:00:05,550 --> 00:00:05,560
+FOR ME. THIS IS FOR ME. And this is for
+ 
+
+5
+00:00:05,560 --> 00:00:06,590
+FOR ME. THIS IS FOR ME. And this is for
+me.
+
+6
+00:00:06,590 --> 00:00:06,600
+me.
+ 
+
+7
+00:00:06,600 --> 00:00:09,280
+me.
+>> Hey, you.
+

@@ -1,0 +1,395 @@
+1
+00:00:00,080 --> 00:00:01,510
+
+i'm gonna teach you how to animate stuff
+
+2
+00:00:01,510 --> 00:00:01,520
+i'm gonna teach you how to animate stuff
+ 
+
+3
+00:00:01,520 --> 00:00:03,189
+i'm gonna teach you how to animate stuff
+in blender uh we're starting off with a
+
+4
+00:00:03,189 --> 00:00:03,199
+in blender uh we're starting off with a
+ 
+
+5
+00:00:03,199 --> 00:00:04,789
+in blender uh we're starting off with a
+character do whatever you want man i
+
+6
+00:00:04,789 --> 00:00:04,799
+character do whatever you want man i
+ 
+
+7
+00:00:04,799 --> 00:00:05,749
+character do whatever you want man i
+have a happy man
+
+8
+00:00:05,749 --> 00:00:05,759
+have a happy man
+ 
+
+9
+00:00:05,759 --> 00:00:06,789
+have a happy man
+now you might want to consider
+
+10
+00:00:06,789 --> 00:00:06,799
+now you might want to consider
+ 
+
+11
+00:00:06,799 --> 00:00:08,549
+now you might want to consider
+decimating your model every computer is
+
+12
+00:00:08,549 --> 00:00:08,559
+decimating your model every computer is
+ 
+
+13
+00:00:08,559 --> 00:00:09,589
+decimating your model every computer is
+different though you just don't want to
+
+14
+00:00:09,589 --> 00:00:09,599
+different though you just don't want to
+ 
+
+15
+00:00:09,599 --> 00:00:11,430
+different though you just don't want to
+start a fire shift aid add armature
+
+16
+00:00:11,430 --> 00:00:11,440
+start a fire shift aid add armature
+ 
+
+17
+00:00:11,440 --> 00:00:12,709
+start a fire shift aid add armature
+we're going to add a single bone but
+
+18
+00:00:12,709 --> 00:00:12,719
+we're going to add a single bone but
+ 
+
+19
+00:00:12,719 --> 00:00:13,669
+we're going to add a single bone but
+it's gone so we're going to
+
+20
+00:00:13,669 --> 00:00:13,679
+it's gone so we're going to
+ 
+
+21
+00:00:13,679 --> 00:00:15,430
+it's gone so we're going to
+go into viewport display and make it in
+
+22
+00:00:15,430 --> 00:00:15,440
+go into viewport display and make it in
+ 
+
+23
+00:00:15,440 --> 00:00:16,870
+go into viewport display and make it in
+front so that way we can forever see it
+
+24
+00:00:16,870 --> 00:00:16,880
+front so that way we can forever see it
+ 
+
+25
+00:00:16,880 --> 00:00:18,390
+front so that way we can forever see it
+in front of the model g to grab
+
+26
+00:00:18,390 --> 00:00:18,400
+in front of the model g to grab
+ 
+
+27
+00:00:18,400 --> 00:00:20,950
+in front of the model g to grab
+s to scale r to rotate in edit mode you
+
+28
+00:00:20,950 --> 00:00:20,960
+s to scale r to rotate in edit mode you
+ 
+
+29
+00:00:20,960 --> 00:00:23,349
+s to scale r to rotate in edit mode you
+want to extrude more bones wherever bone
+
+30
+00:00:23,349 --> 00:00:23,359
+want to extrude more bones wherever bone
+ 
+
+31
+00:00:23,359 --> 00:00:23,910
+want to extrude more bones wherever bone
+should go
+
+32
+00:00:23,910 --> 00:00:23,920
+should go
+ 
+
+33
+00:00:23,920 --> 00:00:25,349
+should go
+you should put it there remember to
+
+34
+00:00:25,349 --> 00:00:25,359
+you should put it there remember to
+ 
+
+35
+00:00:25,359 --> 00:00:26,790
+you should put it there remember to
+check different perspectives that way
+
+36
+00:00:26,790 --> 00:00:26,800
+check different perspectives that way
+ 
+
+37
+00:00:26,800 --> 00:00:28,470
+check different perspectives that way
+the bones line up with the body because
+
+38
+00:00:28,470 --> 00:00:28,480
+the bones line up with the body because
+ 
+
+39
+00:00:28,480 --> 00:00:30,470
+the bones line up with the body because
+remember it's a 3d object it's important
+
+40
+00:00:30,470 --> 00:00:30,480
+remember it's a 3d object it's important
+ 
+
+41
+00:00:30,480 --> 00:00:31,830
+remember it's a 3d object it's important
+now that you have all your bones go back
+
+42
+00:00:31,830 --> 00:00:31,840
+now that you have all your bones go back
+ 
+
+43
+00:00:31,840 --> 00:00:32,790
+now that you have all your bones go back
+into object mode
+
+44
+00:00:32,790 --> 00:00:32,800
+into object mode
+ 
+
+45
+00:00:32,800 --> 00:00:34,790
+into object mode
+select your character first shift select
+
+46
+00:00:34,790 --> 00:00:34,800
+select your character first shift select
+ 
+
+47
+00:00:34,800 --> 00:00:35,830
+select your character first shift select
+your bones second
+
+48
+00:00:35,830 --> 00:00:35,840
+your bones second
+ 
+
+49
+00:00:35,840 --> 00:00:37,430
+your bones second
+your bone should be the lighter color
+
+50
+00:00:37,430 --> 00:00:37,440
+your bone should be the lighter color
+ 
+
+51
+00:00:37,440 --> 00:00:39,350
+your bone should be the lighter color
+control p armature deform automatic
+
+52
+00:00:39,350 --> 00:00:39,360
+control p armature deform automatic
+ 
+
+53
+00:00:39,360 --> 00:00:40,869
+control p armature deform automatic
+weights with your bone selected you
+
+54
+00:00:40,869 --> 00:00:40,879
+weights with your bone selected you
+ 
+
+55
+00:00:40,879 --> 00:00:42,389
+weights with your bone selected you
+should be able to go into pose mode and
+
+56
+00:00:42,389 --> 00:00:42,399
+should be able to go into pose mode and
+ 
+
+57
+00:00:42,399 --> 00:00:43,990
+should be able to go into pose mode and
+now you can move your character he's a
+
+58
+00:00:43,990 --> 00:00:44,000
+now you can move your character he's a
+ 
+
+59
+00:00:44,000 --> 00:00:45,750
+now you can move your character he's a
+puppet so keyframes i like to select
+
+60
+00:00:45,750 --> 00:00:45,760
+puppet so keyframes i like to select
+ 
+
+61
+00:00:45,760 --> 00:00:47,510
+puppet so keyframes i like to select
+this automatic keyframe it's just a dot
+
+62
+00:00:47,510 --> 00:00:47,520
+this automatic keyframe it's just a dot
+ 
+
+63
+00:00:47,520 --> 00:00:49,190
+this automatic keyframe it's just a dot
+and as you move through the timeline you
+
+64
+00:00:49,190 --> 00:00:49,200
+and as you move through the timeline you
+ 
+
+65
+00:00:49,200 --> 00:00:50,709
+and as you move through the timeline you
+can move the bones and the keyframes
+
+66
+00:00:50,709 --> 00:00:50,719
+can move the bones and the keyframes
+ 
+
+67
+00:00:50,719 --> 00:00:51,430
+can move the bones and the keyframes
+will be made
+
+68
+00:00:51,430 --> 00:00:51,440
+will be made
+ 
+
+69
+00:00:51,440 --> 00:00:52,869
+will be made
+and if you want a repeated action you
+
+70
+00:00:52,869 --> 00:00:52,879
+and if you want a repeated action you
+ 
+
+71
+00:00:52,879 --> 00:00:55,110
+and if you want a repeated action you
+can copy and paste your selected frames
+
+72
+00:00:55,110 --> 00:00:55,120
+can copy and paste your selected frames
+ 
+
+73
+00:00:55,120 --> 00:00:55,750
+can copy and paste your selected frames
+and make them
+
+74
+00:00:55,750 --> 00:00:55,760
+and make them
+ 
+
+75
+00:00:55,760 --> 00:00:57,830
+and make them
+wave anything you create can now be your
+
+76
+00:00:57,830 --> 00:00:57,840
+wave anything you create can now be your
+ 
+
+77
+00:00:57,840 --> 00:00:58,790
+wave anything you create can now be your
+puppet you are
+
+78
+00:00:58,790 --> 00:00:58,800
+puppet you are
+ 
+
+79
+00:00:58,800 --> 00:01:01,760
+puppet you are
+god now
+

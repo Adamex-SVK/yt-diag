@@ -1,0 +1,45 @@
+1
+00:00:00,000 --> 00:00:04,430
+
+hello I wanna know I wanna know I wanna
+
+2
+00:00:04,430 --> 00:00:04,440
+hello I wanna know I wanna know I wanna
+ 
+
+3
+00:00:04,440 --> 00:00:06,889
+hello I wanna know I wanna know I wanna
+know I could be right or I could be
+
+4
+00:00:06,889 --> 00:00:06,899
+know I could be right or I could be
+ 
+
+5
+00:00:06,899 --> 00:00:09,230
+know I could be right or I could be
+yellow I could be blue or I could be
+
+6
+00:00:09,230 --> 00:00:09,240
+yellow I could be blue or I could be
+ 
+
+7
+00:00:09,240 --> 00:00:11,509
+yellow I could be blue or I could be
+purple I could be green or pink or black
+
+8
+00:00:11,509 --> 00:00:11,519
+purple I could be green or pink or black
+ 
+
+9
+00:00:11,519 --> 00:00:15,980
+purple I could be green or pink or black
+or white I could be every color you like
+

@@ -1,0 +1,115 @@
+1
+00:00:00,160 --> 00:00:02,149
+
+Mom, can I have a cold drink?
+
+2
+00:00:02,149 --> 00:00:02,159
+Mom, can I have a cold drink?
+ 
+
+3
+00:00:02,159 --> 00:00:02,869
+Mom, can I have a cold drink?
+No.
+
+4
+00:00:02,869 --> 00:00:02,879
+No.
+ 
+
+5
+00:00:02,879 --> 00:00:04,870
+No.
+Mom, can I have ice cream?
+
+6
+00:00:04,870 --> 00:00:04,880
+Mom, can I have ice cream?
+ 
+
+7
+00:00:04,880 --> 00:00:05,670
+Mom, can I have ice cream?
+No.
+
+8
+00:00:05,670 --> 00:00:05,680
+No.
+ 
+
+9
+00:00:05,680 --> 00:00:07,670
+No.
+Mom, can I have some chocolate?
+
+10
+00:00:07,670 --> 00:00:07,680
+Mom, can I have some chocolate?
+ 
+
+11
+00:00:07,680 --> 00:00:08,549
+Mom, can I have some chocolate?
+No.
+
+12
+00:00:08,549 --> 00:00:08,559
+No.
+ 
+
+13
+00:00:08,559 --> 00:00:12,150
+No.
+Refused everything.  Idea.  Mom, can I
+
+14
+00:00:12,150 --> 00:00:12,160
+Refused everything.  Idea.  Mom, can I
+ 
+
+15
+00:00:12,160 --> 00:00:13,509
+Refused everything.  Idea.  Mom, can I
+eat mango then?
+
+16
+00:00:13,509 --> 00:00:13,519
+eat mango then?
+ 
+
+17
+00:00:13,519 --> 00:00:15,350
+eat mango then?
+Yes, eat mango.
+
+18
+00:00:15,350 --> 00:00:15,360
+Yes, eat mango.
+ 
+
+19
+00:00:15,360 --> 00:00:19,029
+Yes, eat mango.
+We are not this mango.  This
+
+20
+00:00:19,029 --> 00:00:19,039
+We are not this mango.  This
+ 
+
+21
+00:00:19,039 --> 00:00:21,605
+We are not this mango.  This
+is mango ice cream.
+
+22
+00:00:21,605 --> 00:00:21,615
+is mango ice cream.
+ 
+
+23
+00:00:21,615 --> 00:00:23,635
+is mango ice cream.
+[Laughter]
+

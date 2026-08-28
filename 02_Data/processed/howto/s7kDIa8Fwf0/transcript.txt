@@ -1,0 +1,1 @@
+How to use the screw modifier. First we need a profile. For this I use two circles. Then add the modifier. Use screw to set your offset if needed. With the iterations you can change the number of revolutions. Here is another good example you can use the screw modifier.

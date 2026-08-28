@@ -1,0 +1,15 @@
+1
+00:00:00,080 --> 00:00:03,669
+
+This is a small guitar
+
+2
+00:00:03,669 --> 00:00:03,679
+This is a small guitar
+ 
+
+3
+00:00:03,679 --> 00:00:08,160
+This is a small guitar
+and this is a big guitar.
+

@@ -11,14 +11,45 @@ yt-dlp==2026.8.19
 # dropped CascadeClassifier from the headless build (confirmed broken
 # 2026-08-18); 4.x is the known-working line for the Haar-cascade face
 # fallback used here.
-numpy==2.2.6
+#
+# numpy pinned <2 (was 2.2.6 until 2026-08-22): forced by the torch==1.13.1
+# pin below -- torch built against the numpy 1.x C-API crashes at import
+# ("Numpy is not available") under numpy 2.x. opencv-python-headless
+# declares numpy>=2 in its own metadata but works fine at runtime against
+# numpy 1.26.4 in practice (verified directly, not just resolver-clean) --
+# pip will print a stale dependency-conflict warning for this, which is
+# safe to ignore.
+numpy<2
 opencv-python-headless>=4.8,<5
 opensmile==2.6.0
-webrtcvad==2.0.10
+packaging
+# webrtcvad (real PyPI) has no Windows wheel and needs MSVC Build Tools to
+# compile from source -- not available on the shared school/lab machine.
+# webrtcvad-wheels is a maintained fork shipping precompiled Windows
+# wheels; it installs as and is imported as `webrtcvad`, drop-in.
+webrtcvad-wheels
 
 # Whisper fallback transcription (data_retrieval.md §4.2/4.3) for videos
 # whose auto-captions are missing or fail the quality heuristic. Pulls in
-# torch (CPU build) -- large download, but only install this happens once.
+# torch -- doesn't pin a version itself, so pip resolves latest by default.
+#
+# torch PINNED to 1.13.1 (found 2026-08-22): the school/lab Windows Server
+# machine's CPU/VM does not expose AVX2 (confirmed via
+# IsProcessorFeaturePresent(40) == false). torch >=~2.0's default CPU
+# kernels hard-require AVX2 with no fallback and crash during DLL init --
+# on Windows this surfaces as generic `[WinError 1114] c10.dll` with NO
+# missing dependency (confirmed clean via Dependencies.exe -chain), which
+# is what made this look like the DLL/TLS race chased earlier today. It
+# wasn't -- that fix (preload_whisper() before worker threads exist) is
+# still correct/needed for its own reason, but the *dominant* failure mode
+# on this machine was AVX2, not TLS. torch==1.13.1 uses MKL with an SSE
+# fallback and imports/computes cleanly on this hardware. Verified 26/26
+# (0 failures) on a real --workers 8 batch spanning 3 categories after
+# this pin -- the same concurrency load that previously failed 15-35% of
+# videos. If moving to a machine with AVX2 (e.g. the A40 server, if it
+# has AVX2 -- untested), a newer torch + numpy>=2 pin can likely be
+# restored; re-verify before assuming.
+torch==1.13.1
 openai-whisper==20250625
 
 # mediapipe intentionally NOT pinned here: mediapipe==1.0.1 (current PyPI

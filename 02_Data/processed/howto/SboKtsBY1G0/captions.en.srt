@@ -1,0 +1,375 @@
+1
+00:00:00,000 --> 00:00:02,150
+
+We'll guide you through how to connect
+
+2
+00:00:02,150 --> 00:00:02,160
+We'll guide you through how to connect
+ 
+
+3
+00:00:02,160 --> 00:00:04,870
+We'll guide you through how to connect
+internet from mobile to a laptop using a
+
+4
+00:00:04,870 --> 00:00:04,880
+internet from mobile to a laptop using a
+ 
+
+5
+00:00:04,880 --> 00:00:07,710
+internet from mobile to a laptop using a
+USB cable. If you find this useful, then
+
+6
+00:00:07,710 --> 00:00:07,720
+USB cable. If you find this useful, then
+ 
+
+7
+00:00:07,720 --> 00:00:09,630
+USB cable. If you find this useful, then
+consider subscribing and liking the
+
+8
+00:00:09,630 --> 00:00:09,640
+consider subscribing and liking the
+ 
+
+9
+00:00:09,640 --> 00:00:10,830
+consider subscribing and liking the
+video.
+
+10
+00:00:10,830 --> 00:00:10,840
+video.
+ 
+
+11
+00:00:10,840 --> 00:00:12,870
+video.
+This is convenient to do as you see at
+
+12
+00:00:12,870 --> 00:00:12,880
+This is convenient to do as you see at
+ 
+
+13
+00:00:12,880 --> 00:00:14,510
+This is convenient to do as you see at
+the moment I'm not currently connected
+
+14
+00:00:14,510 --> 00:00:14,520
+the moment I'm not currently connected
+ 
+
+15
+00:00:14,520 --> 00:00:16,430
+the moment I'm not currently connected
+to the internet on the laptop and I want
+
+16
+00:00:16,430 --> 00:00:16,440
+to the internet on the laptop and I want
+ 
+
+17
+00:00:16,440 --> 00:00:19,350
+to the internet on the laptop and I want
+to be able to so I can browse it. So,
+
+18
+00:00:19,350 --> 00:00:19,360
+to be able to so I can browse it. So,
+ 
+
+19
+00:00:19,360 --> 00:00:20,590
+to be able to so I can browse it. So,
+what we're going to do is we're going to
+
+20
+00:00:20,590 --> 00:00:20,600
+what we're going to do is we're going to
+ 
+
+21
+00:00:20,600 --> 00:00:22,790
+what we're going to do is we're going to
+go and grab the cable. We're going to go
+
+22
+00:00:22,790 --> 00:00:22,800
+go and grab the cable. We're going to go
+ 
+
+23
+00:00:22,800 --> 00:00:25,230
+go and grab the cable. We're going to go
+and plug one end into the laptop so we
+
+24
+00:00:25,230 --> 00:00:25,240
+and plug one end into the laptop so we
+ 
+
+25
+00:00:25,240 --> 00:00:28,350
+and plug one end into the laptop so we
+can go and plug it in just over here.
+
+26
+00:00:28,350 --> 00:00:28,360
+can go and plug it in just over here.
+ 
+
+27
+00:00:28,360 --> 00:00:30,270
+can go and plug it in just over here.
+Then after you've gone and plugged it in
+
+28
+00:00:30,270 --> 00:00:30,280
+Then after you've gone and plugged it in
+ 
+
+29
+00:00:30,280 --> 00:00:32,269
+Then after you've gone and plugged it in
+with the lap with the laptop, you grab
+
+30
+00:00:32,269 --> 00:00:32,279
+with the lap with the laptop, you grab
+ 
+
+31
+00:00:32,279 --> 00:00:34,190
+with the lap with the laptop, you grab
+the other end and you want to go and
+
+32
+00:00:34,190 --> 00:00:34,200
+the other end and you want to go and
+ 
+
+33
+00:00:34,200 --> 00:00:37,190
+the other end and you want to go and
+have the phone unlocked. And what we're
+
+34
+00:00:37,190 --> 00:00:37,200
+have the phone unlocked. And what we're
+ 
+
+35
+00:00:37,200 --> 00:00:38,470
+have the phone unlocked. And what we're
+going to do is we're going to go and
+
+36
+00:00:38,470 --> 00:00:38,480
+going to do is we're going to go and
+ 
+
+37
+00:00:38,480 --> 00:00:40,070
+going to do is we're going to go and
+plug it in. You should go and see that
+
+38
+00:00:40,070 --> 00:00:40,080
+plug it in. You should go and see that
+ 
+
+39
+00:00:40,080 --> 00:00:41,950
+plug it in. You should go and see that
+it will go and start charging. Now you
+
+40
+00:00:41,950 --> 00:00:41,960
+it will go and start charging. Now you
+ 
+
+41
+00:00:41,960 --> 00:00:44,430
+it will go and start charging. Now you
+want to go and drag down like this. You
+
+42
+00:00:44,430 --> 00:00:44,440
+want to go and drag down like this. You
+ 
+
+43
+00:00:44,440 --> 00:00:47,030
+want to go and drag down like this. You
+need to go and find USB 4 and go and tap
+
+44
+00:00:47,030 --> 00:00:47,040
+need to go and find USB 4 and go and tap
+ 
+
+45
+00:00:47,040 --> 00:00:48,110
+need to go and find USB 4 and go and tap
+there.
+
+46
+00:00:48,110 --> 00:00:48,120
+there.
+ 
+
+47
+00:00:48,120 --> 00:00:49,950
+there.
+Make sure it's set to transferring files
+
+48
+00:00:49,950 --> 00:00:49,960
+Make sure it's set to transferring files
+ 
+
+49
+00:00:49,960 --> 00:00:52,830
+Make sure it's set to transferring files
+or USB tethering. Next, go and swipe up
+
+50
+00:00:52,830 --> 00:00:52,840
+or USB tethering. Next, go and swipe up
+ 
+
+51
+00:00:52,840 --> 00:00:54,550
+or USB tethering. Next, go and swipe up
+on your device. And then what you need
+
+52
+00:00:54,550 --> 00:00:54,560
+on your device. And then what you need
+ 
+
+53
+00:00:54,560 --> 00:00:56,590
+on your device. And then what you need
+to do is come to your settings. You want
+
+54
+00:00:56,590 --> 00:00:56,600
+to do is come to your settings. You want
+ 
+
+55
+00:00:56,600 --> 00:00:57,950
+to do is come to your settings. You want
+to go and find the option for
+
+56
+00:00:57,950 --> 00:00:57,960
+to go and find the option for
+ 
+
+57
+00:00:57,960 --> 00:00:59,510
+to go and find the option for
+connections
+
+58
+00:00:59,510 --> 00:00:59,520
+connections
+ 
+
+59
+00:00:59,520 --> 00:01:00,950
+connections
+and you want to go down to mobile
+
+60
+00:01:00,950 --> 00:01:00,960
+and you want to go down to mobile
+ 
+
+61
+00:01:00,960 --> 00:01:02,670
+and you want to go down to mobile
+hotspot and tethering
+
+62
+00:01:02,670 --> 00:01:02,680
+hotspot and tethering
+ 
+
+63
+00:01:02,680 --> 00:01:05,150
+hotspot and tethering
+and you want to switch on USB tethering.
+
+64
+00:01:05,150 --> 00:01:05,160
+and you want to switch on USB tethering.
+ 
+
+65
+00:01:05,160 --> 00:01:06,870
+and you want to switch on USB tethering.
+Share your phone's internet connection
+
+66
+00:01:06,870 --> 00:01:06,880
+Share your phone's internet connection
+ 
+
+67
+00:01:06,880 --> 00:01:10,110
+Share your phone's internet connection
+using a USB cable. Switch it on
+
+68
+00:01:10,110 --> 00:01:10,120
+using a USB cable. Switch it on
+ 
+
+69
+00:01:10,120 --> 00:01:11,870
+using a USB cable. Switch it on
+and shortly you're going to go and see
+
+70
+00:01:11,870 --> 00:01:11,880
+and shortly you're going to go and see
+ 
+
+71
+00:01:11,880 --> 00:01:13,670
+and shortly you're going to go and see
+it will go and change to connected on
+
+72
+00:01:13,670 --> 00:01:13,680
+it will go and change to connected on
+ 
+
+73
+00:01:13,680 --> 00:01:16,350
+it will go and change to connected on
+the laptop. We're now connected. Leave a
+
+74
+00:01:16,350 --> 00:01:16,360
+the laptop. We're now connected. Leave a
+ 
+
+75
+00:01:16,360 --> 00:01:19,840
+the laptop. We're now connected. Leave a
+like if you found this useful.
+

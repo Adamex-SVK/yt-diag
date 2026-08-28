@@ -11,8 +11,9 @@ venv/
 .ipynb_checkpoints/
 
 # Data & model artifacts (large, not versioned — see 02_Data, 03_Models READMEs)
+# 02_Data/processed/ tracked via Git LFS as of 2026-08-28 -- see .gitattributes
+# and CHANGELOG.md. Everything else here stays out of git.
 02_Data/raw/
-02_Data/processed/
 02_Data/tracking/
 02_Data/frames/
 02_Data/videos/
@@ -23,6 +24,19 @@ venv/
 04_Experiments/runs/
 wandb/
 
+# Operational run artifacts (logs/manifests from collect_and_extract.py runs,
+# not the dataset itself)
+02_Data/collection_log.txt
+02_Data/collection_manifest.csv
+02_Data/*.log
+
+# yt-dlp leftover partial-download artifacts from interrupted/failed videos
+# (found 2026-08-28 -- a 168MB one blew past GitHub's 100MB file limit and
+# blocked the push; these were never real dataset content)
+02_Data/processed/**/_tmp_*
+02_Data/processed/**/*.part
+
 # Secrets
 .env
 *.key
+cookies*.txt

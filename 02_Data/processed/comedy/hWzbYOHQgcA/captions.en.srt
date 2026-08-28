@@ -1,0 +1,35 @@
+1
+00:00:00,080 --> 00:00:03,669
+
+Didi has a plate, Mummy has cup
+
+2
+00:00:03,669 --> 00:00:03,679
+Didi has a plate, Mummy has cup
+ 
+
+3
+00:00:03,679 --> 00:00:07,349
+Didi has a plate, Mummy has cup
+noodles and Papa has fish.
+
+4
+00:00:07,349 --> 00:00:07,359
+noodles and Papa has fish.
+ 
+
+5
+00:00:07,359 --> 00:00:10,470
+noodles and Papa has fish.
+But I have Cup Noodles.  But I have
+
+6
+00:00:10,470 --> 00:00:10,480
+But I have Cup Noodles.  But I have
+ 
+
+7
+00:00:10,480 --> 00:00:15,280
+But I have Cup Noodles.  But I have
+fish.  But I have a plate.
+

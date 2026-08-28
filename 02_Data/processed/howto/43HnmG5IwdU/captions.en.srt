@@ -1,0 +1,145 @@
+1
+00:00:00,199 --> 00:00:02,190
+
+let's make this make a new layer on top
+
+2
+00:00:02,190 --> 00:00:02,200
+let's make this make a new layer on top
+ 
+
+3
+00:00:02,200 --> 00:00:04,430
+let's make this make a new layer on top
+of a text layer and start drawing an
+
+4
+00:00:04,430 --> 00:00:04,440
+of a text layer and start drawing an
+ 
+
+5
+00:00:04,440 --> 00:00:06,190
+of a text layer and start drawing an
+outline once you have created that
+
+6
+00:00:06,190 --> 00:00:06,200
+outline once you have created that
+ 
+
+7
+00:00:06,200 --> 00:00:08,990
+outline once you have created that
+outline go to the menu and turn on
+
+8
+00:00:08,990 --> 00:00:09,000
+outline go to the menu and turn on
+ 
+
+9
+00:00:09,000 --> 00:00:11,589
+outline go to the menu and turn on
+animation assist now you can tap add
+
+10
+00:00:11,589 --> 00:00:11,599
+animation assist now you can tap add
+ 
+
+11
+00:00:11,599 --> 00:00:13,509
+animation assist now you can tap add
+frame to add a new frame for your
+
+12
+00:00:13,509 --> 00:00:13,519
+frame to add a new frame for your
+ 
+
+13
+00:00:13,519 --> 00:00:16,630
+frame to add a new frame for your
+animation start tracing the text again
+
+14
+00:00:16,630 --> 00:00:16,640
+animation start tracing the text again
+ 
+
+15
+00:00:16,640 --> 00:00:19,470
+animation start tracing the text again
+and again and again each time creating a
+
+16
+00:00:19,470 --> 00:00:19,480
+and again and again each time creating a
+ 
+
+17
+00:00:19,480 --> 00:00:22,109
+and again and again each time creating a
+new frame and every time you trace it
+
+18
+00:00:22,109 --> 00:00:22,119
+new frame and every time you trace it
+ 
+
+19
+00:00:22,119 --> 00:00:24,310
+new frame and every time you trace it
+the text will look slightly different
+
+20
+00:00:24,310 --> 00:00:24,320
+the text will look slightly different
+ 
+
+21
+00:00:24,320 --> 00:00:26,230
+the text will look slightly different
+unless you have like a really Steady
+
+22
+00:00:26,230 --> 00:00:26,240
+unless you have like a really Steady
+ 
+
+23
+00:00:26,240 --> 00:00:28,310
+unless you have like a really Steady
+Hand then go to the settings set the
+
+24
+00:00:28,310 --> 00:00:28,320
+Hand then go to the settings set the
+ 
+
+25
+00:00:28,320 --> 00:00:30,990
+Hand then go to the settings set the
+frames per second to 9 and set it to
+
+26
+00:00:30,990 --> 00:00:31,000
+frames per second to 9 and set it to
+ 
+
+27
+00:00:31,000 --> 00:00:33,630
+frames per second to 9 and set it to
+pingpong then Tap Play and there you
+
+28
+00:00:33,630 --> 00:00:33,640
+pingpong then Tap Play and there you
+ 
+
+29
+00:00:33,640 --> 00:00:38,120
+pingpong then Tap Play and there you
+have your Wiggly text animation
+

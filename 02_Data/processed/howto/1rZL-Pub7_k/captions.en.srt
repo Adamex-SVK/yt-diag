@@ -1,0 +1,245 @@
+1
+00:00:00,000 --> 00:00:03,070
+
+Learning CapCut day 277.
+
+2
+00:00:03,070 --> 00:00:03,080
+Learning CapCut day 277.
+ 
+
+3
+00:00:03,080 --> 00:00:04,070
+Learning CapCut day 277.
+Today we will learn how [music] to
+
+4
+00:00:04,070 --> 00:00:04,080
+Today we will learn how [music] to
+ 
+
+5
+00:00:04,080 --> 00:00:05,510
+Today we will learn how [music] to
+create this type of heart shape
+
+6
+00:00:05,510 --> 00:00:05,520
+create this type of heart shape
+ 
+
+7
+00:00:05,520 --> 00:00:07,830
+create this type of heart shape
+transition and that too in very simple
+
+8
+00:00:07,830 --> 00:00:07,840
+transition and that too in very simple
+ 
+
+9
+00:00:07,840 --> 00:00:08,505
+transition and that too in very simple
+steps.
+
+10
+00:00:08,505 --> 00:00:08,515
+steps.
+ 
+
+11
+00:00:08,515 --> 00:00:13,745
+steps.
+>> [music]
+
+12
+00:00:13,745 --> 00:00:13,755
+
+ 
+
+13
+00:00:13,755 --> 00:00:16,630
+
+[music]
+
+14
+00:00:16,630 --> 00:00:16,640
+
+ 
+
+15
+00:00:16,640 --> 00:00:18,870
+
+>> Bring the image down. Adjust its
+
+16
+00:00:18,870 --> 00:00:18,880
+>> Bring the image down. Adjust its
+ 
+
+17
+00:00:18,880 --> 00:00:20,070
+>> Bring the image down. Adjust its
+duration.
+
+18
+00:00:20,070 --> 00:00:20,080
+duration.
+ 
+
+19
+00:00:20,080 --> 00:00:21,350
+duration.
+Go to [music] mask and select
+
+20
+00:00:21,350 --> 00:00:21,360
+Go to [music] mask and select
+ 
+
+21
+00:00:21,360 --> 00:00:23,510
+Go to [music] mask and select
+horizontal. Add a key frame at the
+
+22
+00:00:23,510 --> 00:00:23,520
+horizontal. Add a key frame at the
+ 
+
+23
+00:00:23,520 --> 00:00:25,535
+horizontal. Add a key frame at the
+starting point and move it up. Then add
+
+24
+00:00:25,535 --> 00:00:25,545
+starting point and move it up. Then add
+ 
+
+25
+00:00:25,545 --> 00:00:26,790
+starting point and move it up. Then add
+[music] another key frame and move it
+
+26
+00:00:26,790 --> 00:00:26,800
+[music] another key frame and move it
+ 
+
+27
+00:00:26,800 --> 00:00:32,830
+[music] another key frame and move it
+down. Apply the flow two graph.
+
+28
+00:00:32,830 --> 00:00:32,840
+
+ 
+
+29
+00:00:32,840 --> 00:00:34,710
+
+Add two key frames. [music] Go to the
+
+30
+00:00:34,710 --> 00:00:34,720
+Add two key frames. [music] Go to the
+ 
+
+31
+00:00:34,720 --> 00:00:36,790
+Add two key frames. [music] Go to the
+starting key frame and zoom in. Apply
+
+32
+00:00:36,790 --> 00:00:36,800
+starting key frame and zoom in. Apply
+ 
+
+33
+00:00:36,800 --> 00:00:39,190
+starting key frame and zoom in. Apply
+the flow two graph.
+
+34
+00:00:39,190 --> 00:00:39,200
+the flow two graph.
+ 
+
+35
+00:00:39,200 --> 00:00:41,550
+the flow two graph.
+Go to animation and select cross shape.
+
+36
+00:00:41,550 --> 00:00:41,560
+Go to animation and select cross shape.
+ 
+
+37
+00:00:41,560 --> 00:00:44,750
+Go to animation and select cross shape.
+Set its duration to [music] 0.4 seconds.
+
+38
+00:00:44,750 --> 00:00:44,760
+Set its duration to [music] 0.4 seconds.
+ 
+
+39
+00:00:44,760 --> 00:00:48,110
+Set its duration to [music] 0.4 seconds.
+Go to effects and select oblique blur.
+
+40
+00:00:48,110 --> 00:00:48,120
+Go to effects and select oblique blur.
+ 
+
+41
+00:00:48,120 --> 00:00:49,950
+Go to effects and select oblique blur.
+Adjust it from 100% [music]
+
+42
+00:00:49,950 --> 00:00:49,960
+Adjust it from 100% [music]
+ 
+
+43
+00:00:49,960 --> 00:00:52,630
+Adjust it from 100% [music]
+to 0%. Then go to effects again and
+
+44
+00:00:52,630 --> 00:00:52,640
+to 0%. Then go to effects again and
+ 
+
+45
+00:00:52,640 --> 00:00:55,630
+to 0%. Then go to effects again and
+select shake.
+
+46
+00:00:55,630 --> 00:00:55,640
+select shake.
+ 
+
+47
+00:00:55,640 --> 00:00:59,630
+select shake.
+Adjust it to [music] 40%, 60%, 0%.
+
+48
+00:00:59,630 --> 00:00:59,640
+Adjust it to [music] 40%, 60%, 0%.
+ 
+
+49
+00:00:59,640 --> 00:01:02,640
+Adjust it to [music] 40%, 60%, 0%.
+Thanks for watching.
+

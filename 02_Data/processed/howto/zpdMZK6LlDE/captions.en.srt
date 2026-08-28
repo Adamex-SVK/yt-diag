@@ -1,0 +1,2515 @@
+1
+00:00:00,000 --> 00:00:01,429
+
+in this video i'm going to show you
+
+2
+00:00:01,429 --> 00:00:01,439
+in this video i'm going to show you
+ 
+
+3
+00:00:01,439 --> 00:00:03,189
+in this video i'm going to show you
+everything you need to know to use
+
+4
+00:00:03,189 --> 00:00:03,199
+everything you need to know to use
+ 
+
+5
+00:00:03,199 --> 00:00:05,510
+everything you need to know to use
+sketchup to create stuff like this
+
+6
+00:00:05,510 --> 00:00:05,520
+sketchup to create stuff like this
+ 
+
+7
+00:00:05,520 --> 00:00:08,549
+sketchup to create stuff like this
+this or this using sketchup free right
+
+8
+00:00:08,549 --> 00:00:08,559
+this or this using sketchup free right
+ 
+
+9
+00:00:08,559 --> 00:00:11,190
+this or this using sketchup free right
+in your browser all within the next 10
+
+10
+00:00:11,190 --> 00:00:11,200
+in your browser all within the next 10
+ 
+
+11
+00:00:11,200 --> 00:00:12,789
+in your browser all within the next 10
+minutes and you don't need to know
+
+12
+00:00:12,789 --> 00:00:12,799
+minutes and you don't need to know
+ 
+
+13
+00:00:12,799 --> 00:00:15,430
+minutes and you don't need to know
+anything about 3d modeling or sketchup
+
+14
+00:00:15,430 --> 00:00:15,440
+anything about 3d modeling or sketchup
+ 
+
+15
+00:00:15,440 --> 00:00:17,910
+anything about 3d modeling or sketchup
+this tutorial is for complete beginners
+
+16
+00:00:17,910 --> 00:00:17,920
+this tutorial is for complete beginners
+ 
+
+17
+00:00:17,920 --> 00:00:20,230
+this tutorial is for complete beginners
+so go to app.sketchup.com
+
+18
+00:00:20,230 --> 00:00:20,240
+so go to app.sketchup.com
+ 
+
+19
+00:00:20,240 --> 00:00:22,710
+so go to app.sketchup.com
+create a free account click create new
+
+20
+00:00:22,710 --> 00:00:22,720
+create a free account click create new
+ 
+
+21
+00:00:22,720 --> 00:00:25,269
+create a free account click create new
+and let's build this table together
+
+22
+00:00:25,269 --> 00:00:25,279
+and let's build this table together
+ 
+
+23
+00:00:25,279 --> 00:00:27,589
+and let's build this table together
+so click on the rectangle tool click
+
+24
+00:00:27,589 --> 00:00:27,599
+so click on the rectangle tool click
+ 
+
+25
+00:00:27,599 --> 00:00:29,830
+so click on the rectangle tool click
+once to pin the first corner and then
+
+26
+00:00:29,830 --> 00:00:29,840
+once to pin the first corner and then
+ 
+
+27
+00:00:29,840 --> 00:00:31,910
+once to pin the first corner and then
+move your mouse out to expand the
+
+28
+00:00:31,910 --> 00:00:31,920
+move your mouse out to expand the
+ 
+
+29
+00:00:31,920 --> 00:00:34,069
+move your mouse out to expand the
+rectangle now the bottom right hand
+
+30
+00:00:34,069 --> 00:00:34,079
+rectangle now the bottom right hand
+ 
+
+31
+00:00:34,079 --> 00:00:36,630
+rectangle now the bottom right hand
+corner of your window will show you the
+
+32
+00:00:36,630 --> 00:00:36,640
+corner of your window will show you the
+ 
+
+33
+00:00:36,640 --> 00:00:38,389
+corner of your window will show you the
+current measurement information you're
+
+34
+00:00:38,389 --> 00:00:38,399
+current measurement information you're
+ 
+
+35
+00:00:38,399 --> 00:00:40,150
+current measurement information you're
+working with and you can actually just
+
+36
+00:00:40,150 --> 00:00:40,160
+working with and you can actually just
+ 
+
+37
+00:00:40,160 --> 00:00:42,389
+working with and you can actually just
+start typing in measurements and press
+
+38
+00:00:42,389 --> 00:00:42,399
+start typing in measurements and press
+ 
+
+39
+00:00:42,399 --> 00:00:45,350
+start typing in measurements and press
+enter in order to model precisely so
+
+40
+00:00:45,350 --> 00:00:45,360
+enter in order to model precisely so
+ 
+
+41
+00:00:45,360 --> 00:00:47,750
+enter in order to model precisely so
+let's make this rectangle 18 inches by
+
+42
+00:00:47,750 --> 00:00:47,760
+let's make this rectangle 18 inches by
+ 
+
+43
+00:00:47,760 --> 00:00:50,950
+let's make this rectangle 18 inches by
+18 inches so the first important rule to
+
+44
+00:00:50,950 --> 00:00:50,960
+18 inches so the first important rule to
+ 
+
+45
+00:00:50,960 --> 00:00:54,150
+18 inches so the first important rule to
+remember is all drawing and modification
+
+46
+00:00:54,150 --> 00:00:54,160
+remember is all drawing and modification
+ 
+
+47
+00:00:54,160 --> 00:00:57,189
+remember is all drawing and modification
+tools will accept dimensional input from
+
+48
+00:00:57,189 --> 00:00:57,199
+tools will accept dimensional input from
+ 
+
+49
+00:00:57,199 --> 00:00:59,590
+tools will accept dimensional input from
+you just start typing in dimensions and
+
+50
+00:00:59,590 --> 00:00:59,600
+you just start typing in dimensions and
+ 
+
+51
+00:00:59,600 --> 00:01:01,990
+you just start typing in dimensions and
+press enter now if you screw up just
+
+52
+00:01:01,990 --> 00:01:02,000
+press enter now if you screw up just
+ 
+
+53
+00:01:02,000 --> 00:01:04,789
+press enter now if you screw up just
+press ctrl z to undo or you can actually
+
+54
+00:01:04,789 --> 00:01:04,799
+press ctrl z to undo or you can actually
+ 
+
+55
+00:01:04,799 --> 00:01:07,670
+press ctrl z to undo or you can actually
+correct dimensions by providing new ones
+
+56
+00:01:07,670 --> 00:01:07,680
+correct dimensions by providing new ones
+ 
+
+57
+00:01:07,680 --> 00:01:09,990
+correct dimensions by providing new ones
+as many times as you'd like as long as
+
+58
+00:01:09,990 --> 00:01:10,000
+as many times as you'd like as long as
+ 
+
+59
+00:01:10,000 --> 00:01:12,870
+as many times as you'd like as long as
+you don't start a new action or activate
+
+60
+00:01:12,870 --> 00:01:12,880
+you don't start a new action or activate
+ 
+
+61
+00:01:12,880 --> 00:01:15,190
+you don't start a new action or activate
+a new tool now if you do that you'll
+
+62
+00:01:15,190 --> 00:01:15,200
+a new tool now if you do that you'll
+ 
+
+63
+00:01:15,200 --> 00:01:17,030
+a new tool now if you do that you'll
+just have to use one of the modification
+
+64
+00:01:17,030 --> 00:01:17,040
+just have to use one of the modification
+ 
+
+65
+00:01:17,040 --> 00:01:19,749
+just have to use one of the modification
+tools to resize the entities directly
+
+66
+00:01:19,749 --> 00:01:19,759
+tools to resize the entities directly
+ 
+
+67
+00:01:19,759 --> 00:01:21,990
+tools to resize the entities directly
+but we're going to review those later on
+
+68
+00:01:21,990 --> 00:01:22,000
+but we're going to review those later on
+ 
+
+69
+00:01:22,000 --> 00:01:24,550
+but we're going to review those later on
+for now let's add some thickness to this
+
+70
+00:01:24,550 --> 00:01:24,560
+for now let's add some thickness to this
+ 
+
+71
+00:01:24,560 --> 00:01:27,749
+for now let's add some thickness to this
+table top by using the push pull tool
+
+72
+00:01:27,749 --> 00:01:27,759
+table top by using the push pull tool
+ 
+
+73
+00:01:27,759 --> 00:01:31,190
+table top by using the push pull tool
+here so click once pull up
+
+74
+00:01:31,190 --> 00:01:31,200
+here so click once pull up
+ 
+
+75
+00:01:31,200 --> 00:01:33,749
+here so click once pull up
+type three quarter inch enter
+
+76
+00:01:33,749 --> 00:01:33,759
+type three quarter inch enter
+ 
+
+77
+00:01:33,759 --> 00:01:37,270
+type three quarter inch enter
+now you can use decimals fractions feet
+
+78
+00:01:37,270 --> 00:01:37,280
+now you can use decimals fractions feet
+ 
+
+79
+00:01:37,280 --> 00:01:39,510
+now you can use decimals fractions feet
+inches millimeters centimeters whatever
+
+80
+00:01:39,510 --> 00:01:39,520
+inches millimeters centimeters whatever
+ 
+
+81
+00:01:39,520 --> 00:01:41,910
+inches millimeters centimeters whatever
+you want sketchup really doesn't care it
+
+82
+00:01:41,910 --> 00:01:41,920
+you want sketchup really doesn't care it
+ 
+
+83
+00:01:41,920 --> 00:01:45,030
+you want sketchup really doesn't care it
+all just works so congratulations you
+
+84
+00:01:45,030 --> 00:01:45,040
+all just works so congratulations you
+ 
+
+85
+00:01:45,040 --> 00:01:49,510
+all just works so congratulations you
+now have your very first 3d object now
+
+86
+00:01:49,510 --> 00:01:49,520
+now have your very first 3d object now
+ 
+
+87
+00:01:49,520 --> 00:01:51,510
+now have your very first 3d object now
+before you do anything else
+
+88
+00:01:51,510 --> 00:01:51,520
+before you do anything else
+ 
+
+89
+00:01:51,520 --> 00:01:54,630
+before you do anything else
+you need to protect these entities by
+
+90
+00:01:54,630 --> 00:01:54,640
+you need to protect these entities by
+ 
+
+91
+00:01:54,640 --> 00:01:57,830
+you need to protect these entities by
+wrapping them in a group or component
+
+92
+00:01:57,830 --> 00:01:57,840
+wrapping them in a group or component
+ 
+
+93
+00:01:57,840 --> 00:01:59,350
+wrapping them in a group or component
+and you do that by triple clicking the
+
+94
+00:01:59,350 --> 00:01:59,360
+and you do that by triple clicking the
+ 
+
+95
+00:01:59,360 --> 00:02:02,069
+and you do that by triple clicking the
+entities with the select tool right
+
+96
+00:02:02,069 --> 00:02:02,079
+entities with the select tool right
+ 
+
+97
+00:02:02,079 --> 00:02:04,789
+entities with the select tool right
+click make group now all of these
+
+98
+00:02:04,789 --> 00:02:04,799
+click make group now all of these
+ 
+
+99
+00:02:04,799 --> 00:02:07,350
+click make group now all of these
+entities are wrapped inside of a
+
+100
+00:02:07,350 --> 00:02:07,360
+entities are wrapped inside of a
+ 
+
+101
+00:02:07,360 --> 00:02:10,070
+entities are wrapped inside of a
+protective container so they won't stick
+
+102
+00:02:10,070 --> 00:02:10,080
+protective container so they won't stick
+ 
+
+103
+00:02:10,080 --> 00:02:12,550
+protective container so they won't stick
+to other entities and it'll allow you to
+
+104
+00:02:12,550 --> 00:02:12,560
+to other entities and it'll allow you to
+ 
+
+105
+00:02:12,560 --> 00:02:15,910
+to other entities and it'll allow you to
+move all of them as one assembly now you
+
+106
+00:02:15,910 --> 00:02:15,920
+move all of them as one assembly now you
+ 
+
+107
+00:02:15,920 --> 00:02:18,070
+move all of them as one assembly now you
+should be using groups and components
+
+108
+00:02:18,070 --> 00:02:18,080
+should be using groups and components
+ 
+
+109
+00:02:18,080 --> 00:02:21,589
+should be using groups and components
+all the time as soon as you have a basic
+
+110
+00:02:21,589 --> 00:02:21,599
+all the time as soon as you have a basic
+ 
+
+111
+00:02:21,599 --> 00:02:24,630
+all the time as soon as you have a basic
+shape turn it into a group or component
+
+112
+00:02:24,630 --> 00:02:24,640
+shape turn it into a group or component
+ 
+
+113
+00:02:24,640 --> 00:02:26,470
+shape turn it into a group or component
+now when you have multiple groups and
+
+114
+00:02:26,470 --> 00:02:26,480
+now when you have multiple groups and
+ 
+
+115
+00:02:26,480 --> 00:02:29,030
+now when you have multiple groups and
+components turn those into logical
+
+116
+00:02:29,030 --> 00:02:29,040
+components turn those into logical
+ 
+
+117
+00:02:29,040 --> 00:02:31,430
+components turn those into logical
+assemblies as well and you can nest
+
+118
+00:02:31,430 --> 00:02:31,440
+assemblies as well and you can nest
+ 
+
+119
+00:02:31,440 --> 00:02:33,670
+assemblies as well and you can nest
+groups and components as much as you'd
+
+120
+00:02:33,670 --> 00:02:33,680
+groups and components as much as you'd
+ 
+
+121
+00:02:33,680 --> 00:02:35,830
+groups and components as much as you'd
+like all right so how do you navigate
+
+122
+00:02:35,830 --> 00:02:35,840
+like all right so how do you navigate
+ 
+
+123
+00:02:35,840 --> 00:02:38,229
+like all right so how do you navigate
+use a three button mouse
+
+124
+00:02:38,229 --> 00:02:38,239
+use a three button mouse
+ 
+
+125
+00:02:38,239 --> 00:02:40,470
+use a three button mouse
+scroll to zoom now it's going to zoom
+
+126
+00:02:40,470 --> 00:02:40,480
+scroll to zoom now it's going to zoom
+ 
+
+127
+00:02:40,480 --> 00:02:43,270
+scroll to zoom now it's going to zoom
+from the mouse cursor position and then
+
+128
+00:02:43,270 --> 00:02:43,280
+from the mouse cursor position and then
+ 
+
+129
+00:02:43,280 --> 00:02:45,589
+from the mouse cursor position and then
+to orbit the camera click the middle
+
+130
+00:02:45,589 --> 00:02:45,599
+to orbit the camera click the middle
+ 
+
+131
+00:02:45,599 --> 00:02:46,869
+to orbit the camera click the middle
+mouse button which is typically the
+
+132
+00:02:46,869 --> 00:02:46,879
+mouse button which is typically the
+ 
+
+133
+00:02:46,879 --> 00:02:49,430
+mouse button which is typically the
+scroll wheel so hold the middle mouse
+
+134
+00:02:49,430 --> 00:02:49,440
+scroll wheel so hold the middle mouse
+ 
+
+135
+00:02:49,440 --> 00:02:52,150
+scroll wheel so hold the middle mouse
+button move the mouse then release and
+
+136
+00:02:52,150 --> 00:02:52,160
+button move the mouse then release and
+ 
+
+137
+00:02:52,160 --> 00:02:54,710
+button move the mouse then release and
+then repeat as necessary
+
+138
+00:02:54,710 --> 00:02:54,720
+then repeat as necessary
+ 
+
+139
+00:02:54,720 --> 00:02:58,630
+then repeat as necessary
+bonus tip hold down shift while orbiting
+
+140
+00:02:58,630 --> 00:02:58,640
+bonus tip hold down shift while orbiting
+ 
+
+141
+00:02:58,640 --> 00:03:01,509
+bonus tip hold down shift while orbiting
+to pan alright so let's move the table
+
+142
+00:03:01,509 --> 00:03:01,519
+to pan alright so let's move the table
+ 
+
+143
+00:03:01,519 --> 00:03:04,149
+to pan alright so let's move the table
+top up into position select the table
+
+144
+00:03:04,149 --> 00:03:04,159
+top up into position select the table
+ 
+
+145
+00:03:04,159 --> 00:03:06,869
+top up into position select the table
+top group with the select tool activate
+
+146
+00:03:06,869 --> 00:03:06,879
+top group with the select tool activate
+ 
+
+147
+00:03:06,879 --> 00:03:09,509
+top group with the select tool activate
+the move tool and since we know the
+
+148
+00:03:09,509 --> 00:03:09,519
+the move tool and since we know the
+ 
+
+149
+00:03:09,519 --> 00:03:11,830
+the move tool and since we know the
+distance and direction we want to move
+
+150
+00:03:11,830 --> 00:03:11,840
+distance and direction we want to move
+ 
+
+151
+00:03:11,840 --> 00:03:13,910
+distance and direction we want to move
+and the table is pre-selected we can
+
+152
+00:03:13,910 --> 00:03:13,920
+and the table is pre-selected we can
+ 
+
+153
+00:03:13,920 --> 00:03:15,670
+and the table is pre-selected we can
+actually just click anywhere to start
+
+154
+00:03:15,670 --> 00:03:15,680
+actually just click anywhere to start
+ 
+
+155
+00:03:15,680 --> 00:03:18,949
+actually just click anywhere to start
+the move tap the up arrow to lock the
+
+156
+00:03:18,949 --> 00:03:18,959
+the move tap the up arrow to lock the
+ 
+
+157
+00:03:18,959 --> 00:03:20,309
+the move tap the up arrow to lock the
+blue axis
+
+158
+00:03:20,309 --> 00:03:20,319
+blue axis
+ 
+
+159
+00:03:20,319 --> 00:03:23,110
+blue axis
+and type in 26 and three quarters of an
+
+160
+00:03:23,110 --> 00:03:23,120
+and type in 26 and three quarters of an
+ 
+
+161
+00:03:23,120 --> 00:03:26,229
+and type in 26 and three quarters of an
+inch enter let's add a bevel orbit the
+
+162
+00:03:26,229 --> 00:03:26,239
+inch enter let's add a bevel orbit the
+ 
+
+163
+00:03:26,239 --> 00:03:28,470
+inch enter let's add a bevel orbit the
+camera so you can see the bottom of the
+
+164
+00:03:28,470 --> 00:03:28,480
+camera so you can see the bottom of the
+ 
+
+165
+00:03:28,480 --> 00:03:30,869
+camera so you can see the bottom of the
+table top and in order to edit the
+
+166
+00:03:30,869 --> 00:03:30,879
+table top and in order to edit the
+ 
+
+167
+00:03:30,879 --> 00:03:32,869
+table top and in order to edit the
+entities inside of any group or
+
+168
+00:03:32,869 --> 00:03:32,879
+entities inside of any group or
+ 
+
+169
+00:03:32,879 --> 00:03:35,430
+entities inside of any group or
+component you just need to open it first
+
+170
+00:03:35,430 --> 00:03:35,440
+component you just need to open it first
+ 
+
+171
+00:03:35,440 --> 00:03:37,110
+component you just need to open it first
+by double clicking on it with the select
+
+172
+00:03:37,110 --> 00:03:37,120
+by double clicking on it with the select
+ 
+
+173
+00:03:37,120 --> 00:03:39,509
+by double clicking on it with the select
+tool now you can edit the individual
+
+174
+00:03:39,509 --> 00:03:39,519
+tool now you can edit the individual
+ 
+
+175
+00:03:39,519 --> 00:03:42,229
+tool now you can edit the individual
+faces and edges so everything in
+
+176
+00:03:42,229 --> 00:03:42,239
+faces and edges so everything in
+ 
+
+177
+00:03:42,239 --> 00:03:44,869
+faces and edges so everything in
+sketchup is made up of edges and faces
+
+178
+00:03:44,869 --> 00:03:44,879
+sketchup is made up of edges and faces
+ 
+
+179
+00:03:44,879 --> 00:03:46,550
+sketchup is made up of edges and faces
+they are the most
+
+180
+00:03:46,550 --> 00:03:46,560
+they are the most
+ 
+
+181
+00:03:46,560 --> 00:03:49,990
+they are the most
+fundamental entity type of all geometry
+
+182
+00:03:49,990 --> 00:03:50,000
+fundamental entity type of all geometry
+ 
+
+183
+00:03:50,000 --> 00:03:53,350
+fundamental entity type of all geometry
+and once you understand that you realize
+
+184
+00:03:53,350 --> 00:03:53,360
+and once you understand that you realize
+ 
+
+185
+00:03:53,360 --> 00:03:55,509
+and once you understand that you realize
+that every single drawing tool in
+
+186
+00:03:55,509 --> 00:03:55,519
+that every single drawing tool in
+ 
+
+187
+00:03:55,519 --> 00:03:58,550
+that every single drawing tool in
+sketchup simply provides a way to create
+
+188
+00:03:58,550 --> 00:03:58,560
+sketchup simply provides a way to create
+ 
+
+189
+00:03:58,560 --> 00:04:02,070
+sketchup simply provides a way to create
+edges and faces and all the modification
+
+190
+00:04:02,070 --> 00:04:02,080
+edges and faces and all the modification
+ 
+
+191
+00:04:02,080 --> 00:04:05,670
+edges and faces and all the modification
+tools simply change the size position or
+
+192
+00:04:05,670 --> 00:04:05,680
+tools simply change the size position or
+ 
+
+193
+00:04:05,680 --> 00:04:09,190
+tools simply change the size position or
+orientation of edges and faces now the
+
+194
+00:04:09,190 --> 00:04:09,200
+orientation of edges and faces now the
+ 
+
+195
+00:04:09,200 --> 00:04:11,350
+orientation of edges and faces now the
+rectangle tool automates the process of
+
+196
+00:04:11,350 --> 00:04:11,360
+rectangle tool automates the process of
+ 
+
+197
+00:04:11,360 --> 00:04:13,750
+rectangle tool automates the process of
+creating four edges in one face but you
+
+198
+00:04:13,750 --> 00:04:13,760
+creating four edges in one face but you
+ 
+
+199
+00:04:13,760 --> 00:04:16,310
+creating four edges in one face but you
+could actually create the exact same
+
+200
+00:04:16,310 --> 00:04:16,320
+could actually create the exact same
+ 
+
+201
+00:04:16,320 --> 00:04:18,310
+could actually create the exact same
+thing using the line tool there's
+
+202
+00:04:18,310 --> 00:04:18,320
+thing using the line tool there's
+ 
+
+203
+00:04:18,320 --> 00:04:20,789
+thing using the line tool there's
+literally no difference between these
+
+204
+00:04:20,789 --> 00:04:20,799
+literally no difference between these
+ 
+
+205
+00:04:20,799 --> 00:04:23,830
+literally no difference between these
+two rectangles they're just four edges
+
+206
+00:04:23,830 --> 00:04:23,840
+two rectangles they're just four edges
+ 
+
+207
+00:04:23,840 --> 00:04:27,110
+two rectangles they're just four edges
+in one face now the arc tools circle
+
+208
+00:04:27,110 --> 00:04:27,120
+in one face now the arc tools circle
+ 
+
+209
+00:04:27,120 --> 00:04:30,230
+in one face now the arc tools circle
+tool polygon tools follow the same
+
+210
+00:04:30,230 --> 00:04:30,240
+tool polygon tools follow the same
+ 
+
+211
+00:04:30,240 --> 00:04:33,270
+tool polygon tools follow the same
+principle but they do employ
+
+212
+00:04:33,270 --> 00:04:33,280
+principle but they do employ
+ 
+
+213
+00:04:33,280 --> 00:04:36,629
+principle but they do employ
+an additional special entity wrapper to
+
+214
+00:04:36,629 --> 00:04:36,639
+an additional special entity wrapper to
+ 
+
+215
+00:04:36,639 --> 00:04:38,710
+an additional special entity wrapper to
+make it easier to control curves which
+
+216
+00:04:38,710 --> 00:04:38,720
+make it easier to control curves which
+ 
+
+217
+00:04:38,720 --> 00:04:41,430
+make it easier to control curves which
+are technically just series of segmented
+
+218
+00:04:41,430 --> 00:04:41,440
+are technically just series of segmented
+ 
+
+219
+00:04:41,440 --> 00:04:43,990
+are technically just series of segmented
+edges to add the bevel on the table grab
+
+220
+00:04:43,990 --> 00:04:44,000
+edges to add the bevel on the table grab
+ 
+
+221
+00:04:44,000 --> 00:04:46,710
+edges to add the bevel on the table grab
+the offset tool here click on the face
+
+222
+00:04:46,710 --> 00:04:46,720
+the offset tool here click on the face
+ 
+
+223
+00:04:46,720 --> 00:04:49,110
+the offset tool here click on the face
+move the mouse inward click again and
+
+224
+00:04:49,110 --> 00:04:49,120
+move the mouse inward click again and
+ 
+
+225
+00:04:49,120 --> 00:04:52,710
+move the mouse inward click again and
+type 2 inch enter next select each of
+
+226
+00:04:52,710 --> 00:04:52,720
+type 2 inch enter next select each of
+ 
+
+227
+00:04:52,720 --> 00:04:54,950
+type 2 inch enter next select each of
+the perimeter edges by holding the ctrl
+
+228
+00:04:54,950 --> 00:04:54,960
+the perimeter edges by holding the ctrl
+ 
+
+229
+00:04:54,960 --> 00:04:57,990
+the perimeter edges by holding the ctrl
+key with the select tool then grab the
+
+230
+00:04:57,990 --> 00:04:58,000
+key with the select tool then grab the
+ 
+
+231
+00:04:58,000 --> 00:05:01,189
+key with the select tool then grab the
+move tool click once tap the up arrow
+
+232
+00:05:01,189 --> 00:05:01,199
+move tool click once tap the up arrow
+ 
+
+233
+00:05:01,199 --> 00:05:02,390
+move tool click once tap the up arrow
+then type in
+
+234
+00:05:02,390 --> 00:05:02,400
+then type in
+ 
+
+235
+00:05:02,400 --> 00:05:04,390
+then type in
+quarter inch enter and you can see we
+
+236
+00:05:04,390 --> 00:05:04,400
+quarter inch enter and you can see we
+ 
+
+237
+00:05:04,400 --> 00:05:06,629
+quarter inch enter and you can see we
+now have this little bevel here and now
+
+238
+00:05:06,629 --> 00:05:06,639
+now have this little bevel here and now
+ 
+
+239
+00:05:06,639 --> 00:05:08,070
+now have this little bevel here and now
+that we're done with the table top we
+
+240
+00:05:08,070 --> 00:05:08,080
+that we're done with the table top we
+ 
+
+241
+00:05:08,080 --> 00:05:09,590
+that we're done with the table top we
+can close the group by clicking
+
+242
+00:05:09,590 --> 00:05:09,600
+can close the group by clicking
+ 
+
+243
+00:05:09,600 --> 00:05:11,830
+can close the group by clicking
+somewhere outside of the bounding box
+
+244
+00:05:11,830 --> 00:05:11,840
+somewhere outside of the bounding box
+ 
+
+245
+00:05:11,840 --> 00:05:14,310
+somewhere outside of the bounding box
+with the select tool and now we can
+
+246
+00:05:14,310 --> 00:05:14,320
+with the select tool and now we can
+ 
+
+247
+00:05:14,320 --> 00:05:16,870
+with the select tool and now we can
+start modeling the table legs create a
+
+248
+00:05:16,870 --> 00:05:16,880
+start modeling the table legs create a
+ 
+
+249
+00:05:16,880 --> 00:05:20,230
+start modeling the table legs create a
+square at this corner at 1 1 8 by 1 in 1
+
+250
+00:05:20,230 --> 00:05:20,240
+square at this corner at 1 1 8 by 1 in 1
+ 
+
+251
+00:05:20,240 --> 00:05:22,629
+square at this corner at 1 1 8 by 1 in 1
+8 next grab the push-pull tool and
+
+252
+00:05:22,629 --> 00:05:22,639
+8 next grab the push-pull tool and
+ 
+
+253
+00:05:22,639 --> 00:05:24,870
+8 next grab the push-pull tool and
+extrude this down to the ground so you
+
+254
+00:05:24,870 --> 00:05:24,880
+extrude this down to the ground so you
+ 
+
+255
+00:05:24,880 --> 00:05:26,710
+extrude this down to the ground so you
+can snap to the origin so you don't have
+
+256
+00:05:26,710 --> 00:05:26,720
+can snap to the origin so you don't have
+ 
+
+257
+00:05:26,720 --> 00:05:29,590
+can snap to the origin so you don't have
+to type in a distance next we need to
+
+258
+00:05:29,590 --> 00:05:29,600
+to type in a distance next we need to
+ 
+
+259
+00:05:29,600 --> 00:05:32,390
+to type in a distance next we need to
+turn this into a component components
+
+260
+00:05:32,390 --> 00:05:32,400
+turn this into a component components
+ 
+
+261
+00:05:32,400 --> 00:05:35,270
+turn this into a component components
+let you have identical copies where you
+
+262
+00:05:35,270 --> 00:05:35,280
+let you have identical copies where you
+ 
+
+263
+00:05:35,280 --> 00:05:37,990
+let you have identical copies where you
+can edit one and have all the other
+
+264
+00:05:37,990 --> 00:05:38,000
+can edit one and have all the other
+ 
+
+265
+00:05:38,000 --> 00:05:41,189
+can edit one and have all the other
+copies update too so triple click right
+
+266
+00:05:41,189 --> 00:05:41,199
+copies update too so triple click right
+ 
+
+267
+00:05:41,199 --> 00:05:43,909
+copies update too so triple click right
+click make component give it a name and
+
+268
+00:05:43,909 --> 00:05:43,919
+click make component give it a name and
+ 
+
+269
+00:05:43,919 --> 00:05:46,550
+click make component give it a name and
+click ok let's add the taper to the leg
+
+270
+00:05:46,550 --> 00:05:46,560
+click ok let's add the taper to the leg
+ 
+
+271
+00:05:46,560 --> 00:05:48,870
+click ok let's add the taper to the leg
+so double click the component to open it
+
+272
+00:05:48,870 --> 00:05:48,880
+so double click the component to open it
+ 
+
+273
+00:05:48,880 --> 00:05:52,150
+so double click the component to open it
+for editing and notice how the tabletop
+
+274
+00:05:52,150 --> 00:05:52,160
+for editing and notice how the tabletop
+ 
+
+275
+00:05:52,160 --> 00:05:54,390
+for editing and notice how the tabletop
+becomes grayed out you can use hide rest
+
+276
+00:05:54,390 --> 00:05:54,400
+becomes grayed out you can use hide rest
+ 
+
+277
+00:05:54,400 --> 00:05:56,469
+becomes grayed out you can use hide rest
+of model to hide everything outside of
+
+278
+00:05:56,469 --> 00:05:56,479
+of model to hide everything outside of
+ 
+
+279
+00:05:56,479 --> 00:05:58,710
+of model to hide everything outside of
+the current context let's use the tape
+
+280
+00:05:58,710 --> 00:05:58,720
+the current context let's use the tape
+ 
+
+281
+00:05:58,720 --> 00:06:00,629
+the current context let's use the tape
+measure tool to create a guide where we
+
+282
+00:06:00,629 --> 00:06:00,639
+measure tool to create a guide where we
+ 
+
+283
+00:06:00,639 --> 00:06:02,710
+measure tool to create a guide where we
+want the taper to start grab the tape
+
+284
+00:06:02,710 --> 00:06:02,720
+want the taper to start grab the tape
+ 
+
+285
+00:06:02,720 --> 00:06:05,189
+want the taper to start grab the tape
+measure tool click on the top edge here
+
+286
+00:06:05,189 --> 00:06:05,199
+measure tool click on the top edge here
+ 
+
+287
+00:06:05,199 --> 00:06:07,350
+measure tool click on the top edge here
+to create a guide parallel from it move
+
+288
+00:06:07,350 --> 00:06:07,360
+to create a guide parallel from it move
+ 
+
+289
+00:06:07,360 --> 00:06:10,070
+to create a guide parallel from it move
+the mouse downward along the blue axis
+
+290
+00:06:10,070 --> 00:06:10,080
+the mouse downward along the blue axis
+ 
+
+291
+00:06:10,080 --> 00:06:12,550
+the mouse downward along the blue axis
+and type in 6 inch enter
+
+292
+00:06:12,550 --> 00:06:12,560
+and type in 6 inch enter
+ 
+
+293
+00:06:12,560 --> 00:06:14,950
+and type in 6 inch enter
+now we can reference the guides using
+
+294
+00:06:14,950 --> 00:06:14,960
+now we can reference the guides using
+ 
+
+295
+00:06:14,960 --> 00:06:17,189
+now we can reference the guides using
+the line tool to subdivide the faces
+
+296
+00:06:17,189 --> 00:06:17,199
+the line tool to subdivide the faces
+ 
+
+297
+00:06:17,199 --> 00:06:19,110
+the line tool to subdivide the faces
+where we want the taper so remember to
+
+298
+00:06:19,110 --> 00:06:19,120
+where we want the taper so remember to
+ 
+
+299
+00:06:19,120 --> 00:06:21,510
+where we want the taper so remember to
+use the arrow keys to lock axes it's
+
+300
+00:06:21,510 --> 00:06:21,520
+use the arrow keys to lock axes it's
+ 
+
+301
+00:06:21,520 --> 00:06:24,230
+use the arrow keys to lock axes it's
+just a good habit to get into so you
+
+302
+00:06:24,230 --> 00:06:24,240
+just a good habit to get into so you
+ 
+
+303
+00:06:24,240 --> 00:06:26,710
+just a good habit to get into so you
+know you're drawing a long axis once the
+
+304
+00:06:26,710 --> 00:06:26,720
+know you're drawing a long axis once the
+ 
+
+305
+00:06:26,720 --> 00:06:28,710
+know you're drawing a long axis once the
+lines are drawn we can go down to the
+
+306
+00:06:28,710 --> 00:06:28,720
+lines are drawn we can go down to the
+ 
+
+307
+00:06:28,720 --> 00:06:31,350
+lines are drawn we can go down to the
+bottom here and use the scale tool to
+
+308
+00:06:31,350 --> 00:06:31,360
+bottom here and use the scale tool to
+ 
+
+309
+00:06:31,360 --> 00:06:33,430
+bottom here and use the scale tool to
+scale the bottom of the leg inward by a
+
+310
+00:06:33,430 --> 00:06:33,440
+scale the bottom of the leg inward by a
+ 
+
+311
+00:06:33,440 --> 00:06:36,390
+scale the bottom of the leg inward by a
+factor of 0.5 and you can use the scale
+
+312
+00:06:36,390 --> 00:06:36,400
+factor of 0.5 and you can use the scale
+ 
+
+313
+00:06:36,400 --> 00:06:38,950
+factor of 0.5 and you can use the scale
+tool on any selection and you can
+
+314
+00:06:38,950 --> 00:06:38,960
+tool on any selection and you can
+ 
+
+315
+00:06:38,960 --> 00:06:41,510
+tool on any selection and you can
+provide it either a scale factor or an
+
+316
+00:06:41,510 --> 00:06:41,520
+provide it either a scale factor or an
+ 
+
+317
+00:06:41,520 --> 00:06:43,270
+provide it either a scale factor or an
+absolute dimension
+
+318
+00:06:43,270 --> 00:06:43,280
+absolute dimension
+ 
+
+319
+00:06:43,280 --> 00:06:45,430
+absolute dimension
+okay so now let's exit the component and
+
+320
+00:06:45,430 --> 00:06:45,440
+okay so now let's exit the component and
+ 
+
+321
+00:06:45,440 --> 00:06:47,909
+okay so now let's exit the component and
+copy some legs to each corner of the
+
+322
+00:06:47,909 --> 00:06:47,919
+copy some legs to each corner of the
+ 
+
+323
+00:06:47,919 --> 00:06:49,749
+copy some legs to each corner of the
+table we can actually create copies
+
+324
+00:06:49,749 --> 00:06:49,759
+table we can actually create copies
+ 
+
+325
+00:06:49,759 --> 00:06:52,390
+table we can actually create copies
+using the move tool so select the leg
+
+326
+00:06:52,390 --> 00:06:52,400
+using the move tool so select the leg
+ 
+
+327
+00:06:52,400 --> 00:06:55,029
+using the move tool so select the leg
+grab the move tool and click on this
+
+328
+00:06:55,029 --> 00:06:55,039
+grab the move tool and click on this
+ 
+
+329
+00:06:55,039 --> 00:06:57,110
+grab the move tool and click on this
+specific point right here
+
+330
+00:06:57,110 --> 00:06:57,120
+specific point right here
+ 
+
+331
+00:06:57,120 --> 00:06:59,510
+specific point right here
+tap control to activate copy mode and
+
+332
+00:06:59,510 --> 00:06:59,520
+tap control to activate copy mode and
+ 
+
+333
+00:06:59,520 --> 00:07:02,070
+tap control to activate copy mode and
+move it to this specific point on the
+
+334
+00:07:02,070 --> 00:07:02,080
+move it to this specific point on the
+ 
+
+335
+00:07:02,080 --> 00:07:03,990
+move it to this specific point on the
+tabletop now since we're using the
+
+336
+00:07:03,990 --> 00:07:04,000
+tabletop now since we're using the
+ 
+
+337
+00:07:04,000 --> 00:07:05,830
+tabletop now since we're using the
+inference system for this move we don't
+
+338
+00:07:05,830 --> 00:07:05,840
+inference system for this move we don't
+ 
+
+339
+00:07:05,840 --> 00:07:08,150
+inference system for this move we don't
+need to type in a dimension now you'll
+
+340
+00:07:08,150 --> 00:07:08,160
+need to type in a dimension now you'll
+ 
+
+341
+00:07:08,160 --> 00:07:09,909
+need to type in a dimension now you'll
+notice that the taper is facing the
+
+342
+00:07:09,909 --> 00:07:09,919
+notice that the taper is facing the
+ 
+
+343
+00:07:09,919 --> 00:07:12,070
+notice that the taper is facing the
+wrong way so we need to rotate this copy
+
+344
+00:07:12,070 --> 00:07:12,080
+wrong way so we need to rotate this copy
+ 
+
+345
+00:07:12,080 --> 00:07:15,029
+wrong way so we need to rotate this copy
+90 degrees and an easy way to do that is
+
+346
+00:07:15,029 --> 00:07:15,039
+90 degrees and an easy way to do that is
+ 
+
+347
+00:07:15,039 --> 00:07:17,510
+90 degrees and an easy way to do that is
+to use the built-in rotation grips that
+
+348
+00:07:17,510 --> 00:07:17,520
+to use the built-in rotation grips that
+ 
+
+349
+00:07:17,520 --> 00:07:19,990
+to use the built-in rotation grips that
+appear on selected groups and components
+
+350
+00:07:19,990 --> 00:07:20,000
+appear on selected groups and components
+ 
+
+351
+00:07:20,000 --> 00:07:22,469
+appear on selected groups and components
+when you have the move tool active and
+
+352
+00:07:22,469 --> 00:07:22,479
+when you have the move tool active and
+ 
+
+353
+00:07:22,479 --> 00:07:24,390
+when you have the move tool active and
+so you can repeat this for the other two
+
+354
+00:07:24,390 --> 00:07:24,400
+so you can repeat this for the other two
+ 
+
+355
+00:07:24,400 --> 00:07:26,309
+so you can repeat this for the other two
+legs but if you're feeling up for it i
+
+356
+00:07:26,309 --> 00:07:26,319
+legs but if you're feeling up for it i
+ 
+
+357
+00:07:26,319 --> 00:07:28,469
+legs but if you're feeling up for it i
+want to show you an advanced way to do
+
+358
+00:07:28,469 --> 00:07:28,479
+want to show you an advanced way to do
+ 
+
+359
+00:07:28,479 --> 00:07:30,870
+want to show you an advanced way to do
+this using the rotate tool so i can show
+
+360
+00:07:30,870 --> 00:07:30,880
+this using the rotate tool so i can show
+ 
+
+361
+00:07:30,880 --> 00:07:33,350
+this using the rotate tool so i can show
+you some advanced infant system tricks
+
+362
+00:07:33,350 --> 00:07:33,360
+you some advanced infant system tricks
+ 
+
+363
+00:07:33,360 --> 00:07:36,150
+you some advanced infant system tricks
+while we're at it so select the leg grab
+
+364
+00:07:36,150 --> 00:07:36,160
+while we're at it so select the leg grab
+ 
+
+365
+00:07:36,160 --> 00:07:38,870
+while we're at it so select the leg grab
+the rotate tool and the rotate tool will
+
+366
+00:07:38,870 --> 00:07:38,880
+the rotate tool and the rotate tool will
+ 
+
+367
+00:07:38,880 --> 00:07:40,870
+the rotate tool and the rotate tool will
+orient according to which face you're
+
+368
+00:07:40,870 --> 00:07:40,880
+orient according to which face you're
+ 
+
+369
+00:07:40,880 --> 00:07:43,430
+orient according to which face you're
+hovering over but like most tools in
+
+370
+00:07:43,430 --> 00:07:43,440
+hovering over but like most tools in
+ 
+
+371
+00:07:43,440 --> 00:07:45,510
+hovering over but like most tools in
+sketchup wink wink
+
+372
+00:07:45,510 --> 00:07:45,520
+sketchup wink wink
+ 
+
+373
+00:07:45,520 --> 00:07:47,670
+sketchup wink wink
+you can lock the orientation using the
+
+374
+00:07:47,670 --> 00:07:47,680
+you can lock the orientation using the
+ 
+
+375
+00:07:47,680 --> 00:07:50,950
+you can lock the orientation using the
+up left right or down arrow key now i
+
+376
+00:07:50,950 --> 00:07:50,960
+up left right or down arrow key now i
+ 
+
+377
+00:07:50,960 --> 00:07:52,550
+up left right or down arrow key now i
+haven't told you about the down arrow
+
+378
+00:07:52,550 --> 00:07:52,560
+haven't told you about the down arrow
+ 
+
+379
+00:07:52,560 --> 00:07:54,790
+haven't told you about the down arrow
+key yet but it's an inference lock that
+
+380
+00:07:54,790 --> 00:07:54,800
+key yet but it's an inference lock that
+ 
+
+381
+00:07:54,800 --> 00:07:57,430
+key yet but it's an inference lock that
+lets you inference edges and faces in
+
+382
+00:07:57,430 --> 00:07:57,440
+lets you inference edges and faces in
+ 
+
+383
+00:07:57,440 --> 00:07:59,589
+lets you inference edges and faces in
+your model that aren't aligned to one of
+
+384
+00:07:59,589 --> 00:07:59,599
+your model that aren't aligned to one of
+ 
+
+385
+00:07:59,599 --> 00:08:01,990
+your model that aren't aligned to one of
+the three axes so let's go ahead and
+
+386
+00:08:01,990 --> 00:08:02,000
+the three axes so let's go ahead and
+ 
+
+387
+00:08:02,000 --> 00:08:04,309
+the three axes so let's go ahead and
+lock the blue axis with the up arrow key
+
+388
+00:08:04,309 --> 00:08:04,319
+lock the blue axis with the up arrow key
+ 
+
+389
+00:08:04,319 --> 00:08:06,469
+lock the blue axis with the up arrow key
+and just like the move tool you can use
+
+390
+00:08:06,469 --> 00:08:06,479
+and just like the move tool you can use
+ 
+
+391
+00:08:06,479 --> 00:08:09,749
+and just like the move tool you can use
+the rotate tool to make copies too so
+
+392
+00:08:09,749 --> 00:08:09,759
+the rotate tool to make copies too so
+ 
+
+393
+00:08:09,759 --> 00:08:11,830
+the rotate tool to make copies too so
+let's rotate three copies around the
+
+394
+00:08:11,830 --> 00:08:11,840
+let's rotate three copies around the
+ 
+
+395
+00:08:11,840 --> 00:08:14,230
+let's rotate three copies around the
+center of the table but how do you
+
+396
+00:08:14,230 --> 00:08:14,240
+center of the table but how do you
+ 
+
+397
+00:08:14,240 --> 00:08:17,110
+center of the table but how do you
+actually find the center point well if
+
+398
+00:08:17,110 --> 00:08:17,120
+actually find the center point well if
+ 
+
+399
+00:08:17,120 --> 00:08:19,510
+actually find the center point well if
+you hover over an inference point for
+
+400
+00:08:19,510 --> 00:08:19,520
+you hover over an inference point for
+ 
+
+401
+00:08:19,520 --> 00:08:21,670
+you hover over an inference point for
+about a second or two sketchup will
+
+402
+00:08:21,670 --> 00:08:21,680
+about a second or two sketchup will
+ 
+
+403
+00:08:21,680 --> 00:08:24,070
+about a second or two sketchup will
+temporarily track from that point and
+
+404
+00:08:24,070 --> 00:08:24,080
+temporarily track from that point and
+ 
+
+405
+00:08:24,080 --> 00:08:26,150
+temporarily track from that point and
+the cool thing is you can do this with
+
+406
+00:08:26,150 --> 00:08:26,160
+the cool thing is you can do this with
+ 
+
+407
+00:08:26,160 --> 00:08:28,390
+the cool thing is you can do this with
+two inference points which will then
+
+408
+00:08:28,390 --> 00:08:28,400
+two inference points which will then
+ 
+
+409
+00:08:28,400 --> 00:08:31,110
+two inference points which will then
+allow you to find their intersection and
+
+410
+00:08:31,110 --> 00:08:31,120
+allow you to find their intersection and
+ 
+
+411
+00:08:31,120 --> 00:08:33,190
+allow you to find their intersection and
+from there we just click to place the
+
+412
+00:08:33,190 --> 00:08:33,200
+from there we just click to place the
+ 
+
+413
+00:08:33,200 --> 00:08:35,909
+from there we just click to place the
+rotation point tap control to switch to
+
+414
+00:08:35,909 --> 00:08:35,919
+rotation point tap control to switch to
+ 
+
+415
+00:08:35,919 --> 00:08:38,149
+rotation point tap control to switch to
+copy mode click again to establish the
+
+416
+00:08:38,149 --> 00:08:38,159
+copy mode click again to establish the
+ 
+
+417
+00:08:38,159 --> 00:08:40,949
+copy mode click again to establish the
+reference line then move the mouse until
+
+418
+00:08:40,949 --> 00:08:40,959
+reference line then move the mouse until
+ 
+
+419
+00:08:40,959 --> 00:08:43,190
+reference line then move the mouse until
+you snap to 90 degrees and click to
+
+420
+00:08:43,190 --> 00:08:43,200
+you snap to 90 degrees and click to
+ 
+
+421
+00:08:43,200 --> 00:08:47,350
+you snap to 90 degrees and click to
+place the first copy next type in 3x
+
+422
+00:08:47,350 --> 00:08:47,360
+place the first copy next type in 3x
+ 
+
+423
+00:08:47,360 --> 00:08:49,910
+place the first copy next type in 3x
+enter and that will place three copies
+
+424
+00:08:49,910 --> 00:08:49,920
+enter and that will place three copies
+ 
+
+425
+00:08:49,920 --> 00:08:51,829
+enter and that will place three copies
+in total now you can create areas like
+
+426
+00:08:51,829 --> 00:08:51,839
+in total now you can create areas like
+ 
+
+427
+00:08:51,839 --> 00:08:54,150
+in total now you can create areas like
+this with the move tool too by using
+
+428
+00:08:54,150 --> 00:08:54,160
+this with the move tool too by using
+ 
+
+429
+00:08:54,160 --> 00:08:56,389
+this with the move tool too by using
+either a multiplication sign or division
+
+430
+00:08:56,389 --> 00:08:56,399
+either a multiplication sign or division
+ 
+
+431
+00:08:56,399 --> 00:08:58,230
+either a multiplication sign or division
+sign depending on where you want the
+
+432
+00:08:58,230 --> 00:08:58,240
+sign depending on where you want the
+ 
+
+433
+00:08:58,240 --> 00:09:00,710
+sign depending on where you want the
+copies to be arrayed then just use
+
+434
+00:09:00,710 --> 00:09:00,720
+copies to be arrayed then just use
+ 
+
+435
+00:09:00,720 --> 00:09:02,790
+copies to be arrayed then just use
+everything you've learned so far to add
+
+436
+00:09:02,790 --> 00:09:02,800
+everything you've learned so far to add
+ 
+
+437
+00:09:02,800 --> 00:09:06,230
+everything you've learned so far to add
+the aprons rails and drawer remember to
+
+438
+00:09:06,230 --> 00:09:06,240
+the aprons rails and drawer remember to
+ 
+
+439
+00:09:06,240 --> 00:09:08,870
+the aprons rails and drawer remember to
+use groups and components for everything
+
+440
+00:09:08,870 --> 00:09:08,880
+use groups and components for everything
+ 
+
+441
+00:09:08,880 --> 00:09:11,030
+use groups and components for everything
+now if you find the table top getting in
+
+442
+00:09:11,030 --> 00:09:11,040
+now if you find the table top getting in
+ 
+
+443
+00:09:11,040 --> 00:09:13,269
+now if you find the table top getting in
+your way as you model you can click on
+
+444
+00:09:13,269 --> 00:09:13,279
+your way as you model you can click on
+ 
+
+445
+00:09:13,279 --> 00:09:16,710
+your way as you model you can click on
+tags add a new tag then with the tag
+
+446
+00:09:16,710 --> 00:09:16,720
+tags add a new tag then with the tag
+ 
+
+447
+00:09:16,720 --> 00:09:19,110
+tags add a new tag then with the tag
+selected you can click on the table top
+
+448
+00:09:19,110 --> 00:09:19,120
+selected you can click on the table top
+ 
+
+449
+00:09:19,120 --> 00:09:21,750
+selected you can click on the table top
+to apply it to the group and now you can
+
+450
+00:09:21,750 --> 00:09:21,760
+to apply it to the group and now you can
+ 
+
+451
+00:09:21,760 --> 00:09:24,310
+to apply it to the group and now you can
+control the visibility of the top by
+
+452
+00:09:24,310 --> 00:09:24,320
+control the visibility of the top by
+ 
+
+453
+00:09:24,320 --> 00:09:26,150
+control the visibility of the top by
+toggling this icon right here you can
+
+454
+00:09:26,150 --> 00:09:26,160
+toggling this icon right here you can
+ 
+
+455
+00:09:26,160 --> 00:09:28,070
+toggling this icon right here you can
+find materials to apply to your model
+
+456
+00:09:28,070 --> 00:09:28,080
+find materials to apply to your model
+ 
+
+457
+00:09:28,080 --> 00:09:29,829
+find materials to apply to your model
+right here just click on a swatch to
+
+458
+00:09:29,829 --> 00:09:29,839
+right here just click on a swatch to
+ 
+
+459
+00:09:29,839 --> 00:09:32,389
+right here just click on a swatch to
+activate the paint bucket tool and apply
+
+460
+00:09:32,389 --> 00:09:32,399
+activate the paint bucket tool and apply
+ 
+
+461
+00:09:32,399 --> 00:09:34,630
+activate the paint bucket tool and apply
+the material to the model you can also
+
+462
+00:09:34,630 --> 00:09:34,640
+the material to the model you can also
+ 
+
+463
+00:09:34,640 --> 00:09:36,310
+the material to the model you can also
+change the look of your model using
+
+464
+00:09:36,310 --> 00:09:36,320
+change the look of your model using
+ 
+
+465
+00:09:36,320 --> 00:09:39,509
+change the look of your model using
+styles here so styles control a variety
+
+466
+00:09:39,509 --> 00:09:39,519
+styles here so styles control a variety
+ 
+
+467
+00:09:39,519 --> 00:09:41,269
+styles here so styles control a variety
+of different visual properties to
+
+468
+00:09:41,269 --> 00:09:41,279
+of different visual properties to
+ 
+
+469
+00:09:41,279 --> 00:09:43,110
+of different visual properties to
+dramatically change the look of your
+
+470
+00:09:43,110 --> 00:09:43,120
+dramatically change the look of your
+ 
+
+471
+00:09:43,120 --> 00:09:43,990
+dramatically change the look of your
+model
+
+472
+00:09:43,990 --> 00:09:44,000
+model
+ 
+
+473
+00:09:44,000 --> 00:09:45,910
+model
+now there are a ton of additional
+
+474
+00:09:45,910 --> 00:09:45,920
+now there are a ton of additional
+ 
+
+475
+00:09:45,920 --> 00:09:48,310
+now there are a ton of additional
+features tips and workflows that i
+
+476
+00:09:48,310 --> 00:09:48,320
+features tips and workflows that i
+ 
+
+477
+00:09:48,320 --> 00:09:49,590
+features tips and workflows that i
+haven't covered
+
+478
+00:09:49,590 --> 00:09:49,600
+haven't covered
+ 
+
+479
+00:09:49,600 --> 00:09:51,509
+haven't covered
+in this video so if this is your first
+
+480
+00:09:51,509 --> 00:09:51,519
+in this video so if this is your first
+ 
+
+481
+00:09:51,519 --> 00:09:53,030
+in this video so if this is your first
+time on my channel my name is matt
+
+482
+00:09:53,030 --> 00:09:53,040
+time on my channel my name is matt
+ 
+
+483
+00:09:53,040 --> 00:09:55,829
+time on my channel my name is matt
+donnelly and i'm a sketchup teacher and
+
+484
+00:09:55,829 --> 00:09:55,839
+donnelly and i'm a sketchup teacher and
+ 
+
+485
+00:09:55,839 --> 00:09:57,670
+donnelly and i'm a sketchup teacher and
+author you can find my books in the
+
+486
+00:09:57,670 --> 00:09:57,680
+author you can find my books in the
+ 
+
+487
+00:09:57,680 --> 00:10:00,150
+author you can find my books in the
+links below and make sure you subscribe
+
+488
+00:10:00,150 --> 00:10:00,160
+links below and make sure you subscribe
+ 
+
+489
+00:10:00,160 --> 00:10:02,069
+links below and make sure you subscribe
+to my channel to get more sketchup
+
+490
+00:10:02,069 --> 00:10:02,079
+to my channel to get more sketchup
+ 
+
+491
+00:10:02,079 --> 00:10:04,550
+to my channel to get more sketchup
+tutorials just like this now leave a
+
+492
+00:10:04,550 --> 00:10:04,560
+tutorials just like this now leave a
+ 
+
+493
+00:10:04,560 --> 00:10:05,910
+tutorials just like this now leave a
+comment below if there's any part of the
+
+494
+00:10:05,910 --> 00:10:05,920
+comment below if there's any part of the
+ 
+
+495
+00:10:05,920 --> 00:10:07,990
+comment below if there's any part of the
+video you got stuck on or if you'd like
+
+496
+00:10:07,990 --> 00:10:08,000
+video you got stuck on or if you'd like
+ 
+
+497
+00:10:08,000 --> 00:10:10,470
+video you got stuck on or if you'd like
+me to make a video on a specific
+
+498
+00:10:10,470 --> 00:10:10,480
+me to make a video on a specific
+ 
+
+499
+00:10:10,480 --> 00:10:12,870
+me to make a video on a specific
+sketchup topic alright that's it for
+
+500
+00:10:12,870 --> 00:10:12,880
+sketchup topic alright that's it for
+ 
+
+501
+00:10:12,880 --> 00:10:14,710
+sketchup topic alright that's it for
+this video thanks for watching and i'll
+
+502
+00:10:14,710 --> 00:10:14,720
+this video thanks for watching and i'll
+ 
+
+503
+00:10:14,720 --> 00:10:18,000
+this video thanks for watching and i'll
+see you in the next video
+

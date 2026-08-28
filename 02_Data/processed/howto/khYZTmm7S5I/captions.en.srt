@@ -1,0 +1,3435 @@
+1
+00:00:00,000 --> 00:00:01,589
+
+by the end of this video you'll have a
+
+2
+00:00:01,589 --> 00:00:01,599
+by the end of this video you'll have a
+ 
+
+3
+00:00:01,599 --> 00:00:03,270
+by the end of this video you'll have a
+basic understanding of everything that
+
+4
+00:00:03,270 --> 00:00:03,280
+basic understanding of everything that
+ 
+
+5
+00:00:03,280 --> 00:00:04,950
+basic understanding of everything that
+you need to know to convert the sun's
+
+6
+00:00:04,950 --> 00:00:04,960
+you need to know to convert the sun's
+ 
+
+7
+00:00:04,960 --> 00:00:07,269
+you need to know to convert the sun's
+energy through your solar panels into
+
+8
+00:00:07,269 --> 00:00:07,279
+energy through your solar panels into
+ 
+
+9
+00:00:07,279 --> 00:00:08,950
+energy through your solar panels into
+power that you can use in your everyday
+
+10
+00:00:08,950 --> 00:00:08,960
+power that you can use in your everyday
+ 
+
+11
+00:00:08,960 --> 00:00:11,589
+power that you can use in your everyday
+life whether that's on grid or off-grid
+
+12
+00:00:11,589 --> 00:00:11,599
+life whether that's on grid or off-grid
+ 
+
+13
+00:00:11,599 --> 00:00:13,350
+life whether that's on grid or off-grid
+the first and probably most important
+
+14
+00:00:13,350 --> 00:00:13,360
+the first and probably most important
+ 
+
+15
+00:00:13,360 --> 00:00:15,430
+the first and probably most important
+part of any system is the solar panels
+
+16
+00:00:15,430 --> 00:00:15,440
+part of any system is the solar panels
+ 
+
+17
+00:00:15,440 --> 00:00:17,670
+part of any system is the solar panels
+themselves these come in a huge variety
+
+18
+00:00:17,670 --> 00:00:17,680
+themselves these come in a huge variety
+ 
+
+19
+00:00:17,680 --> 00:00:20,630
+themselves these come in a huge variety
+of sizes powers and efficiencies like
+
+20
+00:00:20,630 --> 00:00:20,640
+of sizes powers and efficiencies like
+ 
+
+21
+00:00:20,640 --> 00:00:22,070
+of sizes powers and efficiencies like
+this panel right here for example
+
+22
+00:00:22,070 --> 00:00:22,080
+this panel right here for example
+ 
+
+23
+00:00:22,080 --> 00:00:25,509
+this panel right here for example
+produces up to 395 watts but this one
+
+24
+00:00:25,509 --> 00:00:25,519
+produces up to 395 watts but this one
+ 
+
+25
+00:00:25,519 --> 00:00:27,349
+produces up to 395 watts but this one
+that's almost the same size produces
+
+26
+00:00:27,349 --> 00:00:27,359
+that's almost the same size produces
+ 
+
+27
+00:00:27,359 --> 00:00:30,710
+that's almost the same size produces
+only 250 watts at best and no that's not
+
+28
+00:00:30,710 --> 00:00:30,720
+only 250 watts at best and no that's not
+ 
+
+29
+00:00:30,720 --> 00:00:32,229
+only 250 watts at best and no that's not
+because it's shattered it actually works
+
+30
+00:00:32,229 --> 00:00:32,239
+because it's shattered it actually works
+ 
+
+31
+00:00:32,239 --> 00:00:33,910
+because it's shattered it actually works
+quite well despite being shattered it
+
+32
+00:00:33,910 --> 00:00:33,920
+quite well despite being shattered it
+ 
+
+33
+00:00:33,920 --> 00:00:35,510
+quite well despite being shattered it
+just doesn't have the same capacity as
+
+34
+00:00:35,510 --> 00:00:35,520
+just doesn't have the same capacity as
+ 
+
+35
+00:00:35,520 --> 00:00:37,430
+just doesn't have the same capacity as
+the newer nicer ones now the more power
+
+36
+00:00:37,430 --> 00:00:37,440
+the newer nicer ones now the more power
+ 
+
+37
+00:00:37,440 --> 00:00:39,510
+the newer nicer ones now the more power
+they produce per area the more they tend
+
+38
+00:00:39,510 --> 00:00:39,520
+they produce per area the more they tend
+ 
+
+39
+00:00:39,520 --> 00:00:41,270
+they produce per area the more they tend
+to cost which could be a factor if you
+
+40
+00:00:41,270 --> 00:00:41,280
+to cost which could be a factor if you
+ 
+
+41
+00:00:41,280 --> 00:00:43,030
+to cost which could be a factor if you
+have limited space on your roof or
+
+42
+00:00:43,030 --> 00:00:43,040
+have limited space on your roof or
+ 
+
+43
+00:00:43,040 --> 00:00:44,310
+have limited space on your roof or
+wherever it is that you're placing the
+
+44
+00:00:44,310 --> 00:00:44,320
+wherever it is that you're placing the
+ 
+
+45
+00:00:44,320 --> 00:00:46,630
+wherever it is that you're placing the
+panels there are also portable panels
+
+46
+00:00:46,630 --> 00:00:46,640
+panels there are also portable panels
+ 
+
+47
+00:00:46,640 --> 00:00:48,389
+panels there are also portable panels
+like these but they tend to produce a
+
+48
+00:00:48,389 --> 00:00:48,399
+like these but they tend to produce a
+ 
+
+49
+00:00:48,399 --> 00:00:50,630
+like these but they tend to produce a
+lot less power they are however great
+
+50
+00:00:50,630 --> 00:00:50,640
+lot less power they are however great
+ 
+
+51
+00:00:50,640 --> 00:00:52,790
+lot less power they are however great
+for portability and for lower power
+
+52
+00:00:52,790 --> 00:00:52,800
+for portability and for lower power
+ 
+
+53
+00:00:52,800 --> 00:00:54,790
+for portability and for lower power
+needs like charging a phone i'd say the
+
+54
+00:00:54,790 --> 00:00:54,800
+needs like charging a phone i'd say the
+ 
+
+55
+00:00:54,800 --> 00:00:56,389
+needs like charging a phone i'd say the
+two main things to consider when looking
+
+56
+00:00:56,389 --> 00:00:56,399
+two main things to consider when looking
+ 
+
+57
+00:00:56,399 --> 00:00:59,029
+two main things to consider when looking
+at solar panels are the wattage output
+
+58
+00:00:59,029 --> 00:00:59,039
+at solar panels are the wattage output
+ 
+
+59
+00:00:59,039 --> 00:01:00,630
+at solar panels are the wattage output
+and also just making sure you've got the
+
+60
+00:01:00,630 --> 00:01:00,640
+and also just making sure you've got the
+ 
+
+61
+00:01:00,640 --> 00:01:02,389
+and also just making sure you've got the
+right voltage and nowadays you can also
+
+62
+00:01:02,389 --> 00:01:02,399
+right voltage and nowadays you can also
+ 
+
+63
+00:01:02,399 --> 00:01:04,469
+right voltage and nowadays you can also
+buy what are called bifacial panels like
+
+64
+00:01:04,469 --> 00:01:04,479
+buy what are called bifacial panels like
+ 
+
+65
+00:01:04,479 --> 00:01:07,030
+buy what are called bifacial panels like
+this one that even if the back is at all
+
+66
+00:01:07,030 --> 00:01:07,040
+this one that even if the back is at all
+ 
+
+67
+00:01:07,040 --> 00:01:09,109
+this one that even if the back is at all
+uncovered they absorb light from the
+
+68
+00:01:09,109 --> 00:01:09,119
+uncovered they absorb light from the
+ 
+
+69
+00:01:09,119 --> 00:01:11,830
+uncovered they absorb light from the
+back adding up to as much as 30 percent
+
+70
+00:01:11,830 --> 00:01:11,840
+back adding up to as much as 30 percent
+ 
+
+71
+00:01:11,840 --> 00:01:13,830
+back adding up to as much as 30 percent
+power output i set this one up so that
+
+72
+00:01:13,830 --> 00:01:13,840
+power output i set this one up so that
+ 
+
+73
+00:01:13,840 --> 00:01:15,270
+power output i set this one up so that
+it's not actually getting any direct
+
+74
+00:01:15,270 --> 00:01:15,280
+it's not actually getting any direct
+ 
+
+75
+00:01:15,280 --> 00:01:17,109
+it's not actually getting any direct
+sunlight but it's still collecting power
+
+76
+00:01:17,109 --> 00:01:17,119
+sunlight but it's still collecting power
+ 
+
+77
+00:01:17,119 --> 00:01:19,030
+sunlight but it's still collecting power
+from both the front and the back and
+
+78
+00:01:19,030 --> 00:01:19,040
+from both the front and the back and
+ 
+
+79
+00:01:19,040 --> 00:01:21,429
+from both the front and the back and
+producing about 39 watts of power not
+
+80
+00:01:21,429 --> 00:01:21,439
+producing about 39 watts of power not
+ 
+
+81
+00:01:21,439 --> 00:01:23,510
+producing about 39 watts of power not
+too shabby the second ingredient is
+
+82
+00:01:23,510 --> 00:01:23,520
+too shabby the second ingredient is
+ 
+
+83
+00:01:23,520 --> 00:01:25,990
+too shabby the second ingredient is
+inverters now inverters can either be up
+
+84
+00:01:25,990 --> 00:01:26,000
+inverters now inverters can either be up
+ 
+
+85
+00:01:26,000 --> 00:01:27,429
+inverters now inverters can either be up
+with the panels and these are called
+
+86
+00:01:27,429 --> 00:01:27,439
+with the panels and these are called
+ 
+
+87
+00:01:27,439 --> 00:01:29,270
+with the panels and these are called
+micro inverters or they can be
+
+88
+00:01:29,270 --> 00:01:29,280
+micro inverters or they can be
+ 
+
+89
+00:01:29,280 --> 00:01:30,789
+micro inverters or they can be
+downstream where all of the panel's
+
+90
+00:01:30,789 --> 00:01:30,799
+downstream where all of the panel's
+ 
+
+91
+00:01:30,799 --> 00:01:33,030
+downstream where all of the panel's
+wires are collected in what's called a
+
+92
+00:01:33,030 --> 00:01:33,040
+wires are collected in what's called a
+ 
+
+93
+00:01:33,040 --> 00:01:35,350
+wires are collected in what's called a
+string inverter and you can even use
+
+94
+00:01:35,350 --> 00:01:35,360
+string inverter and you can even use
+ 
+
+95
+00:01:35,360 --> 00:01:37,510
+string inverter and you can even use
+both their job is simply to convert the
+
+96
+00:01:37,510 --> 00:01:37,520
+both their job is simply to convert the
+ 
+
+97
+00:01:37,520 --> 00:01:39,749
+both their job is simply to convert the
+dc power that comes from the panels to
+
+98
+00:01:39,749 --> 00:01:39,759
+dc power that comes from the panels to
+ 
+
+99
+00:01:39,759 --> 00:01:41,990
+dc power that comes from the panels to
+ac power that we can use for our devices
+
+100
+00:01:41,990 --> 00:01:42,000
+ac power that we can use for our devices
+ 
+
+101
+00:01:42,000 --> 00:01:44,230
+ac power that we can use for our devices
+and appliances micro inverters typically
+
+102
+00:01:44,230 --> 00:01:44,240
+and appliances micro inverters typically
+ 
+
+103
+00:01:44,240 --> 00:01:46,069
+and appliances micro inverters typically
+connect to between two and four
+
+104
+00:01:46,069 --> 00:01:46,079
+connect to between two and four
+ 
+
+105
+00:01:46,079 --> 00:01:47,910
+connect to between two and four
+photovoltaic panels or these solar
+
+106
+00:01:47,910 --> 00:01:47,920
+photovoltaic panels or these solar
+ 
+
+107
+00:01:47,920 --> 00:01:49,749
+photovoltaic panels or these solar
+panels and they make it really easy to
+
+108
+00:01:49,749 --> 00:01:49,759
+panels and they make it really easy to
+ 
+
+109
+00:01:49,759 --> 00:01:52,069
+panels and they make it really easy to
+expand or condense if you need to your
+
+110
+00:01:52,069 --> 00:01:52,079
+expand or condense if you need to your
+ 
+
+111
+00:01:52,079 --> 00:01:54,389
+expand or condense if you need to your
+system you can add monitoring systems to
+
+112
+00:01:54,389 --> 00:01:54,399
+system you can add monitoring systems to
+ 
+
+113
+00:01:54,399 --> 00:01:56,469
+system you can add monitoring systems to
+these but they do have to be serviced up
+
+114
+00:01:56,469 --> 00:01:56,479
+these but they do have to be serviced up
+ 
+
+115
+00:01:56,479 --> 00:01:58,389
+these but they do have to be serviced up
+on the roof and typically underneath the
+
+116
+00:01:58,389 --> 00:01:58,399
+on the roof and typically underneath the
+ 
+
+117
+00:01:58,399 --> 00:02:00,069
+on the roof and typically underneath the
+solar panels so they can be challenging
+
+118
+00:02:00,069 --> 00:02:00,079
+solar panels so they can be challenging
+ 
+
+119
+00:02:00,079 --> 00:02:02,230
+solar panels so they can be challenging
+to get to now because micro inverters
+
+120
+00:02:02,230 --> 00:02:02,240
+to get to now because micro inverters
+ 
+
+121
+00:02:02,240 --> 00:02:04,310
+to get to now because micro inverters
+handle power in smaller groups if
+
+122
+00:02:04,310 --> 00:02:04,320
+handle power in smaller groups if
+ 
+
+123
+00:02:04,320 --> 00:02:06,149
+handle power in smaller groups if
+certain panels are shaded or under
+
+124
+00:02:06,149 --> 00:02:06,159
+certain panels are shaded or under
+ 
+
+125
+00:02:06,159 --> 00:02:08,309
+certain panels are shaded or under
+producing it typically has less of an
+
+126
+00:02:08,309 --> 00:02:08,319
+producing it typically has less of an
+ 
+
+127
+00:02:08,319 --> 00:02:10,229
+producing it typically has less of an
+impact on the total power production
+
+128
+00:02:10,229 --> 00:02:10,239
+impact on the total power production
+ 
+
+129
+00:02:10,239 --> 00:02:11,910
+impact on the total power production
+string inverters bring all of the panel
+
+130
+00:02:11,910 --> 00:02:11,920
+string inverters bring all of the panel
+ 
+
+131
+00:02:11,920 --> 00:02:13,830
+string inverters bring all of the panel
+wiring into a central location and they
+
+132
+00:02:13,830 --> 00:02:13,840
+wiring into a central location and they
+ 
+
+133
+00:02:13,840 --> 00:02:15,830
+wiring into a central location and they
+have a specific size rating in order to
+
+134
+00:02:15,830 --> 00:02:15,840
+have a specific size rating in order to
+ 
+
+135
+00:02:15,840 --> 00:02:17,510
+have a specific size rating in order to
+accommodate up to a certain number of
+
+136
+00:02:17,510 --> 00:02:17,520
+accommodate up to a certain number of
+ 
+
+137
+00:02:17,520 --> 00:02:20,550
+accommodate up to a certain number of
+panels based on wattage and voltage now
+
+138
+00:02:20,550 --> 00:02:20,560
+panels based on wattage and voltage now
+ 
+
+139
+00:02:20,560 --> 00:02:22,070
+panels based on wattage and voltage now
+if you have to set your panels up in
+
+140
+00:02:22,070 --> 00:02:22,080
+if you have to set your panels up in
+ 
+
+141
+00:02:22,080 --> 00:02:23,750
+if you have to set your panels up in
+series to accommodate your string
+
+142
+00:02:23,750 --> 00:02:23,760
+series to accommodate your string
+ 
+
+143
+00:02:23,760 --> 00:02:25,510
+series to accommodate your string
+inverter your panels will only be as
+
+144
+00:02:25,510 --> 00:02:25,520
+inverter your panels will only be as
+ 
+
+145
+00:02:25,520 --> 00:02:27,190
+inverter your panels will only be as
+productive as your least productive
+
+146
+00:02:27,190 --> 00:02:27,200
+productive as your least productive
+ 
+
+147
+00:02:27,200 --> 00:02:29,350
+productive as your least productive
+panel though power optimizers can help
+
+148
+00:02:29,350 --> 00:02:29,360
+panel though power optimizers can help
+ 
+
+149
+00:02:29,360 --> 00:02:31,509
+panel though power optimizers can help
+with that it's also possible to use a
+
+150
+00:02:31,509 --> 00:02:31,519
+with that it's also possible to use a
+ 
+
+151
+00:02:31,519 --> 00:02:33,190
+with that it's also possible to use a
+combination of micro inverters and
+
+152
+00:02:33,190 --> 00:02:33,200
+combination of micro inverters and
+ 
+
+153
+00:02:33,200 --> 00:02:34,869
+combination of micro inverters and
+string inverters if that makes sense for
+
+154
+00:02:34,869 --> 00:02:34,879
+string inverters if that makes sense for
+ 
+
+155
+00:02:34,879 --> 00:02:37,110
+string inverters if that makes sense for
+your setup now it's worth noting that
+
+156
+00:02:37,110 --> 00:02:37,120
+your setup now it's worth noting that
+ 
+
+157
+00:02:37,120 --> 00:02:38,630
+your setup now it's worth noting that
+certain string inverters actually
+
+158
+00:02:38,630 --> 00:02:38,640
+certain string inverters actually
+ 
+
+159
+00:02:38,640 --> 00:02:40,550
+certain string inverters actually
+require a battery to work since they're
+
+160
+00:02:40,550 --> 00:02:40,560
+require a battery to work since they're
+ 
+
+161
+00:02:40,560 --> 00:02:42,869
+require a battery to work since they're
+designed for off-grid situations so be
+
+162
+00:02:42,869 --> 00:02:42,879
+designed for off-grid situations so be
+ 
+
+163
+00:02:42,879 --> 00:02:44,390
+designed for off-grid situations so be
+sure to check out those details before
+
+164
+00:02:44,390 --> 00:02:44,400
+sure to check out those details before
+ 
+
+165
+00:02:44,400 --> 00:02:46,550
+sure to check out those details before
+you buy another major consideration when
+
+166
+00:02:46,550 --> 00:02:46,560
+you buy another major consideration when
+ 
+
+167
+00:02:46,560 --> 00:02:48,630
+you buy another major consideration when
+choosing between micro inverters and
+
+168
+00:02:48,630 --> 00:02:48,640
+choosing between micro inverters and
+ 
+
+169
+00:02:48,640 --> 00:02:50,470
+choosing between micro inverters and
+string inverters is whether or not you
+
+170
+00:02:50,470 --> 00:02:50,480
+string inverters is whether or not you
+ 
+
+171
+00:02:50,480 --> 00:02:52,550
+string inverters is whether or not you
+want the ability to reroute power to
+
+172
+00:02:52,550 --> 00:02:52,560
+want the ability to reroute power to
+ 
+
+173
+00:02:52,560 --> 00:02:55,030
+want the ability to reroute power to
+your house during a power outage to do
+
+174
+00:02:55,030 --> 00:02:55,040
+your house during a power outage to do
+ 
+
+175
+00:02:55,040 --> 00:02:56,710
+your house during a power outage to do
+that you need to disconnect it from the
+
+176
+00:02:56,710 --> 00:02:56,720
+that you need to disconnect it from the
+ 
+
+177
+00:02:56,720 --> 00:02:59,110
+that you need to disconnect it from the
+grid like we can do with this setup this
+
+178
+00:02:59,110 --> 00:02:59,120
+grid like we can do with this setup this
+ 
+
+179
+00:02:59,120 --> 00:03:00,550
+grid like we can do with this setup this
+can allow us to keep our freezers
+
+180
+00:03:00,550 --> 00:03:00,560
+can allow us to keep our freezers
+ 
+
+181
+00:03:00,560 --> 00:03:02,070
+can allow us to keep our freezers
+running in a couple of lights on for
+
+182
+00:03:02,070 --> 00:03:02,080
+running in a couple of lights on for
+ 
+
+183
+00:03:02,080 --> 00:03:04,390
+running in a couple of lights on for
+example in case of a blackout now not
+
+184
+00:03:04,390 --> 00:03:04,400
+example in case of a blackout now not
+ 
+
+185
+00:03:04,400 --> 00:03:06,309
+example in case of a blackout now not
+all inverters allow for that especially
+
+186
+00:03:06,309 --> 00:03:06,319
+all inverters allow for that especially
+ 
+
+187
+00:03:06,319 --> 00:03:08,229
+all inverters allow for that especially
+when you're looking at micro inverters
+
+188
+00:03:08,229 --> 00:03:08,239
+when you're looking at micro inverters
+ 
+
+189
+00:03:08,239 --> 00:03:10,149
+when you're looking at micro inverters
+now let's pause for a second to explain
+
+190
+00:03:10,149 --> 00:03:10,159
+now let's pause for a second to explain
+ 
+
+191
+00:03:10,159 --> 00:03:11,910
+now let's pause for a second to explain
+series versus parallel because that's
+
+192
+00:03:11,910 --> 00:03:11,920
+series versus parallel because that's
+ 
+
+193
+00:03:11,920 --> 00:03:13,030
+series versus parallel because that's
+something you definitely need to
+
+194
+00:03:13,030 --> 00:03:13,040
+something you definitely need to
+ 
+
+195
+00:03:13,040 --> 00:03:14,869
+something you definitely need to
+understand when connecting batteries and
+
+196
+00:03:14,869 --> 00:03:14,879
+understand when connecting batteries and
+ 
+
+197
+00:03:14,879 --> 00:03:17,110
+understand when connecting batteries and
+panels so series when you connect
+
+198
+00:03:17,110 --> 00:03:17,120
+panels so series when you connect
+ 
+
+199
+00:03:17,120 --> 00:03:18,550
+panels so series when you connect
+something in series that means the
+
+200
+00:03:18,550 --> 00:03:18,560
+something in series that means the
+ 
+
+201
+00:03:18,560 --> 00:03:20,710
+something in series that means the
+positive of one panel or battery is
+
+202
+00:03:20,710 --> 00:03:20,720
+positive of one panel or battery is
+ 
+
+203
+00:03:20,720 --> 00:03:22,790
+positive of one panel or battery is
+connected to the negative of the next
+
+204
+00:03:22,790 --> 00:03:22,800
+connected to the negative of the next
+ 
+
+205
+00:03:22,800 --> 00:03:24,710
+connected to the negative of the next
+this puts them all in line with each
+
+206
+00:03:24,710 --> 00:03:24,720
+this puts them all in line with each
+ 
+
+207
+00:03:24,720 --> 00:03:26,710
+this puts them all in line with each
+other and you can think of it like a tv
+
+208
+00:03:26,710 --> 00:03:26,720
+other and you can think of it like a tv
+ 
+
+209
+00:03:26,720 --> 00:03:28,949
+other and you can think of it like a tv
+series there are certain tv series where
+
+210
+00:03:28,949 --> 00:03:28,959
+series there are certain tv series where
+ 
+
+211
+00:03:28,959 --> 00:03:31,030
+series there are certain tv series where
+if you skip them or go out of order
+
+212
+00:03:31,030 --> 00:03:31,040
+if you skip them or go out of order
+ 
+
+213
+00:03:31,040 --> 00:03:32,710
+if you skip them or go out of order
+you're gonna get totally lost so you
+
+214
+00:03:32,710 --> 00:03:32,720
+you're gonna get totally lost so you
+ 
+
+215
+00:03:32,720 --> 00:03:34,550
+you're gonna get totally lost so you
+actually need to watch them in order
+
+216
+00:03:34,550 --> 00:03:34,560
+actually need to watch them in order
+ 
+
+217
+00:03:34,560 --> 00:03:37,509
+actually need to watch them in order
+episode one episode two three and so on
+
+218
+00:03:37,509 --> 00:03:37,519
+episode one episode two three and so on
+ 
+
+219
+00:03:37,519 --> 00:03:39,190
+episode one episode two three and so on
+this is also how the old christmas
+
+220
+00:03:39,190 --> 00:03:39,200
+this is also how the old christmas
+ 
+
+221
+00:03:39,200 --> 00:03:40,630
+this is also how the old christmas
+lights were set up which was super
+
+222
+00:03:40,630 --> 00:03:40,640
+lights were set up which was super
+ 
+
+223
+00:03:40,640 --> 00:03:42,149
+lights were set up which was super
+annoying one bulb would go out you're
+
+224
+00:03:42,149 --> 00:03:42,159
+annoying one bulb would go out you're
+ 
+
+225
+00:03:42,159 --> 00:03:43,589
+annoying one bulb would go out you're
+not sure which one it is and none of
+
+226
+00:03:43,589 --> 00:03:43,599
+not sure which one it is and none of
+ 
+
+227
+00:03:43,599 --> 00:03:46,309
+not sure which one it is and none of
+them worked and it's just horrible so
+
+228
+00:03:46,309 --> 00:03:46,319
+them worked and it's just horrible so
+ 
+
+229
+00:03:46,319 --> 00:03:48,470
+them worked and it's just horrible so
+with parallel on the other hand you're
+
+230
+00:03:48,470 --> 00:03:48,480
+with parallel on the other hand you're
+ 
+
+231
+00:03:48,480 --> 00:03:50,710
+with parallel on the other hand you're
+connecting every positive line together
+
+232
+00:03:50,710 --> 00:03:50,720
+connecting every positive line together
+ 
+
+233
+00:03:50,720 --> 00:03:53,030
+connecting every positive line together
+and every negative line together so you
+
+234
+00:03:53,030 --> 00:03:53,040
+and every negative line together so you
+ 
+
+235
+00:03:53,040 --> 00:03:54,550
+and every negative line together so you
+can pull one out of the mix and it
+
+236
+00:03:54,550 --> 00:03:54,560
+can pull one out of the mix and it
+ 
+
+237
+00:03:54,560 --> 00:03:55,990
+can pull one out of the mix and it
+really won't matter it won't affect the
+
+238
+00:03:55,990 --> 00:03:56,000
+really won't matter it won't affect the
+ 
+
+239
+00:03:56,000 --> 00:03:57,750
+really won't matter it won't affect the
+rest of them the other big thing to know
+
+240
+00:03:57,750 --> 00:03:57,760
+rest of them the other big thing to know
+ 
+
+241
+00:03:57,760 --> 00:03:59,910
+rest of them the other big thing to know
+about series versus parallel is how the
+
+242
+00:03:59,910 --> 00:03:59,920
+about series versus parallel is how the
+ 
+
+243
+00:03:59,920 --> 00:04:01,990
+about series versus parallel is how the
+power gets added up so the difference
+
+244
+00:04:01,990 --> 00:04:02,000
+power gets added up so the difference
+ 
+
+245
+00:04:02,000 --> 00:04:03,990
+power gets added up so the difference
+between series in parallel is one will
+
+246
+00:04:03,990 --> 00:04:04,000
+between series in parallel is one will
+ 
+
+247
+00:04:04,000 --> 00:04:05,990
+between series in parallel is one will
+add up the volts of each and the other
+
+248
+00:04:05,990 --> 00:04:06,000
+add up the volts of each and the other
+ 
+
+249
+00:04:06,000 --> 00:04:08,390
+add up the volts of each and the other
+one will add up the amps of each now in
+
+250
+00:04:08,390 --> 00:04:08,400
+one will add up the amps of each now in
+ 
+
+251
+00:04:08,400 --> 00:04:09,589
+one will add up the amps of each now in
+trying to come up with a good way to
+
+252
+00:04:09,589 --> 00:04:09,599
+trying to come up with a good way to
+ 
+
+253
+00:04:09,599 --> 00:04:11,429
+trying to come up with a good way to
+memorize this i decided to use the word
+
+254
+00:04:11,429 --> 00:04:11,439
+memorize this i decided to use the word
+ 
+
+255
+00:04:11,439 --> 00:04:13,429
+memorize this i decided to use the word
+suave and if you think about the letters
+
+256
+00:04:13,429 --> 00:04:13,439
+suave and if you think about the letters
+ 
+
+257
+00:04:13,439 --> 00:04:15,110
+suave and if you think about the letters
+and break them down you can say in
+
+258
+00:04:15,110 --> 00:04:15,120
+and break them down you can say in
+ 
+
+259
+00:04:15,120 --> 00:04:19,030
+and break them down you can say in
+series you add volts of each so in this
+
+260
+00:04:19,030 --> 00:04:19,040
+series you add volts of each so in this
+ 
+
+261
+00:04:19,040 --> 00:04:21,670
+series you add volts of each so in this
+case with the series the amps stay the
+
+262
+00:04:21,670 --> 00:04:21,680
+case with the series the amps stay the
+ 
+
+263
+00:04:21,680 --> 00:04:25,430
+case with the series the amps stay the
+same if you put for example two 250 volt
+
+264
+00:04:25,430 --> 00:04:25,440
+same if you put for example two 250 volt
+ 
+
+265
+00:04:25,440 --> 00:04:28,230
+same if you put for example two 250 volt
+10 amp panels together in series they'll
+
+266
+00:04:28,230 --> 00:04:28,240
+10 amp panels together in series they'll
+ 
+
+267
+00:04:28,240 --> 00:04:31,189
+10 amp panels together in series they'll
+produce an output of 500 volts and still
+
+268
+00:04:31,189 --> 00:04:31,199
+produce an output of 500 volts and still
+ 
+
+269
+00:04:31,199 --> 00:04:33,670
+produce an output of 500 volts and still
+that same 10 amps now the opposite is
+
+270
+00:04:33,670 --> 00:04:33,680
+that same 10 amps now the opposite is
+ 
+
+271
+00:04:33,680 --> 00:04:35,990
+that same 10 amps now the opposite is
+true for parallel these same two panels
+
+272
+00:04:35,990 --> 00:04:36,000
+true for parallel these same two panels
+ 
+
+273
+00:04:36,000 --> 00:04:39,030
+true for parallel these same two panels
+will produce the original 250 volts but
+
+274
+00:04:39,030 --> 00:04:39,040
+will produce the original 250 volts but
+ 
+
+275
+00:04:39,040 --> 00:04:41,749
+will produce the original 250 volts but
+also 20 amps of power this is really
+
+276
+00:04:41,749 --> 00:04:41,759
+also 20 amps of power this is really
+ 
+
+277
+00:04:41,759 --> 00:04:43,430
+also 20 amps of power this is really
+important in how you connect batteries
+
+278
+00:04:43,430 --> 00:04:43,440
+important in how you connect batteries
+ 
+
+279
+00:04:43,440 --> 00:04:45,909
+important in how you connect batteries
+this inverter for example can handle 24
+
+280
+00:04:45,909 --> 00:04:45,919
+this inverter for example can handle 24
+ 
+
+281
+00:04:45,919 --> 00:04:48,070
+this inverter for example can handle 24
+volts so i've connected these two 12
+
+282
+00:04:48,070 --> 00:04:48,080
+volts so i've connected these two 12
+ 
+
+283
+00:04:48,080 --> 00:04:50,790
+volts so i've connected these two 12
+volt batteries in series that means it's
+
+284
+00:04:50,790 --> 00:04:50,800
+volt batteries in series that means it's
+ 
+
+285
+00:04:50,800 --> 00:04:53,110
+volt batteries in series that means it's
+adding up their voltage to produce 24
+
+286
+00:04:53,110 --> 00:04:53,120
+adding up their voltage to produce 24
+ 
+
+287
+00:04:53,120 --> 00:04:55,430
+adding up their voltage to produce 24
+volts and then the amp hours stay the
+
+288
+00:04:55,430 --> 00:04:55,440
+volts and then the amp hours stay the
+ 
+
+289
+00:04:55,440 --> 00:04:58,629
+volts and then the amp hours stay the
+same which in this case is 150 amp hours
+
+290
+00:04:58,629 --> 00:04:58,639
+same which in this case is 150 amp hours
+ 
+
+291
+00:04:58,639 --> 00:05:00,310
+same which in this case is 150 amp hours
+this other inverter on the other hand is
+
+292
+00:05:00,310 --> 00:05:00,320
+this other inverter on the other hand is
+ 
+
+293
+00:05:00,320 --> 00:05:02,550
+this other inverter on the other hand is
+a 12 volt inverter so i connected these
+
+294
+00:05:02,550 --> 00:05:02,560
+a 12 volt inverter so i connected these
+ 
+
+295
+00:05:02,560 --> 00:05:04,950
+a 12 volt inverter so i connected these
+two 12 volt batteries in parallel that
+
+296
+00:05:04,950 --> 00:05:04,960
+two 12 volt batteries in parallel that
+ 
+
+297
+00:05:04,960 --> 00:05:07,029
+two 12 volt batteries in parallel that
+means they still add up to only 12 volts
+
+298
+00:05:07,029 --> 00:05:07,039
+means they still add up to only 12 volts
+ 
+
+299
+00:05:07,039 --> 00:05:09,029
+means they still add up to only 12 volts
+but they give me double the amp hours so
+
+300
+00:05:09,029 --> 00:05:09,039
+but they give me double the amp hours so
+ 
+
+301
+00:05:09,039 --> 00:05:10,629
+but they give me double the amp hours so
+300 amp hours
+
+302
+00:05:10,629 --> 00:05:10,639
+300 amp hours
+ 
+
+303
+00:05:10,639 --> 00:05:12,870
+300 amp hours
+it's also very common to mix and match
+
+304
+00:05:12,870 --> 00:05:12,880
+it's also very common to mix and match
+ 
+
+305
+00:05:12,880 --> 00:05:14,950
+it's also very common to mix and match
+series in parallel to meet your needs
+
+306
+00:05:14,950 --> 00:05:14,960
+series in parallel to meet your needs
+ 
+
+307
+00:05:14,960 --> 00:05:16,469
+series in parallel to meet your needs
+but no matter what type of circuit you
+
+308
+00:05:16,469 --> 00:05:16,479
+but no matter what type of circuit you
+ 
+
+309
+00:05:16,479 --> 00:05:17,990
+but no matter what type of circuit you
+go with you do need to understand the
+
+310
+00:05:17,990 --> 00:05:18,000
+go with you do need to understand the
+ 
+
+311
+00:05:18,000 --> 00:05:19,990
+go with you do need to understand the
+output that you'll get as a result now i
+
+312
+00:05:19,990 --> 00:05:20,000
+output that you'll get as a result now i
+ 
+
+313
+00:05:20,000 --> 00:05:21,670
+output that you'll get as a result now i
+totally understand that some of this can
+
+314
+00:05:21,670 --> 00:05:21,680
+totally understand that some of this can
+ 
+
+315
+00:05:21,680 --> 00:05:23,430
+totally understand that some of this can
+get pretty overwhelming which is why i'm
+
+316
+00:05:23,430 --> 00:05:23,440
+get pretty overwhelming which is why i'm
+ 
+
+317
+00:05:23,440 --> 00:05:24,790
+get pretty overwhelming which is why i'm
+trying to keep a little bit high level
+
+318
+00:05:24,790 --> 00:05:24,800
+trying to keep a little bit high level
+ 
+
+319
+00:05:24,800 --> 00:05:26,550
+trying to keep a little bit high level
+here and i'm not going too far into some
+
+320
+00:05:26,550 --> 00:05:26,560
+here and i'm not going too far into some
+ 
+
+321
+00:05:26,560 --> 00:05:28,390
+here and i'm not going too far into some
+of the details but if you're just
+
+322
+00:05:28,390 --> 00:05:28,400
+of the details but if you're just
+ 
+
+323
+00:05:28,400 --> 00:05:30,790
+of the details but if you're just
+overwhelmed by the idea of understanding
+
+324
+00:05:30,790 --> 00:05:30,800
+overwhelmed by the idea of understanding
+ 
+
+325
+00:05:30,800 --> 00:05:32,469
+overwhelmed by the idea of understanding
+all that goes into solar and especially
+
+326
+00:05:32,469 --> 00:05:32,479
+all that goes into solar and especially
+ 
+
+327
+00:05:32,479 --> 00:05:34,390
+all that goes into solar and especially
+doing it yourself there are some great
+
+328
+00:05:34,390 --> 00:05:34,400
+doing it yourself there are some great
+ 
+
+329
+00:05:34,400 --> 00:05:36,230
+doing it yourself there are some great
+options out there for you now this video
+
+330
+00:05:36,230 --> 00:05:36,240
+options out there for you now this video
+ 
+
+331
+00:05:36,240 --> 00:05:37,830
+options out there for you now this video
+is in no way sponsored but i do want to
+
+332
+00:05:37,830 --> 00:05:37,840
+is in no way sponsored but i do want to
+ 
+
+333
+00:05:37,840 --> 00:05:39,110
+is in no way sponsored but i do want to
+tell you that there are options out
+
+334
+00:05:39,110 --> 00:05:39,120
+tell you that there are options out
+ 
+
+335
+00:05:39,120 --> 00:05:40,950
+tell you that there are options out
+there that can save you a lot of money
+
+336
+00:05:40,950 --> 00:05:40,960
+there that can save you a lot of money
+ 
+
+337
+00:05:40,960 --> 00:05:43,110
+there that can save you a lot of money
+and still be a high quality installation
+
+338
+00:05:43,110 --> 00:05:43,120
+and still be a high quality installation
+ 
+
+339
+00:05:43,120 --> 00:05:45,029
+and still be a high quality installation
+as i've done my research and looking at
+
+340
+00:05:45,029 --> 00:05:45,039
+as i've done my research and looking at
+ 
+
+341
+00:05:45,039 --> 00:05:47,029
+as i've done my research and looking at
+my system that's almost 7 years old i
+
+342
+00:05:47,029 --> 00:05:47,039
+my system that's almost 7 years old i
+ 
+
+343
+00:05:47,039 --> 00:05:48,469
+my system that's almost 7 years old i
+wish i had the options that are out
+
+344
+00:05:48,469 --> 00:05:48,479
+wish i had the options that are out
+ 
+
+345
+00:05:48,479 --> 00:05:50,310
+wish i had the options that are out
+there today and when i look around one
+
+346
+00:05:50,310 --> 00:05:50,320
+there today and when i look around one
+ 
+
+347
+00:05:50,320 --> 00:05:51,909
+there today and when i look around one
+of the best options i see is actually
+
+348
+00:05:51,909 --> 00:05:51,919
+of the best options i see is actually
+ 
+
+349
+00:05:51,919 --> 00:05:54,230
+of the best options i see is actually
+going with tesla which does very similar
+
+350
+00:05:54,230 --> 00:05:54,240
+going with tesla which does very similar
+ 
+
+351
+00:05:54,240 --> 00:05:56,070
+going with tesla which does very similar
+systems to what i've got here but they
+
+352
+00:05:56,070 --> 00:05:56,080
+systems to what i've got here but they
+ 
+
+353
+00:05:56,080 --> 00:05:57,830
+systems to what i've got here but they
+do it for a lot lower price than what i
+
+354
+00:05:57,830 --> 00:05:57,840
+do it for a lot lower price than what i
+ 
+
+355
+00:05:57,840 --> 00:05:59,510
+do it for a lot lower price than what i
+paid so i've got a coupon in the
+
+356
+00:05:59,510 --> 00:05:59,520
+paid so i've got a coupon in the
+ 
+
+357
+00:05:59,520 --> 00:06:01,830
+paid so i've got a coupon in the
+description that you can use to save 300
+
+358
+00:06:01,830 --> 00:06:01,840
+description that you can use to save 300
+ 
+
+359
+00:06:01,840 --> 00:06:03,430
+description that you can use to save 300
+off any installation it's just a
+
+360
+00:06:03,430 --> 00:06:03,440
+off any installation it's just a
+ 
+
+361
+00:06:03,440 --> 00:06:05,350
+off any installation it's just a
+referral code it helps me out and it
+
+362
+00:06:05,350 --> 00:06:05,360
+referral code it helps me out and it
+ 
+
+363
+00:06:05,360 --> 00:06:07,110
+referral code it helps me out and it
+saves you a few bucks too so if you're
+
+364
+00:06:07,110 --> 00:06:07,120
+saves you a few bucks too so if you're
+ 
+
+365
+00:06:07,120 --> 00:06:08,870
+saves you a few bucks too so if you're
+interested in doing something that's not
+
+366
+00:06:08,870 --> 00:06:08,880
+interested in doing something that's not
+ 
+
+367
+00:06:08,880 --> 00:06:10,790
+interested in doing something that's not
+diy that's a great option that you can
+
+368
+00:06:10,790 --> 00:06:10,800
+diy that's a great option that you can
+ 
+
+369
+00:06:10,800 --> 00:06:12,150
+diy that's a great option that you can
+check out they actually have a
+
+370
+00:06:12,150 --> 00:06:12,160
+check out they actually have a
+ 
+
+371
+00:06:12,160 --> 00:06:13,830
+check out they actually have a
+configurator right on their site that
+
+372
+00:06:13,830 --> 00:06:13,840
+configurator right on their site that
+ 
+
+373
+00:06:13,840 --> 00:06:15,670
+configurator right on their site that
+you can put everything in see what the
+
+374
+00:06:15,670 --> 00:06:15,680
+you can put everything in see what the
+ 
+
+375
+00:06:15,680 --> 00:06:17,909
+you can put everything in see what the
+cost will be for you see what the loan
+
+376
+00:06:17,909 --> 00:06:17,919
+cost will be for you see what the loan
+ 
+
+377
+00:06:17,919 --> 00:06:19,430
+cost will be for you see what the loan
+options are versus paying it out of
+
+378
+00:06:19,430 --> 00:06:19,440
+options are versus paying it out of
+ 
+
+379
+00:06:19,440 --> 00:06:21,110
+options are versus paying it out of
+pocket all that good stuff so feel free
+
+380
+00:06:21,110 --> 00:06:21,120
+pocket all that good stuff so feel free
+ 
+
+381
+00:06:21,120 --> 00:06:22,629
+pocket all that good stuff so feel free
+to check that out if that's something
+
+382
+00:06:22,629 --> 00:06:22,639
+to check that out if that's something
+ 
+
+383
+00:06:22,639 --> 00:06:24,309
+to check that out if that's something
+that you're interested in having said
+
+384
+00:06:24,309 --> 00:06:24,319
+that you're interested in having said
+ 
+
+385
+00:06:24,319 --> 00:06:25,990
+that you're interested in having said
+that let's explain the rest of this
+
+386
+00:06:25,990 --> 00:06:26,000
+that let's explain the rest of this
+ 
+
+387
+00:06:26,000 --> 00:06:27,670
+that let's explain the rest of this
+system so you can see how this all comes
+
+388
+00:06:27,670 --> 00:06:27,680
+system so you can see how this all comes
+ 
+
+389
+00:06:27,680 --> 00:06:29,830
+system so you can see how this all comes
+together now just as a reminder all
+
+390
+00:06:29,830 --> 00:06:29,840
+together now just as a reminder all
+ 
+
+391
+00:06:29,840 --> 00:06:31,430
+together now just as a reminder all
+electrical work that you do of this
+
+392
+00:06:31,430 --> 00:06:31,440
+electrical work that you do of this
+ 
+
+393
+00:06:31,440 --> 00:06:33,029
+electrical work that you do of this
+nature should definitely be checked by a
+
+394
+00:06:33,029 --> 00:06:33,039
+nature should definitely be checked by a
+ 
+
+395
+00:06:33,039 --> 00:06:34,790
+nature should definitely be checked by a
+certified electrician and then you need
+
+396
+00:06:34,790 --> 00:06:34,800
+certified electrician and then you need
+ 
+
+397
+00:06:34,800 --> 00:06:36,469
+certified electrician and then you need
+to make sure to adhere to all local
+
+398
+00:06:36,469 --> 00:06:36,479
+to make sure to adhere to all local
+ 
+
+399
+00:06:36,479 --> 00:06:38,710
+to make sure to adhere to all local
+guidelines local codes and whatever it
+
+400
+00:06:38,710 --> 00:06:38,720
+guidelines local codes and whatever it
+ 
+
+401
+00:06:38,720 --> 00:06:40,550
+guidelines local codes and whatever it
+is that your town tells you to do with
+
+402
+00:06:40,550 --> 00:06:40,560
+is that your town tells you to do with
+ 
+
+403
+00:06:40,560 --> 00:06:42,550
+is that your town tells you to do with
+solar in your area all right on to our
+
+404
+00:06:42,550 --> 00:06:42,560
+solar in your area all right on to our
+ 
+
+405
+00:06:42,560 --> 00:06:44,629
+solar in your area all right on to our
+third ingredient which is switches and
+
+406
+00:06:44,629 --> 00:06:44,639
+third ingredient which is switches and
+ 
+
+407
+00:06:44,639 --> 00:06:46,550
+third ingredient which is switches and
+safety measures now there are several
+
+408
+00:06:46,550 --> 00:06:46,560
+safety measures now there are several
+ 
+
+409
+00:06:46,560 --> 00:06:47,990
+safety measures now there are several
+different versions of these so here i've
+
+410
+00:06:47,990 --> 00:06:48,000
+different versions of these so here i've
+ 
+
+411
+00:06:48,000 --> 00:06:50,469
+different versions of these so here i've
+got a pv combiner which is just a really
+
+412
+00:06:50,469 --> 00:06:50,479
+got a pv combiner which is just a really
+ 
+
+413
+00:06:50,479 --> 00:06:52,710
+got a pv combiner which is just a really
+nice box with fuses and switches to be
+
+414
+00:06:52,710 --> 00:06:52,720
+nice box with fuses and switches to be
+ 
+
+415
+00:06:52,720 --> 00:06:54,390
+nice box with fuses and switches to be
+able to allow you to connect multiple
+
+416
+00:06:54,390 --> 00:06:54,400
+able to allow you to connect multiple
+ 
+
+417
+00:06:54,400 --> 00:06:57,270
+able to allow you to connect multiple
+solar panels to one output you can also
+
+418
+00:06:57,270 --> 00:06:57,280
+solar panels to one output you can also
+ 
+
+419
+00:06:57,280 --> 00:06:58,710
+solar panels to one output you can also
+use circuit breakers there are
+
+420
+00:06:58,710 --> 00:06:58,720
+use circuit breakers there are
+ 
+
+421
+00:06:58,720 --> 00:07:01,270
+use circuit breakers there are
+disconnects involved both dc and ac
+
+422
+00:07:01,270 --> 00:07:01,280
+disconnects involved both dc and ac
+ 
+
+423
+00:07:01,280 --> 00:07:03,270
+disconnects involved both dc and ac
+there are fuses and each of these
+
+424
+00:07:03,270 --> 00:07:03,280
+there are fuses and each of these
+ 
+
+425
+00:07:03,280 --> 00:07:05,510
+there are fuses and each of these
+basically serves two purposes the first
+
+426
+00:07:05,510 --> 00:07:05,520
+basically serves two purposes the first
+ 
+
+427
+00:07:05,520 --> 00:07:07,189
+basically serves two purposes the first
+and the one they all do is they create a
+
+428
+00:07:07,189 --> 00:07:07,199
+and the one they all do is they create a
+ 
+
+429
+00:07:07,199 --> 00:07:09,110
+and the one they all do is they create a
+break point between one portion of your
+
+430
+00:07:09,110 --> 00:07:09,120
+break point between one portion of your
+ 
+
+431
+00:07:09,120 --> 00:07:11,589
+break point between one portion of your
+system and the next they make it easy to
+
+432
+00:07:11,589 --> 00:07:11,599
+system and the next they make it easy to
+ 
+
+433
+00:07:11,599 --> 00:07:13,510
+system and the next they make it easy to
+disable power to a section so that you
+
+434
+00:07:13,510 --> 00:07:13,520
+disable power to a section so that you
+ 
+
+435
+00:07:13,520 --> 00:07:15,510
+disable power to a section so that you
+can service it now the second one that
+
+436
+00:07:15,510 --> 00:07:15,520
+can service it now the second one that
+ 
+
+437
+00:07:15,520 --> 00:07:17,029
+can service it now the second one that
+almost all of these do is they also
+
+438
+00:07:17,029 --> 00:07:17,039
+almost all of these do is they also
+ 
+
+439
+00:07:17,039 --> 00:07:18,950
+almost all of these do is they also
+provide protection from surges and
+
+440
+00:07:18,950 --> 00:07:18,960
+provide protection from surges and
+ 
+
+441
+00:07:18,960 --> 00:07:21,270
+provide protection from surges and
+overloads an electrical code requires
+
+442
+00:07:21,270 --> 00:07:21,280
+overloads an electrical code requires
+ 
+
+443
+00:07:21,280 --> 00:07:23,029
+overloads an electrical code requires
+these in certain locations but it's
+
+444
+00:07:23,029 --> 00:07:23,039
+these in certain locations but it's
+ 
+
+445
+00:07:23,039 --> 00:07:24,710
+these in certain locations but it's
+always best to err on the side of having
+
+446
+00:07:24,710 --> 00:07:24,720
+always best to err on the side of having
+ 
+
+447
+00:07:24,720 --> 00:07:26,629
+always best to err on the side of having
+too many in place for safety sake the
+
+448
+00:07:26,629 --> 00:07:26,639
+too many in place for safety sake the
+ 
+
+449
+00:07:26,639 --> 00:07:28,309
+too many in place for safety sake the
+only one of these that does not provide
+
+450
+00:07:28,309 --> 00:07:28,319
+only one of these that does not provide
+ 
+
+451
+00:07:28,319 --> 00:07:29,830
+only one of these that does not provide
+any overload protection is the
+
+452
+00:07:29,830 --> 00:07:29,840
+any overload protection is the
+ 
+
+453
+00:07:29,840 --> 00:07:32,150
+any overload protection is the
+disconnect boxes those really are just
+
+454
+00:07:32,150 --> 00:07:32,160
+disconnect boxes those really are just
+ 
+
+455
+00:07:32,160 --> 00:07:34,150
+disconnect boxes those really are just
+an on off switch that you can use now
+
+456
+00:07:34,150 --> 00:07:34,160
+an on off switch that you can use now
+ 
+
+457
+00:07:34,160 --> 00:07:35,909
+an on off switch that you can use now
+when it comes to deciding how much power
+
+458
+00:07:35,909 --> 00:07:35,919
+when it comes to deciding how much power
+ 
+
+459
+00:07:35,919 --> 00:07:37,350
+when it comes to deciding how much power
+you need to generate with your solar
+
+460
+00:07:37,350 --> 00:07:37,360
+you need to generate with your solar
+ 
+
+461
+00:07:37,360 --> 00:07:40,150
+you need to generate with your solar
+system consider this analogy imagine you
+
+462
+00:07:40,150 --> 00:07:40,160
+system consider this analogy imagine you
+ 
+
+463
+00:07:40,160 --> 00:07:41,909
+system consider this analogy imagine you
+have no running water at your home but
+
+464
+00:07:41,909 --> 00:07:41,919
+have no running water at your home but
+ 
+
+465
+00:07:41,919 --> 00:07:44,150
+have no running water at your home but
+you do have a water tank out back you
+
+466
+00:07:44,150 --> 00:07:44,160
+you do have a water tank out back you
+ 
+
+467
+00:07:44,160 --> 00:07:45,990
+you do have a water tank out back you
+also have a large opening on the top of
+
+468
+00:07:45,990 --> 00:07:46,000
+also have a large opening on the top of
+ 
+
+469
+00:07:46,000 --> 00:07:47,909
+also have a large opening on the top of
+the tank to collect that water but it
+
+470
+00:07:47,909 --> 00:07:47,919
+the tank to collect that water but it
+ 
+
+471
+00:07:47,919 --> 00:07:50,309
+the tank to collect that water but it
+only rains for about four hours per day
+
+472
+00:07:50,309 --> 00:07:50,319
+only rains for about four hours per day
+ 
+
+473
+00:07:50,319 --> 00:07:51,830
+only rains for about four hours per day
+now you've got a water pump that pushes
+
+474
+00:07:51,830 --> 00:07:51,840
+now you've got a water pump that pushes
+ 
+
+475
+00:07:51,840 --> 00:07:53,749
+now you've got a water pump that pushes
+the water from your tank to your house
+
+476
+00:07:53,749 --> 00:07:53,759
+the water from your tank to your house
+ 
+
+477
+00:07:53,759 --> 00:07:55,670
+the water from your tank to your house
+so that you can actually use it now in
+
+478
+00:07:55,670 --> 00:07:55,680
+so that you can actually use it now in
+ 
+
+479
+00:07:55,680 --> 00:07:57,749
+so that you can actually use it now in
+this analogy the tank is your battery
+
+480
+00:07:57,749 --> 00:07:57,759
+this analogy the tank is your battery
+ 
+
+481
+00:07:57,759 --> 00:07:59,990
+this analogy the tank is your battery
+system the opening to the tank is your
+
+482
+00:07:59,990 --> 00:08:00,000
+system the opening to the tank is your
+ 
+
+483
+00:08:00,000 --> 00:08:02,230
+system the opening to the tank is your
+solar panel array and the pump is your
+
+484
+00:08:02,230 --> 00:08:02,240
+solar panel array and the pump is your
+ 
+
+485
+00:08:02,240 --> 00:08:03,909
+solar panel array and the pump is your
+inverter if you're not getting enough
+
+486
+00:08:03,909 --> 00:08:03,919
+inverter if you're not getting enough
+ 
+
+487
+00:08:03,919 --> 00:08:05,749
+inverter if you're not getting enough
+rain into your tank you need a bigger
+
+488
+00:08:05,749 --> 00:08:05,759
+rain into your tank you need a bigger
+ 
+
+489
+00:08:05,759 --> 00:08:07,430
+rain into your tank you need a bigger
+opening to collect the rain which means
+
+490
+00:08:07,430 --> 00:08:07,440
+opening to collect the rain which means
+ 
+
+491
+00:08:07,440 --> 00:08:09,589
+opening to collect the rain which means
+more solar panels if you're not getting
+
+492
+00:08:09,589 --> 00:08:09,599
+more solar panels if you're not getting
+ 
+
+493
+00:08:09,599 --> 00:08:11,670
+more solar panels if you're not getting
+enough water from the tank to your home
+
+494
+00:08:11,670 --> 00:08:11,680
+enough water from the tank to your home
+ 
+
+495
+00:08:11,680 --> 00:08:13,749
+enough water from the tank to your home
+you need a bigger or better pump which
+
+496
+00:08:13,749 --> 00:08:13,759
+you need a bigger or better pump which
+ 
+
+497
+00:08:13,759 --> 00:08:16,070
+you need a bigger or better pump which
+is in this case a better inverter and if
+
+498
+00:08:16,070 --> 00:08:16,080
+is in this case a better inverter and if
+ 
+
+499
+00:08:16,080 --> 00:08:17,909
+is in this case a better inverter and if
+you're using more water than is in your
+
+500
+00:08:17,909 --> 00:08:17,919
+you're using more water than is in your
+ 
+
+501
+00:08:17,919 --> 00:08:19,990
+you're using more water than is in your
+tank you need a bigger tank which is a
+
+502
+00:08:19,990 --> 00:08:20,000
+tank you need a bigger tank which is a
+ 
+
+503
+00:08:20,000 --> 00:08:22,070
+tank you need a bigger tank which is a
+bigger battery system on that note let's
+
+504
+00:08:22,070 --> 00:08:22,080
+bigger battery system on that note let's
+ 
+
+505
+00:08:22,080 --> 00:08:23,830
+bigger battery system on that note let's
+talk about batteries which is the fourth
+
+506
+00:08:23,830 --> 00:08:23,840
+talk about batteries which is the fourth
+ 
+
+507
+00:08:23,840 --> 00:08:25,909
+talk about batteries which is the fourth
+ingredient in our recipe there's a ton
+
+508
+00:08:25,909 --> 00:08:25,919
+ingredient in our recipe there's a ton
+ 
+
+509
+00:08:25,919 --> 00:08:27,350
+ingredient in our recipe there's a ton
+to cover with batteries so we won't get
+
+510
+00:08:27,350 --> 00:08:27,360
+to cover with batteries so we won't get
+ 
+
+511
+00:08:27,360 --> 00:08:28,790
+to cover with batteries so we won't get
+into all of it but there are several
+
+512
+00:08:28,790 --> 00:08:28,800
+into all of it but there are several
+ 
+
+513
+00:08:28,800 --> 00:08:30,309
+into all of it but there are several
+kinds of batteries out there that can be
+
+514
+00:08:30,309 --> 00:08:30,319
+kinds of batteries out there that can be
+ 
+
+515
+00:08:30,319 --> 00:08:32,149
+kinds of batteries out there that can be
+used to store power from a solar panel
+
+516
+00:08:32,149 --> 00:08:32,159
+used to store power from a solar panel
+ 
+
+517
+00:08:32,159 --> 00:08:33,990
+used to store power from a solar panel
+system for later use if you're building
+
+518
+00:08:33,990 --> 00:08:34,000
+system for later use if you're building
+ 
+
+519
+00:08:34,000 --> 00:08:35,909
+system for later use if you're building
+a grid tied system you don't actually
+
+520
+00:08:35,909 --> 00:08:35,919
+a grid tied system you don't actually
+ 
+
+521
+00:08:35,919 --> 00:08:37,509
+a grid tied system you don't actually
+need to use batteries unless you want to
+
+522
+00:08:37,509 --> 00:08:37,519
+need to use batteries unless you want to
+ 
+
+523
+00:08:37,519 --> 00:08:39,670
+need to use batteries unless you want to
+add protection against power outages you
+
+524
+00:08:39,670 --> 00:08:39,680
+add protection against power outages you
+ 
+
+525
+00:08:39,680 --> 00:08:41,670
+add protection against power outages you
+can use a tesla power wall for this or
+
+526
+00:08:41,670 --> 00:08:41,680
+can use a tesla power wall for this or
+ 
+
+527
+00:08:41,680 --> 00:08:43,430
+can use a tesla power wall for this or
+you can use your own batteries if you
+
+528
+00:08:43,430 --> 00:08:43,440
+you can use your own batteries if you
+ 
+
+529
+00:08:43,440 --> 00:08:45,350
+you can use your own batteries if you
+are building an off-grid system however
+
+530
+00:08:45,350 --> 00:08:45,360
+are building an off-grid system however
+ 
+
+531
+00:08:45,360 --> 00:08:46,949
+are building an off-grid system however
+batteries are essential for power
+
+532
+00:08:46,949 --> 00:08:46,959
+batteries are essential for power
+ 
+
+533
+00:08:46,959 --> 00:08:48,790
+batteries are essential for power
+storage just like with solar panels
+
+534
+00:08:48,790 --> 00:08:48,800
+storage just like with solar panels
+ 
+
+535
+00:08:48,800 --> 00:08:50,389
+storage just like with solar panels
+these can be combined for additional
+
+536
+00:08:50,389 --> 00:08:50,399
+these can be combined for additional
+ 
+
+537
+00:08:50,399 --> 00:08:52,389
+these can be combined for additional
+storage in addition to solution like the
+
+538
+00:08:52,389 --> 00:08:52,399
+storage in addition to solution like the
+ 
+
+539
+00:08:52,399 --> 00:08:53,910
+storage in addition to solution like the
+batteries that we've shown here as well
+
+540
+00:08:53,910 --> 00:08:53,920
+batteries that we've shown here as well
+ 
+
+541
+00:08:53,920 --> 00:08:55,910
+batteries that we've shown here as well
+as the tesla power wall there are even
+
+542
+00:08:55,910 --> 00:08:55,920
+as the tesla power wall there are even
+ 
+
+543
+00:08:55,920 --> 00:08:57,750
+as the tesla power wall there are even
+certain electric vehicles coming out
+
+544
+00:08:57,750 --> 00:08:57,760
+certain electric vehicles coming out
+ 
+
+545
+00:08:57,760 --> 00:08:59,110
+certain electric vehicles coming out
+that claim to be able to power your
+
+546
+00:08:59,110 --> 00:08:59,120
+that claim to be able to power your
+ 
+
+547
+00:08:59,120 --> 00:09:02,230
+that claim to be able to power your
+house like the ford f-150 lightning says
+
+548
+00:09:02,230 --> 00:09:02,240
+house like the ford f-150 lightning says
+ 
+
+549
+00:09:02,240 --> 00:09:04,230
+house like the ford f-150 lightning says
+it can power your house off the ford's
+
+550
+00:09:04,230 --> 00:09:04,240
+it can power your house off the ford's
+ 
+
+551
+00:09:04,240 --> 00:09:06,630
+it can power your house off the ford's
+battery to provide power for up to as
+
+552
+00:09:06,630 --> 00:09:06,640
+battery to provide power for up to as
+ 
+
+553
+00:09:06,640 --> 00:09:08,230
+battery to provide power for up to as
+much as a few days which would be pretty
+
+554
+00:09:08,230 --> 00:09:08,240
+much as a few days which would be pretty
+ 
+
+555
+00:09:08,240 --> 00:09:09,590
+much as a few days which would be pretty
+awesome so i'm sure we'll see a lot more
+
+556
+00:09:09,590 --> 00:09:09,600
+awesome so i'm sure we'll see a lot more
+ 
+
+557
+00:09:09,600 --> 00:09:10,949
+awesome so i'm sure we'll see a lot more
+of that sort of thing coming out over
+
+558
+00:09:10,949 --> 00:09:10,959
+of that sort of thing coming out over
+ 
+
+559
+00:09:10,959 --> 00:09:12,870
+of that sort of thing coming out over
+the next several years batteries do have
+
+560
+00:09:12,870 --> 00:09:12,880
+the next several years batteries do have
+ 
+
+561
+00:09:12,880 --> 00:09:15,350
+the next several years batteries do have
+a voltage rating like six volt 12 volt
+
+562
+00:09:15,350 --> 00:09:15,360
+a voltage rating like six volt 12 volt
+ 
+
+563
+00:09:15,360 --> 00:09:17,590
+a voltage rating like six volt 12 volt
+or 24 volt typically they also have
+
+564
+00:09:17,590 --> 00:09:17,600
+or 24 volt typically they also have
+ 
+
+565
+00:09:17,600 --> 00:09:20,470
+or 24 volt typically they also have
+different amp hours kilowatt hours cycle
+
+566
+00:09:20,470 --> 00:09:20,480
+different amp hours kilowatt hours cycle
+ 
+
+567
+00:09:20,480 --> 00:09:22,870
+different amp hours kilowatt hours cycle
+count efficiencies temperature ratings
+
+568
+00:09:22,870 --> 00:09:22,880
+count efficiencies temperature ratings
+ 
+
+569
+00:09:22,880 --> 00:09:25,030
+count efficiencies temperature ratings
+and more to compare so we won't get into
+
+570
+00:09:25,030 --> 00:09:25,040
+and more to compare so we won't get into
+ 
+
+571
+00:09:25,040 --> 00:09:27,190
+and more to compare so we won't get into
+all of that for now but i will say that
+
+572
+00:09:27,190 --> 00:09:27,200
+all of that for now but i will say that
+ 
+
+573
+00:09:27,200 --> 00:09:28,870
+all of that for now but i will say that
+you do need batteries to store power if
+
+574
+00:09:28,870 --> 00:09:28,880
+you do need batteries to store power if
+ 
+
+575
+00:09:28,880 --> 00:09:30,710
+you do need batteries to store power if
+you're not tied to the grid and they're
+
+576
+00:09:30,710 --> 00:09:30,720
+you're not tied to the grid and they're
+ 
+
+577
+00:09:30,720 --> 00:09:32,470
+you're not tied to the grid and they're
+optional if you are now the last
+
+578
+00:09:32,470 --> 00:09:32,480
+optional if you are now the last
+ 
+
+579
+00:09:32,480 --> 00:09:34,710
+optional if you are now the last
+ingredient is the wiring and connectors
+
+580
+00:09:34,710 --> 00:09:34,720
+ingredient is the wiring and connectors
+ 
+
+581
+00:09:34,720 --> 00:09:36,710
+ingredient is the wiring and connectors
+to connect all the pieces together there
+
+582
+00:09:36,710 --> 00:09:36,720
+to connect all the pieces together there
+ 
+
+583
+00:09:36,720 --> 00:09:38,710
+to connect all the pieces together there
+is again a lot to get into here but if
+
+584
+00:09:38,710 --> 00:09:38,720
+is again a lot to get into here but if
+ 
+
+585
+00:09:38,720 --> 00:09:40,070
+is again a lot to get into here but if
+you're using wires that are going to be
+
+586
+00:09:40,070 --> 00:09:40,080
+you're using wires that are going to be
+ 
+
+587
+00:09:40,080 --> 00:09:41,910
+you're using wires that are going to be
+outside at all they need to be outdoor
+
+588
+00:09:41,910 --> 00:09:41,920
+outside at all they need to be outdoor
+ 
+
+589
+00:09:41,920 --> 00:09:44,070
+outside at all they need to be outdoor
+rated or you need to use what's called
+
+590
+00:09:44,070 --> 00:09:44,080
+rated or you need to use what's called
+ 
+
+591
+00:09:44,080 --> 00:09:47,190
+rated or you need to use what's called
+thhn or thwn wire that goes inside of
+
+592
+00:09:47,190 --> 00:09:47,200
+thhn or thwn wire that goes inside of
+ 
+
+593
+00:09:47,200 --> 00:09:49,829
+thhn or thwn wire that goes inside of
+the electrical conduit th n wires are
+
+594
+00:09:49,829 --> 00:09:49,839
+the electrical conduit th n wires are
+ 
+
+595
+00:09:49,839 --> 00:09:51,670
+the electrical conduit th n wires are
+individually sheathed cables that are
+
+596
+00:09:51,670 --> 00:09:51,680
+individually sheathed cables that are
+ 
+
+597
+00:09:51,680 --> 00:09:53,990
+individually sheathed cables that are
+rated for exterior use inside a conduit
+
+598
+00:09:53,990 --> 00:09:54,000
+rated for exterior use inside a conduit
+ 
+
+599
+00:09:54,000 --> 00:09:56,150
+rated for exterior use inside a conduit
+a cheap alternative to using the solar
+
+600
+00:09:56,150 --> 00:09:56,160
+a cheap alternative to using the solar
+ 
+
+601
+00:09:56,160 --> 00:09:58,230
+a cheap alternative to using the solar
+specific panel wiring is just to use
+
+602
+00:09:58,230 --> 00:09:58,240
+specific panel wiring is just to use
+ 
+
+603
+00:09:58,240 --> 00:10:00,389
+specific panel wiring is just to use
+some 12 gauge landscape wiring this
+
+604
+00:10:00,389 --> 00:10:00,399
+some 12 gauge landscape wiring this
+ 
+
+605
+00:10:00,399 --> 00:10:01,910
+some 12 gauge landscape wiring this
+actually works really well you just need
+
+606
+00:10:01,910 --> 00:10:01,920
+actually works really well you just need
+ 
+
+607
+00:10:01,920 --> 00:10:05,030
+actually works really well you just need
+to connect your mc4 connections which is
+
+608
+00:10:05,030 --> 00:10:05,040
+to connect your mc4 connections which is
+ 
+
+609
+00:10:05,040 --> 00:10:06,710
+to connect your mc4 connections which is
+what most solar panels use as their
+
+610
+00:10:06,710 --> 00:10:06,720
+what most solar panels use as their
+ 
+
+611
+00:10:06,720 --> 00:10:09,110
+what most solar panels use as their
+connector mc4 connectors are great
+
+612
+00:10:09,110 --> 00:10:09,120
+connector mc4 connectors are great
+ 
+
+613
+00:10:09,120 --> 00:10:10,790
+connector mc4 connectors are great
+because they make it really easy to see
+
+614
+00:10:10,790 --> 00:10:10,800
+because they make it really easy to see
+ 
+
+615
+00:10:10,800 --> 00:10:12,310
+because they make it really easy to see
+that you've got a secure connection
+
+616
+00:10:12,310 --> 00:10:12,320
+that you've got a secure connection
+ 
+
+617
+00:10:12,320 --> 00:10:13,910
+that you've got a secure connection
+they're weatherproof and you can both
+
+618
+00:10:13,910 --> 00:10:13,920
+they're weatherproof and you can both
+ 
+
+619
+00:10:13,920 --> 00:10:15,590
+they're weatherproof and you can both
+feel and hear when they make that
+
+620
+00:10:15,590 --> 00:10:15,600
+feel and hear when they make that
+ 
+
+621
+00:10:15,600 --> 00:10:16,949
+feel and hear when they make that
+perfect connection
+
+622
+00:10:16,949 --> 00:10:16,959
+perfect connection
+ 
+
+623
+00:10:16,959 --> 00:10:18,790
+perfect connection
+now for wiring up batteries you usually
+
+624
+00:10:18,790 --> 00:10:18,800
+now for wiring up batteries you usually
+ 
+
+625
+00:10:18,800 --> 00:10:20,790
+now for wiring up batteries you usually
+need a much heavier gauge wire because
+
+626
+00:10:20,790 --> 00:10:20,800
+need a much heavier gauge wire because
+ 
+
+627
+00:10:20,800 --> 00:10:23,030
+need a much heavier gauge wire because
+there's more amperage going through so
+
+628
+00:10:23,030 --> 00:10:23,040
+there's more amperage going through so
+ 
+
+629
+00:10:23,040 --> 00:10:25,430
+there's more amperage going through so
+i'll often use this two gauge wire which
+
+630
+00:10:25,430 --> 00:10:25,440
+i'll often use this two gauge wire which
+ 
+
+631
+00:10:25,440 --> 00:10:27,670
+i'll often use this two gauge wire which
+also requires the use of either a 3 8 or
+
+632
+00:10:27,670 --> 00:10:27,680
+also requires the use of either a 3 8 or
+ 
+
+633
+00:10:27,680 --> 00:10:30,150
+also requires the use of either a 3 8 or
+a 5 16 copper lug and then some pretty
+
+634
+00:10:30,150 --> 00:10:30,160
+a 5 16 copper lug and then some pretty
+ 
+
+635
+00:10:30,160 --> 00:10:31,509
+a 5 16 copper lug and then some pretty
+heavy duty crimpers to put these
+
+636
+00:10:31,509 --> 00:10:31,519
+heavy duty crimpers to put these
+ 
+
+637
+00:10:31,519 --> 00:10:33,350
+heavy duty crimpers to put these
+together so those are those five
+
+638
+00:10:33,350 --> 00:10:33,360
+together so those are those five
+ 
+
+639
+00:10:33,360 --> 00:10:35,110
+together so those are those five
+ingredients now to put those together
+
+640
+00:10:35,110 --> 00:10:35,120
+ingredients now to put those together
+ 
+
+641
+00:10:35,120 --> 00:10:36,630
+ingredients now to put those together
+we're going to connect the solar panels
+
+642
+00:10:36,630 --> 00:10:36,640
+we're going to connect the solar panels
+ 
+
+643
+00:10:36,640 --> 00:10:39,509
+we're going to connect the solar panels
+to a fuse or a pv combiner box that gets
+
+644
+00:10:39,509 --> 00:10:39,519
+to a fuse or a pv combiner box that gets
+ 
+
+645
+00:10:39,519 --> 00:10:41,590
+to a fuse or a pv combiner box that gets
+connected to an inverter and then you
+
+646
+00:10:41,590 --> 00:10:41,600
+connected to an inverter and then you
+ 
+
+647
+00:10:41,600 --> 00:10:43,110
+connected to an inverter and then you
+can connect your inverter to either
+
+648
+00:10:43,110 --> 00:10:43,120
+can connect your inverter to either
+ 
+
+649
+00:10:43,120 --> 00:10:45,269
+can connect your inverter to either
+batteries or the grid for the off-grid
+
+650
+00:10:45,269 --> 00:10:45,279
+batteries or the grid for the off-grid
+ 
+
+651
+00:10:45,279 --> 00:10:46,870
+batteries or the grid for the off-grid
+setup this is pretty much the whole
+
+652
+00:10:46,870 --> 00:10:46,880
+setup this is pretty much the whole
+ 
+
+653
+00:10:46,880 --> 00:10:48,550
+setup this is pretty much the whole
+install right here you can connect
+
+654
+00:10:48,550 --> 00:10:48,560
+install right here you can connect
+ 
+
+655
+00:10:48,560 --> 00:10:50,150
+install right here you can connect
+outlets to this if you need to but more
+
+656
+00:10:50,150 --> 00:10:50,160
+outlets to this if you need to but more
+ 
+
+657
+00:10:50,160 --> 00:10:51,670
+outlets to this if you need to but more
+typically you'd connect this to a
+
+658
+00:10:51,670 --> 00:10:51,680
+typically you'd connect this to a
+ 
+
+659
+00:10:51,680 --> 00:10:53,910
+typically you'd connect this to a
+circuit breaker panel that is completely
+
+660
+00:10:53,910 --> 00:10:53,920
+circuit breaker panel that is completely
+ 
+
+661
+00:10:53,920 --> 00:10:56,230
+circuit breaker panel that is completely
+non-grid tied for grid tied you would
+
+662
+00:10:56,230 --> 00:10:56,240
+non-grid tied for grid tied you would
+ 
+
+663
+00:10:56,240 --> 00:10:58,150
+non-grid tied for grid tied you would
+run wiring from your inverter through an
+
+664
+00:10:58,150 --> 00:10:58,160
+run wiring from your inverter through an
+ 
+
+665
+00:10:58,160 --> 00:11:00,630
+run wiring from your inverter through an
+ac disconnect box and then into your
+
+666
+00:11:00,630 --> 00:11:00,640
+ac disconnect box and then into your
+ 
+
+667
+00:11:00,640 --> 00:11:03,030
+ac disconnect box and then into your
+main circuit breaker panel like this
+
+668
+00:11:03,030 --> 00:11:03,040
+main circuit breaker panel like this
+ 
+
+669
+00:11:03,040 --> 00:11:04,630
+main circuit breaker panel like this
+this provides power to the rest of the
+
+670
+00:11:04,630 --> 00:11:04,640
+this provides power to the rest of the
+ 
+
+671
+00:11:04,640 --> 00:11:06,550
+this provides power to the rest of the
+circuit breaker panel and your power
+
+672
+00:11:06,550 --> 00:11:06,560
+circuit breaker panel and your power
+ 
+
+673
+00:11:06,560 --> 00:11:08,389
+circuit breaker panel and your power
+company will install a bi-directional
+
+674
+00:11:08,389 --> 00:11:08,399
+company will install a bi-directional
+ 
+
+675
+00:11:08,399 --> 00:11:10,310
+company will install a bi-directional
+meter that measures how much power is
+
+676
+00:11:10,310 --> 00:11:10,320
+meter that measures how much power is
+ 
+
+677
+00:11:10,320 --> 00:11:12,310
+meter that measures how much power is
+coming in from solar versus how much is
+
+678
+00:11:12,310 --> 00:11:12,320
+coming in from solar versus how much is
+ 
+
+679
+00:11:12,320 --> 00:11:14,949
+coming in from solar versus how much is
+being used at your residence with that
+
+680
+00:11:14,949 --> 00:11:14,959
+being used at your residence with that
+ 
+
+681
+00:11:14,959 --> 00:11:16,630
+being used at your residence with that
+you've got working power to run your
+
+682
+00:11:16,630 --> 00:11:16,640
+you've got working power to run your
+ 
+
+683
+00:11:16,640 --> 00:11:19,030
+you've got working power to run your
+appliances and devices directly from the
+
+684
+00:11:19,030 --> 00:11:19,040
+appliances and devices directly from the
+ 
+
+685
+00:11:19,040 --> 00:11:21,990
+appliances and devices directly from the
+sun's rays how awesome is that i'm nils
+
+686
+00:11:21,990 --> 00:11:22,000
+sun's rays how awesome is that i'm nils
+ 
+
+687
+00:11:22,000 --> 00:11:26,480
+sun's rays how awesome is that i'm nils
+with learn to diy thanks for watching
+

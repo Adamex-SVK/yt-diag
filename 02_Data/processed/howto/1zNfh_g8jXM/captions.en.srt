@@ -1,0 +1,265 @@
+1
+00:00:01,440 --> 00:00:04,270
+
+Press Shift A and go to Surface NURBS
+
+2
+00:00:04,270 --> 00:00:04,280
+Press Shift A and go to Surface NURBS
+ 
+
+3
+00:00:04,280 --> 00:00:06,590
+Press Shift A and go to Surface NURBS
+Curve. If you go to Edit Mode, you see
+
+4
+00:00:06,590 --> 00:00:06,600
+Curve. If you go to Edit Mode, you see
+ 
+
+5
+00:00:06,600 --> 00:00:08,470
+Curve. If you go to Edit Mode, you see
+that the NURBS Curve has what is called
+
+6
+00:00:08,470 --> 00:00:08,480
+that the NURBS Curve has what is called
+ 
+
+7
+00:00:08,480 --> 00:00:10,190
+that the NURBS Curve has what is called
+a hull with vertices that you can
+
+8
+00:00:10,190 --> 00:00:10,200
+a hull with vertices that you can
+ 
+
+9
+00:00:10,200 --> 00:00:12,990
+a hull with vertices that you can
+manipulate. Clicking on endpoint U will
+
+10
+00:00:12,990 --> 00:00:13,000
+manipulate. Clicking on endpoint U will
+ 
+
+11
+00:00:13,000 --> 00:00:14,990
+manipulate. Clicking on endpoint U will
+make the curve endpoints the same as the
+
+12
+00:00:14,990 --> 00:00:15,000
+make the curve endpoints the same as the
+ 
+
+13
+00:00:15,000 --> 00:00:15,870
+make the curve endpoints the same as the
+hull.
+
+14
+00:00:15,870 --> 00:00:15,880
+hull.
+ 
+
+15
+00:00:15,880 --> 00:00:17,790
+hull.
+So now you can manipulate that curve in
+
+16
+00:00:17,790 --> 00:00:17,800
+So now you can manipulate that curve in
+ 
+
+17
+00:00:17,800 --> 00:00:19,990
+So now you can manipulate that curve in
+Edit Mode. Just like with a mesh, you
+
+18
+00:00:19,990 --> 00:00:20,000
+Edit Mode. Just like with a mesh, you
+ 
+
+19
+00:00:20,000 --> 00:00:22,190
+Edit Mode. Just like with a mesh, you
+can select two vertices and right click
+
+20
+00:00:22,190 --> 00:00:22,200
+can select two vertices and right click
+ 
+
+21
+00:00:22,200 --> 00:00:24,070
+can select two vertices and right click
+then choose Subdivide to add another
+
+22
+00:00:24,070 --> 00:00:24,080
+then choose Subdivide to add another
+ 
+
+23
+00:00:24,080 --> 00:00:26,830
+then choose Subdivide to add another
+vertex. You can select all and uh Shift
+
+24
+00:00:26,830 --> 00:00:26,840
+vertex. You can select all and uh Shift
+ 
+
+25
+00:00:26,840 --> 00:00:28,590
+vertex. You can select all and uh Shift
+D to duplicate.
+
+26
+00:00:28,590 --> 00:00:28,600
+D to duplicate.
+ 
+
+27
+00:00:28,600 --> 00:00:30,750
+D to duplicate.
+Then with everything selected, press F
+
+28
+00:00:30,750 --> 00:00:30,760
+Then with everything selected, press F
+ 
+
+29
+00:00:30,760 --> 00:00:32,990
+Then with everything selected, press F
+to fill the NURBS surface.
+
+30
+00:00:32,990 --> 00:00:33,000
+to fill the NURBS surface.
+ 
+
+31
+00:00:33,000 --> 00:00:34,910
+to fill the NURBS surface.
+Now you can manipulate the vertices to
+
+32
+00:00:34,910 --> 00:00:34,920
+Now you can manipulate the vertices to
+ 
+
+33
+00:00:34,920 --> 00:00:37,430
+Now you can manipulate the vertices to
+create a perfectly smooth surface. This
+
+34
+00:00:37,430 --> 00:00:37,440
+create a perfectly smooth surface. This
+ 
+
+35
+00:00:37,440 --> 00:00:39,910
+create a perfectly smooth surface. This
+is the basics of NURBS modeling. To add
+
+36
+00:00:39,910 --> 00:00:39,920
+is the basics of NURBS modeling. To add
+ 
+
+37
+00:00:39,920 --> 00:00:42,150
+is the basics of NURBS modeling. To add
+an edge loop, you can't just press Ctrl
+
+38
+00:00:42,150 --> 00:00:42,160
+an edge loop, you can't just press Ctrl
+ 
+
+39
+00:00:42,160 --> 00:00:43,830
+an edge loop, you can't just press Ctrl
+R. You will need to select all these
+
+40
+00:00:43,830 --> 00:00:43,840
+R. You will need to select all these
+ 
+
+41
+00:00:43,840 --> 00:00:45,710
+R. You will need to select all these
+vertices and then right click and choose
+
+42
+00:00:45,710 --> 00:00:45,720
+vertices and then right click and choose
+ 
+
+43
+00:00:45,720 --> 00:00:47,030
+vertices and then right click and choose
+Subdivide.
+
+44
+00:00:47,030 --> 00:00:47,040
+Subdivide.
+ 
+
+45
+00:00:47,040 --> 00:00:48,910
+Subdivide.
+NURBS surfaces are great for modeling,
+
+46
+00:00:48,910 --> 00:00:48,920
+NURBS surfaces are great for modeling,
+ 
+
+47
+00:00:48,920 --> 00:00:51,110
+NURBS surfaces are great for modeling,
+for example, the overall shape of a car.
+
+48
+00:00:51,110 --> 00:00:51,120
+for example, the overall shape of a car.
+ 
+
+49
+00:00:51,120 --> 00:00:52,990
+for example, the overall shape of a car.
+Once the main shape is finished, you can
+
+50
+00:00:52,990 --> 00:00:53,000
+Once the main shape is finished, you can
+ 
+
+51
+00:00:53,000 --> 00:00:54,710
+Once the main shape is finished, you can
+convert it to a mesh and then add more
+
+52
+00:00:54,710 --> 00:00:54,720
+convert it to a mesh and then add more
+ 
+
+53
+00:00:54,720 --> 00:00:58,760
+convert it to a mesh and then add more
+detail with normal polygonal modeling.
+

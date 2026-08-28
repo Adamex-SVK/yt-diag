@@ -1,0 +1,1264 @@
+1
+00:00:00,000 --> 00:00:05,310
+This is the beginner's guide to using
+Microsoft Word and specifically using it
+
+2
+00:00:05,310 --> 00:00:11,730
+to create documents like reports, essays,
+handouts, flyers, things like that. And so
+
+3
+00:00:11,730 --> 00:00:15,389
+I'm just gonna go down here and click on
+Microsoft Word. If you don't have Word
+
+4
+00:00:15,389 --> 00:00:19,680
+down here on the taskbar, you can just
+click here on Search Windows and do a
+
+5
+00:00:19,680 --> 00:00:23,580
+search for Microsoft Word to see if it's
+on your computer. If that doesn't turn up
+
+6
+00:00:23,580 --> 00:00:27,119
+anything, then it's not installed on your
+computer, but like I said, I'm gonna go
+
+7
+00:00:27,119 --> 00:00:31,679
+ahead and click on that to start it up
+and Microsoft Word opens right up and it
+
+8
+00:00:31,679 --> 00:00:35,489
+gives me right away a bunch of templates
+that I can choose from to help me get
+
+9
+00:00:35,489 --> 00:00:39,239
+started creating documents using
+Microsoft Word. And you can see that
+
+10
+00:00:39,239 --> 00:00:43,410
+there's all sorts of great documents.
+They have trifold brochures they have
+
+11
+00:00:43,410 --> 00:00:47,309
+event menus. They have blog posts, all
+sorts of different templates that you
+
+12
+00:00:47,309 --> 00:00:51,780
+can use. Also across the top, notice that
+you can filter them by category, so I
+
+13
+00:00:51,780 --> 00:00:55,980
+could just show Business templates. I
+could show Event templates, labels and so
+
+14
+00:00:55,980 --> 00:00:59,969
+on. And notice that there is an Education
+category. You can also search for online
+
+15
+00:00:59,969 --> 00:01:04,409
+templates here. So templates can be a
+great time-saver. You can just select one
+
+16
+00:01:04,409 --> 00:01:08,040
+of these templates to open it up and
+then edit it and use it for your own
+
+17
+00:01:08,040 --> 00:01:12,119
+purposes. But, in this tutorial, we're
+going to focus just on creating starting
+
+18
+00:01:12,119 --> 00:01:15,780
+from scratch. And so I'm gonna click here
+where it says Blank document and it
+
+19
+00:01:15,780 --> 00:01:22,049
+opens up the Microsoft Word layout and a
+blank document. Now there is so much to
+
+20
+00:01:22,049 --> 00:01:26,759
+Word. Most people don't really use Word
+to its full capabilities but in this
+
+21
+00:01:26,759 --> 00:01:30,570
+tutorial I'm really going to focus on the
+basics, on those essentials that you need
+
+22
+00:01:30,570 --> 00:01:35,070
+to know to start using Microsoft Word
+effectively. And one of the first things
+
+23
+00:01:35,070 --> 00:01:38,670
+I'm going to do is just close this panel
+here at the left that says Navigation.
+
+24
+00:01:38,670 --> 00:01:43,110
+It's a nice panel, but I'm going to get rid
+of that and close that out. Next, I want
+
+25
+00:01:43,110 --> 00:01:47,610
+to give you a quick tour of what you're
+seeing here in the layout. You'll notice
+
+26
+00:01:47,610 --> 00:01:52,560
+that, across the top, we have tabs. We have
+the Home tab, insert tab, design tab. and
+
+27
+00:01:52,560 --> 00:01:57,719
+This is very similar to Excel Microsoft
+Excel and also Microsoft PowerPoint.
+
+28
+00:01:57,719 --> 00:02:01,619
+If you've watched my other tutorials, you
+already know about this Microsoft office
+
+29
+00:02:01,619 --> 00:02:05,820
+layout, but for those who maybe haven't
+watched those other tutorials just a
+
+30
+00:02:05,820 --> 00:02:10,050
+quick intro each of these tabs. When you
+click on it will give you a different
+
+31
+00:02:10,050 --> 00:02:13,500
+ribbon and that's what they call this
+this is the ribbon.
+
+32
+00:02:13,500 --> 00:02:18,090
+And the ribbon changes based on the tab
+that you click. Ok, so if I want to change
+
+33
+00:02:18,090 --> 00:02:21,270
+something about the layout, I click on
+layout and then I look at the layout
+
+34
+00:02:21,270 --> 00:02:26,760
+ribbon and see what I can do. Now each
+ribbon is divided up into groups, so this
+
+35
+00:02:26,760 --> 00:02:29,970
+is the Page Setup group. This is the
+Paragraph group and the Arrange group.
+
+36
+00:02:29,970 --> 00:02:34,080
+Now, what if I want to insert something,
+maybe a picture or a photo, I would go to
+
+37
+00:02:34,080 --> 00:02:38,880
+the Insert tab and click and I get the
+insert ribbon with lots and lots of
+
+38
+00:02:38,880 --> 00:02:42,840
+different groups. Now, one thing about
+groups that you need to be aware of is
+
+39
+00:02:42,840 --> 00:02:47,940
+some groups will have a little launch
+button in the corner. So here's an
+
+40
+00:02:47,940 --> 00:02:52,080
+example of a launch button. The paragraph
+group has a launch button but the
+
+41
+00:02:52,080 --> 00:02:55,800
+arrange group doesn'tm at least for me it
+doesn't. The page setup group has a
+
+42
+00:02:55,800 --> 00:02:59,520
+launch button. So what are these lunch
+buttons and why do you need to know
+
+43
+00:02:59,520 --> 00:03:01,860
+about them?
+Well basically, whenever you see a launch
+
+44
+00:03:01,860 --> 00:03:05,280
+button, what that means is that there are
+more tools but that they couldn't fit
+
+45
+00:03:05,280 --> 00:03:09,810
+them in the space provided in the group.
+So if I don't see one of the font
+
+46
+00:03:09,810 --> 00:03:13,920
+options that I would like to have, I look
+through these to see if it's there and
+
+47
+00:03:13,920 --> 00:03:17,370
+if it's not I can just click here on the
+launch button and then I'll get even
+
+48
+00:03:17,370 --> 00:03:20,430
+more options.
+Another example over here in the Styles
+
+49
+00:03:20,430 --> 00:03:24,030
+group, There's a few styles but if I
+click here then I get many many more
+
+50
+00:03:24,030 --> 00:03:28,410
+styles to choose from and some options
+that I don't see just by looking at the
+
+51
+00:03:28,410 --> 00:03:33,000
+group itself. So watch out for that
+launch button. Ok, now down here I have
+
+52
+00:03:33,000 --> 00:03:38,760
+the page of my document. This is my Word
+document and it's completely blank. At
+
+53
+00:03:38,760 --> 00:03:42,660
+this time a couple of things that I want
+you to know about before you get started
+
+54
+00:03:42,660 --> 00:03:46,980
+making a document: First of all, I don't
+know about you, but I like to be able to
+
+55
+00:03:46,980 --> 00:03:51,360
+see the document - at least its width - and
+so I'm gonna go down here in the lower
+
+56
+00:03:51,360 --> 00:03:57,180
+right corner and change the zoom level.
+So it was at 200% and that was a little
+
+57
+00:03:57,180 --> 00:04:03,750
+bit too big for me. Maybe 150 maybe to
+125. You know something like that that
+
+58
+00:04:03,750 --> 00:04:07,170
+will be a little bit easier to fit on
+the screen. So I think I'll just go with
+
+59
+00:04:07,170 --> 00:04:14,340
+this 100%. Now, in this tutorial I'm using
+Microsoft Word 2016 for Windows, but if
+
+60
+00:04:14,340 --> 00:04:17,609
+you're using an older version of
+Microsoft Word, or even a future version
+
+61
+00:04:17,609 --> 00:04:21,959
+of Microsoft Word or Word for Mac, most of
+what I'm showing you will still be
+
+62
+00:04:21,959 --> 00:04:26,010
+applicable, but one of the things that I
+kind of miss from an older version
+
+63
+00:04:26,010 --> 00:04:31,500
+Microsoft Word is I miss the rulers. I'm
+used to having a ruler across the top
+
+64
+00:04:31,500 --> 00:04:35,610
+and also down the left side to help me
+know the size of the pages that I'm
+
+65
+00:04:35,610 --> 00:04:40,170
+working with. So I'm gonna go here and
+look and see where might there be an
+
+66
+00:04:40,170 --> 00:04:45,390
+option to show the ruler and I would
+think it would be maybe here in the
+
+67
+00:04:45,390 --> 00:04:49,470
+layout options. But the reason I'm
+bringing this up is because if you're
+
+68
+00:04:49,470 --> 00:04:53,820
+having trouble finding an option, like I
+am right now, you don't need to really
+
+69
+00:04:53,820 --> 00:04:57,840
+hunt and search for it very much if it's
+not quickly showing up. All you need to
+
+70
+00:04:57,840 --> 00:05:01,650
+do is go here to the top where it says
+"Tell me what you want to do" and do a
+
+71
+00:05:01,650 --> 00:05:05,670
+search. So I'll do a search for "Rulers"
+and, look, right there at the top there's
+
+72
+00:05:05,670 --> 00:05:09,480
+an option that says "Show Ruler" and I can
+click on it and immediately the rulers
+
+73
+00:05:09,480 --> 00:05:15,780
+pop up. Okay, so I'm happy now with the
+look of Microsoft Word. Okay, now I'm
+
+74
+00:05:15,780 --> 00:05:20,160
+ready to start creating a wonderful
+document and let's say this document is
+
+75
+00:05:20,160 --> 00:05:24,420
+going to be a handout or a worksheet for
+my students. I can just go in and start
+
+76
+00:05:24,420 --> 00:05:28,980
+creating. So I'll just provide a space
+there for the name of the student, the
+
+77
+00:05:28,980 --> 00:05:33,210
+class period, and I'm just typing and
+hitting Return or Enter on the keyboard.
+
+78
+00:05:33,210 --> 00:05:39,630
+And I would like this to be the title of
+my document. Now this is pretty typical,
+
+79
+00:05:39,630 --> 00:05:44,280
+but what I would do here is highlight
+the text and immediately I get a pop-up
+
+80
+00:05:44,280 --> 00:05:48,840
+here with some options that I have. But I
+can also go here to the Home tab home
+
+81
+00:05:48,840 --> 00:05:53,370
+ribbon. That's where you'll find the most
+commonly needed options in Microsoft
+
+82
+00:05:53,370 --> 00:05:56,970
+Word. And so, look, there is Center and
+that's what I was hoping for.
+
+83
+00:05:56,970 --> 00:06:00,270
+I can also underline if I want to. I can
+make it bold and there's all sorts of
+
+84
+00:06:00,270 --> 00:06:04,290
+options that you have there. I could make
+the text bigger but more often than not,
+
+85
+00:06:04,290 --> 00:06:09,120
+instead of making all of these fine
+tuned adjustments, what I often do is I
+
+86
+00:06:09,120 --> 00:06:13,770
+use these styles. And so to show that, I'm
+going to click the Undo button several
+
+87
+00:06:13,770 --> 00:06:18,570
+times to go back to just the text. So
+with just the text selected, I'm going to go
+
+88
+00:06:18,570 --> 00:06:22,440
+here where it says Styles and I'll go to
+Heading number 1 and you can see what
+
+89
+00:06:22,440 --> 00:06:26,280
+it does. It changes the color, it makes it
+bigger, changes the font a little bit.
+
+90
+00:06:26,280 --> 00:06:30,930
+There's also Heading number 2, and
+several other options. Title would be a
+
+91
+00:06:30,930 --> 00:06:34,470
+good one as well. And I'm gonna go with
+Title. Now, regardless of which one you
+
+92
+00:06:34,470 --> 00:06:38,040
+pick, if you want you can still adjust it,
+like I would still like that to be
+
+93
+00:06:38,040 --> 00:06:41,030
+centered. I
+still like it to be underlined, and I
+
+94
+00:06:41,030 --> 00:06:45,500
+think that looks really nice. So, now I
+hit Enter or Return and I can proceed to
+
+95
+00:06:45,500 --> 00:06:49,360
+create this worksheet. I can type in
+instructions for my students and
+
+96
+00:06:49,360 --> 00:06:54,530
+Microsoft Word handles most of the work.
+I'm just typing hitting Enter,
+
+97
+00:06:54,530 --> 00:06:59,479
+moving down. Now I can also click to move
+around using the mouse, but watch what
+
+98
+00:06:59,479 --> 00:07:02,780
+happens.
+I can only click so far. It's not letting
+
+99
+00:07:02,780 --> 00:07:07,069
+me go past the current line that I've
+typed. I can go to the right side of it,
+
+100
+00:07:07,069 --> 00:07:11,120
+but that's as far as it'll let me go. I
+can go back up though, by clicking and
+
+101
+00:07:11,120 --> 00:07:15,710
+make changes, make adjustments. Okay and
+I'm really ruining this document aren't
+
+102
+00:07:15,710 --> 00:07:20,810
+I? So I'll just undo a few times, but the
+point is that if you want to put in some
+
+103
+00:07:20,810 --> 00:07:25,250
+blank space and then type something
+below, you're gonna have to tap Enter a
+
+104
+00:07:25,250 --> 00:07:29,750
+few times to move the cursor down, and
+then you'll be able to type down below,
+
+105
+00:07:29,750 --> 00:07:33,110
+Now, when you get to the bottom of the
+page, you hit enter and, look, it just
+
+106
+00:07:33,110 --> 00:07:37,129
+takes you automatically to page number
+two. Now, a few other essential things to
+
+107
+00:07:37,129 --> 00:07:42,349
+know about Microsoft Word include how to
+insert pictures, because that's really
+
+108
+00:07:42,349 --> 00:07:45,620
+one of the powerful things about
+Microsoft Word. And you heard me say the
+
+109
+00:07:45,620 --> 00:07:49,190
+key word there, didn't you? It's "Insert". So
+I click on "Insert" and look at the
+
+110
+00:07:49,190 --> 00:07:53,750
+options that I have: four things to
+insert into this document, all sorts of
+
+111
+00:07:53,750 --> 00:07:58,310
+things, including Wikipedia articles,
+online videos, all sorts of neat things.
+
+112
+00:07:58,310 --> 00:08:02,900
+But in this case, I'm going to go to
+pictures, and that automatically accessed
+
+113
+00:08:02,900 --> 00:08:07,610
+my computer and now I can browse my
+computer to find pictures that I can
+
+114
+00:08:07,610 --> 00:08:12,889
+then pull in and use in my document. So
+I'll pull in this skeleton. Now, whenever
+
+115
+00:08:12,889 --> 00:08:17,090
+you put a photo or an image into
+Microsoft Word, it brings up some
+
+116
+00:08:17,090 --> 00:08:21,169
+difficulties. For example, that is not at
+all where I wanted that photo to be. I
+
+117
+00:08:21,169 --> 00:08:26,690
+wanted it to be here, in between the text
+up here and the text down below, and so
+
+118
+00:08:26,690 --> 00:08:30,770
+this is a problem. The other problem is
+the photo came in way too big. So let's
+
+119
+00:08:30,770 --> 00:08:33,740
+fix some of these issues. The first thing
+I'm going to do is click on the picture.
+
+120
+00:08:33,740 --> 00:08:38,899
+Now ,something subtle just happened when
+I clicked on that photo. Look what
+
+121
+00:08:38,899 --> 00:08:43,099
+happened. I got an additional tab and
+ribbon that appeared at the top of
+
+122
+00:08:43,099 --> 00:08:47,209
+Microsoft Word and this is going to be
+very important. Anytime you click on
+
+123
+00:08:47,209 --> 00:08:50,839
+something, especially something special
+like a photo or a video, it's going to
+
+124
+00:08:50,839 --> 00:08:54,559
+give you some extra options. 
+In this case the format options. First
+
+125
+00:08:54,559 --> 00:08:58,189
+thing I want to do though is just resize
+this image. So with it selected, I can
+
+126
+00:08:58,189 --> 00:09:03,410
+just go to the corner - any corner - click
+and drag to shrink that photo down to
+
+127
+00:09:03,410 --> 00:09:07,850
+size a little bit. And that's a lot
+better. Now, I still I'm struggling. I'm
+
+128
+00:09:07,850 --> 00:09:12,189
+trying to drag it up to the place I want
+it to be but it's just not quite
+
+129
+00:09:12,189 --> 00:09:17,119
+cooperating with me. The reason why is
+because this photo has some specific
+
+130
+00:09:17,119 --> 00:09:22,549
+layout options that come pre-selected by
+default and so I need to change those
+
+131
+00:09:22,549 --> 00:09:26,959
+layout options. Now in this latest
+version of Microsoft Word, when you click
+
+132
+00:09:26,959 --> 00:09:31,160
+on a photo, you'll get this little button
+that pops up. You can then click on it to
+
+133
+00:09:31,160 --> 00:09:36,589
+change the layout options, but just like
+in older versions of Microsoft Word, you
+
+134
+00:09:36,589 --> 00:09:40,279
+also have the option to right-click and
+go to Wrap Text and that will give you
+
+135
+00:09:40,279 --> 00:09:45,559
+the same options. So here in Wrap Text,
+I'm going to go with In Front of Text or
+
+136
+00:09:45,559 --> 00:09:50,989
+Behind Text. Either one will work great.
+I guess I'll choose Behind Text, and now
+
+137
+00:09:50,989 --> 00:09:55,369
+you can see what happened. Now, it's
+moving much more freely. I was not able
+
+138
+00:09:55,369 --> 00:09:59,899
+to do this before. I was not able to
+click and drag and put the picture
+
+139
+00:09:59,899 --> 00:10:05,239
+wherever I wanted it to be, but just by
+changing the options to Behind Text or
+
+140
+00:10:05,239 --> 00:10:09,769
+in Front of Text, now it's unlocked that
+photo and I can put it literally
+
+141
+00:10:09,769 --> 00:10:13,850
+anywhere in this document that I want it
+to be. You could even be up here in the
+
+142
+00:10:13,850 --> 00:10:17,419
+header or in the footer. It really
+doesn't matter. So that's a nice little
+
+143
+00:10:17,419 --> 00:10:22,100
+trick that you'll want to know and be
+able to use in your own documents. I also
+
+144
+00:10:22,100 --> 00:10:26,149
+want you to know that you can insert
+online pictures, and this is a great
+
+145
+00:10:26,149 --> 00:10:31,489
+option. You can connect to the internet
+and do searches and find images, find
+
+146
+00:10:31,489 --> 00:10:34,999
+clipart, and things that are on the web
+and then just click and drag to drop
+
+147
+00:10:34,999 --> 00:10:39,319
+them into your project. So that's a
+really nice option to have. Now, before we
+
+148
+00:10:39,319 --> 00:10:44,329
+move away from the photo and move on to
+other topics, I want you to notice this
+
+149
+00:10:44,329 --> 00:10:48,980
+Format tab that I mentioned earlier. When
+you click on a photo and then the format
+
+150
+00:10:48,980 --> 00:10:52,069
+tab, it gives you some options to do some
+things that are really nice. You can
+
+151
+00:10:52,069 --> 00:10:56,389
+remove the background. In this case, it
+wasn't very successful in how I removed
+
+152
+00:10:56,389 --> 00:11:01,160
+the background. You can alter the color
+scheme in lots of ways. You can do some
+
+153
+00:11:01,160 --> 00:11:05,220
+corrections, and there's some artistic
+effects. And so there's some
+
+154
+00:11:05,220 --> 00:11:08,850
+pretty exciting things you could come up
+with, some creepy images here with this
+
+155
+00:11:08,850 --> 00:11:13,889
+skeleton. I'm going to undo that but these
+photo effects are really pretty nice. You
+
+156
+00:11:13,889 --> 00:11:17,370
+can compress the picture as well and do
+some other exciting things. There's also
+
+157
+00:11:17,370 --> 00:11:22,560
+some picture styles. For example, you can
+put a frame around Mr. Skeleton here and
+
+158
+00:11:22,560 --> 00:11:25,800
+there's all sorts of different frames.
+You can have a kind of a fuzzy border
+
+159
+00:11:25,800 --> 00:11:30,180
+around the skeleton. If you'd like, you
+can make it almost 3D with some of these
+
+160
+00:11:30,180 --> 00:11:35,370
+3D effects. So some really nice options.
+You can also crop, and you'll be
+
+161
+00:11:35,370 --> 00:11:40,139
+surprised how often this is helpful and
+necessary. So when I clicked on Crop, it
+
+162
+00:11:40,139 --> 00:11:44,100
+gave me some additional lines and edges
+and things like that.
+
+163
+00:11:44,100 --> 00:11:49,560
+So I can use that to crop out part of
+the photo - whoops - and I have to make sure
+
+164
+00:11:49,560 --> 00:11:54,269
+I get the exact line there, and then I
+can just click outside the box and it
+
+165
+00:11:54,269 --> 00:11:59,490
+makes that crop effective. So watch out
+for this format tab. It'll appear and
+
+166
+00:11:59,490 --> 00:12:02,339
+give you some wonderful options that you
+need to be aware of.
+
+167
+00:12:02,339 --> 00:12:06,569
+There are also all sorts of other great
+options, especially shapes are especially
+
+168
+00:12:06,569 --> 00:12:12,389
+good. You can put in arrows. You can put
+in call-outs. You can put in squares,
+
+169
+00:12:12,389 --> 00:12:17,610
+rectangles, circles, plus signs - all sorts
+of great shapes that are useful
+
+170
+00:12:17,610 --> 00:12:22,139
+especially for teachers and students. And
+I want you to know that you can also add
+
+171
+00:12:22,139 --> 00:12:26,579
+a text box. Now how is the text box
+special? How is it different from the
+
+172
+00:12:26,579 --> 00:12:30,990
+regular text that you're typing in?
+Basically a text box is additional text
+
+173
+00:12:30,990 --> 00:12:35,759
+that can float on top of your document.
+So I'm gonna go with the simple text box
+
+174
+00:12:35,759 --> 00:12:41,399
+and I'll type in a wonderful message
+here and then click away. This text box
+
+175
+00:12:41,399 --> 00:12:45,839
+now can be dragged wherever I want it to
+go. Now it is interacting with that text
+
+176
+00:12:45,839 --> 00:12:50,189
+and if I don't want that to happen, I can
+use this button here to make it be
+
+177
+00:12:50,189 --> 00:12:54,269
+behind the text, the other text, or in
+front of the text. I'm going to go with
+
+178
+00:12:54,269 --> 00:12:58,589
+behind, and so now I can drag it freely
+so similarly to how I fixed this photo
+
+179
+00:12:58,589 --> 00:13:01,980
+and made it so that I could drag it
+anywhere I wanted it to be. It's similar
+
+180
+00:13:01,980 --> 00:13:07,980
+with text that's in a text box. Okay, now
+here in the review tab, a few other
+
+181
+00:13:07,980 --> 00:13:11,430
+basics that you need to know about
+whenever you're writing a paper or a
+
+182
+00:13:11,430 --> 00:13:15,569
+report or even a worksheet like this.
+It's important to get the spelling right
+
+183
+00:13:15,569 --> 00:13:19,649
+and you can see here on the Review tab,
+you can click Spelling and Grammar and
+
+184
+00:13:19,649 --> 00:13:24,089
+it will check for spelling mistakes. It
+looks like it found one. I don't know how
+
+185
+00:13:24,089 --> 00:13:29,100
+I possibly misspelled this word but I
+did and, if it can, Microsoft Word will
+
+186
+00:13:29,100 --> 00:13:33,510
+suggest alternate spellings that are
+correct. In this case, I've got it stumped
+
+187
+00:13:33,510 --> 00:13:37,290
+a little bit so I'll close that out, but
+I just wanted to point that out the
+
+188
+00:13:37,290 --> 00:13:40,890
+spelling and grammar in Word is great
+and is really one of the basic
+
+189
+00:13:40,890 --> 00:13:43,890
+essentials that you need to know if
+you're gonna be using Microsoft Word.
+
+190
+00:13:43,890 --> 00:13:47,550
+There's also some great options, like
+Word Count if you're a student and the
+
+191
+00:13:47,550 --> 00:13:51,779
+teacher has said I want you to create a
+two-thousand word essay or report,
+
+192
+00:13:51,779 --> 00:13:55,320
+you can just click to get a word count
+and it'll tell you how many characters,
+
+193
+00:13:55,320 --> 00:13:59,339
+how many words, how many pages , etc.
+There's also a wonderful thesaurus to
+
+194
+00:13:59,339 --> 00:14:03,089
+help you use a variety of words instead
+of using the same word over and over.
+
+195
+00:14:03,089 --> 00:14:07,320
+That's very helpful. Okay, so let's say
+you're done with your document and it's
+
+196
+00:14:07,320 --> 00:14:10,950
+time to get ready to turn it in. If
+you're a student and you're finishing an
+
+197
+00:14:10,950 --> 00:14:14,910
+assignment, let's say or maybe you're a
+teacher and you've put together what you
+
+198
+00:14:14,910 --> 00:14:18,570
+want to print and give to the students,
+how do you go from there? Well, one of the
+
+199
+00:14:18,570 --> 00:14:22,500
+first things that you need to do is to
+consider if you have the right line
+
+200
+00:14:22,500 --> 00:14:26,250
+spacing and things like that. Especially
+for students, maybe the teacher has said
+
+201
+00:14:26,250 --> 00:14:29,760
+I want you to double space your paper.
+How do you do that? Well, here on the Home
+
+202
+00:14:29,760 --> 00:14:34,410
+tab - home ribbon - you can go to Paragraph
+group and, look right here this is the
+
+203
+00:14:34,410 --> 00:14:43,620
+line and paragraph spacing options. You
+can go in and say I want double-spaced. Now, for that to really be effective, you
+need to click and drag to highlight the
+
+204
+00:14:43,620 --> 00:14:48,930
+text that you want to effect. So now when
+I do line spacing, set it at 2, now my
+
+205
+00:14:48,930 --> 00:14:53,670
+paragraph has double-spaced text. I also
+want you to notice that you have font
+
+206
+00:14:53,670 --> 00:14:58,170
+color options and all sorts of typical
+font options that you're probably very
+
+207
+00:14:58,170 --> 00:15:02,370
+accustomed to on all sorts of tools. And
+on the internet there's different fonts
+
+208
+00:15:02,370 --> 00:15:06,510
+to choose from here as well. Okay, so I'm
+happy with this. I'm good.
+
+209
+00:15:06,510 --> 00:15:11,550
+Of course, I could change the margins at
+the left and right using this ruler tool,
+
+210
+00:15:11,550 --> 00:15:16,170
+but if I don't want to mess with that,
+I'll just leave it as is. Now, to finish
+
+211
+00:15:16,170 --> 00:15:20,670
+this off, I just go to File and I have a
+bunch of different options. First, I
+
+212
+00:15:20,670 --> 00:15:25,860
+really should save this. And I can click
+Save. I can save it just to this PC and I
+
+213
+00:15:25,860 --> 00:15:29,010
+could save it directly, let's say, to the
+desktop or to my
+
+214
+00:15:29,010 --> 00:15:32,910
+documents, but also notice that there's an
+option to save it to OneDrive, and if
+
+215
+00:15:32,910 --> 00:15:41,610
+you're not familiar with OneDrive, please
+watch my YouTube video on OneDrive. It's wonderful tool similar to Dropbox but extra good for Microsoft Office and
+
+216
+00:15:41,610 --> 00:15:45,839
+Microsoft Word, in this case. Now, to
+access that it would be helpful to sign
+
+217
+00:15:45,839 --> 00:15:49,920
+in to your Microsoft account and that
+way, like it says here, you can get to
+
+218
+00:15:49,920 --> 00:15:53,880
+your documents from anywhere because
+you'll be signed in to your Microsoft
+
+219
+00:15:53,880 --> 00:15:58,769
+Office account and basically OneDrive in
+this case, though I'll just save it to my
+
+220
+00:15:58,769 --> 00:15:59,269
+desktop. It opens up, and I just give it a name. So there's the name I want to use.
+
+221
+00:16:03,779 --> 00:16:08,190
+I click Save,  and we're good to go. And, of course,  I can also click there on File
+
+222
+00:16:08,190 --> 00:16:12,120
+and I could print it, now that I've saved. I could have printed it without saving,
+
+223
+00:16:12,120 --> 00:16:16,680
+but it's a good idea to save first, just
+so you don't forget. But I can now print
+
+224
+00:16:16,680 --> 00:16:21,300
+and there's all these print options. Now, in addition to Print and Save, notice
+
+225
+00:16:21,300 --> 00:16:25,199
+what else that there is. There's Export,
+and this is very powerful. I could create
+
+226
+00:16:25,199 --> 00:16:30,839
+a PDF out of this document. So I can
+click that, save it also to the desktop
+
+227
+00:16:30,839 --> 00:16:34,019
+in this case, and so now when I go to my desktop,
+
+228
+00:16:34,019 --> 00:16:39,389
+look there is a PDF document that I've
+created from inside Microsoft Word and
+
+229
+00:16:39,389 --> 00:16:44,970
+here's the original in Word format. So
+that's a nice powerful option, just built
+
+230
+00:16:44,970 --> 00:16:48,510
+right into Word. So I'm done, so I'm going to close out of
+
+231
+00:16:48,510 --> 00:16:53,190
+this document completely, go to my
+desktop. Let's say next week I need this
+
+232
+00:16:53,190 --> 00:16:57,120
+same document, I can just go back to Word, open it up and, look, because it was
+
+233
+00:16:57,120 --> 00:17:00,870
+recently created, it shows up here. So
+this is a list of recently created
+
+234
+00:17:00,870 --> 00:17:05,790
+documents on this computer and there it
+is at the top. Now, as I use this more and
+
+235
+00:17:05,790 --> 00:17:11,069
+more on this computer, I'm going to end up
+with 20, 3, 50, 100 documents. It might be
+
+236
+00:17:11,069 --> 00:17:14,850
+nice, if this is a document that I'm
+going to keep working on a lot over the
+
+237
+00:17:14,850 --> 00:17:18,750
+next few weeks, it might be a good idea
+to try to get it to stay at the top of
+
+238
+00:17:18,750 --> 00:17:23,100
+the list. Well, there is a way to do that.
+If you put your mouse on it, look there's
+
+239
+00:17:23,100 --> 00:17:28,260
+a little pin. And if you click that pin,
+it will pin this particular document to
+
+240
+00:17:28,260 --> 00:17:32,850
+the top of the list. Now, I know right now,
+I just have the one document, but imagine
+
+241
+00:17:32,850 --> 00:17:37,830
+500 documents. This document would remain
+at the top of the list because I pinned
+
+242
+00:17:37,830 --> 00:17:39,929
+it. So that's a little trick that I think
+is helpful to know.
+
+243
+00:17:39,929 --> 00:17:44,639
+So in this tutorial, we have gone
+over all of the basics that you need to
+
+244
+00:17:44,639 --> 00:17:48,450
+know, all of the essentials that you need
+to know to start using Microsoft Word,
+
+245
+00:17:48,450 --> 00:17:52,590
+whether you're a teacher, whether you're
+a student, a business-person, or you're
+
+246
+00:17:52,590 --> 00:17:56,340
+just using this on your own at home.
+Microsoft Word is very powerful. You can
+
+247
+00:17:56,340 --> 00:18:00,240
+use it to make all sorts of things, and
+what I've given you here today is just
+
+248
+00:18:00,240 --> 00:18:04,529
+the basics to help you get started, with
+a few little bonus tips and tricks in
+
+249
+00:18:04,529 --> 00:18:08,460
+there that are a little bit more than
+basic. So in the future, I'd like to make
+
+250
+00:18:08,460 --> 00:18:11,759
+an advanced Microsoft Word tutorial, so
+watch for that.
+
+251
+00:18:11,759 --> 00:18:15,480
+But thanks for watching and please
+consider connecting with me on my social
+
+252
+00:18:15,480 --> 00:18:20,129
+media websites, like Facebook, Twitter and,
+Pinterest, and definitely do subscribe to
+
+253
+00:18:20,129 --> 00:18:24,269
+my YouTube channel for more videos about
+technology for teachers and students. and
+
+254
+00:18:24,269 --> 00:18:28,999
+Watch for a new video at least every
+Monday.
+

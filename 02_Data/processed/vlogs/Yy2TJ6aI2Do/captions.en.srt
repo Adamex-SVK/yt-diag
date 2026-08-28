@@ -1,0 +1,45 @@
+1
+00:00:00,000 --> 00:00:03,270
+
+This chili is not spicy at all.
+
+2
+00:00:03,270 --> 00:00:03,280
+This chili is not spicy at all.
+ 
+
+3
+00:00:03,280 --> 00:00:07,195
+This chili is not spicy at all.
+Really?  should I eat it?
+
+4
+00:00:07,195 --> 00:00:07,205
+Really?  should I eat it?
+ 
+
+5
+00:00:07,205 --> 00:00:07,590
+Really?  should I eat it?
+[sudden heavy breathing]
+
+6
+00:00:07,590 --> 00:00:07,600
+[sudden heavy breathing]
+ 
+
+7
+00:00:07,600 --> 00:00:09,160
+[sudden heavy breathing]
+water water
+
+8
+00:00:09,160 --> 00:00:09,170
+water water
+ 
+
+9
+00:00:09,170 --> 00:00:11,190
+water water
+[laughter]
+

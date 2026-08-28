@@ -53,6 +53,7 @@ import csv
 import json
 import math
 import os
+import queue
 import shutil
 import subprocess
 import sys
@@ -117,6 +118,55 @@ def log(msg):
     print(line)
     with _io_lock, open(LOG_PATH, "a", encoding="utf-8") as f:
         f.write(line + "\n")
+
+
+# Found 2026-08-23: an overnight --workers 8 run collapsed after ~11.5
+# hours -- yt-dlp's cookies-based session broke (explicit "Sign in to
+# confirm your age" / "does not look like a Netscape format cookies file"
+# errors), and once that happened, YouTube returned a generic
+# "Video unavailable" for nearly every subsequent video instead of the
+# real per-video reason. Nothing detected this, so the run burned through
+# its entire remaining ~1,100-video queue as instant fake failures (up to
+# 145/minute -- far faster than real processing) instead of stopping. This
+# guards against that: any failure whose message matches a known
+# auth-break signature bumps a shared counter; a real success (or a
+# failure that ISN'T an auth-break signature) resets it. Crossing the
+# threshold sets _abort_event, and process_video() skips remaining jobs
+# instead of quietly mislabeling the rest of the queue as failed.
+AUTH_BREAK_THRESHOLD = 6
+_AUTH_BREAK_PATTERNS = (
+    "sign in to confirm your age",
+    "sign in to confirm you're not a bot",
+    "sign in to confirm you’re not a bot",
+    "does not look like a netscape format cookies file",
+    "use --cookies-from-browser or --cookies for the authentication",
+)
+_auth_break_lock = threading.Lock()
+_auth_break_count = 0
+_abort_event = threading.Event()
+
+
+def _is_auth_break_error(err_text):
+    lowered = err_text.lower()
+    return any(pat in lowered for pat in _AUTH_BREAK_PATTERNS)
+
+
+def _note_result(success, err_text=""):
+    """Track consecutive auth-break-signature failures across worker
+    threads; trip _abort_event once AUTH_BREAK_THRESHOLD is hit in a row."""
+    global _auth_break_count
+    with _auth_break_lock:
+        if success or not _is_auth_break_error(err_text):
+            _auth_break_count = 0
+            return
+        _auth_break_count += 1
+        count = _auth_break_count
+    if count == AUTH_BREAK_THRESHOLD and not _abort_event.is_set():
+        _abort_event.set()
+        log(f"ABORT: {count} consecutive auth-break-signature failures "
+            f"(cookies session likely dead/blocked) -- skipping all remaining "
+            f"queued videos instead of burning through them as fake failures. "
+            f"Refresh cookies.txt and re-run with --resume.")
 
 
 def check_dependencies():
@@ -306,14 +356,26 @@ def caption_quality_ok(srt_path):
     return word_count > 50 and tag_ratio <= 0.2
 
 
-_whisper_model = None
+_whisper_pool = None  # queue.Queue of loaded model instances, sized to --workers
 _whisper_available = True  # set False by preload_whisper() if openai-whisper isn't installed
-_whisper_lock = threading.Lock()  # one shared model instance -- serialize inference across
-                                   # worker threads rather than loading a copy per thread
-                                   # (each copy would cost ~1GB+ RAM, too much with --workers>1)
+
+# History: originally one shared model instance behind a global lock, so
+# transcription -- the slowest single step per video -- ran fully serialized
+# regardless of --workers. That was a deliberate RAM tradeoff on a normal
+# machine (~1GB+ per extra instance). On the real collection hardware (Dell
+# PowerEdge R740, 96 threads, 1.5TB RAM -- see compute_scaling.md) that
+# tradeoff wastes almost all of the machine: a real --workers 8 run averaged
+# ~63s/video end-to-end even with downloads/frames/features overlapping,
+# because every video still had to wait its turn for the one Whisper
+# instance -- extrapolating to ~5-6 days for the full 8,000-video run, i.e.
+# --workers barely helped. Switched to a small pool of N instances (found
+# 2026-08-22) so transcription runs with the same concurrency as everything
+# else. Each instance gets a slice of the CPU (torch.set_num_threads is a
+# process-global intraop budget, so it's divided by N up front, not fought
+# over at call time) to avoid N instances each trying to grab all 96 threads.
 
 
-def preload_whisper():
+def preload_whisper(num_instances=1):
     """Load Whisper/torch BEFORE any worker threads exist -- must be called
     from main(), single-threaded, prior to creating the ThreadPoolExecutor.
 
@@ -329,27 +391,41 @@ def preload_whisper():
     thread *count*, independent of whether the import call itself is
     serialized. Loading it once in the main thread, before any worker
     threads are spawned, sidesteps this entirely -- once the DLL is
-    resident, later loads from any thread just bump a refcount, no re-init."""
-    global _whisper_model, _whisper_available
+    resident, later loads from any thread just bump a refcount, no re-init.
+    Loading all `num_instances` copies here (still single-threaded, still
+    before the ThreadPoolExecutor exists) keeps that guarantee for all of
+    them, not just the first."""
+    global _whisper_pool, _whisper_available
     try:
+        import torch
         import whisper
     except ImportError:
         _whisper_available = False
         warn_once("whisper", "openai-whisper not installed -- videos with missing/poor auto-captions "
                               "will have NO transcript. Install it (requirements.txt) to get the fallback.")
         return
-    log("loading Whisper small.en (once, before workers start)...")
-    _whisper_model = whisper.load_model("small.en")
+    num_instances = max(1, num_instances)
+    threads_per_instance = max(1, (os.cpu_count() or 1) // num_instances)
+    torch.set_num_threads(threads_per_instance)
+    log(f"loading {num_instances} Whisper small.en instance(s) "
+        f"({threads_per_instance} CPU threads each, before workers start)...")
+    _whisper_pool = queue.Queue()
+    for _ in range(num_instances):
+        _whisper_pool.put(whisper.load_model("small.en"))
 
 
 def transcribe_with_whisper(audio_path):
     """data_retrieval.md #4.2/#4.3 fallback for missing/poor auto-captions.
     Assumes preload_whisper() already ran in main() before any worker
-    threads started -- this only serializes the actual inference call."""
+    threads started. Borrows one instance from the pool for the duration of
+    the call so up to `num_instances` transcriptions run concurrently."""
     if not _whisper_available:
         return None
-    with _whisper_lock:
-        result = _whisper_model.transcribe(audio_path, fp16=False)
+    model = _whisper_pool.get()
+    try:
+        result = model.transcribe(audio_path, fp16=False)
+    finally:
+        _whisper_pool.put(model)
     return result["text"].strip()
 
 
@@ -622,6 +698,9 @@ def process_video(video_id, category, frame_count, resume):
     if resume and is_done(video_dir):
         log(f"skip (already done): {video_id}")
         return
+    if _abort_event.is_set():
+        log(f"skip (aborted -- cookies session appears dead): {video_id}")
+        return
     os.makedirs(video_dir, exist_ok=True)
     tmp_video_path = os.path.join(video_dir, "_tmp_video.mp4")
     tmp_audio_path = os.path.join(video_dir, "_tmp_audio.wav")
@@ -664,6 +743,7 @@ def process_video(video_id, category, frame_count, resume):
             f.write(time.strftime("%Y-%m-%dT%H:%M:%S"))
         manifest_append(video_id, category, "done")
         log(f"done {video_id}")
+        _note_result(success=True)
     except subprocess.CalledProcessError as e:
         for p in (tmp_video_path, tmp_audio_path):
             if os.path.exists(p):
@@ -671,12 +751,15 @@ def process_video(video_id, category, frame_count, resume):
         err = (e.stderr or str(e))[:500]
         manifest_append(video_id, category, "failed", err)
         log(f"FAILED {video_id}: {err}")
+        _note_result(success=False, err_text=err)
     except Exception as e:
         for p in (tmp_video_path, tmp_audio_path):
             if os.path.exists(p):
                 os.remove(p)
-        manifest_append(video_id, category, "failed", str(e)[:500])
+        err = str(e)[:500]
+        manifest_append(video_id, category, "failed", err)
         log(f"FAILED {video_id}: {e}")
+        _note_result(success=False, err_text=err)
 
 
 # ---------------------------------------------------------------------------
@@ -705,11 +788,16 @@ def main():
                               "requests back-to-back is exactly the pattern that triggers the bot-check above")
     parser.add_argument("--workers", type=int, default=3,
                          help="videos processed concurrently. Confirmed 2026-08-22: single-threaded is far too "
-                              "slow for 8,000 videos (~50s/video observed -> ~5 days). Whisper inference is "
-                              "serialized internally regardless of this value (one shared model instance, too "
-                              "much RAM to load a copy per worker) -- concurrency mainly overlaps downloads/"
-                              "frame-extraction across videos. Start conservative (3) and watch for renewed "
-                              "429/bot-check errors before raising it; drop to 1 if they reappear.")
+                              "slow for 8,000 videos (~50s/video observed -> ~5 days). Start conservative (3) on "
+                              "a normal machine and watch for renewed 429/bot-check errors before raising it; "
+                              "drop to 1 if they reappear.")
+    parser.add_argument("--whisper-instances", type=int, default=None,
+                         help="concurrent Whisper model instances (default: same as --workers). Each instance "
+                              "gets cpu_count/instances threads. Only lower this below --workers on a RAM- or "
+                              "core-constrained machine -- transcription was found 2026-08-22 to be the dominant "
+                              "bottleneck when serialized behind a single instance (~63s/video even at --workers "
+                              "8, extrapolating to ~5-6 days for 8,000 videos), so on a high-core/high-RAM box "
+                              "this should normally just match --workers.")
     args = parser.parse_args()
 
     if args.cookies_from_browser:
@@ -719,7 +807,8 @@ def main():
 
     check_dependencies()
     os.makedirs(OUT_DIR, exist_ok=True)
-    preload_whisper()  # must happen before any worker threads exist -- see preload_whisper() docstring
+    # must happen before any worker threads exist -- see preload_whisper() docstring
+    preload_whisper(args.whisper_instances if args.whisper_instances is not None else args.workers)
 
     targets = list(CATEGORIES) if args.category == "all" else [args.category]
 
@@ -742,11 +831,15 @@ def main():
     with concurrent.futures.ThreadPoolExecutor(max_workers=args.workers) as executor:
         futures = []
         for video_id, category in jobs:
+            if _abort_event.is_set():
+                log(f"stopping submission early -- {len(jobs) - len(futures)} videos left unsubmitted "
+                    f"(cookies session dead, see ABORT line above). Refresh cookies.txt and re-run with --resume.")
+                break
             futures.append(executor.submit(process_video, video_id, category, args.frames, args.resume))
             time.sleep(stagger)  # stagger submissions so `workers` tasks don't all start in one burst
         concurrent.futures.wait(futures)
 
-    log("run complete")
+    log("run complete" if not _abort_event.is_set() else "run aborted (cookies session dead)")
 
 
 if __name__ == "__main__":
