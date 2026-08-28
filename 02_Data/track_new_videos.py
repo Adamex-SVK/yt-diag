@@ -57,12 +57,11 @@ video/channel/thumbnail/text snapshots), discovery_state.json, thumbnails/
 and texts/ -- when moving machines, copy ALL of it alongside this script,
 or thumbnail/text history is lost and the discovery window resets.
 
-Quota per tick: discovery is the expensive part -- up to 84 search.list
-calls at the per-category page budgets in CATEGORIES (sized to where the
-videos are: comedy 2 arms x 4 pages, vlogs 2 arms x 5, product_reviews 3 x 5, howto 1 x 3, tech 2 x 3;
-~50 in practice since scarce arms stop early, and far less once the big
-categories hit their caps and skip discovery), against a 100-search-calls/
-day budget, hence the run-discovery-once-a-day advice above. Snapshots are cheap per call but scale with the
+Quota per tick: discovery is the expensive part -- up to 80 search.list
+calls at the per-arm page budgets in CATEGORIES (2 duration filters x 40
+pages, sized to where the videos are; far less once categories hit their
+caps and skip discovery), against a 100-search-calls/day budget, hence the
+run-discovery-once-a-day advice above. Snapshots are cheap per call but scale with the
 cohort: ~(cohort/50) videos.list + ~(channels/50) channels.list per pass,
 ~1,200 one-unit calls/day at the mature 15,000 ceiling (~12% of budget).
 
@@ -111,15 +110,17 @@ STALE_LOCK_HOURS = 2.0
 #     accumulating from day 2 as insurance: if product_reviews stays too
 #     thin/noisy, the team can swap it in without losing cohort history.
 #     Swap is a team decision with Adam; until then it is tracked alongside.
-# "pages" = search pages (50 results each) per query arm x duration filter
-# per tick -- a per-category budget, NOT a uniform cap. Search quota is
-# use-it-or-lose-it, so it goes where the videos are: at a uniform 3 pages
-# the vlogs arm exhausted rank 150 on both filters and comedy came close
-# (146/124) while howto never got past page 2. Worst-case search calls per
-# tick = sum(queries x 2 filters x pages) = 2x2x4 + 1x2x3 + 2x2x5 + 3x2x5 + 2x2x3 = 84,
-# under the 100-call daily budget; ~50 in practice (scarce arms stop early
-# when a page comes back short). Re-tune from cohort.csv search_rank: an
-# arm whose max rank keeps hitting pages*50 is still truncating.
+# queries = {query: pages}: search pages (50 results each) per query arm x
+# duration filter per tick -- a PER-ARM budget, not a uniform cap. Search
+# quota is use-it-or-lose-it, so it goes where the videos are. Tuned
+# 2026-08-28 from the first tick with the English arms: unboxing (24) and
+# "day in my life" saturated their 5 pages (max rank 250/248), tutorial and
+# tech review saturated 3 pages (150/148), while "first impressions" peaked
+# at rank 29, "product review" at 12, "weekly vlog" at 73 and "sketch comedy"
+# at 119 -- budget they could not use. Worst-case search calls per tick =
+# 2 x sum(pages) = 2 x 40 = 80, under the 100-call daily budget. Re-tune from
+# cohort.csv search_rank: an arm whose max rank keeps hitting pages*50 is
+# still truncating; one far below it is over-budgeted.
 # 2026-08-27 (evening): comedy and vlogs arms re-phrased for English yield.
 # Search has no language filter, so non-English videos consume page slots
 # before the admission gate ever sees them: at order=date, admitted videos
@@ -131,18 +132,18 @@ STALE_LOCK_HOURS = 2.0
 # sketch; day-in-my-life + weekly vlogs) -- every row records its exact
 # query in discovery_source, so the two frames stay separable.
 CATEGORIES = {
-    "comedy": {"categoryId": "23", "queries": ["stand up comedy", "sketch comedy"], "pages": 4},
-    "howto": {"categoryId": "26", "queries": ["tutorial"], "pages": 3},
-    "vlogs": {"categoryId": "22", "queries": ["day in my life", "weekly vlog"], "pages": 5},
-    "product_reviews": {"categoryId": "24", "queries": ["product review", "unboxing", "first impressions"], "pages": 5},
-    "tech_reviews": {"categoryId": "28", "queries": ["review", "unboxing"], "pages": 3},
+    "comedy": {"categoryId": "23", "queries": {"stand up comedy": 4, "sketch comedy": 3}},
+    "howto": {"categoryId": "26", "queries": {"tutorial": 5}},
+    "vlogs": {"categoryId": "22", "queries": {"day in my life": 8, "weekly vlog": 2}},
+    "product_reviews": {"categoryId": "24", "queries": {"product review": 1, "unboxing": 8, "first impressions": 1}},
+    "tech_reviews": {"categoryId": "28", "queries": {"review": 5, "unboxing": 3}},
 }
 # Per-category cap divides max_cohort by the MAIN categories only, so the
 # backup category gets the same absolute cap without shrinking the others.
 MAIN_CATEGORY_COUNT = 4
 # A uniform --discover-pages override is refused if it could exceed this many
-# search calls in one tick (the daily search budget is ~100; the per-category
-# budgets sum to 84). Found 2026-08-27: a leftover "--discover-pages 5" on the
+# search calls in one tick (the daily search budget is ~100; the per-arm
+# budgets sum to 80). Found 2026-08-27: a leftover "--discover-pages 5" on the
 # launchd agent would have meant 10 arms x 2 filters x 5 = 100 calls.
 MAX_SEARCH_CALLS_PER_TICK = 90
 
@@ -159,7 +160,7 @@ MAX_SEARCH_CALLS_PER_TICK = 90
 # short_form, ~1,550 non_english) which are tracked but never capped.
 # Quota at that ceiling: ~315 videos.list + ~290 channels.list per
 # snapshot pass, x2 ticks/day ~= 1,200 one-unit calls/day (~12% of
-# budget); search spend is independent of the cap (<=84 calls/day). The
+# budget); search spend is independent of the cap (<=80 calls/day). The
 # old wall-time constraint (serial thumbnail downloads) was removed by
 # parallelizing them (THUMB_WORKERS below). Scarce categories won't reach
 # their caps anyway; the raise mainly deepens comedy/howto/vlogs.
@@ -382,7 +383,7 @@ def discover(api_key, cohort, args):
     """Bounded-window discovery, order=date only. Each tick covers
     [previous window end - lookback, now] -- an explicit, recorded sampling
     frame -- and pages through every nextPageToken inside it (bounded by the
-    per-category page budget in CATEGORIES, or the --discover-pages uniform
+    per-arm page budget in CATEGORIES, or the --discover-pages uniform
     override, experiments only). order=viewCount is deliberately
     never used for the main cohort: it selects on an early version of the
     outcome and would bias an underperformance model toward established
@@ -417,11 +418,11 @@ def discover(api_key, cohort, args):
             log(f"discover {category}: at cap ({per_category_cap}), skipping")
             continue
         candidates = []
-        for q in spec["queries"]:
+        for q, arm_pages in spec["queries"].items():
             for duration_filter in SEARCH_DURATION_FILTERS:
                 page_token = None
                 rank = 0
-                pages = spec["pages"] if args.discover_pages is None else args.discover_pages
+                pages = arm_pages if args.discover_pages is None else args.discover_pages
                 for _ in range(pages):
                     params = {
                         "part": "snippet",
