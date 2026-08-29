@@ -63,9 +63,14 @@ def playability(body):
     return m.group(1) if m else None
 
 
+RATE_LIMIT_STATUSES = (429, 403, 503)
+BACKOFF_SEC = (5.0, 30.0)  # per retry attempt after a rate-limit response
+ABORT_AFTER_CONSECUTIVE_UNKNOWN = 25  # a blocked run must stop hammering
+
+
 def classify(video_id, retries=1):
     """'true' (Short), 'false' (regular video), '' (unknown: consent page,
-    network error, deleted/private, unexpected status)."""
+    network error, deleted/private/unavailable page, unexpected status)."""
     for attempt in range(retries + 1):
         try:
             status, location, body = fetch_status(f"https://www.youtube.com/shorts/{video_id}")
@@ -78,20 +83,41 @@ def classify(video_id, retries=1):
         if status in (301, 302, 303, 307, 308) and "/watch" in location:
             return "false"
         if attempt < retries:
-            time.sleep(1.0)  # consent page / transient error: retry once
+            # rate-limited: back off hard before the retry; otherwise a short pause
+            time.sleep(BACKOFF_SEC[min(attempt, len(BACKOFF_SEC) - 1)] if status in RATE_LIMIT_STATUSES else 1.0)
     return ""
 
 
-def classify_many(video_ids, workers=WORKERS):
-    """{video_id: verdict} for many ids, fetched concurrently, order-free."""
+def classify_many(video_ids, workers=WORKERS, on_item=None):
+    """{video_id: verdict} for many ids, fetched concurrently, order-free.
+    on_item (optional) is called after every fetch -- the tracker passes its
+    lock heartbeat so a long check is never mistaken for a dead tick. After
+    ABORT_AFTER_CONSECUTIVE_UNKNOWN unknowns in a row (consent bypass broken,
+    rate-limited, network down) the remaining ids are returned as '' without
+    fetching, so a blocked run stops hammering and the caller can log it."""
+    import threading
     ids = list(dict.fromkeys(video_ids))
     if not ids:
         return {}
+    state = {"consecutive_unknown": 0, "abort": False}
+    guard = threading.Lock()
 
     def one(vid):
+        with guard:
+            if state["abort"]:
+                return vid, ""
         v = classify(vid)
+        with guard:
+            state["consecutive_unknown"] = 0 if v else state["consecutive_unknown"] + 1
+            if state["consecutive_unknown"] >= ABORT_AFTER_CONSECUTIVE_UNKNOWN:
+                state["abort"] = True
+        if on_item:
+            on_item()
         time.sleep(PACING_SEC)
         return vid, v
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as pool:
-        return dict(pool.map(one, ids))
+        out = dict(pool.map(one, ids))
+    if state["abort"]:
+        out["__aborted__"] = "true"  # marker for callers; not a video id
+    return out

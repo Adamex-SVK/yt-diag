@@ -427,6 +427,7 @@ def discover(api_key, cohort, args):
     dropped_short = 0
     dropped_language = 0
     dropped_short_verdict = 0
+    checked_verdicts = unknown_verdicts = verdict_runs_aborted = 0
     failed_calls = 0
     for category, spec in CATEGORIES.items():
         if counts.get(category, 0) >= per_category_cap:
@@ -515,22 +516,35 @@ def discover(api_key, cohort, args):
             if not is_english(statics.get(c["video_id"], {})):
                 dropped_language += 1
                 continue
-            if counts.get(category, 0) >= per_category_cap:
-                break
             c["duration_sec"] = dur
             c.update(statics.get(c["video_id"], {}))
             admissible.append(c)
-        # Definitive Shorts check on the survivors (one plain HTTP request each,
-        # no quota): duration >= 4min should already exclude every Short, so
-        # this is verification -- a "true" here is rejected and logged.
-        verdicts = yt_shorts.classify_many([c["video_id"] for c in admissible])
-        for c in admissible:
-            c["is_short"] = verdicts.get(c["video_id"], "")
-            if c["is_short"] == "true":
-                dropped_short_verdict += 1
-                continue
-            counts[category] = counts.get(category, 0) + 1
-            new_rows.append(c)
+        # Cap-aware definitive Shorts check (one plain HTTP request each, no
+        # quota): classify only as many survivors as the cap can still take,
+        # plus a small margin for rejections, topping up from the remainder
+        # -- never hundreds of needless page fetches near a full cap. The cap
+        # is enforced HERE, on admission, not in the filter loop above.
+        remaining = per_category_cap - counts.get(category, 0)
+        pos = 0
+        while remaining > 0 and pos < len(admissible):
+            batch = admissible[pos:pos + remaining + max(2, remaining // 10)]
+            pos += len(batch)
+            verdicts = yt_shorts.classify_many([c["video_id"] for c in batch], on_item=heartbeat)
+            if verdicts.pop("__aborted__", None):
+                verdict_runs_aborted += 1
+            for c in batch:
+                c["is_short"] = verdicts.get(c["video_id"], "")
+                checked_verdicts += 1
+                if c["is_short"] == "true":
+                    dropped_short_verdict += 1
+                    continue
+                if c["is_short"] == "":
+                    unknown_verdicts += 1  # admitted (duration >= 4min already), healed by later ticks
+                if remaining <= 0:
+                    break
+                counts[category] = counts.get(category, 0) + 1
+                remaining -= 1
+                new_rows.append(c)
         log(f"discover {category}: cohort now {counts.get(category, 0)}/{per_category_cap}")
 
     if dropped_short:
@@ -542,6 +556,11 @@ def discover(api_key, cohort, args):
     if dropped_short_verdict:
         log(f"discover: {dropped_short_verdict} candidates rejected -- the /shorts/ URL test says Short "
             f"despite duration >= {args.min_duration_sec}s")
+    if unknown_verdicts:
+        log(f"discover: {unknown_verdicts} of {checked_verdicts} Shorts verdicts unknown -- admitted with blank "
+            f"is_short, re-checked by later ticks" + (f"; {verdict_runs_aborted} check run(s) ABORTED after consecutive "
+            f"failures -- consent bypass or network broken?" if verdict_runs_aborted else "")
+            + (" WARNING: EVERY verdict unknown" if unknown_verdicts == checked_verdicts and checked_verdicts >= 20 else ""))
     if new_rows:
         append_rows(COHORT_PATH, COHORT_FIELDS, new_rows)
     if failed_calls:
@@ -836,19 +855,31 @@ def backfill_static(api_key):
         + (f" (not returned by the API -- deleted/private?): {' '.join(unfilled[:40])}" if unfilled else ""))
 
 
-def check_shorts(recheck_true=False):
-    """One-off: fill is_short for cohort rows without a verdict via the
-    definitive /shorts/ URL test (no API quota; a few concurrent page
-    fetches). With recheck_true, rows currently "true" are re-examined --
-    needed after 2026-08-29, when unavailable videos were found to answer
-    200 at /shorts/ and had been called Shorts. cohort.csv is rewritten
-    atomically; a recheck that comes back unknown CLEARS the old verdict."""
+HEAL_SHORTS_PER_TICK = 200  # blank verdicts re-examined at the start of every tick
+
+
+def check_shorts(recheck_true=False, limit=None):
+    """Fill is_short for cohort rows without a verdict via the definitive
+    /shorts/ URL test (no API quota; a few concurrent page fetches). With
+    recheck_true, rows currently "true" are re-examined -- needed after
+    2026-08-29, when unavailable videos were found to answer 200 at /shorts/
+    and had been called Shorts; a recheck that comes back unknown CLEARS the
+    old verdict. `limit` bounds the work (the scheduled tick heals a few
+    hundred blanks per run). The lock is heartbeated per fetch, and the
+    verdicts are merged into a FRESH read of cohort.csv right before the
+    atomic rewrite, so rows appended meanwhile are never clobbered."""
     header = ensure_fields(COHORT_PATH, COHORT_FIELDS)
     cohort = read_csv(COHORT_PATH)
     todo = [r["video_id"] for r in cohort
             if not r.get("is_short") or (recheck_true and r.get("is_short") == "true")]
+    if limit is not None:
+        todo = todo[:limit]
+    if not todo:
+        return 0
     log(f"check-shorts{' (recheck true)' if recheck_true else ''}: {len(todo)} of {len(cohort)} cohort rows to classify")
-    verdicts = yt_shorts.classify_many(todo)
+    verdicts = yt_shorts.classify_many(todo, on_item=heartbeat)
+    aborted = verdicts.pop("__aborted__", None)
+    cohort = read_csv(COHORT_PATH)  # fresh: a tick may have appended rows during a long check
     for r in cohort:
         if r["video_id"] in verdicts:
             r["is_short"] = verdicts[r["video_id"]]  # may be "" -> verdict withdrawn
@@ -863,8 +894,10 @@ def check_shorts(recheck_true=False):
     for r in cohort:
         key = (r.get("sampling_arm", ""), r.get("is_short", "") or "unknown")
         arms[key] = arms.get(key, 0) + 1
-    log(f"check-shorts: {got} verdicts, {len(todo) - got} unknown (retry later); by arm: "
-        + ", ".join(f"{a}/{v}={n}" for (a, v), n in sorted(arms.items())))
+    log(f"check-shorts: {got} verdicts, {len(todo) - got} unknown (retry later)"
+        + ("; run ABORTED after consecutive failures -- consent bypass or network broken?" if aborted else "")
+        + "; by arm: " + ", ".join(f"{a}/{v}={n}" for (a, v), n in sorted(arms.items())))
+    return got
 
 
 def fetch_url(url):
@@ -997,13 +1030,14 @@ def main():
         print(f"another tick is already running ({LOCK_PATH}) -- exiting without touching state")
         return
     try:
+        if args.check_shorts or args.recheck_shorts:  # no API quota needed: before load_api_key()
+            check_shorts(recheck_true=args.recheck_shorts)
+            return
         api_key = load_api_key()
         if args.backfill_static:
             backfill_static(api_key)
             return
-        if args.check_shorts or args.recheck_shorts:
-            check_shorts(recheck_true=args.recheck_shorts)
-            return
+        check_shorts(limit=HEAL_SHORTS_PER_TICK)  # heal blank verdicts a few hundred per tick
         cohort = read_csv(COHORT_PATH)
         main = sum(1 for r in cohort if r.get("sampling_arm") == "date_window")
         log(f"tick start: {len(cohort)} cohort rows ({main} main arm; other arms: {arm_counts(cohort)})")

@@ -49,6 +49,7 @@ import yt_shorts  # noqa: E402  -- definitive Shorts check shared with track_new
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT_DIR = os.path.join(os.path.dirname(__file__), "processed")
 EXTRA_NAME = "metadata_extra.json"
+_known_verdicts = {}  # video_id -> "true"/"false" already in metadata_extra.json (never re-probed or overwritten)
 
 
 def load_api_key():
@@ -73,6 +74,7 @@ def pending_videos(data_dir, only_category):
     """(video_id, video_dir, channel_id) for every .done video without an
     extra file yet. channel_id comes from the existing metadata.json."""
     pending = []
+    _known_verdicts.clear()  # rebuilt from the files on every scan
     if not os.path.isdir(data_dir):
         sys.exit(f"No data directory at {data_dir} -- run collect_and_extract.py first")
     for category in sorted(os.listdir(data_dir)):
@@ -92,6 +94,8 @@ def pending_videos(data_dir, only_category):
                         existing = json.load(f)
                 except (OSError, json.JSONDecodeError):
                     existing = {}
+                if existing.get("is_short") in ("true", "false"):
+                    _known_verdicts[video_id] = existing["is_short"]
                 if "published_at_utc" in existing or existing.get("status") == "missing_from_api":
                     continue  # resumable: API fields already backfilled (a shorts-only file is not enough)
             try:
@@ -146,6 +150,8 @@ def shorts_only(data_dir, only_category, recheck=False):
             todo.append((video_id, video_dir))
     print(f"{len(todo)} videos to classify via the /shorts/ URL test")
     verdicts = yt_shorts.classify_many([v for v, _ in todo])
+    if verdicts.pop("__aborted__", None):
+        print("WARNING: check run aborted after consecutive failures -- consent bypass or network broken? (re-run later)")
     written = unknown = 0
     for vid, video_dir in todo:
         v = verdicts.get(vid, "")
@@ -230,7 +236,9 @@ def main():
             time.sleep(args.pacing)
             continue
         returned = {item["id"]: item for item in data.get("items", [])}
-        verdicts = yt_shorts.classify_many([vid for vid, _, _ in batch if vid in returned])
+        # only probe videos that exist and have no definitive verdict yet
+        verdicts = yt_shorts.classify_many([vid for vid, _, _ in batch if vid in returned and vid not in _known_verdicts])
+        verdicts.pop("__aborted__", None)
         for vid, video_dir, channel_id in batch:
             item = returned.get(vid)
             if item is None:
@@ -253,8 +261,10 @@ def main():
                     "status": "ok",
                 }
             extra.update(channel_info.get(channel_id, {}))
-            if vid in verdicts:
-                extra["is_short"] = verdicts[vid]  # "true" / "false" / "" unknown
+            verdict = _known_verdicts.get(vid) or verdicts.get(vid)
+            if verdict:  # definitive only -- an unknown never overwrites a stored verdict
+                extra["is_short"] = verdict
+                extra["is_short_checked_at_utc"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
             extra["backfilled_at_utc"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
             _write_extra(video_dir, extra)
             written += 1
