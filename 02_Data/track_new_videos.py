@@ -836,18 +836,22 @@ def backfill_static(api_key):
         + (f" (not returned by the API -- deleted/private?): {' '.join(unfilled[:40])}" if unfilled else ""))
 
 
-def check_shorts(only_missing=True):
+def check_shorts(recheck_true=False):
     """One-off: fill is_short for cohort rows without a verdict via the
-    definitive /shorts/ URL test (no API quota; ~8 concurrent page fetches).
-    cohort.csv is rewritten atomically."""
+    definitive /shorts/ URL test (no API quota; a few concurrent page
+    fetches). With recheck_true, rows currently "true" are re-examined --
+    needed after 2026-08-29, when unavailable videos were found to answer
+    200 at /shorts/ and had been called Shorts. cohort.csv is rewritten
+    atomically; a recheck that comes back unknown CLEARS the old verdict."""
     header = ensure_fields(COHORT_PATH, COHORT_FIELDS)
     cohort = read_csv(COHORT_PATH)
-    todo = [r["video_id"] for r in cohort if not (only_missing and r.get("is_short"))]
-    log(f"check-shorts: {len(todo)} of {len(cohort)} cohort rows to classify")
+    todo = [r["video_id"] for r in cohort
+            if not r.get("is_short") or (recheck_true and r.get("is_short") == "true")]
+    log(f"check-shorts{' (recheck true)' if recheck_true else ''}: {len(todo)} of {len(cohort)} cohort rows to classify")
     verdicts = yt_shorts.classify_many(todo)
     for r in cohort:
-        if r["video_id"] in verdicts and verdicts[r["video_id"]]:
-            r["is_short"] = verdicts[r["video_id"]]
+        if r["video_id"] in verdicts:
+            r["is_short"] = verdicts[r["video_id"]]  # may be "" -> verdict withdrawn
     tmp = COHORT_PATH + ".tmp"
     with open(tmp, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=header, restval="")
@@ -978,6 +982,8 @@ def main():
                         help="one-off: fill definition/caption/language for cohort rows admitted before 2026-08-27, then exit")
     parser.add_argument("--check-shorts", action="store_true",
                         help="one-off: definitive /shorts/ URL verdict for cohort rows lacking is_short, then exit (no API quota)")
+    parser.add_argument("--recheck-shorts", action="store_true",
+                        help="one-off: re-examine rows currently is_short=true (unavailable videos used to be misread as Shorts), then exit")
     args = parser.parse_args()
     if args.discover_pages is not None:
         if args.discover_pages < 1:
@@ -995,8 +1001,8 @@ def main():
         if args.backfill_static:
             backfill_static(api_key)
             return
-        if args.check_shorts:
-            check_shorts()
+        if args.check_shorts or args.recheck_shorts:
+            check_shorts(recheck_true=args.recheck_shorts)
             return
         cohort = read_csv(COHORT_PATH)
         main = sum(1 for r in cohort if r.get("sampling_arm") == "date_window")

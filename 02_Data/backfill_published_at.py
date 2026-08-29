@@ -119,7 +119,7 @@ def _write_extra(video_dir, extra):
         json.dump(merged, f, indent=2)
 
 
-def shorts_only(data_dir, only_category):
+def shorts_only(data_dir, only_category, recheck=False):
     """Definitive Shorts verdict for every .done video without one, written
     (merged) into metadata_extra.json. No API quota: one page fetch each."""
     todo = []
@@ -141,7 +141,7 @@ def shorts_only(data_dir, only_category):
                         existing = json.load(f)
                 except (OSError, json.JSONDecodeError):
                     existing = {}
-            if existing.get("is_short") in ("true", "false"):
+            if existing.get("is_short") == "false" or (existing.get("is_short") == "true" and not recheck):
                 continue
             todo.append((video_id, video_dir))
     print(f"{len(todo)} videos to classify via the /shorts/ URL test")
@@ -151,10 +151,12 @@ def shorts_only(data_dir, only_category):
         v = verdicts.get(vid, "")
         if not v:
             unknown += 1
+            if recheck:  # withdraw a verdict that the improved test no longer supports
+                _write_extra(video_dir, {"is_short": "", "is_short_checked_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())})
             continue
         _write_extra(video_dir, {"is_short": v, "is_short_checked_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())})
         written += 1
-    print(f"Done: {written} verdicts written, {unknown} unknown (re-run to retry)")
+    print(f"Done: {written} verdicts written, {unknown} unknown" + (" (withdrawn)" if recheck else " (re-run to retry)"))
 
 
 def chunked(items, size=50):
@@ -170,10 +172,13 @@ def main():
     parser.add_argument("--shorts-only", action="store_true",
                         help="only run the definitive /shorts/ URL test (no API key needed) and record is_short "
                              "for every .done video lacking a verdict; API fields are left for a later full run")
+    parser.add_argument("--recheck", action="store_true",
+                        help="with --shorts-only: re-examine videos currently is_short=true (unavailable videos "
+                             "used to be misread as Shorts); an unknown result withdraws the old verdict")
     args = parser.parse_args()
 
     if args.shorts_only:
-        shorts_only(args.data_dir, args.category)
+        shorts_only(args.data_dir, args.category, recheck=args.recheck)
         return
 
     api_key = load_api_key()
