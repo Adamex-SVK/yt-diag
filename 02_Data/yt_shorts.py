@@ -33,7 +33,8 @@ CONSENT_COOKIE = "CONSENT=YES+cb.20240101-01-p0.en+FX+000; SOCS=CAI"
 WORKERS = 4
 PACING_SEC = 0.3  # per request, per worker -- plain page fetches, be polite
 BODY_BYTES = 2_000_000  # the player response sits in the first ~1.3MB of the page
-_PLAYABILITY = re.compile(r'"playabilityStatus":\{"status":"([A-Z_]+)"')
+_PLAYABILITY = re.compile(r'"playabilityStatus":\{"status":"([A-Z_]+)"(?:,"reason":"([^"]{0,120})")?')
+_TITLE = re.compile(r"<title>([^<]*)</title>")
 
 
 class _NoRedirect(urllib.request.HTTPRedirectHandler):
@@ -57,10 +58,32 @@ def fetch_status(url):
 
 
 def playability(body):
-    """'OK' / 'ERROR' / 'LOGIN_REQUIRED' / ... from the embedded player
-    response, or None if the page carries none."""
+    """(status, reason) from the embedded player response -- e.g. ('OK', ''),
+    ('ERROR', 'Video unavailable'), ('LOGIN_REQUIRED', 'Private video'),
+    ('LOGIN_REQUIRED', "Sign in to confirm you're not a bot") -- or
+    (None, '') if the page carries none."""
     m = _PLAYABILITY.search(body or "")
-    return m.group(1) if m else None
+    return (m.group(1), m.group(2) or "") if m else (None, "")
+
+
+def page_has_video(body):
+    """A 200 at /shorts/<id> only means 'no /watch page to redirect to'. The
+    page proves a video exists unless the player response says the video is
+    unavailable (ERROR), or private/removed (LOGIN_REQUIRED without the
+    bot-check reason -- 'Private video' or no reason at all, with an empty
+    '<title> - YouTube'). Found 2026-08-29: 6 private videos of 4-40 minutes
+    had passed as Shorts. YouTube's bot-check (LOGIN_REQUIRED, 'Sign in to
+    confirm you're not a bot') is NOT unavailability -- the redirect signal
+    already decided, the player payload is just gated."""
+    status, reason = playability(body)
+    if status == "ERROR":
+        return False
+    if status == "LOGIN_REQUIRED" and "bot" not in reason.lower():
+        return False
+    t = _TITLE.search(body or "")
+    if t and t.group(1).strip() in ("- YouTube", "YouTube") and status != "LOGIN_REQUIRED":
+        return False  # empty title: no video rendered
+    return True
 
 
 RATE_LIMIT_STATUSES = (429, 403, 503)
@@ -77,7 +100,7 @@ def classify(video_id, retries=1):
         except Exception:
             status, location, body = None, "", ""
         if status == 200:
-            if playability(body) == "ERROR":
+            if not page_has_video(body):
                 return ""  # deleted / private / unavailable: no verdict possible
             return "true"
         if status in (301, 302, 303, 307, 308) and "/watch" in location:
