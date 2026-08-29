@@ -24,7 +24,8 @@ def test_retrospective_adapter_and_registry():
     assert len(df) == 1200 and df.label.notna().all()
     assert abs(df.label.mean() - 0.25) < 0.02  # top quartile per category
     assert available_groups(df) == ["meta", "sched", "vis", "aud", "asset"]
-    assert len(select_columns(df, ("meta",))) == 13  # incl. language, both caption flags, channel age/count/first-upload
+    assert len(select_columns(df, ("meta",))) == 14  # incl. language, both caption flags, channel age/count/first-upload, is_short
+    assert set(df.meta__is_short.dropna().unique()) <= {0, 1}
     assert df.meta__channel_age_days.gt(0).all() and set(df.meta__is_first_upload.unique()) <= {0, 1}
     assert sum(c.startswith("aud__egemaps__") for c in select_columns(df, ("aud",))) == 88
     assert not any(c in LABEL_ONLY for c in select_columns(df, ("meta", "sched", "vis", "aud")))
@@ -53,7 +54,7 @@ def test_baselines_recover_planted_signal():
     assert val["logistic_regression"] > 0.62, val  # planted signal is recoverable
     assert "test" not in res["models"]["logistic_regression"]  # test untouched by default
     res_meta = run_baselines(df, ("meta",), seed=0)
-    assert res_meta["n_features"] == 13
+    assert res_meta["n_features"] == 14
 
 
 def _synthetic_tracking_dir():
@@ -66,7 +67,7 @@ def _synthetic_tracking_dir():
     os.makedirs(os.path.join(d, "texts"))
     cohort_fields = ["video_id", "category", "channel_id", "published_at_utc", "discovered_at_utc", "discovery_source",
                      "sampling_arm", "window_start_utc", "window_end_utc", "search_rank", "duration_sec",
-                     "definition", "caption_available", "default_language", "default_audio_language"]
+                     "definition", "caption_available", "default_language", "default_audio_language", "is_short"]
     pub = "2026-08-20T10:00:00Z"
     rows = []
     N = 24  # >= 8 main-arm videos per category, so the min-label-group rule leaves labels in place
@@ -76,7 +77,8 @@ def _synthetic_tracking_dir():
                          published_at_utc=pub, discovered_at_utc=pub, discovery_source="search:23:comedy:medium",
                          sampling_arm=arm, window_start_utc="", window_end_utc="", search_rank=i + 1, duration_sec=600,
                          definition="hd" if i % 3 else "sd", caption_available=("" if i == 10 else ("true" if i % 2 else "false")),
-                         default_language="", default_audio_language="hi" if i == N - 1 else ("en-US" if i % 2 else "en")))
+                         default_language="", default_audio_language="hi" if i == N - 1 else ("en-US" if i % 2 else "en"),
+                         is_short="" if i == 5 else "false"))
     with open(os.path.join(d, "cohort.csv"), "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=cohort_fields); w.writeheader(); w.writerows(rows)
     # two observations per video: day 1 and day 8 (brackets the 7-day horizon); title edited on day 8
@@ -130,6 +132,7 @@ def test_prospective_adapter_parsing_and_policies():
     assert set(df.meta__caption_available.dropna().unique()) == {0, 1} and df.meta__caption_available.isna().sum() == 1  # '' -> NaN, strings parsed
     assert set(df.meta__definition_hd.unique()) == {0, 1}
     assert set(df.meta__language.unique()) == {"en", "hi"}  # 'en-US' -> 'en'
+    assert df.meta__is_short.isna().sum() == 1 and (df.meta__is_short.dropna() == 0).all()
     # upload-time policy: FIRST observation, never the edited one
     v9 = df[df.video_id == "v09"].iloc[0]  # old-schema first snapshot -> falls back to the FIRST text version
     assert v9.meta__title_length == len("t") and v9.meta__description_length == len("original description") and v9.meta__tag_count == 0

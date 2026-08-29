@@ -127,6 +127,7 @@ def load_retrospective(processed_dir):
                 "meta__auto_captions": int(tinfo["had_auto_captions"]) if "had_auto_captions" in tinfo else np.nan,
                 "meta__category": category,
                 "meta__language": _language(extra.get("default_audio_language"), extra.get("default_language")),
+                "meta__is_short": _flag(extra.get("is_short")),
                 **_schedule_features(extra.get("published_at_utc")),
                 **_channel_features(extra.get("published_at_utc"), extra.get("channel_created_at"),
                                     extra.get("channel_video_count")),
@@ -181,7 +182,7 @@ def load_prospective(tracking_dir, horizon_days=7):
     horizon_h = horizon_days * 24
 
     # schema tolerance: files written before 2026-08-27 lack these columns
-    for c in ("definition", "caption_available", "default_language", "default_audio_language"):
+    for c in ("definition", "caption_available", "default_language", "default_audio_language", "is_short"):
         if c not in cohort.columns:
             cohort[c] = np.nan
     for c in ("description_length", "tag_count"):
@@ -276,6 +277,7 @@ def load_prospective(tracking_dir, horizon_days=7):
             "meta__auto_captions": np.nan,  # not observable without downloading (retrospective only)
             "meta__category": r.category,
             "meta__language": _language(r.default_audio_language, r.default_language),
+            "meta__is_short": _flag(r.is_short),
             **_schedule_features(r.published_at_utc),
             **_channel_features(r.published_at_utc, created, ch.channel_video_count if ch is not None else np.nan),
             "asset__thumbnail_path": os.path.join(tracking_dir, "thumbnails", first_file) if first_file else None,

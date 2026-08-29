@@ -58,6 +58,7 @@ def make_video(rng, category, channel, days_old, collected):
              "default_language": "", "default_audio_language": rng.choice(["en", "en", "en", "de", ""]),
              "channel_created_at": (upload - datetime.timedelta(days=rng.randint(1, 3000))).strftime("%Y-%m-%dT%H:%M:%SZ"),
              "channel_video_count": str(rng.choice([1, 2, 5, 20, 100, 800])),
+             "is_short": "true" if duration <= 60 and rng.random() < 0.9 else "false",
              "status": "ok"}
     return meta, visual, audio, extra, views
 

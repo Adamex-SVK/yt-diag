@@ -43,6 +43,9 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import yt_shorts  # noqa: E402  -- definitive Shorts check shared with track_new_videos.py
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT_DIR = os.path.join(os.path.dirname(__file__), "processed")
 EXTRA_NAME = "metadata_extra.json"
@@ -82,8 +85,15 @@ def pending_videos(data_dir, only_category):
             video_dir = os.path.join(cat_dir, video_id)
             if not os.path.exists(os.path.join(video_dir, ".done")):
                 continue
-            if os.path.exists(os.path.join(video_dir, EXTRA_NAME)):
-                continue  # resumable: already backfilled
+            extra_path = os.path.join(video_dir, EXTRA_NAME)
+            if os.path.exists(extra_path):
+                try:
+                    with open(extra_path, encoding="utf-8") as f:
+                        existing = json.load(f)
+                except (OSError, json.JSONDecodeError):
+                    existing = {}
+                if "published_at_utc" in existing or existing.get("status") == "missing_from_api":
+                    continue  # resumable: API fields already backfilled (a shorts-only file is not enough)
             try:
                 with open(os.path.join(video_dir, "metadata.json"), encoding="utf-8") as f:
                     meta = json.load(f)
@@ -91,6 +101,60 @@ def pending_videos(data_dir, only_category):
                 continue
             pending.append((video_id, video_dir, meta.get("channel_id") or ""))
     return pending
+
+
+def _write_extra(video_dir, extra):
+    """Merge into an existing metadata_extra.json (e.g. one written by
+    --shorts-only) rather than overwriting it."""
+    path = os.path.join(video_dir, EXTRA_NAME)
+    merged = {}
+    if os.path.exists(path):
+        try:
+            with open(path, encoding="utf-8") as f:
+                merged = json.load(f)
+        except (OSError, json.JSONDecodeError):
+            merged = {}
+    merged.update(extra)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(merged, f, indent=2)
+
+
+def shorts_only(data_dir, only_category):
+    """Definitive Shorts verdict for every .done video without one, written
+    (merged) into metadata_extra.json. No API quota: one page fetch each."""
+    todo = []
+    for category in sorted(os.listdir(data_dir)):
+        if only_category and category != only_category:
+            continue
+        cat_dir = os.path.join(data_dir, category)
+        if not os.path.isdir(cat_dir):
+            continue
+        for video_id in sorted(os.listdir(cat_dir)):
+            video_dir = os.path.join(cat_dir, video_id)
+            if not os.path.exists(os.path.join(video_dir, ".done")):
+                continue
+            path = os.path.join(video_dir, EXTRA_NAME)
+            existing = {}
+            if os.path.exists(path):
+                try:
+                    with open(path, encoding="utf-8") as f:
+                        existing = json.load(f)
+                except (OSError, json.JSONDecodeError):
+                    existing = {}
+            if existing.get("is_short") in ("true", "false"):
+                continue
+            todo.append((video_id, video_dir))
+    print(f"{len(todo)} videos to classify via the /shorts/ URL test")
+    verdicts = yt_shorts.classify_many([v for v, _ in todo])
+    written = unknown = 0
+    for vid, video_dir in todo:
+        v = verdicts.get(vid, "")
+        if not v:
+            unknown += 1
+            continue
+        _write_extra(video_dir, {"is_short": v, "is_short_checked_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())})
+        written += 1
+    print(f"Done: {written} verdicts written, {unknown} unknown (re-run to retry)")
 
 
 def chunked(items, size=50):
@@ -103,7 +167,14 @@ def main():
     parser.add_argument("--category", help="backfill only this category")
     parser.add_argument("--data-dir", default=OUT_DIR)
     parser.add_argument("--pacing", type=float, default=0.2, help="seconds between API calls")
+    parser.add_argument("--shorts-only", action="store_true",
+                        help="only run the definitive /shorts/ URL test (no API key needed) and record is_short "
+                             "for every .done video lacking a verdict; API fields are left for a later full run")
     args = parser.parse_args()
+
+    if args.shorts_only:
+        shorts_only(args.data_dir, args.category)
+        return
 
     api_key = load_api_key()
     pending = pending_videos(args.data_dir, args.category)
@@ -154,6 +225,7 @@ def main():
             time.sleep(args.pacing)
             continue
         returned = {item["id"]: item for item in data.get("items", [])}
+        verdicts = yt_shorts.classify_many([vid for vid, _, _ in batch if vid in returned])
         for vid, video_dir, channel_id in batch:
             item = returned.get(vid)
             if item is None:
@@ -176,9 +248,10 @@ def main():
                     "status": "ok",
                 }
             extra.update(channel_info.get(channel_id, {}))
+            if vid in verdicts:
+                extra["is_short"] = verdicts[vid]  # "true" / "false" / "" unknown
             extra["backfilled_at_utc"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
-            with open(os.path.join(video_dir, EXTRA_NAME), "w", encoding="utf-8") as f:
-                json.dump(extra, f, indent=2)
+            _write_extra(video_dir, extra)
             written += 1
         time.sleep(args.pacing)
 

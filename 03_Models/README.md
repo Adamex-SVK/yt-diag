@@ -9,7 +9,7 @@ Two datasets feed the project and they do **not** have the same features — Ada
 
 | Group | Prefix | What | Retrospective | Prospective |
 |---|---|---|---|---|
-| metadata | `meta__` | duration, HD, title/description length, tag count, subscriber count, uploader captions + auto-captions flags, category, uploader-declared language (primary subtag), channel age / upload count / first-upload flag | ✅ (language after backfill) | ✅ (static fields since 2026-08-27 + `--backfill-static`) |
+| metadata | `meta__` | duration, HD, title/description length, tag count, subscriber count, uploader captions + auto-captions flags, category, uploader-declared language (primary subtag), channel age / upload count / first-upload flag, definitive Shorts verdict (`is_short`, a filter) | ✅ (language after backfill) | ✅ (static fields since 2026-08-27 + `--backfill-static`) |
 | schedule | `sched__` | publish hour (sin/cos), weekday, weekend — from a full UTC timestamp | after `backfill_published_at.py` | ✅ |
 | visual engineered | `vis__` | thumbnail + frame aggregates (`visual_features.json`) | ✅ | ❌ |
 | audio engineered | `aud__` | eGeMAPS 88 + pause stats (`audio_features.json`) | ✅ | ❌ |

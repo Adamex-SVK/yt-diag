@@ -27,9 +27,10 @@ One idempotent daily "tick" does everything:
      videoDuration=medium/long, over a bounded publishedAfter/Before window
      that continues from the last checkpoint (first run: now - 24h) with a
      2h overlap; every candidate's contentDetails duration is verified
-     (>= --min-duration-sec) and its uploader-declared language must start
-     with "en" (is_english) before admission, newest-first, until the
-     per-category caps are reached
+     (>= --min-duration-sec), its uploader-declared language must start
+     with "en" (is_english), and the definitive /shorts/ URL test
+     (yt_shorts.py) must say it is not a Short, before admission,
+     newest-first, until the per-category caps are reached
   2. snapshot  -- videos.list (batched 50 per call, statistics+snippet) for
      every cohort video still inside --track-days (plus one terminal sample
      past it) whose last snapshot is older than --min-gap-hours, recording
@@ -70,6 +71,7 @@ Usage:
     python3 02_Data/track_new_videos.py --no-discover  # snapshot only
     python3 02_Data/track_new_videos.py --max-cohort 12000 --track-days 30
     python3 02_Data/track_new_videos.py --backfill-static   # one-off: fill static fields for older rows
+    python3 02_Data/track_new_videos.py --check-shorts      # one-off: definitive Shorts verdict for older rows (no quota)
 
 Requires in project-root .env: YOUTUBE_API_KEY=... (use a dedicated key /
 Google Cloud project so tracking never competes with collection quota).
@@ -84,6 +86,9 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import yt_shorts  # noqa: E402  -- definitive Shorts check shared with backfill_published_at.py
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TRACK_DIR = os.path.join(os.path.dirname(__file__), "tracking")
@@ -200,7 +205,11 @@ COHORT_FIELDS = ["video_id", "category", "channel_id", "published_at_utc",
                  # and threw these away -- they are the prospective dataset's
                  # metadata-baseline columns (FEATURES.md 1) and language.
                  "definition", "caption_available", "default_language",
-                 "default_audio_language"]
+                 "default_audio_language",
+                 # definitive Shorts verdict from the /shorts/<id> URL test
+                 # (yt_shorts.py): "true" / "false" / "" unknown. Duration is
+                 # only a proxy; this is the ground truth (added 2026-08-29).
+                 "is_short"]
 STATIC_FIELDS = ("definition", "caption_available", "default_language", "default_audio_language")
 # Found 2026-08-27 by backfilling the language fields: only ~39% of the
 # API-returned cohort declared an English language (audio, else metadata;
@@ -417,6 +426,7 @@ def discover(api_key, cohort, args):
     new_rows = []
     dropped_short = 0
     dropped_language = 0
+    dropped_short_verdict = 0
     failed_calls = 0
     for category, spec in CATEGORIES.items():
         if counts.get(category, 0) >= per_category_cap:
@@ -496,6 +506,7 @@ def discover(api_key, cohort, args):
         # otherwise, near the cap, earlier arms and medium-length videos
         # would always win admission by loop order, making the capped sample
         # depend on iteration order instead of the order=date frame.
+        admissible = []
         for c in sorted(candidates, key=lambda r: (r["published_at_utc"], r["video_id"]), reverse=True):
             dur = durations.get(c["video_id"])
             if dur is None or dur < args.min_duration_sec:
@@ -508,6 +519,16 @@ def discover(api_key, cohort, args):
                 break
             c["duration_sec"] = dur
             c.update(statics.get(c["video_id"], {}))
+            admissible.append(c)
+        # Definitive Shorts check on the survivors (one plain HTTP request each,
+        # no quota): duration >= 4min should already exclude every Short, so
+        # this is verification -- a "true" here is rejected and logged.
+        verdicts = yt_shorts.classify_many([c["video_id"] for c in admissible])
+        for c in admissible:
+            c["is_short"] = verdicts.get(c["video_id"], "")
+            if c["is_short"] == "true":
+                dropped_short_verdict += 1
+                continue
             counts[category] = counts.get(category, 0) + 1
             new_rows.append(c)
         log(f"discover {category}: cohort now {counts.get(category, 0)}/{per_category_cap}")
@@ -518,6 +539,9 @@ def discover(api_key, cohort, args):
     if dropped_language:
         log(f"discover: {dropped_language} candidates rejected -- declared language not '{ENGLISH_PREFIX}*' "
             f"(relevanceLanguage=en is only a ranking hint)")
+    if dropped_short_verdict:
+        log(f"discover: {dropped_short_verdict} candidates rejected -- the /shorts/ URL test says Short "
+            f"despite duration >= {args.min_duration_sec}s")
     if new_rows:
         append_rows(COHORT_PATH, COHORT_FIELDS, new_rows)
     if failed_calls:
@@ -812,6 +836,33 @@ def backfill_static(api_key):
         + (f" (not returned by the API -- deleted/private?): {' '.join(unfilled[:40])}" if unfilled else ""))
 
 
+def check_shorts(only_missing=True):
+    """One-off: fill is_short for cohort rows without a verdict via the
+    definitive /shorts/ URL test (no API quota; ~8 concurrent page fetches).
+    cohort.csv is rewritten atomically."""
+    header = ensure_fields(COHORT_PATH, COHORT_FIELDS)
+    cohort = read_csv(COHORT_PATH)
+    todo = [r["video_id"] for r in cohort if not (only_missing and r.get("is_short"))]
+    log(f"check-shorts: {len(todo)} of {len(cohort)} cohort rows to classify")
+    verdicts = yt_shorts.classify_many(todo)
+    for r in cohort:
+        if r["video_id"] in verdicts and verdicts[r["video_id"]]:
+            r["is_short"] = verdicts[r["video_id"]]
+    tmp = COHORT_PATH + ".tmp"
+    with open(tmp, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=header, restval="")
+        w.writeheader()
+        w.writerows({k: r.get(k, "") for k in header} for r in cohort)
+    os.replace(tmp, COHORT_PATH)
+    got = sum(1 for v in verdicts.values() if v)
+    arms = {}
+    for r in cohort:
+        key = (r.get("sampling_arm", ""), r.get("is_short", "") or "unknown")
+        arms[key] = arms.get(key, 0) + 1
+    log(f"check-shorts: {got} verdicts, {len(todo) - got} unknown (retry later); by arm: "
+        + ", ".join(f"{a}/{v}={n}" for (a, v), n in sorted(arms.items())))
+
+
 def fetch_url(url):
     """Plain HTTP GET returning bytes. Isolated so tests can stub it."""
     with urllib.request.urlopen(url, timeout=30) as resp:
@@ -925,6 +976,8 @@ def main():
                         help="snapshot only (e.g. after the cohort is full/frozen)")
     parser.add_argument("--backfill-static", action="store_true",
                         help="one-off: fill definition/caption/language for cohort rows admitted before 2026-08-27, then exit")
+    parser.add_argument("--check-shorts", action="store_true",
+                        help="one-off: definitive /shorts/ URL verdict for cohort rows lacking is_short, then exit (no API quota)")
     args = parser.parse_args()
     if args.discover_pages is not None:
         if args.discover_pages < 1:
@@ -941,6 +994,9 @@ def main():
         api_key = load_api_key()
         if args.backfill_static:
             backfill_static(api_key)
+            return
+        if args.check_shorts:
+            check_shorts()
             return
         cohort = read_csv(COHORT_PATH)
         main = sum(1 for r in cohort if r.get("sampling_arm") == "date_window")

@@ -36,6 +36,10 @@ META_COLUMNS = [
     # (prospective: count at first observation; retrospective: current count,
     # post-outcome -- coarse)
     "meta__channel_age_days", "meta__channel_video_count", "meta__is_first_upload",
+    # definitive Shorts verdict from the /shorts/<id> URL test (yt_shorts.py):
+    # 1/0/NaN. Primarily a FILTER (the main arms exclude Shorts); constant
+    # within a Shorts-free cohort, so rarely a useful predictor.
+    "meta__is_short",
 ]
 SCHED_COLUMNS = ["sched__hour_sin", "sched__hour_cos", "sched__weekday", "sched__is_weekend"]
 VIS_THUMB = ["cct", "brightness", "saturation", "contrast", "has_face",
