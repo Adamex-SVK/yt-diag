@@ -1,0 +1,225 @@
+1
+00:00:00,080 --> 00:00:02,149
+
+how to convert any low resolution photo
+
+2
+00:00:02,149 --> 00:00:02,159
+how to convert any low resolution photo
+ 
+
+3
+00:00:02,159 --> 00:00:04,710
+how to convert any low resolution photo
+into high resolution in photoshop
+
+4
+00:00:04,710 --> 00:00:04,720
+into high resolution in photoshop
+ 
+
+5
+00:00:04,720 --> 00:00:06,869
+into high resolution in photoshop
+here is the very low resolution photo we
+
+6
+00:00:06,869 --> 00:00:06,879
+here is the very low resolution photo we
+ 
+
+7
+00:00:06,879 --> 00:00:08,629
+here is the very low resolution photo we
+can't use this to share online due to
+
+8
+00:00:08,629 --> 00:00:08,639
+can't use this to share online due to
+ 
+
+9
+00:00:08,639 --> 00:00:10,310
+can't use this to share online due to
+the lack of quality
+
+10
+00:00:10,310 --> 00:00:10,320
+the lack of quality
+ 
+
+11
+00:00:10,320 --> 00:00:11,990
+the lack of quality
+but luckily you can improve image
+
+12
+00:00:11,990 --> 00:00:12,000
+but luckily you can improve image
+ 
+
+13
+00:00:12,000 --> 00:00:13,910
+but luckily you can improve image
+resolution in photoshop with a simple
+
+14
+00:00:13,910 --> 00:00:13,920
+resolution in photoshop with a simple
+ 
+
+15
+00:00:13,920 --> 00:00:15,270
+resolution in photoshop with a simple
+technique
+
+16
+00:00:15,270 --> 00:00:15,280
+technique
+ 
+
+17
+00:00:15,280 --> 00:00:17,349
+technique
+open preferences from the edit menu then
+
+18
+00:00:17,349 --> 00:00:17,359
+open preferences from the edit menu then
+ 
+
+19
+00:00:17,359 --> 00:00:19,510
+open preferences from the edit menu then
+choose technology previews
+
+20
+00:00:19,510 --> 00:00:19,520
+choose technology previews
+ 
+
+21
+00:00:19,520 --> 00:00:22,310
+choose technology previews
+in here enable preserve details 2.0
+
+22
+00:00:22,310 --> 00:00:22,320
+in here enable preserve details 2.0
+ 
+
+23
+00:00:22,320 --> 00:00:23,269
+in here enable preserve details 2.0
+update
+
+24
+00:00:23,269 --> 00:00:23,279
+update
+ 
+
+25
+00:00:23,279 --> 00:00:24,790
+update
+hit ok
+
+26
+00:00:24,790 --> 00:00:24,800
+hit ok
+ 
+
+27
+00:00:24,800 --> 00:00:26,790
+hit ok
+then go to the image size option and
+
+28
+00:00:26,790 --> 00:00:26,800
+then go to the image size option and
+ 
+
+29
+00:00:26,800 --> 00:00:33,350
+then go to the image size option and
+increase the resolution of the image
+
+30
+00:00:33,350 --> 00:00:33,360
+
+ 
+
+31
+00:00:33,360 --> 00:00:35,430
+
+check to resample and choose to preserve
+
+32
+00:00:35,430 --> 00:00:35,440
+check to resample and choose to preserve
+ 
+
+33
+00:00:35,440 --> 00:00:37,670
+check to resample and choose to preserve
+details 2.0
+
+34
+00:00:37,670 --> 00:00:37,680
+details 2.0
+ 
+
+35
+00:00:37,680 --> 00:00:39,750
+details 2.0
+if the final image looks too much sharp
+
+36
+00:00:39,750 --> 00:00:39,760
+if the final image looks too much sharp
+ 
+
+37
+00:00:39,760 --> 00:00:41,590
+if the final image looks too much sharp
+try reduce noise slider to balance
+
+38
+00:00:41,590 --> 00:00:41,600
+try reduce noise slider to balance
+ 
+
+39
+00:00:41,600 --> 00:00:47,110
+try reduce noise slider to balance
+between smoothness and texture
+
+40
+00:00:47,110 --> 00:00:47,120
+
+ 
+
+41
+00:00:47,120 --> 00:00:49,270
+
+here is high resolution image
+
+42
+00:00:49,270 --> 00:00:49,280
+here is high resolution image
+ 
+
+43
+00:00:49,280 --> 00:00:50,790
+here is high resolution image
+thanks for watching
+
+44
+00:00:50,790 --> 00:00:50,800
+thanks for watching
+ 
+
+45
+00:00:50,800 --> 00:00:53,920
+thanks for watching
+please subscribe
+

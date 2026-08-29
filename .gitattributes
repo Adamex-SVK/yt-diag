@@ -1,0 +1,7 @@
+# Git LFS: binary frame/thumbnail images in the collected dataset
+# (~3.9GB across 1,860 videos as of 2026-08-28 -- see 02_Data/README.md).
+# JSON/txt/srt features and transcripts stay as normal git text files.
+02_Data/processed/**/*.jpg filter=lfs diff=lfs merge=lfs -text
+02_Data/processed/**/*.jpeg filter=lfs diff=lfs merge=lfs -text
+02_Data/processed/**/*.webp filter=lfs diff=lfs merge=lfs -text
+02_Data/processed/**/*.png filter=lfs diff=lfs merge=lfs -text

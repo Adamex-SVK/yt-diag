@@ -1,0 +1,1195 @@
+1
+00:00:00,000 --> 00:00:01,610
+
+hello and welcome to how to play
+
+2
+00:00:01,610 --> 00:00:01,620
+hello and welcome to how to play
+ 
+
+3
+00:00:01,620 --> 00:00:04,450
+hello and welcome to how to play
+backgammon presented by gather together
+
+4
+00:00:04,450 --> 00:00:04,460
+backgammon presented by gather together
+ 
+
+5
+00:00:04,460 --> 00:00:09,790
+backgammon presented by gather together
+games.com
+
+6
+00:00:09,790 --> 00:00:09,800
+
+ 
+
+7
+00:00:09,800 --> 00:00:15,220
+
+[Music]
+
+8
+00:00:15,220 --> 00:00:15,230
+[Music]
+ 
+
+9
+00:00:15,230 --> 00:00:17,720
+[Music]
+this video will cover the basics on how
+
+10
+00:00:17,720 --> 00:00:17,730
+this video will cover the basics on how
+ 
+
+11
+00:00:17,730 --> 00:00:19,910
+this video will cover the basics on how
+to play the game backgammon the video
+
+12
+00:00:19,910 --> 00:00:19,920
+to play the game backgammon the video
+ 
+
+13
+00:00:19,920 --> 00:00:21,410
+to play the game backgammon the video
+will start with the general concepts and
+
+14
+00:00:21,410 --> 00:00:21,420
+will start with the general concepts and
+ 
+
+15
+00:00:21,420 --> 00:00:23,000
+will start with the general concepts and
+gameplay and then get into more of the
+
+16
+00:00:23,000 --> 00:00:23,010
+gameplay and then get into more of the
+ 
+
+17
+00:00:23,010 --> 00:00:26,870
+gameplay and then get into more of the
+details for the game backgammon is a
+
+18
+00:00:26,870 --> 00:00:26,880
+details for the game backgammon is a
+ 
+
+19
+00:00:26,880 --> 00:00:28,850
+details for the game backgammon is a
+two-player game with a player sitting on
+
+20
+00:00:28,850 --> 00:00:28,860
+two-player game with a player sitting on
+ 
+
+21
+00:00:28,860 --> 00:00:30,770
+two-player game with a player sitting on
+each side of the board the board has
+
+22
+00:00:30,770 --> 00:00:30,780
+each side of the board the board has
+ 
+
+23
+00:00:30,780 --> 00:00:33,290
+each side of the board the board has
+four quadrants and each quadrant has six
+
+24
+00:00:33,290 --> 00:00:33,300
+four quadrants and each quadrant has six
+ 
+
+25
+00:00:33,300 --> 00:00:35,780
+four quadrants and each quadrant has six
+points these points can be seen as the
+
+26
+00:00:35,780 --> 00:00:35,790
+points these points can be seen as the
+ 
+
+27
+00:00:35,790 --> 00:00:38,930
+points these points can be seen as the
+boards spaces giving the board a total
+
+28
+00:00:38,930 --> 00:00:38,940
+boards spaces giving the board a total
+ 
+
+29
+00:00:38,940 --> 00:00:42,320
+boards spaces giving the board a total
+of 24 spaces each player has 15 checkers
+
+30
+00:00:42,320 --> 00:00:42,330
+of 24 spaces each player has 15 checkers
+ 
+
+31
+00:00:42,330 --> 00:00:44,930
+of 24 spaces each player has 15 checkers
+player one has the dark colored checkers
+
+32
+00:00:44,930 --> 00:00:44,940
+player one has the dark colored checkers
+ 
+
+33
+00:00:44,940 --> 00:00:47,240
+player one has the dark colored checkers
+and they are set up as follows player 2
+
+34
+00:00:47,240 --> 00:00:47,250
+and they are set up as follows player 2
+ 
+
+35
+00:00:47,250 --> 00:00:49,130
+and they are set up as follows player 2
+has the light colored checkers and they
+
+36
+00:00:49,130 --> 00:00:49,140
+has the light colored checkers and they
+ 
+
+37
+00:00:49,140 --> 00:00:51,500
+has the light colored checkers and they
+are set up to mir player ones checkers
+
+38
+00:00:51,500 --> 00:00:51,510
+are set up to mir player ones checkers
+ 
+
+39
+00:00:51,510 --> 00:00:53,630
+are set up to mir player ones checkers
+during gameplay player ones checkers
+
+40
+00:00:53,630 --> 00:00:53,640
+during gameplay player ones checkers
+ 
+
+41
+00:00:53,640 --> 00:00:54,950
+during gameplay player ones checkers
+will only be able to move
+
+42
+00:00:54,950 --> 00:00:54,960
+will only be able to move
+ 
+
+43
+00:00:54,960 --> 00:00:56,960
+will only be able to move
+counterclockwise and player twos
+
+44
+00:00:56,960 --> 00:00:56,970
+counterclockwise and player twos
+ 
+
+45
+00:00:56,970 --> 00:00:58,640
+counterclockwise and player twos
+checkers will only be able to move
+
+46
+00:00:58,640 --> 00:00:58,650
+checkers will only be able to move
+ 
+
+47
+00:00:58,650 --> 00:01:02,960
+checkers will only be able to move
+clockwise the object of the game is to
+
+48
+00:01:02,960 --> 00:01:02,970
+clockwise the object of the game is to
+ 
+
+49
+00:01:02,970 --> 00:01:04,640
+clockwise the object of the game is to
+be the first player to remove all his
+
+50
+00:01:04,640 --> 00:01:04,650
+be the first player to remove all his
+ 
+
+51
+00:01:04,650 --> 00:01:06,830
+be the first player to remove all his
+checkers off the board checkers can be
+
+52
+00:01:06,830 --> 00:01:06,840
+checkers off the board checkers can be
+ 
+
+53
+00:01:06,840 --> 00:01:08,780
+checkers off the board checkers can be
+removed only when all your checkers are
+
+54
+00:01:08,780 --> 00:01:08,790
+removed only when all your checkers are
+ 
+
+55
+00:01:08,790 --> 00:01:11,480
+removed only when all your checkers are
+within your home board each players home
+
+56
+00:01:11,480 --> 00:01:11,490
+within your home board each players home
+ 
+
+57
+00:01:11,490 --> 00:01:13,640
+within your home board each players home
+board are the first six points in front
+
+58
+00:01:13,640 --> 00:01:13,650
+board are the first six points in front
+ 
+
+59
+00:01:13,650 --> 00:01:14,810
+board are the first six points in front
+of them shown here
+
+60
+00:01:14,810 --> 00:01:14,820
+of them shown here
+ 
+
+61
+00:01:14,820 --> 00:01:20,200
+of them shown here
+for player 1 and here for player 2
+
+62
+00:01:20,200 --> 00:01:20,210
+
+ 
+
+63
+00:01:20,210 --> 00:01:22,820
+
+the game begins with each player rolling
+
+64
+00:01:22,820 --> 00:01:22,830
+the game begins with each player rolling
+ 
+
+65
+00:01:22,830 --> 00:01:24,620
+the game begins with each player rolling
+one die the player with the higher
+
+66
+00:01:24,620 --> 00:01:24,630
+one die the player with the higher
+ 
+
+67
+00:01:24,630 --> 00:01:27,080
+one die the player with the higher
+number rolled gets to use both dice for
+
+68
+00:01:27,080 --> 00:01:27,090
+number rolled gets to use both dice for
+ 
+
+69
+00:01:27,090 --> 00:01:29,210
+number rolled gets to use both dice for
+the first move player 2 rolled the
+
+70
+00:01:29,210 --> 00:01:29,220
+the first move player 2 rolled the
+ 
+
+71
+00:01:29,220 --> 00:01:31,310
+the first move player 2 rolled the
+higher four and gets to move first the
+
+72
+00:01:31,310 --> 00:01:31,320
+higher four and gets to move first the
+ 
+
+73
+00:01:31,320 --> 00:01:33,320
+higher four and gets to move first the
+number rolled on each die equals the
+
+74
+00:01:33,320 --> 00:01:33,330
+number rolled on each die equals the
+ 
+
+75
+00:01:33,330 --> 00:01:35,270
+number rolled on each die equals the
+number of spaces the player can move a
+
+76
+00:01:35,270 --> 00:01:35,280
+number of spaces the player can move a
+ 
+
+77
+00:01:35,280 --> 00:01:37,670
+number of spaces the player can move a
+checker player 2 moves one checker two
+
+78
+00:01:37,670 --> 00:01:37,680
+checker player 2 moves one checker two
+ 
+
+79
+00:01:37,680 --> 00:01:39,620
+checker player 2 moves one checker two
+spaces for the two rolled and moves
+
+80
+00:01:39,620 --> 00:01:39,630
+spaces for the two rolled and moves
+ 
+
+81
+00:01:39,630 --> 00:01:41,840
+spaces for the two rolled and moves
+another checker four spaces for the four
+
+82
+00:01:41,840 --> 00:01:41,850
+another checker four spaces for the four
+ 
+
+83
+00:01:41,850 --> 00:01:45,260
+another checker four spaces for the four
+rolled play moves to player one going
+
+84
+00:01:45,260 --> 00:01:45,270
+rolled play moves to player one going
+ 
+
+85
+00:01:45,270 --> 00:01:47,300
+rolled play moves to player one going
+forward players rolled their own two
+
+86
+00:01:47,300 --> 00:01:47,310
+forward players rolled their own two
+ 
+
+87
+00:01:47,310 --> 00:01:49,730
+forward players rolled their own two
+dice and move accordingly player one
+
+88
+00:01:49,730 --> 00:01:49,740
+dice and move accordingly player one
+ 
+
+89
+00:01:49,740 --> 00:01:52,160
+dice and move accordingly player one
+rolls a four and A one player 1 moves
+
+90
+00:01:52,160 --> 00:01:52,170
+rolls a four and A one player 1 moves
+ 
+
+91
+00:01:52,170 --> 00:01:54,170
+rolls a four and A one player 1 moves
+one checker four spaces for the four
+
+92
+00:01:54,170 --> 00:01:54,180
+one checker four spaces for the four
+ 
+
+93
+00:01:54,180 --> 00:01:56,420
+one checker four spaces for the four
+rolled and moves the same checker one
+
+94
+00:01:56,420 --> 00:01:56,430
+rolled and moves the same checker one
+ 
+
+95
+00:01:56,430 --> 00:01:58,820
+rolled and moves the same checker one
+more space for the one rolled play moves
+
+96
+00:01:58,820 --> 00:01:58,830
+more space for the one rolled play moves
+ 
+
+97
+00:01:58,830 --> 00:02:00,950
+more space for the one rolled play moves
+back to player two to roll players
+
+98
+00:02:00,950 --> 00:02:00,960
+back to player two to roll players
+ 
+
+99
+00:02:00,960 --> 00:02:02,690
+back to player two to roll players
+continue to take turns rolling and
+
+100
+00:02:02,690 --> 00:02:02,700
+continue to take turns rolling and
+ 
+
+101
+00:02:02,700 --> 00:02:06,770
+continue to take turns rolling and
+moving checkers a player is not allowed
+
+102
+00:02:06,770 --> 00:02:06,780
+moving checkers a player is not allowed
+ 
+
+103
+00:02:06,780 --> 00:02:08,540
+moving checkers a player is not allowed
+to move a checker to a space that is
+
+104
+00:02:08,540 --> 00:02:08,550
+to move a checker to a space that is
+ 
+
+105
+00:02:08,550 --> 00:02:10,460
+to move a checker to a space that is
+occupied by two or more of the
+
+106
+00:02:10,460 --> 00:02:10,470
+occupied by two or more of the
+ 
+
+107
+00:02:10,470 --> 00:02:12,860
+occupied by two or more of the
+opponent's checkers here player one
+
+108
+00:02:12,860 --> 00:02:12,870
+opponent's checkers here player one
+ 
+
+109
+00:02:12,870 --> 00:02:14,630
+opponent's checkers here player one
+would not be able to move this checker
+
+110
+00:02:14,630 --> 00:02:14,640
+would not be able to move this checker
+ 
+
+111
+00:02:14,640 --> 00:02:17,270
+would not be able to move this checker
+six spaces for the six rolled since the
+
+112
+00:02:17,270 --> 00:02:17,280
+six spaces for the six rolled since the
+ 
+
+113
+00:02:17,280 --> 00:02:19,220
+six spaces for the six rolled since the
+landing space is blocked by player two's
+
+114
+00:02:19,220 --> 00:02:19,230
+landing space is blocked by player two's
+ 
+
+115
+00:02:19,230 --> 00:02:21,320
+landing space is blocked by player two's
+checkers when a player lands on a space
+
+116
+00:02:21,320 --> 00:02:21,330
+checkers when a player lands on a space
+ 
+
+117
+00:02:21,330 --> 00:02:23,240
+checkers when a player lands on a space
+that is occupied by only one of the
+
+118
+00:02:23,240 --> 00:02:23,250
+that is occupied by only one of the
+ 
+
+119
+00:02:23,250 --> 00:02:25,310
+that is occupied by only one of the
+opponent's checkers the opponent's
+
+120
+00:02:25,310 --> 00:02:25,320
+opponent's checkers the opponent's
+ 
+
+121
+00:02:25,320 --> 00:02:27,560
+opponent's checkers the opponent's
+checker is moved to the middle bar here
+
+122
+00:02:27,560 --> 00:02:27,570
+checker is moved to the middle bar here
+ 
+
+123
+00:02:27,570 --> 00:02:29,600
+checker is moved to the middle bar here
+player 1 moves one space for the one
+
+124
+00:02:29,600 --> 00:02:29,610
+player 1 moves one space for the one
+ 
+
+125
+00:02:29,610 --> 00:02:31,940
+player 1 moves one space for the one
+rolled and lands on the single checker
+
+126
+00:02:31,940 --> 00:02:31,950
+rolled and lands on the single checker
+ 
+
+127
+00:02:31,950 --> 00:02:34,610
+rolled and lands on the single checker
+of player two player two's checker is
+
+128
+00:02:34,610 --> 00:02:34,620
+of player two player two's checker is
+ 
+
+129
+00:02:34,620 --> 00:02:36,320
+of player two player two's checker is
+moved to the middle bar when a player
+
+130
+00:02:36,320 --> 00:02:36,330
+moved to the middle bar when a player
+ 
+
+131
+00:02:36,330 --> 00:02:38,540
+moved to the middle bar when a player
+has a checker on the bar the player must
+
+132
+00:02:38,540 --> 00:02:38,550
+has a checker on the bar the player must
+ 
+
+133
+00:02:38,550 --> 00:02:40,400
+has a checker on the bar the player must
+return it into gameplay before moving
+
+134
+00:02:40,400 --> 00:02:40,410
+return it into gameplay before moving
+ 
+
+135
+00:02:40,410 --> 00:02:41,630
+return it into gameplay before moving
+any other checker
+
+136
+00:02:41,630 --> 00:02:41,640
+any other checker
+ 
+
+137
+00:02:41,640 --> 00:02:43,790
+any other checker
+a checker on the bar returns to the
+
+138
+00:02:43,790 --> 00:02:43,800
+a checker on the bar returns to the
+ 
+
+139
+00:02:43,800 --> 00:02:45,410
+a checker on the bar returns to the
+board starting with the farthest space
+
+140
+00:02:45,410 --> 00:02:45,420
+board starting with the farthest space
+ 
+
+141
+00:02:45,420 --> 00:02:48,290
+board starting with the farthest space
+for the player here player 2 will return
+
+142
+00:02:48,290 --> 00:02:48,300
+for the player here player 2 will return
+ 
+
+143
+00:02:48,300 --> 00:02:50,420
+for the player here player 2 will return
+the bar to checker one space for the one
+
+144
+00:02:50,420 --> 00:02:50,430
+the bar to checker one space for the one
+ 
+
+145
+00:02:50,430 --> 00:02:52,220
+the bar to checker one space for the one
+rolled now that the checker has been
+
+146
+00:02:52,220 --> 00:02:52,230
+rolled now that the checker has been
+ 
+
+147
+00:02:52,230 --> 00:02:54,199
+rolled now that the checker has been
+returned to the board player 2 can move
+
+148
+00:02:54,199 --> 00:02:54,209
+returned to the board player 2 can move
+ 
+
+149
+00:02:54,209 --> 00:02:56,509
+returned to the board player 2 can move
+any checker for the two rolled if a
+
+150
+00:02:56,509 --> 00:02:56,519
+any checker for the two rolled if a
+ 
+
+151
+00:02:56,519 --> 00:02:58,400
+any checker for the two rolled if a
+player rolls the same number on both
+
+152
+00:02:58,400 --> 00:02:58,410
+player rolls the same number on both
+ 
+
+153
+00:02:58,410 --> 00:03:01,160
+player rolls the same number on both
+dice is known as rolling doubles the
+
+154
+00:03:01,160 --> 00:03:01,170
+dice is known as rolling doubles the
+ 
+
+155
+00:03:01,170 --> 00:03:02,990
+dice is known as rolling doubles the
+player that rolled doubles gets to move
+
+156
+00:03:02,990 --> 00:03:03,000
+player that rolled doubles gets to move
+ 
+
+157
+00:03:03,000 --> 00:03:05,630
+player that rolled doubles gets to move
+a total of four times twice for each die
+
+158
+00:03:05,630 --> 00:03:05,640
+a total of four times twice for each die
+ 
+
+159
+00:03:05,640 --> 00:03:08,150
+a total of four times twice for each die
+here player 2 rolls double threes a
+
+160
+00:03:08,150 --> 00:03:08,160
+here player 2 rolls double threes a
+ 
+
+161
+00:03:08,160 --> 00:03:10,820
+here player 2 rolls double threes a
+total of four moves of three spaces each
+
+162
+00:03:10,820 --> 00:03:10,830
+total of four moves of three spaces each
+ 
+
+163
+00:03:10,830 --> 00:03:13,100
+total of four moves of three spaces each
+are taken by player two when moving the
+
+164
+00:03:13,100 --> 00:03:13,110
+are taken by player two when moving the
+ 
+
+165
+00:03:13,110 --> 00:03:15,890
+are taken by player two when moving the
+same checker with both dice numbers the
+
+166
+00:03:15,890 --> 00:03:15,900
+same checker with both dice numbers the
+ 
+
+167
+00:03:15,900 --> 00:03:18,410
+same checker with both dice numbers the
+intermediate point has to be open for
+
+168
+00:03:18,410 --> 00:03:18,420
+intermediate point has to be open for
+ 
+
+169
+00:03:18,420 --> 00:03:20,750
+intermediate point has to be open for
+example player 1 has rolled a three and
+
+170
+00:03:20,750 --> 00:03:20,760
+example player 1 has rolled a three and
+ 
+
+171
+00:03:20,760 --> 00:03:21,229
+example player 1 has rolled a three and
+a four
+
+172
+00:03:21,229 --> 00:03:21,239
+a four
+ 
+
+173
+00:03:21,239 --> 00:03:24,590
+a four
+although seven spaces away is open this
+
+174
+00:03:24,590 --> 00:03:24,600
+although seven spaces away is open this
+ 
+
+175
+00:03:24,600 --> 00:03:26,539
+although seven spaces away is open this
+move cannot be made because both three
+
+176
+00:03:26,539 --> 00:03:26,549
+move cannot be made because both three
+ 
+
+177
+00:03:26,549 --> 00:03:28,759
+move cannot be made because both three
+spaces away and four spaces away are
+
+178
+00:03:28,759 --> 00:03:28,769
+spaces away and four spaces away are
+ 
+
+179
+00:03:28,769 --> 00:03:30,590
+spaces away and four spaces away are
+block
+
+180
+00:03:30,590 --> 00:03:30,600
+block
+ 
+
+181
+00:03:30,600 --> 00:03:33,180
+block
+going back to the gameplay both players
+
+182
+00:03:33,180 --> 00:03:33,190
+going back to the gameplay both players
+ 
+
+183
+00:03:33,190 --> 00:03:34,890
+going back to the gameplay both players
+have moved all their checkers to their
+
+184
+00:03:34,890 --> 00:03:34,900
+have moved all their checkers to their
+ 
+
+185
+00:03:34,900 --> 00:03:36,750
+have moved all their checkers to their
+home board once you have all your
+
+186
+00:03:36,750 --> 00:03:36,760
+home board once you have all your
+ 
+
+187
+00:03:36,760 --> 00:03:38,340
+home board once you have all your
+checkers in your home board you can
+
+188
+00:03:38,340 --> 00:03:38,350
+checkers in your home board you can
+ 
+
+189
+00:03:38,350 --> 00:03:40,320
+checkers in your home board you can
+begin taking checkers off the board with
+
+190
+00:03:40,320 --> 00:03:40,330
+begin taking checkers off the board with
+ 
+
+191
+00:03:40,330 --> 00:03:42,450
+begin taking checkers off the board with
+each roll player two rolls and moves a
+
+192
+00:03:42,450 --> 00:03:42,460
+each roll player two rolls and moves a
+ 
+
+193
+00:03:42,460 --> 00:03:44,550
+each roll player two rolls and moves a
+checker six spaces for these six rolled
+
+194
+00:03:44,550 --> 00:03:44,560
+checker six spaces for these six rolled
+ 
+
+195
+00:03:44,560 --> 00:03:46,890
+checker six spaces for these six rolled
+to get a checker off the board player
+
+196
+00:03:46,890 --> 00:03:46,900
+to get a checker off the board player
+ 
+
+197
+00:03:46,900 --> 00:03:48,780
+to get a checker off the board player
+two then moves a checker three spaces
+
+198
+00:03:48,780 --> 00:03:48,790
+two then moves a checker three spaces
+ 
+
+199
+00:03:48,790 --> 00:03:50,670
+two then moves a checker three spaces
+for the three-year-old player one goes
+
+200
+00:03:50,670 --> 00:03:50,680
+for the three-year-old player one goes
+ 
+
+201
+00:03:50,680 --> 00:03:52,650
+for the three-year-old player one goes
+next and can move one checker off the
+
+202
+00:03:52,650 --> 00:03:52,660
+next and can move one checker off the
+ 
+
+203
+00:03:52,660 --> 00:03:54,810
+next and can move one checker off the
+board with the two rolled and moves one
+
+204
+00:03:54,810 --> 00:03:54,820
+board with the two rolled and moves one
+ 
+
+205
+00:03:54,820 --> 00:03:56,670
+board with the two rolled and moves one
+checker one space for the one rolled
+
+206
+00:03:56,670 --> 00:03:56,680
+checker one space for the one rolled
+ 
+
+207
+00:03:56,680 --> 00:03:58,560
+checker one space for the one rolled
+players continue to take turns rolling
+
+208
+00:03:58,560 --> 00:03:58,570
+players continue to take turns rolling
+ 
+
+209
+00:03:58,570 --> 00:04:00,810
+players continue to take turns rolling
+and moving the first player with all
+
+210
+00:04:00,810 --> 00:04:00,820
+and moving the first player with all
+ 
+
+211
+00:04:00,820 --> 00:04:04,100
+and moving the first player with all
+their checkers off the board wins a
+
+212
+00:04:04,100 --> 00:04:04,110
+their checkers off the board wins a
+ 
+
+213
+00:04:04,110 --> 00:04:07,020
+their checkers off the board wins a
+checker on the bar must be returned into
+
+214
+00:04:07,020 --> 00:04:07,030
+checker on the bar must be returned into
+ 
+
+215
+00:04:07,030 --> 00:04:09,150
+checker on the bar must be returned into
+play before other moves can be made if
+
+216
+00:04:09,150 --> 00:04:09,160
+play before other moves can be made if
+ 
+
+217
+00:04:09,160 --> 00:04:11,100
+play before other moves can be made if
+the checker is blocked from being
+
+218
+00:04:11,100 --> 00:04:11,110
+the checker is blocked from being
+ 
+
+219
+00:04:11,110 --> 00:04:13,740
+the checker is blocked from being
+returned into play the players turn is
+
+220
+00:04:13,740 --> 00:04:13,750
+returned into play the players turn is
+ 
+
+221
+00:04:13,750 --> 00:04:16,170
+returned into play the players turn is
+over with no moves being made if a
+
+222
+00:04:16,170 --> 00:04:16,180
+over with no moves being made if a
+ 
+
+223
+00:04:16,180 --> 00:04:18,300
+over with no moves being made if a
+higher number is rolled than you have
+
+224
+00:04:18,300 --> 00:04:18,310
+higher number is rolled than you have
+ 
+
+225
+00:04:18,310 --> 00:04:21,030
+higher number is rolled than you have
+while bearing off the farthest checker
+
+226
+00:04:21,030 --> 00:04:21,040
+while bearing off the farthest checker
+ 
+
+227
+00:04:21,040 --> 00:04:24,629
+while bearing off the farthest checker
+can be removed
+
+228
+00:04:24,629 --> 00:04:24,639
+
+ 
+
+229
+00:04:24,639 --> 00:04:27,209
+
+that wraps up how to play backgammon if
+
+230
+00:04:27,209 --> 00:04:27,219
+that wraps up how to play backgammon if
+ 
+
+231
+00:04:27,219 --> 00:04:29,040
+that wraps up how to play backgammon if
+you found this video helpful give it a
+
+232
+00:04:29,040 --> 00:04:29,050
+you found this video helpful give it a
+ 
+
+233
+00:04:29,050 --> 00:04:31,200
+you found this video helpful give it a
+thumbs up and get more game tutorials by
+
+234
+00:04:31,200 --> 00:04:31,210
+thumbs up and get more game tutorials by
+ 
+
+235
+00:04:31,210 --> 00:04:32,820
+thumbs up and get more game tutorials by
+subscribing to our channel gather
+
+236
+00:04:32,820 --> 00:04:32,830
+subscribing to our channel gather
+ 
+
+237
+00:04:32,830 --> 00:04:40,860
+subscribing to our channel gather
+together games thanks for watching
+
+238
+00:04:40,860 --> 00:04:40,870
+
+ 
+
+239
+00:04:40,870 --> 00:04:46,439
+
+[Music]
+

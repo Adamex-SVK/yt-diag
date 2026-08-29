@@ -1,0 +1,5235 @@
+1
+00:00:00,240 --> 00:00:01,829
+
+In this video tutorial, we're going to
+
+2
+00:00:01,829 --> 00:00:01,839
+In this video tutorial, we're going to
+ 
+
+3
+00:00:01,839 --> 00:00:04,789
+In this video tutorial, we're going to
+take a look at the intermediate skills,
+
+4
+00:00:04,789 --> 00:00:04,799
+take a look at the intermediate skills,
+ 
+
+5
+00:00:04,799 --> 00:00:06,550
+take a look at the intermediate skills,
+tips, and tricks that you need to know
+
+6
+00:00:06,550 --> 00:00:06,560
+tips, and tricks that you need to know
+ 
+
+7
+00:00:06,560 --> 00:00:08,870
+tips, and tricks that you need to know
+in order to use Excel properly and
+
+8
+00:00:08,870 --> 00:00:08,880
+in order to use Excel properly and
+ 
+
+9
+00:00:08,880 --> 00:00:10,549
+in order to use Excel properly and
+efficiently if you haven't already
+
+10
+00:00:10,549 --> 00:00:10,559
+efficiently if you haven't already
+ 
+
+11
+00:00:10,559 --> 00:00:12,790
+efficiently if you haven't already
+watched my other Excel video. It's
+
+12
+00:00:12,790 --> 00:00:12,800
+watched my other Excel video. It's
+ 
+
+13
+00:00:12,800 --> 00:00:15,589
+watched my other Excel video. It's
+called the beginner's guide to Excel.
+
+14
+00:00:15,589 --> 00:00:15,599
+called the beginner's guide to Excel.
+ 
+
+15
+00:00:15,599 --> 00:00:17,109
+called the beginner's guide to Excel.
+And I highly recommend that you start
+
+16
+00:00:17,109 --> 00:00:17,119
+And I highly recommend that you start
+ 
+
+17
+00:00:17,119 --> 00:00:18,790
+And I highly recommend that you start
+with that video before watching this
+
+18
+00:00:18,790 --> 00:00:18,800
+with that video before watching this
+ 
+
+19
+00:00:18,800 --> 00:00:20,550
+with that video before watching this
+one. So, one of the last things that I
+
+20
+00:00:20,550 --> 00:00:20,560
+one. So, one of the last things that I
+ 
+
+21
+00:00:20,560 --> 00:00:22,550
+one. So, one of the last things that I
+showed in that beginner's guide video
+
+22
+00:00:22,550 --> 00:00:22,560
+showed in that beginner's guide video
+ 
+
+23
+00:00:22,560 --> 00:00:25,429
+showed in that beginner's guide video
+was how to do some formatting. How to
+
+24
+00:00:25,429 --> 00:00:25,439
+was how to do some formatting. How to
+ 
+
+25
+00:00:25,439 --> 00:00:27,750
+was how to do some formatting. How to
+change, let's say, the column widths,
+
+26
+00:00:27,750 --> 00:00:27,760
+change, let's say, the column widths,
+ 
+
+27
+00:00:27,760 --> 00:00:30,470
+change, let's say, the column widths,
+how to do italics and things like that.
+
+28
+00:00:30,470 --> 00:00:30,480
+how to do italics and things like that.
+ 
+
+29
+00:00:30,480 --> 00:00:31,830
+how to do italics and things like that.
+Well, in this video, we're going to
+
+30
+00:00:31,830 --> 00:00:31,840
+Well, in this video, we're going to
+ 
+
+31
+00:00:31,840 --> 00:00:33,350
+Well, in this video, we're going to
+start off by looking at a couple of
+
+32
+00:00:33,350 --> 00:00:33,360
+start off by looking at a couple of
+ 
+
+33
+00:00:33,360 --> 00:00:36,150
+start off by looking at a couple of
+advanced formatting options. Then, I'll
+
+34
+00:00:36,150 --> 00:00:36,160
+advanced formatting options. Then, I'll
+ 
+
+35
+00:00:36,160 --> 00:00:38,470
+advanced formatting options. Then, I'll
+show you a data entry shortcut that's
+
+36
+00:00:38,470 --> 00:00:38,480
+show you a data entry shortcut that's
+ 
+
+37
+00:00:38,480 --> 00:00:41,030
+show you a data entry shortcut that's
+fantastic called the autofill handle.
+
+38
+00:00:41,030 --> 00:00:41,040
+fantastic called the autofill handle.
+ 
+
+39
+00:00:41,040 --> 00:00:42,630
+fantastic called the autofill handle.
+Then, we'll take a look at how to do
+
+40
+00:00:42,630 --> 00:00:42,640
+Then, we'll take a look at how to do
+ 
+
+41
+00:00:42,640 --> 00:00:44,709
+Then, we'll take a look at how to do
+formulas and functions in Excel. and
+
+42
+00:00:44,709 --> 00:00:44,719
+formulas and functions in Excel. and
+ 
+
+43
+00:00:44,719 --> 00:00:46,069
+formulas and functions in Excel. and
+then we'll finish with a few more
+
+44
+00:00:46,069 --> 00:00:46,079
+then we'll finish with a few more
+ 
+
+45
+00:00:46,079 --> 00:00:48,389
+then we'll finish with a few more
+intermediate and advanced tips and
+
+46
+00:00:48,389 --> 00:00:48,399
+intermediate and advanced tips and
+ 
+
+47
+00:00:48,399 --> 00:00:50,549
+intermediate and advanced tips and
+tricks. So, here I am in the spreadsheet
+
+48
+00:00:50,549 --> 00:00:50,559
+tricks. So, here I am in the spreadsheet
+ 
+
+49
+00:00:50,559 --> 00:00:52,709
+tricks. So, here I am in the spreadsheet
+I started in the beginner's tutorial.
+
+50
+00:00:52,709 --> 00:00:52,719
+I started in the beginner's tutorial.
+ 
+
+51
+00:00:52,719 --> 00:00:56,310
+I started in the beginner's tutorial.
+It's a list of movies that I own and I'm
+
+52
+00:00:56,310 --> 00:00:56,320
+It's a list of movies that I own and I'm
+ 
+
+53
+00:00:56,320 --> 00:00:58,470
+It's a list of movies that I own and I'm
+putting in some data about those movies.
+
+54
+00:00:58,470 --> 00:00:58,480
+putting in some data about those movies.
+ 
+
+55
+00:00:58,480 --> 00:00:59,670
+putting in some data about those movies.
+Well, I want to show you a couple of
+
+56
+00:00:59,670 --> 00:00:59,680
+Well, I want to show you a couple of
+ 
+
+57
+00:00:59,680 --> 00:01:02,229
+Well, I want to show you a couple of
+shortcuts as you're trying to format the
+
+58
+00:01:02,229 --> 00:01:02,239
+shortcuts as you're trying to format the
+ 
+
+59
+00:01:02,239 --> 00:01:04,469
+shortcuts as you're trying to format the
+data that's in a spreadsheet. These
+
+60
+00:01:04,469 --> 00:01:04,479
+data that's in a spreadsheet. These
+ 
+
+61
+00:01:04,479 --> 00:01:06,390
+data that's in a spreadsheet. These
+tricks will save you a lot of time. The
+
+62
+00:01:06,390 --> 00:01:06,400
+tricks will save you a lot of time. The
+ 
+
+63
+00:01:06,400 --> 00:01:08,550
+tricks will save you a lot of time. The
+first is called the format painter and
+
+64
+00:01:08,550 --> 00:01:08,560
+first is called the format painter and
+ 
+
+65
+00:01:08,560 --> 00:01:10,550
+first is called the format painter and
+you can find it here on the home tab,
+
+66
+00:01:10,550 --> 00:01:10,560
+you can find it here on the home tab,
+ 
+
+67
+00:01:10,560 --> 00:01:13,270
+you can find it here on the home tab,
+home ribbon in the clipboard group and
+
+68
+00:01:13,270 --> 00:01:13,280
+home ribbon in the clipboard group and
+ 
+
+69
+00:01:13,280 --> 00:01:15,190
+home ribbon in the clipboard group and
+it looks like a paintbrush. The format
+
+70
+00:01:15,190 --> 00:01:15,200
+it looks like a paintbrush. The format
+ 
+
+71
+00:01:15,200 --> 00:01:17,030
+it looks like a paintbrush. The format
+painter is what it is. And the way it
+
+72
+00:01:17,030 --> 00:01:17,040
+painter is what it is. And the way it
+ 
+
+73
+00:01:17,040 --> 00:01:19,190
+painter is what it is. And the way it
+works is let's say that part of your
+
+74
+00:01:19,190 --> 00:01:19,200
+works is let's say that part of your
+ 
+
+75
+00:01:19,200 --> 00:01:21,510
+works is let's say that part of your
+spreadsheet has a format that you wish
+
+76
+00:01:21,510 --> 00:01:21,520
+spreadsheet has a format that you wish
+ 
+
+77
+00:01:21,520 --> 00:01:23,910
+spreadsheet has a format that you wish
+other parts of your spreadsheet had. All
+
+78
+00:01:23,910 --> 00:01:23,920
+other parts of your spreadsheet had. All
+ 
+
+79
+00:01:23,920 --> 00:01:25,510
+other parts of your spreadsheet had. All
+you have to do is click on the good
+
+80
+00:01:25,510 --> 00:01:25,520
+you have to do is click on the good
+ 
+
+81
+00:01:25,520 --> 00:01:27,590
+you have to do is click on the good
+example that you would like. Click here
+
+82
+00:01:27,590 --> 00:01:27,600
+example that you would like. Click here
+ 
+
+83
+00:01:27,600 --> 00:01:29,910
+example that you would like. Click here
+on the format painter and that copied
+
+84
+00:01:29,910 --> 00:01:29,920
+on the format painter and that copied
+ 
+
+85
+00:01:29,920 --> 00:01:32,390
+on the format painter and that copied
+it. It didn't copy the content rather it
+
+86
+00:01:32,390 --> 00:01:32,400
+it. It didn't copy the content rather it
+ 
+
+87
+00:01:32,400 --> 00:01:35,749
+it. It didn't copy the content rather it
+copied the format of this cell. So now
+
+88
+00:01:35,749 --> 00:01:35,759
+copied the format of this cell. So now
+ 
+
+89
+00:01:35,759 --> 00:01:38,230
+copied the format of this cell. So now
+all I need to do is move my mouse to the
+
+90
+00:01:38,230 --> 00:01:38,240
+all I need to do is move my mouse to the
+ 
+
+91
+00:01:38,240 --> 00:01:41,270
+all I need to do is move my mouse to the
+place where I want to copy that format
+
+92
+00:01:41,270 --> 00:01:41,280
+place where I want to copy that format
+ 
+
+93
+00:01:41,280 --> 00:01:43,749
+place where I want to copy that format
+to. And I can click and if I release the
+
+94
+00:01:43,749 --> 00:01:43,759
+to. And I can click and if I release the
+ 
+
+95
+00:01:43,759 --> 00:01:46,389
+to. And I can click and if I release the
+mouse click, it will copy the format.
+
+96
+00:01:46,389 --> 00:01:46,399
+mouse click, it will copy the format.
+ 
+
+97
+00:01:46,399 --> 00:01:48,069
+mouse click, it will copy the format.
+But let's say you would like the entire
+
+98
+00:01:48,069 --> 00:01:48,079
+But let's say you would like the entire
+ 
+
+99
+00:01:48,079 --> 00:01:50,710
+But let's say you would like the entire
+range, this range of five or six cells
+
+100
+00:01:50,710 --> 00:01:50,720
+range, this range of five or six cells
+ 
+
+101
+00:01:50,720 --> 00:01:52,950
+range, this range of five or six cells
+to have that layout, you can just click
+
+102
+00:01:52,950 --> 00:01:52,960
+to have that layout, you can just click
+ 
+
+103
+00:01:52,960 --> 00:01:55,270
+to have that layout, you can just click
+and drag, holding the click, and then
+
+104
+00:01:55,270 --> 00:01:55,280
+and drag, holding the click, and then
+ 
+
+105
+00:01:55,280 --> 00:01:57,429
+and drag, holding the click, and then
+release. And you can see now they've all
+
+106
+00:01:57,429 --> 00:01:57,439
+release. And you can see now they've all
+ 
+
+107
+00:01:57,439 --> 00:01:59,990
+release. And you can see now they've all
+been painted with that format. In this
+
+108
+00:01:59,990 --> 00:02:00,000
+been painted with that format. In this
+ 
+
+109
+00:02:00,000 --> 00:02:01,670
+been painted with that format. In this
+case, that's not at all what I want. So
+
+110
+00:02:01,670 --> 00:02:01,680
+case, that's not at all what I want. So
+ 
+
+111
+00:02:01,680 --> 00:02:03,270
+case, that's not at all what I want. So
+I'm going to undo it with this arrow up
+
+112
+00:02:03,270 --> 00:02:03,280
+I'm going to undo it with this arrow up
+ 
+
+113
+00:02:03,280 --> 00:02:04,950
+I'm going to undo it with this arrow up
+here in the upper left. and it takes me
+
+114
+00:02:04,950 --> 00:02:04,960
+here in the upper left. and it takes me
+ 
+
+115
+00:02:04,960 --> 00:02:07,350
+here in the upper left. and it takes me
+back. Now, another more advanced
+
+116
+00:02:07,350 --> 00:02:07,360
+back. Now, another more advanced
+ 
+
+117
+00:02:07,360 --> 00:02:09,109
+back. Now, another more advanced
+formatting option that is pretty
+
+118
+00:02:09,109 --> 00:02:09,119
+formatting option that is pretty
+ 
+
+119
+00:02:09,119 --> 00:02:11,190
+formatting option that is pretty
+exciting, at least to me, is what they
+
+120
+00:02:11,190 --> 00:02:11,200
+exciting, at least to me, is what they
+ 
+
+121
+00:02:11,200 --> 00:02:13,270
+exciting, at least to me, is what they
+call conditional formatting. So, it's up
+
+122
+00:02:13,270 --> 00:02:13,280
+call conditional formatting. So, it's up
+ 
+
+123
+00:02:13,280 --> 00:02:15,910
+call conditional formatting. So, it's up
+here at the top on the home tab, home
+
+124
+00:02:15,910 --> 00:02:15,920
+here at the top on the home tab, home
+ 
+
+125
+00:02:15,920 --> 00:02:18,790
+here at the top on the home tab, home
+ribbon. Here it is in the styles group,
+
+126
+00:02:18,790 --> 00:02:18,800
+ribbon. Here it is in the styles group,
+ 
+
+127
+00:02:18,800 --> 00:02:20,869
+ribbon. Here it is in the styles group,
+conditional formatting. And the way this
+
+128
+00:02:20,869 --> 00:02:20,879
+conditional formatting. And the way this
+ 
+
+129
+00:02:20,879 --> 00:02:24,150
+conditional formatting. And the way this
+works is you select a column or a row,
+
+130
+00:02:24,150 --> 00:02:24,160
+works is you select a column or a row,
+ 
+
+131
+00:02:24,160 --> 00:02:25,750
+works is you select a column or a row,
+either way. I'm going to select the
+
+132
+00:02:25,750 --> 00:02:25,760
+either way. I'm going to select the
+ 
+
+133
+00:02:25,760 --> 00:02:28,390
+either way. I'm going to select the
+column D. So, I just click on it and the
+
+134
+00:02:28,390 --> 00:02:28,400
+column D. So, I just click on it and the
+ 
+
+135
+00:02:28,400 --> 00:02:30,550
+column D. So, I just click on it and the
+entire column is selected. Now, I simply
+
+136
+00:02:30,550 --> 00:02:30,560
+entire column is selected. Now, I simply
+ 
+
+137
+00:02:30,560 --> 00:02:32,630
+entire column is selected. Now, I simply
+go up here to conditional formatting and
+
+138
+00:02:32,630 --> 00:02:32,640
+go up here to conditional formatting and
+ 
+
+139
+00:02:32,640 --> 00:02:35,750
+go up here to conditional formatting and
+click. And it gives me some options. It
+
+140
+00:02:35,750 --> 00:02:35,760
+click. And it gives me some options. It
+ 
+
+141
+00:02:35,760 --> 00:02:37,990
+click. And it gives me some options. It
+mentions rules several times. Basically,
+
+142
+00:02:37,990 --> 00:02:38,000
+mentions rules several times. Basically,
+ 
+
+143
+00:02:38,000 --> 00:02:40,150
+mentions rules several times. Basically,
+we're going to set up some rules for the
+
+144
+00:02:40,150 --> 00:02:40,160
+we're going to set up some rules for the
+ 
+
+145
+00:02:40,160 --> 00:02:42,150
+we're going to set up some rules for the
+content of these cells and the
+
+146
+00:02:42,150 --> 00:02:42,160
+content of these cells and the
+ 
+
+147
+00:02:42,160 --> 00:02:43,910
+content of these cells and the
+formatting of these cells. And the
+
+148
+00:02:43,910 --> 00:02:43,920
+formatting of these cells. And the
+ 
+
+149
+00:02:43,920 --> 00:02:46,309
+formatting of these cells. And the
+easiest example I can think of is color
+
+150
+00:02:46,309 --> 00:02:46,319
+easiest example I can think of is color
+ 
+
+151
+00:02:46,319 --> 00:02:48,150
+easiest example I can think of is color
+scales. So, let's just look at that. But
+
+152
+00:02:48,150 --> 00:02:48,160
+scales. So, let's just look at that. But
+ 
+
+153
+00:02:48,160 --> 00:02:49,670
+scales. So, let's just look at that. But
+I want you to explore this in more
+
+154
+00:02:49,670 --> 00:02:49,680
+I want you to explore this in more
+ 
+
+155
+00:02:49,680 --> 00:02:51,270
+I want you to explore this in more
+detail if you're interested in
+
+156
+00:02:51,270 --> 00:02:51,280
+detail if you're interested in
+ 
+
+157
+00:02:51,280 --> 00:02:52,710
+detail if you're interested in
+conditional formatting because it's
+
+158
+00:02:52,710 --> 00:02:52,720
+conditional formatting because it's
+ 
+
+159
+00:02:52,720 --> 00:02:54,470
+conditional formatting because it's
+really an exciting tool. So, I'm going
+
+160
+00:02:54,470 --> 00:02:54,480
+really an exciting tool. So, I'm going
+ 
+
+161
+00:02:54,480 --> 00:02:57,110
+really an exciting tool. So, I'm going
+to go into color scales, and I want the
+
+162
+00:02:57,110 --> 00:02:57,120
+to go into color scales, and I want the
+ 
+
+163
+00:02:57,120 --> 00:03:01,110
+to go into color scales, and I want the
+color of each cell to change to adjust
+
+164
+00:03:01,110 --> 00:03:01,120
+color of each cell to change to adjust
+ 
+
+165
+00:03:01,120 --> 00:03:03,830
+color of each cell to change to adjust
+depending on how valuable the movie is.
+
+166
+00:03:03,830 --> 00:03:03,840
+depending on how valuable the movie is.
+ 
+
+167
+00:03:03,840 --> 00:03:06,229
+depending on how valuable the movie is.
+Now, to do this, I would select probably
+
+168
+00:03:06,229 --> 00:03:06,239
+Now, to do this, I would select probably
+ 
+
+169
+00:03:06,239 --> 00:03:08,790
+Now, to do this, I would select probably
+this color scale here. It looks like it
+
+170
+00:03:08,790 --> 00:03:08,800
+this color scale here. It looks like it
+ 
+
+171
+00:03:08,800 --> 00:03:10,869
+this color scale here. It looks like it
+has green at the top and red at the
+
+172
+00:03:10,869 --> 00:03:10,879
+has green at the top and red at the
+ 
+
+173
+00:03:10,879 --> 00:03:12,949
+has green at the top and red at the
+bottom. So, the idea, the more green it
+
+174
+00:03:12,949 --> 00:03:12,959
+bottom. So, the idea, the more green it
+ 
+
+175
+00:03:12,959 --> 00:03:14,869
+bottom. So, the idea, the more green it
+is, the more valuable it is. The redder
+
+176
+00:03:14,869 --> 00:03:14,879
+is, the more valuable it is. The redder
+ 
+
+177
+00:03:14,879 --> 00:03:17,030
+is, the more valuable it is. The redder
+it is, the more worthless it is. If you
+
+178
+00:03:17,030 --> 00:03:17,040
+it is, the more worthless it is. If you
+ 
+
+179
+00:03:17,040 --> 00:03:19,030
+it is, the more worthless it is. If you
+want to reverse that, you can. And there
+
+180
+00:03:19,030 --> 00:03:19,040
+want to reverse that, you can. And there
+ 
+
+181
+00:03:19,040 --> 00:03:20,790
+want to reverse that, you can. And there
+are all of these other options as well
+
+182
+00:03:20,790 --> 00:03:20,800
+are all of these other options as well
+ 
+
+183
+00:03:20,800 --> 00:03:22,309
+are all of these other options as well
+with different color schemes, but I'm
+
+184
+00:03:22,309 --> 00:03:22,319
+with different color schemes, but I'm
+ 
+
+185
+00:03:22,319 --> 00:03:23,670
+with different color schemes, but I'm
+going to go with that first one. I'll
+
+186
+00:03:23,670 --> 00:03:23,680
+going to go with that first one. I'll
+ 
+
+187
+00:03:23,680 --> 00:03:25,910
+going to go with that first one. I'll
+just click on it. And what this does is
+
+188
+00:03:25,910 --> 00:03:25,920
+just click on it. And what this does is
+ 
+
+189
+00:03:25,920 --> 00:03:29,110
+just click on it. And what this does is
+it evaluates the entire column. It looks
+
+190
+00:03:29,110 --> 00:03:29,120
+it evaluates the entire column. It looks
+ 
+
+191
+00:03:29,120 --> 00:03:31,509
+it evaluates the entire column. It looks
+for the highest numbers and gives them
+
+192
+00:03:31,509 --> 00:03:31,519
+for the highest numbers and gives them
+ 
+
+193
+00:03:31,519 --> 00:03:33,589
+for the highest numbers and gives them
+the greenest background. And then the
+
+194
+00:03:33,589 --> 00:03:33,599
+the greenest background. And then the
+ 
+
+195
+00:03:33,599 --> 00:03:36,229
+the greenest background. And then the
+lowest numbers get the darkest red
+
+196
+00:03:36,229 --> 00:03:36,239
+lowest numbers get the darkest red
+ 
+
+197
+00:03:36,239 --> 00:03:37,830
+lowest numbers get the darkest red
+background. And then everything else in
+
+198
+00:03:37,830 --> 00:03:37,840
+background. And then everything else in
+ 
+
+199
+00:03:37,840 --> 00:03:40,390
+background. And then everything else in
+between is adjusted accordingly. So that
+
+200
+00:03:40,390 --> 00:03:40,400
+between is adjusted accordingly. So that
+ 
+
+201
+00:03:40,400 --> 00:03:42,070
+between is adjusted accordingly. So that
+easily I can just glance at this
+
+202
+00:03:42,070 --> 00:03:42,080
+easily I can just glance at this
+ 
+
+203
+00:03:42,080 --> 00:03:44,309
+easily I can just glance at this
+spreadsheet and I can see where the most
+
+204
+00:03:44,309 --> 00:03:44,319
+spreadsheet and I can see where the most
+ 
+
+205
+00:03:44,319 --> 00:03:47,190
+spreadsheet and I can see where the most
+valuable movies are. If you like that,
+
+206
+00:03:47,190 --> 00:03:47,200
+valuable movies are. If you like that,
+ 
+
+207
+00:03:47,200 --> 00:03:48,550
+valuable movies are. If you like that,
+please investigate conditional
+
+208
+00:03:48,550 --> 00:03:48,560
+please investigate conditional
+ 
+
+209
+00:03:48,560 --> 00:03:50,710
+please investigate conditional
+formatting more. There's great ways to
+
+210
+00:03:50,710 --> 00:03:50,720
+formatting more. There's great ways to
+ 
+
+211
+00:03:50,720 --> 00:03:52,949
+formatting more. There's great ways to
+display the data in a conditional way.
+
+212
+00:03:52,949 --> 00:03:52,959
+display the data in a conditional way.
+ 
+
+213
+00:03:52,959 --> 00:03:55,110
+display the data in a conditional way.
+You can use data bars. You can say if
+
+214
+00:03:55,110 --> 00:03:55,120
+You can use data bars. You can say if
+ 
+
+215
+00:03:55,120 --> 00:03:58,470
+You can use data bars. You can say if
+the highlighted cell is greater than 10,
+
+216
+00:03:58,470 --> 00:03:58,480
+the highlighted cell is greater than 10,
+ 
+
+217
+00:03:58,480 --> 00:04:01,270
+the highlighted cell is greater than 10,
+then make the background green or put
+
+218
+00:04:01,270 --> 00:04:01,280
+then make the background green or put
+ 
+
+219
+00:04:01,280 --> 00:04:04,229
+then make the background green or put
+the text in bold. If it's less than
+
+220
+00:04:04,229 --> 00:04:04,239
+the text in bold. If it's less than
+ 
+
+221
+00:04:04,239 --> 00:04:06,710
+the text in bold. If it's less than
+five, then format it with a background
+
+222
+00:04:06,710 --> 00:04:06,720
+five, then format it with a background
+ 
+
+223
+00:04:06,720 --> 00:04:09,429
+five, then format it with a background
+of red. There's all of these if then
+
+224
+00:04:09,429 --> 00:04:09,439
+of red. There's all of these if then
+ 
+
+225
+00:04:09,439 --> 00:04:11,030
+of red. There's all of these if then
+statements that you can use with these
+
+226
+00:04:11,030 --> 00:04:11,040
+statements that you can use with these
+ 
+
+227
+00:04:11,040 --> 00:04:12,949
+statements that you can use with these
+highlight cells rules. There's top
+
+228
+00:04:12,949 --> 00:04:12,959
+highlight cells rules. There's top
+ 
+
+229
+00:04:12,959 --> 00:04:16,469
+highlight cells rules. There's top
+bottom rules, top 10%, bottom 10%, icon
+
+230
+00:04:16,469 --> 00:04:16,479
+bottom rules, top 10%, bottom 10%, icon
+ 
+
+231
+00:04:16,479 --> 00:04:18,550
+bottom rules, top 10%, bottom 10%, icon
+sets where you can show arrows going up,
+
+232
+00:04:18,550 --> 00:04:18,560
+sets where you can show arrows going up,
+ 
+
+233
+00:04:18,560 --> 00:04:21,189
+sets where you can show arrows going up,
+down, left or right, and just some
+
+234
+00:04:21,189 --> 00:04:21,199
+down, left or right, and just some
+ 
+
+235
+00:04:21,199 --> 00:04:23,510
+down, left or right, and just some
+really exciting formatting options that
+
+236
+00:04:23,510 --> 00:04:23,520
+really exciting formatting options that
+ 
+
+237
+00:04:23,520 --> 00:04:25,670
+really exciting formatting options that
+you have here. Okay, before we leave
+
+238
+00:04:25,670 --> 00:04:25,680
+you have here. Okay, before we leave
+ 
+
+239
+00:04:25,680 --> 00:04:28,070
+you have here. Okay, before we leave
+formatting and move on to a few other
+
+240
+00:04:28,070 --> 00:04:28,080
+formatting and move on to a few other
+ 
+
+241
+00:04:28,080 --> 00:04:30,629
+formatting and move on to a few other
+things, I want to show you that because
+
+242
+00:04:30,629 --> 00:04:30,639
+things, I want to show you that because
+ 
+
+243
+00:04:30,639 --> 00:04:32,710
+things, I want to show you that because
+these numbers represent currency, I
+
+244
+00:04:32,710 --> 00:04:32,720
+these numbers represent currency, I
+ 
+
+245
+00:04:32,720 --> 00:04:34,469
+these numbers represent currency, I
+probably should format them a little
+
+246
+00:04:34,469 --> 00:04:34,479
+probably should format them a little
+ 
+
+247
+00:04:34,479 --> 00:04:36,550
+probably should format them a little
+differently. So, I can click here on D
+
+248
+00:04:36,550 --> 00:04:36,560
+differently. So, I can click here on D
+ 
+
+249
+00:04:36,560 --> 00:04:38,629
+differently. So, I can click here on D
+and everything in column D that's a
+
+250
+00:04:38,629 --> 00:04:38,639
+and everything in column D that's a
+ 
+
+251
+00:04:38,639 --> 00:04:40,870
+and everything in column D that's a
+number will get formatted differently.
+
+252
+00:04:40,870 --> 00:04:40,880
+number will get formatted differently.
+ 
+
+253
+00:04:40,880 --> 00:04:42,790
+number will get formatted differently.
+Right now, everything in here is
+
+254
+00:04:42,790 --> 00:04:42,800
+Right now, everything in here is
+ 
+
+255
+00:04:42,800 --> 00:04:45,189
+Right now, everything in here is
+formatted in a general way, which is to
+
+256
+00:04:45,189 --> 00:04:45,199
+formatted in a general way, which is to
+ 
+
+257
+00:04:45,199 --> 00:04:46,469
+formatted in a general way, which is to
+say that there's nothing special about
+
+258
+00:04:46,469 --> 00:04:46,479
+say that there's nothing special about
+ 
+
+259
+00:04:46,479 --> 00:04:48,230
+say that there's nothing special about
+the way they're formatted, at least the
+
+260
+00:04:48,230 --> 00:04:48,240
+the way they're formatted, at least the
+ 
+
+261
+00:04:48,240 --> 00:04:50,390
+the way they're formatted, at least the
+numbers themselves. However, if I go up
+
+262
+00:04:50,390 --> 00:04:50,400
+numbers themselves. However, if I go up
+ 
+
+263
+00:04:50,400 --> 00:04:52,469
+numbers themselves. However, if I go up
+here, I can change that from general to
+
+264
+00:04:52,469 --> 00:04:52,479
+here, I can change that from general to
+ 
+
+265
+00:04:52,479 --> 00:04:53,909
+here, I can change that from general to
+any one of these other things. And
+
+266
+00:04:53,909 --> 00:04:53,919
+any one of these other things. And
+ 
+
+267
+00:04:53,919 --> 00:04:55,830
+any one of these other things. And
+there's even more beyond that. There's
+
+268
+00:04:55,830 --> 00:04:55,840
+there's even more beyond that. There's
+ 
+
+269
+00:04:55,840 --> 00:04:57,670
+there's even more beyond that. There's
+also some shortcuts like this. I just
+
+270
+00:04:57,670 --> 00:04:57,680
+also some shortcuts like this. I just
+ 
+
+271
+00:04:57,680 --> 00:04:59,590
+also some shortcuts like this. I just
+want to click on the dollar sign. Now,
+
+272
+00:04:59,590 --> 00:04:59,600
+want to click on the dollar sign. Now,
+ 
+
+273
+00:04:59,600 --> 00:05:02,550
+want to click on the dollar sign. Now,
+they all show up as accounting currency.
+
+274
+00:05:02,550 --> 00:05:02,560
+they all show up as accounting currency.
+ 
+
+275
+00:05:02,560 --> 00:05:04,150
+they all show up as accounting currency.
+If you don't need it or want it to be
+
+276
+00:05:04,150 --> 00:05:04,160
+If you don't need it or want it to be
+ 
+
+277
+00:05:04,160 --> 00:05:05,830
+If you don't need it or want it to be
+accounting, you can just go down and do
+
+278
+00:05:05,830 --> 00:05:05,840
+accounting, you can just go down and do
+ 
+
+279
+00:05:05,840 --> 00:05:07,749
+accounting, you can just go down and do
+regular currency. All that changes is
+
+280
+00:05:07,749 --> 00:05:07,759
+regular currency. All that changes is
+ 
+
+281
+00:05:07,759 --> 00:05:10,230
+regular currency. All that changes is
+where the dollar sign is located. Okay,
+
+282
+00:05:10,230 --> 00:05:10,240
+where the dollar sign is located. Okay,
+ 
+
+283
+00:05:10,240 --> 00:05:12,230
+where the dollar sign is located. Okay,
+so this is awesome. This spreadsheet is
+
+284
+00:05:12,230 --> 00:05:12,240
+so this is awesome. This spreadsheet is
+ 
+
+285
+00:05:12,240 --> 00:05:15,029
+so this is awesome. This spreadsheet is
+turning out great so far. Next, let's
+
+286
+00:05:15,029 --> 00:05:15,039
+turning out great so far. Next, let's
+ 
+
+287
+00:05:15,039 --> 00:05:17,270
+turning out great so far. Next, let's
+look at formulas. This is where the true
+
+288
+00:05:17,270 --> 00:05:17,280
+look at formulas. This is where the true
+ 
+
+289
+00:05:17,280 --> 00:05:19,990
+look at formulas. This is where the true
+power of Excel is found, I believe. So
+
+290
+00:05:19,990 --> 00:05:20,000
+power of Excel is found, I believe. So
+ 
+
+291
+00:05:20,000 --> 00:05:21,749
+power of Excel is found, I believe. So
+far in our spreadsheet, all we've done
+
+292
+00:05:21,749 --> 00:05:21,759
+far in our spreadsheet, all we've done
+ 
+
+293
+00:05:21,759 --> 00:05:24,870
+far in our spreadsheet, all we've done
+is enter text or numbers, and then also
+
+294
+00:05:24,870 --> 00:05:24,880
+is enter text or numbers, and then also
+ 
+
+295
+00:05:24,880 --> 00:05:26,469
+is enter text or numbers, and then also
+in some cases, we've applied some
+
+296
+00:05:26,469 --> 00:05:26,479
+in some cases, we've applied some
+ 
+
+297
+00:05:26,479 --> 00:05:28,790
+in some cases, we've applied some
+formatting, but other than that, we
+
+298
+00:05:28,790 --> 00:05:28,800
+formatting, but other than that, we
+ 
+
+299
+00:05:28,800 --> 00:05:31,510
+formatting, but other than that, we
+haven't put anything special into the
+
+300
+00:05:31,510 --> 00:05:31,520
+haven't put anything special into the
+ 
+
+301
+00:05:31,520 --> 00:05:33,909
+haven't put anything special into the
+spreadsheet. Well, let's change that.
+
+302
+00:05:33,909 --> 00:05:33,919
+spreadsheet. Well, let's change that.
+ 
+
+303
+00:05:33,919 --> 00:05:36,629
+spreadsheet. Well, let's change that.
+What I'd like to do next is put in some
+
+304
+00:05:36,629 --> 00:05:36,639
+What I'd like to do next is put in some
+ 
+
+305
+00:05:36,639 --> 00:05:38,469
+What I'd like to do next is put in some
+formulas that will help me know some
+
+306
+00:05:38,469 --> 00:05:38,479
+formulas that will help me know some
+ 
+
+307
+00:05:38,479 --> 00:05:41,110
+formulas that will help me know some
+things like what's the total value of my
+
+308
+00:05:41,110 --> 00:05:41,120
+things like what's the total value of my
+ 
+
+309
+00:05:41,120 --> 00:05:43,670
+things like what's the total value of my
+DVD collection? What is the average
+
+310
+00:05:43,670 --> 00:05:43,680
+DVD collection? What is the average
+ 
+
+311
+00:05:43,680 --> 00:05:46,550
+DVD collection? What is the average
+value of the DVDs that I own? And what's
+
+312
+00:05:46,550 --> 00:05:46,560
+value of the DVDs that I own? And what's
+ 
+
+313
+00:05:46,560 --> 00:05:49,189
+value of the DVDs that I own? And what's
+the most expensive value and the least
+
+314
+00:05:49,189 --> 00:05:49,199
+the most expensive value and the least
+ 
+
+315
+00:05:49,199 --> 00:05:51,270
+the most expensive value and the least
+expensive? Stuff like that. All right,
+
+316
+00:05:51,270 --> 00:05:51,280
+expensive? Stuff like that. All right,
+ 
+
+317
+00:05:51,280 --> 00:05:53,590
+expensive? Stuff like that. All right,
+so let's figure that out. Down here at
+
+318
+00:05:53,590 --> 00:05:53,600
+so let's figure that out. Down here at
+ 
+
+319
+00:05:53,600 --> 00:05:55,110
+so let's figure that out. Down here at
+the bottom of the spreadsheet, I'm going
+
+320
+00:05:55,110 --> 00:05:55,120
+the bottom of the spreadsheet, I'm going
+ 
+
+321
+00:05:55,120 --> 00:05:57,029
+the bottom of the spreadsheet, I'm going
+to create a formula. Now, it doesn't
+
+322
+00:05:57,029 --> 00:05:57,039
+to create a formula. Now, it doesn't
+ 
+
+323
+00:05:57,039 --> 00:05:59,590
+to create a formula. Now, it doesn't
+have to be here. I could put the formula
+
+324
+00:05:59,590 --> 00:05:59,600
+have to be here. I could put the formula
+ 
+
+325
+00:05:59,600 --> 00:06:02,070
+have to be here. I could put the formula
+anywhere on this spreadsheet or another
+
+326
+00:06:02,070 --> 00:06:02,080
+anywhere on this spreadsheet or another
+ 
+
+327
+00:06:02,080 --> 00:06:04,550
+anywhere on this spreadsheet or another
+spreadsheet. Okay, wherever I want to
+
+328
+00:06:04,550 --> 00:06:04,560
+spreadsheet. Okay, wherever I want to
+ 
+
+329
+00:06:04,560 --> 00:06:06,469
+spreadsheet. Okay, wherever I want to
+put this formula, I can do it. But I'm
+
+330
+00:06:06,469 --> 00:06:06,479
+put this formula, I can do it. But I'm
+ 
+
+331
+00:06:06,479 --> 00:06:07,909
+put this formula, I can do it. But I'm
+going to do it here. So, I'll just
+
+332
+00:06:07,909 --> 00:06:07,919
+going to do it here. So, I'll just
+ 
+
+333
+00:06:07,919 --> 00:06:09,990
+going to do it here. So, I'll just
+click. And whenever I do a formula in
+
+334
+00:06:09,990 --> 00:06:10,000
+click. And whenever I do a formula in
+ 
+
+335
+00:06:10,000 --> 00:06:11,909
+click. And whenever I do a formula in
+Excel, I click on a cell and then I
+
+336
+00:06:11,909 --> 00:06:11,919
+Excel, I click on a cell and then I
+ 
+
+337
+00:06:11,919 --> 00:06:14,710
+Excel, I click on a cell and then I
+think to myself the phrase this cell.
+
+338
+00:06:14,710 --> 00:06:14,720
+think to myself the phrase this cell.
+ 
+
+339
+00:06:14,720 --> 00:06:18,070
+think to myself the phrase this cell.
+So, I click this cell equals. And I want
+
+340
+00:06:18,070 --> 00:06:18,080
+So, I click this cell equals. And I want
+ 
+
+341
+00:06:18,080 --> 00:06:20,390
+So, I click this cell equals. And I want
+to find out the total amount that my
+
+342
+00:06:20,390 --> 00:06:20,400
+to find out the total amount that my
+ 
+
+343
+00:06:20,400 --> 00:06:22,309
+to find out the total amount that my
+collection is worth. So, I need to
+
+344
+00:06:22,309 --> 00:06:22,319
+collection is worth. So, I need to
+ 
+
+345
+00:06:22,319 --> 00:06:24,629
+collection is worth. So, I need to
+somehow add up all of those numbers. Let
+
+346
+00:06:24,629 --> 00:06:24,639
+somehow add up all of those numbers. Let
+ 
+
+347
+00:06:24,639 --> 00:06:26,790
+somehow add up all of those numbers. Let
+me show you the hard way first. The hard
+
+348
+00:06:26,790 --> 00:06:26,800
+me show you the hard way first. The hard
+ 
+
+349
+00:06:26,800 --> 00:06:29,110
+me show you the hard way first. The hard
+way would be to say, okay, we have a
+
+350
+00:06:29,110 --> 00:06:29,120
+way would be to say, okay, we have a
+ 
+
+351
+00:06:29,120 --> 00:06:34,230
+way would be to say, okay, we have a
+five. So, I'll type in five + 2 + 5. And
+
+352
+00:06:34,230 --> 00:06:34,240
+five. So, I'll type in five + 2 + 5. And
+ 
+
+353
+00:06:34,240 --> 00:06:37,670
+five. So, I'll type in five + 2 + 5. And
+I can just keep doing this. + 6 + 9. And
+
+354
+00:06:37,670 --> 00:06:37,680
+I can just keep doing this. + 6 + 9. And
+ 
+
+355
+00:06:37,680 --> 00:06:39,670
+I can just keep doing this. + 6 + 9. And
+I can just keep doing that. Basically
+
+356
+00:06:39,670 --> 00:06:39,680
+I can just keep doing that. Basically
+ 
+
+357
+00:06:39,680 --> 00:06:41,990
+I can just keep doing that. Basically
+creating a formula. And then all I have
+
+358
+00:06:41,990 --> 00:06:42,000
+creating a formula. And then all I have
+ 
+
+359
+00:06:42,000 --> 00:06:44,950
+creating a formula. And then all I have
+to do is tap return or enter. And look,
+
+360
+00:06:44,950 --> 00:06:44,960
+to do is tap return or enter. And look,
+ 
+
+361
+00:06:44,960 --> 00:06:47,350
+to do is tap return or enter. And look,
+it adds up those numbers. The thing is
+
+362
+00:06:47,350 --> 00:06:47,360
+it adds up those numbers. The thing is
+ 
+
+363
+00:06:47,360 --> 00:06:49,430
+it adds up those numbers. The thing is
+that's way too tedious. So instead of
+
+364
+00:06:49,430 --> 00:06:49,440
+that's way too tedious. So instead of
+ 
+
+365
+00:06:49,440 --> 00:06:51,990
+that's way too tedious. So instead of
+doing that, what I can do is type in the
+
+366
+00:06:51,990 --> 00:06:52,000
+doing that, what I can do is type in the
+ 
+
+367
+00:06:52,000 --> 00:06:55,670
+doing that, what I can do is type in the
+word sum. So this cell is equal to the
+
+368
+00:06:55,670 --> 00:06:55,680
+word sum. So this cell is equal to the
+ 
+
+369
+00:06:55,680 --> 00:06:57,909
+word sum. So this cell is equal to the
+sum of and then you put a left
+
+370
+00:06:57,909 --> 00:06:57,919
+sum of and then you put a left
+ 
+
+371
+00:06:57,919 --> 00:07:00,790
+sum of and then you put a left
+parenthesis. And now I just need to
+
+372
+00:07:00,790 --> 00:07:00,800
+parenthesis. And now I just need to
+ 
+
+373
+00:07:00,800 --> 00:07:03,909
+parenthesis. And now I just need to
+describe the cell or in this case the
+
+374
+00:07:03,909 --> 00:07:03,919
+describe the cell or in this case the
+ 
+
+375
+00:07:03,919 --> 00:07:06,309
+describe the cell or in this case the
+range that I want it to add up that I
+
+376
+00:07:06,309 --> 00:07:06,319
+range that I want it to add up that I
+ 
+
+377
+00:07:06,319 --> 00:07:08,309
+range that I want it to add up that I
+want it to sum. Fortunately, as I showed
+
+378
+00:07:08,309 --> 00:07:08,319
+want it to sum. Fortunately, as I showed
+ 
+
+379
+00:07:08,319 --> 00:07:10,550
+want it to sum. Fortunately, as I showed
+in the beginner's video, I can name a
+
+380
+00:07:10,550 --> 00:07:10,560
+in the beginner's video, I can name a
+ 
+
+381
+00:07:10,560 --> 00:07:13,270
+in the beginner's video, I can name a
+range. Every range in Excel has a name.
+
+382
+00:07:13,270 --> 00:07:13,280
+range. Every range in Excel has a name.
+ 
+
+383
+00:07:13,280 --> 00:07:17,589
+range. Every range in Excel has a name.
+And the name of this range is D3
+
+384
+00:07:17,589 --> 00:07:17,599
+And the name of this range is D3
+ 
+
+385
+00:07:17,599 --> 00:07:21,589
+And the name of this range is D3
+through D22. So I'll just type D3. And
+
+386
+00:07:21,589 --> 00:07:21,599
+through D22. So I'll just type D3. And
+ 
+
+387
+00:07:21,599 --> 00:07:22,870
+through D22. So I'll just type D3. And
+if you remember from the beginner's
+
+388
+00:07:22,870 --> 00:07:22,880
+if you remember from the beginner's
+ 
+
+389
+00:07:22,880 --> 00:07:26,309
+if you remember from the beginner's
+video, the word through is denoted with
+
+390
+00:07:26,309 --> 00:07:26,319
+video, the word through is denoted with
+ 
+
+391
+00:07:26,319 --> 00:07:29,510
+video, the word through is denoted with
+a colon and then D22. And then you're
+
+392
+00:07:29,510 --> 00:07:29,520
+a colon and then D22. And then you're
+ 
+
+393
+00:07:29,520 --> 00:07:31,749
+a colon and then D22. And then you're
+supposed to put another parenthesis, the
+
+394
+00:07:31,749 --> 00:07:31,759
+supposed to put another parenthesis, the
+ 
+
+395
+00:07:31,759 --> 00:07:34,390
+supposed to put another parenthesis, the
+end parenthesis. Now, I'm going to not
+
+396
+00:07:34,390 --> 00:07:34,400
+end parenthesis. Now, I'm going to not
+ 
+
+397
+00:07:34,400 --> 00:07:36,230
+end parenthesis. Now, I'm going to not
+do that just to show you that even
+
+398
+00:07:36,230 --> 00:07:36,240
+do that just to show you that even
+ 
+
+399
+00:07:36,240 --> 00:07:37,589
+do that just to show you that even
+though you're supposed to, you don't
+
+400
+00:07:37,589 --> 00:07:37,599
+though you're supposed to, you don't
+ 
+
+401
+00:07:37,599 --> 00:07:40,390
+though you're supposed to, you don't
+have to. You now hit enter. And look
+
+402
+00:07:40,390 --> 00:07:40,400
+have to. You now hit enter. And look
+ 
+
+403
+00:07:40,400 --> 00:07:42,390
+have to. You now hit enter. And look
+what it's done. It's added up all of
+
+404
+00:07:42,390 --> 00:07:42,400
+what it's done. It's added up all of
+ 
+
+405
+00:07:42,400 --> 00:07:44,629
+what it's done. It's added up all of
+those numbers. The grand total worth of
+
+406
+00:07:44,629 --> 00:07:44,639
+those numbers. The grand total worth of
+ 
+
+407
+00:07:44,639 --> 00:07:48,150
+those numbers. The grand total worth of
+my DVD collection is $135.
+
+408
+00:07:48,150 --> 00:07:48,160
+my DVD collection is $135.
+ 
+
+409
+00:07:48,160 --> 00:07:49,589
+my DVD collection is $135.
+Now, if you want to make sure that it
+
+410
+00:07:49,589 --> 00:07:49,599
+Now, if you want to make sure that it
+ 
+
+411
+00:07:49,599 --> 00:07:51,510
+Now, if you want to make sure that it
+worked, you can double click on it. And
+
+412
+00:07:51,510 --> 00:07:51,520
+worked, you can double click on it. And
+ 
+
+413
+00:07:51,520 --> 00:07:53,510
+worked, you can double click on it. And
+look what it did. It highlighted all of
+
+414
+00:07:53,510 --> 00:07:53,520
+look what it did. It highlighted all of
+ 
+
+415
+00:07:53,520 --> 00:07:56,070
+look what it did. It highlighted all of
+the numbers that it got that it included
+
+416
+00:07:56,070 --> 00:07:56,080
+the numbers that it got that it included
+ 
+
+417
+00:07:56,080 --> 00:07:58,629
+the numbers that it got that it included
+in the formula. Now, let me show you an
+
+418
+00:07:58,629 --> 00:07:58,639
+in the formula. Now, let me show you an
+ 
+
+419
+00:07:58,639 --> 00:08:00,230
+in the formula. Now, let me show you an
+alternate way. The way I just showed you
+
+420
+00:08:00,230 --> 00:08:00,240
+alternate way. The way I just showed you
+ 
+
+421
+00:08:00,240 --> 00:08:02,230
+alternate way. The way I just showed you
+is one of the nicest, quickest ways to
+
+422
+00:08:02,230 --> 00:08:02,240
+is one of the nicest, quickest ways to
+ 
+
+423
+00:08:02,240 --> 00:08:03,830
+is one of the nicest, quickest ways to
+do it, especially if you have a giant
+
+424
+00:08:03,830 --> 00:08:03,840
+do it, especially if you have a giant
+ 
+
+425
+00:08:03,840 --> 00:08:05,589
+do it, especially if you have a giant
+spreadsheet. But there are a couple of
+
+426
+00:08:05,589 --> 00:08:05,599
+spreadsheet. But there are a couple of
+ 
+
+427
+00:08:05,599 --> 00:08:08,869
+spreadsheet. But there are a couple of
+other ways. In addition to typing in the
+
+428
+00:08:08,869 --> 00:08:08,879
+other ways. In addition to typing in the
+ 
+
+429
+00:08:08,879 --> 00:08:11,589
+other ways. In addition to typing in the
+range, I could just move my mouse up to
+
+430
+00:08:11,589 --> 00:08:11,599
+range, I could just move my mouse up to
+ 
+
+431
+00:08:11,599 --> 00:08:14,629
+range, I could just move my mouse up to
+the top, click and drag with my mouse on
+
+432
+00:08:14,629 --> 00:08:14,639
+the top, click and drag with my mouse on
+ 
+
+433
+00:08:14,639 --> 00:08:16,469
+the top, click and drag with my mouse on
+the range that I would like it to add
+
+434
+00:08:16,469 --> 00:08:16,479
+the range that I would like it to add
+ 
+
+435
+00:08:16,479 --> 00:08:19,510
+the range that I would like it to add
+up, and then just tap return, and you
+
+436
+00:08:19,510 --> 00:08:19,520
+up, and then just tap return, and you
+ 
+
+437
+00:08:19,520 --> 00:08:21,510
+up, and then just tap return, and you
+get the same results. Now, there's also
+
+438
+00:08:21,510 --> 00:08:21,520
+get the same results. Now, there's also
+ 
+
+439
+00:08:21,520 --> 00:08:24,390
+get the same results. Now, there's also
+yet another even faster and easier way
+
+440
+00:08:24,390 --> 00:08:24,400
+yet another even faster and easier way
+ 
+
+441
+00:08:24,400 --> 00:08:26,869
+yet another even faster and easier way
+to do it, and I'm going to delete my
+
+442
+00:08:26,869 --> 00:08:26,879
+to do it, and I'm going to delete my
+ 
+
+443
+00:08:26,879 --> 00:08:28,790
+to do it, and I'm going to delete my
+formula in order to show you this
+
+444
+00:08:28,790 --> 00:08:28,800
+formula in order to show you this
+ 
+
+445
+00:08:28,800 --> 00:08:30,309
+formula in order to show you this
+properly. What I would do is I would
+
+446
+00:08:30,309 --> 00:08:30,319
+properly. What I would do is I would
+ 
+
+447
+00:08:30,319 --> 00:08:31,830
+properly. What I would do is I would
+just click on the cell, but instead of
+
+448
+00:08:31,830 --> 00:08:31,840
+just click on the cell, but instead of
+ 
+
+449
+00:08:31,840 --> 00:08:34,149
+just click on the cell, but instead of
+typing equals, I can just go up here on
+
+450
+00:08:34,149 --> 00:08:34,159
+typing equals, I can just go up here on
+ 
+
+451
+00:08:34,159 --> 00:08:37,190
+typing equals, I can just go up here on
+the home ribbon and go to the editing
+
+452
+00:08:37,190 --> 00:08:37,200
+the home ribbon and go to the editing
+ 
+
+453
+00:08:37,200 --> 00:08:39,670
+the home ribbon and go to the editing
+group. And here we have something called
+
+454
+00:08:39,670 --> 00:08:39,680
+group. And here we have something called
+ 
+
+455
+00:08:39,680 --> 00:08:42,550
+group. And here we have something called
+auto sum. It's this symbol here. And you
+
+456
+00:08:42,550 --> 00:08:42,560
+auto sum. It's this symbol here. And you
+ 
+
+457
+00:08:42,560 --> 00:08:44,230
+auto sum. It's this symbol here. And you
+can just click on it and it will
+
+458
+00:08:44,230 --> 00:08:44,240
+can just click on it and it will
+ 
+
+459
+00:08:44,240 --> 00:08:46,949
+can just click on it and it will
+automatically look immediately above and
+
+460
+00:08:46,949 --> 00:08:46,959
+automatically look immediately above and
+ 
+
+461
+00:08:46,959 --> 00:08:49,269
+automatically look immediately above and
+it will add up everything in those
+
+462
+00:08:49,269 --> 00:08:49,279
+it will add up everything in those
+ 
+
+463
+00:08:49,279 --> 00:08:51,910
+it will add up everything in those
+cells. So I can hit enter and I get the
+
+464
+00:08:51,910 --> 00:08:51,920
+cells. So I can hit enter and I get the
+ 
+
+465
+00:08:51,920 --> 00:08:55,430
+cells. So I can hit enter and I get the
+same results. So that's the fastest. I
+
+466
+00:08:55,430 --> 00:08:55,440
+same results. So that's the fastest. I
+ 
+
+467
+00:08:55,440 --> 00:08:57,190
+same results. So that's the fastest. I
+will say that sometimes it gets it
+
+468
+00:08:57,190 --> 00:08:57,200
+will say that sometimes it gets it
+ 
+
+469
+00:08:57,200 --> 00:08:59,750
+will say that sometimes it gets it
+wrong. Sometimes it gets the wrong data,
+
+470
+00:08:59,750 --> 00:08:59,760
+wrong. Sometimes it gets the wrong data,
+ 
+
+471
+00:08:59,760 --> 00:09:02,230
+wrong. Sometimes it gets the wrong data,
+so just watch out for it. I usually use
+
+472
+00:09:02,230 --> 00:09:02,240
+so just watch out for it. I usually use
+ 
+
+473
+00:09:02,240 --> 00:09:04,550
+so just watch out for it. I usually use
+auto sum, but just be a little bit
+
+474
+00:09:04,550 --> 00:09:04,560
+auto sum, but just be a little bit
+ 
+
+475
+00:09:04,560 --> 00:09:06,630
+auto sum, but just be a little bit
+skeptical. Sometimes it might include
+
+476
+00:09:06,630 --> 00:09:06,640
+skeptical. Sometimes it might include
+ 
+
+477
+00:09:06,640 --> 00:09:08,550
+skeptical. Sometimes it might include
+data that you don't want included. Okay,
+
+478
+00:09:08,550 --> 00:09:08,560
+data that you don't want included. Okay,
+ 
+
+479
+00:09:08,560 --> 00:09:09,990
+data that you don't want included. Okay,
+speaking of including data that you
+
+480
+00:09:09,990 --> 00:09:10,000
+speaking of including data that you
+ 
+
+481
+00:09:10,000 --> 00:09:11,990
+speaking of including data that you
+don't want, notice what it did to my
+
+482
+00:09:11,990 --> 00:09:12,000
+don't want, notice what it did to my
+ 
+
+483
+00:09:12,000 --> 00:09:14,550
+don't want, notice what it did to my
+conditional formatting. Now, this is the
+
+484
+00:09:14,550 --> 00:09:14,560
+conditional formatting. Now, this is the
+ 
+
+485
+00:09:14,560 --> 00:09:17,190
+conditional formatting. Now, this is the
+only green value and everything else is
+
+486
+00:09:17,190 --> 00:09:17,200
+only green value and everything else is
+ 
+
+487
+00:09:17,200 --> 00:09:19,590
+only green value and everything else is
+small compared to it. Right? So, I need
+
+488
+00:09:19,590 --> 00:09:19,600
+small compared to it. Right? So, I need
+ 
+
+489
+00:09:19,600 --> 00:09:21,030
+small compared to it. Right? So, I need
+to fix that with my conditional
+
+490
+00:09:21,030 --> 00:09:21,040
+to fix that with my conditional
+ 
+
+491
+00:09:21,040 --> 00:09:23,110
+to fix that with my conditional
+formatting. I'll go in and highlight
+
+492
+00:09:23,110 --> 00:09:23,120
+formatting. I'll go in and highlight
+ 
+
+493
+00:09:23,120 --> 00:09:25,750
+formatting. I'll go in and highlight
+that entire column and I'm going to
+
+494
+00:09:25,750 --> 00:09:25,760
+that entire column and I'm going to
+ 
+
+495
+00:09:25,760 --> 00:09:27,910
+that entire column and I'm going to
+clear the rules. Okay, so it gets it
+
+496
+00:09:27,910 --> 00:09:27,920
+clear the rules. Okay, so it gets it
+ 
+
+497
+00:09:27,920 --> 00:09:31,110
+clear the rules. Okay, so it gets it
+completely out. And I just want to do
+
+498
+00:09:31,110 --> 00:09:31,120
+completely out. And I just want to do
+ 
+
+499
+00:09:31,120 --> 00:09:33,910
+completely out. And I just want to do
+conditional formatting with just those
+
+500
+00:09:33,910 --> 00:09:33,920
+conditional formatting with just those
+ 
+
+501
+00:09:33,920 --> 00:09:36,150
+conditional formatting with just those
+numbers, not the total. So now I go in
+
+502
+00:09:36,150 --> 00:09:36,160
+numbers, not the total. So now I go in
+ 
+
+503
+00:09:36,160 --> 00:09:37,910
+numbers, not the total. So now I go in
+conditional formatting, color scales,
+
+504
+00:09:37,910 --> 00:09:37,920
+conditional formatting, color scales,
+ 
+
+505
+00:09:37,920 --> 00:09:40,550
+conditional formatting, color scales,
+and look, that's back to being useful.
+
+506
+00:09:40,550 --> 00:09:40,560
+and look, that's back to being useful.
+ 
+
+507
+00:09:40,560 --> 00:09:42,710
+and look, that's back to being useful.
+Okay, now I should go in and type total
+
+508
+00:09:42,710 --> 00:09:42,720
+Okay, now I should go in and type total
+ 
+
+509
+00:09:42,720 --> 00:09:45,110
+Okay, now I should go in and type total
+and maybe put these in bold just to show
+
+510
+00:09:45,110 --> 00:09:45,120
+and maybe put these in bold just to show
+ 
+
+511
+00:09:45,120 --> 00:09:46,870
+and maybe put these in bold just to show
+that this number is different. It's
+
+512
+00:09:46,870 --> 00:09:46,880
+that this number is different. It's
+ 
+
+513
+00:09:46,880 --> 00:09:48,550
+that this number is different. It's
+special. It's different than those other
+
+514
+00:09:48,550 --> 00:09:48,560
+special. It's different than those other
+ 
+
+515
+00:09:48,560 --> 00:09:51,269
+special. It's different than those other
+numbers. Okay, next I'd like to do an
+
+516
+00:09:51,269 --> 00:09:51,279
+numbers. Okay, next I'd like to do an
+ 
+
+517
+00:09:51,279 --> 00:09:54,070
+numbers. Okay, next I'd like to do an
+average formula and it's similar. I
+
+518
+00:09:54,070 --> 00:09:54,080
+average formula and it's similar. I
+ 
+
+519
+00:09:54,080 --> 00:09:56,470
+average formula and it's similar. I
+would just say to myself, this cell is
+
+520
+00:09:56,470 --> 00:09:56,480
+would just say to myself, this cell is
+ 
+
+521
+00:09:56,480 --> 00:09:59,910
+would just say to myself, this cell is
+equal to the average left parenthesis
+
+522
+00:09:59,910 --> 00:09:59,920
+equal to the average left parenthesis
+ 
+
+523
+00:09:59,920 --> 00:10:02,550
+equal to the average left parenthesis
+and then I can click and drag or I can
+
+524
+00:10:02,550 --> 00:10:02,560
+and then I can click and drag or I can
+ 
+
+525
+00:10:02,560 --> 00:10:05,269
+and then I can click and drag or I can
+type in the range or notice that there
+
+526
+00:10:05,269 --> 00:10:05,279
+type in the range or notice that there
+ 
+
+527
+00:10:05,279 --> 00:10:08,949
+type in the range or notice that there
+is an auto average which again you
+
+528
+00:10:08,949 --> 00:10:08,959
+is an auto average which again you
+ 
+
+529
+00:10:08,959 --> 00:10:11,110
+is an auto average which again you
+should use it. It's great but just be a
+
+530
+00:10:11,110 --> 00:10:11,120
+should use it. It's great but just be a
+ 
+
+531
+00:10:11,120 --> 00:10:13,030
+should use it. It's great but just be a
+little skeptical of the results. I'm
+
+532
+00:10:13,030 --> 00:10:13,040
+little skeptical of the results. I'm
+ 
+
+533
+00:10:13,040 --> 00:10:14,069
+little skeptical of the results. I'm
+going to double click between those
+
+534
+00:10:14,069 --> 00:10:14,079
+going to double click between those
+ 
+
+535
+00:10:14,079 --> 00:10:15,590
+going to double click between those
+cells to make it so you can see the word
+
+536
+00:10:15,590 --> 00:10:15,600
+cells to make it so you can see the word
+ 
+
+537
+00:10:15,600 --> 00:10:19,030
+cells to make it so you can see the word
+average. Next I want to do one of what's
+
+538
+00:10:19,030 --> 00:10:19,040
+average. Next I want to do one of what's
+ 
+
+539
+00:10:19,040 --> 00:10:22,230
+average. Next I want to do one of what's
+the highest value and the lowest value
+
+540
+00:10:22,230 --> 00:10:22,240
+the highest value and the lowest value
+ 
+
+541
+00:10:22,240 --> 00:10:24,550
+the highest value and the lowest value
+for these. The formula is a little
+
+542
+00:10:24,550 --> 00:10:24,560
+for these. The formula is a little
+ 
+
+543
+00:10:24,560 --> 00:10:26,470
+for these. The formula is a little
+different for highest. The formula is
+
+544
+00:10:26,470 --> 00:10:26,480
+different for highest. The formula is
+ 
+
+545
+00:10:26,480 --> 00:10:30,150
+different for highest. The formula is
+this. This cell is equal to the max or
+
+546
+00:10:30,150 --> 00:10:30,160
+this. This cell is equal to the max or
+ 
+
+547
+00:10:30,160 --> 00:10:33,030
+this. This cell is equal to the max or
+just max left parenthesis. Click and
+
+548
+00:10:33,030 --> 00:10:33,040
+just max left parenthesis. Click and
+ 
+
+549
+00:10:33,040 --> 00:10:36,389
+just max left parenthesis. Click and
+drag on the range or type in the range.
+
+550
+00:10:36,389 --> 00:10:36,399
+drag on the range or type in the range.
+ 
+
+551
+00:10:36,399 --> 00:10:39,190
+drag on the range or type in the range.
+It's up to you. Hit return. So what it
+
+552
+00:10:39,190 --> 00:10:39,200
+It's up to you. Hit return. So what it
+ 
+
+553
+00:10:39,200 --> 00:10:42,230
+It's up to you. Hit return. So what it
+did is it looked through that range,
+
+554
+00:10:42,230 --> 00:10:42,240
+did is it looked through that range,
+ 
+
+555
+00:10:42,240 --> 00:10:44,310
+did is it looked through that range,
+found the maximum number, the highest
+
+556
+00:10:44,310 --> 00:10:44,320
+found the maximum number, the highest
+ 
+
+557
+00:10:44,320 --> 00:10:47,430
+found the maximum number, the highest
+number, and printed it here. Next, I'll
+
+558
+00:10:47,430 --> 00:10:47,440
+number, and printed it here. Next, I'll
+ 
+
+559
+00:10:47,440 --> 00:10:50,550
+number, and printed it here. Next, I'll
+do lowest. For lowest, we do this cell
+
+560
+00:10:50,550 --> 00:10:50,560
+do lowest. For lowest, we do this cell
+ 
+
+561
+00:10:50,560 --> 00:10:54,630
+do lowest. For lowest, we do this cell
+is equal to min left parenthesis and the
+
+562
+00:10:54,630 --> 00:10:54,640
+is equal to min left parenthesis and the
+ 
+
+563
+00:10:54,640 --> 00:10:57,030
+is equal to min left parenthesis and the
+range. I'll type it in this time. D3
+
+564
+00:10:57,030 --> 00:10:57,040
+range. I'll type it in this time. D3
+ 
+
+565
+00:10:57,040 --> 00:11:02,470
+range. I'll type it in this time. D3
+through D22. D3 through D22. Hit enter.
+
+566
+00:11:02,470 --> 00:11:02,480
+through D22. D3 through D22. Hit enter.
+ 
+
+567
+00:11:02,480 --> 00:11:04,710
+through D22. D3 through D22. Hit enter.
+And there's the lowest. So, you can see
+
+568
+00:11:04,710 --> 00:11:04,720
+And there's the lowest. So, you can see
+ 
+
+569
+00:11:04,720 --> 00:11:07,190
+And there's the lowest. So, you can see
+these formulas are pretty useful. You
+
+570
+00:11:07,190 --> 00:11:07,200
+these formulas are pretty useful. You
+ 
+
+571
+00:11:07,200 --> 00:11:08,550
+these formulas are pretty useful. You
+can get some really good numbers out of
+
+572
+00:11:08,550 --> 00:11:08,560
+can get some really good numbers out of
+ 
+
+573
+00:11:08,560 --> 00:11:10,389
+can get some really good numbers out of
+them. So, those are probably the four
+
+574
+00:11:10,389 --> 00:11:10,399
+them. So, those are probably the four
+ 
+
+575
+00:11:10,399 --> 00:11:13,110
+them. So, those are probably the four
+most common ones that I use. Sum,
+
+576
+00:11:13,110 --> 00:11:13,120
+most common ones that I use. Sum,
+ 
+
+577
+00:11:13,120 --> 00:11:14,949
+most common ones that I use. Sum,
+average, max, and min. But just know
+
+578
+00:11:14,949 --> 00:11:14,959
+average, max, and min. But just know
+ 
+
+579
+00:11:14,959 --> 00:11:17,030
+average, max, and min. But just know
+that there are many, many more functions
+
+580
+00:11:17,030 --> 00:11:17,040
+that there are many, many more functions
+ 
+
+581
+00:11:17,040 --> 00:11:18,630
+that there are many, many more functions
+that you can use. If you want to see
+
+582
+00:11:18,630 --> 00:11:18,640
+that you can use. If you want to see
+ 
+
+583
+00:11:18,640 --> 00:11:20,870
+that you can use. If you want to see
+pretty much an exhaustive list of all of
+
+584
+00:11:20,870 --> 00:11:20,880
+pretty much an exhaustive list of all of
+ 
+
+585
+00:11:20,880 --> 00:11:23,110
+pretty much an exhaustive list of all of
+the functions that you can use, just
+
+586
+00:11:23,110 --> 00:11:23,120
+the functions that you can use, just
+ 
+
+587
+00:11:23,120 --> 00:11:26,069
+the functions that you can use, just
+type in equals and then look up here.
+
+588
+00:11:26,069 --> 00:11:26,079
+type in equals and then look up here.
+ 
+
+589
+00:11:26,079 --> 00:11:28,630
+type in equals and then look up here.
+This is the formula bar is what we have
+
+590
+00:11:28,630 --> 00:11:28,640
+This is the formula bar is what we have
+ 
+
+591
+00:11:28,640 --> 00:11:31,590
+This is the formula bar is what we have
+here. And it's an alternative to typing
+
+592
+00:11:31,590 --> 00:11:31,600
+here. And it's an alternative to typing
+ 
+
+593
+00:11:31,600 --> 00:11:34,550
+here. And it's an alternative to typing
+your formula right here in the cell. You
+
+594
+00:11:34,550 --> 00:11:34,560
+your formula right here in the cell. You
+ 
+
+595
+00:11:34,560 --> 00:11:36,470
+your formula right here in the cell. You
+could just go up to the formula bar and
+
+596
+00:11:36,470 --> 00:11:36,480
+could just go up to the formula bar and
+ 
+
+597
+00:11:36,480 --> 00:11:39,030
+could just go up to the formula bar and
+start typing. And notice as you type,
+
+598
+00:11:39,030 --> 00:11:39,040
+start typing. And notice as you type,
+ 
+
+599
+00:11:39,040 --> 00:11:40,949
+start typing. And notice as you type,
+you get some suggestions. So it's
+
+600
+00:11:40,949 --> 00:11:40,959
+you get some suggestions. So it's
+ 
+
+601
+00:11:40,959 --> 00:11:43,670
+you get some suggestions. So it's
+recommending because I typed in average,
+
+602
+00:11:43,670 --> 00:11:43,680
+recommending because I typed in average,
+ 
+
+603
+00:11:43,680 --> 00:11:45,750
+recommending because I typed in average,
+it's recommending average, average A,
+
+604
+00:11:45,750 --> 00:11:45,760
+it's recommending average, average A,
+ 
+
+605
+00:11:45,760 --> 00:11:47,670
+it's recommending average, average A,
+average if. There's four different
+
+606
+00:11:47,670 --> 00:11:47,680
+average if. There's four different
+ 
+
+607
+00:11:47,680 --> 00:11:49,590
+average if. There's four different
+average functions that I could draw
+
+608
+00:11:49,590 --> 00:11:49,600
+average functions that I could draw
+ 
+
+609
+00:11:49,600 --> 00:11:52,069
+average functions that I could draw
+from. Okay. So it will give suggestions.
+
+610
+00:11:52,069 --> 00:11:52,079
+from. Okay. So it will give suggestions.
+ 
+
+611
+00:11:52,079 --> 00:11:54,150
+from. Okay. So it will give suggestions.
+That's one thing to know about. But also
+
+612
+00:11:54,150 --> 00:11:54,160
+That's one thing to know about. But also
+ 
+
+613
+00:11:54,160 --> 00:11:55,990
+That's one thing to know about. But also
+over here on the left, look what it
+
+614
+00:11:55,990 --> 00:11:56,000
+over here on the left, look what it
+ 
+
+615
+00:11:56,000 --> 00:11:58,630
+over here on the left, look what it
+does. There's a click drop-down where
+
+616
+00:11:58,630 --> 00:11:58,640
+does. There's a click drop-down where
+ 
+
+617
+00:11:58,640 --> 00:12:00,710
+does. There's a click drop-down where
+you get some pretty good suggestions
+
+618
+00:12:00,710 --> 00:12:00,720
+you get some pretty good suggestions
+ 
+
+619
+00:12:00,720 --> 00:12:02,790
+you get some pretty good suggestions
+about the functions that you might want.
+
+620
+00:12:02,790 --> 00:12:02,800
+about the functions that you might want.
+ 
+
+621
+00:12:02,800 --> 00:12:05,190
+about the functions that you might want.
+There's also a formulas tab where you
+
+622
+00:12:05,190 --> 00:12:05,200
+There's also a formulas tab where you
+ 
+
+623
+00:12:05,200 --> 00:12:08,150
+There's also a formulas tab where you
+can go and a whole function library
+
+624
+00:12:08,150 --> 00:12:08,160
+can go and a whole function library
+ 
+
+625
+00:12:08,160 --> 00:12:09,670
+can go and a whole function library
+where you can get math and trig
+
+626
+00:12:09,670 --> 00:12:09,680
+where you can get math and trig
+ 
+
+627
+00:12:09,680 --> 00:12:11,670
+where you can get math and trig
+formulas, look up and reference
+
+628
+00:12:11,670 --> 00:12:11,680
+formulas, look up and reference
+ 
+
+629
+00:12:11,680 --> 00:12:14,949
+formulas, look up and reference
+formulas, text, logical, these are great
+
+630
+00:12:14,949 --> 00:12:14,959
+formulas, text, logical, these are great
+ 
+
+631
+00:12:14,959 --> 00:12:18,710
+formulas, text, logical, these are great
+recently used financial formulas. And if
+
+632
+00:12:18,710 --> 00:12:18,720
+recently used financial formulas. And if
+ 
+
+633
+00:12:18,720 --> 00:12:20,629
+recently used financial formulas. And if
+you really don't know which one you want
+
+634
+00:12:20,629 --> 00:12:20,639
+you really don't know which one you want
+ 
+
+635
+00:12:20,639 --> 00:12:23,670
+you really don't know which one you want
+to do, just go here to insert function
+
+636
+00:12:23,670 --> 00:12:23,680
+to do, just go here to insert function
+ 
+
+637
+00:12:23,680 --> 00:12:25,670
+to do, just go here to insert function
+and you can get it on most of these drop
+
+638
+00:12:25,670 --> 00:12:25,680
+and you can get it on most of these drop
+ 
+
+639
+00:12:25,680 --> 00:12:27,910
+and you can get it on most of these drop
+downs. And then just type a brief
+
+640
+00:12:27,910 --> 00:12:27,920
+downs. And then just type a brief
+ 
+
+641
+00:12:27,920 --> 00:12:30,230
+downs. And then just type a brief
+description of what you want to do.
+
+642
+00:12:30,230 --> 00:12:30,240
+description of what you want to do.
+ 
+
+643
+00:12:30,240 --> 00:12:32,949
+description of what you want to do.
+Let's say I want to count the number of
+
+644
+00:12:32,949 --> 00:12:32,959
+Let's say I want to count the number of
+ 
+
+645
+00:12:32,959 --> 00:12:35,030
+Let's say I want to count the number of
+DVDs that I have. So, I'll do a search
+
+646
+00:12:35,030 --> 00:12:35,040
+DVDs that I have. So, I'll do a search
+ 
+
+647
+00:12:35,040 --> 00:12:37,190
+DVDs that I have. So, I'll do a search
+for count. And it brings up some options
+
+648
+00:12:37,190 --> 00:12:37,200
+for count. And it brings up some options
+ 
+
+649
+00:12:37,200 --> 00:12:39,190
+for count. And it brings up some options
+that I have. And it tells me what
+
+650
+00:12:39,190 --> 00:12:39,200
+that I have. And it tells me what
+ 
+
+651
+00:12:39,200 --> 00:12:42,069
+that I have. And it tells me what
+exactly it's going to do. So, use these
+
+652
+00:12:42,069 --> 00:12:42,079
+exactly it's going to do. So, use these
+ 
+
+653
+00:12:42,079 --> 00:12:44,470
+exactly it's going to do. So, use these
+tools that you have. Use the formula
+
+654
+00:12:44,470 --> 00:12:44,480
+tools that you have. Use the formula
+ 
+
+655
+00:12:44,480 --> 00:12:47,269
+tools that you have. Use the formula
+bar, use the formulas tab, and if you
+
+656
+00:12:47,269 --> 00:12:47,279
+bar, use the formulas tab, and if you
+ 
+
+657
+00:12:47,279 --> 00:12:50,150
+bar, use the formulas tab, and if you
+need to use the insert function button
+
+658
+00:12:50,150 --> 00:12:50,160
+need to use the insert function button
+ 
+
+659
+00:12:50,160 --> 00:12:52,310
+need to use the insert function button
+that gives you some additional options.
+
+660
+00:12:52,310 --> 00:12:52,320
+that gives you some additional options.
+ 
+
+661
+00:12:52,320 --> 00:12:54,470
+that gives you some additional options.
+So, you can also click here, insert
+
+662
+00:12:54,470 --> 00:12:54,480
+So, you can also click here, insert
+ 
+
+663
+00:12:54,480 --> 00:12:56,470
+So, you can also click here, insert
+function. So, have fun playing around
+
+664
+00:12:56,470 --> 00:12:56,480
+function. So, have fun playing around
+ 
+
+665
+00:12:56,480 --> 00:12:58,550
+function. So, have fun playing around
+with formulas and functions. They're
+
+666
+00:12:58,550 --> 00:12:58,560
+with formulas and functions. They're
+ 
+
+667
+00:12:58,560 --> 00:13:00,470
+with formulas and functions. They're
+very powerful. Next, we're going to take
+
+668
+00:13:00,470 --> 00:13:00,480
+very powerful. Next, we're going to take
+ 
+
+669
+00:13:00,480 --> 00:13:02,470
+very powerful. Next, we're going to take
+a look at a few intermediate and maybe
+
+670
+00:13:02,470 --> 00:13:02,480
+a look at a few intermediate and maybe
+ 
+
+671
+00:13:02,480 --> 00:13:04,790
+a look at a few intermediate and maybe
+some advanced tips and tricks that you
+
+672
+00:13:04,790 --> 00:13:04,800
+some advanced tips and tricks that you
+ 
+
+673
+00:13:04,800 --> 00:13:06,710
+some advanced tips and tricks that you
+should know about. One that is pretty
+
+674
+00:13:06,710 --> 00:13:06,720
+should know about. One that is pretty
+ 
+
+675
+00:13:06,720 --> 00:13:09,750
+should know about. One that is pretty
+wellnown is called the autofill handle.
+
+676
+00:13:09,750 --> 00:13:09,760
+wellnown is called the autofill handle.
+ 
+
+677
+00:13:09,760 --> 00:13:11,030
+wellnown is called the autofill handle.
+And this is where you'll find it. When
+
+678
+00:13:11,030 --> 00:13:11,040
+And this is where you'll find it. When
+ 
+
+679
+00:13:11,040 --> 00:13:12,870
+And this is where you'll find it. When
+you click on a cell, look in the lower
+
+680
+00:13:12,870 --> 00:13:12,880
+you click on a cell, look in the lower
+ 
+
+681
+00:13:12,880 --> 00:13:15,110
+you click on a cell, look in the lower
+right corner, there's a little green
+
+682
+00:13:15,110 --> 00:13:15,120
+right corner, there's a little green
+ 
+
+683
+00:13:15,120 --> 00:13:17,190
+right corner, there's a little green
+square. And if you put your mouse on
+
+684
+00:13:17,190 --> 00:13:17,200
+square. And if you put your mouse on
+ 
+
+685
+00:13:17,200 --> 00:13:19,590
+square. And if you put your mouse on
+that square, it will become a plus sign.
+
+686
+00:13:19,590 --> 00:13:19,600
+that square, it will become a plus sign.
+ 
+
+687
+00:13:19,600 --> 00:13:21,110
+that square, it will become a plus sign.
+Now, it's already a plus sign, but it
+
+688
+00:13:21,110 --> 00:13:21,120
+Now, it's already a plus sign, but it
+ 
+
+689
+00:13:21,120 --> 00:13:23,590
+Now, it's already a plus sign, but it
+becomes a black plus sign. Once you see
+
+690
+00:13:23,590 --> 00:13:23,600
+becomes a black plus sign. Once you see
+ 
+
+691
+00:13:23,600 --> 00:13:24,870
+becomes a black plus sign. Once you see
+that, you know that you've got the
+
+692
+00:13:24,870 --> 00:13:24,880
+that, you know that you've got the
+ 
+
+693
+00:13:24,880 --> 00:13:26,629
+that, you know that you've got the
+autofill handle. And what you can do
+
+694
+00:13:26,629 --> 00:13:26,639
+autofill handle. And what you can do
+ 
+
+695
+00:13:26,639 --> 00:13:29,030
+autofill handle. And what you can do
+with this is you can click and drag to
+
+696
+00:13:29,030 --> 00:13:29,040
+with this is you can click and drag to
+ 
+
+697
+00:13:29,040 --> 00:13:31,269
+with this is you can click and drag to
+copy what's in the cell. So if I want to
+
+698
+00:13:31,269 --> 00:13:31,279
+copy what's in the cell. So if I want to
+ 
+
+699
+00:13:31,279 --> 00:13:34,389
+copy what's in the cell. So if I want to
+copy 2015, I just click and drag. It's
+
+700
+00:13:34,389 --> 00:13:34,399
+copy 2015, I just click and drag. It's
+ 
+
+701
+00:13:34,399 --> 00:13:37,110
+copy 2015, I just click and drag. It's
+2015 again. 2015 again. And I can just
+
+702
+00:13:37,110 --> 00:13:37,120
+2015 again. 2015 again. And I can just
+ 
+
+703
+00:13:37,120 --> 00:13:38,550
+2015 again. 2015 again. And I can just
+keep doing that. I could even just click
+
+704
+00:13:38,550 --> 00:13:38,560
+keep doing that. I could even just click
+ 
+
+705
+00:13:38,560 --> 00:13:42,150
+keep doing that. I could even just click
+and drag and get a whole column of 2015.
+
+706
+00:13:42,150 --> 00:13:42,160
+and drag and get a whole column of 2015.
+ 
+
+707
+00:13:42,160 --> 00:13:44,470
+and drag and get a whole column of 2015.
+So that's the autofill handle. I'm going
+
+708
+00:13:44,470 --> 00:13:44,480
+So that's the autofill handle. I'm going
+ 
+
+709
+00:13:44,480 --> 00:13:47,190
+So that's the autofill handle. I'm going
+to undo that. Now, that also works with
+
+710
+00:13:47,190 --> 00:13:47,200
+to undo that. Now, that also works with
+ 
+
+711
+00:13:47,200 --> 00:13:50,790
+to undo that. Now, that also works with
+text, not just with numbers. So I can
+
+712
+00:13:50,790 --> 00:13:50,800
+text, not just with numbers. So I can
+ 
+
+713
+00:13:50,800 --> 00:13:52,710
+text, not just with numbers. So I can
+copy what's in a cell by using the
+
+714
+00:13:52,710 --> 00:13:52,720
+copy what's in a cell by using the
+ 
+
+715
+00:13:52,720 --> 00:13:54,550
+copy what's in a cell by using the
+autofill handle and clicking and
+
+716
+00:13:54,550 --> 00:13:54,560
+autofill handle and clicking and
+ 
+
+717
+00:13:54,560 --> 00:13:57,189
+autofill handle and clicking and
+dragging. Now, what's really cool is you
+
+718
+00:13:57,189 --> 00:13:57,199
+dragging. Now, what's really cool is you
+ 
+
+719
+00:13:57,199 --> 00:14:00,069
+dragging. Now, what's really cool is you
+can copy a pattern. So, right here, I
+
+720
+00:14:00,069 --> 00:14:00,079
+can copy a pattern. So, right here, I
+ 
+
+721
+00:14:00,079 --> 00:14:01,910
+can copy a pattern. So, right here, I
+just clicked and dragged to highlight
+
+722
+00:14:01,910 --> 00:14:01,920
+just clicked and dragged to highlight
+ 
+
+723
+00:14:01,920 --> 00:14:05,030
+just clicked and dragged to highlight
+2016 2015. Now, if I use the autofill
+
+724
+00:14:05,030 --> 00:14:05,040
+2016 2015. Now, if I use the autofill
+ 
+
+725
+00:14:05,040 --> 00:14:06,870
+2016 2015. Now, if I use the autofill
+handle, look what it does. It figures
+
+726
+00:14:06,870 --> 00:14:06,880
+handle, look what it does. It figures
+ 
+
+727
+00:14:06,880 --> 00:14:09,430
+handle, look what it does. It figures
+out the pattern. The pattern is minus
+
+728
+00:14:09,430 --> 00:14:09,440
+out the pattern. The pattern is minus
+ 
+
+729
+00:14:09,440 --> 00:14:12,710
+out the pattern. The pattern is minus
+one, subtract one, and it just repeated
+
+730
+00:14:12,710 --> 00:14:12,720
+one, subtract one, and it just repeated
+ 
+
+731
+00:14:12,720 --> 00:14:15,269
+one, subtract one, and it just repeated
+that pattern. So, if you will show the
+
+732
+00:14:15,269 --> 00:14:15,279
+that pattern. So, if you will show the
+ 
+
+733
+00:14:15,279 --> 00:14:17,350
+that pattern. So, if you will show the
+autofill handle the pattern that you
+
+734
+00:14:17,350 --> 00:14:17,360
+autofill handle the pattern that you
+ 
+
+735
+00:14:17,360 --> 00:14:19,670
+autofill handle the pattern that you
+would like for it to copy, it will copy
+
+736
+00:14:19,670 --> 00:14:19,680
+would like for it to copy, it will copy
+ 
+
+737
+00:14:19,680 --> 00:14:21,990
+would like for it to copy, it will copy
+that pattern. You can also use the
+
+738
+00:14:21,990 --> 00:14:22,000
+that pattern. You can also use the
+ 
+
+739
+00:14:22,000 --> 00:14:24,790
+that pattern. You can also use the
+autofill handle to copy a formula. Now,
+
+740
+00:14:24,790 --> 00:14:24,800
+autofill handle to copy a formula. Now,
+ 
+
+741
+00:14:24,800 --> 00:14:26,389
+autofill handle to copy a formula. Now,
+in this case, the formula doesn't work
+
+742
+00:14:26,389 --> 00:14:26,399
+in this case, the formula doesn't work
+ 
+
+743
+00:14:26,399 --> 00:14:28,949
+in this case, the formula doesn't work
+too well. This is the sum formula. It's
+
+744
+00:14:28,949 --> 00:14:28,959
+too well. This is the sum formula. It's
+ 
+
+745
+00:14:28,959 --> 00:14:30,310
+too well. This is the sum formula. It's
+trying to add up all of these numbers.
+
+746
+00:14:30,310 --> 00:14:30,320
+trying to add up all of these numbers.
+ 
+
+747
+00:14:30,320 --> 00:14:31,990
+trying to add up all of these numbers.
+When I use the autofill handle, dragged
+
+748
+00:14:31,990 --> 00:14:32,000
+When I use the autofill handle, dragged
+ 
+
+749
+00:14:32,000 --> 00:14:33,829
+When I use the autofill handle, dragged
+it over. Look what it did. Now, it's
+
+750
+00:14:33,829 --> 00:14:33,839
+it over. Look what it did. Now, it's
+ 
+
+751
+00:14:33,839 --> 00:14:36,629
+it over. Look what it did. Now, it's
+trying to sum up this column. And so,
+
+752
+00:14:36,629 --> 00:14:36,639
+trying to sum up this column. And so,
+ 
+
+753
+00:14:36,639 --> 00:14:38,230
+trying to sum up this column. And so,
+because those aren't numbers, it's not
+
+754
+00:14:38,230 --> 00:14:38,240
+because those aren't numbers, it's not
+ 
+
+755
+00:14:38,240 --> 00:14:40,069
+because those aren't numbers, it's not
+working real well. But, let me do it
+
+756
+00:14:40,069 --> 00:14:40,079
+working real well. But, let me do it
+ 
+
+757
+00:14:40,079 --> 00:14:42,949
+working real well. But, let me do it
+this direction. You can see it is now
+
+758
+00:14:42,949 --> 00:14:42,959
+this direction. You can see it is now
+ 
+
+759
+00:14:42,959 --> 00:14:45,430
+this direction. You can see it is now
+adding up the years. It thinks that it's
+
+760
+00:14:45,430 --> 00:14:45,440
+adding up the years. It thinks that it's
+ 
+
+761
+00:14:45,440 --> 00:14:47,430
+adding up the years. It thinks that it's
+currency, but that's okay. It's adding
+
+762
+00:14:47,430 --> 00:14:47,440
+currency, but that's okay. It's adding
+ 
+
+763
+00:14:47,440 --> 00:14:49,030
+currency, but that's okay. It's adding
+up all of these years and coming up with
+
+764
+00:14:49,030 --> 00:14:49,040
+up all of these years and coming up with
+ 
+
+765
+00:14:49,040 --> 00:14:51,910
+up all of these years and coming up with
+a total. So, I just love the autofill
+
+766
+00:14:51,910 --> 00:14:51,920
+a total. So, I just love the autofill
+ 
+
+767
+00:14:51,920 --> 00:14:53,910
+a total. So, I just love the autofill
+handle. It's especially good for
+
+768
+00:14:53,910 --> 00:14:53,920
+handle. It's especially good for
+ 
+
+769
+00:14:53,920 --> 00:14:56,790
+handle. It's especially good for
+anything related to time. So, for
+
+770
+00:14:56,790 --> 00:14:56,800
+anything related to time. So, for
+ 
+
+771
+00:14:56,800 --> 00:14:59,670
+anything related to time. So, for
+example, dates. Let's say I want to put
+
+772
+00:14:59,670 --> 00:14:59,680
+example, dates. Let's say I want to put
+ 
+
+773
+00:14:59,680 --> 00:15:02,389
+example, dates. Let's say I want to put
+in each of the months of the year. With
+
+774
+00:15:02,389 --> 00:15:02,399
+in each of the months of the year. With
+ 
+
+775
+00:15:02,399 --> 00:15:04,790
+in each of the months of the year. With
+dates and times, you don't even have to
+
+776
+00:15:04,790 --> 00:15:04,800
+dates and times, you don't even have to
+ 
+
+777
+00:15:04,800 --> 00:15:06,790
+dates and times, you don't even have to
+establish a pattern. You can just type
+
+778
+00:15:06,790 --> 00:15:06,800
+establish a pattern. You can just type
+ 
+
+779
+00:15:06,800 --> 00:15:08,710
+establish a pattern. You can just type
+in the first thing that's related to to
+
+780
+00:15:08,710 --> 00:15:08,720
+in the first thing that's related to to
+ 
+
+781
+00:15:08,720 --> 00:15:10,550
+in the first thing that's related to to
+date or time and then just go to the
+
+782
+00:15:10,550 --> 00:15:10,560
+date or time and then just go to the
+ 
+
+783
+00:15:10,560 --> 00:15:12,790
+date or time and then just go to the
+corner, click and drag, and look, it
+
+784
+00:15:12,790 --> 00:15:12,800
+corner, click and drag, and look, it
+ 
+
+785
+00:15:12,800 --> 00:15:14,870
+corner, click and drag, and look, it
+automatically knows what comes next.
+
+786
+00:15:14,870 --> 00:15:14,880
+automatically knows what comes next.
+ 
+
+787
+00:15:14,880 --> 00:15:17,590
+automatically knows what comes next.
+Same with days of the week. Same with
+
+788
+00:15:17,590 --> 00:15:17,600
+Same with days of the week. Same with
+ 
+
+789
+00:15:17,600 --> 00:15:20,710
+Same with days of the week. Same with
+full dates.
+
+790
+00:15:20,710 --> 00:15:20,720
+full dates.
+ 
+
+791
+00:15:20,720 --> 00:15:24,310
+full dates.
+And it's also the same with times.
+
+792
+00:15:24,310 --> 00:15:24,320
+And it's also the same with times.
+ 
+
+793
+00:15:24,320 --> 00:15:26,790
+And it's also the same with times.
+So this autofill handle is just a
+
+794
+00:15:26,790 --> 00:15:26,800
+So this autofill handle is just a
+ 
+
+795
+00:15:26,800 --> 00:15:30,150
+So this autofill handle is just a
+lifesaver, a timesaver for sure. So I'm
+
+796
+00:15:30,150 --> 00:15:30,160
+lifesaver, a timesaver for sure. So I'm
+ 
+
+797
+00:15:30,160 --> 00:15:31,750
+lifesaver, a timesaver for sure. So I'm
+going to select all of that just by
+
+798
+00:15:31,750 --> 00:15:31,760
+going to select all of that just by
+ 
+
+799
+00:15:31,760 --> 00:15:33,350
+going to select all of that just by
+clicking on the column letters across
+
+800
+00:15:33,350 --> 00:15:33,360
+clicking on the column letters across
+ 
+
+801
+00:15:33,360 --> 00:15:35,350
+clicking on the column letters across
+the top, clicking and holding, and then
+
+802
+00:15:35,350 --> 00:15:35,360
+the top, clicking and holding, and then
+ 
+
+803
+00:15:35,360 --> 00:15:37,110
+the top, clicking and holding, and then
+I'll rightclick and choose clear
+
+804
+00:15:37,110 --> 00:15:37,120
+I'll rightclick and choose clear
+ 
+
+805
+00:15:37,120 --> 00:15:39,509
+I'll rightclick and choose clear
+contents. And that clears it out. But I
+
+806
+00:15:39,509 --> 00:15:39,519
+contents. And that clears it out. But I
+ 
+
+807
+00:15:39,519 --> 00:15:41,829
+contents. And that clears it out. But I
+wanted you to see that autofill handle.
+
+808
+00:15:41,829 --> 00:15:41,839
+wanted you to see that autofill handle.
+ 
+
+809
+00:15:41,839 --> 00:15:45,509
+wanted you to see that autofill handle.
+Okay. Next up, just three fast rapidfire
+
+810
+00:15:45,509 --> 00:15:45,519
+Okay. Next up, just three fast rapidfire
+ 
+
+811
+00:15:45,519 --> 00:15:47,509
+Okay. Next up, just three fast rapidfire
+tips that I think everyone needs to know
+
+812
+00:15:47,509 --> 00:15:47,519
+tips that I think everyone needs to know
+ 
+
+813
+00:15:47,519 --> 00:15:49,670
+tips that I think everyone needs to know
+if you're using Excel more than just at
+
+814
+00:15:49,670 --> 00:15:49,680
+if you're using Excel more than just at
+ 
+
+815
+00:15:49,680 --> 00:15:52,470
+if you're using Excel more than just at
+a beginning level. And the first one is
+
+816
+00:15:52,470 --> 00:15:52,480
+a beginning level. And the first one is
+ 
+
+817
+00:15:52,480 --> 00:15:54,870
+a beginning level. And the first one is
+how to sort. So, I put my movies in just
+
+818
+00:15:54,870 --> 00:15:54,880
+how to sort. So, I put my movies in just
+ 
+
+819
+00:15:54,880 --> 00:15:56,790
+how to sort. So, I put my movies in just
+in random order. But I would like to
+
+820
+00:15:56,790 --> 00:15:56,800
+in random order. But I would like to
+ 
+
+821
+00:15:56,800 --> 00:15:58,629
+in random order. But I would like to
+sort them alphabetically. So, what I'll
+
+822
+00:15:58,629 --> 00:15:58,639
+sort them alphabetically. So, what I'll
+ 
+
+823
+00:15:58,639 --> 00:16:00,230
+sort them alphabetically. So, what I'll
+do is I'll click on the just the first
+
+824
+00:16:00,230 --> 00:16:00,240
+do is I'll click on the just the first
+ 
+
+825
+00:16:00,240 --> 00:16:03,110
+do is I'll click on the just the first
+cell of the first record. So, Star Wars,
+
+826
+00:16:03,110 --> 00:16:03,120
+cell of the first record. So, Star Wars,
+ 
+
+827
+00:16:03,120 --> 00:16:06,069
+cell of the first record. So, Star Wars,
+I clicked on that cell. Now, either on
+
+828
+00:16:06,069 --> 00:16:06,079
+I clicked on that cell. Now, either on
+ 
+
+829
+00:16:06,079 --> 00:16:09,670
+I clicked on that cell. Now, either on
+the home tab or on the data tab, either
+
+830
+00:16:09,670 --> 00:16:09,680
+the home tab or on the data tab, either
+ 
+
+831
+00:16:09,680 --> 00:16:12,949
+the home tab or on the data tab, either
+one, you should be able to find sort and
+
+832
+00:16:12,949 --> 00:16:12,959
+one, you should be able to find sort and
+ 
+
+833
+00:16:12,959 --> 00:16:15,110
+one, you should be able to find sort and
+filter. I'm going to go to the data tab.
+
+834
+00:16:15,110 --> 00:16:15,120
+filter. I'm going to go to the data tab.
+ 
+
+835
+00:16:15,120 --> 00:16:17,430
+filter. I'm going to go to the data tab.
+Here's sort, and I would like it to sort
+
+836
+00:16:17,430 --> 00:16:17,440
+Here's sort, and I would like it to sort
+ 
+
+837
+00:16:17,440 --> 00:16:19,590
+Here's sort, and I would like it to sort
+alphabetically A to Z. So, I click on
+
+838
+00:16:19,590 --> 00:16:19,600
+alphabetically A to Z. So, I click on
+ 
+
+839
+00:16:19,600 --> 00:16:21,990
+alphabetically A to Z. So, I click on
+it, and look what it did. Now, all of
+
+840
+00:16:21,990 --> 00:16:22,000
+it, and look what it did. Now, all of
+ 
+
+841
+00:16:22,000 --> 00:16:25,829
+it, and look what it did. Now, all of
+the movies are alphabetized from A to Z.
+
+842
+00:16:25,829 --> 00:16:25,839
+the movies are alphabetized from A to Z.
+ 
+
+843
+00:16:25,839 --> 00:16:27,509
+the movies are alphabetized from A to Z.
+Now, the first time you do this, you're
+
+844
+00:16:27,509 --> 00:16:27,519
+Now, the first time you do this, you're
+ 
+
+845
+00:16:27,519 --> 00:16:29,509
+Now, the first time you do this, you're
+going to be worried that you'll lose the
+
+846
+00:16:29,509 --> 00:16:29,519
+going to be worried that you'll lose the
+ 
+
+847
+00:16:29,519 --> 00:16:31,749
+going to be worried that you'll lose the
+integrity of your spreadsheet, that
+
+848
+00:16:31,749 --> 00:16:31,759
+integrity of your spreadsheet, that
+ 
+
+849
+00:16:31,759 --> 00:16:34,069
+integrity of your spreadsheet, that
+maybe the dates won't match up. now. But
+
+850
+00:16:34,069 --> 00:16:34,079
+maybe the dates won't match up. now. But
+ 
+
+851
+00:16:34,079 --> 00:16:36,629
+maybe the dates won't match up. now. But
+if you notice, they do. Okay, go back,
+
+852
+00:16:36,629 --> 00:16:36,639
+if you notice, they do. Okay, go back,
+ 
+
+853
+00:16:36,639 --> 00:16:38,069
+if you notice, they do. Okay, go back,
+rewind the video if you want, but this
+
+854
+00:16:38,069 --> 00:16:38,079
+rewind the video if you want, but this
+ 
+
+855
+00:16:38,079 --> 00:16:41,269
+rewind the video if you want, but this
+used to say 2007, now it says 2003. So,
+
+856
+00:16:41,269 --> 00:16:41,279
+used to say 2007, now it says 2003. So,
+ 
+
+857
+00:16:41,279 --> 00:16:43,829
+used to say 2007, now it says 2003. So,
+sorting is a really great feature in
+
+858
+00:16:43,829 --> 00:16:43,839
+sorting is a really great feature in
+ 
+
+859
+00:16:43,839 --> 00:16:45,910
+sorting is a really great feature in
+Excel. What about filtering? What is
+
+860
+00:16:45,910 --> 00:16:45,920
+Excel. What about filtering? What is
+ 
+
+861
+00:16:45,920 --> 00:16:47,990
+Excel. What about filtering? What is
+filtering? Well, filtering is a way to
+
+862
+00:16:47,990 --> 00:16:48,000
+filtering? Well, filtering is a way to
+ 
+
+863
+00:16:48,000 --> 00:16:50,310
+filtering? Well, filtering is a way to
+eliminate parts of your spreadsheet
+
+864
+00:16:50,310 --> 00:16:50,320
+eliminate parts of your spreadsheet
+ 
+
+865
+00:16:50,320 --> 00:16:52,069
+eliminate parts of your spreadsheet
+temporarily so that you can see the data
+
+866
+00:16:52,069 --> 00:16:52,079
+temporarily so that you can see the data
+ 
+
+867
+00:16:52,079 --> 00:16:54,230
+temporarily so that you can see the data
+you want to see. To turn on filtering,
+
+868
+00:16:54,230 --> 00:16:54,240
+you want to see. To turn on filtering,
+ 
+
+869
+00:16:54,240 --> 00:16:56,389
+you want to see. To turn on filtering,
+what I like to do is click and drag
+
+870
+00:16:56,389 --> 00:16:56,399
+what I like to do is click and drag
+ 
+
+871
+00:16:56,399 --> 00:16:58,470
+what I like to do is click and drag
+across the column headings that I've
+
+872
+00:16:58,470 --> 00:16:58,480
+across the column headings that I've
+ 
+
+873
+00:16:58,480 --> 00:17:01,509
+across the column headings that I've
+created. So, location, genre, value,
+
+874
+00:17:01,509 --> 00:17:01,519
+created. So, location, genre, value,
+ 
+
+875
+00:17:01,519 --> 00:17:03,430
+created. So, location, genre, value,
+etc. Once I've highlighted all of them,
+
+876
+00:17:03,430 --> 00:17:03,440
+etc. Once I've highlighted all of them,
+ 
+
+877
+00:17:03,440 --> 00:17:06,069
+etc. Once I've highlighted all of them,
+I go up to the top and I click filter.
+
+878
+00:17:06,069 --> 00:17:06,079
+I go up to the top and I click filter.
+ 
+
+879
+00:17:06,079 --> 00:17:08,390
+I go up to the top and I click filter.
+And notice they all now have a little
+
+880
+00:17:08,390 --> 00:17:08,400
+And notice they all now have a little
+ 
+
+881
+00:17:08,400 --> 00:17:10,710
+And notice they all now have a little
+drop down arrow. And so what I'm going
+
+882
+00:17:10,710 --> 00:17:10,720
+drop down arrow. And so what I'm going
+ 
+
+883
+00:17:10,720 --> 00:17:12,789
+drop down arrow. And so what I'm going
+to use this to do is I want to eliminate
+
+884
+00:17:12,789 --> 00:17:12,799
+to use this to do is I want to eliminate
+ 
+
+885
+00:17:12,799 --> 00:17:15,110
+to use this to do is I want to eliminate
+all of the PG-13 movies. Let's say we're
+
+886
+00:17:15,110 --> 00:17:15,120
+all of the PG-13 movies. Let's say we're
+ 
+
+887
+00:17:15,120 --> 00:17:16,710
+all of the PG-13 movies. Let's say we're
+going to have a birthday party for a
+
+888
+00:17:16,710 --> 00:17:16,720
+going to have a birthday party for a
+ 
+
+889
+00:17:16,720 --> 00:17:18,069
+going to have a birthday party for a
+small child. I don't want to show a
+
+890
+00:17:18,069 --> 00:17:18,079
+small child. I don't want to show a
+ 
+
+891
+00:17:18,079 --> 00:17:19,990
+small child. I don't want to show a
+movie that would be too scary. I would
+
+892
+00:17:19,990 --> 00:17:20,000
+movie that would be too scary. I would
+ 
+
+893
+00:17:20,000 --> 00:17:23,590
+movie that would be too scary. I would
+go into ratings and click. And right now
+
+894
+00:17:23,590 --> 00:17:23,600
+go into ratings and click. And right now
+ 
+
+895
+00:17:23,600 --> 00:17:25,990
+go into ratings and click. And right now
+it's showing everything. Okay. So I want
+
+896
+00:17:25,990 --> 00:17:26,000
+it's showing everything. Okay. So I want
+ 
+
+897
+00:17:26,000 --> 00:17:29,029
+it's showing everything. Okay. So I want
+to deselect all and go down. And I just
+
+898
+00:17:29,029 --> 00:17:29,039
+to deselect all and go down. And I just
+ 
+
+899
+00:17:29,039 --> 00:17:31,909
+to deselect all and go down. And I just
+want to choose PG. That's the only one I
+
+900
+00:17:31,909 --> 00:17:31,919
+want to choose PG. That's the only one I
+ 
+
+901
+00:17:31,919 --> 00:17:33,750
+want to choose PG. That's the only one I
+want selected. Now, if I had GM movies,
+
+902
+00:17:33,750 --> 00:17:33,760
+want selected. Now, if I had GM movies,
+ 
+
+903
+00:17:33,760 --> 00:17:35,350
+want selected. Now, if I had GM movies,
+I could select those, too. But I'll just
+
+904
+00:17:35,350 --> 00:17:35,360
+I could select those, too. But I'll just
+ 
+
+905
+00:17:35,360 --> 00:17:37,110
+I could select those, too. But I'll just
+stick with that. Click okay. And you can
+
+906
+00:17:37,110 --> 00:17:37,120
+stick with that. Click okay. And you can
+ 
+
+907
+00:17:37,120 --> 00:17:39,750
+stick with that. Click okay. And you can
+see it looks like it got rid of those
+
+908
+00:17:39,750 --> 00:17:39,760
+see it looks like it got rid of those
+ 
+
+909
+00:17:39,760 --> 00:17:42,070
+see it looks like it got rid of those
+additional records. It really didn't get
+
+910
+00:17:42,070 --> 00:17:42,080
+additional records. It really didn't get
+ 
+
+911
+00:17:42,080 --> 00:17:43,430
+additional records. It really didn't get
+rid of them. You can see here on the
+
+912
+00:17:43,430 --> 00:17:43,440
+rid of them. You can see here on the
+ 
+
+913
+00:17:43,440 --> 00:17:45,830
+rid of them. You can see here on the
+left, it jumps from one, two, jumps to
+
+914
+00:17:45,830 --> 00:17:45,840
+left, it jumps from one, two, jumps to
+ 
+
+915
+00:17:45,840 --> 00:17:48,870
+left, it jumps from one, two, jumps to
+five. And in Excel, you just cannot
+
+916
+00:17:48,870 --> 00:17:48,880
+five. And in Excel, you just cannot
+ 
+
+917
+00:17:48,880 --> 00:17:51,190
+five. And in Excel, you just cannot
+eliminate row numbers or column
+
+918
+00:17:51,190 --> 00:17:51,200
+eliminate row numbers or column
+ 
+
+919
+00:17:51,200 --> 00:17:52,870
+eliminate row numbers or column
+headings. They always exist. They can be
+
+920
+00:17:52,870 --> 00:17:52,880
+headings. They always exist. They can be
+ 
+
+921
+00:17:52,880 --> 00:17:54,390
+headings. They always exist. They can be
+hidden. And that's what's happened here
+
+922
+00:17:54,390 --> 00:17:54,400
+hidden. And that's what's happened here
+ 
+
+923
+00:17:54,400 --> 00:17:57,110
+hidden. And that's what's happened here
+is they're hidden, but they still exist.
+
+924
+00:17:57,110 --> 00:17:57,120
+is they're hidden, but they still exist.
+ 
+
+925
+00:17:57,120 --> 00:17:58,710
+is they're hidden, but they still exist.
+All right. So, isn't that pretty useful?
+
+926
+00:17:58,710 --> 00:17:58,720
+All right. So, isn't that pretty useful?
+ 
+
+927
+00:17:58,720 --> 00:18:01,190
+All right. So, isn't that pretty useful?
+I love filtering even more really than
+
+928
+00:18:01,190 --> 00:18:01,200
+I love filtering even more really than
+ 
+
+929
+00:18:01,200 --> 00:18:03,669
+I love filtering even more really than
+sorting. Now to get the data all showing
+
+930
+00:18:03,669 --> 00:18:03,679
+sorting. Now to get the data all showing
+ 
+
+931
+00:18:03,679 --> 00:18:05,590
+sorting. Now to get the data all showing
+again, I can just click here on what
+
+932
+00:18:05,590 --> 00:18:05,600
+again, I can just click here on what
+ 
+
+933
+00:18:05,600 --> 00:18:07,669
+again, I can just click here on what
+looks like a funnel. Okay, it used to be
+
+934
+00:18:07,669 --> 00:18:07,679
+looks like a funnel. Okay, it used to be
+ 
+
+935
+00:18:07,679 --> 00:18:09,190
+looks like a funnel. Okay, it used to be
+the drop down arrow. Now it's a funnel.
+
+936
+00:18:09,190 --> 00:18:09,200
+the drop down arrow. Now it's a funnel.
+ 
+
+937
+00:18:09,200 --> 00:18:12,390
+the drop down arrow. Now it's a funnel.
+I just click on it and go to select all.
+
+938
+00:18:12,390 --> 00:18:12,400
+I just click on it and go to select all.
+ 
+
+939
+00:18:12,400 --> 00:18:14,630
+I just click on it and go to select all.
+Click okay and that takes the filter
+
+940
+00:18:14,630 --> 00:18:14,640
+Click okay and that takes the filter
+ 
+
+941
+00:18:14,640 --> 00:18:16,549
+Click okay and that takes the filter
+off. I could do the same kind of filter
+
+942
+00:18:16,549 --> 00:18:16,559
+off. I could do the same kind of filter
+ 
+
+943
+00:18:16,559 --> 00:18:18,789
+off. I could do the same kind of filter
+for genre and I could say I only want to
+
+944
+00:18:18,789 --> 00:18:18,799
+for genre and I could say I only want to
+ 
+
+945
+00:18:18,799 --> 00:18:21,190
+for genre and I could say I only want to
+see comedy or children's movies, things
+
+946
+00:18:21,190 --> 00:18:21,200
+see comedy or children's movies, things
+ 
+
+947
+00:18:21,200 --> 00:18:23,750
+see comedy or children's movies, things
+like that. So filters are very powerful.
+
+948
+00:18:23,750 --> 00:18:23,760
+like that. So filters are very powerful.
+ 
+
+949
+00:18:23,760 --> 00:18:26,549
+like that. So filters are very powerful.
+Now, the last more advanced tip that I
+
+950
+00:18:26,549 --> 00:18:26,559
+Now, the last more advanced tip that I
+ 
+
+951
+00:18:26,559 --> 00:18:28,549
+Now, the last more advanced tip that I
+want to share with you is called freeze
+
+952
+00:18:28,549 --> 00:18:28,559
+want to share with you is called freeze
+ 
+
+953
+00:18:28,559 --> 00:18:31,110
+want to share with you is called freeze
+panes. This spreadsheet really is not
+
+954
+00:18:31,110 --> 00:18:31,120
+panes. This spreadsheet really is not
+ 
+
+955
+00:18:31,120 --> 00:18:33,590
+panes. This spreadsheet really is not
+that big. Let's say I go buy a hundred
+
+956
+00:18:33,590 --> 00:18:33,600
+that big. Let's say I go buy a hundred
+ 
+
+957
+00:18:33,600 --> 00:18:35,590
+that big. Let's say I go buy a hundred
+more DVDs, then it's really going to be
+
+958
+00:18:35,590 --> 00:18:35,600
+more DVDs, then it's really going to be
+ 
+
+959
+00:18:35,600 --> 00:18:37,270
+more DVDs, then it's really going to be
+a bigger spreadsheet and it's going to
+
+960
+00:18:37,270 --> 00:18:37,280
+a bigger spreadsheet and it's going to
+ 
+
+961
+00:18:37,280 --> 00:18:39,909
+a bigger spreadsheet and it's going to
+be harder to put in my data and even to
+
+962
+00:18:39,909 --> 00:18:39,919
+be harder to put in my data and even to
+ 
+
+963
+00:18:39,919 --> 00:18:41,830
+be harder to put in my data and even to
+look at it. As your spreadsheet gets
+
+964
+00:18:41,830 --> 00:18:41,840
+look at it. As your spreadsheet gets
+ 
+
+965
+00:18:41,840 --> 00:18:43,669
+look at it. As your spreadsheet gets
+more vertical, you can kind of lose
+
+966
+00:18:43,669 --> 00:18:43,679
+more vertical, you can kind of lose
+ 
+
+967
+00:18:43,679 --> 00:18:46,390
+more vertical, you can kind of lose
+track of what your column titles are.
+
+968
+00:18:46,390 --> 00:18:46,400
+track of what your column titles are.
+ 
+
+969
+00:18:46,400 --> 00:18:48,710
+track of what your column titles are.
+So, that's where freeze panes comes in.
+
+970
+00:18:48,710 --> 00:18:48,720
+So, that's where freeze panes comes in.
+ 
+
+971
+00:18:48,720 --> 00:18:50,549
+So, that's where freeze panes comes in.
+What you do with freeze panes is you
+
+972
+00:18:50,549 --> 00:18:50,559
+What you do with freeze panes is you
+ 
+
+973
+00:18:50,559 --> 00:18:53,430
+What you do with freeze panes is you
+click underneath the row that you would
+
+974
+00:18:53,430 --> 00:18:53,440
+click underneath the row that you would
+ 
+
+975
+00:18:53,440 --> 00:18:55,510
+click underneath the row that you would
+like to freeze. So I'm going to click on
+
+976
+00:18:55,510 --> 00:18:55,520
+like to freeze. So I'm going to click on
+ 
+
+977
+00:18:55,520 --> 00:18:57,430
+like to freeze. So I'm going to click on
+three because that's underneath my
+
+978
+00:18:57,430 --> 00:18:57,440
+three because that's underneath my
+ 
+
+979
+00:18:57,440 --> 00:18:59,909
+three because that's underneath my
+column titles. Then I'm going to go to
+
+980
+00:18:59,909 --> 00:18:59,919
+column titles. Then I'm going to go to
+ 
+
+981
+00:18:59,919 --> 00:19:02,150
+column titles. Then I'm going to go to
+the view tab, the view ribbon. And
+
+982
+00:19:02,150 --> 00:19:02,160
+the view tab, the view ribbon. And
+ 
+
+983
+00:19:02,160 --> 00:19:03,750
+the view tab, the view ribbon. And
+notice there's an option in the window
+
+984
+00:19:03,750 --> 00:19:03,760
+notice there's an option in the window
+ 
+
+985
+00:19:03,760 --> 00:19:05,990
+notice there's an option in the window
+group called freeze panes. And watch
+
+986
+00:19:05,990 --> 00:19:06,000
+group called freeze panes. And watch
+ 
+
+987
+00:19:06,000 --> 00:19:08,230
+group called freeze panes. And watch
+what happens when I click freeze panes.
+
+988
+00:19:08,230 --> 00:19:08,240
+what happens when I click freeze panes.
+ 
+
+989
+00:19:08,240 --> 00:19:10,150
+what happens when I click freeze panes.
+Okay, it first pops up with three
+
+990
+00:19:10,150 --> 00:19:10,160
+Okay, it first pops up with three
+ 
+
+991
+00:19:10,160 --> 00:19:12,070
+Okay, it first pops up with three
+options. And I'm just going to click
+
+992
+00:19:12,070 --> 00:19:12,080
+options. And I'm just going to click
+ 
+
+993
+00:19:12,080 --> 00:19:14,789
+options. And I'm just going to click
+freeze panes. So now as I browse down
+
+994
+00:19:14,789 --> 00:19:14,799
+freeze panes. So now as I browse down
+ 
+
+995
+00:19:14,799 --> 00:19:17,029
+freeze panes. So now as I browse down
+the page, as I enter more records, look
+
+996
+00:19:17,029 --> 00:19:17,039
+the page, as I enter more records, look
+ 
+
+997
+00:19:17,039 --> 00:19:19,909
+the page, as I enter more records, look
+what happens. those first two rows stay
+
+998
+00:19:19,909 --> 00:19:19,919
+what happens. those first two rows stay
+ 
+
+999
+00:19:19,919 --> 00:19:22,870
+what happens. those first two rows stay
+visible to me and that's because I froze
+
+1000
+00:19:22,870 --> 00:19:22,880
+visible to me and that's because I froze
+ 
+
+1001
+00:19:22,880 --> 00:19:25,510
+visible to me and that's because I froze
+everything above row three. So that's
+
+1002
+00:19:25,510 --> 00:19:25,520
+everything above row three. So that's
+ 
+
+1003
+00:19:25,520 --> 00:19:27,830
+everything above row three. So that's
+where I'm going to stop. In reality, a
+
+1004
+00:19:27,830 --> 00:19:27,840
+where I'm going to stop. In reality, a
+ 
+
+1005
+00:19:27,840 --> 00:19:30,710
+where I'm going to stop. In reality, a
+comprehensive Excel tutorial would be
+
+1006
+00:19:30,710 --> 00:19:30,720
+comprehensive Excel tutorial would be
+ 
+
+1007
+00:19:30,720 --> 00:19:33,669
+comprehensive Excel tutorial would be
+15, 20, 25 hours long. And this is
+
+1008
+00:19:33,669 --> 00:19:33,679
+15, 20, 25 hours long. And this is
+ 
+
+1009
+00:19:33,679 --> 00:19:35,669
+15, 20, 25 hours long. And this is
+already too long of a video, but I
+
+1010
+00:19:35,669 --> 00:19:35,679
+already too long of a video, but I
+ 
+
+1011
+00:19:35,679 --> 00:19:38,230
+already too long of a video, but I
+really believe that if you watch my
+
+1012
+00:19:38,230 --> 00:19:38,240
+really believe that if you watch my
+ 
+
+1013
+00:19:38,240 --> 00:19:41,190
+really believe that if you watch my
+beginner's guide to Excel video and this
+
+1014
+00:19:41,190 --> 00:19:41,200
+beginner's guide to Excel video and this
+ 
+
+1015
+00:19:41,200 --> 00:19:43,830
+beginner's guide to Excel video and this
+intermediate video that you will have
+
+1016
+00:19:43,830 --> 00:19:43,840
+intermediate video that you will have
+ 
+
+1017
+00:19:43,840 --> 00:19:46,310
+intermediate video that you will have
+what you need to get started using Excel
+
+1018
+00:19:46,310 --> 00:19:46,320
+what you need to get started using Excel
+ 
+
+1019
+00:19:46,320 --> 00:19:48,710
+what you need to get started using Excel
+effectively. As you continue using and
+
+1020
+00:19:48,710 --> 00:19:48,720
+effectively. As you continue using and
+ 
+
+1021
+00:19:48,720 --> 00:19:50,630
+effectively. As you continue using and
+learning Excel, I'd recommend that you
+
+1022
+00:19:50,630 --> 00:19:50,640
+learning Excel, I'd recommend that you
+ 
+
+1023
+00:19:50,640 --> 00:19:52,470
+learning Excel, I'd recommend that you
+use this resource here at the top. Tell
+
+1024
+00:19:52,470 --> 00:19:52,480
+use this resource here at the top. Tell
+ 
+
+1025
+00:19:52,480 --> 00:19:54,070
+use this resource here at the top. Tell
+me what you want to do. You can just
+
+1026
+00:19:54,070 --> 00:19:54,080
+me what you want to do. You can just
+ 
+
+1027
+00:19:54,080 --> 00:19:55,909
+me what you want to do. You can just
+type in something that you're trying to
+
+1028
+00:19:55,909 --> 00:19:55,919
+type in something that you're trying to
+ 
+
+1029
+00:19:55,919 --> 00:19:59,350
+type in something that you're trying to
+do and it will give you some help and um
+
+1030
+00:19:59,350 --> 00:19:59,360
+do and it will give you some help and um
+ 
+
+1031
+00:19:59,360 --> 00:20:01,270
+do and it will give you some help and um
+some guidance on how to do it. Thanks
+
+1032
+00:20:01,270 --> 00:20:01,280
+some guidance on how to do it. Thanks
+ 
+
+1033
+00:20:01,280 --> 00:20:03,590
+some guidance on how to do it. Thanks
+for watching this tutorial and please
+
+1034
+00:20:03,590 --> 00:20:03,600
+for watching this tutorial and please
+ 
+
+1035
+00:20:03,600 --> 00:20:05,270
+for watching this tutorial and please
+consider subscribing to my YouTube
+
+1036
+00:20:05,270 --> 00:20:05,280
+consider subscribing to my YouTube
+ 
+
+1037
+00:20:05,280 --> 00:20:07,350
+consider subscribing to my YouTube
+channel for more videos about technology
+
+1038
+00:20:07,350 --> 00:20:07,360
+channel for more videos about technology
+ 
+
+1039
+00:20:07,360 --> 00:20:09,590
+channel for more videos about technology
+for teachers and students. And please
+
+1040
+00:20:09,590 --> 00:20:09,600
+for teachers and students. And please
+ 
+
+1041
+00:20:09,600 --> 00:20:11,990
+for teachers and students. And please
+consider following me on social media
+
+1042
+00:20:11,990 --> 00:20:12,000
+consider following me on social media
+ 
+
+1043
+00:20:12,000 --> 00:20:14,310
+consider following me on social media
+platforms such as Twitter and Facebook
+
+1044
+00:20:14,310 --> 00:20:14,320
+platforms such as Twitter and Facebook
+ 
+
+1045
+00:20:14,320 --> 00:20:15,750
+platforms such as Twitter and Facebook
+so that we can continue learning
+
+1046
+00:20:15,750 --> 00:20:15,760
+so that we can continue learning
+ 
+
+1047
+00:20:15,760 --> 00:20:18,480
+so that we can continue learning
+together.
+

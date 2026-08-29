@@ -1,0 +1,155 @@
+1
+00:00:04,080 --> 00:00:06,310
+
+Create a custom brush by painting a
+
+2
+00:00:06,310 --> 00:00:06,320
+Create a custom brush by painting a
+ 
+
+3
+00:00:06,320 --> 00:00:08,350
+Create a custom brush by painting a
+white-on-black image in your favorite
+
+4
+00:00:08,350 --> 00:00:08,360
+white-on-black image in your favorite
+ 
+
+5
+00:00:08,360 --> 00:00:10,590
+white-on-black image in your favorite
+painting app. Now, in your favorite 3D
+
+6
+00:00:10,590 --> 00:00:10,600
+painting app. Now, in your favorite 3D
+ 
+
+7
+00:00:10,600 --> 00:00:12,790
+painting app. Now, in your favorite 3D
+app, connect two materials with a mix
+
+8
+00:00:12,790 --> 00:00:12,800
+app, connect two materials with a mix
+ 
+
+9
+00:00:12,800 --> 00:00:15,030
+app, connect two materials with a mix
+shader node. Give it a new texture and
+
+10
+00:00:15,030 --> 00:00:15,040
+shader node. Give it a new texture and
+ 
+
+11
+00:00:15,040 --> 00:00:16,910
+shader node. Give it a new texture and
+name it mask.
+
+12
+00:00:16,910 --> 00:00:16,920
+name it mask.
+ 
+
+13
+00:00:16,920 --> 00:00:19,190
+name it mask.
+Go to texture paint mode. In the texture
+
+14
+00:00:19,190 --> 00:00:19,200
+Go to texture paint mode. In the texture
+ 
+
+15
+00:00:19,200 --> 00:00:21,550
+Go to texture paint mode. In the texture
+tab, choose the brush mask. Load the
+
+16
+00:00:21,550 --> 00:00:21,560
+tab, choose the brush mask. Load the
+ 
+
+17
+00:00:21,560 --> 00:00:23,230
+tab, choose the brush mask. Load the
+black and white brush that you created
+
+18
+00:00:23,230 --> 00:00:23,240
+black and white brush that you created
+ 
+
+19
+00:00:23,240 --> 00:00:25,750
+black and white brush that you created
+earlier. In the active tool workspace,
+
+20
+00:00:25,750 --> 00:00:25,760
+earlier. In the active tool workspace,
+ 
+
+21
+00:00:25,760 --> 00:00:28,230
+earlier. In the active tool workspace,
+set mask mapping to random. Check the
+
+22
+00:00:28,230 --> 00:00:28,240
+set mask mapping to random. Check the
+ 
+
+23
+00:00:28,240 --> 00:00:30,070
+set mask mapping to random. Check the
+random option and increase jitter a
+
+24
+00:00:30,070 --> 00:00:30,080
+random option and increase jitter a
+ 
+
+25
+00:00:30,080 --> 00:00:32,310
+random option and increase jitter a
+little bit. Select the mask texture so
+
+26
+00:00:32,310 --> 00:00:32,320
+little bit. Select the mask texture so
+ 
+
+27
+00:00:32,320 --> 00:00:34,070
+little bit. Select the mask texture so
+that you can paint on it. Now, you can
+
+28
+00:00:34,070 --> 00:00:34,080
+that you can paint on it. Now, you can
+ 
+
+29
+00:00:34,080 --> 00:00:35,750
+that you can paint on it. Now, you can
+paint edge wear using your custom
+
+30
+00:00:35,750 --> 00:00:35,760
+paint edge wear using your custom
+ 
+
+31
+00:00:35,760 --> 00:00:38,760
+paint edge wear using your custom
+texture mask.
+

@@ -1,0 +1,185 @@
+1
+00:00:02,449 --> 00:00:06,440
+
+add the cylinder without caps in edit
+
+2
+00:00:06,440 --> 00:00:06,450
+add the cylinder without caps in edit
+ 
+
+3
+00:00:06,450 --> 00:00:08,660
+add the cylinder without caps in edit
+mode select all scale it along the
+
+4
+00:00:08,660 --> 00:00:08,670
+mode select all scale it along the
+ 
+
+5
+00:00:08,670 --> 00:00:12,440
+mode select all scale it along the
+z-axis and rotate it press ctrl R to add
+
+6
+00:00:12,440 --> 00:00:12,450
+z-axis and rotate it press ctrl R to add
+ 
+
+7
+00:00:12,450 --> 00:00:15,289
+z-axis and rotate it press ctrl R to add
+an edge loop press control B to bevel
+
+8
+00:00:15,289 --> 00:00:15,299
+an edge loop press control B to bevel
+ 
+
+9
+00:00:15,299 --> 00:00:17,599
+an edge loop press control B to bevel
+the edge loop press alt E and choose
+
+10
+00:00:17,599 --> 00:00:17,609
+the edge loop press alt E and choose
+ 
+
+11
+00:00:17,609 --> 00:00:20,510
+the edge loop press alt E and choose
+extrude and along normals set it to
+
+12
+00:00:20,510 --> 00:00:20,520
+extrude and along normals set it to
+ 
+
+13
+00:00:20,520 --> 00:00:24,470
+extrude and along normals set it to
+shade smooth now add a curved path go
+
+14
+00:00:24,470 --> 00:00:24,480
+shade smooth now add a curved path go
+ 
+
+15
+00:00:24,480 --> 00:00:26,330
+shade smooth now add a curved path go
+into edit mode and move the points and
+
+16
+00:00:26,330 --> 00:00:26,340
+into edit mode and move the points and
+ 
+
+17
+00:00:26,340 --> 00:00:28,189
+into edit mode and move the points and
+extrude more points to make it longer
+
+18
+00:00:28,189 --> 00:00:28,199
+extrude more points to make it longer
+ 
+
+19
+00:00:28,199 --> 00:00:30,919
+extrude more points to make it longer
+you probably need to scale the cylinder
+
+20
+00:00:30,919 --> 00:00:30,929
+you probably need to scale the cylinder
+ 
+
+21
+00:00:30,929 --> 00:00:33,410
+you probably need to scale the cylinder
+down add an array modifier to the
+
+22
+00:00:33,410 --> 00:00:33,420
+down add an array modifier to the
+ 
+
+23
+00:00:33,420 --> 00:00:36,620
+down add an array modifier to the
+cylinder increase the count at a curve
+
+24
+00:00:36,620 --> 00:00:36,630
+cylinder increase the count at a curve
+ 
+
+25
+00:00:36,630 --> 00:00:38,360
+cylinder increase the count at a curve
+modifier to the cylinder as well and
+
+26
+00:00:38,360 --> 00:00:38,370
+modifier to the cylinder as well and
+ 
+
+27
+00:00:38,370 --> 00:00:41,180
+modifier to the cylinder as well and
+choose the path as the object you can
+
+28
+00:00:41,180 --> 00:00:41,190
+choose the path as the object you can
+ 
+
+29
+00:00:41,190 --> 00:00:43,160
+choose the path as the object you can
+add a subdivision surface modifier to
+
+30
+00:00:43,160 --> 00:00:43,170
+add a subdivision surface modifier to
+ 
+
+31
+00:00:43,170 --> 00:00:45,350
+add a subdivision surface modifier to
+make it more rounded you can set it a
+
+32
+00:00:45,350 --> 00:00:45,360
+make it more rounded you can set it a
+ 
+
+33
+00:00:45,360 --> 00:00:47,540
+make it more rounded you can set it a
+curve to in front so it's easier to
+
+34
+00:00:47,540 --> 00:00:47,550
+curve to in front so it's easier to
+ 
+
+35
+00:00:47,550 --> 00:00:54,470
+curve to in front so it's easier to
+manipulate the pipe curvature
+
+36
+00:00:54,470 --> 00:00:54,480
+
+ 
+
+37
+00:00:54,480 --> 00:00:56,540
+
+you
+

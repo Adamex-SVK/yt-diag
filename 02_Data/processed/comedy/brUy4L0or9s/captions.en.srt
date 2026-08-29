@@ -1,0 +1,55 @@
+1
+00:00:00,040 --> 00:00:02,070
+
+How many dots are in this picture?
+
+2
+00:00:02,070 --> 00:00:02,080
+How many dots are in this picture?
+ 
+
+3
+00:00:02,080 --> 00:00:03,429
+How many dots are in this picture?
+Three.  I'll take another close look
+
+4
+00:00:03,429 --> 00:00:03,439
+Three.  I'll take another close look
+ 
+
+5
+00:00:03,439 --> 00:00:05,590
+Three.  I'll take another close look
+.
+
+6
+00:00:05,590 --> 00:00:05,600
+.
+ 
+
+7
+00:00:05,600 --> 00:00:07,309
+.
+Three.
+
+8
+00:00:07,309 --> 00:00:07,319
+Three.
+ 
+
+9
+00:00:07,319 --> 00:00:08,549
+Three.
+What do you guys say?  Write the
+
+10
+00:00:08,549 --> 00:00:08,559
+What do you guys say?  Write the
+ 
+
+11
+00:00:08,559 --> 00:00:11,800
+What do you guys say?  Write the
+correct answer in the comments.
+

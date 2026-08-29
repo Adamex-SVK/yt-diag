@@ -1,0 +1,5685 @@
+1
+00:00:00,560 --> 00:00:03,110
+
+this is all you need to get started with
+
+2
+00:00:03,110 --> 00:00:03,120
+this is all you need to get started with
+ 
+
+3
+00:00:03,120 --> 00:00:05,590
+this is all you need to get started with
+digital painting in procreate i will
+
+4
+00:00:05,590 --> 00:00:05,600
+digital painting in procreate i will
+ 
+
+5
+00:00:05,600 --> 00:00:07,430
+digital painting in procreate i will
+guide you through all the basics while
+
+6
+00:00:07,430 --> 00:00:07,440
+guide you through all the basics while
+ 
+
+7
+00:00:07,440 --> 00:00:09,830
+guide you through all the basics while
+we create this awesome artwork i will
+
+8
+00:00:09,830 --> 00:00:09,840
+we create this awesome artwork i will
+ 
+
+9
+00:00:09,840 --> 00:00:12,150
+we create this awesome artwork i will
+show you how to create a canvas how to
+
+10
+00:00:12,150 --> 00:00:12,160
+show you how to create a canvas how to
+ 
+
+11
+00:00:12,160 --> 00:00:13,830
+show you how to create a canvas how to
+use alphalog
+
+12
+00:00:13,830 --> 00:00:13,840
+use alphalog
+ 
+
+13
+00:00:13,840 --> 00:00:16,630
+use alphalog
+clipping mask how to fill areas with
+
+14
+00:00:16,630 --> 00:00:16,640
+clipping mask how to fill areas with
+ 
+
+15
+00:00:16,640 --> 00:00:19,590
+clipping mask how to fill areas with
+color or to create a gradient how to use
+
+16
+00:00:19,590 --> 00:00:19,600
+color or to create a gradient how to use
+ 
+
+17
+00:00:19,600 --> 00:00:22,470
+color or to create a gradient how to use
+brushes the smudge tool and a lot more
+
+18
+00:00:22,470 --> 00:00:22,480
+brushes the smudge tool and a lot more
+ 
+
+19
+00:00:22,480 --> 00:00:24,310
+brushes the smudge tool and a lot more
+so this is the perfect start for your
+
+20
+00:00:24,310 --> 00:00:24,320
+so this is the perfect start for your
+ 
+
+21
+00:00:24,320 --> 00:00:26,230
+so this is the perfect start for your
+procreate journey the first thing we'll
+
+22
+00:00:26,230 --> 00:00:26,240
+procreate journey the first thing we'll
+ 
+
+23
+00:00:26,240 --> 00:00:29,029
+procreate journey the first thing we'll
+do is create a canvas when you are in
+
+24
+00:00:29,029 --> 00:00:29,039
+do is create a canvas when you are in
+ 
+
+25
+00:00:29,039 --> 00:00:30,790
+do is create a canvas when you are in
+the procreate gallery you can create a
+
+26
+00:00:30,790 --> 00:00:30,800
+the procreate gallery you can create a
+ 
+
+27
+00:00:30,800 --> 00:00:33,430
+the procreate gallery you can create a
+canvas by going to the plus here in the
+
+28
+00:00:33,430 --> 00:00:33,440
+canvas by going to the plus here in the
+ 
+
+29
+00:00:33,440 --> 00:00:35,750
+canvas by going to the plus here in the
+upper right corner now you'll see some
+
+30
+00:00:35,750 --> 00:00:35,760
+upper right corner now you'll see some
+ 
+
+31
+00:00:35,760 --> 00:00:38,549
+upper right corner now you'll see some
+standard canvas sizes that procreate has
+
+32
+00:00:38,549 --> 00:00:38,559
+standard canvas sizes that procreate has
+ 
+
+33
+00:00:38,559 --> 00:00:40,950
+standard canvas sizes that procreate has
+already come up with but you can also
+
+34
+00:00:40,950 --> 00:00:40,960
+already come up with but you can also
+ 
+
+35
+00:00:40,960 --> 00:00:43,430
+already come up with but you can also
+create your own custom size by tapping
+
+36
+00:00:43,430 --> 00:00:43,440
+create your own custom size by tapping
+ 
+
+37
+00:00:43,440 --> 00:00:44,630
+create your own custom size by tapping
+this little
+
+38
+00:00:44,630 --> 00:00:44,640
+this little
+ 
+
+39
+00:00:44,640 --> 00:00:47,430
+this little
+folder with a plus and here you can set
+
+40
+00:00:47,430 --> 00:00:47,440
+folder with a plus and here you can set
+ 
+
+41
+00:00:47,440 --> 00:00:50,510
+folder with a plus and here you can set
+the width which we will set to
+
+42
+00:00:50,510 --> 00:00:50,520
+the width which we will set to
+ 
+
+43
+00:00:50,520 --> 00:00:53,110
+the width which we will set to
+2300 pixels
+
+44
+00:00:53,110 --> 00:00:53,120
+2300 pixels
+ 
+
+45
+00:00:53,120 --> 00:00:55,990
+2300 pixels
+and the height we will set that to
+
+46
+00:00:55,990 --> 00:00:56,000
+and the height we will set that to
+ 
+
+47
+00:00:56,000 --> 00:00:59,670
+and the height we will set that to
+3 000 pixels now you can leave the dpi
+
+48
+00:00:59,670 --> 00:00:59,680
+3 000 pixels now you can leave the dpi
+ 
+
+49
+00:00:59,680 --> 00:01:01,830
+3 000 pixels now you can leave the dpi
+and here you'll see the maximum amount
+
+50
+00:01:01,830 --> 00:01:01,840
+and here you'll see the maximum amount
+ 
+
+51
+00:01:01,840 --> 00:01:04,310
+and here you'll see the maximum amount
+of layers that you can use and this
+
+52
+00:01:04,310 --> 00:01:04,320
+of layers that you can use and this
+ 
+
+53
+00:01:04,320 --> 00:01:06,630
+of layers that you can use and this
+number might differ from what i have
+
+54
+00:01:06,630 --> 00:01:06,640
+number might differ from what i have
+ 
+
+55
+00:01:06,640 --> 00:01:09,030
+number might differ from what i have
+here because it all depends on the type
+
+56
+00:01:09,030 --> 00:01:09,040
+here because it all depends on the type
+ 
+
+57
+00:01:09,040 --> 00:01:11,830
+here because it all depends on the type
+of ipad you're using so don't worry if
+
+58
+00:01:11,830 --> 00:01:11,840
+of ipad you're using so don't worry if
+ 
+
+59
+00:01:11,840 --> 00:01:14,230
+of ipad you're using so don't worry if
+your number is a bit lower than mine
+
+60
+00:01:14,230 --> 00:01:14,240
+your number is a bit lower than mine
+ 
+
+61
+00:01:14,240 --> 00:01:16,469
+your number is a bit lower than mine
+that's all fine then go to the color
+
+62
+00:01:16,469 --> 00:01:16,479
+that's all fine then go to the color
+ 
+
+63
+00:01:16,479 --> 00:01:19,830
+that's all fine then go to the color
+profile i like to set it to rgb and then
+
+64
+00:01:19,830 --> 00:01:19,840
+profile i like to set it to rgb and then
+ 
+
+65
+00:01:19,840 --> 00:01:22,550
+profile i like to set it to rgb and then
+to srgb a long code
+
+66
+00:01:22,550 --> 00:01:22,560
+to srgb a long code
+ 
+
+67
+00:01:22,560 --> 00:01:24,630
+to srgb a long code
+and then finally you can change the name
+
+68
+00:01:24,630 --> 00:01:24,640
+and then finally you can change the name
+ 
+
+69
+00:01:24,640 --> 00:01:27,270
+and then finally you can change the name
+of your canvas so it's easier to find
+
+70
+00:01:27,270 --> 00:01:27,280
+of your canvas so it's easier to find
+ 
+
+71
+00:01:27,280 --> 00:01:29,429
+of your canvas so it's easier to find
+it'll be like the standard canvases that
+
+72
+00:01:29,429 --> 00:01:29,439
+it'll be like the standard canvases that
+ 
+
+73
+00:01:29,439 --> 00:01:31,910
+it'll be like the standard canvases that
+procreate has already put in the app
+
+74
+00:01:31,910 --> 00:01:31,920
+procreate has already put in the app
+ 
+
+75
+00:01:31,920 --> 00:01:34,069
+procreate has already put in the app
+your new canvas will be at the bottom of
+
+76
+00:01:34,069 --> 00:01:34,079
+your new canvas will be at the bottom of
+ 
+
+77
+00:01:34,079 --> 00:01:36,710
+your new canvas will be at the bottom of
+the list so for instance you could just
+
+78
+00:01:36,710 --> 00:01:36,720
+the list so for instance you could just
+ 
+
+79
+00:01:36,720 --> 00:01:41,590
+the list so for instance you could just
+call it 2 300 by 3000 pixels it's a size
+
+80
+00:01:41,590 --> 00:01:41,600
+call it 2 300 by 3000 pixels it's a size
+ 
+
+81
+00:01:41,600 --> 00:01:44,630
+call it 2 300 by 3000 pixels it's a size
+i often use in my tutorials so if you're
+
+82
+00:01:44,630 --> 00:01:44,640
+i often use in my tutorials so if you're
+ 
+
+83
+00:01:44,640 --> 00:01:46,149
+i often use in my tutorials so if you're
+going to follow the other you can draw
+
+84
+00:01:46,149 --> 00:01:46,159
+going to follow the other you can draw
+ 
+
+85
+00:01:46,159 --> 00:01:48,069
+going to follow the other you can draw
+this video tutorials then you're all set
+
+86
+00:01:48,069 --> 00:01:48,079
+this video tutorials then you're all set
+ 
+
+87
+00:01:48,079 --> 00:01:48,950
+this video tutorials then you're all set
+to go
+
+88
+00:01:48,950 --> 00:01:48,960
+to go
+ 
+
+89
+00:01:48,960 --> 00:01:51,270
+to go
+now tap create
+
+90
+00:01:51,270 --> 00:01:51,280
+now tap create
+ 
+
+91
+00:01:51,280 --> 00:01:53,270
+now tap create
+and there we have our canvas and we are
+
+92
+00:01:53,270 --> 00:01:53,280
+and there we have our canvas and we are
+ 
+
+93
+00:01:53,280 --> 00:01:55,590
+and there we have our canvas and we are
+ready to get started now one more thing
+
+94
+00:01:55,590 --> 00:01:55,600
+ready to get started now one more thing
+ 
+
+95
+00:01:55,600 --> 00:01:58,230
+ready to get started now one more thing
+you'll want to get before continuing is
+
+96
+00:01:58,230 --> 00:01:58,240
+you'll want to get before continuing is
+ 
+
+97
+00:01:58,240 --> 00:02:00,389
+you'll want to get before continuing is
+my color palette
+
+98
+00:02:00,389 --> 00:02:00,399
+my color palette
+ 
+
+99
+00:02:00,399 --> 00:02:02,389
+my color palette
+you tap the color you can see the color
+
+100
+00:02:02,389 --> 00:02:02,399
+you tap the color you can see the color
+ 
+
+101
+00:02:02,399 --> 00:02:05,270
+you tap the color you can see the color
+palette over here there is a link in the
+
+102
+00:02:05,270 --> 00:02:05,280
+palette over here there is a link in the
+ 
+
+103
+00:02:05,280 --> 00:02:07,670
+palette over here there is a link in the
+description so you can download it so by
+
+104
+00:02:07,670 --> 00:02:07,680
+description so you can download it so by
+ 
+
+105
+00:02:07,680 --> 00:02:09,510
+description so you can download it so by
+downloading the color palette you'll be
+
+106
+00:02:09,510 --> 00:02:09,520
+downloading the color palette you'll be
+ 
+
+107
+00:02:09,520 --> 00:02:11,990
+downloading the color palette you'll be
+able to use the exact same colors as i'm
+
+108
+00:02:11,990 --> 00:02:12,000
+able to use the exact same colors as i'm
+ 
+
+109
+00:02:12,000 --> 00:02:13,910
+able to use the exact same colors as i'm
+using during the tutorial
+
+110
+00:02:13,910 --> 00:02:13,920
+using during the tutorial
+ 
+
+111
+00:02:13,920 --> 00:02:15,910
+using during the tutorial
+now the first thing we'll do is we are
+
+112
+00:02:15,910 --> 00:02:15,920
+now the first thing we'll do is we are
+ 
+
+113
+00:02:15,920 --> 00:02:18,630
+now the first thing we'll do is we are
+going to drag this first color over here
+
+114
+00:02:18,630 --> 00:02:18,640
+going to drag this first color over here
+ 
+
+115
+00:02:18,640 --> 00:02:21,270
+going to drag this first color over here
+just tap it we are going to drag it onto
+
+116
+00:02:21,270 --> 00:02:21,280
+just tap it we are going to drag it onto
+ 
+
+117
+00:02:21,280 --> 00:02:22,949
+just tap it we are going to drag it onto
+our canvas you can do that by just
+
+118
+00:02:22,949 --> 00:02:22,959
+our canvas you can do that by just
+ 
+
+119
+00:02:22,959 --> 00:02:25,510
+our canvas you can do that by just
+tapping and holding the color over here
+
+120
+00:02:25,510 --> 00:02:25,520
+tapping and holding the color over here
+ 
+
+121
+00:02:25,520 --> 00:02:27,910
+tapping and holding the color over here
+and dragging it onto your screen now we
+
+122
+00:02:27,910 --> 00:02:27,920
+and dragging it onto your screen now we
+ 
+
+123
+00:02:27,920 --> 00:02:30,550
+and dragging it onto your screen now we
+have filled our entire canvas or
+
+124
+00:02:30,550 --> 00:02:30,560
+have filled our entire canvas or
+ 
+
+125
+00:02:30,560 --> 00:02:33,270
+have filled our entire canvas or
+actually our layer one with this blue
+
+126
+00:02:33,270 --> 00:02:33,280
+actually our layer one with this blue
+ 
+
+127
+00:02:33,280 --> 00:02:34,550
+actually our layer one with this blue
+color
+
+128
+00:02:34,550 --> 00:02:34,560
+color
+ 
+
+129
+00:02:34,560 --> 00:02:36,550
+color
+now let's go to the brush menu that's
+
+130
+00:02:36,550 --> 00:02:36,560
+now let's go to the brush menu that's
+ 
+
+131
+00:02:36,560 --> 00:02:39,030
+now let's go to the brush menu that's
+the little brush icon here
+
+132
+00:02:39,030 --> 00:02:39,040
+the little brush icon here
+ 
+
+133
+00:02:39,040 --> 00:02:41,990
+the little brush icon here
+and go to the airbrushing brushes
+
+134
+00:02:41,990 --> 00:02:42,000
+and go to the airbrushing brushes
+ 
+
+135
+00:02:42,000 --> 00:02:44,390
+and go to the airbrushing brushes
+and then grab the soft brush
+
+136
+00:02:44,390 --> 00:02:44,400
+and then grab the soft brush
+ 
+
+137
+00:02:44,400 --> 00:02:46,229
+and then grab the soft brush
+now here on the left side you'll see two
+
+138
+00:02:46,229 --> 00:02:46,239
+now here on the left side you'll see two
+ 
+
+139
+00:02:46,239 --> 00:02:48,869
+now here on the left side you'll see two
+sliders the top slider
+
+140
+00:02:48,869 --> 00:02:48,879
+sliders the top slider
+ 
+
+141
+00:02:48,879 --> 00:02:51,030
+sliders the top slider
+is for the size
+
+142
+00:02:51,030 --> 00:02:51,040
+is for the size
+ 
+
+143
+00:02:51,040 --> 00:02:53,589
+is for the size
+you can move it down or up
+
+144
+00:02:53,589 --> 00:02:53,599
+you can move it down or up
+ 
+
+145
+00:02:53,599 --> 00:02:55,750
+you can move it down or up
+and if if you find a size that you like
+
+146
+00:02:55,750 --> 00:02:55,760
+and if if you find a size that you like
+ 
+
+147
+00:02:55,760 --> 00:02:58,149
+and if if you find a size that you like
+you can actually save it by tapping this
+
+148
+00:02:58,149 --> 00:02:58,159
+you can actually save it by tapping this
+ 
+
+149
+00:02:58,159 --> 00:03:02,309
+you can actually save it by tapping this
+little plus here i have it set to 25
+
+150
+00:03:02,309 --> 00:03:02,319
+little plus here i have it set to 25
+ 
+
+151
+00:03:02,319 --> 00:03:04,550
+little plus here i have it set to 25
+and here this bottom slider is for the
+
+152
+00:03:04,550 --> 00:03:04,560
+and here this bottom slider is for the
+ 
+
+153
+00:03:04,560 --> 00:03:06,390
+and here this bottom slider is for the
+opacity
+
+154
+00:03:06,390 --> 00:03:06,400
+opacity
+ 
+
+155
+00:03:06,400 --> 00:03:09,589
+opacity
+and that means how transparent or opaque
+
+156
+00:03:09,589 --> 00:03:09,599
+and that means how transparent or opaque
+ 
+
+157
+00:03:09,599 --> 00:03:11,430
+and that means how transparent or opaque
+your brush stroke is
+
+158
+00:03:11,430 --> 00:03:11,440
+your brush stroke is
+ 
+
+159
+00:03:11,440 --> 00:03:13,990
+your brush stroke is
+let's set it to 60 and again you can tap
+
+160
+00:03:13,990 --> 00:03:14,000
+let's set it to 60 and again you can tap
+ 
+
+161
+00:03:14,000 --> 00:03:16,390
+let's set it to 60 and again you can tap
+it and then tap the plus if you want to
+
+162
+00:03:16,390 --> 00:03:16,400
+it and then tap the plus if you want to
+ 
+
+163
+00:03:16,400 --> 00:03:18,550
+it and then tap the plus if you want to
+save this amount of opacity
+
+164
+00:03:18,550 --> 00:03:18,560
+save this amount of opacity
+ 
+
+165
+00:03:18,560 --> 00:03:20,710
+save this amount of opacity
+now tap the colored circle here in the
+
+166
+00:03:20,710 --> 00:03:20,720
+now tap the colored circle here in the
+ 
+
+167
+00:03:20,720 --> 00:03:22,949
+now tap the colored circle here in the
+upper right corner and grab the second
+
+168
+00:03:22,949 --> 00:03:22,959
+upper right corner and grab the second
+ 
+
+169
+00:03:22,959 --> 00:03:24,949
+upper right corner and grab the second
+color in the first row of the color
+
+170
+00:03:24,949 --> 00:03:24,959
+color in the first row of the color
+ 
+
+171
+00:03:24,959 --> 00:03:26,789
+color in the first row of the color
+palette
+
+172
+00:03:26,789 --> 00:03:26,799
+palette
+ 
+
+173
+00:03:26,799 --> 00:03:28,470
+palette
+now you can zoom out of your canvas a
+
+174
+00:03:28,470 --> 00:03:28,480
+now you can zoom out of your canvas a
+ 
+
+175
+00:03:28,480 --> 00:03:30,710
+now you can zoom out of your canvas a
+little bit by pinching your fingers
+
+176
+00:03:30,710 --> 00:03:30,720
+little bit by pinching your fingers
+ 
+
+177
+00:03:30,720 --> 00:03:33,350
+little bit by pinching your fingers
+so we can make it a little bit smaller
+
+178
+00:03:33,350 --> 00:03:33,360
+so we can make it a little bit smaller
+ 
+
+179
+00:03:33,360 --> 00:03:36,550
+so we can make it a little bit smaller
+and now we are going to glaze over
+
+180
+00:03:36,550 --> 00:03:36,560
+and now we are going to glaze over
+ 
+
+181
+00:03:36,560 --> 00:03:39,030
+and now we are going to glaze over
+the middle half a little bit
+
+182
+00:03:39,030 --> 00:03:39,040
+the middle half a little bit
+ 
+
+183
+00:03:39,040 --> 00:03:41,270
+the middle half a little bit
+and gently go up
+
+184
+00:03:41,270 --> 00:03:41,280
+and gently go up
+ 
+
+185
+00:03:41,280 --> 00:03:44,390
+and gently go up
+to create a little bit of a gradient
+
+186
+00:03:44,390 --> 00:03:44,400
+to create a little bit of a gradient
+ 
+
+187
+00:03:44,400 --> 00:03:46,949
+to create a little bit of a gradient
+so make sure that you keep the top part
+
+188
+00:03:46,949 --> 00:03:46,959
+so make sure that you keep the top part
+ 
+
+189
+00:03:46,959 --> 00:03:49,350
+so make sure that you keep the top part
+keep that blue
+
+190
+00:03:49,350 --> 00:03:49,360
+keep that blue
+ 
+
+191
+00:03:49,360 --> 00:03:51,270
+keep that blue
+so a bit like this and then we'll switch
+
+192
+00:03:51,270 --> 00:03:51,280
+so a bit like this and then we'll switch
+ 
+
+193
+00:03:51,280 --> 00:03:55,190
+so a bit like this and then we'll switch
+to the third color in the color palette
+
+194
+00:03:55,190 --> 00:03:55,200
+to the third color in the color palette
+ 
+
+195
+00:03:55,200 --> 00:03:57,110
+to the third color in the color palette
+and let's make our brush a little bit
+
+196
+00:03:57,110 --> 00:03:57,120
+and let's make our brush a little bit
+ 
+
+197
+00:03:57,120 --> 00:03:58,949
+and let's make our brush a little bit
+smaller
+
+198
+00:03:58,949 --> 00:03:58,959
+smaller
+ 
+
+199
+00:03:58,959 --> 00:04:02,630
+smaller
+let's go for 15 if you move it outwards
+
+200
+00:04:02,630 --> 00:04:02,640
+let's go for 15 if you move it outwards
+ 
+
+201
+00:04:02,640 --> 00:04:04,710
+let's go for 15 if you move it outwards
+your pin your slider will go a little
+
+202
+00:04:04,710 --> 00:04:04,720
+your pin your slider will go a little
+ 
+
+203
+00:04:04,720 --> 00:04:06,710
+your pin your slider will go a little
+bit slower
+
+204
+00:04:06,710 --> 00:04:06,720
+bit slower
+ 
+
+205
+00:04:06,720 --> 00:04:08,869
+bit slower
+15
+
+206
+00:04:08,869 --> 00:04:08,879
+15
+ 
+
+207
+00:04:08,879 --> 00:04:11,350
+15
+and then add some pink
+
+208
+00:04:11,350 --> 00:04:11,360
+and then add some pink
+ 
+
+209
+00:04:11,360 --> 00:04:13,350
+and then add some pink
+just underneath
+
+210
+00:04:13,350 --> 00:04:13,360
+just underneath
+ 
+
+211
+00:04:13,360 --> 00:04:19,189
+just underneath
+the like the halfway point of our canvas
+
+212
+00:04:19,189 --> 00:04:19,199
+
+ 
+
+213
+00:04:19,199 --> 00:04:21,349
+
+just like this and it doesn't matter if
+
+214
+00:04:21,349 --> 00:04:21,359
+just like this and it doesn't matter if
+ 
+
+215
+00:04:21,359 --> 00:04:24,070
+just like this and it doesn't matter if
+you see your strokes
+
+216
+00:04:24,070 --> 00:04:24,080
+you see your strokes
+ 
+
+217
+00:04:24,080 --> 00:04:25,590
+you see your strokes
+because we are going to blur it to
+
+218
+00:04:25,590 --> 00:04:25,600
+because we are going to blur it to
+ 
+
+219
+00:04:25,600 --> 00:04:28,790
+because we are going to blur it to
+create a nice smooth gradient to do that
+
+220
+00:04:28,790 --> 00:04:28,800
+create a nice smooth gradient to do that
+ 
+
+221
+00:04:28,800 --> 00:04:31,110
+create a nice smooth gradient to do that
+we need to go to this little magic wand
+
+222
+00:04:31,110 --> 00:04:31,120
+we need to go to this little magic wand
+ 
+
+223
+00:04:31,120 --> 00:04:32,629
+we need to go to this little magic wand
+here at the top
+
+224
+00:04:32,629 --> 00:04:32,639
+here at the top
+ 
+
+225
+00:04:32,639 --> 00:04:34,870
+here at the top
+and select gaussian blur
+
+226
+00:04:34,870 --> 00:04:34,880
+and select gaussian blur
+ 
+
+227
+00:04:34,880 --> 00:04:36,790
+and select gaussian blur
+now here at the top you'll see gaussian
+
+228
+00:04:36,790 --> 00:04:36,800
+now here at the top you'll see gaussian
+ 
+
+229
+00:04:36,800 --> 00:04:39,430
+now here at the top you'll see gaussian
+blur and the percentage and to adjust it
+
+230
+00:04:39,430 --> 00:04:39,440
+blur and the percentage and to adjust it
+ 
+
+231
+00:04:39,440 --> 00:04:41,670
+blur and the percentage and to adjust it
+you need to slide it's telling you over
+
+232
+00:04:41,670 --> 00:04:41,680
+you need to slide it's telling you over
+ 
+
+233
+00:04:41,680 --> 00:04:42,469
+you need to slide it's telling you over
+here
+
+234
+00:04:42,469 --> 00:04:42,479
+here
+ 
+
+235
+00:04:42,479 --> 00:04:44,469
+here
+so you can drag your pen or your finger
+
+236
+00:04:44,469 --> 00:04:44,479
+so you can drag your pen or your finger
+ 
+
+237
+00:04:44,479 --> 00:04:47,670
+so you can drag your pen or your finger
+to the right on the screen
+
+238
+00:04:47,670 --> 00:04:47,680
+to the right on the screen
+ 
+
+239
+00:04:47,680 --> 00:04:49,830
+to the right on the screen
+and then you can create this nice soft
+
+240
+00:04:49,830 --> 00:04:49,840
+and then you can create this nice soft
+ 
+
+241
+00:04:49,840 --> 00:04:53,749
+and then you can create this nice soft
+gradient let's set it to 45 in this case
+
+242
+00:04:53,749 --> 00:04:53,759
+gradient let's set it to 45 in this case
+ 
+
+243
+00:04:53,759 --> 00:04:56,390
+gradient let's set it to 45 in this case
+now we're going to the layer menu
+
+244
+00:04:56,390 --> 00:04:56,400
+now we're going to the layer menu
+ 
+
+245
+00:04:56,400 --> 00:04:57,990
+now we're going to the layer menu
+and here you can see that we have layer
+
+246
+00:04:57,990 --> 00:04:58,000
+and here you can see that we have layer
+ 
+
+247
+00:04:58,000 --> 00:05:00,390
+and here you can see that we have layer
+1 with this gradient and you see a
+
+248
+00:05:00,390 --> 00:05:00,400
+1 with this gradient and you see a
+ 
+
+249
+00:05:00,400 --> 00:05:02,710
+1 with this gradient and you see a
+little plus here to create new layers on
+
+250
+00:05:02,710 --> 00:05:02,720
+little plus here to create new layers on
+ 
+
+251
+00:05:02,720 --> 00:05:05,590
+little plus here to create new layers on
+top of it if you tap the plus you'll see
+
+252
+00:05:05,590 --> 00:05:05,600
+top of it if you tap the plus you'll see
+ 
+
+253
+00:05:05,600 --> 00:05:07,749
+top of it if you tap the plus you'll see
+this new layer and it's still completely
+
+254
+00:05:07,749 --> 00:05:07,759
+this new layer and it's still completely
+ 
+
+255
+00:05:07,759 --> 00:05:09,990
+this new layer and it's still completely
+transparent so we have a layer that is
+
+256
+00:05:09,990 --> 00:05:10,000
+transparent so we have a layer that is
+ 
+
+257
+00:05:10,000 --> 00:05:11,909
+transparent so we have a layer that is
+completely filled and a transparent
+
+258
+00:05:11,909 --> 00:05:11,919
+completely filled and a transparent
+ 
+
+259
+00:05:11,919 --> 00:05:13,909
+completely filled and a transparent
+layer you can compare it to like a
+
+260
+00:05:13,909 --> 00:05:13,919
+layer you can compare it to like a
+ 
+
+261
+00:05:13,919 --> 00:05:16,070
+layer you can compare it to like a
+transparent sheet of paper and that's
+
+262
+00:05:16,070 --> 00:05:16,080
+transparent sheet of paper and that's
+ 
+
+263
+00:05:16,080 --> 00:05:17,830
+transparent sheet of paper and that's
+what we are going to draw on right now
+
+264
+00:05:17,830 --> 00:05:17,840
+what we are going to draw on right now
+ 
+
+265
+00:05:17,840 --> 00:05:20,070
+what we are going to draw on right now
+and we are going to grab a different
+
+266
+00:05:20,070 --> 00:05:20,080
+and we are going to grab a different
+ 
+
+267
+00:05:20,080 --> 00:05:21,029
+and we are going to grab a different
+brush
+
+268
+00:05:21,029 --> 00:05:21,039
+brush
+ 
+
+269
+00:05:21,039 --> 00:05:23,430
+brush
+under calligraphy and that's the mono
+
+270
+00:05:23,430 --> 00:05:23,440
+under calligraphy and that's the mono
+ 
+
+271
+00:05:23,440 --> 00:05:25,350
+under calligraphy and that's the mono
+line brush and then we'll go to the
+
+272
+00:05:25,350 --> 00:05:25,360
+line brush and then we'll go to the
+ 
+
+273
+00:05:25,360 --> 00:05:27,350
+line brush and then we'll go to the
+colors and we are going to use this
+
+274
+00:05:27,350 --> 00:05:27,360
+colors and we are going to use this
+ 
+
+275
+00:05:27,360 --> 00:05:29,909
+colors and we are going to use this
+first color in the second row
+
+276
+00:05:29,909 --> 00:05:29,919
+first color in the second row
+ 
+
+277
+00:05:29,919 --> 00:05:32,310
+first color in the second row
+now the opacity of this brush is set to
+
+278
+00:05:32,310 --> 00:05:32,320
+now the opacity of this brush is set to
+ 
+
+279
+00:05:32,320 --> 00:05:34,150
+now the opacity of this brush is set to
+100
+
+280
+00:05:34,150 --> 00:05:34,160
+100
+ 
+
+281
+00:05:34,160 --> 00:05:37,029
+100
+and size is set to 10 and now we are
+
+282
+00:05:37,029 --> 00:05:37,039
+and size is set to 10 and now we are
+ 
+
+283
+00:05:37,039 --> 00:05:39,749
+and size is set to 10 and now we are
+going to create a wobbly line from left
+
+284
+00:05:39,749 --> 00:05:39,759
+going to create a wobbly line from left
+ 
+
+285
+00:05:39,759 --> 00:05:41,510
+going to create a wobbly line from left
+to right
+
+286
+00:05:41,510 --> 00:05:41,520
+to right
+ 
+
+287
+00:05:41,520 --> 00:05:43,830
+to right
+and it's going through that pink
+
+288
+00:05:43,830 --> 00:05:43,840
+and it's going through that pink
+ 
+
+289
+00:05:43,840 --> 00:05:46,230
+and it's going through that pink
+area that we have created with our
+
+290
+00:05:46,230 --> 00:05:46,240
+area that we have created with our
+ 
+
+291
+00:05:46,240 --> 00:05:49,270
+area that we have created with our
+gradient so let's start about here
+
+292
+00:05:49,270 --> 00:05:49,280
+gradient so let's start about here
+ 
+
+293
+00:05:49,280 --> 00:05:51,510
+gradient so let's start about here
+and just make a wobbly line which
+
+294
+00:05:51,510 --> 00:05:51,520
+and just make a wobbly line which
+ 
+
+295
+00:05:51,520 --> 00:05:54,629
+and just make a wobbly line which
+shouldn't be too hard
+
+296
+00:05:54,629 --> 00:05:54,639
+shouldn't be too hard
+ 
+
+297
+00:05:54,639 --> 00:05:56,950
+shouldn't be too hard
+and just wobble your way from left to
+
+298
+00:05:56,950 --> 00:05:56,960
+and just wobble your way from left to
+ 
+
+299
+00:05:56,960 --> 00:06:00,230
+and just wobble your way from left to
+right imagining you are creating these
+
+300
+00:06:00,230 --> 00:06:00,240
+right imagining you are creating these
+ 
+
+301
+00:06:00,240 --> 00:06:02,629
+right imagining you are creating these
+these hill-like shapes
+
+302
+00:06:02,629 --> 00:06:02,639
+these hill-like shapes
+ 
+
+303
+00:06:02,639 --> 00:06:04,710
+these hill-like shapes
+like mountains
+
+304
+00:06:04,710 --> 00:06:04,720
+like mountains
+ 
+
+305
+00:06:04,720 --> 00:06:06,790
+like mountains
+mountain range all the way to the right
+
+306
+00:06:06,790 --> 00:06:06,800
+mountain range all the way to the right
+ 
+
+307
+00:06:06,800 --> 00:06:08,309
+mountain range all the way to the right
+and now we are going to fill it just
+
+308
+00:06:08,309 --> 00:06:08,319
+and now we are going to fill it just
+ 
+
+309
+00:06:08,319 --> 00:06:10,469
+and now we are going to fill it just
+like we filled the entire page at the
+
+310
+00:06:10,469 --> 00:06:10,479
+like we filled the entire page at the
+ 
+
+311
+00:06:10,479 --> 00:06:13,510
+like we filled the entire page at the
+beginning now we are going to fill this
+
+312
+00:06:13,510 --> 00:06:13,520
+beginning now we are going to fill this
+ 
+
+313
+00:06:13,520 --> 00:06:16,070
+beginning now we are going to fill this
+shape now sometimes when you drag in the
+
+314
+00:06:16,070 --> 00:06:16,080
+shape now sometimes when you drag in the
+ 
+
+315
+00:06:16,080 --> 00:06:18,950
+shape now sometimes when you drag in the
+color it happens that either the paint
+
+316
+00:06:18,950 --> 00:06:18,960
+color it happens that either the paint
+ 
+
+317
+00:06:18,960 --> 00:06:21,430
+color it happens that either the paint
+spills all over the page or you get like
+
+318
+00:06:21,430 --> 00:06:21,440
+spills all over the page or you get like
+ 
+
+319
+00:06:21,440 --> 00:06:22,550
+spills all over the page or you get like
+a little
+
+320
+00:06:22,550 --> 00:06:22,560
+a little
+ 
+
+321
+00:06:22,560 --> 00:06:24,710
+a little
+transparent edge
+
+322
+00:06:24,710 --> 00:06:24,720
+transparent edge
+ 
+
+323
+00:06:24,720 --> 00:06:27,029
+transparent edge
+just around the edge as if the paint
+
+324
+00:06:27,029 --> 00:06:27,039
+just around the edge as if the paint
+ 
+
+325
+00:06:27,039 --> 00:06:29,909
+just around the edge as if the paint
+isn't filling the entire object and to
+
+326
+00:06:29,909 --> 00:06:29,919
+isn't filling the entire object and to
+ 
+
+327
+00:06:29,919 --> 00:06:32,070
+isn't filling the entire object and to
+be able to adjust that you need to fill
+
+328
+00:06:32,070 --> 00:06:32,080
+be able to adjust that you need to fill
+ 
+
+329
+00:06:32,080 --> 00:06:33,990
+be able to adjust that you need to fill
+the color on your screen and then hold
+
+330
+00:06:33,990 --> 00:06:34,000
+the color on your screen and then hold
+ 
+
+331
+00:06:34,000 --> 00:06:35,110
+the color on your screen and then hold
+it
+
+332
+00:06:35,110 --> 00:06:35,120
+it
+ 
+
+333
+00:06:35,120 --> 00:06:37,670
+it
+and drag to the right or left you can
+
+334
+00:06:37,670 --> 00:06:37,680
+and drag to the right or left you can
+ 
+
+335
+00:06:37,680 --> 00:06:40,550
+and drag to the right or left you can
+see color drop threshold there
+
+336
+00:06:40,550 --> 00:06:40,560
+see color drop threshold there
+ 
+
+337
+00:06:40,560 --> 00:06:42,710
+see color drop threshold there
+you need to go all the way to the right
+
+338
+00:06:42,710 --> 00:06:42,720
+you need to go all the way to the right
+ 
+
+339
+00:06:42,720 --> 00:06:45,830
+you need to go all the way to the right
+just until it just barely doesn't spill
+
+340
+00:06:45,830 --> 00:06:45,840
+just until it just barely doesn't spill
+ 
+
+341
+00:06:45,840 --> 00:06:47,990
+just until it just barely doesn't spill
+all over that's when you have that sweet
+
+342
+00:06:47,990 --> 00:06:48,000
+all over that's when you have that sweet
+ 
+
+343
+00:06:48,000 --> 00:06:48,950
+all over that's when you have that sweet
+spot
+
+344
+00:06:48,950 --> 00:06:48,960
+spot
+ 
+
+345
+00:06:48,960 --> 00:06:50,710
+spot
+now we're going to create another layer
+
+346
+00:06:50,710 --> 00:06:50,720
+now we're going to create another layer
+ 
+
+347
+00:06:50,720 --> 00:06:52,790
+now we're going to create another layer
+so go to the layer menu these two little
+
+348
+00:06:52,790 --> 00:06:52,800
+so go to the layer menu these two little
+ 
+
+349
+00:06:52,800 --> 00:06:55,029
+so go to the layer menu these two little
+squares and tap the plus
+
+350
+00:06:55,029 --> 00:06:55,039
+squares and tap the plus
+ 
+
+351
+00:06:55,039 --> 00:06:57,270
+squares and tap the plus
+and then go to the next color that's the
+
+352
+00:06:57,270 --> 00:06:57,280
+and then go to the next color that's the
+ 
+
+353
+00:06:57,280 --> 00:06:59,909
+and then go to the next color that's the
+second color in the second row
+
+354
+00:06:59,909 --> 00:06:59,919
+second color in the second row
+ 
+
+355
+00:06:59,919 --> 00:07:02,790
+second color in the second row
+and now start a little bit lower
+
+356
+00:07:02,790 --> 00:07:02,800
+and now start a little bit lower
+ 
+
+357
+00:07:02,800 --> 00:07:07,670
+and now start a little bit lower
+and make another wobbly line
+
+358
+00:07:07,670 --> 00:07:07,680
+
+ 
+
+359
+00:07:07,680 --> 00:07:09,589
+
+so this is a great practice if you want
+
+360
+00:07:09,589 --> 00:07:09,599
+so this is a great practice if you want
+ 
+
+361
+00:07:09,599 --> 00:07:10,710
+so this is a great practice if you want
+to
+
+362
+00:07:10,710 --> 00:07:10,720
+to
+ 
+
+363
+00:07:10,720 --> 00:07:13,350
+to
+improve your your wobbliness your wobbly
+
+364
+00:07:13,350 --> 00:07:13,360
+improve your your wobbliness your wobbly
+ 
+
+365
+00:07:13,360 --> 00:07:15,189
+improve your your wobbliness your wobbly
+lines
+
+366
+00:07:15,189 --> 00:07:15,199
+lines
+ 
+
+367
+00:07:15,199 --> 00:07:16,790
+lines
+all the way to the right and then just
+
+368
+00:07:16,790 --> 00:07:16,800
+all the way to the right and then just
+ 
+
+369
+00:07:16,800 --> 00:07:20,070
+all the way to the right and then just
+drag in the color to fill that shape
+
+370
+00:07:20,070 --> 00:07:20,080
+drag in the color to fill that shape
+ 
+
+371
+00:07:20,080 --> 00:07:22,150
+drag in the color to fill that shape
+then create another layer so go to the
+
+372
+00:07:22,150 --> 00:07:22,160
+then create another layer so go to the
+ 
+
+373
+00:07:22,160 --> 00:07:24,309
+then create another layer so go to the
+layer menu tap the plus
+
+374
+00:07:24,309 --> 00:07:24,319
+layer menu tap the plus
+ 
+
+375
+00:07:24,319 --> 00:07:26,870
+layer menu tap the plus
+go to the next color
+
+376
+00:07:26,870 --> 00:07:26,880
+go to the next color
+ 
+
+377
+00:07:26,880 --> 00:07:28,830
+go to the next color
+and again make a wobbly
+
+378
+00:07:28,830 --> 00:07:28,840
+and again make a wobbly
+ 
+
+379
+00:07:28,840 --> 00:07:31,350
+and again make a wobbly
+line over here you can go a little bit
+
+380
+00:07:31,350 --> 00:07:31,360
+line over here you can go a little bit
+ 
+
+381
+00:07:31,360 --> 00:07:33,749
+line over here you can go a little bit
+higher than our previous
+
+382
+00:07:33,749 --> 00:07:33,759
+higher than our previous
+ 
+
+383
+00:07:33,759 --> 00:07:37,510
+higher than our previous
+mountain range
+
+384
+00:07:37,510 --> 00:07:37,520
+
+ 
+
+385
+00:07:37,520 --> 00:07:40,550
+
+just go all the way to the right
+
+386
+00:07:40,550 --> 00:07:40,560
+just go all the way to the right
+ 
+
+387
+00:07:40,560 --> 00:07:43,189
+just go all the way to the right
+wobble along
+
+388
+00:07:43,189 --> 00:07:43,199
+wobble along
+ 
+
+389
+00:07:43,199 --> 00:07:45,589
+wobble along
+until you are here and then drag the
+
+390
+00:07:45,589 --> 00:07:45,599
+until you are here and then drag the
+ 
+
+391
+00:07:45,599 --> 00:07:47,670
+until you are here and then drag the
+color inside the shape
+
+392
+00:07:47,670 --> 00:07:47,680
+color inside the shape
+ 
+
+393
+00:07:47,680 --> 00:07:49,670
+color inside the shape
+then the next one go to the layer menu
+
+394
+00:07:49,670 --> 00:07:49,680
+then the next one go to the layer menu
+ 
+
+395
+00:07:49,680 --> 00:07:51,430
+then the next one go to the layer menu
+again tap the plus
+
+396
+00:07:51,430 --> 00:07:51,440
+again tap the plus
+ 
+
+397
+00:07:51,440 --> 00:07:53,350
+again tap the plus
+grab the next color that's the fourth
+
+398
+00:07:53,350 --> 00:07:53,360
+grab the next color that's the fourth
+ 
+
+399
+00:07:53,360 --> 00:07:55,670
+grab the next color that's the fourth
+color
+
+400
+00:07:55,670 --> 00:07:55,680
+color
+ 
+
+401
+00:07:55,680 --> 00:08:00,230
+color
+and again start a little bit lower
+
+402
+00:08:00,230 --> 00:08:00,240
+
+ 
+
+403
+00:08:00,240 --> 00:08:02,390
+
+and wobble along
+
+404
+00:08:02,390 --> 00:08:02,400
+and wobble along
+ 
+
+405
+00:08:02,400 --> 00:08:04,469
+and wobble along
+to the right side here you can go a
+
+406
+00:08:04,469 --> 00:08:04,479
+to the right side here you can go a
+ 
+
+407
+00:08:04,479 --> 00:08:08,309
+to the right side here you can go a
+little bit higher
+
+408
+00:08:08,309 --> 00:08:08,319
+
+ 
+
+409
+00:08:08,319 --> 00:08:10,070
+
+just wobble
+
+410
+00:08:10,070 --> 00:08:10,080
+just wobble
+ 
+
+411
+00:08:10,080 --> 00:08:13,749
+just wobble
+to the right and drag and drop the color
+
+412
+00:08:13,749 --> 00:08:13,759
+to the right and drag and drop the color
+ 
+
+413
+00:08:13,759 --> 00:08:15,830
+to the right and drag and drop the color
+then go to the layer menu tap the plus
+
+414
+00:08:15,830 --> 00:08:15,840
+then go to the layer menu tap the plus
+ 
+
+415
+00:08:15,840 --> 00:08:17,189
+then go to the layer menu tap the plus
+again
+
+416
+00:08:17,189 --> 00:08:17,199
+again
+ 
+
+417
+00:08:17,199 --> 00:08:19,430
+again
+then we'll go to the fifth color in the
+
+418
+00:08:19,430 --> 00:08:19,440
+then we'll go to the fifth color in the
+ 
+
+419
+00:08:19,440 --> 00:08:22,869
+then we'll go to the fifth color in the
+second row we're almost there
+
+420
+00:08:22,869 --> 00:08:22,879
+second row we're almost there
+ 
+
+421
+00:08:22,879 --> 00:08:27,029
+second row we're almost there
+start a little bit lower again
+
+422
+00:08:27,029 --> 00:08:27,039
+start a little bit lower again
+ 
+
+423
+00:08:27,039 --> 00:08:31,830
+start a little bit lower again
+and we'll wobble along
+
+424
+00:08:31,830 --> 00:08:31,840
+
+ 
+
+425
+00:08:31,840 --> 00:08:34,870
+
+all the way to the right
+
+426
+00:08:34,870 --> 00:08:34,880
+all the way to the right
+ 
+
+427
+00:08:34,880 --> 00:08:37,110
+all the way to the right
+drag and drop the color
+
+428
+00:08:37,110 --> 00:08:37,120
+drag and drop the color
+ 
+
+429
+00:08:37,120 --> 00:08:39,269
+drag and drop the color
+then go to the layer menu again tap the
+
+430
+00:08:39,269 --> 00:08:39,279
+then go to the layer menu again tap the
+ 
+
+431
+00:08:39,279 --> 00:08:41,110
+then go to the layer menu again tap the
+plus
+
+432
+00:08:41,110 --> 00:08:41,120
+plus
+ 
+
+433
+00:08:41,120 --> 00:08:43,269
+plus
+then grab the last color
+
+434
+00:08:43,269 --> 00:08:43,279
+then grab the last color
+ 
+
+435
+00:08:43,279 --> 00:08:46,550
+then grab the last color
+the sixth color in the second row
+
+436
+00:08:46,550 --> 00:08:46,560
+the sixth color in the second row
+ 
+
+437
+00:08:46,560 --> 00:08:49,269
+the sixth color in the second row
+start a bit lower again
+
+438
+00:08:49,269 --> 00:08:49,279
+start a bit lower again
+ 
+
+439
+00:08:49,279 --> 00:08:51,190
+start a bit lower again
+you can barely see it i wonder if you
+
+440
+00:08:51,190 --> 00:08:51,200
+you can barely see it i wonder if you
+ 
+
+441
+00:08:51,200 --> 00:08:53,110
+you can barely see it i wonder if you
+can see it on screen
+
+442
+00:08:53,110 --> 00:08:53,120
+can see it on screen
+ 
+
+443
+00:08:53,120 --> 00:08:57,910
+can see it on screen
+but we're making a wobbly line here
+
+444
+00:08:57,910 --> 00:08:57,920
+
+ 
+
+445
+00:08:57,920 --> 00:09:00,389
+
+and just wobble to the right
+
+446
+00:09:00,389 --> 00:09:00,399
+and just wobble to the right
+ 
+
+447
+00:09:00,399 --> 00:09:02,949
+and just wobble to the right
+and drag and drop the color now let's
+
+448
+00:09:02,949 --> 00:09:02,959
+and drag and drop the color now let's
+ 
+
+449
+00:09:02,959 --> 00:09:05,430
+and drag and drop the color now let's
+say you feel like your mountains or your
+
+450
+00:09:05,430 --> 00:09:05,440
+say you feel like your mountains or your
+ 
+
+451
+00:09:05,440 --> 00:09:08,230
+say you feel like your mountains or your
+hills are a little bit too high up when
+
+452
+00:09:08,230 --> 00:09:08,240
+hills are a little bit too high up when
+ 
+
+453
+00:09:08,240 --> 00:09:10,710
+hills are a little bit too high up when
+you're working digitally it's easy to
+
+454
+00:09:10,710 --> 00:09:10,720
+you're working digitally it's easy to
+ 
+
+455
+00:09:10,720 --> 00:09:12,150
+you're working digitally it's easy to
+adjust things
+
+456
+00:09:12,150 --> 00:09:12,160
+adjust things
+ 
+
+457
+00:09:12,160 --> 00:09:13,990
+adjust things
+we can just go to the layer menu and
+
+458
+00:09:13,990 --> 00:09:14,000
+we can just go to the layer menu and
+ 
+
+459
+00:09:14,000 --> 00:09:16,790
+we can just go to the layer menu and
+select all these layers with hills you
+
+460
+00:09:16,790 --> 00:09:16,800
+select all these layers with hills you
+ 
+
+461
+00:09:16,800 --> 00:09:19,509
+select all these layers with hills you
+can do that by sliding to the right
+
+462
+00:09:19,509 --> 00:09:19,519
+can do that by sliding to the right
+ 
+
+463
+00:09:19,519 --> 00:09:21,430
+can do that by sliding to the right
+selecting all of them just not the
+
+464
+00:09:21,430 --> 00:09:21,440
+selecting all of them just not the
+ 
+
+465
+00:09:21,440 --> 00:09:23,590
+selecting all of them just not the
+background layer with the gradient
+
+466
+00:09:23,590 --> 00:09:23,600
+background layer with the gradient
+ 
+
+467
+00:09:23,600 --> 00:09:25,590
+background layer with the gradient
+they can go to the move tool that's the
+
+468
+00:09:25,590 --> 00:09:25,600
+they can go to the move tool that's the
+ 
+
+469
+00:09:25,600 --> 00:09:27,590
+they can go to the move tool that's the
+little arrow up here
+
+470
+00:09:27,590 --> 00:09:27,600
+little arrow up here
+ 
+
+471
+00:09:27,600 --> 00:09:29,829
+little arrow up here
+and make sure you have snapping turned
+
+472
+00:09:29,829 --> 00:09:29,839
+and make sure you have snapping turned
+ 
+
+473
+00:09:29,839 --> 00:09:31,350
+and make sure you have snapping turned
+on over here
+
+474
+00:09:31,350 --> 00:09:31,360
+on over here
+ 
+
+475
+00:09:31,360 --> 00:09:33,030
+on over here
+and now you can drag it down a little
+
+476
+00:09:33,030 --> 00:09:33,040
+and now you can drag it down a little
+ 
+
+477
+00:09:33,040 --> 00:09:33,990
+and now you can drag it down a little
+bit
+
+478
+00:09:33,990 --> 00:09:34,000
+bit
+ 
+
+479
+00:09:34,000 --> 00:09:36,550
+bit
+and just make sure you keep seeing that
+
+480
+00:09:36,550 --> 00:09:36,560
+and just make sure you keep seeing that
+ 
+
+481
+00:09:36,560 --> 00:09:39,110
+and just make sure you keep seeing that
+that orange line so you know that you
+
+482
+00:09:39,110 --> 00:09:39,120
+that orange line so you know that you
+ 
+
+483
+00:09:39,120 --> 00:09:41,350
+that orange line so you know that you
+are in the center otherwise
+
+484
+00:09:41,350 --> 00:09:41,360
+are in the center otherwise
+ 
+
+485
+00:09:41,360 --> 00:09:43,590
+are in the center otherwise
+you will get a little gap on the right
+
+486
+00:09:43,590 --> 00:09:43,600
+you will get a little gap on the right
+ 
+
+487
+00:09:43,600 --> 00:09:45,509
+you will get a little gap on the right
+or left and once you're happy with the
+
+488
+00:09:45,509 --> 00:09:45,519
+or left and once you're happy with the
+ 
+
+489
+00:09:45,519 --> 00:09:47,350
+or left and once you're happy with the
+placement you can just tap the little
+
+490
+00:09:47,350 --> 00:09:47,360
+placement you can just tap the little
+ 
+
+491
+00:09:47,360 --> 00:09:49,829
+placement you can just tap the little
+arrow to get out of the menu again
+
+492
+00:09:49,829 --> 00:09:49,839
+arrow to get out of the menu again
+ 
+
+493
+00:09:49,839 --> 00:09:52,389
+arrow to get out of the menu again
+now we are going to add a little like
+
+494
+00:09:52,389 --> 00:09:52,399
+now we are going to add a little like
+ 
+
+495
+00:09:52,399 --> 00:09:53,670
+now we are going to add a little like
+fog
+
+496
+00:09:53,670 --> 00:09:53,680
+fog
+ 
+
+497
+00:09:53,680 --> 00:09:55,829
+fog
+on our mountains this will help to
+
+498
+00:09:55,829 --> 00:09:55,839
+on our mountains this will help to
+ 
+
+499
+00:09:55,839 --> 00:09:58,389
+on our mountains this will help to
+separate them a little bit
+
+500
+00:09:58,389 --> 00:09:58,399
+separate them a little bit
+ 
+
+501
+00:09:58,399 --> 00:10:00,310
+separate them a little bit
+now before we do that
+
+502
+00:10:00,310 --> 00:10:00,320
+now before we do that
+ 
+
+503
+00:10:00,320 --> 00:10:02,870
+now before we do that
+first let's tap layer two those are the
+
+504
+00:10:02,870 --> 00:10:02,880
+first let's tap layer two those are the
+ 
+
+505
+00:10:02,880 --> 00:10:05,350
+first let's tap layer two those are the
+mountains or hills in the back we are
+
+506
+00:10:05,350 --> 00:10:05,360
+mountains or hills in the back we are
+ 
+
+507
+00:10:05,360 --> 00:10:07,509
+mountains or hills in the back we are
+going to turn on alpha lock on this
+
+508
+00:10:07,509 --> 00:10:07,519
+going to turn on alpha lock on this
+ 
+
+509
+00:10:07,519 --> 00:10:08,550
+going to turn on alpha lock on this
+layer
+
+510
+00:10:08,550 --> 00:10:08,560
+layer
+ 
+
+511
+00:10:08,560 --> 00:10:11,030
+layer
+you need to tap the layer then tap alpha
+
+512
+00:10:11,030 --> 00:10:11,040
+you need to tap the layer then tap alpha
+ 
+
+513
+00:10:11,040 --> 00:10:11,990
+you need to tap the layer then tap alpha
+lock
+
+514
+00:10:11,990 --> 00:10:12,000
+lock
+ 
+
+515
+00:10:12,000 --> 00:10:13,509
+lock
+and you'll see a little checkerboard
+
+516
+00:10:13,509 --> 00:10:13,519
+and you'll see a little checkerboard
+ 
+
+517
+00:10:13,519 --> 00:10:14,470
+and you'll see a little checkerboard
+pattern
+
+518
+00:10:14,470 --> 00:10:14,480
+pattern
+ 
+
+519
+00:10:14,480 --> 00:10:17,350
+pattern
+appear around our shape
+
+520
+00:10:17,350 --> 00:10:17,360
+appear around our shape
+ 
+
+521
+00:10:17,360 --> 00:10:20,069
+appear around our shape
+now whatever was still transparent on
+
+522
+00:10:20,069 --> 00:10:20,079
+now whatever was still transparent on
+ 
+
+523
+00:10:20,079 --> 00:10:22,630
+now whatever was still transparent on
+our like transparent sheet of paper is
+
+524
+00:10:22,630 --> 00:10:22,640
+our like transparent sheet of paper is
+ 
+
+525
+00:10:22,640 --> 00:10:24,710
+our like transparent sheet of paper is
+now locked we won't be able to paint
+
+526
+00:10:24,710 --> 00:10:24,720
+now locked we won't be able to paint
+ 
+
+527
+00:10:24,720 --> 00:10:27,350
+now locked we won't be able to paint
+there anymore we can only paint on our
+
+528
+00:10:27,350 --> 00:10:27,360
+there anymore we can only paint on our
+ 
+
+529
+00:10:27,360 --> 00:10:29,430
+there anymore we can only paint on our
+hill and that's really super handy if
+
+530
+00:10:29,430 --> 00:10:29,440
+hill and that's really super handy if
+ 
+
+531
+00:10:29,440 --> 00:10:31,030
+hill and that's really super handy if
+you don't want to go
+
+532
+00:10:31,030 --> 00:10:31,040
+you don't want to go
+ 
+
+533
+00:10:31,040 --> 00:10:33,110
+you don't want to go
+outside of the shape accidentally now
+
+534
+00:10:33,110 --> 00:10:33,120
+outside of the shape accidentally now
+ 
+
+535
+00:10:33,120 --> 00:10:35,910
+outside of the shape accidentally now
+we're going back to the airbrush to that
+
+536
+00:10:35,910 --> 00:10:35,920
+we're going back to the airbrush to that
+ 
+
+537
+00:10:35,920 --> 00:10:38,310
+we're going back to the airbrush to that
+soft brush we used before
+
+538
+00:10:38,310 --> 00:10:38,320
+soft brush we used before
+ 
+
+539
+00:10:38,320 --> 00:10:40,150
+soft brush we used before
+and for our color we are going to use
+
+540
+00:10:40,150 --> 00:10:40,160
+and for our color we are going to use
+ 
+
+541
+00:10:40,160 --> 00:10:43,269
+and for our color we are going to use
+this third color in the first row
+
+542
+00:10:43,269 --> 00:10:43,279
+this third color in the first row
+ 
+
+543
+00:10:43,279 --> 00:10:46,069
+this third color in the first row
+now the opacity is still at sixty
+
+544
+00:10:46,069 --> 00:10:46,079
+now the opacity is still at sixty
+ 
+
+545
+00:10:46,079 --> 00:10:47,590
+now the opacity is still at sixty
+percent
+
+546
+00:10:47,590 --> 00:10:47,600
+percent
+ 
+
+547
+00:10:47,600 --> 00:10:50,870
+percent
+and the size is at fifteen percent
+
+548
+00:10:50,870 --> 00:10:50,880
+and the size is at fifteen percent
+ 
+
+549
+00:10:50,880 --> 00:10:53,670
+and the size is at fifteen percent
+now we are going to glaze over
+
+550
+00:10:53,670 --> 00:10:53,680
+now we are going to glaze over
+ 
+
+551
+00:10:53,680 --> 00:10:56,470
+now we are going to glaze over
+that bottom area here
+
+552
+00:10:56,470 --> 00:10:56,480
+that bottom area here
+ 
+
+553
+00:10:56,480 --> 00:10:59,430
+that bottom area here
+just to add a little bit of mist there
+
+554
+00:10:59,430 --> 00:10:59,440
+just to add a little bit of mist there
+ 
+
+555
+00:10:59,440 --> 00:11:01,190
+just to add a little bit of mist there
+we are going to do the same thing for
+
+556
+00:11:01,190 --> 00:11:01,200
+we are going to do the same thing for
+ 
+
+557
+00:11:01,200 --> 00:11:03,110
+we are going to do the same thing for
+the other heel so first go to layer
+
+558
+00:11:03,110 --> 00:11:03,120
+the other heel so first go to layer
+ 
+
+559
+00:11:03,120 --> 00:11:03,990
+the other heel so first go to layer
+three
+
+560
+00:11:03,990 --> 00:11:04,000
+three
+ 
+
+561
+00:11:04,000 --> 00:11:05,430
+three
+make sure you don't go outside of the
+
+562
+00:11:05,430 --> 00:11:05,440
+make sure you don't go outside of the
+ 
+
+563
+00:11:05,440 --> 00:11:08,470
+make sure you don't go outside of the
+shape by turning on alpha lock
+
+564
+00:11:08,470 --> 00:11:08,480
+shape by turning on alpha lock
+ 
+
+565
+00:11:08,480 --> 00:11:10,150
+shape by turning on alpha lock
+and just to demonstrate
+
+566
+00:11:10,150 --> 00:11:10,160
+and just to demonstrate
+ 
+
+567
+00:11:10,160 --> 00:11:12,949
+and just to demonstrate
+if i paint here nothing happens but if i
+
+568
+00:11:12,949 --> 00:11:12,959
+if i paint here nothing happens but if i
+ 
+
+569
+00:11:12,959 --> 00:11:14,470
+if i paint here nothing happens but if i
+paint on the mountains
+
+570
+00:11:14,470 --> 00:11:14,480
+paint on the mountains
+ 
+
+571
+00:11:14,480 --> 00:11:16,470
+paint on the mountains
+something does happen now if you have
+
+572
+00:11:16,470 --> 00:11:16,480
+something does happen now if you have
+ 
+
+573
+00:11:16,480 --> 00:11:19,190
+something does happen now if you have
+made a mistake like this you can easily
+
+574
+00:11:19,190 --> 00:11:19,200
+made a mistake like this you can easily
+ 
+
+575
+00:11:19,200 --> 00:11:21,430
+made a mistake like this you can easily
+undo it by either tapping here on this
+
+576
+00:11:21,430 --> 00:11:21,440
+undo it by either tapping here on this
+ 
+
+577
+00:11:21,440 --> 00:11:24,230
+undo it by either tapping here on this
+little arrow or tapping with two fingers
+
+578
+00:11:24,230 --> 00:11:24,240
+little arrow or tapping with two fingers
+ 
+
+579
+00:11:24,240 --> 00:11:27,030
+little arrow or tapping with two fingers
+on the screen so let's try again
+
+580
+00:11:27,030 --> 00:11:27,040
+on the screen so let's try again
+ 
+
+581
+00:11:27,040 --> 00:11:29,670
+on the screen so let's try again
+let's just go over that lower area
+
+582
+00:11:29,670 --> 00:11:29,680
+let's just go over that lower area
+ 
+
+583
+00:11:29,680 --> 00:11:32,710
+let's just go over that lower area
+and add a very gentle
+
+584
+00:11:32,710 --> 00:11:32,720
+and add a very gentle
+ 
+
+585
+00:11:32,720 --> 00:11:34,870
+and add a very gentle
+little mist
+
+586
+00:11:34,870 --> 00:11:34,880
+little mist
+ 
+
+587
+00:11:34,880 --> 00:11:37,269
+little mist
+let's do the same for the next area
+
+588
+00:11:37,269 --> 00:11:37,279
+let's do the same for the next area
+ 
+
+589
+00:11:37,279 --> 00:11:41,190
+let's do the same for the next area
+layer four turn on alpha lock
+
+590
+00:11:41,190 --> 00:11:41,200
+layer four turn on alpha lock
+ 
+
+591
+00:11:41,200 --> 00:11:47,030
+layer four turn on alpha lock
+and then glaze over that lower area
+
+592
+00:11:47,030 --> 00:11:47,040
+
+ 
+
+593
+00:11:47,040 --> 00:11:49,430
+
+and we'll move on to the next one layer
+
+594
+00:11:49,430 --> 00:11:49,440
+and we'll move on to the next one layer
+ 
+
+595
+00:11:49,440 --> 00:11:52,230
+and we'll move on to the next one layer
+five again tap the layer turn on alpha
+
+596
+00:11:52,230 --> 00:11:52,240
+five again tap the layer turn on alpha
+ 
+
+597
+00:11:52,240 --> 00:11:54,310
+five again tap the layer turn on alpha
+lock
+
+598
+00:11:54,310 --> 00:11:54,320
+lock
+ 
+
+599
+00:11:54,320 --> 00:11:57,990
+lock
+and glaze over the lower area
+
+600
+00:11:57,990 --> 00:11:58,000
+and glaze over the lower area
+ 
+
+601
+00:11:58,000 --> 00:12:00,790
+and glaze over the lower area
+that's where the mist is
+
+602
+00:12:00,790 --> 00:12:00,800
+that's where the mist is
+ 
+
+603
+00:12:00,800 --> 00:12:03,110
+that's where the mist is
+in the final one we we won't be going
+
+604
+00:12:03,110 --> 00:12:03,120
+in the final one we we won't be going
+ 
+
+605
+00:12:03,120 --> 00:12:06,150
+in the final one we we won't be going
+over layer seven only over layer six
+
+606
+00:12:06,150 --> 00:12:06,160
+over layer seven only over layer six
+ 
+
+607
+00:12:06,160 --> 00:12:08,829
+over layer seven only over layer six
+tap it turn on alpha
+
+608
+00:12:08,829 --> 00:12:08,839
+tap it turn on alpha
+ 
+
+609
+00:12:08,839 --> 00:12:11,190
+tap it turn on alpha
+lock and then
+
+610
+00:12:11,190 --> 00:12:11,200
+lock and then
+ 
+
+611
+00:12:11,200 --> 00:12:13,910
+lock and then
+add just a little bit of mist i'm using
+
+612
+00:12:13,910 --> 00:12:13,920
+add just a little bit of mist i'm using
+ 
+
+613
+00:12:13,920 --> 00:12:16,470
+add just a little bit of mist i'm using
+very little pressure here on my pen
+
+614
+00:12:16,470 --> 00:12:16,480
+very little pressure here on my pen
+ 
+
+615
+00:12:16,480 --> 00:12:18,710
+very little pressure here on my pen
+there are brushes in procreate that
+
+616
+00:12:18,710 --> 00:12:18,720
+there are brushes in procreate that
+ 
+
+617
+00:12:18,720 --> 00:12:21,269
+there are brushes in procreate that
+behave differently if you press hard or
+
+618
+00:12:21,269 --> 00:12:21,279
+behave differently if you press hard or
+ 
+
+619
+00:12:21,279 --> 00:12:23,509
+behave differently if you press hard or
+light on your pen and of course this
+
+620
+00:12:23,509 --> 00:12:23,519
+light on your pen and of course this
+ 
+
+621
+00:12:23,519 --> 00:12:25,509
+light on your pen and of course this
+only works if you have a pressure
+
+622
+00:12:25,509 --> 00:12:25,519
+only works if you have a pressure
+ 
+
+623
+00:12:25,519 --> 00:12:27,190
+only works if you have a pressure
+sensitive pen it doesn't work with your
+
+624
+00:12:27,190 --> 00:12:27,200
+sensitive pen it doesn't work with your
+ 
+
+625
+00:12:27,200 --> 00:12:29,509
+sensitive pen it doesn't work with your
+finger so with some brushes they become
+
+626
+00:12:29,509 --> 00:12:29,519
+finger so with some brushes they become
+ 
+
+627
+00:12:29,519 --> 00:12:32,069
+finger so with some brushes they become
+more opaque if you press harder or the
+
+628
+00:12:32,069 --> 00:12:32,079
+more opaque if you press harder or the
+ 
+
+629
+00:12:32,079 --> 00:12:34,310
+more opaque if you press harder or the
+other way around or some brushes the
+
+630
+00:12:34,310 --> 00:12:34,320
+other way around or some brushes the
+ 
+
+631
+00:12:34,320 --> 00:12:36,550
+other way around or some brushes the
+stroke becomes a thicker or bigger when
+
+632
+00:12:36,550 --> 00:12:36,560
+stroke becomes a thicker or bigger when
+ 
+
+633
+00:12:36,560 --> 00:12:39,190
+stroke becomes a thicker or bigger when
+you press harder so having a pressure
+
+634
+00:12:39,190 --> 00:12:39,200
+you press harder so having a pressure
+ 
+
+635
+00:12:39,200 --> 00:12:41,430
+you press harder so having a pressure
+sensitive pen really is worth it now
+
+636
+00:12:41,430 --> 00:12:41,440
+sensitive pen really is worth it now
+ 
+
+637
+00:12:41,440 --> 00:12:43,910
+sensitive pen really is worth it now
+what our landscape needs is a moon we
+
+638
+00:12:43,910 --> 00:12:43,920
+what our landscape needs is a moon we
+ 
+
+639
+00:12:43,920 --> 00:12:46,150
+what our landscape needs is a moon we
+are going to put it on a separate layer
+
+640
+00:12:46,150 --> 00:12:46,160
+are going to put it on a separate layer
+ 
+
+641
+00:12:46,160 --> 00:12:48,710
+are going to put it on a separate layer
+so first let's go all the way to the top
+
+642
+00:12:48,710 --> 00:12:48,720
+so first let's go all the way to the top
+ 
+
+643
+00:12:48,720 --> 00:12:51,190
+so first let's go all the way to the top
+select layer seven then tap the plus for
+
+644
+00:12:51,190 --> 00:12:51,200
+select layer seven then tap the plus for
+ 
+
+645
+00:12:51,200 --> 00:12:53,269
+select layer seven then tap the plus for
+a new layer and let's go back to the
+
+646
+00:12:53,269 --> 00:12:53,279
+a new layer and let's go back to the
+ 
+
+647
+00:12:53,279 --> 00:12:55,110
+a new layer and let's go back to the
+mono line brush
+
+648
+00:12:55,110 --> 00:12:55,120
+mono line brush
+ 
+
+649
+00:12:55,120 --> 00:12:57,110
+mono line brush
+it is under calligraphy
+
+650
+00:12:57,110 --> 00:12:57,120
+it is under calligraphy
+ 
+
+651
+00:12:57,120 --> 00:12:59,430
+it is under calligraphy
+and for the color let's grab this first
+
+652
+00:12:59,430 --> 00:12:59,440
+and for the color let's grab this first
+ 
+
+653
+00:12:59,440 --> 00:13:01,670
+and for the color let's grab this first
+color in the third row
+
+654
+00:13:01,670 --> 00:13:01,680
+color in the third row
+ 
+
+655
+00:13:01,680 --> 00:13:03,910
+color in the third row
+we are going to draw a circle which can
+
+656
+00:13:03,910 --> 00:13:03,920
+we are going to draw a circle which can
+ 
+
+657
+00:13:03,920 --> 00:13:05,990
+we are going to draw a circle which can
+be quite challenging in real life to
+
+658
+00:13:05,990 --> 00:13:06,000
+be quite challenging in real life to
+ 
+
+659
+00:13:06,000 --> 00:13:08,389
+be quite challenging in real life to
+draw a perfect circle but in procreate
+
+660
+00:13:08,389 --> 00:13:08,399
+draw a perfect circle but in procreate
+ 
+
+661
+00:13:08,399 --> 00:13:10,310
+draw a perfect circle but in procreate
+it's really easy all you have to do is
+
+662
+00:13:10,310 --> 00:13:10,320
+it's really easy all you have to do is
+ 
+
+663
+00:13:10,320 --> 00:13:13,269
+it's really easy all you have to do is
+make a shape that looks like a circle
+
+664
+00:13:13,269 --> 00:13:13,279
+make a shape that looks like a circle
+ 
+
+665
+00:13:13,279 --> 00:13:15,190
+make a shape that looks like a circle
+then hold your pen in place to make it
+
+666
+00:13:15,190 --> 00:13:15,200
+then hold your pen in place to make it
+ 
+
+667
+00:13:15,200 --> 00:13:17,430
+then hold your pen in place to make it
+snap to a quick shape here at the top
+
+668
+00:13:17,430 --> 00:13:17,440
+snap to a quick shape here at the top
+ 
+
+669
+00:13:17,440 --> 00:13:20,470
+snap to a quick shape here at the top
+you can see an ellipse is created
+
+670
+00:13:20,470 --> 00:13:20,480
+you can see an ellipse is created
+ 
+
+671
+00:13:20,480 --> 00:13:22,150
+you can see an ellipse is created
+now if you put a finger on your screen
+
+672
+00:13:22,150 --> 00:13:22,160
+now if you put a finger on your screen
+ 
+
+673
+00:13:22,160 --> 00:13:24,949
+now if you put a finger on your screen
+it'll snap to a perfectly round circle
+
+674
+00:13:24,949 --> 00:13:24,959
+it'll snap to a perfectly round circle
+ 
+
+675
+00:13:24,959 --> 00:13:27,670
+it'll snap to a perfectly round circle
+and if you let go you have your circle
+
+676
+00:13:27,670 --> 00:13:27,680
+and if you let go you have your circle
+ 
+
+677
+00:13:27,680 --> 00:13:29,750
+and if you let go you have your circle
+you can even go to edit shaper at the
+
+678
+00:13:29,750 --> 00:13:29,760
+you can even go to edit shaper at the
+ 
+
+679
+00:13:29,760 --> 00:13:30,710
+you can even go to edit shaper at the
+top
+
+680
+00:13:30,710 --> 00:13:30,720
+top
+ 
+
+681
+00:13:30,720 --> 00:13:32,949
+top
+and you can use these handles to change
+
+682
+00:13:32,949 --> 00:13:32,959
+and you can use these handles to change
+ 
+
+683
+00:13:32,959 --> 00:13:35,829
+and you can use these handles to change
+the shape this also works for triangles
+
+684
+00:13:35,829 --> 00:13:35,839
+the shape this also works for triangles
+ 
+
+685
+00:13:35,839 --> 00:13:38,710
+the shape this also works for triangles
+rectangles for lines actually so this is
+
+686
+00:13:38,710 --> 00:13:38,720
+rectangles for lines actually so this is
+ 
+
+687
+00:13:38,720 --> 00:13:40,870
+rectangles for lines actually so this is
+a super handy tool now let's fill our
+
+688
+00:13:40,870 --> 00:13:40,880
+a super handy tool now let's fill our
+ 
+
+689
+00:13:40,880 --> 00:13:43,110
+a super handy tool now let's fill our
+shape by just dragging in the color and
+
+690
+00:13:43,110 --> 00:13:43,120
+shape by just dragging in the color and
+ 
+
+691
+00:13:43,120 --> 00:13:44,949
+shape by just dragging in the color and
+if you need you can move it around by
+
+692
+00:13:44,949 --> 00:13:44,959
+if you need you can move it around by
+ 
+
+693
+00:13:44,959 --> 00:13:46,790
+if you need you can move it around by
+going to the arrow we still have
+
+694
+00:13:46,790 --> 00:13:46,800
+going to the arrow we still have
+ 
+
+695
+00:13:46,800 --> 00:13:49,030
+going to the arrow we still have
+snapping turned on so we can place it in
+
+696
+00:13:49,030 --> 00:13:49,040
+snapping turned on so we can place it in
+ 
+
+697
+00:13:49,040 --> 00:13:51,430
+snapping turned on so we can place it in
+the vertical center let's place it a
+
+698
+00:13:51,430 --> 00:13:51,440
+the vertical center let's place it a
+ 
+
+699
+00:13:51,440 --> 00:13:53,670
+the vertical center let's place it a
+little bit higher
+
+700
+00:13:53,670 --> 00:13:53,680
+little bit higher
+ 
+
+701
+00:13:53,680 --> 00:13:55,750
+little bit higher
+and if you need to resize it then make
+
+702
+00:13:55,750 --> 00:13:55,760
+and if you need to resize it then make
+ 
+
+703
+00:13:55,760 --> 00:13:58,310
+and if you need to resize it then make
+sure that you set it to uniform here if
+
+704
+00:13:58,310 --> 00:13:58,320
+sure that you set it to uniform here if
+ 
+
+705
+00:13:58,320 --> 00:14:01,189
+sure that you set it to uniform here if
+you use freeform
+
+706
+00:14:01,189 --> 00:14:01,199
+you use freeform
+ 
+
+707
+00:14:01,199 --> 00:14:03,509
+you use freeform
+and you go like this you'll get a little
+
+708
+00:14:03,509 --> 00:14:03,519
+and you go like this you'll get a little
+ 
+
+709
+00:14:03,519 --> 00:14:05,110
+and you go like this you'll get a little
+like egg shape
+
+710
+00:14:05,110 --> 00:14:05,120
+like egg shape
+ 
+
+711
+00:14:05,120 --> 00:14:06,870
+like egg shape
+that's not what you want so make sure
+
+712
+00:14:06,870 --> 00:14:06,880
+that's not what you want so make sure
+ 
+
+713
+00:14:06,880 --> 00:14:09,030
+that's not what you want so make sure
+you set it to uniform if you need to
+
+714
+00:14:09,030 --> 00:14:09,040
+you set it to uniform if you need to
+ 
+
+715
+00:14:09,040 --> 00:14:12,870
+you set it to uniform if you need to
+resize it
+
+716
+00:14:12,870 --> 00:14:12,880
+
+ 
+
+717
+00:14:12,880 --> 00:14:14,870
+
+the next thing we'll do is add a little
+
+718
+00:14:14,870 --> 00:14:14,880
+the next thing we'll do is add a little
+ 
+
+719
+00:14:14,880 --> 00:14:17,189
+the next thing we'll do is add a little
+glow to our moon let's go to the layer
+
+720
+00:14:17,189 --> 00:14:17,199
+glow to our moon let's go to the layer
+ 
+
+721
+00:14:17,199 --> 00:14:19,350
+glow to our moon let's go to the layer
+menu and duplicate our moon you can do
+
+722
+00:14:19,350 --> 00:14:19,360
+menu and duplicate our moon you can do
+ 
+
+723
+00:14:19,360 --> 00:14:21,670
+menu and duplicate our moon you can do
+that by sliding to the left
+
+724
+00:14:21,670 --> 00:14:21,680
+that by sliding to the left
+ 
+
+725
+00:14:21,680 --> 00:14:24,069
+that by sliding to the left
+and clicking duplicate this is also the
+
+726
+00:14:24,069 --> 00:14:24,079
+and clicking duplicate this is also the
+ 
+
+727
+00:14:24,079 --> 00:14:26,069
+and clicking duplicate this is also the
+area where you can either delete your
+
+728
+00:14:26,069 --> 00:14:26,079
+area where you can either delete your
+ 
+
+729
+00:14:26,079 --> 00:14:27,829
+area where you can either delete your
+layer or lock it
+
+730
+00:14:27,829 --> 00:14:27,839
+layer or lock it
+ 
+
+731
+00:14:27,839 --> 00:14:30,150
+layer or lock it
+that's handy if you have created a layer
+
+732
+00:14:30,150 --> 00:14:30,160
+that's handy if you have created a layer
+ 
+
+733
+00:14:30,160 --> 00:14:31,670
+that's handy if you have created a layer
+and you really don't want to touch it
+
+734
+00:14:31,670 --> 00:14:31,680
+and you really don't want to touch it
+ 
+
+735
+00:14:31,680 --> 00:14:32,629
+and you really don't want to touch it
+anymore
+
+736
+00:14:32,629 --> 00:14:32,639
+anymore
+ 
+
+737
+00:14:32,639 --> 00:14:34,629
+anymore
+then lock it and you won't be able to
+
+738
+00:14:34,629 --> 00:14:34,639
+then lock it and you won't be able to
+ 
+
+739
+00:14:34,639 --> 00:14:35,990
+then lock it and you won't be able to
+paint on it
+
+740
+00:14:35,990 --> 00:14:36,000
+paint on it
+ 
+
+741
+00:14:36,000 --> 00:14:37,670
+paint on it
+now let's duplicate it
+
+742
+00:14:37,670 --> 00:14:37,680
+now let's duplicate it
+ 
+
+743
+00:14:37,680 --> 00:14:39,910
+now let's duplicate it
+and go to the bottom layer and we are
+
+744
+00:14:39,910 --> 00:14:39,920
+and go to the bottom layer and we are
+ 
+
+745
+00:14:39,920 --> 00:14:42,069
+and go to the bottom layer and we are
+going to add a bloom effect you can find
+
+746
+00:14:42,069 --> 00:14:42,079
+going to add a bloom effect you can find
+ 
+
+747
+00:14:42,079 --> 00:14:43,670
+going to add a bloom effect you can find
+it under the magic wand where you can
+
+748
+00:14:43,670 --> 00:14:43,680
+it under the magic wand where you can
+ 
+
+749
+00:14:43,680 --> 00:14:46,069
+it under the magic wand where you can
+find all adjustments and it works the
+
+750
+00:14:46,069 --> 00:14:46,079
+find all adjustments and it works the
+ 
+
+751
+00:14:46,079 --> 00:14:47,990
+find all adjustments and it works the
+same as the gaussian blur so when you
+
+752
+00:14:47,990 --> 00:14:48,000
+same as the gaussian blur so when you
+ 
+
+753
+00:14:48,000 --> 00:14:49,430
+same as the gaussian blur so when you
+tap bloom
+
+754
+00:14:49,430 --> 00:14:49,440
+tap bloom
+ 
+
+755
+00:14:49,440 --> 00:14:51,509
+tap bloom
+you'll see bloom and a percentage and
+
+756
+00:14:51,509 --> 00:14:51,519
+you'll see bloom and a percentage and
+ 
+
+757
+00:14:51,519 --> 00:14:53,829
+you'll see bloom and a percentage and
+again you need to slide to the right
+
+758
+00:14:53,829 --> 00:14:53,839
+again you need to slide to the right
+ 
+
+759
+00:14:53,839 --> 00:14:55,750
+again you need to slide to the right
+with your pen or finger
+
+760
+00:14:55,750 --> 00:14:55,760
+with your pen or finger
+ 
+
+761
+00:14:55,760 --> 00:14:59,110
+with your pen or finger
+to increase the bloom and it's nice for
+
+762
+00:14:59,110 --> 00:14:59,120
+to increase the bloom and it's nice for
+ 
+
+763
+00:14:59,120 --> 00:15:01,910
+to increase the bloom and it's nice for
+adding these nice lighting effects
+
+764
+00:15:01,910 --> 00:15:01,920
+adding these nice lighting effects
+ 
+
+765
+00:15:01,920 --> 00:15:04,550
+adding these nice lighting effects
+let's increase the size
+
+766
+00:15:04,550 --> 00:15:04,560
+let's increase the size
+ 
+
+767
+00:15:04,560 --> 00:15:06,470
+let's increase the size
+just a little bit
+
+768
+00:15:06,470 --> 00:15:06,480
+just a little bit
+ 
+
+769
+00:15:06,480 --> 00:15:09,030
+just a little bit
+let's say 43
+
+770
+00:15:09,030 --> 00:15:09,040
+let's say 43
+ 
+
+771
+00:15:09,040 --> 00:15:11,030
+let's say 43
+you can also increase the burn i don't
+
+772
+00:15:11,030 --> 00:15:11,040
+you can also increase the burn i don't
+ 
+
+773
+00:15:11,040 --> 00:15:16,150
+you can also increase the burn i don't
+want it to be too burny
+
+774
+00:15:16,150 --> 00:15:16,160
+
+ 
+
+775
+00:15:16,160 --> 00:15:17,910
+
+i think it looks good like this now
+
+776
+00:15:17,910 --> 00:15:17,920
+i think it looks good like this now
+ 
+
+777
+00:15:17,920 --> 00:15:20,629
+i think it looks good like this now
+let's go to the layer menu i want to add
+
+778
+00:15:20,629 --> 00:15:20,639
+let's go to the layer menu i want to add
+ 
+
+779
+00:15:20,639 --> 00:15:22,790
+let's go to the layer menu i want to add
+some texture to our moon
+
+780
+00:15:22,790 --> 00:15:22,800
+some texture to our moon
+ 
+
+781
+00:15:22,800 --> 00:15:25,750
+some texture to our moon
+first let's tap layer 8 and when we add
+
+782
+00:15:25,750 --> 00:15:25,760
+first let's tap layer 8 and when we add
+ 
+
+783
+00:15:25,760 --> 00:15:27,590
+first let's tap layer 8 and when we add
+texture to the moon we don't want our
+
+784
+00:15:27,590 --> 00:15:27,600
+texture to the moon we don't want our
+ 
+
+785
+00:15:27,600 --> 00:15:31,110
+texture to the moon we don't want our
+texture to show up outside of our moon
+
+786
+00:15:31,110 --> 00:15:31,120
+texture to show up outside of our moon
+ 
+
+787
+00:15:31,120 --> 00:15:33,509
+texture to show up outside of our moon
+so you could go for alpha lock here but
+
+788
+00:15:33,509 --> 00:15:33,519
+so you could go for alpha lock here but
+ 
+
+789
+00:15:33,519 --> 00:15:35,590
+so you could go for alpha lock here but
+you could also create a new layer on top
+
+790
+00:15:35,590 --> 00:15:35,600
+you could also create a new layer on top
+ 
+
+791
+00:15:35,600 --> 00:15:37,430
+you could also create a new layer on top
+by tapping the plus
+
+792
+00:15:37,430 --> 00:15:37,440
+by tapping the plus
+ 
+
+793
+00:15:37,440 --> 00:15:39,829
+by tapping the plus
+tab the layer and then turn on clipping
+
+794
+00:15:39,829 --> 00:15:39,839
+tab the layer and then turn on clipping
+ 
+
+795
+00:15:39,839 --> 00:15:42,470
+tab the layer and then turn on clipping
+mask now we paint on this layer that is
+
+796
+00:15:42,470 --> 00:15:42,480
+mask now we paint on this layer that is
+ 
+
+797
+00:15:42,480 --> 00:15:44,710
+mask now we paint on this layer that is
+clipped to our moon
+
+798
+00:15:44,710 --> 00:15:44,720
+clipped to our moon
+ 
+
+799
+00:15:44,720 --> 00:15:47,030
+clipped to our moon
+whatever we paint will only show up on
+
+800
+00:15:47,030 --> 00:15:47,040
+whatever we paint will only show up on
+ 
+
+801
+00:15:47,040 --> 00:15:48,389
+whatever we paint will only show up on
+our moon
+
+802
+00:15:48,389 --> 00:15:48,399
+our moon
+ 
+
+803
+00:15:48,399 --> 00:15:51,110
+our moon
+now let's grab a brush we are going to
+
+804
+00:15:51,110 --> 00:15:51,120
+now let's grab a brush we are going to
+ 
+
+805
+00:15:51,120 --> 00:15:53,670
+now let's grab a brush we are going to
+the industrial brushes and use the
+
+806
+00:15:53,670 --> 00:15:53,680
+the industrial brushes and use the
+ 
+
+807
+00:15:53,680 --> 00:15:55,670
+the industrial brushes and use the
+rusted decay brush
+
+808
+00:15:55,670 --> 00:15:55,680
+rusted decay brush
+ 
+
+809
+00:15:55,680 --> 00:15:57,590
+rusted decay brush
+for our color we are going to use the
+
+810
+00:15:57,590 --> 00:15:57,600
+for our color we are going to use the
+ 
+
+811
+00:15:57,600 --> 00:16:00,790
+for our color we are going to use the
+second color and the third row
+
+812
+00:16:00,790 --> 00:16:00,800
+second color and the third row
+ 
+
+813
+00:16:00,800 --> 00:16:03,509
+second color and the third row
+i have the opacity set to 100
+
+814
+00:16:03,509 --> 00:16:03,519
+i have the opacity set to 100
+ 
+
+815
+00:16:03,519 --> 00:16:06,710
+i have the opacity set to 100
+and the size is set to 14
+
+816
+00:16:06,710 --> 00:16:06,720
+and the size is set to 14
+ 
+
+817
+00:16:06,720 --> 00:16:08,790
+and the size is set to 14
+and now let's just tap a few times on
+
+818
+00:16:08,790 --> 00:16:08,800
+and now let's just tap a few times on
+ 
+
+819
+00:16:08,800 --> 00:16:10,790
+and now let's just tap a few times on
+our moon
+
+820
+00:16:10,790 --> 00:16:10,800
+our moon
+ 
+
+821
+00:16:10,800 --> 00:16:13,030
+our moon
+to get some texture
+
+822
+00:16:13,030 --> 00:16:13,040
+to get some texture
+ 
+
+823
+00:16:13,040 --> 00:16:15,189
+to get some texture
+now the difference with alpha lock is
+
+824
+00:16:15,189 --> 00:16:15,199
+now the difference with alpha lock is
+ 
+
+825
+00:16:15,199 --> 00:16:17,430
+now the difference with alpha lock is
+that we still have full control over
+
+826
+00:16:17,430 --> 00:16:17,440
+that we still have full control over
+ 
+
+827
+00:16:17,440 --> 00:16:19,670
+that we still have full control over
+this texture that we have added if you
+
+828
+00:16:19,670 --> 00:16:19,680
+this texture that we have added if you
+ 
+
+829
+00:16:19,680 --> 00:16:22,310
+this texture that we have added if you
+go to the layer menu you can tap the n
+
+830
+00:16:22,310 --> 00:16:22,320
+go to the layer menu you can tap the n
+ 
+
+831
+00:16:22,320 --> 00:16:23,430
+go to the layer menu you can tap the n
+over here
+
+832
+00:16:23,430 --> 00:16:23,440
+over here
+ 
+
+833
+00:16:23,440 --> 00:16:26,310
+over here
+and you get this opacity slider
+
+834
+00:16:26,310 --> 00:16:26,320
+and you get this opacity slider
+ 
+
+835
+00:16:26,320 --> 00:16:28,629
+and you get this opacity slider
+so you can slide and make
+
+836
+00:16:28,629 --> 00:16:28,639
+so you can slide and make
+ 
+
+837
+00:16:28,639 --> 00:16:31,430
+so you can slide and make
+your texture more transparent
+
+838
+00:16:31,430 --> 00:16:31,440
+your texture more transparent
+ 
+
+839
+00:16:31,440 --> 00:16:32,629
+your texture more transparent
+let's say
+
+840
+00:16:32,629 --> 00:16:32,639
+let's say
+ 
+
+841
+00:16:32,639 --> 00:16:35,269
+let's say
+we go for 70 percent and since this is
+
+842
+00:16:35,269 --> 00:16:35,279
+we go for 70 percent and since this is
+ 
+
+843
+00:16:35,279 --> 00:16:36,870
+we go for 70 percent and since this is
+on a separate layer you can also
+
+844
+00:16:36,870 --> 00:16:36,880
+on a separate layer you can also
+ 
+
+845
+00:16:36,880 --> 00:16:39,350
+on a separate layer you can also
+manipulate that layer so if you go to
+
+846
+00:16:39,350 --> 00:16:39,360
+manipulate that layer so if you go to
+ 
+
+847
+00:16:39,360 --> 00:16:41,990
+manipulate that layer so if you go to
+the arrow tool the move tool
+
+848
+00:16:41,990 --> 00:16:42,000
+the arrow tool the move tool
+ 
+
+849
+00:16:42,000 --> 00:16:43,910
+the arrow tool the move tool
+you can rotate
+
+850
+00:16:43,910 --> 00:16:43,920
+you can rotate
+ 
+
+851
+00:16:43,920 --> 00:16:47,749
+you can rotate
+that that texture you can move it around
+
+852
+00:16:47,749 --> 00:16:47,759
+that that texture you can move it around
+ 
+
+853
+00:16:47,759 --> 00:16:48,550
+that that texture you can move it around
+so
+
+854
+00:16:48,550 --> 00:16:48,560
+so
+ 
+
+855
+00:16:48,560 --> 00:16:50,710
+so
+using clipping mask gives you a lot of
+
+856
+00:16:50,710 --> 00:16:50,720
+using clipping mask gives you a lot of
+ 
+
+857
+00:16:50,720 --> 00:16:53,590
+using clipping mask gives you a lot of
+freedom it just costs you more layers
+
+858
+00:16:53,590 --> 00:16:53,600
+freedom it just costs you more layers
+ 
+
+859
+00:16:53,600 --> 00:16:55,590
+freedom it just costs you more layers
+now let's go and add some stars and i'll
+
+860
+00:16:55,590 --> 00:16:55,600
+now let's go and add some stars and i'll
+ 
+
+861
+00:16:55,600 --> 00:16:57,509
+now let's go and add some stars and i'll
+tell you about how you can manipulate
+
+862
+00:16:57,509 --> 00:16:57,519
+tell you about how you can manipulate
+ 
+
+863
+00:16:57,519 --> 00:16:59,910
+tell you about how you can manipulate
+brushes let's go to layer one where we
+
+864
+00:16:59,910 --> 00:16:59,920
+brushes let's go to layer one where we
+ 
+
+865
+00:16:59,920 --> 00:17:02,310
+brushes let's go to layer one where we
+have that gradient that we have created
+
+866
+00:17:02,310 --> 00:17:02,320
+have that gradient that we have created
+ 
+
+867
+00:17:02,320 --> 00:17:04,630
+have that gradient that we have created
+then let's go to the brush menu and go
+
+868
+00:17:04,630 --> 00:17:04,640
+then let's go to the brush menu and go
+ 
+
+869
+00:17:04,640 --> 00:17:06,630
+then let's go to the brush menu and go
+to the luminance brushes
+
+870
+00:17:06,630 --> 00:17:06,640
+to the luminance brushes
+ 
+
+871
+00:17:06,640 --> 00:17:08,949
+to the luminance brushes
+then select the glimmer brush if you tap
+
+872
+00:17:08,949 --> 00:17:08,959
+then select the glimmer brush if you tap
+ 
+
+873
+00:17:08,959 --> 00:17:09,909
+then select the glimmer brush if you tap
+it again
+
+874
+00:17:09,909 --> 00:17:09,919
+it again
+ 
+
+875
+00:17:09,919 --> 00:17:12,549
+it again
+it'll open the brush studio and here you
+
+876
+00:17:12,549 --> 00:17:12,559
+it'll open the brush studio and here you
+ 
+
+877
+00:17:12,559 --> 00:17:15,189
+it'll open the brush studio and here you
+can see a lot of options all the stuff
+
+878
+00:17:15,189 --> 00:17:15,199
+can see a lot of options all the stuff
+ 
+
+879
+00:17:15,199 --> 00:17:17,029
+can see a lot of options all the stuff
+you can adjust
+
+880
+00:17:17,029 --> 00:17:17,039
+you can adjust
+ 
+
+881
+00:17:17,039 --> 00:17:18,470
+you can adjust
+in your brush
+
+882
+00:17:18,470 --> 00:17:18,480
+in your brush
+ 
+
+883
+00:17:18,480 --> 00:17:20,870
+in your brush
+we are going to stroke path
+
+884
+00:17:20,870 --> 00:17:20,880
+we are going to stroke path
+ 
+
+885
+00:17:20,880 --> 00:17:23,029
+we are going to stroke path
+and we are going to turn up the spacing
+
+886
+00:17:23,029 --> 00:17:23,039
+and we are going to turn up the spacing
+ 
+
+887
+00:17:23,039 --> 00:17:24,150
+and we are going to turn up the spacing
+of our brush
+
+888
+00:17:24,150 --> 00:17:24,160
+of our brush
+ 
+
+889
+00:17:24,160 --> 00:17:27,909
+of our brush
+so our stars will be a lot further apart
+
+890
+00:17:27,909 --> 00:17:27,919
+so our stars will be a lot further apart
+ 
+
+891
+00:17:27,919 --> 00:17:30,950
+so our stars will be a lot further apart
+we'll also go to shape
+
+892
+00:17:30,950 --> 00:17:30,960
+we'll also go to shape
+ 
+
+893
+00:17:30,960 --> 00:17:34,390
+we'll also go to shape
+and turn up the scatter
+
+894
+00:17:34,390 --> 00:17:34,400
+and turn up the scatter
+ 
+
+895
+00:17:34,400 --> 00:17:37,350
+and turn up the scatter
+how they are all rotated a bit and
+
+896
+00:17:37,350 --> 00:17:37,360
+how they are all rotated a bit and
+ 
+
+897
+00:17:37,360 --> 00:17:39,510
+how they are all rotated a bit and
+there's more diversity even though it's
+
+898
+00:17:39,510 --> 00:17:39,520
+there's more diversity even though it's
+ 
+
+899
+00:17:39,520 --> 00:17:41,270
+there's more diversity even though it's
+hard to see
+
+900
+00:17:41,270 --> 00:17:41,280
+hard to see
+ 
+
+901
+00:17:41,280 --> 00:17:43,510
+hard to see
+you can also change the color dynamics
+
+902
+00:17:43,510 --> 00:17:43,520
+you can also change the color dynamics
+ 
+
+903
+00:17:43,520 --> 00:17:45,990
+you can also change the color dynamics
+for example here you can see that the
+
+904
+00:17:45,990 --> 00:17:46,000
+for example here you can see that the
+ 
+
+905
+00:17:46,000 --> 00:17:48,549
+for example here you can see that the
+hue saturation and lightness
+
+906
+00:17:48,549 --> 00:17:48,559
+hue saturation and lightness
+ 
+
+907
+00:17:48,559 --> 00:17:50,549
+hue saturation and lightness
+they all vary a little bit when you make
+
+908
+00:17:50,549 --> 00:17:50,559
+they all vary a little bit when you make
+ 
+
+909
+00:17:50,559 --> 00:17:52,630
+they all vary a little bit when you make
+a stroke if you don't like that then you
+
+910
+00:17:52,630 --> 00:17:52,640
+a stroke if you don't like that then you
+ 
+
+911
+00:17:52,640 --> 00:17:54,789
+a stroke if you don't like that then you
+can turn it off here or if you want more
+
+912
+00:17:54,789 --> 00:17:54,799
+can turn it off here or if you want more
+ 
+
+913
+00:17:54,799 --> 00:17:57,029
+can turn it off here or if you want more
+color variation then you can turn it up
+
+914
+00:17:57,029 --> 00:17:57,039
+color variation then you can turn it up
+ 
+
+915
+00:17:57,039 --> 00:17:58,310
+color variation then you can turn it up
+of course
+
+916
+00:17:58,310 --> 00:17:58,320
+of course
+ 
+
+917
+00:17:58,320 --> 00:18:01,110
+of course
+now let's tap done so we are ready to
+
+918
+00:18:01,110 --> 00:18:01,120
+now let's tap done so we are ready to
+ 
+
+919
+00:18:01,120 --> 00:18:03,110
+now let's tap done so we are ready to
+add some stars for the color we are
+
+920
+00:18:03,110 --> 00:18:03,120
+add some stars for the color we are
+ 
+
+921
+00:18:03,120 --> 00:18:05,350
+add some stars for the color we are
+going to use this blue that third color
+
+922
+00:18:05,350 --> 00:18:05,360
+going to use this blue that third color
+ 
+
+923
+00:18:05,360 --> 00:18:07,830
+going to use this blue that third color
+in the third row
+
+924
+00:18:07,830 --> 00:18:07,840
+in the third row
+ 
+
+925
+00:18:07,840 --> 00:18:10,150
+in the third row
+the opacity is set to max
+
+926
+00:18:10,150 --> 00:18:10,160
+the opacity is set to max
+ 
+
+927
+00:18:10,160 --> 00:18:13,510
+the opacity is set to max
+and let's set the size to
+
+928
+00:18:13,510 --> 00:18:13,520
+and let's set the size to
+ 
+
+929
+00:18:13,520 --> 00:18:15,350
+and let's set the size to
+18
+
+930
+00:18:15,350 --> 00:18:15,360
+18
+ 
+
+931
+00:18:15,360 --> 00:18:17,110
+18
+and now with this brush the harder you
+
+932
+00:18:17,110 --> 00:18:17,120
+and now with this brush the harder you
+ 
+
+933
+00:18:17,120 --> 00:18:19,750
+and now with this brush the harder you
+press the more stars the brightest stars
+
+934
+00:18:19,750 --> 00:18:19,760
+press the more stars the brightest stars
+ 
+
+935
+00:18:19,760 --> 00:18:20,630
+press the more stars the brightest stars
+you get
+
+936
+00:18:20,630 --> 00:18:20,640
+you get
+ 
+
+937
+00:18:20,640 --> 00:18:23,270
+you get
+your if i press lightly
+
+938
+00:18:23,270 --> 00:18:23,280
+your if i press lightly
+ 
+
+939
+00:18:23,280 --> 00:18:26,070
+your if i press lightly
+or harder they will become bigger
+
+940
+00:18:26,070 --> 00:18:26,080
+or harder they will become bigger
+ 
+
+941
+00:18:26,080 --> 00:18:28,630
+or harder they will become bigger
+and also brighter so if you have a
+
+942
+00:18:28,630 --> 00:18:28,640
+and also brighter so if you have a
+ 
+
+943
+00:18:28,640 --> 00:18:30,310
+and also brighter so if you have a
+pressure sensitive pen
+
+944
+00:18:30,310 --> 00:18:30,320
+pressure sensitive pen
+ 
+
+945
+00:18:30,320 --> 00:18:32,870
+pressure sensitive pen
+keep that in mind
+
+946
+00:18:32,870 --> 00:18:32,880
+keep that in mind
+ 
+
+947
+00:18:32,880 --> 00:18:35,990
+keep that in mind
+and vary your strokes
+
+948
+00:18:35,990 --> 00:18:36,000
+and vary your strokes
+ 
+
+949
+00:18:36,000 --> 00:18:39,110
+and vary your strokes
+so try to press harder in some areas
+
+950
+00:18:39,110 --> 00:18:39,120
+so try to press harder in some areas
+ 
+
+951
+00:18:39,120 --> 00:18:41,510
+so try to press harder in some areas
+and a bit lighter in others
+
+952
+00:18:41,510 --> 00:18:41,520
+and a bit lighter in others
+ 
+
+953
+00:18:41,520 --> 00:18:46,230
+and a bit lighter in others
+to get a nice variation of stars
+
+954
+00:18:46,230 --> 00:18:46,240
+
+ 
+
+955
+00:18:46,240 --> 00:18:48,950
+
+and add more stars to the top area and
+
+956
+00:18:48,950 --> 00:18:48,960
+and add more stars to the top area and
+ 
+
+957
+00:18:48,960 --> 00:18:50,950
+and add more stars to the top area and
+less to the lower area because it's
+
+958
+00:18:50,950 --> 00:18:50,960
+less to the lower area because it's
+ 
+
+959
+00:18:50,960 --> 00:18:52,390
+less to the lower area because it's
+lighter there
+
+960
+00:18:52,390 --> 00:18:52,400
+lighter there
+ 
+
+961
+00:18:52,400 --> 00:18:54,549
+lighter there
+so you wouldn't be able to see that many
+
+962
+00:18:54,549 --> 00:18:54,559
+so you wouldn't be able to see that many
+ 
+
+963
+00:18:54,559 --> 00:18:59,350
+so you wouldn't be able to see that many
+stars there
+
+964
+00:18:59,350 --> 00:18:59,360
+
+ 
+
+965
+00:18:59,360 --> 00:19:01,830
+
+now finally let's add some shooting
+
+966
+00:19:01,830 --> 00:19:01,840
+now finally let's add some shooting
+ 
+
+967
+00:19:01,840 --> 00:19:03,430
+now finally let's add some shooting
+stars as well
+
+968
+00:19:03,430 --> 00:19:03,440
+stars as well
+ 
+
+969
+00:19:03,440 --> 00:19:05,110
+stars as well
+we will create a new layer for that
+
+970
+00:19:05,110 --> 00:19:05,120
+we will create a new layer for that
+ 
+
+971
+00:19:05,120 --> 00:19:07,909
+we will create a new layer for that
+again so tap the plus for a new layer
+
+972
+00:19:07,909 --> 00:19:07,919
+again so tap the plus for a new layer
+ 
+
+973
+00:19:07,919 --> 00:19:09,750
+again so tap the plus for a new layer
+and for our brush we are going to use
+
+974
+00:19:09,750 --> 00:19:09,760
+and for our brush we are going to use
+ 
+
+975
+00:19:09,760 --> 00:19:11,909
+and for our brush we are going to use
+the light brush
+
+976
+00:19:11,909 --> 00:19:11,919
+the light brush
+ 
+
+977
+00:19:11,919 --> 00:19:13,669
+the light brush
+keep it set to that blue
+
+978
+00:19:13,669 --> 00:19:13,679
+keep it set to that blue
+ 
+
+979
+00:19:13,679 --> 00:19:16,310
+keep it set to that blue
+opacity to a hundred percent
+
+980
+00:19:16,310 --> 00:19:16,320
+opacity to a hundred percent
+ 
+
+981
+00:19:16,320 --> 00:19:19,909
+opacity to a hundred percent
+and the size at five
+
+982
+00:19:19,909 --> 00:19:19,919
+
+ 
+
+983
+00:19:19,919 --> 00:19:24,310
+
+now let's add a little bright dot over
+
+984
+00:19:24,310 --> 00:19:24,320
+now let's add a little bright dot over
+ 
+
+985
+00:19:24,320 --> 00:19:25,270
+now let's add a little bright dot over
+here
+
+986
+00:19:25,270 --> 00:19:25,280
+here
+ 
+
+987
+00:19:25,280 --> 00:19:27,510
+here
+and another one
+
+988
+00:19:27,510 --> 00:19:27,520
+and another one
+ 
+
+989
+00:19:27,520 --> 00:19:29,190
+and another one
+over here
+
+990
+00:19:29,190 --> 00:19:29,200
+over here
+ 
+
+991
+00:19:29,200 --> 00:19:31,270
+over here
+these will be our shooting stars now to
+
+992
+00:19:31,270 --> 00:19:31,280
+these will be our shooting stars now to
+ 
+
+993
+00:19:31,280 --> 00:19:32,470
+these will be our shooting stars now to
+give them
+
+994
+00:19:32,470 --> 00:19:32,480
+give them
+ 
+
+995
+00:19:32,480 --> 00:19:34,310
+give them
+a nice tail we are going to use the
+
+996
+00:19:34,310 --> 00:19:34,320
+a nice tail we are going to use the
+ 
+
+997
+00:19:34,320 --> 00:19:35,909
+a nice tail we are going to use the
+smudge tool and you can see this much
+
+998
+00:19:35,909 --> 00:19:35,919
+smudge tool and you can see this much
+ 
+
+999
+00:19:35,919 --> 00:19:37,590
+smudge tool and you can see this much
+tool here at the top it's the little
+
+1000
+00:19:37,590 --> 00:19:37,600
+tool here at the top it's the little
+ 
+
+1001
+00:19:37,600 --> 00:19:40,789
+tool here at the top it's the little
+finger right next to the eraser
+
+1002
+00:19:40,789 --> 00:19:40,799
+finger right next to the eraser
+ 
+
+1003
+00:19:40,799 --> 00:19:42,710
+finger right next to the eraser
+and if you tap it
+
+1004
+00:19:42,710 --> 00:19:42,720
+and if you tap it
+ 
+
+1005
+00:19:42,720 --> 00:19:44,470
+and if you tap it
+and check it you can see that you can
+
+1006
+00:19:44,470 --> 00:19:44,480
+and check it you can see that you can
+ 
+
+1007
+00:19:44,480 --> 00:19:47,270
+and check it you can see that you can
+use any type of brush as a smudge tool
+
+1008
+00:19:47,270 --> 00:19:47,280
+use any type of brush as a smudge tool
+ 
+
+1009
+00:19:47,280 --> 00:19:49,350
+use any type of brush as a smudge tool
+and we are going to use the light brush
+
+1010
+00:19:49,350 --> 00:19:49,360
+and we are going to use the light brush
+ 
+
+1011
+00:19:49,360 --> 00:19:51,350
+and we are going to use the light brush
+that we also use to create these little
+
+1012
+00:19:51,350 --> 00:19:51,360
+that we also use to create these little
+ 
+
+1013
+00:19:51,360 --> 00:19:52,950
+that we also use to create these little
+stars
+
+1014
+00:19:52,950 --> 00:19:52,960
+stars
+ 
+
+1015
+00:19:52,960 --> 00:19:55,270
+stars
+i have the opacity set to a hundred
+
+1016
+00:19:55,270 --> 00:19:55,280
+i have the opacity set to a hundred
+ 
+
+1017
+00:19:55,280 --> 00:19:59,830
+i have the opacity set to a hundred
+percent and the size is at nine percent
+
+1018
+00:19:59,830 --> 00:19:59,840
+percent and the size is at nine percent
+ 
+
+1019
+00:19:59,840 --> 00:20:03,510
+percent and the size is at nine percent
+and i'll just gently stroke outward
+
+1020
+00:20:03,510 --> 00:20:03,520
+and i'll just gently stroke outward
+ 
+
+1021
+00:20:03,520 --> 00:20:06,789
+and i'll just gently stroke outward
+and drag that color to create this
+
+1022
+00:20:06,789 --> 00:20:06,799
+and drag that color to create this
+ 
+
+1023
+00:20:06,799 --> 00:20:10,230
+and drag that color to create this
+little tail
+
+1024
+00:20:10,230 --> 00:20:10,240
+
+ 
+
+1025
+00:20:10,240 --> 00:20:12,070
+
+make sure they both go in the same
+
+1026
+00:20:12,070 --> 00:20:12,080
+make sure they both go in the same
+ 
+
+1027
+00:20:12,080 --> 00:20:19,029
+make sure they both go in the same
+direction
+
+1028
+00:20:19,029 --> 00:20:19,039
+
+ 
+
+1029
+00:20:19,039 --> 00:20:21,350
+
+and there you have two nice shooting
+
+1030
+00:20:21,350 --> 00:20:21,360
+and there you have two nice shooting
+ 
+
+1031
+00:20:21,360 --> 00:20:22,390
+and there you have two nice shooting
+stars
+
+1032
+00:20:22,390 --> 00:20:22,400
+stars
+ 
+
+1033
+00:20:22,400 --> 00:20:23,750
+stars
+if you feel they are a little bit too
+
+1034
+00:20:23,750 --> 00:20:23,760
+if you feel they are a little bit too
+ 
+
+1035
+00:20:23,760 --> 00:20:25,590
+if you feel they are a little bit too
+bright then you can just go to the layer
+
+1036
+00:20:25,590 --> 00:20:25,600
+bright then you can just go to the layer
+ 
+
+1037
+00:20:25,600 --> 00:20:28,149
+bright then you can just go to the layer
+menu tap the little end again
+
+1038
+00:20:28,149 --> 00:20:28,159
+menu tap the little end again
+ 
+
+1039
+00:20:28,159 --> 00:20:30,310
+menu tap the little end again
+and lower the opacity of course you'll
+
+1040
+00:20:30,310 --> 00:20:30,320
+and lower the opacity of course you'll
+ 
+
+1041
+00:20:30,320 --> 00:20:31,990
+and lower the opacity of course you'll
+need to see them
+
+1042
+00:20:31,990 --> 00:20:32,000
+need to see them
+ 
+
+1043
+00:20:32,000 --> 00:20:35,510
+need to see them
+so drag your canvas around
+
+1044
+00:20:35,510 --> 00:20:35,520
+so drag your canvas around
+ 
+
+1045
+00:20:35,520 --> 00:20:37,430
+so drag your canvas around
+and you can make them a little bit less
+
+1046
+00:20:37,430 --> 00:20:37,440
+and you can make them a little bit less
+ 
+
+1047
+00:20:37,440 --> 00:20:38,789
+and you can make them a little bit less
+bright
+
+1048
+00:20:38,789 --> 00:20:38,799
+bright
+ 
+
+1049
+00:20:38,799 --> 00:20:43,590
+bright
+for instance 90
+
+1050
+00:20:43,590 --> 00:20:43,600
+
+ 
+
+1051
+00:20:43,600 --> 00:20:45,669
+
+now if you want to view your artwork
+
+1052
+00:20:45,669 --> 00:20:45,679
+now if you want to view your artwork
+ 
+
+1053
+00:20:45,679 --> 00:20:47,830
+now if you want to view your artwork
+without all the menus visible then you
+
+1054
+00:20:47,830 --> 00:20:47,840
+without all the menus visible then you
+ 
+
+1055
+00:20:47,840 --> 00:20:50,070
+without all the menus visible then you
+can just tap four fingers on the screen
+
+1056
+00:20:50,070 --> 00:20:50,080
+can just tap four fingers on the screen
+ 
+
+1057
+00:20:50,080 --> 00:20:50,870
+can just tap four fingers on the screen
+to
+
+1058
+00:20:50,870 --> 00:20:50,880
+to
+ 
+
+1059
+00:20:50,880 --> 00:20:53,310
+to
+admire what you have just created
+
+1060
+00:20:53,310 --> 00:20:53,320
+admire what you have just created
+ 
+
+1061
+00:20:53,320 --> 00:20:55,990
+admire what you have just created
+congratulations on what's possibly your
+
+1062
+00:20:55,990 --> 00:20:56,000
+congratulations on what's possibly your
+ 
+
+1063
+00:20:56,000 --> 00:20:58,070
+congratulations on what's possibly your
+first work in procreate let me know in
+
+1064
+00:20:58,070 --> 00:20:58,080
+first work in procreate let me know in
+ 
+
+1065
+00:20:58,080 --> 00:21:00,710
+first work in procreate let me know in
+the comments if this is now finally we
+
+1066
+00:21:00,710 --> 00:21:00,720
+the comments if this is now finally we
+ 
+
+1067
+00:21:00,720 --> 00:21:03,430
+the comments if this is now finally we
+just want to export our artwork to show
+
+1068
+00:21:03,430 --> 00:21:03,440
+just want to export our artwork to show
+ 
+
+1069
+00:21:03,440 --> 00:21:05,430
+just want to export our artwork to show
+it to the world of course but before we
+
+1070
+00:21:05,430 --> 00:21:05,440
+it to the world of course but before we
+ 
+
+1071
+00:21:05,440 --> 00:21:07,909
+it to the world of course but before we
+do that don't forget to hit that thumbs
+
+1072
+00:21:07,909 --> 00:21:07,919
+do that don't forget to hit that thumbs
+ 
+
+1073
+00:21:07,919 --> 00:21:10,149
+do that don't forget to hit that thumbs
+up if you have enjoyed this video
+
+1074
+00:21:10,149 --> 00:21:10,159
+up if you have enjoyed this video
+ 
+
+1075
+00:21:10,159 --> 00:21:12,390
+up if you have enjoyed this video
+subscribe if you want to see more and
+
+1076
+00:21:12,390 --> 00:21:12,400
+subscribe if you want to see more and
+ 
+
+1077
+00:21:12,400 --> 00:21:14,870
+subscribe if you want to see more and
+that's not just for future videos
+
+1078
+00:21:14,870 --> 00:21:14,880
+that's not just for future videos
+ 
+
+1079
+00:21:14,880 --> 00:21:17,110
+that's not just for future videos
+because if you want more i actually have
+
+1080
+00:21:17,110 --> 00:21:17,120
+because if you want more i actually have
+ 
+
+1081
+00:21:17,120 --> 00:21:19,350
+because if you want more i actually have
+over a hundred you can draw this video
+
+1082
+00:21:19,350 --> 00:21:19,360
+over a hundred you can draw this video
+ 
+
+1083
+00:21:19,360 --> 00:21:21,990
+over a hundred you can draw this video
+tutorials in which i always take you
+
+1084
+00:21:21,990 --> 00:21:22,000
+tutorials in which i always take you
+ 
+
+1085
+00:21:22,000 --> 00:21:23,990
+tutorials in which i always take you
+through all the steps and once you're
+
+1086
+00:21:23,990 --> 00:21:24,000
+through all the steps and once you're
+ 
+
+1087
+00:21:24,000 --> 00:21:25,830
+through all the steps and once you're
+done with those you can come and join
+
+1088
+00:21:25,830 --> 00:21:25,840
+done with those you can come and join
+ 
+
+1089
+00:21:25,840 --> 00:21:28,470
+done with those you can come and join
+the community at patreon and follow even
+
+1090
+00:21:28,470 --> 00:21:28,480
+the community at patreon and follow even
+ 
+
+1091
+00:21:28,480 --> 00:21:30,549
+the community at patreon and follow even
+more procreate tutorials so there's
+
+1092
+00:21:30,549 --> 00:21:30,559
+more procreate tutorials so there's
+ 
+
+1093
+00:21:30,559 --> 00:21:33,430
+more procreate tutorials so there's
+still a lot to do but now let's export
+
+1094
+00:21:33,430 --> 00:21:33,440
+still a lot to do but now let's export
+ 
+
+1095
+00:21:33,440 --> 00:21:35,350
+still a lot to do but now let's export
+our work just tap with four fingers
+
+1096
+00:21:35,350 --> 00:21:35,360
+our work just tap with four fingers
+ 
+
+1097
+00:21:35,360 --> 00:21:37,669
+our work just tap with four fingers
+again so you can go to the menu if you
+
+1098
+00:21:37,669 --> 00:21:37,679
+again so you can go to the menu if you
+ 
+
+1099
+00:21:37,679 --> 00:21:39,990
+again so you can go to the menu if you
+want to export your work you can go to
+
+1100
+00:21:39,990 --> 00:21:40,000
+want to export your work you can go to
+ 
+
+1101
+00:21:40,000 --> 00:21:42,549
+want to export your work you can go to
+the wrench then to share
+
+1102
+00:21:42,549 --> 00:21:42,559
+the wrench then to share
+ 
+
+1103
+00:21:42,559 --> 00:21:44,789
+the wrench then to share
+and here you can pick how you want to
+
+1104
+00:21:44,789 --> 00:21:44,799
+and here you can pick how you want to
+ 
+
+1105
+00:21:44,799 --> 00:21:46,230
+and here you can pick how you want to
+share your work
+
+1106
+00:21:46,230 --> 00:21:46,240
+share your work
+ 
+
+1107
+00:21:46,240 --> 00:21:48,789
+share your work
+whenever i share a work i usually share
+
+1108
+00:21:48,789 --> 00:21:48,799
+whenever i share a work i usually share
+ 
+
+1109
+00:21:48,799 --> 00:21:52,470
+whenever i share a work i usually share
+it as a jpg so you can tab jpeg
+
+1110
+00:21:52,470 --> 00:21:52,480
+it as a jpg so you can tab jpeg
+ 
+
+1111
+00:21:52,480 --> 00:21:54,390
+it as a jpg so you can tab jpeg
+and then you can decide how you want to
+
+1112
+00:21:54,390 --> 00:21:54,400
+and then you can decide how you want to
+ 
+
+1113
+00:21:54,400 --> 00:21:57,350
+and then you can decide how you want to
+share it what i usually do is save it to
+
+1114
+00:21:57,350 --> 00:21:57,360
+share it what i usually do is save it to
+ 
+
+1115
+00:21:57,360 --> 00:21:59,029
+share it what i usually do is save it to
+my google drive
+
+1116
+00:21:59,029 --> 00:21:59,039
+my google drive
+ 
+
+1117
+00:21:59,039 --> 00:22:01,830
+my google drive
+or if i want to send it to someone i i
+
+1118
+00:22:01,830 --> 00:22:01,840
+or if i want to send it to someone i i
+ 
+
+1119
+00:22:01,840 --> 00:22:03,830
+or if i want to send it to someone i i
+just pick gmail and send it through
+
+1120
+00:22:03,830 --> 00:22:03,840
+just pick gmail and send it through
+ 
+
+1121
+00:22:03,840 --> 00:22:06,470
+just pick gmail and send it through
+email but of course you can also just
+
+1122
+00:22:06,470 --> 00:22:06,480
+email but of course you can also just
+ 
+
+1123
+00:22:06,480 --> 00:22:08,870
+email but of course you can also just
+save your image on your device it'll be
+
+1124
+00:22:08,870 --> 00:22:08,880
+save your image on your device it'll be
+ 
+
+1125
+00:22:08,880 --> 00:22:11,590
+save your image on your device it'll be
+on your ipad in your image gallery ready
+
+1126
+00:22:11,590 --> 00:22:11,600
+on your ipad in your image gallery ready
+ 
+
+1127
+00:22:11,600 --> 00:22:17,990
+on your ipad in your image gallery ready
+to do with it whatever you please
+
+1128
+00:22:17,990 --> 00:22:18,000
+
+ 
+
+1129
+00:22:18,000 --> 00:22:19,710
+
+now this is it you have done it
+
+1130
+00:22:19,710 --> 00:22:19,720
+now this is it you have done it
+ 
+
+1131
+00:22:19,720 --> 00:22:22,230
+now this is it you have done it
+congratulations i hope you have enjoyed
+
+1132
+00:22:22,230 --> 00:22:22,240
+congratulations i hope you have enjoyed
+ 
+
+1133
+00:22:22,240 --> 00:22:24,149
+congratulations i hope you have enjoyed
+following this tutorial and i'm hoping
+
+1134
+00:22:24,149 --> 00:22:24,159
+following this tutorial and i'm hoping
+ 
+
+1135
+00:22:24,159 --> 00:22:25,750
+following this tutorial and i'm hoping
+to see you next time for the next
+
+1136
+00:22:25,750 --> 00:22:25,760
+to see you next time for the next
+ 
+
+1137
+00:22:25,760 --> 00:22:28,760
+to see you next time for the next
+tutorial
+

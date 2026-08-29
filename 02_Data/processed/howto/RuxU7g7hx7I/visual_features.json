@@ -1,0 +1,19 @@
+{
+  "thumbnail": {
+    "cct": 2526.2469616808294,
+    "brightness": 196.8402387152778,
+    "saturation": 94.47198567708334,
+    "contrast": 73.62711846269755,
+    "has_face": false,
+    "face_count": 0,
+    "max_face_area_ratio": 0.0,
+    "face_centrality": null
+  },
+  "frames_mean_cct": 2948.6535577138466,
+  "frames_std_cct": 426.77501579798866,
+  "frames_mean_brightness": 199.22730237268516,
+  "frames_mean_saturation": 72.35925366512346,
+  "frames_mean_contrast": 46.89580285112357,
+  "frames_has_face_ratio": 0.05,
+  "frames_mean_max_face_area_ratio": 0.00028125
+}

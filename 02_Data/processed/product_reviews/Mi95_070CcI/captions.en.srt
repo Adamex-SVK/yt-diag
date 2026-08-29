@@ -1,0 +1,525 @@
+1
+00:00:00,320 --> 00:00:02,470
+
+hey what is up guys
+
+2
+00:00:02,470 --> 00:00:02,480
+hey what is up guys
+ 
+
+3
+00:00:02,480 --> 00:00:06,230
+hey what is up guys
+i just wanted to do a very quick review
+
+4
+00:00:06,230 --> 00:00:06,240
+i just wanted to do a very quick review
+ 
+
+5
+00:00:06,240 --> 00:00:08,710
+i just wanted to do a very quick review
+of the
+
+6
+00:00:08,710 --> 00:00:08,720
+of the
+ 
+
+7
+00:00:08,720 --> 00:00:10,230
+of the
+feiyutech
+
+8
+00:00:10,230 --> 00:00:10,240
+feiyutech
+ 
+
+9
+00:00:10,240 --> 00:00:12,470
+feiyutech
+uh squirt focus
+
+10
+00:00:12,470 --> 00:00:12,480
+uh squirt focus
+ 
+
+11
+00:00:12,480 --> 00:00:14,230
+uh squirt focus
+motor
+
+12
+00:00:14,230 --> 00:00:14,240
+motor
+ 
+
+13
+00:00:14,240 --> 00:00:17,029
+motor
+uh it can either focus or it can zoom in
+
+14
+00:00:17,029 --> 00:00:17,039
+uh it can either focus or it can zoom in
+ 
+
+15
+00:00:17,039 --> 00:00:19,269
+uh it can either focus or it can zoom in
+zoom out for you i don't know if you
+
+16
+00:00:19,269 --> 00:00:19,279
+zoom out for you i don't know if you
+ 
+
+17
+00:00:19,279 --> 00:00:22,630
+zoom out for you i don't know if you
+guys can see that or not
+
+18
+00:00:22,630 --> 00:00:22,640
+
+ 
+
+19
+00:00:22,640 --> 00:00:23,670
+
+um
+
+20
+00:00:23,670 --> 00:00:23,680
+um
+ 
+
+21
+00:00:23,680 --> 00:00:27,830
+um
+but yeah it's it's pretty badass
+
+22
+00:00:27,830 --> 00:00:27,840
+but yeah it's it's pretty badass
+ 
+
+23
+00:00:27,840 --> 00:00:28,710
+but yeah it's it's pretty badass
+so
+
+24
+00:00:28,710 --> 00:00:28,720
+so
+ 
+
+25
+00:00:28,720 --> 00:00:32,630
+so
+what happens is
+
+26
+00:00:32,630 --> 00:00:32,640
+
+ 
+
+27
+00:00:32,640 --> 00:00:34,950
+
+you put
+
+28
+00:00:34,950 --> 00:00:34,960
+you put
+ 
+
+29
+00:00:34,960 --> 00:00:38,869
+you put
+this rubber gear
+
+30
+00:00:38,869 --> 00:00:38,879
+
+ 
+
+31
+00:00:38,879 --> 00:00:42,069
+
+around either your focus or your zoom i
+
+32
+00:00:42,069 --> 00:00:42,079
+around either your focus or your zoom i
+ 
+
+33
+00:00:42,079 --> 00:00:45,270
+around either your focus or your zoom i
+chose zoom
+
+34
+00:00:45,270 --> 00:00:45,280
+chose zoom
+ 
+
+35
+00:00:45,280 --> 00:00:49,190
+chose zoom
+and then it has a brushless motor
+
+36
+00:00:49,190 --> 00:00:49,200
+and then it has a brushless motor
+ 
+
+37
+00:00:49,200 --> 00:00:52,229
+and then it has a brushless motor
+that attaches to that
+
+38
+00:00:52,229 --> 00:00:52,239
+that attaches to that
+ 
+
+39
+00:00:52,239 --> 00:00:54,229
+that attaches to that
+and via some
+
+40
+00:00:54,229 --> 00:00:54,239
+and via some
+ 
+
+41
+00:00:54,239 --> 00:00:55,670
+and via some
+linkage
+
+42
+00:00:55,670 --> 00:00:55,680
+linkage
+ 
+
+43
+00:00:55,680 --> 00:00:59,189
+linkage
+uh from right here
+
+44
+00:00:59,189 --> 00:00:59,199
+uh from right here
+ 
+
+45
+00:00:59,199 --> 00:01:01,110
+uh from right here
+down to
+
+46
+00:01:01,110 --> 00:01:01,120
+down to
+ 
+
+47
+00:01:01,120 --> 00:01:02,950
+down to
+the front
+
+48
+00:01:02,950 --> 00:01:02,960
+the front
+ 
+
+49
+00:01:02,960 --> 00:01:06,310
+the front
+of the scorpc
+
+50
+00:01:06,310 --> 00:01:06,320
+
+ 
+
+51
+00:01:06,320 --> 00:01:10,550
+
+it's able to control your zoom for you
+
+52
+00:01:10,550 --> 00:01:10,560
+it's able to control your zoom for you
+ 
+
+53
+00:01:10,560 --> 00:01:15,910
+it's able to control your zoom for you
+and here i will show you that let me um
+
+54
+00:01:15,910 --> 00:01:15,920
+
+ 
+
+55
+00:01:15,920 --> 00:01:21,870
+
+just power on
+
+56
+00:01:21,870 --> 00:01:21,880
+
+ 
+
+57
+00:01:21,880 --> 00:01:35,270
+
+[Music]
+
+58
+00:01:35,270 --> 00:01:35,280
+
+ 
+
+59
+00:01:35,280 --> 00:01:38,390
+
+and via
+
+60
+00:01:38,390 --> 00:01:38,400
+
+ 
+
+61
+00:01:38,400 --> 00:01:41,030
+
+this uh twisty knob
+
+62
+00:01:41,030 --> 00:01:41,040
+this uh twisty knob
+ 
+
+63
+00:01:41,040 --> 00:01:44,149
+this uh twisty knob
+i don't know what it's called exactly
+
+64
+00:01:44,149 --> 00:01:44,159
+i don't know what it's called exactly
+ 
+
+65
+00:01:44,159 --> 00:01:47,670
+i don't know what it's called exactly
+but we can control
+
+66
+00:01:47,670 --> 00:01:47,680
+
+ 
+
+67
+00:01:47,680 --> 00:01:56,069
+
+the zoom
+
+68
+00:01:56,069 --> 00:01:56,079
+
+ 
+
+69
+00:01:56,079 --> 00:01:59,429
+
+i think it's pretty awesome
+
+70
+00:01:59,429 --> 00:01:59,439
+i think it's pretty awesome
+ 
+
+71
+00:01:59,439 --> 00:02:10,070
+i think it's pretty awesome
+uh here it is actually working
+
+72
+00:02:10,070 --> 00:02:10,080
+
+ 
+
+73
+00:02:10,080 --> 00:02:12,390
+
+very cool very very cool piece of
+
+74
+00:02:12,390 --> 00:02:12,400
+very cool very very cool piece of
+ 
+
+75
+00:02:12,400 --> 00:02:15,190
+very cool very very cool piece of
+equipment um it's only about
+
+76
+00:02:15,190 --> 00:02:15,200
+equipment um it's only about
+ 
+
+77
+00:02:15,200 --> 00:02:19,430
+equipment um it's only about
+um a hundred and twenty hundred and
+
+78
+00:02:19,430 --> 00:02:19,440
+um a hundred and twenty hundred and
+ 
+
+79
+00:02:19,440 --> 00:02:22,390
+um a hundred and twenty hundred and
+thirty us dollars
+
+80
+00:02:22,390 --> 00:02:22,400
+thirty us dollars
+ 
+
+81
+00:02:22,400 --> 00:02:26,309
+thirty us dollars
+but it is well worth it uh for you
+
+82
+00:02:26,309 --> 00:02:26,319
+but it is well worth it uh for you
+ 
+
+83
+00:02:26,319 --> 00:02:30,150
+but it is well worth it uh for you
+um camera enthusiasts out there
+
+84
+00:02:30,150 --> 00:02:30,160
+um camera enthusiasts out there
+ 
+
+85
+00:02:30,160 --> 00:02:32,710
+um camera enthusiasts out there
+um it will definitely take your game up
+
+86
+00:02:32,710 --> 00:02:32,720
+um it will definitely take your game up
+ 
+
+87
+00:02:32,720 --> 00:02:34,710
+um it will definitely take your game up
+to the next level
+
+88
+00:02:34,710 --> 00:02:34,720
+to the next level
+ 
+
+89
+00:02:34,720 --> 00:02:37,670
+to the next level
+the
+
+90
+00:02:37,670 --> 00:02:37,680
+the
+ 
+
+91
+00:02:37,680 --> 00:02:41,990
+the
+feiyutech
+
+92
+00:02:41,990 --> 00:02:42,000
+
+ 
+
+93
+00:02:42,000 --> 00:02:44,710
+
+scorp focus motor
+
+94
+00:02:44,710 --> 00:02:44,720
+scorp focus motor
+ 
+
+95
+00:02:44,720 --> 00:02:46,790
+scorp focus motor
+i mean these guys are like light years
+
+96
+00:02:46,790 --> 00:02:46,800
+i mean these guys are like light years
+ 
+
+97
+00:02:46,800 --> 00:02:49,190
+i mean these guys are like light years
+ahead of the game
+
+98
+00:02:49,190 --> 00:02:49,200
+ahead of the game
+ 
+
+99
+00:02:49,200 --> 00:02:51,509
+ahead of the game
+so if you like filming
+
+100
+00:02:51,509 --> 00:02:51,519
+so if you like filming
+ 
+
+101
+00:02:51,519 --> 00:02:54,470
+so if you like filming
+as much as i do
+
+102
+00:02:54,470 --> 00:02:54,480
+as much as i do
+ 
+
+103
+00:02:54,480 --> 00:02:58,070
+as much as i do
+um
+
+104
+00:02:58,070 --> 00:02:58,080
+
+ 
+
+105
+00:02:58,080 --> 00:03:02,440
+
+this is definitely a good option
+

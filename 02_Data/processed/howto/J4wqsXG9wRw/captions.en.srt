@@ -1,0 +1,195 @@
+1
+00:00:00,000 --> 00:00:02,990
+
+Learning CapCut day 25. Today, we will
+
+2
+00:00:02,990 --> 00:00:03,000
+Learning CapCut day 25. Today, we will
+ 
+
+3
+00:00:03,000 --> 00:00:05,030
+Learning CapCut day 25. Today, we will
+learn how to create this type of trend
+
+4
+00:00:05,030 --> 00:00:05,040
+learn how to create this type of trend
+ 
+
+5
+00:00:05,040 --> 00:00:07,710
+learn how to create this type of trend
+neon effect transition the two in very
+
+6
+00:00:07,710 --> 00:00:07,720
+neon effect transition the two in very
+ 
+
+7
+00:00:07,720 --> 00:00:09,160
+neon effect transition the two in very
+simple steps.
+
+8
+00:00:09,160 --> 00:00:09,170
+simple steps.
+ 
+
+9
+00:00:09,170 --> 00:00:15,710
+simple steps.
+>> [music]
+
+10
+00:00:15,710 --> 00:00:15,720
+
+ 
+
+11
+00:00:15,720 --> 00:00:18,310
+
+[music]
+
+12
+00:00:18,310 --> 00:00:18,320
+
+ 
+
+13
+00:00:18,320 --> 00:00:20,510
+
+>> Duplicate the clip and move it down. Cut
+
+14
+00:00:20,510 --> 00:00:20,520
+>> Duplicate the clip and move it down. Cut
+ 
+
+15
+00:00:20,520 --> 00:00:22,550
+>> Duplicate the clip and move it down. Cut
+the clip from the middle. Go to effects
+
+16
+00:00:22,550 --> 00:00:22,560
+the clip from the middle. Go to effects
+ 
+
+17
+00:00:22,560 --> 00:00:24,750
+the clip from the middle. Go to effects
+and select [music] neon outline. Go to
+
+18
+00:00:24,750 --> 00:00:24,760
+and select [music] neon outline. Go to
+ 
+
+19
+00:00:24,760 --> 00:00:27,710
+and select [music] neon outline. Go to
+object and select overlay. Duplicate the
+
+20
+00:00:27,710 --> 00:00:27,720
+object and select overlay. Duplicate the
+ 
+
+21
+00:00:27,720 --> 00:00:29,230
+object and select overlay. Duplicate the
+effect and [music] apply it to the next
+
+22
+00:00:29,230 --> 00:00:29,240
+effect and [music] apply it to the next
+ 
+
+23
+00:00:29,240 --> 00:00:31,670
+effect and [music] apply it to the next
+clip. Go to object and select overlay.
+
+24
+00:00:31,670 --> 00:00:31,680
+clip. Go to object and select overlay.
+ 
+
+25
+00:00:31,680 --> 00:00:33,150
+clip. Go to object and select overlay.
+Go to mask and select [music]
+
+26
+00:00:33,150 --> 00:00:33,160
+Go to mask and select [music]
+ 
+
+27
+00:00:33,160 --> 00:00:36,190
+Go to mask and select [music]
+horizontal. Rotate it to minus 90°. Go
+
+28
+00:00:36,190 --> 00:00:36,200
+horizontal. Rotate it to minus 90°. Go
+ 
+
+29
+00:00:36,200 --> 00:00:38,430
+horizontal. Rotate it to minus 90°. Go
+to mask again, select horizontal and
+
+30
+00:00:38,430 --> 00:00:38,440
+to mask again, select horizontal and
+ 
+
+31
+00:00:38,440 --> 00:00:40,590
+to mask again, select horizontal and
+rotate [music] it to 90°. Add one
+
+32
+00:00:40,590 --> 00:00:40,600
+rotate [music] it to 90°. Add one
+ 
+
+33
+00:00:40,600 --> 00:00:42,710
+rotate [music] it to 90°. Add one
+keyframe at the start and another at the
+
+34
+00:00:42,710 --> 00:00:42,720
+keyframe at the start and another at the
+ 
+
+35
+00:00:42,720 --> 00:00:45,185
+keyframe at the start and another at the
+end. Go to splice and set it to 0%.
+
+36
+00:00:45,185 --> 00:00:45,195
+end. Go to splice and set it to 0%.
+ 
+
+37
+00:00:45,195 --> 00:00:47,270
+end. Go to splice and set it to 0%.
+[music] Apply the same steps to the next
+
+38
+00:00:47,270 --> 00:00:47,280
+[music] Apply the same steps to the next
+ 
+
+39
+00:00:47,280 --> 00:00:50,640
+[music] Apply the same steps to the next
+clip. Thanks for watching.
+

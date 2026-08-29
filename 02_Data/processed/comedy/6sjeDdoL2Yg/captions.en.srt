@@ -1,0 +1,44 @@
+1
+00:00:01,199 --> 00:00:03,750
+
+Uncle, how much does a plate of samosas cost?
+
+2
+00:00:03,750 --> 00:00:03,760
+Uncle, how much does a plate of samosas cost?
+ 
+
+3
+00:00:03,760 --> 00:00:05,269
+Uncle, how much does a plate of samosas cost?
+Son, for ₹20.   Then
+
+4
+00:00:05,269 --> 00:00:05,279
+Son, for ₹20.   Then
+ 
+
+5
+00:00:05,279 --> 00:00:07,749
+Son, for ₹20.   Then
+keep this empty box.  I will give you the money tomorrow.
+
+6
+00:00:07,749 --> 00:00:07,759
+keep this empty box.  I will give you the money tomorrow.
+ 
+
+7
+00:00:07,759 --> 00:00:09,160
+keep this empty box.  I will give you the money tomorrow.
+
+8
+00:00:09,160 --> 00:00:09,170
+
+ 
+
+9
+00:00:09,170 --> 00:00:11,190
+
+[Laughter]
+

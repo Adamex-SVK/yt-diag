@@ -1,0 +1,4835 @@
+1
+00:00:00,000 --> 00:00:01,579
+
+hey you're on caffeine man here and
+
+2
+00:00:01,579 --> 00:00:01,589
+hey you're on caffeine man here and
+ 
+
+3
+00:00:01,589 --> 00:00:04,280
+hey you're on caffeine man here and
+today we're going over v8 energy energy
+
+4
+00:00:04,280 --> 00:00:04,290
+today we're going over v8 energy energy
+ 
+
+5
+00:00:04,290 --> 00:00:06,079
+today we're going over v8 energy energy
+drink that's right we're airing another
+
+6
+00:00:06,079 --> 00:00:06,089
+drink that's right we're airing another
+ 
+
+7
+00:00:06,089 --> 00:00:07,610
+drink that's right we're airing another
+healthy energy drink to the healthy
+
+8
+00:00:07,610 --> 00:00:07,620
+healthy energy drink to the healthy
+ 
+
+9
+00:00:07,620 --> 00:00:09,350
+healthy energy drink to the healthy
+energy drink series and you know it's
+
+10
+00:00:09,350 --> 00:00:09,360
+energy drink series and you know it's
+ 
+
+11
+00:00:09,360 --> 00:00:11,629
+energy drink series and you know it's
+gonna be healthy I mean it's v8 I mean
+
+12
+00:00:11,629 --> 00:00:11,639
+gonna be healthy I mean it's v8 I mean
+ 
+
+13
+00:00:11,639 --> 00:00:13,310
+gonna be healthy I mean it's v8 I mean
+you get 100 percent of your vegetables
+
+14
+00:00:13,310 --> 00:00:13,320
+you get 100 percent of your vegetables
+ 
+
+15
+00:00:13,320 --> 00:00:14,839
+you get 100 percent of your vegetables
+and one serving and this one's got fruit
+
+16
+00:00:14,839 --> 00:00:14,849
+and one serving and this one's got fruit
+ 
+
+17
+00:00:14,849 --> 00:00:16,519
+and one serving and this one's got fruit
+in it as well I think it's 100 percent
+
+18
+00:00:16,519 --> 00:00:16,529
+in it as well I think it's 100 percent
+ 
+
+19
+00:00:16,529 --> 00:00:18,859
+in it as well I think it's 100 percent
+servings in regular v8 this is v8 energy
+
+20
+00:00:18,859 --> 00:00:18,869
+servings in regular v8 this is v8 energy
+ 
+
+21
+00:00:18,869 --> 00:00:20,450
+servings in regular v8 this is v8 energy
+so it might be a little bit different so
+
+22
+00:00:20,450 --> 00:00:20,460
+so it might be a little bit different so
+ 
+
+23
+00:00:20,460 --> 00:00:21,500
+so it might be a little bit different so
+do you still get the same amount of
+
+24
+00:00:21,500 --> 00:00:21,510
+do you still get the same amount of
+ 
+
+25
+00:00:21,510 --> 00:00:22,730
+do you still get the same amount of
+veggies because I think it's a smaller
+
+26
+00:00:22,730 --> 00:00:22,740
+veggies because I think it's a smaller
+ 
+
+27
+00:00:22,740 --> 00:00:24,769
+veggies because I think it's a smaller
+can as well well when it comes to v8
+
+28
+00:00:24,769 --> 00:00:24,779
+can as well well when it comes to v8
+ 
+
+29
+00:00:24,779 --> 00:00:29,599
+can as well well when it comes to v8
+what oh yeah I forgot something I'll be
+
+30
+00:00:29,599 --> 00:00:29,609
+what oh yeah I forgot something I'll be
+ 
+
+31
+00:00:29,609 --> 00:00:36,290
+what oh yeah I forgot something I'll be
+right back hello again everybody
+
+32
+00:00:36,290 --> 00:00:36,300
+right back hello again everybody
+ 
+
+33
+00:00:36,300 --> 00:00:39,500
+right back hello again everybody
+ouch that hurt thanks again for joining
+
+34
+00:00:39,500 --> 00:00:39,510
+ouch that hurt thanks again for joining
+ 
+
+35
+00:00:39,510 --> 00:00:41,900
+ouch that hurt thanks again for joining
+me today we're going over v8 energy
+
+36
+00:00:41,900 --> 00:00:41,910
+me today we're going over v8 energy
+ 
+
+37
+00:00:41,910 --> 00:00:43,790
+me today we're going over v8 energy
+energy drink okay I tell you guys
+
+38
+00:00:43,790 --> 00:00:43,800
+energy drink okay I tell you guys
+ 
+
+39
+00:00:43,800 --> 00:00:46,670
+energy drink okay I tell you guys
+something I hate I mean this stuff
+
+40
+00:00:46,670 --> 00:00:46,680
+something I hate I mean this stuff
+ 
+
+41
+00:00:46,680 --> 00:00:48,979
+something I hate I mean this stuff
+tastes horrible I don't know I don't
+
+42
+00:00:48,979 --> 00:00:48,989
+tastes horrible I don't know I don't
+ 
+
+43
+00:00:48,989 --> 00:00:50,690
+tastes horrible I don't know I don't
+know how anybody can drink it I mean it
+
+44
+00:00:50,690 --> 00:00:50,700
+know how anybody can drink it I mean it
+ 
+
+45
+00:00:50,700 --> 00:00:52,189
+know how anybody can drink it I mean it
+literally makes me want to puke I mean
+
+46
+00:00:52,189 --> 00:00:52,199
+literally makes me want to puke I mean
+ 
+
+47
+00:00:52,199 --> 00:00:53,779
+literally makes me want to puke I mean
+is it just for old people because I
+
+48
+00:00:53,779 --> 00:00:53,789
+is it just for old people because I
+ 
+
+49
+00:00:53,789 --> 00:00:55,580
+is it just for old people because I
+don't see any younger people drinking I
+
+50
+00:00:55,580 --> 00:00:55,590
+don't see any younger people drinking I
+ 
+
+51
+00:00:55,590 --> 00:00:56,660
+don't see any younger people drinking I
+don't even see middle-aged people
+
+52
+00:00:56,660 --> 00:00:56,670
+don't even see middle-aged people
+ 
+
+53
+00:00:56,670 --> 00:00:58,819
+don't even see middle-aged people
+drinking it so why am i reviewing it I
+
+54
+00:00:58,819 --> 00:00:58,829
+drinking it so why am i reviewing it I
+ 
+
+55
+00:00:58,829 --> 00:00:59,959
+drinking it so why am i reviewing it I
+have no idea
+
+56
+00:00:59,959 --> 00:00:59,969
+have no idea
+ 
+
+57
+00:00:59,969 --> 00:01:02,330
+have no idea
+torture but no seriously some of you
+
+58
+00:01:02,330 --> 00:01:02,340
+torture but no seriously some of you
+ 
+
+59
+00:01:02,340 --> 00:01:03,799
+torture but no seriously some of you
+guys requested it and since you guys
+
+60
+00:01:03,799 --> 00:01:03,809
+guys requested it and since you guys
+ 
+
+61
+00:01:03,809 --> 00:01:04,969
+guys requested it and since you guys
+seem to like the healthy energy drink
+
+62
+00:01:04,969 --> 00:01:04,979
+seem to like the healthy energy drink
+ 
+
+63
+00:01:04,979 --> 00:01:06,649
+seem to like the healthy energy drink
+reviews I'm bringing another healthy
+
+64
+00:01:06,649 --> 00:01:06,659
+reviews I'm bringing another healthy
+ 
+
+65
+00:01:06,659 --> 00:01:08,300
+reviews I'm bringing another healthy
+energy drink review at the risk of my
+
+66
+00:01:08,300 --> 00:01:08,310
+energy drink review at the risk of my
+ 
+
+67
+00:01:08,310 --> 00:01:09,649
+energy drink review at the risk of my
+own taste buds but then when I actually
+
+68
+00:01:09,649 --> 00:01:09,659
+own taste buds but then when I actually
+ 
+
+69
+00:01:09,659 --> 00:01:10,940
+own taste buds but then when I actually
+looked it up and I saw some of the
+
+70
+00:01:10,940 --> 00:01:10,950
+looked it up and I saw some of the
+ 
+
+71
+00:01:10,950 --> 00:01:12,530
+looked it up and I saw some of the
+flavors they actually sound pretty good
+
+72
+00:01:12,530 --> 00:01:12,540
+flavors they actually sound pretty good
+ 
+
+73
+00:01:12,540 --> 00:01:14,810
+flavors they actually sound pretty good
+so even if they're bad they did a great
+
+74
+00:01:14,810 --> 00:01:14,820
+so even if they're bad they did a great
+ 
+
+75
+00:01:14,820 --> 00:01:16,399
+so even if they're bad they did a great
+job with the marking because they sold
+
+76
+00:01:16,399 --> 00:01:16,409
+job with the marking because they sold
+ 
+
+77
+00:01:16,409 --> 00:01:18,109
+job with the marking because they sold
+me on it but before I get into that if
+
+78
+00:01:18,109 --> 00:01:18,119
+me on it but before I get into that if
+ 
+
+79
+00:01:18,119 --> 00:01:19,429
+me on it but before I get into that if
+you're new to my channel and you want to
+
+80
+00:01:19,429 --> 00:01:19,439
+you're new to my channel and you want to
+ 
+
+81
+00:01:19,439 --> 00:01:20,810
+you're new to my channel and you want to
+stay informed on all things caffeine
+
+82
+00:01:20,810 --> 00:01:20,820
+stay informed on all things caffeine
+ 
+
+83
+00:01:20,820 --> 00:01:22,100
+stay informed on all things caffeine
+related feel free to hit the subscribe
+
+84
+00:01:22,100 --> 00:01:22,110
+related feel free to hit the subscribe
+ 
+
+85
+00:01:22,110 --> 00:01:23,870
+related feel free to hit the subscribe
+button I post new videos every Tuesday
+
+86
+00:01:23,870 --> 00:01:23,880
+button I post new videos every Tuesday
+ 
+
+87
+00:01:23,880 --> 00:01:26,060
+button I post new videos every Tuesday
+night also feel free to share me all
+
+88
+00:01:26,060 --> 00:01:26,070
+night also feel free to share me all
+ 
+
+89
+00:01:26,070 --> 00:01:27,800
+night also feel free to share me all
+over social media I'm on Instagram
+
+90
+00:01:27,800 --> 00:01:27,810
+over social media I'm on Instagram
+ 
+
+91
+00:01:27,810 --> 00:01:30,560
+over social media I'm on Instagram
+Facebook Twitter I'm even on LinkedIn
+
+92
+00:01:30,560 --> 00:01:30,570
+Facebook Twitter I'm even on LinkedIn
+ 
+
+93
+00:01:30,570 --> 00:01:34,520
+Facebook Twitter I'm even on LinkedIn
+what really apparently after last week's
+
+94
+00:01:34,520 --> 00:01:34,530
+what really apparently after last week's
+ 
+
+95
+00:01:34,530 --> 00:01:36,140
+what really apparently after last week's
+video I got one more follower on
+
+96
+00:01:36,140 --> 00:01:36,150
+video I got one more follower on
+ 
+
+97
+00:01:36,150 --> 00:01:39,050
+video I got one more follower on
+LinkedIn so first I'll go over a little
+
+98
+00:01:39,050 --> 00:01:39,060
+LinkedIn so first I'll go over a little
+ 
+
+99
+00:01:39,060 --> 00:01:40,940
+LinkedIn so first I'll go over a little
+bit about the company then I'll go over
+
+100
+00:01:40,940 --> 00:01:40,950
+bit about the company then I'll go over
+ 
+
+101
+00:01:40,950 --> 00:01:42,770
+bit about the company then I'll go over
+the nutrition facts in the ingredients
+
+102
+00:01:42,770 --> 00:01:42,780
+the nutrition facts in the ingredients
+ 
+
+103
+00:01:42,780 --> 00:01:44,450
+the nutrition facts in the ingredients
+that make this healthy and then I'll do
+
+104
+00:01:44,450 --> 00:01:44,460
+that make this healthy and then I'll do
+ 
+
+105
+00:01:44,460 --> 00:01:46,999
+that make this healthy and then I'll do
+a taste test time stamps in the
+
+106
+00:01:46,999 --> 00:01:47,009
+a taste test time stamps in the
+ 
+
+107
+00:01:47,009 --> 00:01:49,039
+a taste test time stamps in the
+description box down below so you can go
+
+108
+00:01:49,039 --> 00:01:49,049
+description box down below so you can go
+ 
+
+109
+00:01:49,049 --> 00:01:51,800
+description box down below so you can go
+exactly where you want to go v8 is an
+
+110
+00:01:51,800 --> 00:01:51,810
+exactly where you want to go v8 is an
+ 
+
+111
+00:01:51,810 --> 00:01:52,910
+exactly where you want to go v8 is an
+amazing drink
+
+112
+00:01:52,910 --> 00:01:52,920
+amazing drink
+ 
+
+113
+00:01:52,920 --> 00:01:54,770
+amazing drink
+I mean it's so amazing I'm most puked
+
+114
+00:01:54,770 --> 00:01:54,780
+I mean it's so amazing I'm most puked
+ 
+
+115
+00:01:54,780 --> 00:01:56,209
+I mean it's so amazing I'm most puked
+the first time I had it I mean I thought
+
+116
+00:01:56,209 --> 00:01:56,219
+the first time I had it I mean I thought
+ 
+
+117
+00:01:56,219 --> 00:01:57,980
+the first time I had it I mean I thought
+it was bad or it was spoiled or
+
+118
+00:01:57,980 --> 00:01:57,990
+it was bad or it was spoiled or
+ 
+
+119
+00:01:57,990 --> 00:01:59,899
+it was bad or it was spoiled or
+something bad but no that's just how it
+
+120
+00:01:59,899 --> 00:01:59,909
+something bad but no that's just how it
+ 
+
+121
+00:01:59,909 --> 00:02:01,639
+something bad but no that's just how it
+tastes and I know I'm not alone when I
+
+122
+00:02:01,639 --> 00:02:01,649
+tastes and I know I'm not alone when I
+ 
+
+123
+00:02:01,649 --> 00:02:03,260
+tastes and I know I'm not alone when I
+say that something about they're like
+
+124
+00:02:03,260 --> 00:02:03,270
+say that something about they're like
+ 
+
+125
+00:02:03,270 --> 00:02:04,850
+say that something about they're like
+yeah why is he doing v8 because it
+
+126
+00:02:04,850 --> 00:02:04,860
+yeah why is he doing v8 because it
+ 
+
+127
+00:02:04,860 --> 00:02:06,980
+yeah why is he doing v8 because it
+tastes so bad I know for a fact my
+
+128
+00:02:06,980 --> 00:02:06,990
+tastes so bad I know for a fact my
+ 
+
+129
+00:02:06,990 --> 00:02:08,900
+tastes so bad I know for a fact my
+comment box down below is gonna be going
+
+130
+00:02:08,900 --> 00:02:08,910
+comment box down below is gonna be going
+ 
+
+131
+00:02:08,910 --> 00:02:10,760
+comment box down below is gonna be going
+crazy with the people like you're crazy
+
+132
+00:02:10,760 --> 00:02:10,770
+crazy with the people like you're crazy
+ 
+
+133
+00:02:10,770 --> 00:02:11,520
+crazy with the people like you're crazy
+v8
+
+134
+00:02:11,520 --> 00:02:11,530
+v8
+ 
+
+135
+00:02:11,530 --> 00:02:12,960
+v8
+is the best thing since sliced bread
+
+136
+00:02:12,960 --> 00:02:12,970
+is the best thing since sliced bread
+ 
+
+137
+00:02:12,970 --> 00:02:14,490
+is the best thing since sliced bread
+that's probably what they eat when they
+
+138
+00:02:14,490 --> 00:02:14,500
+that's probably what they eat when they
+ 
+
+139
+00:02:14,500 --> 00:02:15,030
+that's probably what they eat when they
+drink it
+
+140
+00:02:15,030 --> 00:02:15,040
+drink it
+ 
+
+141
+00:02:15,040 --> 00:02:16,800
+drink it
+the truth is it has to be good because
+
+142
+00:02:16,800 --> 00:02:16,810
+the truth is it has to be good because
+ 
+
+143
+00:02:16,810 --> 00:02:18,180
+the truth is it has to be good because
+it wouldn't be on the market if it
+
+144
+00:02:18,180 --> 00:02:18,190
+it wouldn't be on the market if it
+ 
+
+145
+00:02:18,190 --> 00:02:19,620
+it wouldn't be on the market if it
+wasn't selling well so even though my
+
+146
+00:02:19,620 --> 00:02:19,630
+wasn't selling well so even though my
+ 
+
+147
+00:02:19,630 --> 00:02:21,390
+wasn't selling well so even though my
+opinion is it doesn't really taste that
+
+148
+00:02:21,390 --> 00:02:21,400
+opinion is it doesn't really taste that
+ 
+
+149
+00:02:21,400 --> 00:02:22,530
+opinion is it doesn't really taste that
+great I'm sure there are plenty of
+
+150
+00:02:22,530 --> 00:02:22,540
+great I'm sure there are plenty of
+ 
+
+151
+00:02:22,540 --> 00:02:24,390
+great I'm sure there are plenty of
+healthy people out there I love it so
+
+152
+00:02:24,390 --> 00:02:24,400
+healthy people out there I love it so
+ 
+
+153
+00:02:24,400 --> 00:02:25,650
+healthy people out there I love it so
+feel free to leave me your comments down
+
+154
+00:02:25,650 --> 00:02:25,660
+feel free to leave me your comments down
+ 
+
+155
+00:02:25,660 --> 00:02:27,300
+feel free to leave me your comments down
+below if you'd love the eight or four
+
+156
+00:02:27,300 --> 00:02:27,310
+below if you'd love the eight or four
+ 
+
+157
+00:02:27,310 --> 00:02:29,910
+below if you'd love the eight or four
+makes you puke so if you didn't know v8
+
+158
+00:02:29,910 --> 00:02:29,920
+makes you puke so if you didn't know v8
+ 
+
+159
+00:02:29,920 --> 00:02:31,740
+makes you puke so if you didn't know v8
+is actually owned by Campbell Soup
+
+160
+00:02:31,740 --> 00:02:31,750
+is actually owned by Campbell Soup
+ 
+
+161
+00:02:31,750 --> 00:02:33,360
+is actually owned by Campbell Soup
+Company and they're headquartered in New
+
+162
+00:02:33,360 --> 00:02:33,370
+Company and they're headquartered in New
+ 
+
+163
+00:02:33,370 --> 00:02:36,390
+Company and they're headquartered in New
+Jersey the company was started in 1869
+
+164
+00:02:36,390 --> 00:02:36,400
+Jersey the company was started in 1869
+ 
+
+165
+00:02:36,400 --> 00:02:37,620
+Jersey the company was started in 1869
+by two people
+
+166
+00:02:37,620 --> 00:02:37,630
+by two people
+ 
+
+167
+00:02:37,630 --> 00:02:40,320
+by two people
+Joseph Campbell and Abraham Anderson in
+
+168
+00:02:40,320 --> 00:02:40,330
+Joseph Campbell and Abraham Anderson in
+ 
+
+169
+00:02:40,330 --> 00:02:43,199
+Joseph Campbell and Abraham Anderson in
+1876 Anderson left the partnership and
+
+170
+00:02:43,199 --> 00:02:43,209
+1876 Anderson left the partnership and
+ 
+
+171
+00:02:43,209 --> 00:02:44,400
+1876 Anderson left the partnership and
+Arthur dorrance joined the company
+
+172
+00:02:44,400 --> 00:02:44,410
+Arthur dorrance joined the company
+ 
+
+173
+00:02:44,410 --> 00:02:45,990
+Arthur dorrance joined the company
+dorrance would actually succeed Joseph
+
+174
+00:02:45,990 --> 00:02:46,000
+dorrance would actually succeed Joseph
+ 
+
+175
+00:02:46,000 --> 00:02:48,240
+dorrance would actually succeed Joseph
+Campbell in 1894 they started off with
+
+176
+00:02:48,240 --> 00:02:48,250
+Campbell in 1894 they started off with
+ 
+
+177
+00:02:48,250 --> 00:02:50,190
+Campbell in 1894 they started off with
+just tomato soup and they thrived for
+
+178
+00:02:50,190 --> 00:02:50,200
+just tomato soup and they thrived for
+ 
+
+179
+00:02:50,200 --> 00:02:51,840
+just tomato soup and they thrived for
+many years with just that product alone
+
+180
+00:02:51,840 --> 00:02:51,850
+many years with just that product alone
+ 
+
+181
+00:02:51,850 --> 00:02:55,890
+many years with just that product alone
+it wasn't until 1934 40 years later that
+
+182
+00:02:55,890 --> 00:02:55,900
+it wasn't until 1934 40 years later that
+ 
+
+183
+00:02:55,900 --> 00:02:57,150
+it wasn't until 1934 40 years later that
+they came out with chicken noodle soup
+
+184
+00:02:57,150 --> 00:02:57,160
+they came out with chicken noodle soup
+ 
+
+185
+00:02:57,160 --> 00:02:58,440
+they came out with chicken noodle soup
+in cream of mushroom
+
+186
+00:02:58,440 --> 00:02:58,450
+in cream of mushroom
+ 
+
+187
+00:02:58,450 --> 00:03:00,900
+in cream of mushroom
+fast forward to 1948 they established
+
+188
+00:03:00,900 --> 00:03:00,910
+fast forward to 1948 they established
+ 
+
+189
+00:03:00,910 --> 00:03:02,520
+fast forward to 1948 they established
+their v8 brand and we're on their way to
+
+190
+00:03:02,520 --> 00:03:02,530
+their v8 brand and we're on their way to
+ 
+
+191
+00:03:02,530 --> 00:03:03,660
+their v8 brand and we're on their way to
+being the leading vegetable juice
+
+192
+00:03:03,660 --> 00:03:03,670
+being the leading vegetable juice
+ 
+
+193
+00:03:03,670 --> 00:03:05,880
+being the leading vegetable juice
+company in the United States and as of
+
+194
+00:03:05,880 --> 00:03:05,890
+company in the United States and as of
+ 
+
+195
+00:03:05,890 --> 00:03:07,440
+company in the United States and as of
+today it's still the leader for
+
+196
+00:03:07,440 --> 00:03:07,450
+today it's still the leader for
+ 
+
+197
+00:03:07,450 --> 00:03:09,270
+today it's still the leader for
+vegetable juice of course v8 eventually
+
+198
+00:03:09,270 --> 00:03:09,280
+vegetable juice of course v8 eventually
+ 
+
+199
+00:03:09,280 --> 00:03:10,710
+vegetable juice of course v8 eventually
+needed to add to their line like many
+
+200
+00:03:10,710 --> 00:03:10,720
+needed to add to their line like many
+ 
+
+201
+00:03:10,720 --> 00:03:12,690
+needed to add to their line like many
+companies do so as time progressed they
+
+202
+00:03:12,690 --> 00:03:12,700
+companies do so as time progressed they
+ 
+
+203
+00:03:12,700 --> 00:03:15,509
+companies do so as time progressed they
+expanded out in 1997 they came out with
+
+204
+00:03:15,509 --> 00:03:15,519
+expanded out in 1997 they came out with
+ 
+
+205
+00:03:15,519 --> 00:03:18,090
+expanded out in 1997 they came out with
+v8 splash then in 2005 they came out
+
+206
+00:03:18,090 --> 00:03:18,100
+v8 splash then in 2005 they came out
+ 
+
+207
+00:03:18,100 --> 00:03:20,009
+v8 splash then in 2005 they came out
+with their VA fusion which was 100%
+
+208
+00:03:20,009 --> 00:03:20,019
+with their VA fusion which was 100%
+ 
+
+209
+00:03:20,019 --> 00:03:23,400
+with their VA fusion which was 100%
+vegetable and fruit juice then like so
+
+210
+00:03:23,400 --> 00:03:23,410
+vegetable and fruit juice then like so
+ 
+
+211
+00:03:23,410 --> 00:03:25,949
+vegetable and fruit juice then like so
+many other companies out there they saw
+
+212
+00:03:25,949 --> 00:03:25,959
+many other companies out there they saw
+ 
+
+213
+00:03:25,959 --> 00:03:27,750
+many other companies out there they saw
+the energy market beginning to boom and
+
+214
+00:03:27,750 --> 00:03:27,760
+the energy market beginning to boom and
+ 
+
+215
+00:03:27,760 --> 00:03:28,740
+the energy market beginning to boom and
+they wanted to get a piece of that
+
+216
+00:03:28,740 --> 00:03:28,750
+they wanted to get a piece of that
+ 
+
+217
+00:03:28,750 --> 00:03:32,009
+they wanted to get a piece of that
+market so in 2011 they came out with v8
+
+218
+00:03:32,009 --> 00:03:32,019
+market so in 2011 they came out with v8
+ 
+
+219
+00:03:32,019 --> 00:03:34,680
+market so in 2011 they came out with v8
+energy they actually have 15 flavors of
+
+220
+00:03:34,680 --> 00:03:34,690
+energy they actually have 15 flavors of
+ 
+
+221
+00:03:34,690 --> 00:03:36,750
+energy they actually have 15 flavors of
+v8 energy if you include their vegetable
+
+222
+00:03:36,750 --> 00:03:36,760
+v8 energy if you include their vegetable
+ 
+
+223
+00:03:36,760 --> 00:03:38,759
+v8 energy if you include their vegetable
+juice energy their sparkling energy in
+
+224
+00:03:38,759 --> 00:03:38,769
+juice energy their sparkling energy in
+ 
+
+225
+00:03:38,769 --> 00:03:40,680
+juice energy their sparkling energy in
+their diet energy flavors I have five of
+
+226
+00:03:40,680 --> 00:03:40,690
+their diet energy flavors I have five of
+ 
+
+227
+00:03:40,690 --> 00:03:42,180
+their diet energy flavors I have five of
+the most popular flavors to go over with
+
+228
+00:03:42,180 --> 00:03:42,190
+the most popular flavors to go over with
+ 
+
+229
+00:03:42,190 --> 00:03:43,710
+the most popular flavors to go over with
+you today and those flavors are
+
+230
+00:03:43,710 --> 00:03:43,720
+you today and those flavors are
+ 
+
+231
+00:03:43,720 --> 00:03:45,660
+you today and those flavors are
+pomegranate blueberry strawberry banana
+
+232
+00:03:45,660 --> 00:03:45,670
+pomegranate blueberry strawberry banana
+ 
+
+233
+00:03:45,670 --> 00:03:48,360
+pomegranate blueberry strawberry banana
+peach mango orange pineapple and black
+
+234
+00:03:48,360 --> 00:03:48,370
+peach mango orange pineapple and black
+ 
+
+235
+00:03:48,370 --> 00:03:50,550
+peach mango orange pineapple and black
+cherry don't lose all sound delicious I
+
+236
+00:03:50,550 --> 00:03:50,560
+cherry don't lose all sound delicious I
+ 
+
+237
+00:03:50,560 --> 00:03:53,550
+cherry don't lose all sound delicious I
+hope so and of course no energy drink
+
+238
+00:03:53,550 --> 00:03:53,560
+hope so and of course no energy drink
+ 
+
+239
+00:03:53,560 --> 00:03:55,050
+hope so and of course no energy drink
+story would be complete without a
+
+240
+00:03:55,050 --> 00:03:55,060
+story would be complete without a
+ 
+
+241
+00:03:55,060 --> 00:03:57,990
+story would be complete without a
+lawsuit that's right in February of 2019
+
+242
+00:03:57,990 --> 00:03:58,000
+lawsuit that's right in February of 2019
+ 
+
+243
+00:03:58,000 --> 00:04:00,240
+lawsuit that's right in February of 2019
+not too long ago a lawsuit was filed
+
+244
+00:04:00,240 --> 00:04:00,250
+not too long ago a lawsuit was filed
+ 
+
+245
+00:04:00,250 --> 00:04:02,280
+not too long ago a lawsuit was filed
+against the Campbell Soup Company saying
+
+246
+00:04:02,280 --> 00:04:02,290
+against the Campbell Soup Company saying
+ 
+
+247
+00:04:02,290 --> 00:04:03,750
+against the Campbell Soup Company saying
+that if falsely markets that the
+
+248
+00:04:03,750 --> 00:04:03,760
+that if falsely markets that the
+ 
+
+249
+00:04:03,760 --> 00:04:05,940
+that if falsely markets that the
+caffeine provides a steady energy as
+
+250
+00:04:05,940 --> 00:04:05,950
+caffeine provides a steady energy as
+ 
+
+251
+00:04:05,950 --> 00:04:08,160
+caffeine provides a steady energy as
+indicated on the can as well as saying
+
+252
+00:04:08,160 --> 00:04:08,170
+indicated on the can as well as saying
+ 
+
+253
+00:04:08,170 --> 00:04:09,900
+indicated on the can as well as saying
+that it's just sweet potato juice and
+
+254
+00:04:09,900 --> 00:04:09,910
+that it's just sweet potato juice and
+ 
+
+255
+00:04:09,910 --> 00:04:11,190
+that it's just sweet potato juice and
+there aren't any other fruits and
+
+256
+00:04:11,190 --> 00:04:11,200
+there aren't any other fruits and
+ 
+
+257
+00:04:11,200 --> 00:04:13,110
+there aren't any other fruits and
+vegetables in there and they say that
+
+258
+00:04:13,110 --> 00:04:13,120
+vegetables in there and they say that
+ 
+
+259
+00:04:13,120 --> 00:04:14,699
+vegetables in there and they say that
+they're falsely advertising that there's
+
+260
+00:04:14,699 --> 00:04:14,709
+they're falsely advertising that there's
+ 
+
+261
+00:04:14,709 --> 00:04:17,039
+they're falsely advertising that there's
+no added sugar and of course because a
+
+262
+00:04:17,039 --> 00:04:17,049
+no added sugar and of course because a
+ 
+
+263
+00:04:17,049 --> 00:04:19,710
+no added sugar and of course because a
+lawsuit has been filed every uneducated
+
+264
+00:04:19,710 --> 00:04:19,720
+lawsuit has been filed every uneducated
+ 
+
+265
+00:04:19,720 --> 00:04:22,830
+lawsuit has been filed every uneducated
+one is all up in arms about it saying oh
+
+266
+00:04:22,830 --> 00:04:22,840
+one is all up in arms about it saying oh
+ 
+
+267
+00:04:22,840 --> 00:04:24,450
+one is all up in arms about it saying oh
+I feel betrayed I feel
+
+268
+00:04:24,450 --> 00:04:24,460
+I feel betrayed I feel
+ 
+
+269
+00:04:24,460 --> 00:04:26,460
+I feel betrayed I feel
+Lyde - they're posted in common inboxes
+
+270
+00:04:26,460 --> 00:04:26,470
+Lyde - they're posted in common inboxes
+ 
+
+271
+00:04:26,470 --> 00:04:29,129
+Lyde - they're posted in common inboxes
+no fruit and v8 sound familiar - no
+
+272
+00:04:29,129 --> 00:04:29,139
+no fruit and v8 sound familiar - no
+ 
+
+273
+00:04:29,139 --> 00:04:31,680
+no fruit and v8 sound familiar - no
+creatine did this drink stupid without
+
+274
+00:04:31,680 --> 00:04:31,690
+creatine did this drink stupid without
+ 
+
+275
+00:04:31,690 --> 00:04:33,659
+creatine did this drink stupid without
+the case even being in court yet they
+
+276
+00:04:33,659 --> 00:04:33,669
+the case even being in court yet they
+ 
+
+277
+00:04:33,669 --> 00:04:36,330
+the case even being in court yet they
+just filed a lawsuit listen people just
+
+278
+00:04:36,330 --> 00:04:36,340
+just filed a lawsuit listen people just
+ 
+
+279
+00:04:36,340 --> 00:04:38,670
+just filed a lawsuit listen people just
+because someone files a lawsuit against
+
+280
+00:04:38,670 --> 00:04:38,680
+because someone files a lawsuit against
+ 
+
+281
+00:04:38,680 --> 00:04:40,800
+because someone files a lawsuit against
+somebody doesn't automatically make them
+
+282
+00:04:40,800 --> 00:04:40,810
+somebody doesn't automatically make them
+ 
+
+283
+00:04:40,810 --> 00:04:42,779
+somebody doesn't automatically make them
+guilty at least wait for the results of
+
+284
+00:04:42,779 --> 00:04:42,789
+guilty at least wait for the results of
+ 
+
+285
+00:04:42,789 --> 00:04:44,700
+guilty at least wait for the results of
+the trial before being up in arms about
+
+286
+00:04:44,700 --> 00:04:44,710
+the trial before being up in arms about
+ 
+
+287
+00:04:44,710 --> 00:04:47,040
+the trial before being up in arms about
+it energy drink lawsuits are inevitable
+
+288
+00:04:47,040 --> 00:04:47,050
+it energy drink lawsuits are inevitable
+ 
+
+289
+00:04:47,050 --> 00:04:49,020
+it energy drink lawsuits are inevitable
+for anybody that decides to go into the
+
+290
+00:04:49,020 --> 00:04:49,030
+for anybody that decides to go into the
+ 
+
+291
+00:04:49,030 --> 00:04:50,790
+for anybody that decides to go into the
+energy drink market given the science
+
+292
+00:04:50,790 --> 00:04:50,800
+energy drink market given the science
+ 
+
+293
+00:04:50,800 --> 00:04:52,680
+energy drink market given the science
+behind energy drinks in their tendency
+
+294
+00:04:52,680 --> 00:04:52,690
+behind energy drinks in their tendency
+ 
+
+295
+00:04:52,690 --> 00:04:54,480
+behind energy drinks in their tendency
+to have mixed results based on who's
+
+296
+00:04:54,480 --> 00:04:54,490
+to have mixed results based on who's
+ 
+
+297
+00:04:54,490 --> 00:04:56,400
+to have mixed results based on who's
+doing the scientific study people are
+
+298
+00:04:56,400 --> 00:04:56,410
+doing the scientific study people are
+ 
+
+299
+00:04:56,410 --> 00:04:58,409
+doing the scientific study people are
+willing to sue anybody over anything
+
+300
+00:04:58,409 --> 00:04:58,419
+willing to sue anybody over anything
+ 
+
+301
+00:04:58,419 --> 00:05:00,689
+willing to sue anybody over anything
+because they might actually have a small
+
+302
+00:05:00,689 --> 00:05:00,699
+because they might actually have a small
+ 
+
+303
+00:05:00,699 --> 00:05:02,279
+because they might actually have a small
+chance at winning depending on who's
+
+304
+00:05:02,279 --> 00:05:02,289
+chance at winning depending on who's
+ 
+
+305
+00:05:02,289 --> 00:05:03,900
+chance at winning depending on who's
+doing the study and who the judge is
+
+306
+00:05:03,900 --> 00:05:03,910
+doing the study and who the judge is
+ 
+
+307
+00:05:03,910 --> 00:05:05,820
+doing the study and who the judge is
+that day basically we're on product
+
+308
+00:05:05,820 --> 00:05:05,830
+that day basically we're on product
+ 
+
+309
+00:05:05,830 --> 00:05:07,499
+that day basically we're on product
+claims that have provide steady energy
+
+310
+00:05:07,499 --> 00:05:07,509
+claims that have provide steady energy
+ 
+
+311
+00:05:07,509 --> 00:05:09,510
+claims that have provide steady energy
+lots of lawyers are ready to pounce on
+
+312
+00:05:09,510 --> 00:05:09,520
+lots of lawyers are ready to pounce on
+ 
+
+313
+00:05:09,520 --> 00:05:11,189
+lots of lawyers are ready to pounce on
+that situation because that sounds like
+
+314
+00:05:11,189 --> 00:05:11,199
+that situation because that sounds like
+ 
+
+315
+00:05:11,199 --> 00:05:13,379
+that situation because that sounds like
+an opinion as opposed to scientific fact
+
+316
+00:05:13,379 --> 00:05:13,389
+an opinion as opposed to scientific fact
+ 
+
+317
+00:05:13,389 --> 00:05:15,960
+an opinion as opposed to scientific fact
+they'll argue all day long that science
+
+318
+00:05:15,960 --> 00:05:15,970
+they'll argue all day long that science
+ 
+
+319
+00:05:15,970 --> 00:05:17,580
+they'll argue all day long that science
+can't prove that it has a steady energy
+
+320
+00:05:17,580 --> 00:05:17,590
+can't prove that it has a steady energy
+ 
+
+321
+00:05:17,590 --> 00:05:19,499
+can't prove that it has a steady energy
+because it really seems like it's more
+
+322
+00:05:19,499 --> 00:05:19,509
+because it really seems like it's more
+ 
+
+323
+00:05:19,509 --> 00:05:21,300
+because it really seems like it's more
+of a personal opinion as we all know
+
+324
+00:05:21,300 --> 00:05:21,310
+of a personal opinion as we all know
+ 
+
+325
+00:05:21,310 --> 00:05:22,740
+of a personal opinion as we all know
+caffeine affects everyone differently
+
+326
+00:05:22,740 --> 00:05:22,750
+caffeine affects everyone differently
+ 
+
+327
+00:05:22,750 --> 00:05:24,839
+caffeine affects everyone differently
+and everyone's bodies are different so
+
+328
+00:05:24,839 --> 00:05:24,849
+and everyone's bodies are different so
+ 
+
+329
+00:05:24,849 --> 00:05:26,159
+and everyone's bodies are different so
+they're definitely gonna be some cases
+
+330
+00:05:26,159 --> 00:05:26,169
+they're definitely gonna be some cases
+ 
+
+331
+00:05:26,169 --> 00:05:28,020
+they're definitely gonna be some cases
+that say they didn't actually get a
+
+332
+00:05:28,020 --> 00:05:28,030
+that say they didn't actually get a
+ 
+
+333
+00:05:28,030 --> 00:05:29,700
+that say they didn't actually get a
+steady energy from the drink and those
+
+334
+00:05:29,700 --> 00:05:29,710
+steady energy from the drink and those
+ 
+
+335
+00:05:29,710 --> 00:05:31,499
+steady energy from the drink and those
+are the people the lawyers look for in
+
+336
+00:05:31,499 --> 00:05:31,509
+are the people the lawyers look for in
+ 
+
+337
+00:05:31,509 --> 00:05:33,600
+are the people the lawyers look for in
+their trial it's great to live in a
+
+338
+00:05:33,600 --> 00:05:33,610
+their trial it's great to live in a
+ 
+
+339
+00:05:33,610 --> 00:05:35,640
+their trial it's great to live in a
+country where a billion-dollar company
+
+340
+00:05:35,640 --> 00:05:35,650
+country where a billion-dollar company
+ 
+
+341
+00:05:35,650 --> 00:05:37,620
+country where a billion-dollar company
+can lie to people just to make an extra
+
+342
+00:05:37,620 --> 00:05:37,630
+can lie to people just to make an extra
+ 
+
+343
+00:05:37,630 --> 00:05:39,210
+can lie to people just to make an extra
+buck yeah even if the company is
+
+344
+00:05:39,210 --> 00:05:39,220
+buck yeah even if the company is
+ 
+
+345
+00:05:39,220 --> 00:05:41,070
+buck yeah even if the company is
+actually being honest there's plenty of
+
+346
+00:05:41,070 --> 00:05:41,080
+actually being honest there's plenty of
+ 
+
+347
+00:05:41,080 --> 00:05:42,749
+actually being honest there's plenty of
+dishonest people out there trying to
+
+348
+00:05:42,749 --> 00:05:42,759
+dishonest people out there trying to
+ 
+
+349
+00:05:42,759 --> 00:05:44,249
+dishonest people out there trying to
+make an easy buck because they don't
+
+350
+00:05:44,249 --> 00:05:44,259
+make an easy buck because they don't
+ 
+
+351
+00:05:44,259 --> 00:05:45,749
+make an easy buck because they don't
+want to lift a finger to work an honest
+
+352
+00:05:45,749 --> 00:05:45,759
+want to lift a finger to work an honest
+ 
+
+353
+00:05:45,759 --> 00:05:47,010
+want to lift a finger to work an honest
+day or working the whole entire life
+
+354
+00:05:47,010 --> 00:05:47,020
+day or working the whole entire life
+ 
+
+355
+00:05:47,020 --> 00:05:49,649
+day or working the whole entire life
+what's I just get political yeah which I
+
+356
+00:05:49,649 --> 00:05:49,659
+what's I just get political yeah which I
+ 
+
+357
+00:05:49,659 --> 00:05:51,450
+what's I just get political yeah which I
+hate comments down below I'll delete
+
+358
+00:05:51,450 --> 00:05:51,460
+hate comments down below I'll delete
+ 
+
+359
+00:05:51,460 --> 00:05:53,490
+hate comments down below I'll delete
+them anyway so actually god these drinks
+
+360
+00:05:53,490 --> 00:05:53,500
+them anyway so actually god these drinks
+ 
+
+361
+00:05:53,500 --> 00:05:55,439
+them anyway so actually god these drinks
+in a six-pack from Target and actually
+
+362
+00:05:55,439 --> 00:05:55,449
+in a six-pack from Target and actually
+ 
+
+363
+00:05:55,449 --> 00:05:57,540
+in a six-pack from Target and actually
+only cost like four bucks that comes out
+
+364
+00:05:57,540 --> 00:05:57,550
+only cost like four bucks that comes out
+ 
+
+365
+00:05:57,550 --> 00:05:59,459
+only cost like four bucks that comes out
+to like 66 cents each which isn't bad
+
+366
+00:05:59,459 --> 00:05:59,469
+to like 66 cents each which isn't bad
+ 
+
+367
+00:05:59,469 --> 00:06:00,990
+to like 66 cents each which isn't bad
+for an 8 ounce drink that gives you all
+
+368
+00:06:00,990 --> 00:06:01,000
+for an 8 ounce drink that gives you all
+ 
+
+369
+00:06:01,000 --> 00:06:02,580
+for an 8 ounce drink that gives you all
+your fruits and vegetables for the day
+
+370
+00:06:02,580 --> 00:06:02,590
+your fruits and vegetables for the day
+ 
+
+371
+00:06:02,590 --> 00:06:04,200
+your fruits and vegetables for the day
+as well and a whole bunch of caffeine
+
+372
+00:06:04,200 --> 00:06:04,210
+as well and a whole bunch of caffeine
+ 
+
+373
+00:06:04,210 --> 00:06:06,330
+as well and a whole bunch of caffeine
+for energy but wait does it actually
+
+374
+00:06:06,330 --> 00:06:06,340
+for energy but wait does it actually
+ 
+
+375
+00:06:06,340 --> 00:06:08,189
+for energy but wait does it actually
+give you all your fruits and vegetables
+
+376
+00:06:08,189 --> 00:06:08,199
+give you all your fruits and vegetables
+ 
+
+377
+00:06:08,199 --> 00:06:09,719
+give you all your fruits and vegetables
+for the day or am I just thinking that
+
+378
+00:06:09,719 --> 00:06:09,729
+for the day or am I just thinking that
+ 
+
+379
+00:06:09,729 --> 00:06:11,520
+for the day or am I just thinking that
+because it's v8 and and that's one of
+
+380
+00:06:11,520 --> 00:06:11,530
+because it's v8 and and that's one of
+ 
+
+381
+00:06:11,530 --> 00:06:12,749
+because it's v8 and and that's one of
+their things they say or maybe I just
+
+382
+00:06:12,749 --> 00:06:12,759
+their things they say or maybe I just
+ 
+
+383
+00:06:12,759 --> 00:06:14,459
+their things they say or maybe I just
+assumed that's what they say so let's
+
+384
+00:06:14,459 --> 00:06:14,469
+assumed that's what they say so let's
+ 
+
+385
+00:06:14,469 --> 00:06:16,980
+assumed that's what they say so let's
+take a closer look at the can right on
+
+386
+00:06:16,980 --> 00:06:16,990
+take a closer look at the can right on
+ 
+
+387
+00:06:16,990 --> 00:06:18,990
+take a closer look at the can right on
+the can this is a black cherry flavored
+
+388
+00:06:18,990 --> 00:06:19,000
+the can this is a black cherry flavored
+ 
+
+389
+00:06:19,000 --> 00:06:21,029
+the can this is a black cherry flavored
+well actually each one has a different
+
+390
+00:06:21,029 --> 00:06:21,039
+well actually each one has a different
+ 
+
+391
+00:06:21,039 --> 00:06:23,249
+well actually each one has a different
+flavor so it will say that flavor name
+
+392
+00:06:23,249 --> 00:06:23,259
+flavor so it will say that flavor name
+ 
+
+393
+00:06:23,259 --> 00:06:26,459
+flavor so it will say that flavor name
+with a 50% blend of five vegetable and
+
+394
+00:06:26,459 --> 00:06:26,469
+with a 50% blend of five vegetable and
+ 
+
+395
+00:06:26,469 --> 00:06:28,560
+with a 50% blend of five vegetable and
+fruit juices from concentrate with green
+
+396
+00:06:28,560 --> 00:06:28,570
+fruit juices from concentrate with green
+ 
+
+397
+00:06:28,570 --> 00:06:30,959
+fruit juices from concentrate with green
+tea extract and other natural flavors it
+
+398
+00:06:30,959 --> 00:06:30,969
+tea extract and other natural flavors it
+ 
+
+399
+00:06:30,969 --> 00:06:32,790
+tea extract and other natural flavors it
+also states one combined serving of
+
+400
+00:06:32,790 --> 00:06:32,800
+also states one combined serving of
+ 
+
+401
+00:06:32,800 --> 00:06:35,610
+also states one combined serving of
+veggies and fruit and steady energy from
+
+402
+00:06:35,610 --> 00:06:35,620
+veggies and fruit and steady energy from
+ 
+
+403
+00:06:35,620 --> 00:06:38,230
+veggies and fruit and steady energy from
+green tea so was that all mean well
+
+404
+00:06:38,230 --> 00:06:38,240
+green tea so was that all mean well
+ 
+
+405
+00:06:38,240 --> 00:06:40,300
+green tea so was that all mean well
+one can has two ounces of vegetable
+
+406
+00:06:40,300 --> 00:06:40,310
+one can has two ounces of vegetable
+ 
+
+407
+00:06:40,310 --> 00:06:43,749
+one can has two ounces of vegetable
+juice and 2 ounces of fruit juice for a
+
+408
+00:06:43,749 --> 00:06:43,759
+juice and 2 ounces of fruit juice for a
+ 
+
+409
+00:06:43,759 --> 00:06:45,610
+juice and 2 ounces of fruit juice for a
+total of four ounces which is half a cup
+
+410
+00:06:45,610 --> 00:06:45,620
+total of four ounces which is half a cup
+ 
+
+411
+00:06:45,620 --> 00:06:47,950
+total of four ounces which is half a cup
+easy math one serving of vegetables or
+
+412
+00:06:47,950 --> 00:06:47,960
+easy math one serving of vegetables or
+ 
+
+413
+00:06:47,960 --> 00:06:50,589
+easy math one serving of vegetables or
+fruit is four ounces or half a cup so
+
+414
+00:06:50,589 --> 00:06:50,599
+fruit is four ounces or half a cup so
+ 
+
+415
+00:06:50,599 --> 00:06:51,879
+fruit is four ounces or half a cup so
+this is one serving
+
+416
+00:06:51,879 --> 00:06:51,889
+this is one serving
+ 
+
+417
+00:06:51,889 --> 00:06:54,040
+this is one serving
+that being said dietary supplement
+
+418
+00:06:54,040 --> 00:06:54,050
+that being said dietary supplement
+ 
+
+419
+00:06:54,050 --> 00:06:56,260
+that being said dietary supplement
+guidelines recommend two and a half cups
+
+420
+00:06:56,260 --> 00:06:56,270
+guidelines recommend two and a half cups
+ 
+
+421
+00:06:56,270 --> 00:06:58,749
+guidelines recommend two and a half cups
+of vegetables and two cups of fruit for
+
+422
+00:06:58,749 --> 00:06:58,759
+of vegetables and two cups of fruit for
+ 
+
+423
+00:06:58,759 --> 00:07:00,790
+of vegetables and two cups of fruit for
+a 2,000 calorie diet that means your
+
+424
+00:07:00,790 --> 00:07:00,800
+a 2,000 calorie diet that means your
+ 
+
+425
+00:07:00,800 --> 00:07:02,499
+a 2,000 calorie diet that means your
+daily intake or fruits and vegetables
+
+426
+00:07:02,499 --> 00:07:02,509
+daily intake or fruits and vegetables
+ 
+
+427
+00:07:02,509 --> 00:07:04,089
+daily intake or fruits and vegetables
+should be about four and a half servings
+
+428
+00:07:04,089 --> 00:07:04,099
+should be about four and a half servings
+ 
+
+429
+00:07:04,099 --> 00:07:05,770
+should be about four and a half servings
+so you definitely need more than one can
+
+430
+00:07:05,770 --> 00:07:05,780
+so you definitely need more than one can
+ 
+
+431
+00:07:05,780 --> 00:07:07,210
+so you definitely need more than one can
+to get all your daily fruits and
+
+432
+00:07:07,210 --> 00:07:07,220
+to get all your daily fruits and
+ 
+
+433
+00:07:07,220 --> 00:07:08,559
+to get all your daily fruits and
+vegetables or you can just eat fruits
+
+434
+00:07:08,559 --> 00:07:08,569
+vegetables or you can just eat fruits
+ 
+
+435
+00:07:08,569 --> 00:07:09,189
+vegetables or you can just eat fruits
+and vegetables
+
+436
+00:07:09,189 --> 00:07:09,199
+and vegetables
+ 
+
+437
+00:07:09,199 --> 00:07:11,559
+and vegetables
+either way it's healthy there are
+
+438
+00:07:11,559 --> 00:07:11,569
+either way it's healthy there are
+ 
+
+439
+00:07:11,569 --> 00:07:12,999
+either way it's healthy there are
+actually three different nutrition fact
+
+440
+00:07:12,999 --> 00:07:13,009
+actually three different nutrition fact
+ 
+
+441
+00:07:13,009 --> 00:07:15,100
+actually three different nutrition fact
+panels for these drinks because each one
+
+442
+00:07:15,100 --> 00:07:15,110
+panels for these drinks because each one
+ 
+
+443
+00:07:15,110 --> 00:07:16,779
+panels for these drinks because each one
+has different ingredients that give it
+
+444
+00:07:16,779 --> 00:07:16,789
+has different ingredients that give it
+ 
+
+445
+00:07:16,789 --> 00:07:18,610
+has different ingredients that give it
+different numbers so as you can see the
+
+446
+00:07:18,610 --> 00:07:18,620
+different numbers so as you can see the
+ 
+
+447
+00:07:18,620 --> 00:07:21,070
+different numbers so as you can see the
+calories range from 45 to 60 calories
+
+448
+00:07:21,070 --> 00:07:21,080
+calories range from 45 to 60 calories
+ 
+
+449
+00:07:21,080 --> 00:07:23,230
+calories range from 45 to 60 calories
+depending on the can they all have zero
+
+450
+00:07:23,230 --> 00:07:23,240
+depending on the can they all have zero
+ 
+
+451
+00:07:23,240 --> 00:07:25,779
+depending on the can they all have zero
+fat between 50 and 65 milligrams of
+
+452
+00:07:25,779 --> 00:07:25,789
+fat between 50 and 65 milligrams of
+ 
+
+453
+00:07:25,789 --> 00:07:28,120
+fat between 50 and 65 milligrams of
+sodium between 11 and 14 total carbs
+
+454
+00:07:28,120 --> 00:07:28,130
+sodium between 11 and 14 total carbs
+ 
+
+455
+00:07:28,130 --> 00:07:30,370
+sodium between 11 and 14 total carbs
+between 10 to 12 total sugars without
+
+456
+00:07:30,370 --> 00:07:30,380
+between 10 to 12 total sugars without
+ 
+
+457
+00:07:30,380 --> 00:07:32,740
+between 10 to 12 total sugars without
+any added sugar and zero protein on to
+
+458
+00:07:32,740 --> 00:07:32,750
+any added sugar and zero protein on to
+ 
+
+459
+00:07:32,750 --> 00:07:34,540
+any added sugar and zero protein on to
+the vitamins all the vitamins on the can
+
+460
+00:07:34,540 --> 00:07:34,550
+the vitamins all the vitamins on the can
+ 
+
+461
+00:07:34,550 --> 00:07:36,249
+the vitamins all the vitamins on the can
+are the same so you're gonna have 2
+
+462
+00:07:36,249 --> 00:07:36,259
+are the same so you're gonna have 2
+ 
+
+463
+00:07:36,259 --> 00:07:38,140
+are the same so you're gonna have 2
+percent or your daily value of potassium
+
+464
+00:07:38,140 --> 00:07:38,150
+percent or your daily value of potassium
+ 
+
+465
+00:07:38,150 --> 00:07:40,749
+percent or your daily value of potassium
+10 percent or your vitamin C 25 percent
+
+466
+00:07:40,749 --> 00:07:40,759
+10 percent or your vitamin C 25 percent
+ 
+
+467
+00:07:40,759 --> 00:07:43,330
+10 percent or your vitamin C 25 percent
+of your thiamine riboflavin niacin and
+
+468
+00:07:43,330 --> 00:07:43,340
+of your thiamine riboflavin niacin and
+ 
+
+469
+00:07:43,340 --> 00:07:47,560
+of your thiamine riboflavin niacin and
+b6 and 50% of your b12 not too bad as
+
+470
+00:07:47,560 --> 00:07:47,570
+b6 and 50% of your b12 not too bad as
+ 
+
+471
+00:07:47,570 --> 00:07:49,420
+b6 and 50% of your b12 not too bad as
+for the caffeine this little 8 house
+
+472
+00:07:49,420 --> 00:07:49,430
+for the caffeine this little 8 house
+ 
+
+473
+00:07:49,430 --> 00:07:51,189
+for the caffeine this little 8 house
+can't has 80 milligrams of caffeine
+
+474
+00:07:51,189 --> 00:07:51,199
+can't has 80 milligrams of caffeine
+ 
+
+475
+00:07:51,199 --> 00:07:52,959
+can't has 80 milligrams of caffeine
+putting it on par with your average Red
+
+476
+00:07:52,959 --> 00:07:52,969
+putting it on par with your average Red
+ 
+
+477
+00:07:52,969 --> 00:07:54,820
+putting it on par with your average Red
+Bull or monster which comes in at 10
+
+478
+00:07:54,820 --> 00:07:54,830
+Bull or monster which comes in at 10
+ 
+
+479
+00:07:54,830 --> 00:07:57,279
+Bull or monster which comes in at 10
+milligrams per ounce alright it's time
+
+480
+00:07:57,279 --> 00:07:57,289
+milligrams per ounce alright it's time
+ 
+
+481
+00:07:57,289 --> 00:07:59,170
+milligrams per ounce alright it's time
+to taste these things out wish me luck
+
+482
+00:07:59,170 --> 00:07:59,180
+to taste these things out wish me luck
+ 
+
+483
+00:07:59,180 --> 00:08:01,180
+to taste these things out wish me luck
+we're first gonna start out with the
+
+484
+00:08:01,180 --> 00:08:01,190
+we're first gonna start out with the
+ 
+
+485
+00:08:01,190 --> 00:08:07,990
+we're first gonna start out with the
+orange pineapple also these are non
+
+486
+00:08:07,990 --> 00:08:08,000
+orange pineapple also these are non
+ 
+
+487
+00:08:08,000 --> 00:08:09,760
+orange pineapple also these are non
+carbonated and as some of you may know I
+
+488
+00:08:09,760 --> 00:08:09,770
+carbonated and as some of you may know I
+ 
+
+489
+00:08:09,770 --> 00:08:11,350
+carbonated and as some of you may know I
+actually like lightly carbonated things
+
+490
+00:08:11,350 --> 00:08:11,360
+actually like lightly carbonated things
+ 
+
+491
+00:08:11,360 --> 00:08:13,390
+actually like lightly carbonated things
+or no carbonated energy drinks so it's a
+
+492
+00:08:13,390 --> 00:08:13,400
+or no carbonated energy drinks so it's a
+ 
+
+493
+00:08:13,400 --> 00:08:19,450
+or no carbonated energy drinks so it's a
+plus that these aren't carbonated also
+
+494
+00:08:19,450 --> 00:08:19,460
+plus that these aren't carbonated also
+ 
+
+495
+00:08:19,460 --> 00:08:20,740
+plus that these aren't carbonated also
+the fact that these are actually made
+
+496
+00:08:20,740 --> 00:08:20,750
+the fact that these are actually made
+ 
+
+497
+00:08:20,750 --> 00:08:22,719
+the fact that these are actually made
+with green tea extract is a good thing
+
+498
+00:08:22,719 --> 00:08:22,729
+with green tea extract is a good thing
+ 
+
+499
+00:08:22,729 --> 00:08:24,040
+with green tea extract is a good thing
+for me as well because I actually like
+
+500
+00:08:24,040 --> 00:08:24,050
+for me as well because I actually like
+ 
+
+501
+00:08:24,050 --> 00:08:25,570
+for me as well because I actually like
+things with a green tea extract because
+
+502
+00:08:25,570 --> 00:08:25,580
+things with a green tea extract because
+ 
+
+503
+00:08:25,580 --> 00:08:27,159
+things with a green tea extract because
+they are known for having a steady
+
+504
+00:08:27,159 --> 00:08:27,169
+they are known for having a steady
+ 
+
+505
+00:08:27,169 --> 00:08:29,620
+they are known for having a steady
+energy as opposed to a sugar crash take
+
+506
+00:08:29,620 --> 00:08:29,630
+energy as opposed to a sugar crash take
+ 
+
+507
+00:08:29,630 --> 00:08:33,100
+energy as opposed to a sugar crash take
+that you stupid lawsuit alright I guess
+
+508
+00:08:33,100 --> 00:08:33,110
+that you stupid lawsuit alright I guess
+ 
+
+509
+00:08:33,110 --> 00:08:34,899
+that you stupid lawsuit alright I guess
+I gotta try I'm just I don't know why
+
+510
+00:08:34,899 --> 00:08:34,909
+I gotta try I'm just I don't know why
+ 
+
+511
+00:08:34,909 --> 00:08:36,490
+I gotta try I'm just I don't know why
+I'm for passing I'm sorry if I'm taking
+
+512
+00:08:36,490 --> 00:08:36,500
+I'm for passing I'm sorry if I'm taking
+ 
+
+513
+00:08:36,500 --> 00:08:37,990
+I'm for passing I'm sorry if I'm taking
+too long in the video I'm trying to cut
+
+514
+00:08:37,990 --> 00:08:38,000
+too long in the video I'm trying to cut
+ 
+
+515
+00:08:38,000 --> 00:08:48,000
+too long in the video I'm trying to cut
+it down let's just do this
+
+516
+00:08:48,000 --> 00:08:48,010
+
+ 
+
+517
+00:08:48,010 --> 00:08:50,620
+
+okay not too bad I'm pleasantly
+
+518
+00:08:50,620 --> 00:08:50,630
+okay not too bad I'm pleasantly
+ 
+
+519
+00:08:50,630 --> 00:08:52,240
+okay not too bad I'm pleasantly
+surprised that I'm not puking right now
+
+520
+00:08:52,240 --> 00:08:52,250
+surprised that I'm not puking right now
+ 
+
+521
+00:08:52,250 --> 00:08:54,130
+surprised that I'm not puking right now
+big bonus although some of you guys
+
+522
+00:08:54,130 --> 00:08:54,140
+big bonus although some of you guys
+ 
+
+523
+00:08:54,140 --> 00:08:56,200
+big bonus although some of you guys
+probably want to watch me puke didn't ya
+
+524
+00:08:56,200 --> 00:08:56,210
+probably want to watch me puke didn't ya
+ 
+
+525
+00:08:56,210 --> 00:08:59,110
+probably want to watch me puke didn't ya
+didn't ya yeah I mean it's actually a
+
+526
+00:08:59,110 --> 00:08:59,120
+didn't ya yeah I mean it's actually a
+ 
+
+527
+00:08:59,120 --> 00:09:00,519
+didn't ya yeah I mean it's actually a
+little bit strange because I'm not
+
+528
+00:09:00,519 --> 00:09:00,529
+little bit strange because I'm not
+ 
+
+529
+00:09:00,529 --> 00:09:02,590
+little bit strange because I'm not
+getting a really strong orange or strong
+
+530
+00:09:02,590 --> 00:09:02,600
+getting a really strong orange or strong
+ 
+
+531
+00:09:02,600 --> 00:09:04,300
+getting a really strong orange or strong
+pineapple flavor which is extremely
+
+532
+00:09:04,300 --> 00:09:04,310
+pineapple flavor which is extremely
+ 
+
+533
+00:09:04,310 --> 00:09:05,980
+pineapple flavor which is extremely
+strange because I'm used to drinking
+
+534
+00:09:05,980 --> 00:09:05,990
+strange because I'm used to drinking
+ 
+
+535
+00:09:05,990 --> 00:09:07,840
+strange because I'm used to drinking
+regular energy drinks and you're usually
+
+536
+00:09:07,840 --> 00:09:07,850
+regular energy drinks and you're usually
+ 
+
+537
+00:09:07,850 --> 00:09:09,519
+regular energy drinks and you're usually
+hit with that orange I hit with that
+
+538
+00:09:09,519 --> 00:09:09,529
+hit with that orange I hit with that
+ 
+
+539
+00:09:09,529 --> 00:09:10,870
+hit with that orange I hit with that
+pineapple because orange and pineapple
+
+540
+00:09:10,870 --> 00:09:10,880
+pineapple because orange and pineapple
+ 
+
+541
+00:09:10,880 --> 00:09:13,240
+pineapple because orange and pineapple
+are both relatively strong flavors but
+
+542
+00:09:13,240 --> 00:09:13,250
+are both relatively strong flavors but
+ 
+
+543
+00:09:13,250 --> 00:09:14,440
+are both relatively strong flavors but
+I'm guessing because this is a fruit
+
+544
+00:09:14,440 --> 00:09:14,450
+I'm guessing because this is a fruit
+ 
+
+545
+00:09:14,450 --> 00:09:16,269
+I'm guessing because this is a fruit
+juice and a vegetable juice those
+
+546
+00:09:16,269 --> 00:09:16,279
+juice and a vegetable juice those
+ 
+
+547
+00:09:16,279 --> 00:09:17,740
+juice and a vegetable juice those
+flavors a little bit later it doesn't
+
+548
+00:09:17,740 --> 00:09:17,750
+flavors a little bit later it doesn't
+ 
+
+549
+00:09:17,750 --> 00:09:19,389
+flavors a little bit later it doesn't
+really taste like a vegetable juice to
+
+550
+00:09:19,389 --> 00:09:19,399
+really taste like a vegetable juice to
+ 
+
+551
+00:09:19,399 --> 00:09:21,130
+really taste like a vegetable juice to
+me and I can actually taste the
+
+552
+00:09:21,130 --> 00:09:21,140
+me and I can actually taste the
+ 
+
+553
+00:09:21,140 --> 00:09:23,050
+me and I can actually taste the
+pineapple in the orange a little bit and
+
+554
+00:09:23,050 --> 00:09:23,060
+pineapple in the orange a little bit and
+ 
+
+555
+00:09:23,060 --> 00:09:24,400
+pineapple in the orange a little bit and
+I think it's covering up any bad
+
+556
+00:09:24,400 --> 00:09:24,410
+I think it's covering up any bad
+ 
+
+557
+00:09:24,410 --> 00:09:26,199
+I think it's covering up any bad
+vegetable taste that I might be used to
+
+558
+00:09:26,199 --> 00:09:26,209
+vegetable taste that I might be used to
+ 
+
+559
+00:09:26,209 --> 00:09:26,949
+vegetable taste that I might be used to
+from the past
+
+560
+00:09:26,949 --> 00:09:26,959
+from the past
+ 
+
+561
+00:09:26,959 --> 00:09:28,510
+from the past
+am I gonna recommend these to all my
+
+562
+00:09:28,510 --> 00:09:28,520
+am I gonna recommend these to all my
+ 
+
+563
+00:09:28,520 --> 00:09:30,790
+am I gonna recommend these to all my
+energy drink friends no no no definitely
+
+564
+00:09:30,790 --> 00:09:30,800
+energy drink friends no no no definitely
+ 
+
+565
+00:09:30,800 --> 00:09:32,530
+energy drink friends no no no definitely
+not these are not your typical energy
+
+566
+00:09:32,530 --> 00:09:32,540
+not these are not your typical energy
+ 
+
+567
+00:09:32,540 --> 00:09:35,620
+not these are not your typical energy
+drink these are healthy vegetable fruit
+
+568
+00:09:35,620 --> 00:09:35,630
+drink these are healthy vegetable fruit
+ 
+
+569
+00:09:35,630 --> 00:09:36,970
+drink these are healthy vegetable fruit
+drinks so if you're looking for a
+
+570
+00:09:36,970 --> 00:09:36,980
+drinks so if you're looking for a
+ 
+
+571
+00:09:36,980 --> 00:09:38,800
+drinks so if you're looking for a
+regular energy drink make sure you stick
+
+572
+00:09:38,800 --> 00:09:38,810
+regular energy drink make sure you stick
+ 
+
+573
+00:09:38,810 --> 00:09:40,900
+regular energy drink make sure you stick
+to my other energy drink reviews if you
+
+574
+00:09:40,900 --> 00:09:40,910
+to my other energy drink reviews if you
+ 
+
+575
+00:09:40,910 --> 00:09:42,190
+to my other energy drink reviews if you
+looking for something really healthy
+
+576
+00:09:42,190 --> 00:09:42,200
+looking for something really healthy
+ 
+
+577
+00:09:42,200 --> 00:09:44,980
+looking for something really healthy
+really healthy then you're gonna want to
+
+578
+00:09:44,980 --> 00:09:44,990
+really healthy then you're gonna want to
+ 
+
+579
+00:09:44,990 --> 00:09:46,329
+really healthy then you're gonna want to
+go for something like this because it's
+
+580
+00:09:46,329 --> 00:09:46,339
+go for something like this because it's
+ 
+
+581
+00:09:46,339 --> 00:09:48,400
+go for something like this because it's
+not an energy drink it really is just a
+
+582
+00:09:48,400 --> 00:09:48,410
+not an energy drink it really is just a
+ 
+
+583
+00:09:48,410 --> 00:09:49,840
+not an energy drink it really is just a
+vegetable fruit juice that they added
+
+584
+00:09:49,840 --> 00:09:49,850
+vegetable fruit juice that they added
+ 
+
+585
+00:09:49,850 --> 00:09:52,269
+vegetable fruit juice that they added
+caffeine to and some B vitamins and some
+
+586
+00:09:52,269 --> 00:09:52,279
+caffeine to and some B vitamins and some
+ 
+
+587
+00:09:52,279 --> 00:09:54,579
+caffeine to and some B vitamins and some
+niacin and some b6 and let's move on to
+
+588
+00:09:54,579 --> 00:09:54,589
+niacin and some b6 and let's move on to
+ 
+
+589
+00:09:54,589 --> 00:09:56,260
+niacin and some b6 and let's move on to
+the next one the next one I'm going on
+
+590
+00:09:56,260 --> 00:09:56,270
+the next one the next one I'm going on
+ 
+
+591
+00:09:56,270 --> 00:09:57,820
+the next one the next one I'm going on
+to the black cherry because I'm hoping
+
+592
+00:09:57,820 --> 00:09:57,830
+to the black cherry because I'm hoping
+ 
+
+593
+00:09:57,830 --> 00:09:59,410
+to the black cherry because I'm hoping
+it tastes like soda but I know it's not
+
+594
+00:09:59,410 --> 00:09:59,420
+it tastes like soda but I know it's not
+ 
+
+595
+00:09:59,420 --> 00:10:00,940
+it tastes like soda but I know it's not
+going to because it's a vegetable or
+
+596
+00:10:00,940 --> 00:10:00,950
+going to because it's a vegetable or
+ 
+
+597
+00:10:00,950 --> 00:10:12,330
+going to because it's a vegetable or
+fruit juice but we'll see
+
+598
+00:10:12,330 --> 00:10:12,340
+
+ 
+
+599
+00:10:12,340 --> 00:10:15,520
+
+it's actually not a diet but yeah that's
+
+600
+00:10:15,520 --> 00:10:15,530
+it's actually not a diet but yeah that's
+ 
+
+601
+00:10:15,530 --> 00:10:17,500
+it's actually not a diet but yeah that's
+actually not a bad I can't say bad black
+
+602
+00:10:17,500 --> 00:10:17,510
+actually not a bad I can't say bad black
+ 
+
+603
+00:10:17,510 --> 00:10:19,180
+actually not a bad I can't say bad black
+cherry that's actually not a bad black
+
+604
+00:10:19,180 --> 00:10:19,190
+cherry that's actually not a bad black
+ 
+
+605
+00:10:19,190 --> 00:10:20,860
+cherry that's actually not a bad black
+cherry it still has a little bit of that
+
+606
+00:10:20,860 --> 00:10:20,870
+cherry it still has a little bit of that
+ 
+
+607
+00:10:20,870 --> 00:10:23,050
+cherry it still has a little bit of that
+vegetable fruit juice flavor but it's
+
+608
+00:10:23,050 --> 00:10:23,060
+vegetable fruit juice flavor but it's
+ 
+
+609
+00:10:23,060 --> 00:10:24,760
+vegetable fruit juice flavor but it's
+still overpowered by the black cherry
+
+610
+00:10:24,760 --> 00:10:24,770
+still overpowered by the black cherry
+ 
+
+611
+00:10:24,770 --> 00:10:26,620
+still overpowered by the black cherry
+flavor once again it's very different
+
+612
+00:10:26,620 --> 00:10:26,630
+flavor once again it's very different
+ 
+
+613
+00:10:26,630 --> 00:10:27,880
+flavor once again it's very different
+from all the other energy drinks that
+
+614
+00:10:27,880 --> 00:10:27,890
+from all the other energy drinks that
+ 
+
+615
+00:10:27,890 --> 00:10:29,140
+from all the other energy drinks that
+I've had this much more of a vegetable
+
+616
+00:10:29,140 --> 00:10:29,150
+I've had this much more of a vegetable
+ 
+
+617
+00:10:29,150 --> 00:10:30,760
+I've had this much more of a vegetable
+and fruit drink with a hint of black
+
+618
+00:10:30,760 --> 00:10:30,770
+and fruit drink with a hint of black
+ 
+
+619
+00:10:30,770 --> 00:10:32,350
+and fruit drink with a hint of black
+cherry but it's definitely not bad
+
+620
+00:10:32,350 --> 00:10:32,360
+cherry but it's definitely not bad
+ 
+
+621
+00:10:32,360 --> 00:10:33,550
+cherry but it's definitely not bad
+would I ever purchase these on my own
+
+622
+00:10:33,550 --> 00:10:33,560
+would I ever purchase these on my own
+ 
+
+623
+00:10:33,560 --> 00:10:35,050
+would I ever purchase these on my own
+probably not unless like I was in a
+
+624
+00:10:35,050 --> 00:10:35,060
+probably not unless like I was in a
+ 
+
+625
+00:10:35,060 --> 00:10:36,730
+probably not unless like I was in a
+hospital they said you need to drink v8
+
+626
+00:10:36,730 --> 00:10:36,740
+hospital they said you need to drink v8
+ 
+
+627
+00:10:36,740 --> 00:10:38,110
+hospital they said you need to drink v8
+to get better I said can you give me a
+
+628
+00:10:38,110 --> 00:10:38,120
+to get better I said can you give me a
+ 
+
+629
+00:10:38,120 --> 00:10:39,790
+to get better I said can you give me a
+v8 energy then please know what doctors
+
+630
+00:10:39,790 --> 00:10:39,800
+v8 energy then please know what doctors
+ 
+
+631
+00:10:39,800 --> 00:10:41,080
+v8 energy then please know what doctors
+we're not gonna have recommend caffeine
+
+632
+00:10:41,080 --> 00:10:41,090
+we're not gonna have recommend caffeine
+ 
+
+633
+00:10:41,090 --> 00:10:43,030
+we're not gonna have recommend caffeine
+to you say yeah but is v8 energy
+
+634
+00:10:43,030 --> 00:10:43,040
+to you say yeah but is v8 energy
+ 
+
+635
+00:10:43,040 --> 00:10:45,310
+to you say yeah but is v8 energy
+caffeine so it's got to be good what am
+
+636
+00:10:45,310 --> 00:10:45,320
+caffeine so it's got to be good what am
+ 
+
+637
+00:10:45,320 --> 00:10:45,970
+caffeine so it's got to be good what am
+I talking about
+
+638
+00:10:45,970 --> 00:10:45,980
+I talking about
+ 
+
+639
+00:10:45,980 --> 00:10:57,990
+I talking about
+next up is the pomegranate blueberry
+
+640
+00:10:57,990 --> 00:10:58,000
+
+ 
+
+641
+00:10:58,000 --> 00:11:00,520
+
+that's not too bad either I'm a fan of
+
+642
+00:11:00,520 --> 00:11:00,530
+that's not too bad either I'm a fan of
+ 
+
+643
+00:11:00,530 --> 00:11:02,200
+that's not too bad either I'm a fan of
+blueberry stuff as you guys might know
+
+644
+00:11:02,200 --> 00:11:02,210
+blueberry stuff as you guys might know
+ 
+
+645
+00:11:02,210 --> 00:11:03,940
+blueberry stuff as you guys might know
+I'm doing multiple drinks in my taste
+
+646
+00:11:03,940 --> 00:11:03,950
+I'm doing multiple drinks in my taste
+ 
+
+647
+00:11:03,950 --> 00:11:05,830
+I'm doing multiple drinks in my taste
+test I'm always doing multiple drinks
+
+648
+00:11:05,830 --> 00:11:05,840
+test I'm always doing multiple drinks
+ 
+
+649
+00:11:05,840 --> 00:11:08,740
+test I'm always doing multiple drinks
+that's just one who does just one now
+
+650
+00:11:08,740 --> 00:11:08,750
+that's just one who does just one now
+ 
+
+651
+00:11:08,750 --> 00:11:11,080
+that's just one who does just one now
+caffeine man no no no I never do does
+
+652
+00:11:11,080 --> 00:11:11,090
+caffeine man no no no I never do does
+ 
+
+653
+00:11:11,090 --> 00:11:14,590
+caffeine man no no no I never do does
+one I a do like five yeah but I usually
+
+654
+00:11:14,590 --> 00:11:14,600
+one I a do like five yeah but I usually
+ 
+
+655
+00:11:14,600 --> 00:11:16,600
+one I a do like five yeah but I usually
+try usually start off with the ones I
+
+656
+00:11:16,600 --> 00:11:16,610
+try usually start off with the ones I
+ 
+
+657
+00:11:16,610 --> 00:11:17,890
+try usually start off with the ones I
+don't think I'm gonna like as much I
+
+658
+00:11:17,890 --> 00:11:17,900
+don't think I'm gonna like as much I
+ 
+
+659
+00:11:17,900 --> 00:11:19,510
+don't think I'm gonna like as much I
+work my way up to the ones that I think
+
+660
+00:11:19,510 --> 00:11:19,520
+work my way up to the ones that I think
+ 
+
+661
+00:11:19,520 --> 00:11:21,190
+work my way up to the ones that I think
+are gonna be the best and this one is
+
+662
+00:11:21,190 --> 00:11:21,200
+are gonna be the best and this one is
+ 
+
+663
+00:11:21,200 --> 00:11:22,000
+are gonna be the best and this one is
+actually pretty good
+
+664
+00:11:22,000 --> 00:11:22,010
+actually pretty good
+ 
+
+665
+00:11:22,010 --> 00:11:23,770
+actually pretty good
+it's much more of a blueberry drink as
+
+666
+00:11:23,770 --> 00:11:23,780
+it's much more of a blueberry drink as
+ 
+
+667
+00:11:23,780 --> 00:11:25,300
+it's much more of a blueberry drink as
+opposed to the vegetable fruit juices
+
+668
+00:11:25,300 --> 00:11:25,310
+opposed to the vegetable fruit juices
+ 
+
+669
+00:11:25,310 --> 00:11:27,220
+opposed to the vegetable fruit juices
+like the other two I still get a hint of
+
+670
+00:11:27,220 --> 00:11:27,230
+like the other two I still get a hint of
+ 
+
+671
+00:11:27,230 --> 00:11:28,570
+like the other two I still get a hint of
+that vegetable fruit juice flavor but
+
+672
+00:11:28,570 --> 00:11:28,580
+that vegetable fruit juice flavor but
+ 
+
+673
+00:11:28,580 --> 00:11:29,950
+that vegetable fruit juice flavor but
+the blueberry and the pomegranate are
+
+674
+00:11:29,950 --> 00:11:29,960
+the blueberry and the pomegranate are
+ 
+
+675
+00:11:29,960 --> 00:11:31,690
+the blueberry and the pomegranate are
+pretty decent cover up that healthy
+
+676
+00:11:31,690 --> 00:11:31,700
+pretty decent cover up that healthy
+ 
+
+677
+00:11:31,700 --> 00:11:33,310
+pretty decent cover up that healthy
+flavor better I'm even gonna risk
+
+678
+00:11:33,310 --> 00:11:33,320
+flavor better I'm even gonna risk
+ 
+
+679
+00:11:33,320 --> 00:11:40,240
+flavor better I'm even gonna risk
+another sip not too bad
+
+680
+00:11:40,240 --> 00:11:40,250
+another sip not too bad
+ 
+
+681
+00:11:40,250 --> 00:11:42,700
+another sip not too bad
+next up is the peach mango now a lot of
+
+682
+00:11:42,700 --> 00:11:42,710
+next up is the peach mango now a lot of
+ 
+
+683
+00:11:42,710 --> 00:11:43,900
+next up is the peach mango now a lot of
+you might be saying wait is that the
+
+684
+00:11:43,900 --> 00:11:43,910
+you might be saying wait is that the
+ 
+
+685
+00:11:43,910 --> 00:11:46,060
+you might be saying wait is that the
+last one no this is the fourth one and
+
+686
+00:11:46,060 --> 00:11:46,070
+last one no this is the fourth one and
+ 
+
+687
+00:11:46,070 --> 00:11:47,500
+last one no this is the fourth one and
+those people that watch my videos know
+
+688
+00:11:47,500 --> 00:11:47,510
+those people that watch my videos know
+ 
+
+689
+00:11:47,510 --> 00:11:49,450
+those people that watch my videos know
+that peach mango is probably my favorite
+
+690
+00:11:49,450 --> 00:11:49,460
+that peach mango is probably my favorite
+ 
+
+691
+00:11:49,460 --> 00:11:51,100
+that peach mango is probably my favorite
+of all of the energy drinks besides
+
+692
+00:11:51,100 --> 00:11:51,110
+of all of the energy drinks besides
+ 
+
+693
+00:11:51,110 --> 00:11:52,960
+of all of the energy drinks besides
+coconut red ball but peach mango always
+
+694
+00:11:52,960 --> 00:11:52,970
+coconut red ball but peach mango always
+ 
+
+695
+00:11:52,970 --> 00:11:54,910
+coconut red ball but peach mango always
+tends to show up high on my list so why
+
+696
+00:11:54,910 --> 00:11:54,920
+tends to show up high on my list so why
+ 
+
+697
+00:11:54,920 --> 00:11:56,230
+tends to show up high on my list so why
+am I doing this one second to last
+
+698
+00:11:56,230 --> 00:11:56,240
+am I doing this one second to last
+ 
+
+699
+00:11:56,240 --> 00:11:57,760
+am I doing this one second to last
+because the last one is strawberry
+
+700
+00:11:57,760 --> 00:11:57,770
+because the last one is strawberry
+ 
+
+701
+00:11:57,770 --> 00:12:00,010
+because the last one is strawberry
+banana I'm a big fan of strawberry
+
+702
+00:12:00,010 --> 00:12:00,020
+banana I'm a big fan of strawberry
+ 
+
+703
+00:12:00,020 --> 00:12:01,900
+banana I'm a big fan of strawberry
+banana problem is I don't know any
+
+704
+00:12:01,900 --> 00:12:01,910
+banana problem is I don't know any
+ 
+
+705
+00:12:01,910 --> 00:12:03,250
+banana problem is I don't know any
+energy drinks they have strawberry
+
+706
+00:12:03,250 --> 00:12:03,260
+energy drinks they have strawberry
+ 
+
+707
+00:12:03,260 --> 00:12:03,790
+energy drinks they have strawberry
+banana
+
+708
+00:12:03,790 --> 00:12:03,800
+banana
+ 
+
+709
+00:12:03,800 --> 00:12:05,650
+banana
+why don't we energy drinks have banana
+
+710
+00:12:05,650 --> 00:12:05,660
+why don't we energy drinks have banana
+ 
+
+711
+00:12:05,660 --> 00:12:07,390
+why don't we energy drinks have banana
+why have my voice just go really high
+
+712
+00:12:07,390 --> 00:12:07,400
+why have my voice just go really high
+ 
+
+713
+00:12:07,400 --> 00:12:08,680
+why have my voice just go really high
+right there it just went really high
+
+714
+00:12:08,680 --> 00:12:08,690
+right there it just went really high
+ 
+
+715
+00:12:08,690 --> 00:12:09,340
+right there it just went really high
+didn't it
+
+716
+00:12:09,340 --> 00:12:09,350
+didn't it
+ 
+
+717
+00:12:09,350 --> 00:12:11,800
+didn't it
+Oh energy drinks must be kicking in but
+
+718
+00:12:11,800 --> 00:12:11,810
+Oh energy drinks must be kicking in but
+ 
+
+719
+00:12:11,810 --> 00:12:13,420
+Oh energy drinks must be kicking in but
+anyway yeah if you guys know any
+
+720
+00:12:13,420 --> 00:12:13,430
+anyway yeah if you guys know any
+ 
+
+721
+00:12:13,430 --> 00:12:15,070
+anyway yeah if you guys know any
+strawberry banana energy drinks out
+
+722
+00:12:15,070 --> 00:12:15,080
+strawberry banana energy drinks out
+ 
+
+723
+00:12:15,080 --> 00:12:16,510
+strawberry banana energy drinks out
+there let me know on the comments down
+
+724
+00:12:16,510 --> 00:12:16,520
+there let me know on the comments down
+ 
+
+725
+00:12:16,520 --> 00:12:19,120
+there let me know on the comments down
+below if not someone going with me we're
+
+726
+00:12:19,120 --> 00:12:19,130
+below if not someone going with me we're
+ 
+
+727
+00:12:19,130 --> 00:12:20,530
+below if not someone going with me we're
+gonna make a fortune doing strawberry
+
+728
+00:12:20,530 --> 00:12:20,540
+gonna make a fortune doing strawberry
+ 
+
+729
+00:12:20,540 --> 00:12:22,780
+gonna make a fortune doing strawberry
+banana energy drinks I guess I should
+
+730
+00:12:22,780 --> 00:12:22,790
+banana energy drinks I guess I should
+ 
+
+731
+00:12:22,790 --> 00:12:24,700
+banana energy drinks I guess I should
+taste that one first or I should taste
+
+732
+00:12:24,700 --> 00:12:24,710
+taste that one first or I should taste
+ 
+
+733
+00:12:24,710 --> 00:12:25,150
+taste that one first or I should taste
+this one
+
+734
+00:12:25,150 --> 00:12:25,160
+this one
+ 
+
+735
+00:12:25,160 --> 00:12:35,590
+this one
+first hmm we're back to tasting like a
+
+736
+00:12:35,590 --> 00:12:35,600
+first hmm we're back to tasting like a
+ 
+
+737
+00:12:35,600 --> 00:12:37,360
+first hmm we're back to tasting like a
+healthy fruit vegetable juice
+
+738
+00:12:37,360 --> 00:12:37,370
+healthy fruit vegetable juice
+ 
+
+739
+00:12:37,370 --> 00:12:38,889
+healthy fruit vegetable juice
+it's definitely got the hint of peach
+
+740
+00:12:38,889 --> 00:12:38,899
+it's definitely got the hint of peach
+ 
+
+741
+00:12:38,899 --> 00:12:40,509
+it's definitely got the hint of peach
+and mango definitely get that fruit
+
+742
+00:12:40,509 --> 00:12:40,519
+and mango definitely get that fruit
+ 
+
+743
+00:12:40,519 --> 00:12:42,280
+and mango definitely get that fruit
+juice vegetable juice flavor to it if
+
+744
+00:12:42,280 --> 00:12:42,290
+juice vegetable juice flavor to it if
+ 
+
+745
+00:12:42,290 --> 00:12:43,749
+juice vegetable juice flavor to it if
+you guys wanna know what I mean by the
+
+746
+00:12:43,749 --> 00:12:43,759
+you guys wanna know what I mean by the
+ 
+
+747
+00:12:43,759 --> 00:12:45,879
+you guys wanna know what I mean by the
+fruit juice vegetable flavor here's what
+
+748
+00:12:45,879 --> 00:12:45,889
+fruit juice vegetable flavor here's what
+ 
+
+749
+00:12:45,889 --> 00:12:47,199
+fruit juice vegetable flavor here's what
+I mean it tastes like fruit juice
+
+750
+00:12:47,199 --> 00:12:47,209
+I mean it tastes like fruit juice
+ 
+
+751
+00:12:47,209 --> 00:12:48,759
+I mean it tastes like fruit juice
+vegetable juice and how do I explain
+
+752
+00:12:48,759 --> 00:12:48,769
+vegetable juice and how do I explain
+ 
+
+753
+00:12:48,769 --> 00:12:50,679
+vegetable juice and how do I explain
+that I mean is that healthy vegetable
+
+754
+00:12:50,679 --> 00:12:50,689
+that I mean is that healthy vegetable
+ 
+
+755
+00:12:50,689 --> 00:12:52,179
+that I mean is that healthy vegetable
+fruit juice flavor I don't know how to
+
+756
+00:12:52,179 --> 00:12:52,189
+fruit juice flavor I don't know how to
+ 
+
+757
+00:12:52,189 --> 00:12:54,340
+fruit juice flavor I don't know how to
+describe it you know how to tell you go
+
+758
+00:12:54,340 --> 00:12:54,350
+describe it you know how to tell you go
+ 
+
+759
+00:12:54,350 --> 00:12:56,050
+describe it you know how to tell you go
+ahead and buy some v8 energy and you'll
+
+760
+00:12:56,050 --> 00:12:56,060
+ahead and buy some v8 energy and you'll
+ 
+
+761
+00:12:56,060 --> 00:12:57,280
+ahead and buy some v8 energy and you'll
+know what fruit juice vegetable juice
+
+762
+00:12:57,280 --> 00:12:57,290
+know what fruit juice vegetable juice
+ 
+
+763
+00:12:57,290 --> 00:12:58,660
+know what fruit juice vegetable juice
+tastes like actually these probably
+
+764
+00:12:58,660 --> 00:12:58,670
+tastes like actually these probably
+ 
+
+765
+00:12:58,670 --> 00:13:00,129
+tastes like actually these probably
+taste like the v8 fusion just we
+
+766
+00:13:00,129 --> 00:13:00,139
+taste like the v8 fusion just we
+ 
+
+767
+00:13:00,139 --> 00:13:02,199
+taste like the v8 fusion just we
+caffeine since I never buy me a fusion I
+
+768
+00:13:02,199 --> 00:13:02,209
+caffeine since I never buy me a fusion I
+ 
+
+769
+00:13:02,209 --> 00:13:04,300
+caffeine since I never buy me a fusion I
+wouldn't know if you drink v8 fusion and
+
+770
+00:13:04,300 --> 00:13:04,310
+wouldn't know if you drink v8 fusion and
+ 
+
+771
+00:13:04,310 --> 00:13:06,220
+wouldn't know if you drink v8 fusion and
+you think they taste like this comment
+
+772
+00:13:06,220 --> 00:13:06,230
+you think they taste like this comment
+ 
+
+773
+00:13:06,230 --> 00:13:08,499
+you think they taste like this comment
+down below how many times can I tell you
+
+774
+00:13:08,499 --> 00:13:08,509
+down below how many times can I tell you
+ 
+
+775
+00:13:08,509 --> 00:13:10,240
+down below how many times can I tell you
+guys to comment down below I can't even
+
+776
+00:13:10,240 --> 00:13:10,250
+guys to comment down below I can't even
+ 
+
+777
+00:13:10,250 --> 00:13:11,800
+guys to comment down below I can't even
+keep up with all the comments lately
+
+778
+00:13:11,800 --> 00:13:11,810
+keep up with all the comments lately
+ 
+
+779
+00:13:11,810 --> 00:13:14,379
+keep up with all the comments lately
+I mean it's nuts I actually looked up to
+
+780
+00:13:14,379 --> 00:13:14,389
+I mean it's nuts I actually looked up to
+ 
+
+781
+00:13:14,389 --> 00:13:15,939
+I mean it's nuts I actually looked up to
+see how many VA energy drinks were done
+
+782
+00:13:15,939 --> 00:13:15,949
+see how many VA energy drinks were done
+ 
+
+783
+00:13:15,949 --> 00:13:17,860
+see how many VA energy drinks were done
+for reviews that was a decent amount I
+
+784
+00:13:17,860 --> 00:13:17,870
+for reviews that was a decent amount I
+ 
+
+785
+00:13:17,870 --> 00:13:19,059
+for reviews that was a decent amount I
+said oh man I'm gonna have to compete
+
+786
+00:13:19,059 --> 00:13:19,069
+said oh man I'm gonna have to compete
+ 
+
+787
+00:13:19,069 --> 00:13:20,499
+said oh man I'm gonna have to compete
+against all those but away you guys
+
+788
+00:13:20,499 --> 00:13:20,509
+against all those but away you guys
+ 
+
+789
+00:13:20,509 --> 00:13:22,540
+against all those but away you guys
+comment I'll I'll boot them right up
+
+790
+00:13:22,540 --> 00:13:22,550
+comment I'll I'll boot them right up
+ 
+
+791
+00:13:22,550 --> 00:13:24,819
+comment I'll I'll boot them right up
+that list I'm off topic again I'm moving
+
+792
+00:13:24,819 --> 00:13:24,829
+that list I'm off topic again I'm moving
+ 
+
+793
+00:13:24,829 --> 00:13:26,139
+that list I'm off topic again I'm moving
+on to the next one I'm still aching a
+
+794
+00:13:26,139 --> 00:13:26,149
+on to the next one I'm still aching a
+ 
+
+795
+00:13:26,149 --> 00:13:27,280
+on to the next one I'm still aching a
+pomegranate blueberry a little bit
+
+796
+00:13:27,280 --> 00:13:27,290
+pomegranate blueberry a little bit
+ 
+
+797
+00:13:27,290 --> 00:13:28,689
+pomegranate blueberry a little bit
+better and hoping for the best
+
+798
+00:13:28,689 --> 00:13:28,699
+better and hoping for the best
+ 
+
+799
+00:13:28,699 --> 00:13:30,819
+better and hoping for the best
+strawberry banana next up if you
+
+800
+00:13:30,819 --> 00:13:30,829
+strawberry banana next up if you
+ 
+
+801
+00:13:30,829 --> 00:13:43,470
+strawberry banana next up if you
+couldn't have guessed strawberry banana
+
+802
+00:13:43,470 --> 00:13:43,480
+
+ 
+
+803
+00:13:43,480 --> 00:13:46,900
+
+and that is relatively delicious I made
+
+804
+00:13:46,900 --> 00:13:46,910
+and that is relatively delicious I made
+ 
+
+805
+00:13:46,910 --> 00:13:48,160
+and that is relatively delicious I made
+the right choice saving the best for
+
+806
+00:13:48,160 --> 00:13:48,170
+the right choice saving the best for
+ 
+
+807
+00:13:48,170 --> 00:13:48,639
+the right choice saving the best for
+last
+
+808
+00:13:48,639 --> 00:13:48,649
+last
+ 
+
+809
+00:13:48,649 --> 00:13:50,350
+last
+I felt strawberry banana was gonna be
+
+810
+00:13:50,350 --> 00:13:50,360
+I felt strawberry banana was gonna be
+ 
+
+811
+00:13:50,360 --> 00:13:52,150
+I felt strawberry banana was gonna be
+the best out of the five I was right for
+
+812
+00:13:52,150 --> 00:13:52,160
+the best out of the five I was right for
+ 
+
+813
+00:13:52,160 --> 00:13:53,800
+the best out of the five I was right for
+a change it still has a little bit that
+
+814
+00:13:53,800 --> 00:13:53,810
+a change it still has a little bit that
+ 
+
+815
+00:13:53,810 --> 00:13:55,360
+a change it still has a little bit that
+vegetable fruit juice taste to it but it
+
+816
+00:13:55,360 --> 00:13:55,370
+vegetable fruit juice taste to it but it
+ 
+
+817
+00:13:55,370 --> 00:13:56,470
+vegetable fruit juice taste to it but it
+really reminds me more of like a
+
+818
+00:13:56,470 --> 00:13:56,480
+really reminds me more of like a
+ 
+
+819
+00:13:56,480 --> 00:13:58,150
+really reminds me more of like a
+smoothie if you ever had yourself a
+
+820
+00:13:58,150 --> 00:13:58,160
+smoothie if you ever had yourself a
+ 
+
+821
+00:13:58,160 --> 00:13:59,650
+smoothie if you ever had yourself a
+strawberry banana smoothie then you had
+
+822
+00:13:59,650 --> 00:13:59,660
+strawberry banana smoothie then you had
+ 
+
+823
+00:13:59,660 --> 00:14:01,269
+strawberry banana smoothie then you had
+all those other things to it to make it
+
+824
+00:14:01,269 --> 00:14:01,279
+all those other things to it to make it
+ 
+
+825
+00:14:01,279 --> 00:14:02,559
+all those other things to it to make it
+healthy like you're puttin that
+
+826
+00:14:02,559 --> 00:14:02,569
+healthy like you're puttin that
+ 
+
+827
+00:14:02,569 --> 00:14:05,050
+healthy like you're puttin that
+spirulina snuck in some broccoli it
+
+828
+00:14:05,050 --> 00:14:05,060
+spirulina snuck in some broccoli it
+ 
+
+829
+00:14:05,060 --> 00:14:07,689
+spirulina snuck in some broccoli it
+snuck in some kale mixed it all up in
+
+830
+00:14:07,689 --> 00:14:07,699
+snuck in some kale mixed it all up in
+ 
+
+831
+00:14:07,699 --> 00:14:08,049
+snuck in some kale mixed it all up in
+there
+
+832
+00:14:08,049 --> 00:14:08,059
+there
+ 
+
+833
+00:14:08,059 --> 00:14:09,519
+there
+to make sure you go all your healthy
+
+834
+00:14:09,519 --> 00:14:09,529
+to make sure you go all your healthy
+ 
+
+835
+00:14:09,529 --> 00:14:11,350
+to make sure you go all your healthy
+stuff and your smoothie if you covered
+
+836
+00:14:11,350 --> 00:14:11,360
+stuff and your smoothie if you covered
+ 
+
+837
+00:14:11,360 --> 00:14:12,340
+stuff and your smoothie if you covered
+it up with strawberry and banana
+
+838
+00:14:12,340 --> 00:14:12,350
+it up with strawberry and banana
+ 
+
+839
+00:14:12,350 --> 00:14:13,780
+it up with strawberry and banana
+flavoring so you couldn't taste all
+
+840
+00:14:13,780 --> 00:14:13,790
+flavoring so you couldn't taste all
+ 
+
+841
+00:14:13,790 --> 00:14:15,340
+flavoring so you couldn't taste all
+those vegetables that's what this is
+
+842
+00:14:15,340 --> 00:14:15,350
+those vegetables that's what this is
+ 
+
+843
+00:14:15,350 --> 00:14:15,999
+those vegetables that's what this is
+right here
+
+844
+00:14:15,999 --> 00:14:16,009
+right here
+ 
+
+845
+00:14:16,009 --> 00:14:17,499
+right here
+it's your strongest favorite flavors
+
+846
+00:14:17,499 --> 00:14:17,509
+it's your strongest favorite flavors
+ 
+
+847
+00:14:17,509 --> 00:14:19,509
+it's your strongest favorite flavors
+strawberry and banana covering up all
+
+848
+00:14:19,509 --> 00:14:19,519
+strawberry and banana covering up all
+ 
+
+849
+00:14:19,519 --> 00:14:21,490
+strawberry and banana covering up all
+that other healthy stuff smart movie
+
+850
+00:14:21,490 --> 00:14:21,500
+that other healthy stuff smart movie
+ 
+
+851
+00:14:21,500 --> 00:14:28,569
+that other healthy stuff smart movie
+eight I'm having another healthy sip so
+
+852
+00:14:28,569 --> 00:14:28,579
+eight I'm having another healthy sip so
+ 
+
+853
+00:14:28,579 --> 00:14:30,549
+eight I'm having another healthy sip so
+overall if you guys are looking to get
+
+854
+00:14:30,549 --> 00:14:30,559
+overall if you guys are looking to get
+ 
+
+855
+00:14:30,559 --> 00:14:32,290
+overall if you guys are looking to get
+yourselves a healthy energy drink and I
+
+856
+00:14:32,290 --> 00:14:32,300
+yourselves a healthy energy drink and I
+ 
+
+857
+00:14:32,300 --> 00:14:34,660
+yourselves a healthy energy drink and I
+mean super healthy energy drink these
+
+858
+00:14:34,660 --> 00:14:34,670
+mean super healthy energy drink these
+ 
+
+859
+00:14:34,670 --> 00:14:36,249
+mean super healthy energy drink these
+things are your typical energy drinks
+
+860
+00:14:36,249 --> 00:14:36,259
+things are your typical energy drinks
+ 
+
+861
+00:14:36,259 --> 00:14:37,629
+things are your typical energy drinks
+they're really just a really healthy
+
+862
+00:14:37,629 --> 00:14:37,639
+they're really just a really healthy
+ 
+
+863
+00:14:37,639 --> 00:14:38,770
+they're really just a really healthy
+drink but they
+
+864
+00:14:38,770 --> 00:14:38,780
+drink but they
+ 
+
+865
+00:14:38,780 --> 00:14:40,750
+drink but they
+caffeine too and some other vitamins so
+
+866
+00:14:40,750 --> 00:14:40,760
+caffeine too and some other vitamins so
+ 
+
+867
+00:14:40,760 --> 00:14:43,270
+caffeine too and some other vitamins so
+if you like v8 you like fruit juices you
+
+868
+00:14:43,270 --> 00:14:43,280
+if you like v8 you like fruit juices you
+ 
+
+869
+00:14:43,280 --> 00:14:45,160
+if you like v8 you like fruit juices you
+like tomato juices you like all that
+
+870
+00:14:45,160 --> 00:14:45,170
+like tomato juices you like all that
+ 
+
+871
+00:14:45,170 --> 00:14:46,960
+like tomato juices you like all that
+juicy kind of stuff and you want to get
+
+872
+00:14:46,960 --> 00:14:46,970
+juicy kind of stuff and you want to get
+ 
+
+873
+00:14:46,970 --> 00:14:48,700
+juicy kind of stuff and you want to get
+a little extra energy these are gonna be
+
+874
+00:14:48,700 --> 00:14:48,710
+a little extra energy these are gonna be
+ 
+
+875
+00:14:48,710 --> 00:14:50,410
+a little extra energy these are gonna be
+great for you if you're a gamer who
+
+876
+00:14:50,410 --> 00:14:50,420
+great for you if you're a gamer who
+ 
+
+877
+00:14:50,420 --> 00:14:52,570
+great for you if you're a gamer who
+drinks the game Fuel Mountain Dew Red
+
+878
+00:14:52,570 --> 00:14:52,580
+drinks the game Fuel Mountain Dew Red
+ 
+
+879
+00:14:52,580 --> 00:14:55,180
+drinks the game Fuel Mountain Dew Red
+Bull amp spike or any of those other
+
+880
+00:14:55,180 --> 00:14:55,190
+Bull amp spike or any of those other
+ 
+
+881
+00:14:55,190 --> 00:14:57,580
+Bull amp spike or any of those other
+hardcore energy drinks stay away from
+
+882
+00:14:57,580 --> 00:14:57,590
+hardcore energy drinks stay away from
+ 
+
+883
+00:14:57,590 --> 00:15:00,580
+hardcore energy drinks stay away from
+the VA energy you're not gonna like it
+
+884
+00:15:00,580 --> 00:15:00,590
+the VA energy you're not gonna like it
+ 
+
+885
+00:15:00,590 --> 00:15:02,260
+the VA energy you're not gonna like it
+you can only unsubscribe to my channel
+
+886
+00:15:02,260 --> 00:15:02,270
+you can only unsubscribe to my channel
+ 
+
+887
+00:15:02,270 --> 00:15:03,220
+you can only unsubscribe to my channel
+or something because you're gonna find
+
+888
+00:15:03,220 --> 00:15:03,230
+or something because you're gonna find
+ 
+
+889
+00:15:03,230 --> 00:15:05,110
+or something because you're gonna find
+them super disgusting and they're not
+
+890
+00:15:05,110 --> 00:15:05,120
+them super disgusting and they're not
+ 
+
+891
+00:15:05,120 --> 00:15:07,060
+them super disgusting and they're not
+super disgusting but because you like my
+
+892
+00:15:07,060 --> 00:15:07,070
+super disgusting but because you like my
+ 
+
+893
+00:15:07,070 --> 00:15:08,080
+super disgusting but because you like my
+own dude you're probably gonna think
+
+894
+00:15:08,080 --> 00:15:08,090
+own dude you're probably gonna think
+ 
+
+895
+00:15:08,090 --> 00:15:08,740
+own dude you're probably gonna think
+they're disgusting
+
+896
+00:15:08,740 --> 00:15:08,750
+they're disgusting
+ 
+
+897
+00:15:08,750 --> 00:15:10,150
+they're disgusting
+so I know my videos are for different
+
+898
+00:15:10,150 --> 00:15:10,160
+so I know my videos are for different
+ 
+
+899
+00:15:10,160 --> 00:15:12,310
+so I know my videos are for different
+target audiences I got my gamers and I
+
+900
+00:15:12,310 --> 00:15:12,320
+target audiences I got my gamers and I
+ 
+
+901
+00:15:12,320 --> 00:15:13,810
+target audiences I got my gamers and I
+got my healthy people and a lot of those
+
+902
+00:15:13,810 --> 00:15:13,820
+got my healthy people and a lot of those
+ 
+
+903
+00:15:13,820 --> 00:15:15,790
+got my healthy people and a lot of those
+energy drinks sometimes crossover these
+
+904
+00:15:15,790 --> 00:15:15,800
+energy drinks sometimes crossover these
+ 
+
+905
+00:15:15,800 --> 00:15:18,580
+energy drinks sometimes crossover these
+do not so if you're interested in buying
+
+906
+00:15:18,580 --> 00:15:18,590
+do not so if you're interested in buying
+ 
+
+907
+00:15:18,590 --> 00:15:20,470
+do not so if you're interested in buying
+these I'll include a link to Amazon down
+
+908
+00:15:20,470 --> 00:15:20,480
+these I'll include a link to Amazon down
+ 
+
+909
+00:15:20,480 --> 00:15:22,630
+these I'll include a link to Amazon down
+below but the truth is I mean you can
+
+910
+00:15:22,630 --> 00:15:22,640
+below but the truth is I mean you can
+ 
+
+911
+00:15:22,640 --> 00:15:23,830
+below but the truth is I mean you can
+pick these up anywhere I'm gonna go
+
+912
+00:15:23,830 --> 00:15:23,840
+pick these up anywhere I'm gonna go
+ 
+
+913
+00:15:23,840 --> 00:15:25,060
+pick these up anywhere I'm gonna go
+there at Target they're probably have
+
+914
+00:15:25,060 --> 00:15:25,070
+there at Target they're probably have
+ 
+
+915
+00:15:25,070 --> 00:15:26,410
+there at Target they're probably have
+plenty of other grocery stores as well
+
+916
+00:15:26,410 --> 00:15:26,420
+plenty of other grocery stores as well
+ 
+
+917
+00:15:26,420 --> 00:15:28,900
+plenty of other grocery stores as well
+but if you like Amazon feel free to use
+
+918
+00:15:28,900 --> 00:15:28,910
+but if you like Amazon feel free to use
+ 
+
+919
+00:15:28,910 --> 00:15:30,610
+but if you like Amazon feel free to use
+the link I provided down below I'm an
+
+920
+00:15:30,610 --> 00:15:30,620
+the link I provided down below I'm an
+ 
+
+921
+00:15:30,620 --> 00:15:32,050
+the link I provided down below I'm an
+Amazon affiliate so I'll make a very
+
+922
+00:15:32,050 --> 00:15:32,060
+Amazon affiliate so I'll make a very
+ 
+
+923
+00:15:32,060 --> 00:15:34,330
+Amazon affiliate so I'll make a very
+very small Commission for my repurchase
+
+924
+00:15:34,330 --> 00:15:34,340
+very small Commission for my repurchase
+ 
+
+925
+00:15:34,340 --> 00:15:36,160
+very small Commission for my repurchase
+but hey every little bit helps me out
+
+926
+00:15:36,160 --> 00:15:36,170
+but hey every little bit helps me out
+ 
+
+927
+00:15:36,170 --> 00:15:39,070
+but hey every little bit helps me out
+because after five weeks of waiting to
+
+928
+00:15:39,070 --> 00:15:39,080
+because after five weeks of waiting to
+ 
+
+929
+00:15:39,080 --> 00:15:40,690
+because after five weeks of waiting to
+be accepted into the YouTube Partner
+
+930
+00:15:40,690 --> 00:15:40,700
+be accepted into the YouTube Partner
+ 
+
+931
+00:15:40,700 --> 00:15:43,510
+be accepted into the YouTube Partner
+Program I'm still waiting but I'm not
+
+932
+00:15:43,510 --> 00:15:43,520
+Program I'm still waiting but I'm not
+ 
+
+933
+00:15:43,520 --> 00:15:46,870
+Program I'm still waiting but I'm not
+complaining that's all I got for you so
+
+934
+00:15:46,870 --> 00:15:46,880
+complaining that's all I got for you so
+ 
+
+935
+00:15:46,880 --> 00:15:48,400
+complaining that's all I got for you so
+hopefully I'll see you guys next Tuesday
+
+936
+00:15:48,400 --> 00:15:48,410
+hopefully I'll see you guys next Tuesday
+ 
+
+937
+00:15:48,410 --> 00:15:50,080
+hopefully I'll see you guys next Tuesday
+I'm probably gonna be reviewing
+
+938
+00:15:50,080 --> 00:15:50,090
+I'm probably gonna be reviewing
+ 
+
+939
+00:15:50,090 --> 00:15:52,480
+I'm probably gonna be reviewing
+something very very very unhealthy but
+
+940
+00:15:52,480 --> 00:15:52,490
+something very very very unhealthy but
+ 
+
+941
+00:15:52,490 --> 00:15:54,070
+something very very very unhealthy but
+he's after drinking those I need to get
+
+942
+00:15:54,070 --> 00:15:54,080
+he's after drinking those I need to get
+ 
+
+943
+00:15:54,080 --> 00:15:55,630
+he's after drinking those I need to get
+some sugar in my system I need to do
+
+944
+00:15:55,630 --> 00:15:55,640
+some sugar in my system I need to do
+ 
+
+945
+00:15:55,640 --> 00:16:00,490
+some sugar in my system I need to do
+something uh-huh well I just happen to
+
+946
+00:16:00,490 --> 00:16:00,500
+something uh-huh well I just happen to
+ 
+
+947
+00:16:00,500 --> 00:16:01,660
+something uh-huh well I just happen to
+have one of these right here
+
+948
+00:16:01,660 --> 00:16:01,670
+have one of these right here
+ 
+
+949
+00:16:01,670 --> 00:16:03,520
+have one of these right here
+what pedal wait over washdown some fruit
+
+950
+00:16:03,520 --> 00:16:03,530
+what pedal wait over washdown some fruit
+ 
+
+951
+00:16:03,530 --> 00:16:08,220
+what pedal wait over washdown some fruit
+juice then with a real energy drink so
+
+952
+00:16:08,220 --> 00:16:08,230
+
+ 
+
+953
+00:16:08,230 --> 00:16:10,540
+
+until next Tuesday you guys have
+
+954
+00:16:10,540 --> 00:16:10,550
+until next Tuesday you guys have
+ 
+
+955
+00:16:10,550 --> 00:16:16,750
+until next Tuesday you guys have
+yourself a great day or night to shake
+
+956
+00:16:16,750 --> 00:16:16,760
+yourself a great day or night to shake
+ 
+
+957
+00:16:16,760 --> 00:16:18,150
+yourself a great day or night to shake
+these first
+
+958
+00:16:18,150 --> 00:16:18,160
+these first
+ 
+
+959
+00:16:18,160 --> 00:16:21,120
+these first
+do they say shake do or say shake first
+
+960
+00:16:21,120 --> 00:16:21,130
+do they say shake do or say shake first
+ 
+
+961
+00:16:21,130 --> 00:16:24,870
+do they say shake do or say shake first
+please no I want to shake it if you're
+
+962
+00:16:24,870 --> 00:16:24,880
+please no I want to shake it if you're
+ 
+
+963
+00:16:24,880 --> 00:16:28,829
+please no I want to shake it if you're
+going to explode yeah doesn't say maybe
+
+964
+00:16:28,829 --> 00:16:28,839
+going to explode yeah doesn't say maybe
+ 
+
+965
+00:16:28,839 --> 00:16:38,950
+going to explode yeah doesn't say maybe
+I'll just tip it okay
+
+966
+00:16:38,950 --> 00:16:38,960
+
+ 
+
+967
+00:16:38,960 --> 00:16:41,020
+
+you
+
