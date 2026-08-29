@@ -150,14 +150,16 @@ def shorts_only(data_dir, only_category, recheck=False):
             todo.append((video_id, video_dir))
     print(f"{len(todo)} videos to classify via the /shorts/ URL test")
     verdicts = yt_shorts.classify_many([v for v, _ in todo])
-    if verdicts.pop("__aborted__", None):
-        print("WARNING: check run aborted after consecutive failures -- consent bypass or network broken? (re-run later)")
+    aborted = bool(verdicts.pop("__aborted__", None))
+    if aborted:
+        print("WARNING: check run aborted after consecutive failures -- consent bypass or network broken? "
+              "No verdicts withdrawn; re-run on a stable connection.")
     written = unknown = 0
     for vid, video_dir in todo:
         v = verdicts.get(vid, "")
         if not v:
             unknown += 1
-            if recheck:  # withdraw a verdict that the improved test no longer supports
+            if recheck and not aborted:  # withdraw only on a HEALTHY recheck; an unstable run withdraws nothing
                 _write_extra(video_dir, {"is_short": "", "is_short_checked_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())})
             continue
         _write_extra(video_dir, {"is_short": v, "is_short_checked_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())})

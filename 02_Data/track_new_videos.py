@@ -881,8 +881,13 @@ def check_shorts(recheck_true=False, limit=None):
     aborted = verdicts.pop("__aborted__", None)
     cohort = read_csv(COHORT_PATH)  # fresh: a tick may have appended rows during a long check
     for r in cohort:
-        if r["video_id"] in verdicts:
-            r["is_short"] = verdicts[r["video_id"]]  # may be "" -> verdict withdrawn
+        v = verdicts.get(r["video_id"])
+        if v is None:
+            continue
+        if v == "" and (aborted or not recheck_true):
+            continue  # an unknown on an unstable/aborted run withdraws NOTHING (found 2026-08-29: a
+            #           Wi-Fi switch mid-run would otherwise have cleared legitimate verdicts)
+        r["is_short"] = v  # definitive, or a deliberate withdrawal on a healthy recheck
     tmp = COHORT_PATH + ".tmp"
     with open(tmp, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=header, restval="")
