@@ -117,10 +117,15 @@ STALE_LOCK_HOURS = 2.0
 # "day in my life" saturated their 5 pages (max rank 250/248), tutorial and
 # tech review saturated 3 pages (150/148), while "first impressions" peaked
 # at rank 29, "product review" at 12, "weekly vlog" at 73 and "sketch comedy"
-# at 119 -- budget they could not use. Worst-case search calls per tick =
-# 2 x sum(pages) = 2 x 40 = 80, under the 100-call daily budget. Re-tune from
-# cohort.csv search_rank: an arm whose max rank keeps hitting pages*50 is
-# still truncating; one far below it is over-budgeted.
+# at 119 -- budget they could not use. 2026-08-29: unboxing (24) and
+# tutorial still saturated (400/400, 250/250) while stand-up used 127/200
+# and sketch 97/150, so one page moved from each of those to unboxing and
+# tutorial. Worst-case search calls per tick = 2 x sum(pages) = 2 x 40 = 80,
+# under the 100-call daily budget. Re-tune from cohort.csv search_rank: an
+# arm whose max rank keeps hitting pages*50 is still truncating; one far
+# below it is over-budgeted. Note the busiest arms belong to the categories
+# closest to their 3,000 caps -- once capped they stop discovering and free
+# their calls.
 # 2026-08-27 (evening): comedy and vlogs arms re-phrased for English yield.
 # Search has no language filter, so non-English videos consume page slots
 # before the admission gate ever sees them: at order=date, admitted videos
@@ -132,10 +137,10 @@ STALE_LOCK_HOURS = 2.0
 # sketch; day-in-my-life + weekly vlogs) -- every row records its exact
 # query in discovery_source, so the two frames stay separable.
 CATEGORIES = {
-    "comedy": {"categoryId": "23", "queries": {"stand up comedy": 4, "sketch comedy": 3}},
-    "howto": {"categoryId": "26", "queries": {"tutorial": 5}},
+    "comedy": {"categoryId": "23", "queries": {"stand up comedy": 3, "sketch comedy": 2}},
+    "howto": {"categoryId": "26", "queries": {"tutorial": 6}},
     "vlogs": {"categoryId": "22", "queries": {"day in my life": 8, "weekly vlog": 2}},
-    "product_reviews": {"categoryId": "24", "queries": {"product review": 1, "unboxing": 8, "first impressions": 1}},
+    "product_reviews": {"categoryId": "24", "queries": {"product review": 1, "unboxing": 9, "first impressions": 1}},
     "tech_reviews": {"categoryId": "28", "queries": {"review": 5, "unboxing": 3}},
 }
 # Per-category cap divides max_cohort by the MAIN categories only, so the
@@ -441,7 +446,7 @@ def discover(api_key, cohort, args):
                         params["pageToken"] = page_token
                     try:
                         data = api_get("search", params)
-                    except (urllib.error.URLError, json.JSONDecodeError) as e:
+                    except Exception as e:  # URLError, OSError (connection reset), HTTPException, bad JSON -- log and continue
                         failed_calls += 1
                         log(f"discover {category}/{q}/{duration_filter}: search failed ({e}) -- continuing")
                         break
@@ -479,7 +484,7 @@ def discover(api_key, cohort, args):
             try:
                 data = api_get("videos", {"part": "contentDetails,snippet", "id": ids,
                                           "maxResults": "50", "key": api_key})
-            except (urllib.error.URLError, json.JSONDecodeError) as e:
+            except Exception as e:  # URLError, OSError (connection reset), HTTPException, bad JSON -- log and continue
                 failed_calls += 1
                 log(f"discover {category}: duration check failed ({e}) -- batch not admitted this tick")
                 continue
@@ -584,7 +589,7 @@ def snapshot(api_key, cohort, args):
         try:
             data = api_get("videos", {"part": "statistics,snippet", "id": ids,
                                       "maxResults": "50", "key": api_key})
-        except (urllib.error.URLError, json.JSONDecodeError) as e:
+        except Exception as e:  # URLError, OSError (connection reset), HTTPException, bad JSON -- log and continue
             log(f"snapshot: videos.list failed for a batch ({e}) -- those videos get no row this tick")
             continue
         returned = {item["id"]: item for item in data.get("items", [])}
@@ -632,7 +637,7 @@ def snapshot(api_key, cohort, args):
         try:
             data = api_get("channels", {"part": "statistics,snippet", "id": ",".join(batch),
                                         "maxResults": "50", "key": api_key})
-        except (urllib.error.URLError, json.JSONDecodeError) as e:
+        except Exception as e:  # URLError, OSError (connection reset), HTTPException, bad JSON -- log and continue
             log(f"snapshot: channels.list failed for a batch ({e})")
             continue
         observed = iso(utcnow())
@@ -785,7 +790,7 @@ def backfill_static(api_key):
         try:
             data = api_get("videos", {"part": "contentDetails,snippet", "id": ids,
                                       "maxResults": "50", "key": api_key})
-        except (urllib.error.URLError, json.JSONDecodeError) as e:
+        except Exception as e:  # URLError, OSError (connection reset), HTTPException, bad JSON -- log and continue
             log(f"backfill-static: videos.list failed ({e}) -- those rows stay empty, re-run to retry")
             continue
         for item in data.get("items", []):
