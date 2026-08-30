@@ -22,7 +22,7 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from .features import select_columns
 from .split import split_indices
 
-CATEGORICAL = ("meta__category",)
+CATEGORICAL = ("meta__category", "meta__language")
 MIN_LABELED_ROWS = 50  # below this a 60/20/20 grouped split is meaningless
 
 

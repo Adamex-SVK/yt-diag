@@ -9,16 +9,16 @@ Two datasets feed the project and they do **not** have the same features — Ada
 
 | Group | Prefix | What | Retrospective | Prospective |
 |---|---|---|---|---|
-| metadata | `meta__` | duration, HD, title/description length, tag count, subscriber count, caption availability, category | ✅ | ✅ (partial: no tags/description/HD) |
+| metadata | `meta__` | duration, HD, title/description length, tag count, subscriber count, uploader captions + auto-captions flags, category, uploader-declared language (primary subtag), channel age / upload count / first-upload flag, definitive Shorts verdict (`is_short`, a filter) | ✅ (language after backfill) | ✅ (static fields since 2026-08-27 + `--backfill-static`) |
 | schedule | `sched__` | publish hour (sin/cos), weekday, weekend — from a full UTC timestamp | after `backfill_published_at.py` | ✅ |
 | visual engineered | `vis__` | thumbnail + frame aggregates (`visual_features.json`) | ✅ | ❌ |
 | audio engineered | `aud__` | eGeMAPS 88 + pause stats (`audio_features.json`) | ✅ | ❌ |
-| assets | `asset__` | paths/text for the deep stage: thumbnail, frames dir, transcript, title/description | ✅ | thumbnail + title only |
-| tracker-only | `track__` | thumbnail/title change counts, snapshot count | ❌ | ✅ |
+| assets | `asset__` | paths/text for the deep stage: thumbnail, frames dir, transcript, title/description | ✅ | thumbnail + title + description (from `texts/`) |
+| tracker-only | `track__` | thumbnail / title / text (title+description+tags) change counts, snapshot count | ❌ | ✅ |
 
 Roles from `02_Data/FEATURES.md` are enforced in code: label-only columns (`view_count`, outcomes, `label`) can never be selected as inputs; `asset__` columns are never tabular inputs. `features.available_groups(df)` reports honestly what a loaded table supports.
 
-**Label**: retrospective rows carry the v2 stratified label from `compute_labels_v2.py` (`label.json`). Prospective rows get `outcome_views` interpolated at `--horizon-days` from the bracketing snapshots (NaN until a video reaches the horizon — never extrapolated) and a within-category top-quartile label among videos that reached it (a stand-in for the v2 stratification, documented as such).
+**Label**: retrospective rows carry the v2 stratified label from `compute_labels_v2.py` (`label.json`). Prospective rows get `outcome_views` interpolated at `--horizon-days` from the bracketing snapshots (NaN until a video reaches the horizon — never extrapolated) and a within-category top-quartile label computed **only among main-arm (`date_window`) videos** that reached it, and only for categories with ≥ 8 such videos (comparison arms `short_form`/`non_english` never get labels; a stand-in for the v2 stratification, documented as such). **Upload-time policy**: title/description/tags/thumbnail features come from the FIRST observation (falling back to the first stored text version for rows snapshotted before those columns existed); edits are exposed only as `track__*` counts.
 
 **Split**: channel-grouped, label-stratified 60/20/20 via `StratifiedGroupKFold` — no channel spans splits (asserted). Val is used for thresholds and model selection; the **test split is evaluated only with `--test`, once, at the end**.
 

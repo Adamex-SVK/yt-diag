@@ -27,15 +27,20 @@ One idempotent daily "tick" does everything:
      videoDuration=medium/long, over a bounded publishedAfter/Before window
      that continues from the last checkpoint (first run: now - 24h) with a
      2h overlap; every candidate's contentDetails duration is verified
-     (>= --min-duration-sec) before admission, newest-first, until the
-     per-category caps are reached
+     (>= --min-duration-sec), its uploader-declared language must start
+     with "en" (is_english), and the definitive /shorts/ URL test
+     (yt_shorts.py) must say it is not a Short, before admission,
+     newest-first, until the per-category caps are reached
   2. snapshot  -- videos.list (batched 50 per call, statistics+snippet) for
      every cohort video still inside --track-days (plus one terminal sample
      past it) whose last snapshot is older than --min-gap-hours, recording
      counts, categoryId and current title; channels.list (batched 50) for
      their channels' subscriberCount / hiddenSubscriberCount / country /
-     videoCount; then the current thumbnail of each snapshotted video is
-     downloaded, hashed, and stored only if it changed
+     videoCount / creation date; then the current thumbnail of each snapshotted video is
+     downloaded, hashed, and stored only if it changed, and its
+     title+description+tags are hashed and stored (texts/) only if changed.
+     Static fields (definition, caption, uploader-declared languages) are
+     captured once at admission; --backfill-static fills older rows.
 
 Scheduling rule: discovery once per YouTube quota day, which resets at
 midnight Pacific = 09:00 CEST -- so the discovery tick runs at 09:05 local
@@ -48,17 +53,16 @@ Designed for an OS scheduler (launchd / Task Scheduler / cron), NOT a
 long-running sleep loop: every run records exact observed_at_utc timestamps,
 so late, missed, or doubled runs never corrupt anything -- a missed day is a
 gap in the curve, a doubled run is skipped by the min-gap check. State is
-the whole 02_Data/tracking/ directory (gitignored): four CSVs (cohort,
-video/channel/thumbnail snapshots), discovery_state.json, and thumbnails/
--- when moving machines, copy ALL of it alongside this script, or thumbnail
-history is lost and the discovery window resets.
+the whole 02_Data/tracking/ directory (gitignored): five CSVs (cohort,
+video/channel/thumbnail/text snapshots), discovery_state.json, thumbnails/
+and texts/ -- when moving machines, copy ALL of it alongside this script,
+or thumbnail/text history is lost and the discovery window resets.
 
-Quota per tick: discovery is the expensive part -- up to 84 search.list
-calls at the per-category page budgets in CATEGORIES (sized to where the
-videos are: vlogs 10 pages, comedy 8, product_reviews 5, howto/tech 3;
-~50 in practice since scarce arms stop early, and far less once the big
-categories hit their caps and skip discovery), against a 100-search-calls/
-day budget, hence the run-discovery-once-a-day advice above. Snapshots are cheap per call but scale with the
+Quota per tick: discovery is the expensive part -- up to 80 search.list
+calls at the per-arm page budgets in CATEGORIES (2 duration filters x 40
+pages, sized to where the videos are; far less once categories hit their
+caps and skip discovery), against a 100-search-calls/day budget, hence the
+run-discovery-once-a-day advice above. Snapshots are cheap per call but scale with the
 cohort: ~(cohort/50) videos.list + ~(channels/50) channels.list per pass,
 ~1,200 one-unit calls/day at the mature 15,000 ceiling (~12% of budget).
 
@@ -66,6 +70,8 @@ Usage:
     python3 02_Data/track_new_videos.py                # one full tick
     python3 02_Data/track_new_videos.py --no-discover  # snapshot only
     python3 02_Data/track_new_videos.py --max-cohort 12000 --track-days 30
+    python3 02_Data/track_new_videos.py --backfill-static   # one-off: fill static fields for older rows
+    python3 02_Data/track_new_videos.py --check-shorts      # one-off: definitive Shorts verdict for older rows (no quota)
 
 Requires in project-root .env: YOUTUBE_API_KEY=... (use a dedicated key /
 Google Cloud project so tracking never competes with collection quota).
@@ -80,6 +86,9 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import yt_shorts  # noqa: E402  -- definitive Shorts check shared with backfill_published_at.py
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TRACK_DIR = os.path.join(os.path.dirname(__file__), "tracking")
@@ -106,25 +115,47 @@ STALE_LOCK_HOURS = 2.0
 #     accumulating from day 2 as insurance: if product_reviews stays too
 #     thin/noisy, the team can swap it in without losing cohort history.
 #     Swap is a team decision with Adam; until then it is tracked alongside.
-# "pages" = search pages (50 results each) per query arm x duration filter
-# per tick -- a per-category budget, NOT a uniform cap. Search quota is
-# use-it-or-lose-it, so it goes where the videos are: at a uniform 3 pages
-# the vlogs arm exhausted rank 150 on both filters and comedy came close
-# (146/124) while howto never got past page 2. Worst-case search calls per
-# tick = sum(queries x 2 filters x pages) = 16 + 6 + 20 + 30 + 12 = 84,
-# under the 100-call daily budget; ~50 in practice (scarce arms stop early
-# when a page comes back short). Re-tune from cohort.csv search_rank: an
-# arm whose max rank keeps hitting pages*50 is still truncating.
+# queries = {query: pages}: search pages (50 results each) per query arm x
+# duration filter per tick -- a PER-ARM budget, not a uniform cap. Search
+# quota is use-it-or-lose-it, so it goes where the videos are. Tuned
+# 2026-08-28 from the first tick with the English arms: unboxing (24) and
+# "day in my life" saturated their 5 pages (max rank 250/248), tutorial and
+# tech review saturated 3 pages (150/148), while "first impressions" peaked
+# at rank 29, "product review" at 12, "weekly vlog" at 73 and "sketch comedy"
+# at 119 -- budget they could not use. 2026-08-29: unboxing (24) and
+# tutorial still saturated (400/400, 250/250) while stand-up used 127/200
+# and sketch 97/150, so one page moved from each of those to unboxing and
+# tutorial. Worst-case search calls per tick = 2 x sum(pages) = 2 x 40 = 80,
+# under the 100-call daily budget. Re-tune from cohort.csv search_rank: an
+# arm whose max rank keeps hitting pages*50 is still truncating; one far
+# below it is over-budgeted. Note the busiest arms belong to the categories
+# closest to their 3,000 caps -- once capped they stop discovering and free
+# their calls.
+# 2026-08-27 (evening): comedy and vlogs arms re-phrased for English yield.
+# Search has no language filter, so non-English videos consume page slots
+# before the admission gate ever sees them: at order=date, admitted videos
+# from q="comedy" were 22% English and from q="vlog" 32% (cohort-wide). A
+# live probe of one 24h page each found the old arms at 22% / 20% and
+# "stand up comedy" 64% / "sketch comedy" 72% and "day in my life" 58% /
+# "weekly vlog" 64% ("travel vlog" only 36%). Same call budget per category,
+# ~3x the English admissions. This narrows the topical frame (stand-up +
+# sketch; day-in-my-life + weekly vlogs) -- every row records its exact
+# query in discovery_source, so the two frames stay separable.
 CATEGORIES = {
-    "comedy": {"categoryId": "23", "queries": ["comedy"], "pages": 8},
-    "howto": {"categoryId": "26", "queries": ["tutorial"], "pages": 3},
-    "vlogs": {"categoryId": "22", "queries": ["vlog"], "pages": 10},
-    "product_reviews": {"categoryId": "24", "queries": ["product review", "unboxing", "first impressions"], "pages": 5},
-    "tech_reviews": {"categoryId": "28", "queries": ["review", "unboxing"], "pages": 3},
+    "comedy": {"categoryId": "23", "queries": {"stand up comedy": 3, "sketch comedy": 2}},
+    "howto": {"categoryId": "26", "queries": {"tutorial": 6}},
+    "vlogs": {"categoryId": "22", "queries": {"day in my life": 8, "weekly vlog": 2}},
+    "product_reviews": {"categoryId": "24", "queries": {"product review": 1, "unboxing": 9, "first impressions": 1}},
+    "tech_reviews": {"categoryId": "28", "queries": {"review": 5, "unboxing": 3}},
 }
 # Per-category cap divides max_cohort by the MAIN categories only, so the
 # backup category gets the same absolute cap without shrinking the others.
 MAIN_CATEGORY_COUNT = 4
+# A uniform --discover-pages override is refused if it could exceed this many
+# search calls in one tick (the daily search budget is ~100; the per-arm
+# budgets sum to 80). Found 2026-08-27: a leftover "--discover-pages 5" on the
+# launchd agent would have meant 10 arms x 2 filters x 5 = 100 calls.
+MAX_SEARCH_CALLS_PER_TICK = 90
 
 # Raised 3,000 -> 12,000 on 2026-08-27 (team decision: storage/RAM are not
 # binding, quota is use-it-or-lose-it, and a larger clean panel lets the
@@ -135,10 +166,11 @@ MAIN_CATEGORY_COUNT = 4
 # --max-cohort is the budget for the 4 MAIN categories; each gets
 # max_cohort/4 (3,000). The backup category (tech_reviews) gets the SAME
 # per-category cap ON TOP, so the main-arm ceiling is max_cohort * 5/4 =
-# 15,000 at this default, plus the ~742 grandfathered short_form videos.
+# 15,000 at this default, plus the grandfathered comparison arms (742
+# short_form, ~1,550 non_english) which are tracked but never capped.
 # Quota at that ceiling: ~315 videos.list + ~290 channels.list per
 # snapshot pass, x2 ticks/day ~= 1,200 one-unit calls/day (~12% of
-# budget); search spend is independent of the cap (<=84 calls/day). The
+# budget); search spend is independent of the cap (<=80 calls/day). The
 # old wall-time constraint (serial thumbnail downloads) was removed by
 # parallelizing them (THUMB_WORKERS below). Scarce categories won't reach
 # their caps anyway; the raise mainly deepens comedy/howto/vlogs.
@@ -167,7 +199,50 @@ DEFAULT_DISCOVER_WINDOW_HOURS = 24
 
 COHORT_FIELDS = ["video_id", "category", "channel_id", "published_at_utc",
                  "discovered_at_utc", "discovery_source", "sampling_arm",
-                 "window_start_utc", "window_end_utc", "search_rank", "duration_sec"]
+                 "window_start_utc", "window_end_utc", "search_rank", "duration_sec",
+                 # static per-video fields captured at admission (2026-08-27):
+                 # the admission call already fetched contentDetails+snippet
+                 # and threw these away -- they are the prospective dataset's
+                 # metadata-baseline columns (FEATURES.md 1) and language.
+                 "definition", "caption_available", "default_language",
+                 "default_audio_language",
+                 # definitive Shorts verdict from the /shorts/<id> URL test
+                 # (yt_shorts.py): "true" / "false" / "" unknown. Duration is
+                 # only a proxy; this is the ground truth (added 2026-08-29).
+                 "is_short"]
+STATIC_FIELDS = ("definition", "caption_available", "default_language", "default_audio_language")
+# Found 2026-08-27 by backfilling the language fields: only ~39% of the
+# API-returned cohort declared an English language (audio, else metadata;
+# audio-language tallies: hi 29%, en 24%, en-US 9%, id, bn, pt-PT ...). relevanceLanguage=en is a ranking hint, not a
+# filter. The project's text pipeline is English-only (Whisper small.en,
+# ModernBERT on English transcripts), so the MAIN arm admits only videos
+# whose uploader-declared audio language (else metadata language) starts
+# with "en"; undeclared is rejected at admission too (in practice every
+# API-returned row declared at least one language). Rows admitted before
+# the gate that DECLARED another language were retagged to arm
+# "non_english" (kept tracked as a comparison arm, excluded from the caps),
+# like the day-1 short_form precedent. Rows whose static fields are empty
+# because the video was already deleted/private when --backfill-static ran
+# are NOT non-English -- they are main-arm attrition and keep their arm.
+ENGLISH_PREFIX = "en"
+
+
+NON_LANGUAGE_CODES = ("zxx", "und")  # 'no linguistic content' / 'undetermined' -- not a declared language
+
+
+def declared_language(static):
+    """First declared language: audio, else metadata; codes that are not
+    languages (zxx/und) are skipped. Mirrors 03_Models/ytdiag/adapters.py
+    _language() so the admission gate and the model's meta__language agree."""
+    for key in ("default_audio_language", "default_language"):
+        v = (static.get(key) or "").strip().lower()
+        if v and v.split("-")[0] not in NON_LANGUAGE_CODES:
+            return v
+    return ""
+
+
+def is_english(static):
+    return declared_language(static).startswith(ENGLISH_PREFIX)
 # Found 2026-08-26 on the day-1 cohort: at order=date, 94% of fresh uploads
 # in our categories were <=180s (Shorts ceiling; comedy was 100%). Shorts
 # have different distribution surfaces and virality dynamics than the
@@ -186,9 +261,13 @@ DISCOVERY_STATE_PATH = os.path.join(TRACK_DIR, "discovery_state.json")
 WINDOW_LOOKBACK_HOURS = 2.0
 VIDEO_SNAP_FIELDS = ["video_id", "observed_at_utc", "age_hours",
                      "view_count", "like_count", "comment_count", "status",
-                     "youtube_category_id", "title"]
+                     "youtube_category_id", "title", "description_length", "tag_count"]
 CHANNEL_SNAP_FIELDS = ["channel_id", "observed_at_utc", "subscriber_count",
-                       "hidden_subscriber_count", "channel_video_count", "country"]
+                       "hidden_subscriber_count", "channel_video_count", "country",
+                       # channel creation date (snippet.publishedAt) -> channel age at
+                       # publish and, with channel_video_count at first observation,
+                       # an is_first_upload / new-channel feature (added 2026-08-27)
+                       "channel_created_at"]
 # Thumbnails (and titles, via the snapshot rows) are captured because
 # creators CHANGE them after upload -- a common optimization tactic. The
 # retrospective dataset can only ever see the current thumbnail; this cohort
@@ -200,12 +279,23 @@ CHANNEL_SNAP_FIELDS = ["channel_id", "observed_at_utc", "subscriber_count",
 THUMBS_DIR = os.path.join(TRACK_DIR, "thumbnails")
 THUMBS_CSV_PATH = os.path.join(TRACK_DIR, "thumbnail_snapshots.csv")
 THUMB_FIELDS = ["video_id", "observed_at_utc", "sha256", "quality", "file", "changed"]
+# Title/description/tags text, same change-detection pattern as thumbnails:
+# hashed every snapshot, the full text stored only when it changed. Gives the
+# deep model its text inputs (description is not in the snapshot CSV -- up to
+# 5,000 chars x every snapshot would bloat it) and records edit events.
+TEXTS_DIR = os.path.join(TRACK_DIR, "texts")
+TEXTS_CSV_PATH = os.path.join(TRACK_DIR, "text_snapshots.csv")
+TEXT_FIELDS = ["video_id", "observed_at_utc", "sha256", "file", "changed"]
 
 
 def log(msg):
     line = f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] {msg}"
     print(line)
-    with open(LOG_PATH, "a", encoding="utf-8") as f:
+    # resolved at call time from TRACK_DIR: a test or ad-hoc run that points
+    # TRACK_DIR elsewhere must never write into the live log (found 2026-08-27:
+    # three spurious "migrated ... (11 columns)" lines came from review runs
+    # on copies that had not overridden LOG_PATH)
+    with open(os.path.join(TRACK_DIR, os.path.basename(LOG_PATH)), "a", encoding="utf-8") as f:
         f.write(line + "\n")
 
 
@@ -252,8 +342,8 @@ def parse_duration(d):
 
 
 # ---------------------------------------------------------------------------
-# State -- plain CSVs (cohort + video/channel/thumbnail snapshots; the
-# snapshot files are append-only) plus discovery_state.json and thumbnails/
+# State -- plain CSVs (cohort + video/channel/thumbnail/text snapshots; the
+# snapshot files are append-only) plus discovery_state.json, thumbnails/, texts/
 # ---------------------------------------------------------------------------
 
 def read_csv(path):
@@ -264,35 +354,39 @@ def read_csv(path):
 
 
 def append_rows(path, fields, rows):
-    ensure_fields(path, fields)
+    header = ensure_fields(path, fields)
     is_new = not os.path.exists(path)
     with open(path, "a", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=fields)
+        writer = csv.DictWriter(f, fieldnames=header, restval="")
         if is_new:
             writer.writeheader()
         writer.writerows(rows)
 
 
 def ensure_fields(path, fields):
-    """Schema migration for append-only CSVs: when a release adds columns,
-    rewrite the existing file once with the new header (old rows get empty
-    values for the new columns) so appends stay aligned."""
+    """Schema migration for append-only CSVs. Returns the EFFECTIVE header:
+    this code's `fields` plus any extra columns the file already has. Columns
+    are only ever ADDED (old rows get empty values); an older code version
+    running against a newer file must never drop the newer columns, and
+    appends always use the effective header so rows stay aligned."""
     if not os.path.exists(path):
-        return
+        return list(fields)
     with open(path, newline="", encoding="utf-8") as f:
         reader = csv.reader(f)
-        header = next(reader, None)
-    if header == fields:
-        return
+        header = next(reader, None) or []
+    effective = list(fields) + [c for c in header if c not in fields]
+    if header == effective:
+        return effective
     old_rows = read_csv(path)
     tmp = path + ".tmp"
     with open(tmp, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
+        writer = csv.DictWriter(f, fieldnames=effective, restval="")
         writer.writeheader()
         for r in old_rows:
-            writer.writerow({k: r.get(k, "") for k in fields})
+            writer.writerow({k: r.get(k, "") for k in effective})
     os.replace(tmp, path)
-    log(f"migrated {os.path.basename(path)} to new schema ({len(fields)} columns)")
+    log(f"migrated {os.path.basename(path)} to new schema ({len(effective)} columns)")
+    return effective
 
 
 # ---------------------------------------------------------------------------
@@ -302,8 +396,9 @@ def ensure_fields(path, fields):
 def discover(api_key, cohort, args):
     """Bounded-window discovery, order=date only. Each tick covers
     [previous window end - lookback, now] -- an explicit, recorded sampling
-    frame -- and pages through every nextPageToken inside it (bounded by
-    --discover-pages as a quota safety cap). order=viewCount is deliberately
+    frame -- and pages through every nextPageToken inside it (bounded by the
+    per-arm page budget in CATEGORIES, or the --discover-pages uniform
+    override, experiments only). order=viewCount is deliberately
     never used for the main cohort: it selects on an early version of the
     outcome and would bias an underperformance model toward established
     successes. A popularity-enrichment arm, if ever added, must carry its
@@ -330,17 +425,20 @@ def discover(api_key, cohort, args):
 
     new_rows = []
     dropped_short = 0
+    dropped_language = 0
+    dropped_short_verdict = 0
+    checked_verdicts = unknown_verdicts = verdict_runs_aborted = 0
     failed_calls = 0
     for category, spec in CATEGORIES.items():
         if counts.get(category, 0) >= per_category_cap:
             log(f"discover {category}: at cap ({per_category_cap}), skipping")
             continue
         candidates = []
-        for q in spec["queries"]:
+        for q, arm_pages in spec["queries"].items():
             for duration_filter in SEARCH_DURATION_FILTERS:
                 page_token = None
                 rank = 0
-                pages = spec["pages"] if args.discover_pages is None else args.discover_pages
+                pages = arm_pages if args.discover_pages is None else args.discover_pages
                 for _ in range(pages):
                     params = {
                         "part": "snippet",
@@ -359,7 +457,7 @@ def discover(api_key, cohort, args):
                         params["pageToken"] = page_token
                     try:
                         data = api_get("search", params)
-                    except (urllib.error.URLError, json.JSONDecodeError) as e:
+                    except Exception as e:  # URLError, OSError (connection reset), HTTPException, bad JSON -- log and continue
                         failed_calls += 1
                         log(f"discover {category}/{q}/{duration_filter}: search failed ({e}) -- continuing")
                         break
@@ -391,37 +489,78 @@ def discover(api_key, cohort, args):
         # already exclude <4min, but the recorded duration_sec must be the
         # authoritative contentDetails value, not an inference.
         durations = {}
+        statics = {}
         for batch in chunked(candidates):
             ids = ",".join(c["video_id"] for c in batch)
             try:
-                data = api_get("videos", {"part": "contentDetails", "id": ids,
+                data = api_get("videos", {"part": "contentDetails,snippet", "id": ids,
                                           "maxResults": "50", "key": api_key})
-            except (urllib.error.URLError, json.JSONDecodeError) as e:
+            except Exception as e:  # URLError, OSError (connection reset), HTTPException, bad JSON -- log and continue
                 failed_calls += 1
                 log(f"discover {category}: duration check failed ({e}) -- batch not admitted this tick")
                 continue
             for item in data.get("items", []):
                 durations[item["id"]] = parse_duration((item.get("contentDetails") or {}).get("duration"))
+                statics[item["id"]] = static_fields(item)
             time.sleep(0.2)
         # Admit newest-first across ALL query arms and duration filters --
         # otherwise, near the cap, earlier arms and medium-length videos
         # would always win admission by loop order, making the capped sample
         # depend on iteration order instead of the order=date frame.
+        admissible = []
         for c in sorted(candidates, key=lambda r: (r["published_at_utc"], r["video_id"]), reverse=True):
             dur = durations.get(c["video_id"])
             if dur is None or dur < args.min_duration_sec:
                 dropped_short += 1
                 continue
-            if counts.get(category, 0) >= per_category_cap:
-                break
+            if not is_english(statics.get(c["video_id"], {})):
+                dropped_language += 1
+                continue
             c["duration_sec"] = dur
-            counts[category] = counts.get(category, 0) + 1
-            new_rows.append(c)
+            c.update(statics.get(c["video_id"], {}))
+            admissible.append(c)
+        # Cap-aware definitive Shorts check (one plain HTTP request each, no
+        # quota): classify only as many survivors as the cap can still take,
+        # plus a small margin for rejections, topping up from the remainder
+        # -- never hundreds of needless page fetches near a full cap. The cap
+        # is enforced HERE, on admission, not in the filter loop above.
+        remaining = per_category_cap - counts.get(category, 0)
+        pos = 0
+        while remaining > 0 and pos < len(admissible):
+            batch = admissible[pos:pos + remaining + max(2, remaining // 10)]
+            pos += len(batch)
+            verdicts = yt_shorts.classify_many([c["video_id"] for c in batch], on_item=heartbeat)
+            if verdicts.pop("__aborted__", None):
+                verdict_runs_aborted += 1
+            for c in batch:
+                c["is_short"] = verdicts.get(c["video_id"]) or ""  # None (inconclusive) admits as unknown too
+                checked_verdicts += 1
+                if c["is_short"] == "true":
+                    dropped_short_verdict += 1
+                    continue
+                if c["is_short"] == "":
+                    unknown_verdicts += 1  # admitted (duration >= 4min already); re-checked by later ticks while the video stays available
+                if remaining <= 0:
+                    break
+                counts[category] = counts.get(category, 0) + 1
+                remaining -= 1
+                new_rows.append(c)
         log(f"discover {category}: cohort now {counts.get(category, 0)}/{per_category_cap}")
 
     if dropped_short:
         log(f"discover: {dropped_short} sub-{args.min_duration_sec}s candidates rejected "
             f"(Shorts slipping past the search duration filter)")
+    if dropped_language:
+        log(f"discover: {dropped_language} candidates rejected -- declared language not '{ENGLISH_PREFIX}*' "
+            f"(relevanceLanguage=en is only a ranking hint)")
+    if dropped_short_verdict:
+        log(f"discover: {dropped_short_verdict} candidates rejected -- the /shorts/ URL test says Short "
+            f"despite duration >= {args.min_duration_sec}s")
+    if unknown_verdicts:
+        log(f"discover: {unknown_verdicts} of {checked_verdicts} Shorts verdicts unknown -- admitted with blank "
+            f"is_short, re-checked by later ticks while the video stays available" + (f"; {verdict_runs_aborted} check run(s) ABORTED after consecutive "
+            f"failures -- consent bypass or network broken?" if verdict_runs_aborted else "")
+            + (" WARNING: EVERY verdict unknown" if unknown_verdicts == checked_verdicts and checked_verdicts >= 20 else ""))
     if new_rows:
         append_rows(COHORT_PATH, COHORT_FIELDS, new_rows)
     if failed_calls:
@@ -441,8 +580,8 @@ def discover(api_key, cohort, args):
     main_total = sum(counts.values())
     ceiling = per_category_cap * len(CATEGORIES)
     log(f"discover: window [{window_start} .. {window_end}], +{len(new_rows)} videos, "
-        f"main arm {main_total}/{ceiling} ({per_category_cap}/category x {len(CATEGORIES)} categories), "
-        f"{len(cohort) + len(new_rows) - main_total} short_form rows tracked separately")
+        f"main arm {main_total}/{ceiling} ({per_category_cap}/category x {len(CATEGORIES)} categories); "
+        f"other arms: {arm_counts(cohort)}")
     return cohort + new_rows
 
 
@@ -487,12 +626,13 @@ def snapshot(api_key, cohort, args):
 
     snap_rows = []
     thumb_jobs = []
+    text_jobs = []
     for batch in chunked(due):
         ids = ",".join(r["video_id"] for r in batch)
         try:
             data = api_get("videos", {"part": "statistics,snippet", "id": ids,
                                       "maxResults": "50", "key": api_key})
-        except (urllib.error.URLError, json.JSONDecodeError) as e:
+        except Exception as e:  # URLError, OSError (connection reset), HTTPException, bad JSON -- log and continue
             log(f"snapshot: videos.list failed for a batch ({e}) -- those videos get no row this tick")
             continue
         returned = {item["id"]: item for item in data.get("items", [])}
@@ -518,20 +658,29 @@ def snapshot(api_key, cohort, args):
                 # recorded per snapshot on purpose: creators change titles
                 # post-upload -- consecutive rows reveal every change
                 "title": snippet.get("title", ""),
+                # cheap ints per snapshot (the full text goes to texts/ on change)
+                "description_length": len(snippet.get("description") or "") if item else "",
+                "tag_count": len(snippet.get("tags") or []) if item else "",
             })
             if item:
                 thumb_jobs.append((r["video_id"], snippet.get("thumbnails") or {}, observed))
+                text_jobs.append((r["video_id"], observed, {"title": snippet.get("title", ""),
+                                                            "description": snippet.get("description", ""),
+                                                            "tags": snippet.get("tags") or []}))
         time.sleep(0.2)
     append_rows(VIDEO_SNAPSHOTS_PATH, VIDEO_SNAP_FIELDS, snap_rows)
-    snapshot_thumbnails(thumb_jobs)
+    snapshot_texts(text_jobs)  # no network: never lose the near-publish text to a thumbnail-stage failure
 
+    # channel rows BEFORE the thumbnail stage too: the adapter takes each
+    # video's channel features from the channel row at/after its first
+    # observation, so a tick that dies in thumbnails must not lose them
     chan_rows = []
     channel_ids = sorted({r["channel_id"] for r in due if r["channel_id"]})
     for batch in chunked(channel_ids):
         try:
             data = api_get("channels", {"part": "statistics,snippet", "id": ",".join(batch),
                                         "maxResults": "50", "key": api_key})
-        except (urllib.error.URLError, json.JSONDecodeError) as e:
+        except Exception as e:  # URLError, OSError (connection reset), HTTPException, bad JSON -- log and continue
             log(f"snapshot: channels.list failed for a batch ({e})")
             continue
         observed = iso(utcnow())
@@ -544,9 +693,11 @@ def snapshot(api_key, cohort, args):
                 "hidden_subscriber_count": stats.get("hiddenSubscriberCount", ""),
                 "channel_video_count": stats.get("videoCount", ""),
                 "country": (item.get("snippet") or {}).get("country", ""),
+                "channel_created_at": (item.get("snippet") or {}).get("publishedAt", ""),
             })
         time.sleep(0.2)
     append_rows(CHANNEL_SNAPSHOTS_PATH, CHANNEL_SNAP_FIELDS, chan_rows)
+    snapshot_thumbnails(thumb_jobs)
 
     missing = sum(1 for r in snap_rows if r["status"] == "missing")
     log(f"snapshot: {len(snap_rows)} video rows ({missing} missing), "
@@ -611,6 +762,176 @@ def release_lock():
         pass
 
 
+def arm_counts(cohort):
+    """Row counts of every non-main sampling arm, e.g. {'short_form': 742,
+    'non_english': 1606} -- for logs that must not lump arms together."""
+    counts = {}
+    for r in cohort:
+        arm = r.get("sampling_arm", "")
+        if arm != "date_window":
+            counts[arm] = counts.get(arm, 0) + 1
+    return counts
+
+
+def static_fields(item):
+    """Per-video fields that don't change: from a videos.list item with
+    contentDetails+snippet. Language fields are uploader-declared and often
+    empty (defaultAudioLanguage is set more often than defaultLanguage)."""
+    cd = item.get("contentDetails") or {}
+    sn = item.get("snippet") or {}
+    return {
+        "definition": cd.get("definition", ""),          # "hd" / "sd"
+        "caption_available": cd.get("caption", ""),      # "true" / "false"
+        "default_language": sn.get("defaultLanguage", ""),
+        "default_audio_language": sn.get("defaultAudioLanguage", ""),
+    }
+
+
+def snapshot_texts(text_jobs):
+    """Hash title+description+tags per snapshotted video; store the full
+    JSON only when the hash differs from the last stored version."""
+    if not text_jobs:
+        return
+    import hashlib
+
+    os.makedirs(TEXTS_DIR, exist_ok=True)
+    last_hash, versions = {}, {}
+    for row in read_csv(TEXTS_CSV_PATH):
+        last_hash[row["video_id"]] = row["sha256"]
+        if row["changed"] == "true":
+            versions[row["video_id"]] = versions.get(row["video_id"], 0) + 1
+    rows, changed = [], 0
+    for video_id, observed, text in text_jobs:
+        blob = json.dumps(text, sort_keys=True, ensure_ascii=False).encode("utf-8")
+        digest = hashlib.sha256(blob).hexdigest()
+        is_new = last_hash.get(video_id) != digest
+        fname = ""
+        if is_new:
+            n = versions.get(video_id, 0)
+            fname = f"{video_id}_v{n}.json"
+            with open(os.path.join(TEXTS_DIR, fname), "wb") as f:
+                f.write(blob)
+            versions[video_id] = n + 1
+            changed += 1
+        last_hash[video_id] = digest
+        rows.append({"video_id": video_id, "observed_at_utc": observed, "sha256": digest,
+                     "file": fname, "changed": "true" if is_new else "false"})
+    append_rows(TEXTS_CSV_PATH, TEXT_FIELDS, rows)
+    log(f"texts: {len(rows)} checked, {changed} new/changed title+description+tags stored")
+
+
+def backfill_static(api_key):
+    """One-off: fill STATIC_FIELDS for cohort rows admitted before they were
+    captured (cohort.csv is rewritten atomically). ~1 call per 50 videos."""
+    header = ensure_fields(COHORT_PATH, COHORT_FIELDS)
+    cohort = read_csv(COHORT_PATH)
+    todo = [r for r in cohort if not r.get("definition")]
+    log(f"backfill-static: {len(todo)} of {len(cohort)} cohort rows lack static fields")
+    filled = {}
+    for batch in chunked(todo):
+        ids = ",".join(r["video_id"] for r in batch)
+        try:
+            data = api_get("videos", {"part": "contentDetails,snippet", "id": ids,
+                                      "maxResults": "50", "key": api_key})
+        except Exception as e:  # URLError, OSError (connection reset), HTTPException, bad JSON -- log and continue
+            log(f"backfill-static: videos.list failed ({e}) -- those rows stay empty, re-run to retry")
+            continue
+        for item in data.get("items", []):
+            filled[item["id"]] = static_fields(item)
+        time.sleep(0.2)
+    for r in cohort:
+        if r["video_id"] in filled:
+            r.update(filled[r["video_id"]])
+        # rows not returned by the API (deleted/private) keep empty static
+        # fields and are retried on the next --backfill-static run
+    tmp = COHORT_PATH + ".tmp"
+    with open(tmp, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=header, restval="")
+        w.writeheader()
+        w.writerows({k: r.get(k, "") for k in header} for r in cohort)
+    os.replace(tmp, COHORT_PATH)
+    unfilled = [r["video_id"] for r in todo if r["video_id"] not in filled]
+    log(f"backfill-static: filled {len(filled)} rows, {len(unfilled)} still empty"
+        + (f" (not returned by the API -- deleted/private?): {' '.join(unfilled[:40])}" if unfilled else ""))
+
+
+HEAL_SHORTS_PER_TICK = 200  # blank verdicts re-examined at the start of every tick
+
+
+def latest_missing_ids():
+    """video_ids whose LATEST snapshot row says status=missing (deleted/private)."""
+    latest = {}
+    if not os.path.exists(VIDEO_SNAPSHOTS_PATH):
+        return set()  # first-ever run: nothing observed yet
+    for r in read_csv(VIDEO_SNAPSHOTS_PATH):  # append-only file: the last row per video is the newest
+        latest[r["video_id"]] = r.get("status", "")
+    return {v for v, st in latest.items() if st == "missing"}
+
+
+def check_shorts(recheck_true=False, limit=None):
+    """Fill is_short for cohort rows without a verdict via the definitive
+    /shorts/ URL test (no API quota; a few concurrent page fetches). Rows
+    whose latest snapshot is `missing` (deleted/private: unverifiable) are
+    skipped by this heal (scheduled tick and --check-shorts alike). With
+    recheck_true, rows currently "true" are re-examined, dead rows included --
+    needed after 2026-08-29, when unavailable videos were found to answer 200
+    at /shorts/ and had been called Shorts; on a healthy (non-aborted) recheck
+    a RESOLVED unknown ("": the page says the video is gone) withdraws the old
+    verdict, an inconclusive probe (None) never does. `limit` bounds the work
+    (the scheduled tick heals a few hundred blanks per run). The lock is heartbeated per fetch, and the
+    verdicts are merged into a FRESH read of cohort.csv right before the
+    atomic rewrite, so rows appended meanwhile are never clobbered."""
+    header = ensure_fields(COHORT_PATH, COHORT_FIELDS)
+    cohort = read_csv(COHORT_PATH)
+    todo = [r["video_id"] for r in cohort
+            if not r.get("is_short") or (recheck_true and r.get("is_short") == "true")]
+    gone = 0
+    if not recheck_true:
+        # the heal (scheduled tick and --check-shorts) never re-probes videos whose latest snapshot
+        # is missing: a deleted or private video cannot be verified any more, and re-asking every
+        # morning wastes minutes (2026-08-30). --recheck-shorts still probes them so a stale "true"
+        # gets withdrawn.
+        dead = latest_missing_ids()
+        kept = [v for v in todo if v not in dead]
+        gone, todo = len(todo) - len(kept), kept
+    if limit is not None:
+        todo = todo[:limit]
+    if not todo:
+        if gone:
+            log(f"check-shorts: nothing to classify ({gone} unverified rows are deleted/private videos)")
+        return 0
+    log(f"check-shorts{' (recheck true)' if recheck_true else ''}: {len(todo)} of {len(cohort)} cohort rows to classify"
+        + (f" ({gone} skipped: deleted/private)" if gone else ""))
+    verdicts = yt_shorts.classify_many(todo, on_item=heartbeat)
+    aborted = verdicts.pop("__aborted__", None)
+    cohort = read_csv(COHORT_PATH)  # fresh: a tick may have appended rows during a long check
+    for r in cohort:
+        v = verdicts.get(r["video_id"])
+        if v is None:
+            continue  # not in this batch, or an INCONCLUSIVE probe: nothing to write or withdraw
+        if v == "" and (aborted or not recheck_true):
+            continue  # an unknown on an unstable/aborted run withdraws NOTHING (found 2026-08-29: a
+            #           Wi-Fi switch mid-run would otherwise have cleared legitimate verdicts)
+        r["is_short"] = v  # definitive, or a deliberate withdrawal on a healthy recheck
+    tmp = COHORT_PATH + ".tmp"
+    with open(tmp, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=header, restval="")
+        w.writeheader()
+        w.writerows({k: r.get(k, "") for k in header} for r in cohort)
+    os.replace(tmp, COHORT_PATH)
+    got = sum(1 for v in verdicts.values() if v)
+    inconclusive = sum(1 for v in verdicts.values() if v is None)
+    arms = {}
+    for r in cohort:
+        key = (r.get("sampling_arm", ""), r.get("is_short", "") or "unknown")
+        arms[key] = arms.get(key, 0) + 1
+    log(f"check-shorts: {got} verdicts, {len(todo) - got} unknown ({inconclusive} inconclusive, retried later; "
+        f"the rest are deleted/private pages)"
+        + ("; run ABORTED after consecutive failures -- consent bypass or network broken?" if aborted else "")
+        + "; by arm: " + ", ".join(f"{a}/{v}={n}" for (a, v), n in sorted(arms.items())))
+    return got
+
+
 def fetch_url(url):
     """Plain HTTP GET returning bytes. Isolated so tests can stub it."""
     with urllib.request.urlopen(url, timeout=30) as resp:
@@ -650,8 +971,8 @@ def snapshot_thumbnails(thumb_jobs):
             return video_id, observed, None, None
         try:
             return video_id, observed, quality, fetch_url(url)
-        except (urllib.error.URLError, OSError):
-            return video_id, observed, quality, None
+        except Exception:  # URLError, OSError, http.client.IncompleteRead, ... -- one bad
+            return video_id, observed, quality, None  # download must never abort the tick
 
     rows = []
     changed = failed = 0
@@ -722,18 +1043,36 @@ def main():
                         help="main-arm admission floor (Shorts protection)")
     parser.add_argument("--no-discover", action="store_true",
                         help="snapshot only (e.g. after the cohort is full/frozen)")
+    parser.add_argument("--backfill-static", action="store_true",
+                        help="one-off: fill definition/caption/language for cohort rows admitted before 2026-08-27, then exit")
+    parser.add_argument("--check-shorts", action="store_true",
+                        help="one-off: definitive /shorts/ URL verdict for cohort rows lacking is_short, then exit (no API quota)")
+    parser.add_argument("--recheck-shorts", action="store_true",
+                        help="one-off: re-examine rows currently is_short=true (unavailable videos used to be misread as Shorts), then exit")
     args = parser.parse_args()
-    if args.discover_pages is not None and args.discover_pages < 1:
-        parser.error("--discover-pages must be >= 1 (omit it to use the per-category budgets)")
+    if args.discover_pages is not None:
+        if args.discover_pages < 1:
+            parser.error("--discover-pages must be >= 1 (omit it to use the per-category budgets)")
+        worst = sum(len(s["queries"]) for s in CATEGORIES.values()) * len(SEARCH_DURATION_FILTERS) * args.discover_pages
+        if worst > MAX_SEARCH_CALLS_PER_TICK:
+            parser.error(f"--discover-pages {args.discover_pages} means up to {worst} search calls per tick, "
+                         f"over the {MAX_SEARCH_CALLS_PER_TICK}-call safety limit (daily search budget is ~100)")
 
     if not acquire_lock():
         print(f"another tick is already running ({LOCK_PATH}) -- exiting without touching state")
         return
     try:
+        if args.check_shorts or args.recheck_shorts:  # no API quota needed: before load_api_key()
+            check_shorts(recheck_true=args.recheck_shorts)
+            return
         api_key = load_api_key()
+        if args.backfill_static:
+            backfill_static(api_key)
+            return
+        check_shorts(limit=HEAL_SHORTS_PER_TICK)  # heal blank verdicts a few hundred per tick
         cohort = read_csv(COHORT_PATH)
         main = sum(1 for r in cohort if r.get("sampling_arm") == "date_window")
-        log(f"tick start: {len(cohort)} cohort rows ({main} main arm, {len(cohort) - main} short_form)")
+        log(f"tick start: {len(cohort)} cohort rows ({main} main arm; other arms: {arm_counts(cohort)})")
         if not args.no_discover:
             cohort = discover(api_key, cohort, args)
         snapshot(api_key, cohort, args)
