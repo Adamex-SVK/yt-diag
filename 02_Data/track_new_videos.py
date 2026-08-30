@@ -533,13 +533,13 @@ def discover(api_key, cohort, args):
             if verdicts.pop("__aborted__", None):
                 verdict_runs_aborted += 1
             for c in batch:
-                c["is_short"] = verdicts.get(c["video_id"], "")
+                c["is_short"] = verdicts.get(c["video_id"]) or ""  # None (inconclusive) admits as unknown too
                 checked_verdicts += 1
                 if c["is_short"] == "true":
                     dropped_short_verdict += 1
                     continue
                 if c["is_short"] == "":
-                    unknown_verdicts += 1  # admitted (duration >= 4min already), healed by later ticks
+                    unknown_verdicts += 1  # admitted (duration >= 4min already); re-checked by later ticks while the video stays available
                 if remaining <= 0:
                     break
                 counts[category] = counts.get(category, 0) + 1
@@ -558,7 +558,7 @@ def discover(api_key, cohort, args):
             f"despite duration >= {args.min_duration_sec}s")
     if unknown_verdicts:
         log(f"discover: {unknown_verdicts} of {checked_verdicts} Shorts verdicts unknown -- admitted with blank "
-            f"is_short, re-checked by later ticks" + (f"; {verdict_runs_aborted} check run(s) ABORTED after consecutive "
+            f"is_short, re-checked by later ticks while the video stays available" + (f"; {verdict_runs_aborted} check run(s) ABORTED after consecutive "
             f"failures -- consent bypass or network broken?" if verdict_runs_aborted else "")
             + (" WARNING: EVERY verdict unknown" if unknown_verdicts == checked_verdicts and checked_verdicts >= 20 else ""))
     if new_rows:
@@ -858,32 +858,57 @@ def backfill_static(api_key):
 HEAL_SHORTS_PER_TICK = 200  # blank verdicts re-examined at the start of every tick
 
 
+def latest_missing_ids():
+    """video_ids whose LATEST snapshot row says status=missing (deleted/private)."""
+    latest = {}
+    if not os.path.exists(VIDEO_SNAPSHOTS_PATH):
+        return set()  # first-ever run: nothing observed yet
+    for r in read_csv(VIDEO_SNAPSHOTS_PATH):  # append-only file: the last row per video is the newest
+        latest[r["video_id"]] = r.get("status", "")
+    return {v for v, st in latest.items() if st == "missing"}
+
+
 def check_shorts(recheck_true=False, limit=None):
     """Fill is_short for cohort rows without a verdict via the definitive
-    /shorts/ URL test (no API quota; a few concurrent page fetches). With
-    recheck_true, rows currently "true" are re-examined -- needed after
-    2026-08-29, when unavailable videos were found to answer 200 at /shorts/
-    and had been called Shorts; a recheck that comes back unknown CLEARS the
-    old verdict. `limit` bounds the work (the scheduled tick heals a few
-    hundred blanks per run). The lock is heartbeated per fetch, and the
+    /shorts/ URL test (no API quota; a few concurrent page fetches). Rows
+    whose latest snapshot is `missing` (deleted/private: unverifiable) are
+    skipped by this heal (scheduled tick and --check-shorts alike). With
+    recheck_true, rows currently "true" are re-examined, dead rows included --
+    needed after 2026-08-29, when unavailable videos were found to answer 200
+    at /shorts/ and had been called Shorts; on a healthy (non-aborted) recheck
+    a RESOLVED unknown ("": the page says the video is gone) withdraws the old
+    verdict, an inconclusive probe (None) never does. `limit` bounds the work
+    (the scheduled tick heals a few hundred blanks per run). The lock is heartbeated per fetch, and the
     verdicts are merged into a FRESH read of cohort.csv right before the
     atomic rewrite, so rows appended meanwhile are never clobbered."""
     header = ensure_fields(COHORT_PATH, COHORT_FIELDS)
     cohort = read_csv(COHORT_PATH)
     todo = [r["video_id"] for r in cohort
             if not r.get("is_short") or (recheck_true and r.get("is_short") == "true")]
+    gone = 0
+    if not recheck_true:
+        # the heal (scheduled tick and --check-shorts) never re-probes videos whose latest snapshot
+        # is missing: a deleted or private video cannot be verified any more, and re-asking every
+        # morning wastes minutes (2026-08-30). --recheck-shorts still probes them so a stale "true"
+        # gets withdrawn.
+        dead = latest_missing_ids()
+        kept = [v for v in todo if v not in dead]
+        gone, todo = len(todo) - len(kept), kept
     if limit is not None:
         todo = todo[:limit]
     if not todo:
+        if gone:
+            log(f"check-shorts: nothing to classify ({gone} unverified rows are deleted/private videos)")
         return 0
-    log(f"check-shorts{' (recheck true)' if recheck_true else ''}: {len(todo)} of {len(cohort)} cohort rows to classify")
+    log(f"check-shorts{' (recheck true)' if recheck_true else ''}: {len(todo)} of {len(cohort)} cohort rows to classify"
+        + (f" ({gone} skipped: deleted/private)" if gone else ""))
     verdicts = yt_shorts.classify_many(todo, on_item=heartbeat)
     aborted = verdicts.pop("__aborted__", None)
     cohort = read_csv(COHORT_PATH)  # fresh: a tick may have appended rows during a long check
     for r in cohort:
         v = verdicts.get(r["video_id"])
         if v is None:
-            continue
+            continue  # not in this batch, or an INCONCLUSIVE probe: nothing to write or withdraw
         if v == "" and (aborted or not recheck_true):
             continue  # an unknown on an unstable/aborted run withdraws NOTHING (found 2026-08-29: a
             #           Wi-Fi switch mid-run would otherwise have cleared legitimate verdicts)
@@ -895,11 +920,13 @@ def check_shorts(recheck_true=False, limit=None):
         w.writerows({k: r.get(k, "") for k in header} for r in cohort)
     os.replace(tmp, COHORT_PATH)
     got = sum(1 for v in verdicts.values() if v)
+    inconclusive = sum(1 for v in verdicts.values() if v is None)
     arms = {}
     for r in cohort:
         key = (r.get("sampling_arm", ""), r.get("is_short", "") or "unknown")
         arms[key] = arms.get(key, 0) + 1
-    log(f"check-shorts: {got} verdicts, {len(todo) - got} unknown (retry later)"
+    log(f"check-shorts: {got} verdicts, {len(todo) - got} unknown ({inconclusive} inconclusive, retried later; "
+        f"the rest are deleted/private pages)"
         + ("; run ABORTED after consecutive failures -- consent bypass or network broken?" if aborted else "")
         + "; by arm: " + ", ".join(f"{a}/{v}={n}" for (a, v), n in sorted(arms.items())))
     return got

@@ -154,17 +154,21 @@ def shorts_only(data_dir, only_category, recheck=False):
     if aborted:
         print("WARNING: check run aborted after consecutive failures -- consent bypass or network broken? "
               "No verdicts withdrawn; re-run on a stable connection.")
-    written = unknown = 0
+    written = unknown = inconclusive = 0
     for vid, video_dir in todo:
-        v = verdicts.get(vid, "")
-        if not v:
+        v = verdicts.get(vid)
+        if v is None:  # inconclusive probe (consent page, network, rate limit): never write or withdraw
+            inconclusive += 1
+            continue
+        if not v:  # resolved unknown: the page says the video is deleted/private
             unknown += 1
             if recheck and not aborted:  # withdraw only on a HEALTHY recheck; an unstable run withdraws nothing
                 _write_extra(video_dir, {"is_short": "", "is_short_checked_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())})
             continue
         _write_extra(video_dir, {"is_short": v, "is_short_checked_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())})
         written += 1
-    print(f"Done: {written} verdicts written, {unknown} unknown" + (" (withdrawn)" if recheck else " (re-run to retry)"))
+    print(f"Done: {written} verdicts written, {unknown} unknown (deleted/private"
+          + (", withdrawn)" if recheck and not aborted else ")") + f", {inconclusive} inconclusive (re-run to retry)")
 
 
 def chunked(items, size=50):
@@ -182,7 +186,8 @@ def main():
                              "for every .done video lacking a verdict; API fields are left for a later full run")
     parser.add_argument("--recheck", action="store_true",
                         help="with --shorts-only: re-examine videos currently is_short=true (unavailable videos "
-                             "used to be misread as Shorts); an unknown result withdraws the old verdict")
+                             "used to be misread as Shorts); a deleted/private page withdraws the old verdict, "
+                             "but only on a healthy (non-aborted) run -- inconclusive probes never do")
     args = parser.parse_args()
 
     if args.shorts_only:
