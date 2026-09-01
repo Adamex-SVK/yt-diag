@@ -1,0 +1,23 @@
+how to convert any low resolution photo
+into high resolution in photoshop
+here is the very low resolution photo we
+can't use this to share online due to
+the lack of quality
+but luckily you can improve image
+resolution in photoshop with a simple
+technique
+open preferences from the edit menu then
+choose technology previews
+in here enable preserve details 2.0
+update
+hit ok
+then go to the image size option and
+increase the resolution of the image
+check to resample and choose to preserve
+details 2.0
+if the final image looks too much sharp
+try reduce noise slider to balance
+between smoothness and texture
+here is high resolution image
+thanks for watching
+please subscribe

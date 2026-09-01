@@ -1,0 +1,18 @@
+Learning CapCut day 25. Today, we will
+learn how to create this type of trend
+neon effect transition the two in very
+simple steps.
+Duplicate the clip and move it down. Cut
+the clip from the middle. Go to effects
+and select [music] neon outline. Go to
+object and select overlay. Duplicate the
+effect and [music] apply it to the next
+clip. Go to object and select overlay.
+Go to mask and select [music]
+horizontal. Rotate it to minus 90°. Go
+to mask again, select horizontal and
+rotate [music] it to 90°. Add one
+keyframe at the start and another at the
+end. Go to splice and set it to 0%.
+[music] Apply the same steps to the next
+clip. Thanks for watching.

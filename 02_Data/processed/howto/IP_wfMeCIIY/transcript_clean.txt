@@ -1,0 +1,1670 @@
+hi I'm Tony nor and this is a free 1hour
+tutorial for the Canon 5D Mark I if you
+have a different camera you can go to
+this URL sdp.io tutorials and we have
+tutorials for just about every camera
+out there you can share that with your
+friends first I'm not going to cover
+every little menu item and nitpicky
+thing in the camera I'm just going to
+cover those things that I think are
+valuable to photographers I'm also not
+going to go over super Elementary
+aspects of Photography because I'm going
+to assume if you're using this Pro body
+that you at least have some experience
+with photography but I will keep in mind
+that you might be switching over from
+Sony or Nikon or some other system so
+I'll explain some of the basics if I
+bore you look at the description down
+below you can jump ahead to different
+parts of the video if you already know
+everything about the camera I do have
+lens recommendations at the end of the
+video so you might skip forward to those
+things let's get started uh I want to
+talk a little bit about the battery it
+uses the lp e6n battery which which is
+basically the same battery since the
+Canon 5D Mark II so you can continue to
+use your old batteries if you're
+upgrading I just want to mention go
+ahead and get at least one more of these
+I I found that a single battery can last
+you a couple of days of normal travel
+shooting or you can probably get through
+a typical wedding with a single battery
+uh however if you're shooting video it's
+going to run out faster and you don't
+ever really want to be stranded you have
+to use the battery charger you can't USB
+charge charge these things and beware of
+generic non-canon batteries because they
+will work but I find that they work
+great for some number of weeks two three
+weeks maybe six weeks and then they
+start to die really quickly so as a
+result I simply don't use them anymore
+let's move on to the memory cards this
+camera if you pull this slot back it has
+two memory cards One SD card one CF
+card the CF card is probably going to be
+your primary card because the if
+interface tends to be a little bit
+faster however I strongly encourage you
+to populate both slots with cards of
+equal size and the bigger the better and
+then configure the camera to write to
+both cards simultaneously because while
+not everybody has had a memory card
+failure maybe most people haven't they
+do fail I've had three I think three or
+four fail over the course of my career
+so it happens and if you're in the
+middle of a wedding and your card fails
+you might end up with a very pissed off
+family and you might end up losing a
+client and actually might impact your
+career once the reviews come in if you
+care about your pictures use two memory
+card slots and configure it to write to
+both I'll show you how to do that
+quickly Once you turn the camera on with
+this switch there hit the menu button
+and then right it's the very first thing
+here uh under oops I forgot I go tap in
+the screen so go to the wrench icon up
+here and then on page one go to record
+function and card folder selection and
+for record function set that to record
+to multiple and you can see now it's
+recording to both memory cards
+simultaneously you'll notice if it plays
+back it's playing back from the CF card
+by default uh if you record video it
+will not record to both cards
+simultaneously it'll just record to
+probably your CF card one more point
+about the memory cards if you're
+recording 4K video the codec that this
+camera uses is exceptionally inefficient
+as a result 128 gig card like those that
+I tend to use only stores about 30
+minutes a video so buy bigger cards than
+you think you might need like a 256 card
+would just get you an hour of video it's
+definitely not too much let's go over
+the physical ports on the camera I'm
+assuming you can figure out the memory
+card and Battery slots okay over here on
+the side you can see up here at the top
+you have a PC sync cord hopefully you're
+not using this anymore it's a hold over
+from the early 1910s and 20s I think
+that was common and it's terribly
+unreliable and since fall out but you
+can still trigger just about any flash
+with it pull this over open and you can
+see your video connectors the mic jack
+up here and the headphone jack down here
+if you're recording audio you'll want to
+be using both of those and if you're not
+then you're probably doing something
+wrong the other little rubbered sleeve
+here is covering up your HDMI port and
+your usb3 Port this is a mini HDMI port
+here you could use it to go out to a
+field recorder when you record video
+however it only outputs 1080p through
+the the mini HDMI port it does not
+output 4K video so you could use it to
+monitor something or to record a lower
+quality feed through a field monitor but
+you can't look at your 4K video that way
+the other Port here is the usb3 port
+that's exceptionally useful for
+tethering in our studio we have a
+separate video about this but we connect
+by USB 3 into a computer running capture
+one and that makes the workflow go much
+much faster if you had a previous Canon
+you'll be surprised by this but the
+remote connector for like a remote sync
+uh a remote trigger shutter trigger is
+here on the front now it's just used to
+be on the side now it's on the front
+otherwise you can still use your same
+remote triggers if you had a 5D Mark II
+or an earlier
+camera once you take a picture uh I just
+want to show you quickly I'm just going
+to take a picture here it'll pop up on
+the screen automatically you can review
+it by pressing the play button there hit
+the info button over here in the upper
+left corner to cycle through different
+bits of information about it so you can
+see if I press it once it shows me the
+shutter speed the aperture the iso as
+well as you know the format of a large
+JPEG and if I push it again it'll
+actually show me the histogram which
+tells me how bright or dark the picture
+is if you don't know what a histogram is
+I have a book stuning digital
+photography chapter 4 will tell you what
+the histogram is um that's about what
+there is to know about uh reviewing
+pictures one thing I really like about
+these Canon cameras is this rate button
+so if I love that picture let's you know
+what I have some other pictures here's
+some pictures of my kid playing soccer
+I'll hit the right button and press it
+once and it sets it to one star so if I
+think that's a fourstar picture I can
+rate it as four stars then when I import
+it into Lightroom or my other photo
+editing software it'll come up as being
+four stars that way when you're in the
+field and you find a picture that you
+like and you want to remember you can
+set it to four or five stars and when
+you import them you'll be able to
+quickly find that picture I just it's a
+simple thing but I find it really really
+really useful if you're viewing pictures
+and you decide you want to delete a
+picture of course there's a trash can
+here you can press the trash can and
+then touch eras or scroll over with a
+scroll wheel there is an option for
+changing erase to be the default so you
+don't have to scroll over every time and
+I find that really speeds things up so
+I'll show you how to do that now hit the
+menu
+button scroll over to the custom camera
+settings option here
+and then on page four scroll down to
+default erase option select that and set
+it to erase selected so with that set
+when I review a picture and I hit the
+erase button Now erase is set by default
+so if you need to go through and delete
+10 pictures you can just quickly hit
+play set play set play set play set and
+that will erase those pictures in
+sequence it just makes things much
+faster and easier your live view this
+camera has great live view capabilities
+you can start live view at any time by
+hitting the start stop button here what
+this does is it flips up the viewfinder
+the the mirror in the view that sends
+there's a mirror in here that sends
+light up here to your viewfinders and
+that's what you see when you hold it up
+to your eye it flips that out of the way
+so that the sensor is getting a live
+feed of the video of of the world around
+you and it shows it on the back screen
+here live view is good on this camera
+because the live view focusing is really
+good so I can just touch the screen here
+and it should focus it for me well it
+wants me to push F on oh I see it's
+okay so you can touch to focus the
+screen you can also push afon to focus
+just like when you're reviewing a
+picture you can press the info button
+multiple times to view different bits of
+information so if I am in my view I
+really like to have the histogram on
+because that tells me more about the
+exposure so by looking at the histogram
+here I can see well nothing's in the
+right quarter of the histogram so I know
+it's a little underexposed and I can
+just crank up the exposure comp ation
+here and see the changes in real time to
+both the preview and to the histogram
+live view is really terribly useful I
+will warn you though because there's no
+articulating screen if you get download
+to the ground or over your head it can
+be a little bit hard to see um one way
+to work around that is to hook up your
+phone's Wi-Fi app so you can get a
+stream of real time data to your phone
+I'll show you how to use the Wi-Fi app
+in just a little bit as I demonstrated
+earlier this camera has a touchreen
+screen and it's kind of the first for
+the 5D series which is why I wanted to
+mention it you can interact with menus
+and of course touch the focus I'll show
+you the Q menu here you see the Q button
+it takes you to a lot of just really
+useful kind of quick settings that you
+might frequently change so you can get
+to these through other shortcut buttons
+too but it's it's handy to remember that
+Q button is there especially if you're
+unfamiliar with the camera like if I
+want to change from one shot focusing to
+Servo I can do that by just pressing the
+Q button and uh making those changes I
+could also quickly change to change you
+know my jpeg settings for the different
+memory
+cards there you go just switch to Raw
+all by using the touchcreen
+um if you're an experienced photographer
+you might not be accustomed to using the
+test string but I strongly encourage you
+to give it a shot like try it out and
+get used to it in particular it's really
+useful review for reviewing pictures CU
+I might need to make sure that I got
+this sharp picture and with the older
+5DS you had to hit the little magnify
+button over here and then Zoom way in
+and this is just so much faster to zoom
+right in and pan around and then I can
+just switch to a previous picture and
+pan around and make sure that I got the
+shot trust me once you get to use the
+once you become in the habit of using
+the touch screen you're going to really
+appreciate it I want to talk a bit about
+Canon's ITR feature ITR is intelligent
+tracking and recognition this is a
+feature that I think is new to the 5D
+series but it's been in like the 7D Mark
+I and the Canon 1dx Mark I and 1dx
+original it will spot a subject that you
+focus on and then follow it as it moves
+across the frame so if a subject moves
+from the right side of the frame to the
+left side of the frame it can track it I
+want to make a couple of points about it
+it's turned on by default and it's
+configured to find Faces by default so
+you don't need to turn it on and I I
+suggest leaving it on the default
+however we'll talk about focusing groups
+in a little bit it only works when you
+have have uh the group AF
+or uh full all auto all autofocus points
+turned on so you cannot use ITR with a
+single autofocus point or with a a small
+group of autofocus points only with the
+larger groups of autofocus points and to
+me that kind of limits the usefulness of
+it I just wanted to save you the time of
+trying to figure out how that feature
+actually works something that causes a
+lot of problems for people is the
+diopter the diopter is like an ability
+to dial in a glasses prescription into
+your viewfinder so if your glass is wear
+you can take your glasses off and hold
+this up and see everything sharp I'm
+wearing contacts right now but when I
+don't have my contacts in I really like
+to use it the diopter is located here
+just to on the on the right side of the
+viewfinder so what you want to do is
+hold the camera up to your eye make sure
+you have live view turned off and look
+at the numbers at the bottom don't look
+through the viewfinder CU things might
+be out of focus but rather look at the
+the numbers like like the iso number and
+turn that diopter until everything is
+nice and
+sharp if you change the diopter and you
+hand the camera to somebody else
+everything's going to be blurry if you
+pick up your camera and it seems like
+the camera won't focus or everything is
+blurry check the diopter it sometimes
+get gets hit accidentally but a lot of
+people think their camera's broken like
+they can't get anything to focus anymore
+and it's really just a little twist of
+the diopter let's talk about aperture
+priority now because this is a prograde
+camera I'm going to assume that you know
+the basics of when you should use
+aperture shutter priority manual mode
+Etc but maybe you're coming from Nikon
+where the mode buttons work a little bit
+different the 5D Series has a mode dial
+over here and you can see TV here stands
+for shutter priority I'm going to push
+this center button in and then twist
+that over to AV which is Aperture value
+it's aperture priority you can see when
+you don't have this button pushed in you
+can't twist it so when you do want to
+twist it you have to push it in and
+twist it like that this button used to
+get hit all the time in the original 5D
+so it was a real godsend when they added
+in that extra button if you don't know
+what I'm talking about when I'm talking
+about f-stops and aperture visit this
+URL sdp.io fstop and I'll walk you
+through the whole process or check out
+chapter 4 in my book stunning digital
+photography quickly aperture priority
+gives you direct control over the f-stop
+allowing you to use a small f-stop
+number which equates to a large opening
+of the lens or high f- stop number which
+may gives you a little small opening on
+the lens once you have the mode dial set
+to AV you will use the main dial here to
+change the aperture so if we look at the
+LCD screen on top here we can see now
+it's set to f2.8 you know what I will
+turn on I'll hit info here to show the
+information on the back of the screen
+because it's easier to
+see so now it's set to F28 here I can
+turn the dial to the right and use a
+higher f-stop number or to the left to
+use a smaller f-stop
+number you can't touch the info screen
+for some reason so you still have to use
+the main dial there this is a
+demonstration of how it might impact
+your pictures white open with a small
+f-stop number you can see Chelsea there
+on the left the background is extremely
+blurred as we use higher f-stop numbers
+the background starts to become clear
+providing more context to the image but
+perhaps adding more distracting elements
+in as well talk about shutter priority
+as I mentioned earlier it's indicated by
+TV on the mode dial here rather than S
+as in every other camera system once you
+switch to TV the main di here changes
+personalities whereas before this
+changed the aperture now it changes the
+shutter speed that's different from
+other camera systems so you can see by
+scrolling to the right I can go all the
+way up to 1 18,000 of a second or I can
+scroll to the left to go down and down
+down and one quote mark means one full
+second six quote marks means 6 seconds
+and it will go all the way up to 30
+seconds kind of an arbitrary limit
+limit if you want to know more about
+shutter speed and shutter priority visit
+this URL sdp.io
+settings but to quickly demonstrate the
+reason you might want to control it is
+to either show or freeze Motion in your
+picture three pictures of my daughter
+here on the left you can see at 1/8 of a
+second she's on one of these spinning
+marry go rounds at 1/8 the background's
+very blurry at 130 if the background is
+showing some detail but there's still
+some blur and then when I switch to 11
+12 fifth we're still moving but the
+background is completely Frozen that's
+the kind of situation where you want to
+pull out shutter priority like sports
+and action and that kind of thing manual
+mode gives you control over both your
+shutter speed and your aperture
+simultaneously to select manual mode
+push in the center button on the mode D
+here and switch over to M now the main D
+here gives you control over your shutter
+speed just like it did in shutter
+priority to control your aperture you'll
+use a secondary dial here on the back
+back and those are the important
+settings now you might notice that you
+now can't change your exposure
+compensation exposure compensation does
+matter because you have auto
+ISO um what you can do is to switch back
+into say aperture priority mode and then
+move the secondary dial so here you can
+see I'm adding in exposure compensation
+I'm at plus two stops if I go back to
+manual mode now it will retain that
+increased exposure compensation so if
+you are using auto ISO in manual mode
+and you want exposure compensation
+switch over to shutter priority or
+aperture priority use a secondary dial
+to dial that exposure compensation in
+and then switch back to manual mode
+that's different from some earlier Canon
+cameras I'm going to give you a couple
+of links here in case you want to dive
+deeper into a specific topic of
+Photography if you want to know more
+about night photography visit this link
+sdp.io
+and P if you want to know more about
+landscape photography visit sdp.io
+LS if you want to know more about
+Wildlife visit sdp.io
+WL covered that
+already for more information about
+manual mode visit sdp.io slgo manual
+bulb mode allows you to use shutter
+speeds longer than 30 seconds to use
+bulb mode set the mode dial here from M
+over to b b is bulb mode and now what it
+will do is it will keep the shutter open
+for as long as you hold your finger on
+the shutter button here that seems weird
+you wouldn't want to do a one minute
+exposure by holding your finger like
+this for one minute right chances are
+good you check the camera and you'd
+probably get bored so in those cases the
+most likely thing that you'll do is to
+pull off this cover here and hook up
+your remote shutter timer Canon makes a
+remote shutter timer but it's way
+overpriced uh the shutter timer I
+usually use I would just just go to
+Amazon and search for Canon 5D remote
+shutter timer and pick up one of the
+ones that's under 20 bucks there's not a
+particular name for them because there's
+a Chinese manufacturer that makes them
+but they resell them under a bunch of
+different brands so typically they're
+under 20 bucks and that's what I've used
+for more than a decade they work just
+fine you can pick up a shutter timer
+that works for earlier 5DS like the 5D
+Mark I or the original 5D and it should
+work just fine I'm going to take one
+minute and just plug my books I have a
+bunch of books stunning digital
+photography is perfect if you're trying
+to learn the Art and Science of
+Photography I'm telling you how to use
+the buttons on your camera but that
+doesn't teach you about the important
+aspects of Photography like mood and
+expression and lighting and storytelling
+I cover all that in photography and dig
+deep into specific topics like portraits
+and weddings and Wildlife and Landscapes
+even things like HDR and underwater
+photography macro photography I cover
+all that here and it comes free with 14
+hours of video training so if you're not
+into books you can just watch the 14
+hours of video it's the ebook is 10
+bucks so that's incredibly cheap for
+that much video training not to mention
+the actual book Lightroom is the way
+that I do most of my postprocessing and
+organize my pictures you're probably
+already using Lightroom if you have a 5D
+if you want to learn how to actually get
+the most out of Lightroom check out my
+Lightroom book like this book it comes
+with 14 hours of video that's a ton of
+video training goes well to complement
+the book itself Photoshop for the heavy
+lifting when you really need to make a
+picture perfect in post I have a book on
+Photoshop now and like the other books
+it's a full book but it also comes with
+10 hours of video training and it's an
+awesome price and if you have questions
+about which lens tripod Studio lighting
+or just about any other type of gear to
+get check out my photography buying Guy
+this is the big boy it's really big fat
+book you can get them all at Amazon or
+just about any other bookstore or you
+can order them direct from us we ship
+worldwide at sdp.io store the ebooks
+start at 10 bucks and the paperbacks are
+just a little bit more let's talk about
+the different shutter modes by default
+the camera will come in single shutter
+mode and that means when you push the
+button let's switch over to program mode
+here it's just going to take one picture
+to set it to continuous mode hit the
+drive button up here the second button
+and then click a uh click the secondary
+dial here until you'll see looks like a
+stack of copies and then an H
+that turns you into continuous
+mode and now as long as you hold the
+shutter down it will keep firing up
+until the point when it fills its buffer
+so you can see it stopped firing there
+that's because it it filled its buffer
+if you get frustrated because it fills
+its buffer too quickly there are a
+couple of things you can do for one you
+could just switch from raw to jpeg JPEG
+files are smaller they store faster
+therefore you won't run out of buffer as
+quickly the other option is to get
+faster cards if you're riding to both
+memory cards it's going to buffer even
+faster than normal so you could write to
+one card as well though again you take
+that risk that that card will fail get
+both get fast cards for both slots and
+that will increase the number of shots
+you can get consecutively before it
+starts to buffer there are some other
+shutter modes and I'll use the the back
+screen here U when I push the drive
+button and then use the secondary dial
+here you can see there's continuous high
+and continuous low continuous low sounds
+like this
+because sometimes seven frames a second
+The Continuous High speeded is a little
+bit too fast you don't want to
+necessarily take all that many pictures
+you can also do silent single shooting
+and that's a misnomer because it's not
+actually silent but is
+quieter so that's perfect if you're
+shooting a wedding and it's at that
+quiet part of the ceremony and you don't
+want to disturb people or if you're a
+photojournalist and you're shooting some
+sort of scene where you want to be as
+discreet as possible things like street
+photography silent shooting is perfect
+for that there's also a silent
+continuous shooting mode which keeps
+shooting as long as you hold the your
+finger on the shutter and two self
+timers one 10-second self timer and one
+two second self timer the 10-second self
+timer is for those times when you put
+the camera on a tripod and then you go
+run around behind your family and put
+your arm around them and everybody
+Smiles uh the 2cond self-timer is good
+for when you have the camera on a tripod
+you have live view to lock the mirror
+open and you want to get the sharpest
+picture possible possible because it
+will the 2cond delay will eliminate any
+shake you introduce to the camera by
+pressing the shutter button uh rather
+than do the uh 10-second timer I'm going
+to show you how to use the Interval
+Timer in just a second but first let's
+talk about focusing modes that was the
+shutter modes now we'll do the focusing
+modes it's on the same button however
+you can see it says Drive AF so I'll
+push that same button here and now I can
+switch use the main D to switch between
+three different modes one shot AI Focus
+I touched it I always forget it has a
+touch screen one shot AI focus and AI
+Servo one shot seeks focus and then
+freezes as soon as it finds Focus AI
+Servo continues to seek out uh sharp
+focus on a subject even though it's
+moving now on low-end cameras like the
+T6 or T5 I would use one shot for almost
+anything on this camera this has a
+fantastic focusing system it's amazing
+therefore I use continuous focusing all
+the time because the fact is as long as
+you're handholding the camera there's
+always a little bit of movement your
+body can move forward or back a little
+bit and if using fast lenses with
+shallow depth of field you will find
+some shots are out of focus just because
+your body shifted forward to back or
+maybe your portrait subject shifted
+forward to back I just find that I get a
+higher hit rate when I'm using AI Servo
+therefore I just use that all the time
+for more information about focusing
+modes visit sdp.io
+Focus now let's talk about focusing
+areas because the camera can be
+configured to focus on a very small
+point or to focus anywhere across a big
+frame and for most Pro photographers
+you're actually going to want to tell
+the camera where to focus beginning
+cameras they're beginners are don't
+don't want to deal with it so they're
+happy to let the camera just kind of
+pick a focus point but for me I always
+want to tell the camera where to focus
+so the way you'll do that is is by using
+this button here this kind of
+nondescript button that has like
+crosshairs in it so as I push that we
+look at the back display again you can
+see now it's showing me all the
+different focusing options that I have
+so push that
+and all right and um this is weird
+there's another button here next to the
+main dial labeled M FN
+so push your focus
+area selector and then push mfn multiple
+times to iterate through the different
+options this is what I use almost all
+the time which is spot AF spot AF is a
+very precise focusing point it focuses
+on a very small area and it's almost
+always what I want especially with
+things like portraiture it's critical
+that you focus right on the eye and not
+on the forehead or the eyebrow or even
+the eyelashes therefore you want the
+smallest focusing Point possible and
+focusing is very very precise and very
+fast in that mode so that's pretty much
+what I use however you can also select a
+bigger focusing point or a expanded area
+AF where you can focus on something and
+then it will kind of uh Focus well it
+focuses on a broader area and you know
+some valid reasons to use some of these
+expanded area AF or a full Zone AF where
+you can use ITR some of the valid
+reasons for that are if you're following
+a moving subject like a flying bird
+against a blue sky it can be difficult
+to put a small focusing point on a
+moving subject like that it's much
+easier if you tell the camera Focus
+anywhere in this area that way if your
+long telephoto lens moves just a hair
+the camera won't lose focus it'll it'll
+lock on that subject so for me I almost
+always use that spot AF but then when
+I'm actually tracking moving subject
+I'll expand it and make my life just a
+little bit
+easier to move the focusing point I kind
+of demonstrated this already but you can
+just use this thumb stick here and it's
+a great thumb stick they inherited it
+from The 1dx Mark I and it's better than
+was in the other
+5DS you can see the same kind of
+information mirrored when you have your
+eye up to the
+viewfinder this camera gives you a lot
+of control over the focusing Behavior
+you can tune it by hitting the menu
+button and then scrolling over to the AF
+menus over here and the Very first page
+here you'll see by default they provide
+three different cases case one is the
+default versatile multi-purpose setting
+case two continues to track subjects but
+ignores possible
+obstacles that can be useful if you're
+shooting a football game or a soccer
+game and you focus and you're tracking
+somebody but then a defensive player
+runs in front of them it will ignore
+this sudden obstruction rather than
+quickly focusing on it it requires a bit
+of intelligence right cuz it could just
+decide to focus on whatever appears in
+front of you and end up screwing up your
+shot so that's good when you want it to
+ignore things case three here instantly
+focuses on subject suddenly entering the
+area AF and that's good for times when
+you want it to
+focus no matter what you want it to
+focus where your focusing point is no
+matter what without any delay now if one
+of those cases doesn't exactly meet your
+needs you can go through go scroll down
+even lower and specific configure the
+tracking sensitivity the acceleration
+and deceleration tracking and the AF
+Point Auto switching the AF Point Auto
+switching as it as it tracks a subject
+across the frame from say the left side
+of the frame to the right side of the
+frame so with all that said I shoot a
+lot of sports and Wildlife a lot of
+action and I've never found that it
+helps to change those settings I have
+spent lots of time t a lot a lot of time
+tuning them but whenever I tune them I
+always end up a little frustrated with
+it and I end up switching back to the
+default so I wanted to tell you where it
+is but I also encourage you just like
+not to sweat it give the default
+settings a try and only if you feel like
+the AF system isn't behaving up to your
+expectations should you go in and tune
+it because it's it's probably going to
+be fine let's talk about talk about how
+to change the iso and the the iso is the
+camera's sensitivity to light basically
+if you're in a dim condition you would
+use a high ISO like ISO 6400 if you're
+in bright sunlight you'd probably use
+ISO 100 if you want more information
+about ISO including why I'm saying ISO
+and not spelling out ISO visit this URL
+sdp.io ISO to set the iso in this camera
+there's a button on the top so I'll just
+hit that ISO button there and then I can
+use the main dial to select the
+iso that's all there is to it if I
+scroll all the way to the left it will
+use auto ISO there is no shame in using
+auto ISO I use some form of Auto
+exposure almost all the time I will
+often be in manual mode specifying both
+my shutter speed and my aperture but
+relying on the camera to determine the
+exposure using auto ISO camera's Auto
+exposure system is really fast and
+really intelligent I just find I have a
+higher hit rate when I use auto
+ISO let's talk about exposure
+compensation I mentioned it earlier you
+can use exposure compensation in either
+aperture priority or shutter priority
+mode by simply moving the secondary dial
+here down low and the picture will
+become darker up high and the picture
+will become brighter for more
+information about exposure compensation
+visit sdp.io
+closely related to exposure compensation
+is bracketing so to turn on bracketing
+you actually have to go into the menu
+system that's different from some other
+cameras but I'll hit menu here and let's
+go over to the camera icon page two Expo
+compae Canon's menu naming is isn't
+always Crystal Clear I'll hit the set
+button and now what you see is a kind of
+an exposure compensation diagram and if
+I move the main Dow here it will split
+off
+and show this lower line here and what
+it's saying now is it's going to take
+three pictures at three different
+exposures one at negative -2 stops one
+at what it thinks the proper exposure is
+and then one at two stops
+Overexposed now if I want the whole
+thing to be more exposed I can use the
+exposure compensation dial anyway the
+the visual there is really really useful
+once you set it don't just hit the
+shutter button or it will forget all
+your settings hit the set button here
+it's if you forget to hit set I do it
+all the time it forgets it but I'll take
+three pictures
+now and as I review those three pictures
+you can
+see properly exposed underexposed and
+Overexposed when you're done with
+exposure compensation you'll have to go
+back in in and turn it off
+manually three stops exposure
+compensation is usually enough
+especially when I'm shooting raw because
+this camera has a great dynamic range
+you can also bracket at five stops of
+exposure compensation so hit the menu
+button and then under the custom
+settings icon up here page one you'll
+see bracketing number of bracketed shots
+so if you select that you can choose
+three shots Two Shots five shots or
+seven shots often just to be safe I'll
+bracket at actual at five stops and get
+even more pictures taken you can also
+turn on bracketing Auto cancel in case
+you always want to automatically cancel
+bracketing after your first time anytime
+I do turn on bracketing I tend to take
+three or four different scenes bracketed
+so I don't use the bracketing Auto canel
+normally but maybe you do and I wanted
+you to know where it
+is let's talk about Wi-Fi on this camera
+this camera supports Wi-Fi that will
+allow you to transfer pictures from the
+camera over to your smartphone so that
+you can share them online a little more
+quickly it's not the best most people I
+think try out the Wi-Fi app and then
+probably never use it again or maybe you
+use it once or twice you don't use it on
+a regular basis it's kind of laborious
+and as you'll see the smartphone app is
+not up to par with other smartphone apps
+that you might have on your phone uh but
+I will show you how to use it so hit the
+menu button here and it's it's really
+poorly named turning on Wi-Fi is not
+easy but you'll see under the wrench
+icon page four communication settings
+you'd think Canon might call it Wi-Fi or
+something they call it communication
+settings so we'll select built-in
+wireless settings WiFi NFC and then
+enable and now we have Wi-Fi enabled uh
+we can also scroll down a couple and if
+I select this option well I had to
+connect to the smartphone first okay so
+now I have my smartphone out this camera
+does support NFC so if you have an
+Android phone that supports NFC you
+should be able to just rub it okay it
+connected
+in if you have an iPhone or NFC is not
+working for you you will have to open up
+your Wi-Fi
+settings the way it works is the camera
+creates a wireless access point usually
+named 5D 4 and and oh Wi-Fi got turned
+off somehow now you'll need to turn on
+Wi-Fi on your camera under communication
+settings built-in wireless settings go
+to Wi-Fi function select connect to
+smartphone and then
+connect connect to device okay it's a
+lot of unnecessary steps now the little
+blinky thing up here will show Wi-Fi is
+on the camera is now acting as a
+wireless access point without internet
+access but nonetheless a wireless access
+point so if you have NFC on your phone
+you can tap it here and it should
+automatically connect in otherwise if
+you don't have an SC like if you have an
+iPhone you have to open up your wireless
+wi-fi settings and connect to the
+smartphone Network so here you can see
+it's called EOS 54 and then some random
+numbers that it assigned so I'll select
+that and I'll click
+connect this disconnection from your
+internet even if you're using a Cellular
+Connection you usually can't get to the
+internet at this point so you have to
+transfer the pictures over now that I'm
+connected I can switch back to the Canon
+Connect app presumably you've installed
+this from your app store and remote
+shooting allows me to see through the
+camera that's mostly useful if the
+camera is far away from you if you put
+on a tripod and you want to be able to
+compose the shot you can touch the
+refocus here
+take pictures and do things like um
+change the shutter speed Etc overall it
+gets the job done for remote shooting
+for me usually what I'm doing is I'm
+transferring pictures from the camera to
+my phone so I can share them on
+Instagram or Twitter press images on
+camera there and what it will do is
+browse through all the latest pictures
+um some of them you'll see are labeled
+raw and you can still transfer those
+fortunately so you can s select
+that and then tap this down here the
+little phone with an arrow icon tap that
+and it will transfer it to your phone
+now this is it's weird because there's
+no share button so you want to put this
+on Twitter or something you'll have to
+actually open up the app
+separately
+and browse for it and then you'll find
+it alongside your regular smartphone
+pictures generally you want to keep
+Wi-Fi off and like I said it's a little
+bit of a clumsy thing another option if
+you find that frustrating is you can get
+memory card readers like SD or CF memory
+card readers that Connect into your
+smartphone Android or iOS and then you
+can use Lightroom mobile to import them
+from the memory card sometimes that's
+easier than fussing with
+Wi-Fi now let's talk about raw I almost
+always shoot raw images raw images
+capture all the data from the camera
+sensor including details like details
+captured in highlights or Shadows that
+are lost when you say when the camera
+saves the files as a JPEG jpeg is the
+default however so I recommend everybody
+go in and turn on
+raw and to do that you'll go to the very
+first page here it's so important they
+make it the very first thing select that
+and now by using either the main dial or
+the secondary dial here you can record
+choose whether it records raw JP Peg or
+both raw and jpeg generally I just used
+raw and no jpeg for detailed information
+about why you might want to use raw
+visit
+sc. raw V jpeg this camera also features
+dual pixel raw a first Ry can and Camera
+you could turn it on from the same menu
+camera icon page one the second item
+down here selecting enable here I will
+warn you though I find absolutely no
+value in using dual pixel raw we tested
+it thoroughly
+we could not create a real world
+scenario where it actually helped the
+situation and enabling dual pixel raw
+includes several negative side effects
+including your maximum frame rate drops
+from 7 frames a second to 5 frames a
+second it also doubles the size of your
+files meaning they take up twice as much
+storage they take longer to write they
+take longer to import and processing
+them will be slower
+two uh another downside to using dual
+pixel raw is the only way to make dual
+pixel raw change ches is to use the
+Canon software the Canon digital
+photography professional software on
+your PC or Mac and unanimously everybody
+hates that
+software I am not going to go into more
+detail about dual pixel raw we do have a
+review and examples on our Channel if
+you want to search for that otherwise I
+will just say go ahead and turn it off
+and just leave it
+off this camera includes several
+different metering modes and I always
+leave it in the default metering mode
+because I'm always very happy with that
+if you want to use a different metering
+mode metering is the camera's Logic for
+determining how bright or dark the
+picture should be there's this button
+here the first button you can see the
+symbol for metering is universally this
+weird circle with a dot in it so push
+that and now I can use the main dial to
+switch between evaluated metering which
+is the default and very logical um
+partial metting metering spot metering
+or Center weighted average these are
+kind of holdovers from the film era
+that's the way I feel about it if you
+are an old film shooter and you know how
+to use spot metering and you're more
+comfortable with that by all means use
+it for everybody else I recommend just
+using evaluated metering and then
+adjusting with exposure compensation as
+needed 5D markv does not include a
+built-in flash however you can connect
+an external flash and if you do you
+might want to know how to change the
+flash exposure compensation to make it
+brighter or darker it's the third button
+here so I'll push that button and now by
+using the second dial I can add flash
+exposure compensation the symbol is
+lightning bolt plus or minus that's
+Universal so I can dial that up or I can
+dial it down to Output less flash for me
+I like TTL but I find it almost always
+puts out too much Flash and it blinds
+people and washes out their faces I'd
+rather use more ambient light so as a
+result I tend
+to dial in about negative one and a
+third stops of flash exposure
+compensation and just kind of leave it
+there you can change the white balance
+settings on this camera and that won't
+make any real difference if you're
+shooting raw but if you're shooting jpeg
+you might want to get it right I find
+the auto wi balance just generally works
+the best anytime I try to fuss with it I
+end up forgetting it and screwing up a
+bunch of shots so it's something I never
+really change but if you do want to
+change it it's the first button here
+you'll see WB so you push that and then
+the secondary dial here will allow you
+to browse through all the different
+white balance options don't know what
+I'm talking about when I say white
+balance you probably shouldn't sweat it
+but if you do want to understand go to
+chapter three in my book stunning
+digital photography because I Do cover
+it in there let's talk about video
+capabilities on this camera to record
+video you'll take this dial here and
+switch it over to the video camera
+you'll see live view will automatically
+pop up you can iterate through different
+amounts of information on the screen by
+hitting the info button
+here this camera features both HD and 4K
+video If you record in HD which is like
+1080p um it can go up to 60 frames a
+second and it will record the full width
+of the frame if you record in 4K video
+which is kind of everybody's favorite it
+has about a 1.7x crop but it's also
+going into um that's like a true 4K
+which is a little bit wider than the
+type of 4K that you're watching when you
+watch this video on YouTube it's 4096
+pixels wide as opposed to 3840 pixels
+wide so just I'm mentioning that because
+if you are shooting 4K and your
+destination format is 3840 you will have
+to keep in mind that you have to crop
+off a bit of this off the sides so don't
+compose too tight leave yourself a
+little bit of room for cropping to
+change your video format hit the menu
+button
+here
+and go over
+to camera icon page four scroll down to
+movie recording quality and select
+that now movie recording size select
+that you can see by default it's set to
+fhd which is full HD that's
+1080p if you want 4K you'll scroll up to
+4K and then either 23.98 frames a second
+24 frames a second basically or 2997
+which is basically 30 frames a second 24
+frames a second is more typical for film
+and 30 frames a second is more typical
+for video and TV so I'll select
+that
+and so now when I turn it on now I just
+want to show you the amount of crop that
+you get here this is live view for a
+still photo you can see the size of that
+video slide as I switch to video it
+crops in substantially so that's
+something you really need to be aware of
+if you are switching from Stills to
+video on a regular basis there's a
+significant crop factor it gets much
+much tighter as a result a zoom lens is
+useful so you can always Zoom back you
+might also have to plan different lenses
+and the lens I like to use for
+video is the Canon 16 to35 F4 it's great
+for video because it's super wide the 16
+here basically becomes about 24 mm so
+it's much more zoomed in than you might
+expect this lens also has image
+stabilization which can really help out
+in handheld
+situations and that's about what you
+should know for video of course the
+onboard mic isn't that great so you want
+to uh connect in an external microphone
+I'll have a suggestion for you and
+you'll want to use headphones just to
+make sure there's no problems with your
+external microphone as I mentioned
+earlier the file sizes are massive
+they're absolutely massive so not only
+do you want a bigger memory card to
+record those huge files but when you do
+import them onto your computer the first
+thing you want to do is probably
+transcode it down to a smaller file size
+and then if you don't have the extra
+storage actually get rid of the original
+files we use vidcoder to transcode these
+massive motion JPEG files down to a more
+reasonable uh codec and that kind of
+makes life much easier this camera also
+includes GPS the global positioning
+system which can find your place
+anywhere on the planet and then tag your
+pictures with it and this is awesome
+because when you tag your pictures with
+GPS you can import them in Lightroom and
+then go to the map Tab and see the
+location of all the different pictures
+that you've taken it means that if you
+think oh I need to find that picture
+that I took in Boston you can pull up
+the map and then zoom in our map and
+actually find the exact street that you
+were on it makes it easier to find
+pictures and it's also just kind of cool
+if you're a landscape photographer and
+you want to revisit a location even if
+you were on a hike or something you can
+actually pull that information out and
+find your way back to that spot I've
+also found that GPS does not use that
+much battery uh I kept it on for an
+entire week of traveling and didn't have
+any problems to turn on GPS so basically
+I just turn on GPS and I just leave it
+so I'll hit the menu button here and
+then I need to go over to this wrench
+icon and it's on page four right above
+communication settings is GPS settings
+so I'll select that select
+GPS and I'll turn it on to mode two mode
+one keeps the GPS on all the time even
+when the camera is turned off so it's
+going to burn through a lot more
+batteries Mo 2 is a little more sensible
+it only picks GPS signals when the
+camera is on but that means that there
+might be a little bit of lag it might
+not immediately get a GPS signal the
+first time you turn it on so I have it
+on mode two and you can see there are
+some other options here like the
+position update interval um 15 seconds
+is generally okay with me um to save
+some batteries I will even lengthen it
+because usually not moving that fast
+when I'm taking pictures and every 1
+minute might reduce the battery usage by
+four Factor um but still be good enough
+for me me and you can also turn on a GPS
+logger if you absolutely want to this
+doesn't change the fact that whether you
+not you have the GPS logger on it's
+going to be saving your GPS data to your
+pictures the GPS logger just literally
+saves a log of your GPS location and you
+could open that up later and actually
+see the path where you walked even if
+you weren't taking pictures I if you
+actually want that I would instead
+suggest that you get a smartphone app
+and run it from your smartphone so that
+you're not killing your your cameras
+batteries and smartphone apps will
+actually show it on the map and be a
+little more useful for you now I'll show
+you the Interval Timer the Interval
+Timer will take pictures on a regular
+basis and that's terribly useful for
+doing time lapses uh or if you're
+stitching together a long exposure by
+using a technique like image averaging
+the Interval Timer is just perfect I
+also prefer the interval timer for
+situations where uh I need to be in the
+photo where I need to set the camera up
+and on a tripod and then run around
+behind my family I'll set the Interval
+Timer to take 10 pictures that way you
+don't have to keep running back and
+hitting the shutter button again and
+again so to activate the Interval Timer
+hit the menu
+button and it's over on the camera
+icon page four Interval Timer select
+that it's set to disable by default so
+I'll select enable and this is
+confusing um don't hit your shutter
+button or it will forget your settings
+instead you'll need to hit set but
+before you do that you'll need to hit
+the info button you can see it says info
+detail set hit the info button here and
+select the interval so for me if I'm
+taking a selfportrait I'm us usually
+have it fire off one shot every 5
+seconds and I'll set the number of shots
+to say take 20
+shots and then I'll scroll down to okay
+so now I've set those options
+and whether or not you set the options
+when you select enable you need to be
+sure to hit set hit set when you're done
+because if you hit the shutter the
+Interval Timer will not be enabled now
+when I hit the shutter button it will
+fire the first shot right away and then
+wait 5 seconds and fire the next shot
+again up until it takes the number of
+shots that I told it to if I want to cut
+it off early I'll just turn the camera
+off mirror lock up is a technique a lot
+of us used in in the earlier days to
+reduce the amount of vibration every
+time you take a picture with an SLR
+using the viewfinder The Mirror Has to
+flip up and that can shake the camera a
+little bit reducing your sharpness
+especially on high megapixel bodies like
+this the new technique that I prefer is
+just use live view so just hit that
+start stop button there turn the camera
+on first hit the start stop
+button this flips the mirror up
+eliminating that and it gives you the
+ability to more precisely focus and
+frame your shot by giving you a live
+feed through res just use that instead
+of mirror lock up there's still the
+option for Mirror lock up but I can't
+imagine a reason to use it anymore when
+you filled up your memory cards you will
+want to format them so you can reuse
+them of course when you filled up your
+memory cards and then transfer them over
+someplace safe like your computer with
+an active backup to format your memory
+cards this is something I do regularly
+go to the wrench icon page one and then
+the last option here is format card
+you'll have to select which of the two
+cards you want to format and then select
+okay to actually format it now if you
+accidentally format your card and you
+did not mean to if there are still
+pictures on there that you need here's a
+useful tool photo W go to
+scpo like Photo recover that's a free
+tool for Windows Mac Linux just about
+anything that will go through your
+memory card and recover any files that
+it happens to find because when you
+format the card it's like ripping out
+the table of contents from a book all
+the pages are still there it's just you
+have to go through one page at a time to
+find it so it does that for you saves
+all your pictures onto your computer and
+it can be a lifesaver if you search for
+image recovery software Google will give
+you a bunch of options that cost like 50
+bucks or more they pretty much all use
+the same free tool so save your money
+just use the free photo tool I've used
+it a bunch of times it's great one thing
+I hate about all cameras is they come
+with a beep turned on by default I hate
+that because I'm a wedding for
+photographer and you know when the
+church is quiet and Uncle John is
+holding up his little little uh Canon
+camera and it's beeping as it focuses
+beep it's so annoying um though actually
+this camera hasn't been beeping so maybe
+it's not turned on by default but I'll
+show you how to turn it off just in case
+it is on camera page one and the menu
+item go down to the fourth item down
+here beep says enable set it to disable
+because nobody wants to hear the beep
+back button focus is one of my favorite
+techniques back button Focus separates
+focusing from the shutter button so by
+default when you push the shutter button
+halfway the camera will focus everybody
+kind of expects that but experienced
+people have many situations where you
+want to take a picture but you do not
+want the camera to automatically Focus
+back button Focus links the afon button
+here with the focusing Behavior and the
+shutter button turns it off so when you
+want to take a picture without focusing
+you don't push the afon button when you
+do want to focus you push the afon
+button if you want more information
+about why you should use back button
+Focus visit this link sdp.io
+ybb now I'll show you how to actually
+configure it on this camera I'll hit the
+menu button here and got to scroll all
+the way right over to the custom
+settings menu here it's this camera with
+lines under it and scroll over to the
+right some
+more down to page three select the last
+option here which is custom controls so
+I'll select that and this allows you to
+change the behavior of the buttons and
+it's kind of limited on camera Canon
+cameras but one of the useful things you
+can do is enable back button Focus so
+I'll select the shutter button here and
+press set and by default you'll see it's
+set to metering and AF start I'm going
+to set it to just metering start so in
+other words I'm turning off AF start
+from the shutter button now I'll scroll
+down to afon and make sure that's set to
+metering and AF
+start here's a bonus that you get with
+the newer Canon cameras this little
+asterisk button here which is normally
+AE lock I never use that instead what
+I'll do is I'll configure it to do a
+different type of AF start so I'll
+select that asterisk there and I'll
+select metering and AF start just like I
+did before but I'll hit the info button
+you see it says info detail set so I'll
+hit that and now I can select the exact
+behavior of that AF start button when I
+push that and what I'm going to do is I
+almost always want AF AI Servo because
+that's awesome so I'll set that and the
+way I like to configure it is I set it
+the afon and the asterisk for different
+area selection modes so I'll select AF
+area selection mode here and for the
+asterisk I tend to use Auto selection AF
+the widest range of focusing points that
+will allow the camera to decide where to
+focus so I'll set that and now I'll go
+back and edit the afon button here I'll
+hit the info to change the settings and
+I'll set the afon button to do the spot
+AF so
+now when I want spot AF a tiny little
+small precise focusing point I'll push
+AF on when I want to focus anywhere I'll
+push the asterisk here that's Chang the
+way I do Wildlife photography especially
+if there's a bird perched in a tree and
+there's all sorts of twigs and leaves
+that I need to avoid focusing on I'll
+use the spot AF and put the AF point
+right on the bird's eye if there's a
+flying bird and I'm using a big
+telephoto lens and it's kind of hard to
+keep the spot AF on I'll just move my
+thumb over a little bit and I'll hit the
+asterisk instead allowing the camera to
+find the bird anywhere in the frame the
+fact that I don't have to go in and
+change settings is incred incredibly
+incredibly useful so thank you Canon for
+building that in the menus are
+incredibly confusing and also poorly
+named one thing you can do to make it
+much much easier is to set up your own
+custom my menu my menu just has those
+those menu settings that you use on a
+regular basis and it's the last menu
+item here the little as the little star
+and the first thing you'll do is Select
+add my menu tab so your menu will have
+tabs and then each tab can have items so
+we'll add a menu one tab here and then
+we'll choose to configure it select
+items to register and now you can see I
+can go through a long list of every
+single menu item here so if you find
+yourself regularly changing the image
+quality you might add that to my menu
+and what else do we usually change we
+will'll often format pictures oh I use
+the Interval Timer all the time so I'll
+turn on I'll add that
+um in video mode I will often have to go
+in and change the audio levels so I just
+went past
+that sound recording so I'll add that
+and I'll hit menu to back up but now you
+can see my menu here now has three
+different menu items so I don't have to
+dig through each of the different tabs
+anymore I can just go right to my menu
+here and pick the menu item it just
+makes it so much
+easier that covers my tutorial for the
+Canon 5D markv now I'm going to go over
+my favorite accessories for it both
+software and Hardware up first Adobe
+Lightroom Lightroom processes your
+ingest all of your pictures so you
+insert your memory card into the
+computer and then it will pull in your
+thousands of pictures render previews
+for them and allow you to do basic
+editing like changing the exposure
+cropping rotating leveling even fixing
+some blemishes and stuff such Lightroom
+is kind of a necessity it's slow as heck
+but I still think it's the best software
+out there uh I suggest getting the
+Lightroom CC deal the Creative Cloud
+deal because that's the only way you get
+new updates for it you can get it from
+sdp.io Adobe deal with Photoshop and in
+the US it's usually about 10 bucks a
+month let's talk lenses for General
+shooting my favorite lens is the Canon
+24 to70 F28 this is one of the sharpest
+zoom lenses ever made it's absolutely
+exceptional uh it's also quite fast at
+F28 making it good for events things
+like wedding receptions where you're
+shooting indoors in kind of low light
+it's basically the best thing there is
+unfortunately it's not image stabilized
+there is no image stabilized version of
+it in the Canon World um unless you go
+for the Tamron version I still like the
+Canon better um because it well there
+has a few minor differences like it
+doesn't have Focus breathing anyway the
+Canon is my recommendation you can pick
+it up from the link down here and we get
+a few pennies out of every dollar that
+you
+spend for video as I mentioned earlier I
+recommend the Canon 16 to35 F4 because I
+shoot 4K video that means I get
+basically a 1.8x crop which means I need
+to be shooting with a super wide angle
+lens to be a normal wide angle lens it's
+also image stabilized which is really
+important for any sort of Run and Gun
+video shooting handheld or even on a
+mopod that imem stabilization helps if
+you're a landscape phot photographer and
+you want to shoot Ultra wides the Canon
+11 to 24 just can't be beat it's an F4
+lens there's no image stabilization and
+it's exceptionally pricey but it's super
+sharp and it's an 11 mm Zoom it can
+shoot as wide as you might ever need
+basically you can get it from sdp.io
+C11 if you're doing portraits this is an
+unbeatable lens it's the Canon 24 or
+Canon 70 to 200 F28 I have a telecon
+converter on here now because I was
+shooting sports with it it's very sharp
+it has no Focus breathing and it's this
+lens is the reason we stay in the Canon
+system it's a spectacular spectacular
+lens if you're shooting sports more than
+portraits you could also consider the
+Tamron 7200 F28 it's even sharper but it
+shrinks significantly when you're
+shooting close-up portraits this lens
+does not have Focus breathing it's been
+an important criteria for us we love
+that lens um a couple of telecon
+converters are terribly useful with the
+7200 so if you pick that up you might
+want to pick up the 1.4x or 2x
+teleconverters it still continues to be
+quite sharp because it's a really high
+quality lens you can use these links
+here the 1.4x telecon converter will
+turn it into um like uh what is it 100
+to 280 mm or so lens and the 2x
+teleconverter will turn it into a 140 to
+400 mm f56
+lens if you're Shooting Sports and you
+have some money to throw around check
+check out the Canon 200 to 400 MM F4
+lens it's expensive but it's fantastic
+it's extremely sharp and fast and it has
+a lot of reach it also has a built-in
+1.4x telecon converter so you can get
+out to like 560 mm and f56 which is
+great it's also good even for wildlife
+stuff if you just want an inexpensive
+Wildlife lens this lens you can pick it
+up for about a grand maybe a little bit
+less I would even find a used version
+cuz they're extremely durable
+the Canon 400 MM f56 Prime this is an
+old lens it's got to be 13 years old now
+but we've been using it this whole time
+and it cannot be beat at that price
+point no image stabilization but for
+things like moving Birds it works
+spectacularly and you usually don't have
+too much of a need for image
+stabilization with high shutter speeds
+anyway sc.
+ic400 another good Wildlife lens that is
+stabilized and a little more versatile
+it's actually a hair sharper but way
+more expensive
+is the Canon 1400 mm Mark 2 Zoom do not
+get the Mark 1 Zoom it had appalling
+image quality we found this version to
+be much much better pick it up at the
+link here if you're serious about
+Wildlife well first I would probably
+push you towards a 7D Mark I because
+you'll get even better images or maybe a
+Canon 5dsr as the body but for lenses
+you cannot beat the Canon 600 mm F4
+you're looking at about 13 Grand for it
+but it's spectacular it will produce
+results that simply cannot be
+beat if you're shooting video a good mic
+is critical for interview style things
+or anyone where you're filming somebody
+talking our favorite lab mic is the
+Sennheiser ew100 G3 that's what I'm
+using now you can pick it up from this
+link here you can also save yourself a
+few bucks and pick up a G2
+used if you want to order prints we have
+a whole video that test tested all the
+major printers in the United uned States
+visit sdp.io print it to see that if
+you're looking for a tripod I always
+recommend this cheap $50 tripod from DOA
+pick it up at this link here but I also
+wanted to recommend a higher-end menoto
+tripod one that we actually tend to use
+on a regular basis which is oh it's
+cleverly named right MK 190x Pro 4-
+bhq2 those Italians in their clever
+naming anyway you can use this link down
+here to check it out but it's an
+excellent functional tripod it's a
+little bit bigger than a travel tripod
+but generally bigger and heavier tripods
+are better to use as long as you don't
+have to carry it with you for many miles
+the Canon flashes especially the 600
+exrt they're excellent but they're also
+very very expensive and kind of
+unnecessarily so if you just want a
+cheap on camera flash I'll recommend the
+yongo YN 568 ex2 it pretty accurately
+simulates the like non-radio controlled
+Canon flashes at a much much lower price
+point so play with this and see if it
+gets the job done for you before you
+start dropping five 600 bucks on Canon
+flashes before my voice gives out one
+last plug for my books stunning digital
+photography teaches you all the
+photographic things you need to know
+beyond the buttons and dials on your
+cameras I teach you the Art of
+Photography posing mood expression the
+things that really make a difference in
+your photography and heck you spent 3400
+bucks on a camera body you can spend 10
+20 bucks on some knowledge right some Ed
+tion if you're baffled by all the
+different lens options flash options
+Studio lighting how to build out a
+studio uh anything gear related is
+covered in my photography buying guide
+with tons and tons of video in it my
+Photoshop book when you get serious
+about your post-processing you want to
+make your pictures your portraits your
+Landscapes perfect you will definitely
+be using Photoshop this book is cheap
+and has 10 hours of video and of course
+for those processing your pictures in
+Lightroom I have a book on that too pick
+up any of those from our store atp.
+store or just go to Amazon go to Amazon
+and look at the reviews for the books
+you don't have to take my word for it
+other people will tell you their
+experiences with the books the reviews
+are good then you can get it directly
+from us at sdp.io store that wraps it up
+share with your friends subscribe to see
+more photography videos we teach
+photography and we review lots of gear
+we look at your pictures live every
+Thursday at 5:00 we'll actually give you
+feedback if you tune in to the live show
+share with your friends thanks and bye

@@ -134,7 +134,12 @@ def load_retrospective(processed_dir):
                 "asset__thumbnail_path": next((os.path.join(d, f) for f in ("thumbnail.jpg", "thumbnail.webp", "thumbnail.png")
                                                if os.path.exists(os.path.join(d, f))), None),
                 "asset__frames_dir": os.path.join(d, "frames") if os.path.isdir(os.path.join(d, "frames")) else None,
-                "asset__transcript_path": os.path.join(d, "transcript.txt") if os.path.exists(os.path.join(d, "transcript.txt")) else None,
+                # cleaned transcript first (clean_retrospective.py --fix-transcripts):
+                # raw auto-caption text repeats every phrase ~3x (rolling SRT
+                # windows), which distorts any text feature computed from it
+                "asset__transcript_path": next(
+                    (os.path.join(d, f) for f in ("transcript_clean.txt", "transcript.txt")
+                     if os.path.exists(os.path.join(d, f))), None),
                 "asset__title": meta.get("title"), "asset__description": meta.get("description"),
             }
             thumb = vis.get("thumbnail") or {}

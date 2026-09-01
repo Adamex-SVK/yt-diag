@@ -1,0 +1,459 @@
+how's it going guys this is Chris aady
+again with another video and today we
+actually have something a bit different
+so insert gadgets was kind enough to
+give us this axon I don't know how it's
+pronounced don't blame me on how I'm
+pronouncing it soon I don't know but
+it's the t3a it's the soldering station
+as you guys can see right here um I did
+turn it on just wanted to make sure that
+it's good try to connect it as fast as I
+can
+I wanna just do like a quick review on
+this compared to my hako station
+um it would have been a better
+comparison with my other JBC station
+however it's on my other desk and my
+other desk is occupied at the moment so
+I'm just gonna give a quick comparison
+between the
+I soon and the hako fm203
+there's a marginally big difference in
+the price so like let's see for example
+right here I'm on the injured gadgets
+website right so
+the recommended product on this let's
+type in the model name
+they also have a partnership with JC it
+seems like it came in with the with a
+gift of um JC drawing it looks like it
+might be
+I don't know what that is I'll check it
+out it might be a subscription or
+something but
+so there's two models of this this the
+t3a and the t3b the t3b is a bit better
+it looks like it's the newer design
+um this where um the iron holder is a
+bit better this is kind of a little
+wonky it doesn't have like a
+the the the copper braids that you could
+use to clean the tip
+however this costs the t3a costs 153.21
+on injured gadgets and the Axiom 3B t3b
+it costs 169 this is the one I would
+recommend you guys use it looks like
+it's the same head unit the only
+difference would be the
+the iron holder it seems a bit sturdy
+you can you have space where you can put
+the tips if you have space where you can
+disconnect the tips and you have the
+braids right there where you can
+actually clean the head of the tip so
+um they gave us the t3a to review we're
+gonna do the review on this however
+um there's virtually no difference
+between the head unit itself and the
+iron it's the same iron as the t3b so
+this comparison is also viable for the
+t3b now without further Ado we're gonna
+go ahead and
+first um we're gonna do like a
+solder test between tips to see how fast
+we want to see how fast it gets hot
+right now it's in standby they're both
+on sleep as you guys can see I'm not
+going to use the micro pencil I am going
+to use the big tip on the hako
+um they're both at sleep right now I
+want to see how fast they get hot how
+steady it is
+um to melt solder how steady it is to
+Wick an iPhone XS Max board that we are
+currently working on
+and um we will also demonstrate whether
+we can remove like a capacitor resistor
+how how easy it is to remove a capacitor
+or resistor using the
+iron instead of hot air so let's go
+ahead and give that a shot so first
+things first I want to go ahead and grab
+the p3a you guys can see it's getting
+pretty warm fast it's set as 350.
+so it did look like it got hot at 400
+and now it's regulating back to 350. it
+does have three channels as you guys can
+see they're from factory set at 280 350
+and 380 you can adjust that in settings
+I want to show the comparison first then
+we can go ahead and show you the
+different settings that it has
+um you can also see right here it does
+show the ambient temperature which is 23
+degrees Celsius
+so let's go ahead now let's just clean
+up the tip because I tried to use it
+first
+alrighty now let's go ahead and check
+how easy it melts to solder
+which is pretty steady honestly and it
+the tips are pretty
+decent as you guys can see
+it is warm it is warm enough at 350 it's
+plenty of temperature
+it doesn't hesitate at all to melt this
+type of wire let's go ahead and try our
+hako in comparison so for example the
+hako let's see how fast it warms up let
+me just untangle The Wire
+so the hako is set in Fahrenheit so it
+is at 755 right which should be almost
+equivalent I have a different bigger tip
+on this however let's go ahead and
+in comparison they're almost the same
+they melt at the same speed and
+everything which is very expectable
+so it's very well it's expected I would
+want to say no
+also another reason why I didn't want to
+go through
+first telling you about the tips and the
+Machine it's because what actually
+matters is how reliable it is doing
+day-to-day soldering jobs instead of
+like oh wow it has a fancy it has a
+fancy tip it has it uses JVC tips oh my
+God it has different settings it's not
+really what matters no matter what
+matters is how reliable it is so um we
+have a good week
+that we're gonna use to
+disorder this uh interposer so first
+we're gonna do it with this
+um the reason why I don't have a chisel
+tip on the other one is because I don't
+really like using the Chisel tip much I
+like to use the this type that I showed
+you guys on my Hackle but let's go ahead
+just make sure it's warm enough
+it does get warm pretty fast it does get
+back to temperature pretty quick so
+so let's go ahead uh it is wicking it
+pretty decent
+let's try to go a little bit fast to see
+the temperature wise
+that's pretty good actually that's not
+bad
+so as you guys can see it's pretty
+steady it does work pretty nice
+let's clean up the tip
+I definitely recommend again getting if
+you guys would want to get this after
+this review I would definitely recommend
+getting the 3B because it does come with
+the tip cleaner better than this
+um
+let's go ahead and cut that
+let's try with the hako
+okay now we're gonna do this side with
+the hako
+so this is a kind of a different tip
+it's expected that this tip would
+probably get a bit more hotter than the
+other one but however this tip is big
+enough to do micro soldering jobs so it
+should be good enough for wicking could
+be you know good enough to do any any
+soldering work on any iPhone board so
+let's go ahead and use this tip
+so as you guys can see they are pretty
+steady
+as far as um temperature wise and
+wicking capabilities
+let's go fast on this stretch so you can
+show you guys warm-up tip all right nice
+there you go
+so as you guys can see they are pretty
+steady with the temperature
+I did
+um this tip is obviously has a smaller
+diameter than the Chisel tip
+temperature wise working is very decent
+now what matters is can you remove a
+resistor with this machine right so the
+resistors they obviously um well big
+capacitors like on MacBook boards and
+such
+they tend to suck up a bit of heat so
+um let me just get hold real quick
+all right
+so we have here it's a Macbook board
+from a
+looks like it's a 1706 or something
+similar I believe 1706.
+let me check the model number
+zero zero eight five zero
+yeah it's a 1706 because it has CD 3215s
+all right so let's go ahead and do
+something right so what we're going to
+do is we're going to grab our flux and
+then we're gonna try to remove
+um I'm gonna find a decent size
+capacitor that can handle
+let me see the diameter of this tip yeah
+so
+let me go ahead and try to Showcase it
+on
+this capacitor right here
+okay
+so we have two capacitors right next to
+each other
+I'm gonna use I'm gonna remove one with
+the t3a and I'm gonna remove the second
+with the hako and I want to do a
+comparison as far as like how easy it is
+let me try to see if I can get my chisel
+tip just so I can make it a better
+comparison
+let me get my sugar too
+all right
+oh this single tip has seen better days
+um
+no it's okay I'll let me see this one
+yeah all right this one is the same size
+almost let's do a comparison real quick
+so it's almost the same size this is a
+bit finer I would say but we will see
+how good it is and how effective let's
+just change the tip on our
+um
+Taco real quick
+don't mind the loud beat
+let's put this on the side
+all right clean this Step Up all right
+so
+let's go ahead and try to remove
+this capacitor right here right so now
+we filled up with uh flux let's go ahead
+clean up the tip again
+add solder to the tip
+just you have a good enough blob it is
+starting to get dark because it looks
+like the tip is still running hot let's
+clean it up again
+we don't want to use it when the flux on
+there is burning already
+all right let's try again
+all right grab our tweezers
+let's go ahead and see how reliable it
+is to remove this capacitor
+so I can see it move
+there you go so I mean it wasn't bad
+removing it with a big solder blob
+it did stay hot it did stay consistent
+um I'm not sure if the video would have
+showcased the the power right there I
+didn't really pay attention I was
+actually looking there I'm not sure if
+we had grabbed it did we grab it
+video
+we will we will check again we will
+double check
+um
+let's go ahead and do it with the hako
+now
+put a bit more flux
+foreign
+ER
+I gotta find a better setup for my hako
+um
+also there's a big size difference
+between both however the Haku does have
+two tips advantage
+okay compared to the hakua the Haku
+removed it
+very easily
+that came out straight
+um that could be due to the
+um tip size obviously this is a fatter
+tip this is a bigger tip we are using it
+on a on a on a big board however this
+did not hesitate to remove this
+capacitor so
+um let's go ahead and check again on
+another similar capacitor right here
+just to see
+um how
+how much power it consumes if you guys
+can see the percentage right here
+how how much power it uses to
+um actually get that removed so
+let's go ahead and showcase that put
+flux
+put solder on the tip clean the tip
+pretty well
+okay
+nice decent solder blob on there
+so let's go ahead and check you guys can
+see the power
+oh it actually removed this one pretty
+fast and it only used up to 15 power
+which is actually kind of really good
+really impressive
+um so far I really like the tip
+um holding it wise it does it is a bit
+thinner than nihako obviously if you
+guys you guys can obviously look at the
+diameter it's it's thinner
+um tip to tip to base ratio it's almost
+similar if you want to say it's pretty
+good obviously it is a bit shorter a pen
+so if you kind of compare it with the
+base right there
+it is a bit shorter obviously
+um it is a thinner tip it is a thinner
+base
+they use
+JBC tips they use the c245
+as you guys can see from with the box it
+comes with three tips you have the
+Chisel tip you have the um
+conical
+this is the conical yeah you guys can
+see right there and in there you have
+the straight one
+and they're pretty thin there they
+should be all the tips you need honestly
+to do
+um to do uh board repair on an iPhone
+this is pretty thin enough this is
+pretty decent this is very this is small
+enough for where you can Wick
+um you might also want to get a finer
+tip if you want to do like smaller
+jumpers but I'm pretty sure you can get
+those from inter gadgets website I'll
+link it in the in the description of
+this video is going to go on YouTube
+it's going to go on Facebook
+um
+so other than that it's pretty good now
+let's go ahead and show you guys some of
+the settings
+um before I go into settings I want to
+say I really like this tip it's pretty
+decent I am actually surprised at the
+temperature consistency
+to where it like it was able to remove a
+big capacitor without hesitating if you
+try that with a JBC the smaller tips
+with the with the Nano station it's
+gonna hesitate it's gonna choke a bit it
+will still remove it but it would
+require a bit more power because you
+guys can see this is only needed 15
+power right there it only needed 15
+power to remove this capacitor which was
+pretty impressive in my opinion
+um
+let's go ahead and dive into settings of
+this machine right here so let's go
+ahead and
+show you guys know so right now it's
+actually cooling because it's in the
+base right so let's click set and this
+is the settings now first things first
+when you first receive it is going to be
+in Chinese so this knob I don't really
+like it much because like it takes two
+clicks to move
+um to move uh
+whatever you want to call a unit or
+whatever so like click two it moves
+click two I don't like it I wanna I want
+each click to move a setting but first
+it comes in Chinese right so it's gonna
+look like this you click set you go down
+to English click English and now it's in
+English so you can set up Max temp which
+I think is pretty cool it doesn't get it
+won't get hotter than that
+so um
+sorry
+so you don't click this set you click
+this knob right there to enter so max
+temp is set as 500 you obviously do not
+want to go to 500 you wanna set it up at
+lower but we'll we'll go ahead and play
+with that later you can lock the
+temperature it would remain the same
+temperature if you want
+it'll be on off
+dormancy I'm assuming like if when it
+goes to sleep
+you can um
+you can put a sleep timer you can put a
+stat by mode temperature dormancy temp
+um
+basically what temperature you want the
+tip to to sleep at
+um
+delay if you want it after you put it in
+there if you want it to go to sleep
+immediately or you want it to wait a few
+seconds
+dormancy show I don't know why she says
+it is Chinese off
+on
+anyway basically it will show that if
+it's sleeping or not sleep timer if you
+it would go to sleep automatically
+standby mode
+no let's go ahead back now you have
+sound you can get rid of the Annoying
+beep as you guys can see it doesn't beep
+anymore
+temp level
+um these are for the channels you have
+three channels you have 280 you have 350
+you have 380 these comes default you can
+change whichever temperature you want
+um I believe 350 is perfect for any
+almost any application you need 280
+would be ideal if you want to do small
+jumpers on like uh if you're fixing a
+home button for example I would say you
+can use 280 280 is very convenient it
+doesn't burn the flex cable doesn't burn
+the flux too fast
+and um it won't damage the wire you can
+reset it temperature unit if you're
+accustomed to Celsius like me you can
+keep it to Celsius
+you want to switch it to Fahrenheit you
+can however Celsius is the way to go in
+my opinion
+also System Info basically it tells you
+that this is the t3a the software
+version hardware version blah blah blah
+so let's go ahead and um
+look at the back of this unit right so
+the back of this unit
+as you guys can see
+on off button it has an output DC of 24
+volts you have this is a ground that I
+have attached to the table and you have
+this is for the Sleep sensor for The
+Cutting one moment I'll grab with you
+this is the on and off button and there
+you guys have it my opinion is I
+really recommend this station it is
+pretty decent it is pretty sturdy it
+does save you space and it should be
+able to handle any job you throw at it
+pretty much
+thank you guys for watching this video
+and as always have a good day
+thank you

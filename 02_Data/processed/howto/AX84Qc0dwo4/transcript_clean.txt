@@ -1,0 +1,569 @@
+this is all you need to get started with
+digital painting in procreate i will
+guide you through all the basics while
+we create this awesome artwork i will
+show you how to create a canvas how to
+use alphalog
+clipping mask how to fill areas with
+color or to create a gradient how to use
+brushes the smudge tool and a lot more
+so this is the perfect start for your
+procreate journey the first thing we'll
+do is create a canvas when you are in
+the procreate gallery you can create a
+canvas by going to the plus here in the
+upper right corner now you'll see some
+standard canvas sizes that procreate has
+already come up with but you can also
+create your own custom size by tapping
+this little
+folder with a plus and here you can set
+the width which we will set to
+2300 pixels
+and the height we will set that to
+3 000 pixels now you can leave the dpi
+and here you'll see the maximum amount
+of layers that you can use and this
+number might differ from what i have
+here because it all depends on the type
+of ipad you're using so don't worry if
+your number is a bit lower than mine
+that's all fine then go to the color
+profile i like to set it to rgb and then
+to srgb a long code
+and then finally you can change the name
+of your canvas so it's easier to find
+it'll be like the standard canvases that
+procreate has already put in the app
+your new canvas will be at the bottom of
+the list so for instance you could just
+call it 2 300 by 3000 pixels it's a size
+i often use in my tutorials so if you're
+going to follow the other you can draw
+this video tutorials then you're all set
+to go
+now tap create
+and there we have our canvas and we are
+ready to get started now one more thing
+you'll want to get before continuing is
+my color palette
+you tap the color you can see the color
+palette over here there is a link in the
+description so you can download it so by
+downloading the color palette you'll be
+able to use the exact same colors as i'm
+using during the tutorial
+now the first thing we'll do is we are
+going to drag this first color over here
+just tap it we are going to drag it onto
+our canvas you can do that by just
+tapping and holding the color over here
+and dragging it onto your screen now we
+have filled our entire canvas or
+actually our layer one with this blue
+color
+now let's go to the brush menu that's
+the little brush icon here
+and go to the airbrushing brushes
+and then grab the soft brush
+now here on the left side you'll see two
+sliders the top slider
+is for the size
+you can move it down or up
+and if if you find a size that you like
+you can actually save it by tapping this
+little plus here i have it set to 25
+and here this bottom slider is for the
+opacity
+and that means how transparent or opaque
+your brush stroke is
+let's set it to 60 and again you can tap
+it and then tap the plus if you want to
+save this amount of opacity
+now tap the colored circle here in the
+upper right corner and grab the second
+color in the first row of the color
+palette
+now you can zoom out of your canvas a
+little bit by pinching your fingers
+so we can make it a little bit smaller
+and now we are going to glaze over
+the middle half a little bit
+and gently go up
+to create a little bit of a gradient
+so make sure that you keep the top part
+keep that blue
+so a bit like this and then we'll switch
+to the third color in the color palette
+and let's make our brush a little bit
+smaller
+let's go for 15 if you move it outwards
+your pin your slider will go a little
+bit slower
+15
+and then add some pink
+just underneath
+the like the halfway point of our canvas
+just like this and it doesn't matter if
+you see your strokes
+because we are going to blur it to
+create a nice smooth gradient to do that
+we need to go to this little magic wand
+here at the top
+and select gaussian blur
+now here at the top you'll see gaussian
+blur and the percentage and to adjust it
+you need to slide it's telling you over
+here
+so you can drag your pen or your finger
+to the right on the screen
+and then you can create this nice soft
+gradient let's set it to 45 in this case
+now we're going to the layer menu
+and here you can see that we have layer
+1 with this gradient and you see a
+little plus here to create new layers on
+top of it if you tap the plus you'll see
+this new layer and it's still completely
+transparent so we have a layer that is
+completely filled and a transparent
+layer you can compare it to like a
+transparent sheet of paper and that's
+what we are going to draw on right now
+and we are going to grab a different
+brush
+under calligraphy and that's the mono
+line brush and then we'll go to the
+colors and we are going to use this
+first color in the second row
+now the opacity of this brush is set to
+100
+and size is set to 10 and now we are
+going to create a wobbly line from left
+to right
+and it's going through that pink
+area that we have created with our
+gradient so let's start about here
+and just make a wobbly line which
+shouldn't be too hard
+and just wobble your way from left to
+right imagining you are creating these
+these hill-like shapes
+like mountains
+mountain range all the way to the right
+and now we are going to fill it just
+like we filled the entire page at the
+beginning now we are going to fill this
+shape now sometimes when you drag in the
+color it happens that either the paint
+spills all over the page or you get like
+a little
+transparent edge
+just around the edge as if the paint
+isn't filling the entire object and to
+be able to adjust that you need to fill
+the color on your screen and then hold
+it
+and drag to the right or left you can
+see color drop threshold there
+you need to go all the way to the right
+just until it just barely doesn't spill
+all over that's when you have that sweet
+spot
+now we're going to create another layer
+so go to the layer menu these two little
+squares and tap the plus
+and then go to the next color that's the
+second color in the second row
+and now start a little bit lower
+and make another wobbly line
+so this is a great practice if you want
+to
+improve your your wobbliness your wobbly
+lines
+all the way to the right and then just
+drag in the color to fill that shape
+then create another layer so go to the
+layer menu tap the plus
+go to the next color
+and again make a wobbly
+line over here you can go a little bit
+higher than our previous
+mountain range
+just go all the way to the right
+wobble along
+until you are here and then drag the
+color inside the shape
+then the next one go to the layer menu
+again tap the plus
+grab the next color that's the fourth
+color
+and again start a little bit lower
+and wobble along
+to the right side here you can go a
+little bit higher
+just wobble
+to the right and drag and drop the color
+then go to the layer menu tap the plus
+again
+then we'll go to the fifth color in the
+second row we're almost there
+start a little bit lower again
+and we'll wobble along
+all the way to the right
+drag and drop the color
+then go to the layer menu again tap the
+plus
+then grab the last color
+the sixth color in the second row
+start a bit lower again
+you can barely see it i wonder if you
+can see it on screen
+but we're making a wobbly line here
+and just wobble to the right
+and drag and drop the color now let's
+say you feel like your mountains or your
+hills are a little bit too high up when
+you're working digitally it's easy to
+adjust things
+we can just go to the layer menu and
+select all these layers with hills you
+can do that by sliding to the right
+selecting all of them just not the
+background layer with the gradient
+they can go to the move tool that's the
+little arrow up here
+and make sure you have snapping turned
+on over here
+and now you can drag it down a little
+bit
+and just make sure you keep seeing that
+that orange line so you know that you
+are in the center otherwise
+you will get a little gap on the right
+or left and once you're happy with the
+placement you can just tap the little
+arrow to get out of the menu again
+now we are going to add a little like
+fog
+on our mountains this will help to
+separate them a little bit
+now before we do that
+first let's tap layer two those are the
+mountains or hills in the back we are
+going to turn on alpha lock on this
+layer
+you need to tap the layer then tap alpha
+lock
+and you'll see a little checkerboard
+pattern
+appear around our shape
+now whatever was still transparent on
+our like transparent sheet of paper is
+now locked we won't be able to paint
+there anymore we can only paint on our
+hill and that's really super handy if
+you don't want to go
+outside of the shape accidentally now
+we're going back to the airbrush to that
+soft brush we used before
+and for our color we are going to use
+this third color in the first row
+now the opacity is still at sixty
+percent
+and the size is at fifteen percent
+now we are going to glaze over
+that bottom area here
+just to add a little bit of mist there
+we are going to do the same thing for
+the other heel so first go to layer
+three
+make sure you don't go outside of the
+shape by turning on alpha lock
+and just to demonstrate
+if i paint here nothing happens but if i
+paint on the mountains
+something does happen now if you have
+made a mistake like this you can easily
+undo it by either tapping here on this
+little arrow or tapping with two fingers
+on the screen so let's try again
+let's just go over that lower area
+and add a very gentle
+little mist
+let's do the same for the next area
+layer four turn on alpha lock
+and then glaze over that lower area
+and we'll move on to the next one layer
+five again tap the layer turn on alpha
+lock
+and glaze over the lower area
+that's where the mist is
+in the final one we we won't be going
+over layer seven only over layer six
+tap it turn on alpha
+lock and then
+add just a little bit of mist i'm using
+very little pressure here on my pen
+there are brushes in procreate that
+behave differently if you press hard or
+light on your pen and of course this
+only works if you have a pressure
+sensitive pen it doesn't work with your
+finger so with some brushes they become
+more opaque if you press harder or the
+other way around or some brushes the
+stroke becomes a thicker or bigger when
+you press harder so having a pressure
+sensitive pen really is worth it now
+what our landscape needs is a moon we
+are going to put it on a separate layer
+so first let's go all the way to the top
+select layer seven then tap the plus for
+a new layer and let's go back to the
+mono line brush
+it is under calligraphy
+and for the color let's grab this first
+color in the third row
+we are going to draw a circle which can
+be quite challenging in real life to
+draw a perfect circle but in procreate
+it's really easy all you have to do is
+make a shape that looks like a circle
+then hold your pen in place to make it
+snap to a quick shape here at the top
+you can see an ellipse is created
+now if you put a finger on your screen
+it'll snap to a perfectly round circle
+and if you let go you have your circle
+you can even go to edit shaper at the
+top
+and you can use these handles to change
+the shape this also works for triangles
+rectangles for lines actually so this is
+a super handy tool now let's fill our
+shape by just dragging in the color and
+if you need you can move it around by
+going to the arrow we still have
+snapping turned on so we can place it in
+the vertical center let's place it a
+little bit higher
+and if you need to resize it then make
+sure that you set it to uniform here if
+you use freeform
+and you go like this you'll get a little
+like egg shape
+that's not what you want so make sure
+you set it to uniform if you need to
+resize it
+the next thing we'll do is add a little
+glow to our moon let's go to the layer
+menu and duplicate our moon you can do
+that by sliding to the left
+and clicking duplicate this is also the
+area where you can either delete your
+layer or lock it
+that's handy if you have created a layer
+and you really don't want to touch it
+anymore
+then lock it and you won't be able to
+paint on it
+now let's duplicate it
+and go to the bottom layer and we are
+going to add a bloom effect you can find
+it under the magic wand where you can
+find all adjustments and it works the
+same as the gaussian blur so when you
+tap bloom
+you'll see bloom and a percentage and
+again you need to slide to the right
+with your pen or finger
+to increase the bloom and it's nice for
+adding these nice lighting effects
+let's increase the size
+just a little bit
+let's say 43
+you can also increase the burn i don't
+want it to be too burny
+i think it looks good like this now
+let's go to the layer menu i want to add
+some texture to our moon
+first let's tap layer 8 and when we add
+texture to the moon we don't want our
+texture to show up outside of our moon
+so you could go for alpha lock here but
+you could also create a new layer on top
+by tapping the plus
+tab the layer and then turn on clipping
+mask now we paint on this layer that is
+clipped to our moon
+whatever we paint will only show up on
+our moon
+now let's grab a brush we are going to
+the industrial brushes and use the
+rusted decay brush
+for our color we are going to use the
+second color and the third row
+i have the opacity set to 100
+and the size is set to 14
+and now let's just tap a few times on
+our moon
+to get some texture
+now the difference with alpha lock is
+that we still have full control over
+this texture that we have added if you
+go to the layer menu you can tap the n
+over here
+and you get this opacity slider
+so you can slide and make
+your texture more transparent
+let's say
+we go for 70 percent and since this is
+on a separate layer you can also
+manipulate that layer so if you go to
+the arrow tool the move tool
+you can rotate
+that that texture you can move it around
+so
+using clipping mask gives you a lot of
+freedom it just costs you more layers
+now let's go and add some stars and i'll
+tell you about how you can manipulate
+brushes let's go to layer one where we
+have that gradient that we have created
+then let's go to the brush menu and go
+to the luminance brushes
+then select the glimmer brush if you tap
+it again
+it'll open the brush studio and here you
+can see a lot of options all the stuff
+you can adjust
+in your brush
+we are going to stroke path
+and we are going to turn up the spacing
+of our brush
+so our stars will be a lot further apart
+we'll also go to shape
+and turn up the scatter
+how they are all rotated a bit and
+there's more diversity even though it's
+hard to see
+you can also change the color dynamics
+for example here you can see that the
+hue saturation and lightness
+they all vary a little bit when you make
+a stroke if you don't like that then you
+can turn it off here or if you want more
+color variation then you can turn it up
+of course
+now let's tap done so we are ready to
+add some stars for the color we are
+going to use this blue that third color
+in the third row
+the opacity is set to max
+and let's set the size to
+18
+and now with this brush the harder you
+press the more stars the brightest stars
+you get
+your if i press lightly
+or harder they will become bigger
+and also brighter so if you have a
+pressure sensitive pen
+keep that in mind
+and vary your strokes
+so try to press harder in some areas
+and a bit lighter in others
+to get a nice variation of stars
+and add more stars to the top area and
+less to the lower area because it's
+lighter there
+so you wouldn't be able to see that many
+stars there
+now finally let's add some shooting
+stars as well
+we will create a new layer for that
+again so tap the plus for a new layer
+and for our brush we are going to use
+the light brush
+keep it set to that blue
+opacity to a hundred percent
+and the size at five
+now let's add a little bright dot over
+here
+and another one
+over here
+these will be our shooting stars now to
+give them
+a nice tail we are going to use the
+smudge tool and you can see this much
+tool here at the top it's the little
+finger right next to the eraser
+and if you tap it
+and check it you can see that you can
+use any type of brush as a smudge tool
+and we are going to use the light brush
+that we also use to create these little
+stars
+i have the opacity set to a hundred
+percent and the size is at nine percent
+and i'll just gently stroke outward
+and drag that color to create this
+little tail
+make sure they both go in the same
+direction
+and there you have two nice shooting
+stars
+if you feel they are a little bit too
+bright then you can just go to the layer
+menu tap the little end again
+and lower the opacity of course you'll
+need to see them
+so drag your canvas around
+and you can make them a little bit less
+bright
+for instance 90
+now if you want to view your artwork
+without all the menus visible then you
+can just tap four fingers on the screen
+to
+admire what you have just created
+congratulations on what's possibly your
+first work in procreate let me know in
+the comments if this is now finally we
+just want to export our artwork to show
+it to the world of course but before we
+do that don't forget to hit that thumbs
+up if you have enjoyed this video
+subscribe if you want to see more and
+that's not just for future videos
+because if you want more i actually have
+over a hundred you can draw this video
+tutorials in which i always take you
+through all the steps and once you're
+done with those you can come and join
+the community at patreon and follow even
+more procreate tutorials so there's
+still a lot to do but now let's export
+our work just tap with four fingers
+again so you can go to the menu if you
+want to export your work you can go to
+the wrench then to share
+and here you can pick how you want to
+share your work
+whenever i share a work i usually share
+it as a jpg so you can tab jpeg
+and then you can decide how you want to
+share it what i usually do is save it to
+my google drive
+or if i want to send it to someone i i
+just pick gmail and send it through
+email but of course you can also just
+save your image on your device it'll be
+on your ipad in your image gallery ready
+to do with it whatever you please
+now this is it you have done it
+congratulations i hope you have enjoyed
+following this tutorial and i'm hoping
+to see you next time for the next
+tutorial

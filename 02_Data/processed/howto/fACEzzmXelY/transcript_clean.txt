@@ -1,0 +1,643 @@
+hi i'm ram gopal from
+presentationprocess.com
+are you new to powerpoint are you
+overwhelmed by
+all these tools and buttons in the
+software do you need to create your
+powerpoint slides in the next one hour
+but you don't know how
+you have come to the right place
+powerpoint is a sophisticated program
+with tons of tools
+but you don't need to know all of those
+tools and functionality to create your
+next presentation
+you just need to know five percent of
+powerpoint to create
+an impactful presentation in this video
+i'll teach you that five percent
+so you can create your next presentation
+without any trouble
+so let us jump right in and learn
+powerpoint
+by the way for your convenience we have
+added chapters to this
+video you just need to place your cursor
+along the timeline of this youtube video
+to find
+exactly what you want to learn alright
+now the first question
+how do you open powerpoint it's fairly
+simple
+you go to the bottom left corner of your
+screen and click on the start button
+and then start typing powerpoint even
+before you can finish
+typing the entire word you will get this
+option for powerpoint app
+you click on that option and powerpoint
+opens up
+by the way i am using microsoft 365 for
+this video
+but what i am going to teach you will
+apply even if you have
+powerpoint 2007 version now as soon as
+you open powerpoint you will get a
+screen like this or
+you will get a screen like this for a
+new presentation
+no matter which version of powerpoint
+you use you will have three options here
+one is the option to start a blank
+presentation
+second is the option to choose your
+design with the design
+themes and third the option to choose
+your templates
+first let me talk about the templates
+let us say you want to make
+a business pitch presentation you go to
+the option here
+and say business pitch
+and then hit enter and see what
+powerpoint comes up with
+as you can see powerpoint gives you a
+few options if you like any particular
+option like say this one
+you click on it and that will open up
+this dialog box
+here you can read the description and if
+you like it you hit create
+that downloads the template for you you
+just need to replace the sample text
+with your own text
+and your presentation gets ready even if
+the content is not
+an exact match for your needs you can
+always tweak the content to create your
+presentations
+i firmly believe that using templates is
+always
+a big time saver let me close this if
+your presentation is not one of the
+standard types for which you can pick up
+a template and modify
+you have two options one is to click on
+the blank presentation
+or the second which is to click on one
+of these design themes
+that allows you to start with an
+interesting looking slide deck
+for this tutorial i am going to start
+with a simple
+blank presentation now that we have
+opened up powerpoint
+i'll do two things immediately the first
+thing i'll do
+is to pin this program onto the taskbar
+now what do i mean by that
+the next time you want to start the
+program you don't really have to go here
+type powerpoint and then open the app
+all you need to do
+is to go down to this bar called as the
+task bar
+right click on the powerpoint icon and
+you have this option called
+pin to taskbar you click on it now
+powerpoint rests on the taskbar so the
+next time you want to open it
+you just need to click on this and
+powerpoint opens up
+now with that out of the way the next
+thing i will do is to save the
+presentation
+i've seen so many cases where the
+presenter has done so much work on
+creating a presentation
+and leaves it unsaved and accidentally
+closes the file
+to lose all the work i don't want you to
+suffer from that
+so develop the habit of saving your
+presentation
+right off the gate so how do you save
+the presentation
+you take your cursor to the top left
+corner and click on
+file and then click on this option
+called
+save as and then choose the location
+where you want to save your presentation
+in this case i want to save it on the
+desktop so i'm going to click on
+that option give this a memorable name
+i'm going to call this powerpoint basics
+and you can see that the file type is
+dot pptx
+that is exactly the format we want you
+just hit
+save now when i go to the taskbar right
+click and go to
+show the desktop option i can see my
+presentation here called powerpoint
+basics
+so the next time i want to open and
+access the file i just need to double
+click on the icon
+and that opens up that specific file
+excellent
+the second task is done now the third
+task
+now that you have come this far it is
+important for you to know a few
+terminologies
+that will allow you to search for
+information from either the help
+or from google and you will be able to
+make sense of the instructions
+so let us learn the basic terminology of
+powerpoint
+the large panel that you see here on
+your screen is called as
+the slide area then the panel that you
+see
+on the left is called as the thumbnail
+area
+then the most important area on your
+screen is
+this area called as powerpoint ribbon
+the ribbon is made of a collection of
+tabs that look like this
+you click a tab to access a collection
+of tools
+called as group so to summarize
+powerpoint has a number of tools the
+tools related to a specific task
+are clubbed together as a group and a
+collection of groups
+is called a tab and a collection of tab
+is found in a ribbon
+the strip that you see at the bottom
+which has a few commands is called as
+the status bar
+excellent that is as much terminology
+that you need to know
+the next thing i'm going to do is to
+start creating the slide
+powerpoint has made it extremely easy
+for a beginner to start creating the
+slides
+you just need to do what powerpoint says
+here it says click to add title
+so i'm going to click on it and i'm
+going to write the title of this
+presentation
+in this case it will be called
+powerpoint basics
+now i can see that i have made some
+mistake here i can always right click on
+this and click on the right option
+just as it works with any of the other
+software programs that you are familiar
+with
+i can click on this to add subtitle
+maybe i can write my name here
+this is the name of the presenter now
+i've got my first slide ready
+but then the slide looks so plain that
+you don't want to present the slide to
+anyone
+so let us see how we can quickly improve
+the design
+of this slide all you need to do for
+that is
+go to this tab here called as design and
+here you have the option called
+themes themes allow you to add
+professional design to your slides
+quickly
+now observe what happens when i take my
+cursor over these design theme options
+let me place my cursor here you can
+instantly see the result in this live
+preview
+as i move my cursor to the next option
+you can see the design
+applied instantaneously now you're not
+restricted only to these options
+you can click on the drop down menu here
+and that opens up even more options for
+you to add
+design to your slides if you like any
+particular option like say
+this one you can click on it and
+instantly your slide looks
+far more professional once you select a
+design theme
+you will see these options called as
+variants
+these are the variations of the design
+theme you chose
+for example instead of this orange color
+if you want blue color you can choose
+this
+green color you can choose or purple
+color you can choose
+let me choose this blue color and i'm
+well on my way to impress my audience
+with my slide deck next i want to add a
+new slide to write my content
+how do i do that i can go to the
+thumbnail view
+click on that and hit enter and i have
+my new slide available
+if you want a more traditional way you
+can go to the home tab
+and here you have the option called new
+slide now that brings me to the next
+option i want you to notice here you can
+see in certain buttons
+you have the icon available and you have
+the drop down menu
+available related to that icon when you
+click on that option
+when you see here for new slide we have
+this drop down menu available
+you can choose any of these layouts for
+your next slide
+so whenever you choose a tool see if
+that tool has
+the small downward arrow available next
+to it
+if it has then you can click on that
+option and you will have the drop down
+menu
+available by the way you can expand
+certain groups to find
+more options for example let me click on
+this
+and you can see in this group we have
+this arrow available
+when i click on that option you can see
+that we have these floating dialog boxes
+open up
+that give us even more options now let
+us not get confused with all those
+options right now
+all i want you to remember is whenever
+you choose a tool always try to see if
+you can expand the options
+so you can choose the exact tool that
+you want
+excellent now let us come back to
+creating our slides
+here i want to write the topics that i
+am going to discuss
+in this presentation so i am going to
+click on the title
+let us say topics and then i'm going to
+add my options here
+the first option is i'm going to talk
+about the home tab
+hit enter and then i'm going to talk
+about
+the design tab hit enter and i'm going
+to talk about
+animations hit enter and i'm going to
+talk about
+transitions so these are the topics that
+i'm going to discuss
+in this presentation now what you've
+done is you've created one of the
+classic slide types
+in any presentation you've created a
+bullet point slide
+a typical bullet point slide lists items
+like this
+but then the problem is these bullet
+point slides are usually quite boring
+is there a way you can make your slides
+look lot more appealing than these
+bullet point slides
+yes you can let me show you how we have
+a beautiful option
+in powerpoint called as smartart
+diagrams
+let me show you how easy it is for you
+to convert this boring looking slide
+into
+a visual slide you select all these
+bullet points by clicking
+and dragging your cursor across then
+right click
+and go to the option called convert to
+smartart
+and here you can see that we have a
+whole bunch of options available
+let me choose the first one now my slide
+already looks a lot better another way
+for you to visualize your slides
+is to insert pictures let me show you
+how that is done
+let me hit enter by going to the
+thumbnail view
+let us write types of roots which
+happens to be the title
+now the next thing i want to get rid of
+is this placeholder
+so i'm going to change the layout i can
+right click on
+any blank area of the slide go to
+this option called layout and i can
+choose a different layout
+now we are on this title and content
+layout
+i can have this option called title only
+layout
+and now i have the space available for
+me to visualize my information
+the first option we have is apples so i
+need to
+insert the picture of apples how do you
+do that
+you go to the tab here called insert and
+here we have the option called
+pictures you click on the drop down menu
+as i told you before
+and you can choose to insert pictures
+from any of these three options
+one is this device that is if you have
+already downloaded the picture of apples
+then you can click on this option if you
+have office 365 subscription you have
+this option called stock images
+if you are on an earlier version of
+powerpoint you will have this option
+called online pictures
+you click on online pictures here in the
+dialog box that opens up
+you can search for what you want in this
+case i want to search for apples
+let me write that and hit enter and bing
+searches for
+the various images you can use on your
+slides i like this
+option so i'm going to click on that and
+let me say insert
+now i will have the picture of apples on
+my slide
+i can click on this picture hold the
+shift button
+down as i click and drag one of these
+handles
+in the corner and i can resize the image
+and i can place it over here now i need
+to label this
+so let me go to insert again and you
+will find
+this option here called as text box you
+click on that
+and then you click on the slide and you
+will get the text box option
+you start typing your label in this case
+it is apples
+you select that now you go to the option
+here called font
+and if you want to change the font type
+you can click on the drop down menu here
+and you can choose any of these options
+i am quite okay with the current font
+next if you want to increase the size of
+this label you can use
+this option here where a is written in a
+bigger font
+let me click on that a couple of times
+now as i click on this you can see that
+the font size increases
+and it reflects here on the slide let me
+now place this over here
+and i have my label written for my first
+picture
+let me do that again very quickly i want
+to insert the picture of
+oranges which happens to be the next
+option so let me go to the slide
+go to insert go to pictures go to online
+pictures
+and let me search for oranges
+hit enter and i have various pictures of
+oranges available
+i like this one you insert you select
+the picture
+hold the shift button down click and
+drag from the corner
+so you can resize it nicely and then
+place it right next to the previous one
+now if i want to save some time i can
+copy this text box
+by selecting the text box right clicking
+and
+choosing this option called copy then
+right click on the slide
+and choose this option called paste and
+now i can place this label over here
+right
+under the next picture and i can call
+this oranges
+and now i have my second picture labeled
+now take a look at how
+this slide looks compared to the earlier
+one and that is the reason why it is
+always preferable
+to add pictures and visuals to make your
+slides come to life
+now to summarize whatever we have learnt
+so far we learned how to open up
+powerpoint
+we learnt how to save it we learnt about
+the terminology
+we learned how to create a slide by
+clicking and writing our text
+we learnt how to insert a new slide we
+learned how to convert the basic bullet
+point into
+a simple diagram we also learned how to
+visualize our information
+by inserting pictures and the
+corresponding labels
+the next thing you want to know is how
+to present your slides you need to
+choose an option called
+slideshow for that you need to take your
+cursor down to the status bar
+and you will see these icons available
+here let us quickly understand
+what these icons represent the one that
+you see here which is clicked by default
+is called as the normal view
+the option next to it is called as slide
+sorter view
+when you click on it you can see all the
+slides in one glance
+the one that you see right next to it is
+called as the reading view
+i don't usually use it much to come out
+of this view you can hit
+escape the option that we would use to
+present our slide is
+this one called as slideshow you select
+your first slide
+and then you click on this option called
+slideshow
+and you would be able to present your
+slides this is our first slide
+to advance to the next slide you can
+choose any of the options
+like you can hit your enter button on
+the keyboard
+or you can hit your space bar or you can
+use
+up and down arrow keys on your keyboard
+or you can hit page up and page down on
+your keyboard
+whatever is convenient to you you can
+use let me use the simplest option which
+is
+to hit enter that takes me to the next
+slide
+to go back to the previous slide i can
+hit page up
+and that takes me to one slide back so
+let me hit enter here is the second
+slide
+the next slide and the next slide now
+you know how to create a basic bullet
+point slide
+you know how to convert that into a
+simple diagram using smartart
+you also know how to visualize your
+slide using pictures
+and the labels at this point you know
+more about powerpoint
+than most people now to come out of the
+slideshow you hit
+escape now to go to a specific slide you
+double click on the slide
+and that takes you to the normal view
+now let us take our skill
+to the next level we are going to add
+simple animation to our slides
+so that we can hold the audience's
+attention here on this slide
+we have four elements that is two
+pictures
+and two texts so let us add a simple
+animation
+to reveal one item at a time to add
+animation
+all you need to do is to click on the
+object that you want to animate
+go to the animations tab then you use
+a simple animation called fade animation
+as a beginner i don't want you to use
+any of these other options that can be
+quite exciting just stick with
+the basic simple fade animation so we
+have got our first animation in place
+right after showing the picture we are
+going to show the label
+so let me click on the second object i
+want to animate
+and hit fade then i click on the next
+object
+and hit fade then the next object and
+then hit fade
+and then when i go to slideshow by going
+to this option here
+you can see that i can present these
+objects on a click
+on the first click i show the picture of
+apples
+and then on the next click i show the
+corresponding label
+then on the next click i show the
+picture of oranges
+then the corresponding labels can you
+see here you can present your
+information at your own pace
+and you can hold the audience's
+attention with simple animation
+as i said earlier if you want to come
+out of the slideshow mode
+you hit the escape button on your
+keyboard now as the last step
+to add polish to our slide deck we are
+going to add
+transitions so the movement from one
+slide to the next
+happens a bit more dramatically so let
+us go to the first slide
+then go to the transitions tab then
+choose from any of these
+transition options a simple transition
+that works well
+in any business setup is wipe transition
+you can click on that option you can see
+that this is the preview of the wipe
+transition
+once you select the transition you go to
+this option here called
+apply to all that applies the transition
+to all the slides in your deck
+so there is consistency in the way the
+slides move
+now with the first slide selected let us
+go to slideshow
+and here we have the first slide shown
+now with a click
+see how the second slide is shown with a
+nice transition
+by just adding a simple transition you
+can add
+so much professionalism in the way your
+slide deck looks and feels
+that's it now with this much knowledge
+you can create your basic slide deck
+and impress your audience always
+remember to go to file
+and keep hitting the save option so that
+you can save your work
+if at any point you feel you need to up
+your powerpoint game
+and get a strong foundation in the
+program then i highly recommend that you
+join our
+complete powerpoint foundation course
+this is a 13 and a half
+hour course with step by step video
+tutorials that teach you
+all that you need to know about
+powerpoint foundation
+the course is priced affordably and you
+get lifetime access to this program with
+one time payment
+the link to this course is available in
+the description box below the video
+you click on the link and check out more
+details about this program
+and take your powerpoint skills to the
+next level finally
+if you want to join our 25 creative
+ideas free powerpoint mini training
+you can click on the link here to watch
+our latest video on powerpoint in
+presentation process channel you can
+click on the link here
+if you like this video please give this
+video a like
+share it with your friends and hit the
+subscribe button to enjoy more such
+videos
+thanks a lot for watching this video
+i'll see you in the next one

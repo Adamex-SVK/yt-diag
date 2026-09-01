@@ -1,0 +1,262 @@
+so you want to get internet fame and
+learn how to model awesome things to
+show off you're not alone
+in this tutorial you will learn how to
+model a viking x in our case the
+leviathan x from god of war which can be
+used for rendering or for your next game
+project
+we start to block out our handle with a
+simple cylinder rotate it scale it in
+the x-axis
+bring it in position and delete the
+outer faces
+add some loop cuts with ctrl r and with
+proportional editing select loops and
+create an interesting shape for the axe
+handle
+shrink it in the y axis and to fill up
+the outer edge loop press ctrl f and
+click grid fill
+let's now create a plane go in edit mode
+and with vertex select mode we will
+select and delete three words
+now we have one to work with
+press e to extrude the vertex to create
+your shape for your x
+you can connect two vertices by
+selecting them and pressing f
+start with a low vertex count and
+decrease it as you need it
+you can add additional vertices between
+two the same way you do loop cuts
+the shape does not have to be perfect
+since we will later switch to sculpt
+mode
+when you're done we will fill it out
+filling out shapes is pretty simple you
+can split most forms into circles in
+order to fill them
+the goal is to have a topology which
+allows nice loop cuts let's inspect a
+complex shape like the x
+even complex shapes are circles watch
+what happens when i move the vertices of
+this x shape you have a circle and to
+fill it out you can inset the outer
+vertices and connect the inner so let's
+fill out our eggs
+i will extrude the middle part to make
+it more interesting
+when you filled out your shape you can
+use vertex smoothing for a better
+topology
+for this stage i will add additional
+loop cuts and try to have even sized
+quartz
+alright let's make an axe out of our
+plane add a mirror modifier and mirror
+it by the z-axis
+and with proportional editing i will
+move my middle part to the left to give
+it a curved shape
+you can press g and use your mouse wheel
+to control the radius
+and with clipping turned on in the
+mirror modifier you can move the
+vertices of the sharp edge back
+until they clip to the mirrored part
+i use smooth work this is quite often to
+correct the flow of my words
+now deactivate clipping and move all
+vertices a tiny bit to the left to just
+leave a little gap between the mirrored
+pod select the outer edge loop turn on
+clipping again and extrude it to close
+the gap
+and i forgot the bottom part oh man let
+me quickly fix it
+like i mentioned smoothing out vertices
+helps you to contain a smooth shape
+use the settings to change the results
+let's add some blue cuts for additional
+topology and add a subdivision modifier
+now we have to sharpen our edges again
+using the knife too
+and when you ask yourself what the
+is this guy doing there here's a quick
+explanation
+when you have a quack you can increase
+the number of edges with loop cuts but
+what if you want to leave one edge on
+the left side but three on the right you
+can use the knife tool by pressing k and
+cut it so you have a single happy edge
+on the left it's the same principle when
+you use inset by pressing i on a face
+but why should i care glad you asked
+when you have a complex form with many
+vertices doing loop cuts will result in
+more pulleys with an uneven topology in
+this case we have 308 with two loop cuts
+it's 616 but with a nice cut it's just
+360. if you still don't care here's a
+use case when you add a subdivision
+modifier your shape is rounded so you
+have to add additional vertices to the
+sharp parts you can be a noob and add
+loop cuts or be a real gangster and cut
+it in pieces
+so since i'm pretty gangster i will do
+this here
+and here
+and smooth out my birds
+apply all modifiers add a
+multi-resolution modifier and subdivide
+it once or twice before we continue with
+sculpting
+i will first grab the red
+wrap brush turn on y mirroring and
+correct my shape a little bit but since
+i'm already satisfied with the model and
+there is not much to do i will increase
+the number of subdivisions and start
+adding the engravings to do so i will
+pick the mask brush with full strength
+and hardness and start to draw on my
+model
+you can change the radius of your brush
+by pressing f
+and by holding down control you can
+switch between adding and removing mask
+you can also switch between the brushed
+strokes for example to draw straight
+lines
+stroke stabilization is also useful to
+draw nice curves
+you can be pretty creative and take your
+time this is sped up by like 20 times in
+reality this is the real speed
+all right let's pick the mesh filter
+with default settings
+invert our mask and inflate our mask a
+little
+with the mask still active you can
+smooth it out with a low strength
+and after clearing the mask smooth it
+out again
+using the same process as before you can
+add as many details as you want
+what is a viking x without ornaments
+let's pick the inflate brush and open a
+new texture
+like this one
+mask out our circle choose an anchored
+stroke and apply our texture
+you can find a link in the video
+description for the ornament alpha
+textures i'm using
+let's leave our extra now and continue
+with the handle
+here i will use dynamic topology with a
+resolution of 80 to increase our level
+of detail
+and use the draw brush with the lowest
+strength to mark the parts where i want
+to add more detail
+and again mask the parts you want to
+edit and you straw smooth and grab to
+sculpt your shape
+now to the art part
+i don't know what else i can tell you
+here what you didn't learn already the
+horse took me about one hour to model
+it's always important to start with a
+rough shape and get more and more into
+detail
+use masks take your time use reference
+images
+check out the different brushes and the
+use cases you have to practice a lot
+when i started with 3d about one year
+ago my sculpts look pretty cheap but now
+after about 100 models i'm pretty
+satisfied if you're interested in the
+thought process leave a comment and i
+will upload a time-lapse video
+so
+to add tiny detail you need much more
+pulls but this will also slow down our
+system so i re-apologized the handle to
+use the multi-resolution modifier and
+transfer the details on my new model
+add multi-resolution shrink wrap
+set the target to the old model project
+as rec mode check negative and subdivide
+a bunch of times until all details are
+transferred apply the shrink wrap
+modifier and you're left with a high
+detail model while still having a low
+poly count on your original mesh
+with a subdivision level of 5 i can now
+add additional ornaments and even a wood
+structure to our handle
+be creative and test things out
+with my favorite brush the scrape brush
+i will make the edges of our ax more
+interesting and call it done
+now to the last part the leather
+wrapping let's create a cylinder scale
+it down
+delete the upper and bottom face
+and now we have to create a modifier
+chain
+start with subdivision
+add shrink wrap and choose the handle as
+the target select project above surface
+and check negative
+add a solidify modifier and adjust the
+thickness
+apply rotation and scale by pressing
+ctrl a
+and now just test different settings for
+thickness and the shrink rib offset
+shade it smooth and add a loop cut to
+the top and bottom
+we should actually move the subdivision
+modifier to the last position
+now add a displace modifier
+we will use a vertex group to control
+the shape so create a vertex group and
+select it in the modifier
+now go into weight paint mode by
+pressing ctrl tab or on the upper left
+side of the screen
+you can now draw weights to set the
+displays
+but first decrease the brushed string
+and the displaced modifier should be
+after the shrink wrap
+you should now be able to add or
+subtract weight to change the shape
+now with all modifiers you can copy
+paste the cylinder by pressing shift to
+d
+rotate it and create an interesting
+wrapping
+and then just go into weight paint and
+paint
+and maybe you should increase the
+mid-level strength
+let's check out our result
+awesome i'm such a genius
+and after uv unwrapping
+baking the details
+and some texturing and substance painter
+this is the result with 15k pulleys and
+fully game ready if you're interested in
+the texturing process check out my bone
+shield tutorial where i go more into
+detail for the steps
+alright
+see

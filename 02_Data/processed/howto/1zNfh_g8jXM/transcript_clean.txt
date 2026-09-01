@@ -1,0 +1,27 @@
+Press Shift A and go to Surface NURBS
+Curve. If you go to Edit Mode, you see
+that the NURBS Curve has what is called
+a hull with vertices that you can
+manipulate. Clicking on endpoint U will
+make the curve endpoints the same as the
+hull.
+So now you can manipulate that curve in
+Edit Mode. Just like with a mesh, you
+can select two vertices and right click
+then choose Subdivide to add another
+vertex. You can select all and uh Shift
+D to duplicate.
+Then with everything selected, press F
+to fill the NURBS surface.
+Now you can manipulate the vertices to
+create a perfectly smooth surface. This
+is the basics of NURBS modeling. To add
+an edge loop, you can't just press Ctrl
+R. You will need to select all these
+vertices and then right click and choose
+Subdivide.
+NURBS surfaces are great for modeling,
+for example, the overall shape of a car.
+Once the main shape is finished, you can
+convert it to a mesh and then add more
+detail with normal polygonal modeling.
