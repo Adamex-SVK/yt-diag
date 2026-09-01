@@ -40,3 +40,12 @@ wandb/
 .env
 *.key
 cookies*.txt
+
+# LaTeX build artifacts (05_Reports/final_report/build.sh regenerates them)
+*.aux
+*.bbl
+*.blg
+*.out
+*.synctex.gz
+05_Reports/final_report/main.log
+05_Reports/final_report/main.pdf

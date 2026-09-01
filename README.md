@@ -82,6 +82,24 @@ cannot spend the day's search quota:
 .venv/bin/python 02_Data/track_new_videos.py --no-discover
 ```
 
+### Report
+
+```bash
+# once: a real pdflatex in $HOME, no sudo (AAAI requires PDFLaTeX)
+curl -sL "https://yihui.org/tinytex/install-bin-unix.sh" | sh
+~/Library/TinyTeX/bin/universal-darwin/tlmgr install psnfss booktabs xcolor \
+    graphics graphics-def epstopdf-pkg times helvetic courier amsmath
+brew install poppler          # optional: enables the AAAI font checks in build.sh
+
+.venv/bin/python 05_Reports/final_report/make_tables.py --seeds 5   # numbers first
+./05_Reports/final_report/build.sh                                  # then compile
+```
+
+`build.sh` runs the full pdflatex → bibtex → pdflatex ×2 cycle and then *checks* AAAI
+compliance rather than assuming it: no Type 3 fonts, everything embedded, US letter.
+`05_Reports/final_report/claim_evidence.md` maps every number in the report to the
+command that reproduces it.
+
 ### Notebook walkthrough
 
 ```bash
