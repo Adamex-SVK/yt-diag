@@ -47,6 +47,8 @@ Requires in project-root .env: YOUTUBE_API_KEY=... (discovery only).
 Requires in venv (requirements.txt): opencv-python-headless, numpy,
 opensmile, openai-whisper.
 """
+from __future__ import annotations
+
 import argparse
 import concurrent.futures
 import csv
@@ -59,6 +61,7 @@ import subprocess
 import sys
 import threading
 import time
+from typing import Any, Optional
 import urllib.parse
 import urllib.request
 
@@ -113,7 +116,13 @@ _optional_import_warned = set()
 _io_lock = threading.Lock()  # guards log/manifest file writes across worker threads
 
 
-def log(msg):
+def log(msg: str) -> None:
+    """Timestamped line to stdout and appended to collection_log.txt.
+
+    Held under _io_lock because worker threads log concurrently: the log is the
+    only post-hoc account of a multi-day unattended run, and interleaved partial
+    writes would make it unreadable exactly when a run went wrong.
+    """
     line = f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] {msg}"
     print(line)
     with _io_lock, open(LOG_PATH, "a", encoding="utf-8") as f:
@@ -169,7 +178,14 @@ def _note_result(success, err_text=""):
             f"Refresh cookies.txt and re-run with --resume.")
 
 
-def check_dependencies():
+def check_dependencies() -> None:
+    """Verify yt-dlp/ffmpeg/ffprobe/deno are on PATH before any work starts.
+
+    sys.exit()s with an install hint rather than raising: a missing binary would
+    otherwise surface as thousands of identical CalledProcessError rows in the
+    manifest, i.e. a whole run's worth of videos marked "failed" for a reason
+    that has nothing to do with the videos.
+    """
     for tool in ("yt-dlp", "ffmpeg", "ffprobe"):
         if shutil.which(tool) is None:
             sys.exit(f"Missing required tool on PATH: {tool}. Install it before running this script.")
@@ -182,7 +198,13 @@ def check_dependencies():
                   "Install with: brew install deno (macOS) or see https://deno.land for other platforms.")
 
 
-def load_api_key():
+def load_api_key() -> str:
+    """YOUTUBE_API_KEY from the project-root .env.
+
+    Used for discovery only -- yt-dlp never sees it -- so a run driven by
+    --input-ids does not call this at all. Raises RuntimeError if the key is
+    missing, which is the right failure: without discovery there are no jobs.
+    """
     env_path = os.path.join(ROOT, ".env")
     with open(env_path, encoding="utf-8") as f:
         for line in f:
@@ -191,7 +213,16 @@ def load_api_key():
     raise RuntimeError(f"YOUTUBE_API_KEY not found in {env_path}")
 
 
-def warn_once(name, msg):
+def warn_once(name: str, msg: str) -> None:
+    """Log `msg` the first time this `name` is seen, then never again.
+
+    Optional-dependency warnings live on a per-video code path, so without this
+    a single missing package emits one line per video -- 8,000 copies that bury
+    the real failures. `name` is the dedup key, not the message text.
+
+    Not locked: a duplicate warning under a thread race is harmless, and taking
+    _io_lock here would nest it inside log()'s own acquisition of the same lock.
+    """
     if name not in _optional_import_warned:
         _optional_import_warned.add(name)
         log(f"WARNING: {msg}")
@@ -201,7 +232,21 @@ def warn_once(name, msg):
 # Discovery (YouTube Data API search.list -- video IDs only, no license filter)
 # ---------------------------------------------------------------------------
 
-def discover_video_ids(api_key, category_id, q, target_count):
+def discover_video_ids(api_key: str, category_id: Optional[str], q: Optional[str],
+                       target_count: int) -> list[str]:
+    """Up to `target_count` unique video IDs from search.list, in API order.
+
+    Returns FEWER than target_count without error, and that is the normal case,
+    not a failure: search.list stops issuing pageTokens long before the
+    pageInfo.totalResults estimate is exhausted (cc_availability_scan_findings.md
+    measured the gap). Callers must size the run off len() of this, never off
+    what they asked for.
+
+    IDs are deduplicated across pages because search.list repeats them, and both
+    filters are omitted when falsy -- but note a bare videoCategoryId with no `q`
+    returns 0 results on the live API, which is why every CATEGORIES entry
+    carries a keyword.
+    """
     seen = []
     seen_set = set()
     page_token = None
@@ -244,7 +289,14 @@ def discover_video_ids(api_key, category_id, q, target_count):
 # Manifest (human-readable progress log, one row per video)
 # ---------------------------------------------------------------------------
 
-def manifest_append(video_id, category, status, error=""):
+def manifest_append(video_id: str, category: str, status: str, error: str = "") -> None:
+    """Append one row to collection_manifest.csv, writing the header if the file
+    is new. `status` is "done" or "failed"; `error` is the truncated stderr.
+
+    Append-only and locked across threads on purpose: this is the audit trail
+    used to reconcile what was attempted against what landed on disk, so a video
+    that fails twice across two runs correctly appears twice.
+    """
     with _io_lock:
         is_new = not os.path.exists(MANIFEST_PATH)
         with open(MANIFEST_PATH, "a", newline="", encoding="utf-8") as f:
@@ -254,7 +306,14 @@ def manifest_append(video_id, category, status, error=""):
             writer.writerow([video_id, category, status, error, time.strftime("%Y-%m-%d %H:%M:%S")])
 
 
-def is_done(video_dir):
+def is_done(video_dir: str) -> bool:
+    """True if the .done marker exists -- the only signal --resume trusts.
+
+    process_video() writes .done last, after the temp video and audio are
+    deleted, so its presence means every artefact is on disk. A directory that
+    exists but has no marker is therefore a partial video, and is redone from
+    scratch rather than repaired.
+    """
     return os.path.exists(os.path.join(video_dir, ".done"))
 
 
@@ -262,11 +321,33 @@ def is_done(video_dir):
 # Per-video processing -- metadata, thumbnail, captions, video/frames
 # ---------------------------------------------------------------------------
 
-def run(cmd, **kwargs):
+def run(cmd: list[str], **kwargs: Any) -> subprocess.CompletedProcess[str]:
+    """subprocess.run with check=True and captured text output.
+
+    Every external-tool call goes through here so that a non-zero exit raises
+    CalledProcessError with stderr attached to it -- process_video() writes that
+    stderr into the manifest, and _note_result() pattern-matches it to detect a
+    dead cookies session. Both depend on the message surviving; a bare
+    subprocess.run that let output go to the terminal would lose it.
+    """
     return subprocess.run(cmd, check=True, capture_output=True, text=True, **kwargs)
 
 
-def fetch_metadata(video_id, video_dir):
+def fetch_metadata(video_id: str, video_dir: str) -> dict[str, Any]:
+    """Write the kept subset of yt-dlp's --dump-json to metadata.json, and
+    return the same dict.
+
+    Only the baseline's fields are kept; the rest of the dump is mostly playback
+    URLs that expire within hours and would be dead weight in the dataset.
+
+    Every count here (view/like/comment/channel_follower) is a value AS OF
+    collected_at, not a property of the video: they keep rising afterwards, so
+    any label computed from them must age-normalise against collected_at rather
+    than against the time the model is trained. `duration` is seconds. Fields
+    absent from the dump are stored as None, so a null in metadata.json means
+    "YouTube did not report it" (likes hidden by the creator, for instance), not
+    zero.
+    """
     url = f"https://www.youtube.com/watch?v={video_id}"
     result = run(["yt-dlp", *YT_DLP_EXTRA_ARGS, "--dump-json", "--skip-download", url])
     data = json.loads(result.stdout)
@@ -298,7 +379,14 @@ def fetch_metadata(video_id, video_dir):
     return keep
 
 
-def fetch_thumbnail(video_id, video_dir):
+def fetch_thumbnail(video_id: str, video_dir: str) -> None:
+    """Download the thumbnail into video_dir as thumbnail.<ext>.
+
+    The extension is whatever YouTube served (.webp as often as .jpg), so
+    consumers must glob for "thumbnail.*" -- process_video() and the adapters
+    both do. Raises CalledProcessError on failure, which fails the whole video:
+    a thumbnail is a required modality, not an optional extra.
+    """
     url = f"https://www.youtube.com/watch?v={video_id}"
     run([
         "yt-dlp", *YT_DLP_EXTRA_ARGS, "--write-thumbnail", "--skip-download",
@@ -307,7 +395,7 @@ def fetch_thumbnail(video_id, video_dir):
     ])
 
 
-def fetch_captions(video_id, video_dir):
+def fetch_captions(video_id: str, video_dir: str) -> Optional[str]:
     """Returns the path to captions.en.srt if yt-dlp produced one, else None
     -- absence is expected for many videos, not fatal on its own (see
     transcribe() below for the Whisper fallback that covers that case)."""
@@ -328,8 +416,22 @@ def fetch_captions(video_id, video_dir):
 _SRT_TAG_RE = None  # set on first use, avoids importing re at module load for a one-off
 
 
-def srt_to_text(srt_path):
-    """Strips SRT index/timestamp lines, returns plain caption text."""
+def srt_to_text(srt_path: str) -> list[str]:
+    """Caption LINES with SRT index and timestamp lines stripped -- a list, not
+    a joined string.
+
+    Callers join it themselves because the per-line split is load-bearing:
+    caption_quality_ok() counts bare [Music]-style tag lines against the line
+    total, and process_video() drops those same lines before joining.
+
+    Side effect callers depend on: compiles the module-level _SRT_TAG_RE on
+    first use. Anything touching _SRT_TAG_RE directly must have called this
+    first, or it is still None.
+
+    Decode errors are ignored rather than raised -- auto-caption SRTs are
+    occasionally mis-encoded, and losing a character is cheaper than losing the
+    video's entire transcript.
+    """
     import re
     global _SRT_TAG_RE
     if _SRT_TAG_RE is None:
@@ -344,9 +446,14 @@ def srt_to_text(srt_path):
     return lines
 
 
-def caption_quality_ok(srt_path):
+def caption_quality_ok(srt_path: str) -> bool:
     """data_retrieval.md #4.3 heuristic: word count > 50, no more than 20%
-    of lines are bare [Music]/[Applause]-style tags."""
+    of lines are bare [Music]/[Applause]-style tags.
+
+    False means "use Whisper instead", not "this video has no speech" -- an
+    empty or unreadable file also returns False. The 50-word floor is what keeps
+    a music video's two spoken lines from being accepted as a transcript.
+    """
     lines = srt_to_text(srt_path)
     if not lines:
         return False
@@ -375,7 +482,7 @@ _whisper_available = True  # set False by preload_whisper() if openai-whisper is
 # over at call time) to avoid N instances each trying to grab all 96 threads.
 
 
-def preload_whisper(num_instances=1):
+def preload_whisper(num_instances: int = 1) -> None:
     """Load Whisper/torch BEFORE any worker threads exist -- must be called
     from main(), single-threaded, prior to creating the ThreadPoolExecutor.
 
@@ -394,7 +501,13 @@ def preload_whisper(num_instances=1):
     resident, later loads from any thread just bump a refcount, no re-init.
     Loading all `num_instances` copies here (still single-threaded, still
     before the ThreadPoolExecutor exists) keeps that guarantee for all of
-    them, not just the first."""
+    them, not just the first.
+
+    A missing openai-whisper is degradation, not failure: _whisper_available
+    goes False after one warning, and every video that would have needed the
+    fallback finishes with transcript_source "none" and no transcript.txt. Such
+    a run still marks those videos .done, so the gap is invisible afterwards
+    except in transcript_info.json -- check the warning at the top of the log."""
     global _whisper_pool, _whisper_available
     try:
         import torch
@@ -414,11 +527,26 @@ def preload_whisper(num_instances=1):
         _whisper_pool.put(whisper.load_model("small.en"))
 
 
-def transcribe_with_whisper(audio_path):
+def transcribe_with_whisper(audio_path: str) -> Optional[str]:
     """data_retrieval.md #4.2/#4.3 fallback for missing/poor auto-captions.
     Assumes preload_whisper() already ran in main() before any worker
     threads started. Borrows one instance from the pool for the duration of
-    the call so up to `num_instances` transcriptions run concurrently."""
+    the call so up to `num_instances` transcriptions run concurrently.
+
+    None and "" mean different things and process_video() records the
+    difference: None is "openai-whisper is not installed, no attempt was made"
+    (transcript_source "none"), while "" is "Whisper ran and heard nothing"
+    (transcript_source "whisper", no transcript.txt written).
+
+    The instance is returned to the pool in a finally block -- a transcription
+    that raises must not permanently shrink the pool, since after
+    `num_instances` such failures every remaining video would block forever on
+    an empty queue.
+
+    English-only (small.en), which is why discovery constrains
+    relevanceLanguage=en: a non-English video reaching here produces confident
+    nonsense rather than an empty result.
+    """
     if not _whisper_available:
         return None
     model = _whisper_pool.get()
@@ -429,7 +557,19 @@ def transcribe_with_whisper(audio_path):
     return result["text"].strip()
 
 
-def download_video(video_id, tmp_path):
+def download_video(video_id: str, tmp_path: str) -> None:
+    """Download the video muxed with its audio to `tmp_path`, capped at
+    MAX_HEIGHT pixels of vertical resolution.
+
+    The file is temporary by contract, not by convenience: process_video()
+    deletes it on both the success and failure paths, so no video file is ever
+    retained (the TOS constraint in the module docstring). Anything that needs
+    pixels or audio must extract it before that deletion.
+
+    Raises CalledProcessError on failure; the stderr it carries is what the
+    auth-break breaker reads to tell a dead cookies session from a genuinely
+    unavailable video.
+    """
     # bestvideo+bestaudio (not bestvideo alone) -- audio track is required
     # for the eGeMAPS/prosody features below, not just the video frames.
     url = f"https://www.youtube.com/watch?v={video_id}"
@@ -441,7 +581,17 @@ def download_video(video_id, tmp_path):
     ])
 
 
-def probe_duration(video_path):
+def probe_duration(video_path: str) -> float:
+    """Duration of the file on disk, in SECONDS.
+
+    Deliberately measured from the downloaded container rather than reused from
+    metadata.json's `duration`: the two disagree when yt-dlp merges a slightly
+    short stream, and frame timestamps computed from the advertised length would
+    then seek past the end and hand ffmpeg a failing frame.
+
+    Raises ValueError if ffprobe reports no parseable duration (some live-stream
+    remnants), which fails the video rather than sampling it at nonsense times.
+    """
     result = run([
         "ffprobe", "-v", "error", "-show_entries", "format=duration",
         "-of", "default=noprint_wrappers=1:nokey=1", video_path,
@@ -449,11 +599,22 @@ def probe_duration(video_path):
     return float(result.stdout.strip())
 
 
-def compute_frame_timestamps(duration, frame_count):
+def compute_frame_timestamps(duration: float, frame_count: int) -> list[float]:
     """16-24 frames, denser in the first DENSE_WINDOW_SEC seconds (locked
     in the Architecture Digest: 'engagement signal concentrates' there).
     Falls back to plain uniform sampling for videos shorter than the
-    dense window, where the split is meaningless."""
+    dense window, where the split is meaningless.
+
+    `duration` and the returned timestamps are both in SECONDS. Positions are
+    bin midpoints, so no timestamp is ever 0.0 or exactly `duration` -- both
+    ends of a video are routinely black or a fade, and a black frame's mean
+    colour is not a feature.
+
+    Consequence for downstream models: the frames are NOT uniformly spaced, so
+    frame index is not proportional to time. Anything treating the 20 frames as
+    an evenly sampled sequence is wrong for any video longer than
+    DENSE_WINDOW_SEC.
+    """
     if duration <= DENSE_WINDOW_SEC:
         return [(i + 0.5) / frame_count * duration for i in range(frame_count)]
 
@@ -466,7 +627,21 @@ def compute_frame_timestamps(duration, frame_count):
     return dense_ts + sparse_ts
 
 
-def extract_frames(video_path, frames_dir, frame_count):
+def extract_frames(video_path: str, frames_dir: str, frame_count: int) -> list[str]:
+    """Write `frame_count` JPEGs as frames/frame_NN.jpg and return their paths
+    in time order (index order == sampling order, but see
+    compute_frame_timestamps(): the spacing is not uniform).
+
+    One ffmpeg call per frame, with -ss BEFORE -i so ffmpeg seeks to the nearest
+    keyframe instead of decoding the file from the start; a single-pass select
+    filter would decode every frame of a 20-minute video to keep 20 of them.
+    The cost is `frame_count` process spawns per video, which is why this is
+    still the slow step on a low-core machine.
+
+    Raises CalledProcessError if any single frame fails, so a video is never
+    marked done with a short frame set that a later consumer would read as a
+    complete one.
+    """
     os.makedirs(frames_dir, exist_ok=True)
     duration = probe_duration(video_path)
     timestamps = compute_frame_timestamps(duration, frame_count)
@@ -573,7 +748,32 @@ def _analyze_image(cv2, path, detect_faces):
     }
 
 
-def extract_visual_features(thumbnail_path, frame_paths, video_dir):
+def extract_visual_features(thumbnail_path: Optional[str], frame_paths: list[str],
+                            video_dir: str) -> Optional[dict[str, Any]]:
+    """Write visual_features.json (a "thumbnail" block plus across-frame
+    aggregates) and return it. None means opencv is not installed and NO file
+    was written -- distinct from a written file whose values are None.
+
+    Units, none of which are 0-1 unless said so: *_cct is McCamy's
+    correlated-colour-temperature approximation, nominally Kelvin, but computed
+    by _correlated_color_temp() from mean RGB fed in as CIE XYZ directly (no
+    sRGB->XYZ matrix, no gamma linearisation) -- so read it as a monotone
+    warm/cool index, not a calibrated temperature. brightness and saturation are
+    the means of the HSV V and S channels on the 0-255 byte scale; contrast is
+    the standard deviation of V on that same 0-255 scale; *_face_area_ratio is a
+    fraction of frame area; frames_has_face_ratio is the fraction of readable
+    frames with at least one face.
+
+    A None aggregate means no frame yielded a value for that key -- it is not
+    zero, and averaging it as zero would push a video toward "cold and dark".
+    Aggregates are also taken only over the frames OpenCV could actually decode
+    and, per key, only over non-None values, so a mean may be over fewer than
+    len(frame_paths) frames; that count is not recorded anywhere, so denominators
+    here are not comparable across videos.
+
+    "thumbnail" is None when no thumbnail file was found or it failed to decode,
+    which is why consumers must not assume the block exists.
+    """
     try:
         import cv2
     except ImportError:
@@ -616,7 +816,18 @@ def extract_visual_features(thumbnail_path, frame_paths, video_dir):
 # opensmile, extracted from the audio track of the video already on disk.
 # ---------------------------------------------------------------------------
 
-def extract_audio_track(video_path, audio_path):
+def extract_audio_track(video_path: str, audio_path: str) -> None:
+    """Demux to 16 kHz mono signed-16-bit PCM WAV at `audio_path`.
+
+    That exact format is a hard requirement, not a default: webrtcvad
+    (_pause_stats) accepts only 8/16/32/48 kHz mono 16-bit PCM and raises
+    otherwise, and Whisper resamples everything to 16 kHz anyway, so writing it
+    once here serves both consumers. wave.open() in _pause_stats also assumes
+    2-byte samples when it slices frames.
+
+    Raises CalledProcessError when the video has no audio stream at all, which
+    fails the whole video.
+    """
     run([
         "ffmpeg", "-y", "-i", video_path, "-vn",
         "-acodec", "pcm_s16le", "-ar", "16000", "-ac", "1",
@@ -624,7 +835,23 @@ def extract_audio_track(video_path, audio_path):
     ])
 
 
-def extract_audio_features(audio_path, video_dir):
+def extract_audio_features(audio_path: str, video_dir: str) -> Optional[dict[str, Any]]:
+    """Write audio_features.json as {"egemaps": {...}, "pauses": {...}} and
+    return it. None means opensmile is not installed and no file was written.
+
+    "egemaps" is the eGeMAPSv02 Functionals set: ~88 named scalars summarising
+    the WHOLE track with no time axis, so it describes a video's average voice,
+    never its dynamics. Anything wanting "the intro is loud, the rest is flat"
+    has to come from somewhere else.
+
+    "pauses" is None inside an otherwise-complete result when webrtcvad is
+    missing -- a partial success, not a failure, so callers must null-check the
+    inner key as well as the return value.
+
+    Dumped with default=float because opensmile returns numpy scalars, which
+    json cannot encode; that also silently coerces any NaN to the literal NaN,
+    which is not valid JSON for strict parsers.
+    """
     try:
         import opensmile
     except ImportError:
@@ -693,7 +920,27 @@ def _pause_stats(audio_path):
 
 # ---------------------------------------------------------------------------
 
-def process_video(video_id, category, frame_count, resume):
+def process_video(video_id: str, category: str, frame_count: int, resume: bool) -> None:
+    """Run the whole per-video pipeline into processed/<category>/<video_id>/
+    and record the outcome in the manifest.
+
+    Returns None on success, on failure, and on a skip -- deliberately, since a
+    ThreadPoolExecutor task that raises would only surface when the future is
+    read, and nothing reads these futures. Everything from fetch_metadata()
+    onward is caught, logged, written to the manifest as "failed" and fed to
+    _note_result(), so one poisonous video cannot end a multi-day run. The
+    manifest, not a return value, is how a caller learns what happened.
+
+    Ordering is the resumability contract: the temp video and audio are deleted
+    on BOTH paths (so a crash never leaves full videos on disk), and .done is
+    written last, after those deletions. A directory without .done is therefore
+    always safe to overwrite, which is what makes --resume idempotent.
+
+    `resume` only skips already-.done work; it never repairs a partial
+    directory. Skips are also silent when the auth-break breaker has tripped --
+    those videos are left for a later run rather than being recorded as failures
+    they did not have.
+    """
     video_dir = os.path.join(OUT_DIR, category, video_id)
     if resume and is_done(video_dir):
         log(f"skip (already done): {video_id}")
@@ -764,7 +1011,29 @@ def process_video(video_id, category, frame_count, resume):
 
 # ---------------------------------------------------------------------------
 
-def main():
+def main() -> None:
+    """CLI entry point: parse args, build the job list (discovery or
+    --input-ids), and process it across --workers threads.
+
+    Three orderings here are load-bearing rather than stylistic:
+
+    - --cookies/--cookies-from-browser are appended to the module-level
+      YT_DLP_EXTRA_ARGS, so they reach every yt-dlp call in the process, not
+      just the download. This mutates module state; a second main() in one
+      process would append them twice.
+    - preload_whisper() runs before the ThreadPoolExecutor is created. See its
+      docstring -- doing it lazily inside a worker raises the failure rate to
+      25-35% on Windows purely from the number of live threads.
+    - Submissions are staggered by --pacing/--workers instead of being queued
+      back-to-back, because burst traffic is precisely what triggered YouTube's
+      bot check on a school network. The sleep is in the submitting thread, so
+      it paces starts, not throughput.
+
+    Discovery asks for --target IDs per category but search.list usually returns
+    fewer; the run processes what it got and does not retry to reach the target.
+    If the auth-break breaker trips, submission stops early and the remainder of
+    the queue is deliberately left unsubmitted for a later --resume.
+    """
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--category", required=True, choices=list(CATEGORIES) + ["all"])
     parser.add_argument("--target", type=int, default=DEFAULT_TARGET_PER_CATEGORY, help="videos to collect per category")

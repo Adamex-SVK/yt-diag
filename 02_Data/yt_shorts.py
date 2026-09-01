@@ -25,11 +25,13 @@ Two pitfalls verified 2026-08-29 from Germany:
 Be polite: this is a page fetch, not an API call; YouTube starts bot-checking
 after a few thousand fast requests (harmless to the verdict, but rude).
 """
+from __future__ import annotations
 import re
 import concurrent.futures
 import time
 import urllib.error
 import urllib.request
+from typing import Callable, Iterable, Optional
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
@@ -49,7 +51,7 @@ class _NoRedirect(urllib.request.HTTPRedirectHandler):
 _opener = urllib.request.build_opener(_NoRedirect)
 
 
-def fetch_status(url):
+def fetch_status(url: str) -> tuple[int, str, str]:
     """(status, location, body) without following redirects; the body is
     read only for 200 responses. Isolated for tests."""
     req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept-Language": "en-US,en;q=0.9",
@@ -61,7 +63,7 @@ def fetch_status(url):
         return e.code, e.headers.get("Location") or "", ""
 
 
-def playability(body):
+def playability(body: Optional[str]) -> tuple[Optional[str], str]:
     """(status, reason) from the embedded player response -- e.g. ('OK', ''),
     ('ERROR', 'Video unavailable'), ('LOGIN_REQUIRED', 'Private video'),
     ('LOGIN_REQUIRED', "Sign in to confirm you're not a bot") -- or
@@ -70,7 +72,7 @@ def playability(body):
     return (m.group(1), m.group(2) or "") if m else (None, "")
 
 
-def page_has_video(body):
+def page_has_video(body: Optional[str]) -> bool:
     """A 200 at /shorts/<id> only means 'no /watch page to redirect to'. The
     page proves a video exists unless the player response says the video is
     unavailable (ERROR), or private/removed (LOGIN_REQUIRED without the
@@ -96,7 +98,7 @@ ABORT_AFTER_CONSECUTIVE_UNKNOWN = 25  # consecutive INCONCLUSIVE probes: a block
 GRACE_PAUSE_SEC = 60.0  # ... but a transient burst (rate-limit, brief outage) gets ONE pause-and-resume first
 
 
-def classify_ex(video_id, retries=1):
+def classify_ex(video_id: str, retries: int = 1) -> tuple[str, bool]:
     """(verdict, resolved). verdict: 'true' (Short), 'false' (regular video),
     '' (unknown). resolved=True when YouTube answered definitively -- including
     "this video is deleted/private/unavailable" (no verdict possible, but the
@@ -122,13 +124,17 @@ def classify_ex(video_id, retries=1):
     return "", False
 
 
-def classify(video_id, retries=1):
+def classify(video_id: str, retries: int = 1) -> str:
     """'true' (Short), 'false' (regular video), '' (unknown: consent page,
     network error, deleted/private/unavailable page, unexpected status)."""
     return classify_ex(video_id, retries)[0]
 
 
-def classify_many(video_ids, workers=WORKERS, on_item=None):
+def classify_many(
+    video_ids: Iterable[str],
+    workers: int = WORKERS,
+    on_item: Optional[Callable[[], None]] = None,
+) -> dict[str, Optional[str]]:
     """{video_id: verdict} for many ids, fetched concurrently, order-free.
     verdict: 'true' / 'false' (definitive), '' (resolved unknown: the page says
     the video is deleted/private/unavailable -- no verdict is possible), or

@@ -15,6 +15,12 @@ Groups (see FEATURES.md for definitions and roles):
   asset  paths/text handed to the deep stage (thumbnail, frames dir,
          transcript, title/description) -- not tabular inputs themselves
 """
+from __future__ import annotations
+
+from typing import Optional, Sequence
+
+import pandas as pd
+
 GROUPS = ("meta", "sched", "vis", "aud", "asset")
 
 # Columns that may NEVER be a model input (FEATURES.md role "label-only").
@@ -54,11 +60,15 @@ ASSET_COLUMNS = ["asset__thumbnail_path", "asset__frames_dir", "asset__transcrip
                  "asset__title", "asset__description"]
 
 
-def group_of(column):
+def group_of(column: str) -> Optional[str]:
+    """Group prefix of a canonical column, or None when it has no `<group>__`
+    prefix. None is the load-bearing case: identifiers and label-only columns
+    are deliberately left unprefixed, so they belong to no group and can never
+    be picked up by a group selection."""
     return column.split("__", 1)[0] if "__" in column else None
 
 
-def select_columns(df, groups):
+def select_columns(df: pd.DataFrame, groups: Sequence[str]) -> list[str]:
     """Tabular input columns for the requested groups, in a stable order.
     Raises if a label-only column would be selected (it never should be --
     label-only columns are not prefixed, but be explicit)."""
@@ -72,7 +82,7 @@ def select_columns(df, groups):
     return cols
 
 
-def available_groups(df):
+def available_groups(df: pd.DataFrame) -> list[str]:
     """Which groups have at least one non-null value in this table -- the
     honest way to know what a dataset supports (Adam's has aud/vis, the
     prospective one has sched/asset-thumbnail but no aud)."""

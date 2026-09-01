@@ -6,8 +6,11 @@ Protocol: channel-grouped 60/20/20 split; models fit on train, threshold
 picked on val (max F1), reported on val; the TEST split is evaluated only
 when `evaluate_test=True` -- touch it once, at the end (MILESTONES.md).
 """
+from __future__ import annotations
+
 import json
 import os
+from typing import Any, Optional, Sequence
 
 import numpy as np
 import pandas as pd
@@ -26,7 +29,7 @@ CATEGORICAL = ("meta__category", "meta__language")
 MIN_LABELED_ROWS = 50  # below this a 60/20/20 grouped split is meaningless
 
 
-def _preprocessor(cols, scale):
+def _preprocessor(cols: Sequence[str], scale: bool) -> ColumnTransformer:
     """Column-wise preparation: median-impute the numeric columns (EDA found
     0 of 1,860 rows complete, so dropping incomplete rows is not an option),
     one-hot the two string columns, and scale only when the model needs it --
@@ -42,7 +45,7 @@ def _preprocessor(cols, scale):
     ])
 
 
-def _boosting():
+def _boosting() -> tuple[str, Any]:
     """(name, estimator) for the gradient-boosting baseline. XGBoost needs
     libomp on macOS; when that wheel is missing we fall back to sklearn's
     HistGradientBoosting rather than failing the run, and the returned NAME
@@ -58,7 +61,7 @@ def _boosting():
                                                                         max_iter=300, random_state=0)
 
 
-def _metrics(y, p, threshold):
+def _metrics(y: np.ndarray, p: np.ndarray, threshold: float) -> dict[str, float]:
     """AUC-ROC (primary), PR-AUC (honest under class imbalance), and F1 at a
     threshold chosen on validation. positive_rate is carried so a reader can
     see the class balance the numbers were computed against."""
@@ -67,14 +70,20 @@ def _metrics(y, p, threshold):
             "positive_rate": float(np.mean(y))}
 
 
-def _best_threshold(y, p):
+def _best_threshold(y: np.ndarray, p: np.ndarray) -> float:
     """Probability cut-off maximising F1, chosen on VALIDATION only. Picking it
     on test would leak the test set into a modelling decision."""
     grid = np.linspace(0.05, 0.95, 91)
     return float(max(grid, key=lambda t: f1_score(y, (p >= t).astype(int))))
 
 
-def run_baselines(df, groups, out_dir=None, seed=0, evaluate_test=False):
+def run_baselines(
+    df: pd.DataFrame,
+    groups: Sequence[str],
+    out_dir: Optional[str] = None,
+    seed: int = 0,
+    evaluate_test: bool = False,
+) -> dict[str, Any]:
     """Fit the three baselines on `groups` and return a results dict.
 
     `groups` is a tuple of feature-group prefixes ("meta", "sched", "vis",
@@ -134,7 +143,7 @@ def run_baselines(df, groups, out_dir=None, seed=0, evaluate_test=False):
     return results
 
 
-def format_results(results):
+def format_results(results: dict[str, Any]) -> str:
     """One-line-per-model summary for the terminal. Validation always; the test
     column appears only for a run that explicitly asked for it."""
     lines = [f"groups={results['groups']}  features={results['n_features']}  "

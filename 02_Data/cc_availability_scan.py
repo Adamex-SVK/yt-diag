@@ -8,9 +8,12 @@ note can be inaccurate for large result sets).
 
 Usage: source .venv/bin/activate && python3 02_Data/cc_availability_scan.py
 """
+from __future__ import annotations
+
 import json
 import os
 import time
+from typing import Any, Optional
 import urllib.parse
 import urllib.request
 
@@ -34,7 +37,13 @@ CANDIDATES = [
 ]
 
 
-def load_api_key():
+def load_api_key() -> str:
+    """YOUTUBE_API_KEY from the project-root .env.
+
+    Path is resolved relative to this file, not the cwd, so the script gives
+    the same answer wherever it is invoked from. Raises RuntimeError when the
+    key is absent -- there is no unauthenticated fallback for search.list.
+    """
     with open(os.path.join(os.path.dirname(__file__), "..", ".env")) as f:
         for line in f:
             if line.startswith("YOUTUBE_API_KEY="):
@@ -42,7 +51,17 @@ def load_api_key():
     raise RuntimeError("YOUTUBE_API_KEY not found in .env")
 
 
-def search_page(key, category_id, q, page_token=None):
+def search_page(key: str, category_id: Optional[str], q: Optional[str],
+                page_token: Optional[str] = None) -> dict[str, Any]:
+    """One raw decoded search.list page, always with videoLicense=creativeCommon
+    -- that filter is the entire point of this scan and is never optional.
+
+    category_id and q are each omitted from the request when falsy, which is how
+    CANDIDATES expresses "keyword only, no category" and "bare category filter".
+    HTTP/network errors propagate rather than returning an empty page: a failed
+    request counted as zero results would silently understate CC availability,
+    the one number this script exists to measure.
+    """
     params = {
         "part": "id",
         "type": "video",
@@ -61,7 +80,21 @@ def search_page(key, category_id, q, page_token=None):
         return json.load(resp)
 
 
-def scan_candidate(key, candidate):
+def scan_candidate(key: str, candidate: dict[str, Optional[str]]) -> dict[str, Any]:
+    """Page one CANDIDATES entry until CAP distinct IDs are seen or the API
+    stops handing out pages.
+
+    Returns {"label", "retrievable_count", "hit_cap", "totalResults_estimate",
+    "api_calls_used"}. retrievable_count counts DISTINCT videoIds actually
+    returned; totalResults_estimate is carried alongside it only as evidence of
+    the gap, since Google documents it as an approximation and it runs orders of
+    magnitude above what search.list will actually page out. hit_cap=True means
+    retrievable_count is a floor (CAP), not a total -- the scan stopped early.
+
+    api_calls_used is returned because quota, not time, is the binding
+    constraint: search.list costs 100 units per call against a 10,000/day free
+    budget, i.e. ~100 pages per day for the whole scan.
+    """
     seen_ids = set()
     total_results_estimate = None
     page_token = None
@@ -89,7 +122,16 @@ def scan_candidate(key, candidate):
     }
 
 
-def main():
+def main() -> None:
+    """Scan every CANDIDATES entry, print one line each, and write
+    cc_availability_scan_results.json next to this file.
+
+    Historical, not part of the live pipeline: the team dropped the CC-only
+    constraint after this ran (cc_availability_scan_findings.md addendum,
+    2026-08-14), so collect_and_extract.py does not filter by videoLicense.
+    Kept as the record of what that decision was based on -- re-running it costs
+    most of a day's search.list quota, which is why the total is printed.
+    """
     key = load_api_key()
     results = []
     total_calls = 0

@@ -8,17 +8,42 @@ within-category top quartile of that latent, like the real v2 label.
 Usage:
     python3 -m ytdiag.synthetic --out /tmp/fake_processed --n 1200
 """
+from __future__ import annotations
+
 import argparse
 import datetime
 import json
 import os
 import random
+from typing import Any
 
 CATEGORIES = ["comedy", "howto", "vlogs", "product_reviews"]
 EGEMAPS_NAMES = [f"egemaps_feat_{i:02d}" for i in range(88)]  # real names come from openSMILE
 
 
-def make_video(rng, category, channel, days_old, collected):
+def make_video(
+    rng: random.Random,
+    category: str,
+    channel: dict[str, Any],
+    days_old: int,
+    collected: datetime.datetime,
+) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], dict[str, Any], int]:
+    """The four JSON payloads one video directory holds (metadata, visual,
+    audio, metadata_extra) plus its latent view count, which `generate` ranks
+    into the label.
+
+    The views are not noise around a constant: they are driven by a planted
+    signal (face in thumbnail, evening publish hour, over-long duration,
+    channel size) that a working pipeline must partially recover, mixed with
+    gaussian noise loud enough that it cannot be recovered fully. So AUC near
+    0.5 on this data means the pipeline is broken, and AUC near 1.0 means
+    something leaks -- neither is a property of real videos.
+
+    Units: `days_old` days, `collected` the pretend collection time (naive UTC),
+    `duration` seconds, the returned count absolute views at collection. Views
+    grow with both channel size and age, which is exactly why the label has to
+    be cut within a category rather than globally.
+    """
     duration = int(rng.lognormvariate(6.3, 0.7))  # ~550s median
     subs = channel["subs"]
     has_face = rng.random() < 0.55
@@ -63,7 +88,28 @@ def make_video(rng, category, channel, days_old, collected):
     return meta, visual, audio, extra, views
 
 
-def generate(out_dir, n=1200, seed=0):
+def generate(out_dir: str, n: int = 1200, seed: int = 0) -> str:
+    """Write `n` fake videos under `out_dir` in the exact processed/ layout and
+    return `out_dir`, so `load_retrospective(generate(...))` is a full pipeline
+    check without touching real data or the network.
+
+    Deterministic for a given `seed` -- the tests assert on numbers produced by
+    a specific seed, so changing the draw order changes those assertions.
+
+    Videos are spread over only `n // 4` channels because the channel-grouped
+    split has nothing to hold out otherwise, and ages are drawn from 31-600 days
+    so every video clears compute_labels_v2's 30-day minimum. The label is the
+    top floor(n_category/4) of the latent views within a category (so roughly
+    n/16 positives overall, not n/4) -- a stand-in for v2's
+    category x age-band x size-band stratification, not a reproduction of it,
+    and without v2's min-1 floor (a category with fewer than 4 videos gets no
+    positive at all).
+
+    Every video gets a `.done` marker and the five JSON/text artifacts, but NO
+    thumbnail image and NO frames/ directory -- so asset__thumbnail_path and
+    asset__frames_dir come back None on every row, and this tree exercises the
+    adapter's missing-asset branches rather than the all-present path.
+    """
     rng = random.Random(seed)
     collected = datetime.datetime(2026, 8, 25, 12, 0, 0)
     channels = [{"id": f"UCsynth{i:05d}", "subs": int(10 ** rng.uniform(2.5, 6.5))} for i in range(n // 4)]

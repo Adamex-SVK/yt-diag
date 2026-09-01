@@ -5,11 +5,19 @@ FEATURES.md: `channel_id` drives the split). Implemented with
 StratifiedGroupKFold(5): folds 0-2 train, 3 val, 4 test -- deterministic
 for a given seed, stratified on the label as far as grouping allows.
 """
+from __future__ import annotations
+
 import numpy as np
+import pandas as pd
 from sklearn.model_selection import StratifiedGroupKFold
 
 
-def split_indices(df, label_col="label", group_col="channel_id", seed=0):
+def split_indices(
+    df: pd.DataFrame,
+    label_col: str = "label",
+    group_col: str = "channel_id",
+    seed: int = 0,
+) -> dict[str, np.ndarray]:
     """Row positions for train/val/test, as {"train": idx, "val": idx, "test": idx}.
 
     Grouping by channel is load-bearing, not hygiene: EDA (2026-09-01) measured

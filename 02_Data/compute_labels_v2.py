@@ -80,12 +80,15 @@ Usage:
     python3 02_Data/compute_labels_v2.py --category all
     python3 02_Data/compute_labels_v2.py --category all --min-age-days 90
 """
+from __future__ import annotations
+
 import argparse
 import csv
 import datetime
 import json
 import math
 import os
+from typing import Any, Optional
 
 OUT_DIR = os.path.join(os.path.dirname(__file__), "processed")
 VIRAL_FRACTION = 0.25  # exactly floor(n * fraction) viral per cell, min 1
@@ -95,19 +98,37 @@ DEFAULT_SIZE_BANDS = 4
 SMALL_CELL_WARN = 20  # quartile ranking gets noisy below this many videos
 
 
-def is_done(video_dir):
+def is_done(video_dir: str) -> bool:
+    """True once collect_and_extract.py has fully processed this video
+    directory. The .done marker is written last, after metadata/thumbnail/
+    frames/transcript, so a directory without it may still be mid-write:
+    labeling one would rank a video on a partial or absent view count."""
     return os.path.exists(os.path.join(video_dir, ".done"))
 
 
-def load_metadata(video_dir):
+def load_metadata(video_dir: str) -> dict[str, Any]:
+    """collect_and_extract.py's metadata.json for one video, as written (no
+    key is required here -- extract_row decides what is missing). Raises
+    OSError / json.JSONDecodeError; the caller records those videos as
+    exclusions rather than dropping them silently."""
     with open(os.path.join(video_dir, "metadata.json"), encoding="utf-8") as f:
         return json.load(f)
 
 
-def extract_row(video_id, video_dir, meta, min_age_days):
+def extract_row(
+    video_id: str,
+    video_dir: str,
+    meta: dict[str, Any],
+    min_age_days: int,
+) -> tuple[Optional[dict[str, Any]], Optional[str]]:
     """Returns (row, None) if the video enters the labeling cohort, or
     (None, reason) if it is excluded. Exclusions are explicit and recorded --
-    never imputed around (v1's subs=1 fallback is exactly what this replaces)."""
+    never imputed around (v1's subs=1 fallback is exactly what this replaces).
+
+    Row keys: video_id, video_dir, days_since_upload (whole days; both sides
+    are dates only -- yt-dlp's upload_date has no time -- so it carries up to
+    a day of rounding), view_count, subs (channel_follower_count at
+    collection time), log_views = log(1 + view_count)."""
     upload_date = meta.get("upload_date")
     collected_at = meta.get("collected_at")
     view_count = meta.get("view_count")
@@ -136,8 +157,16 @@ def extract_row(video_id, video_dir, meta, min_age_days):
     }, None
 
 
-def assign_bands(rows, key, n_bands, band_field):
-    """Equal-count quantile bands assigned BY VALUE: every video shares the
+def assign_bands(
+    rows: list[dict[str, Any]],
+    key: str,
+    n_bands: int,
+    band_field: str,
+) -> None:
+    """Writes an integer band index in 0..n_bands-1 into r[band_field] for
+    every r in rows, in place (rows is mutated; nothing is returned).
+
+    Equal-count quantile bands assigned BY VALUE: every video shares the
     band of its value's first occurrence in sort order, so identical values
     (common for subscriber counts, which the API rounds to ~3 significant
     figures) can never be split across bands. Band sizes become uneven when
@@ -153,7 +182,22 @@ def assign_bands(rows, key, n_bands, band_field):
         r[band_field] = first_rank[r[key]] * n_bands // n
 
 
-def label_category(category, cat_dir, args):
+def label_category(category: str, cat_dir: str, args: argparse.Namespace) -> None:
+    """Label one category's collected cohort and write the result to disk:
+    label.json per video, plus labels_summary.csv and labels_excluded.csv in
+    cat_dir. Prints a summary; returns nothing. args supplies min_age_days,
+    age_bands and size_bands.
+
+    Every band edge and cell cutoff is derived from the videos on disk at the
+    moment of the run, so the whole category must be relabeled together: a
+    re-run after more videos are collected can flip an already-written label,
+    and labeling a half-collected category ranks videos against a cohort that
+    does not exist yet.
+
+    Cells are (age_band x size_band) within the category and each gets exactly
+    floor(cell_n * VIRAL_FRACTION) viral videos, minimum 1 -- so a cell of 1-3
+    videos force-labels its top video viral. That is what the SMALL_CELL_WARN
+    message is warning about."""
     rows, excluded = [], []
     for video_id in sorted(os.listdir(cat_dir)):
         video_dir = os.path.join(cat_dir, video_id)
@@ -261,7 +305,12 @@ def label_category(category, cat_dir, args):
             print(f"  excluded {count}: {reason}")
 
 
-def main():
+def main() -> None:
+    """CLI entry point. --category all labels every subdirectory of
+    --data-dir as its own cohort: bands and cutoffs are per-category by
+    design, so a video is never ranked against another category's videos.
+    A named category with no processed/ folder is reported and skipped, not
+    an error -- collection order across categories is not guaranteed."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--category", required=True)
     parser.add_argument("--data-dir", default=OUT_DIR,
