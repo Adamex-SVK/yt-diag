@@ -7,7 +7,10 @@ chromaticity. McCamy's denominator (0.1858 - y) then approached zero for
 green-deficient images and the cubic diverged: 83 of the 1,860 collected videos
 carried CCT values up to 5.0e9, and 27 were NEGATIVE Kelvin. After
 standardisation those columns were effectively constant, so the visual feature
-block was carrying three dead columns into every baseline.
+block was carrying three dead columns into every baseline. Version 2 fixed the
+colour conversion but retained McCamy and only approximated Duv. Version 3
+directly finds the closest point on a 1%-resolution Planckian-locus table over
+one consistently supported range.
 
 WHAT THIS DOES NOT NEED: no video re-download and no frame re-extraction. CCT
 is a per-image statistic and every thumbnail and frame is still on disk, so
@@ -36,17 +39,16 @@ import concurrent.futures
 import datetime
 import json
 import os
-import statistics
 import sys
 from typing import Any, Optional
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from collect_and_extract import CCT_VALID_K, correlated_color_temp, srgb_to_linear  # noqa: E402
+from collect_and_extract import (CCT_METHOD, CCT_VALID_K, CCT_VERSION,  # noqa: E402
+                                 correlated_color_temp, population_std,
+                                 srgb_to_linear)
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "processed")
 VIS_NAME = "visual_features.json"
-CCT_VERSION = 2  # 1 = the broken RGB-as-XYZ version; 2 = this one
-
 _LUT = None
 
 
@@ -104,8 +106,8 @@ def video_cct(video_dir: str) -> dict[str, Any]:
                 frame_ccts.append(c)
     return {
         "thumbnail_cct": thumb_cct,
-        "frames_mean_cct": statistics.fmean(frame_ccts) if frame_ccts else None,
-        "frames_std_cct": statistics.stdev(frame_ccts) if len(frame_ccts) > 1 else None,
+        "frames_mean_cct": sum(frame_ccts) / len(frame_ccts) if frame_ccts else None,
+        "frames_std_cct": population_std(frame_ccts),
         "cct_thumbnail_valid": thumb_cct is not None,
         "cct_frames_valid": len(frame_ccts),
         "cct_frames_total": n_frames,
@@ -161,6 +163,7 @@ def apply_to_video(video_dir: str, dry_run: bool = False) -> Optional[dict[str, 
         vis["cct_frames_valid"] = new["cct_frames_valid"]
         vis["cct_frames_total"] = new["cct_frames_total"]
         vis["cct_version"] = CCT_VERSION
+        vis["cct_method"] = CCT_METHOD
         vis["cct_recomputed_at_utc"] = datetime.datetime.now(
             datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
         _atomic_write_json(path, vis)

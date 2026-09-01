@@ -16,6 +16,8 @@ lone figure would be an artefact of the split rather than a result.
 from __future__ import annotations
 
 import argparse
+import datetime
+import json
 import os
 import re
 import sys
@@ -28,6 +30,9 @@ ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, os.path.join(ROOT, "03_Models"))
 
 MAIN_TEX = os.path.join(HERE, "main.tex")
+# The multi-seed numbers are persisted, not just rendered: a table in a PDF is
+# not a record. Anything quoted in the report must be traceable to this file.
+RESULTS_JSON = os.path.join(HERE, "results", "baselines.json")
 DATA = os.path.join(ROOT, "02_Data", "processed")
 
 # The ablation ladder. Order matters: it reads as an argument, from the
@@ -109,6 +114,22 @@ def render(rows: list[dict[str, Any]], model_names: list[str], seeds: int,
     return "\n".join(lines)
 
 
+def _cct_version() -> "int | None":
+    """Which colour-temperature version the stored features carry.
+
+    Recorded with the results because a CCT recomputation changes the vis__
+    block underneath them: numbers produced against different versions are not
+    comparable, and without this the JSON could not say which."""
+    import glob
+    for p in glob.glob(os.path.join(DATA, "*", "*", "visual_features.json")):
+        try:
+            with open(p, encoding="utf-8") as f:
+                return json.load(f).get("cct_version")
+        except (OSError, json.JSONDecodeError):
+            continue
+    return None
+
+
 def splice(tex: str, key: str, body: str) -> str:
     """Replace the region between the generated markers for `key`."""
     begin, end = f"%% <<<BEGIN GENERATED {key}>>>", f"%% <<<END GENERATED {key}>>>"
@@ -134,6 +155,21 @@ def main() -> None:
     if args.dry_run:
         print("\n" + body)
         return
+    os.makedirs(os.path.dirname(RESULTS_JSON), exist_ok=True)
+    payload = {
+        "generated_at_utc": datetime.datetime.now(datetime.timezone.utc)
+                            .strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "seeds": args.seeds, "n_labelled": n_labelled,
+        "protocol": "channel-grouped 60/20/20; VALIDATION only, test untouched",
+        "cct_version": _cct_version(),
+        "rows": [{"features": r["label"], "n_features": r["n_features"],
+                  "auc": {m: {"mean": mu, "std": sd} for m, (mu, sd) in r["auc"].items()}}
+                 for r in rows],
+    }
+    with open(RESULTS_JSON, "w", encoding="utf-8") as f:
+        json.dump(payload, f, indent=2)
+    print(f"saved {RESULTS_JSON}")
+
     with open(MAIN_TEX, encoding="utf-8") as f:
         tex = f.read()
     out = splice(tex, "baselines", body)

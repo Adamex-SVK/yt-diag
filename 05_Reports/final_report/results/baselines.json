@@ -1,0 +1,117 @@
+{
+  "generated_at_utc": "2026-09-01T14:09:02Z",
+  "seeds": 5,
+  "n_labelled": 1854,
+  "protocol": "channel-grouped 60/20/20; VALIDATION only, test untouched",
+  "cct_version": 3,
+  "rows": [
+    {
+      "features": "Metadata",
+      "n_features": 13,
+      "auc": {
+        "dummy_prior": {
+          "mean": 0.5,
+          "std": 0.0
+        },
+        "logistic_regression": {
+          "mean": 0.5881160835598086,
+          "std": 0.05345207010844271
+        },
+        "xgboost": {
+          "mean": 0.5734656519517831,
+          "std": 0.03058586603375694
+        }
+      }
+    },
+    {
+      "features": "+ schedule",
+      "n_features": 17,
+      "auc": {
+        "dummy_prior": {
+          "mean": 0.5,
+          "std": 0.0
+        },
+        "logistic_regression": {
+          "mean": 0.5967259761757834,
+          "std": 0.05455788521846263
+        },
+        "xgboost": {
+          "mean": 0.5890414971139931,
+          "std": 0.028063059792363655
+        }
+      }
+    },
+    {
+      "features": "+ visual",
+      "n_features": 32,
+      "auc": {
+        "dummy_prior": {
+          "mean": 0.5,
+          "std": 0.0
+        },
+        "logistic_regression": {
+          "mean": 0.6029216763904903,
+          "std": 0.053855188577898366
+        },
+        "xgboost": {
+          "mean": 0.583926550239636,
+          "std": 0.02833915815075497
+        }
+      }
+    },
+    {
+      "features": "+ audio",
+      "n_features": 124,
+      "auc": {
+        "dummy_prior": {
+          "mean": 0.5,
+          "std": 0.0
+        },
+        "logistic_regression": {
+          "mean": 0.5905985870907446,
+          "std": 0.040983186606131185
+        },
+        "xgboost": {
+          "mean": 0.6093858749606056,
+          "std": 0.022312702140619232
+        }
+      }
+    },
+    {
+      "features": "Visual only",
+      "n_features": 15,
+      "auc": {
+        "dummy_prior": {
+          "mean": 0.5,
+          "std": 0.0
+        },
+        "logistic_regression": {
+          "mean": 0.5258958151084151,
+          "std": 0.025397785229151155
+        },
+        "xgboost": {
+          "mean": 0.5041202390202085,
+          "std": 0.009871935078791973
+        }
+      }
+    },
+    {
+      "features": "Audio only",
+      "n_features": 92,
+      "auc": {
+        "dummy_prior": {
+          "mean": 0.5,
+          "std": 0.0
+        },
+        "logistic_regression": {
+          "mean": 0.5341540283068381,
+          "std": 0.02457239595389584
+        },
+        "xgboost": {
+          "mean": 0.5559724376304589,
+          "std": 0.040422541033950765
+        }
+      }
+    }
+  ]
+}

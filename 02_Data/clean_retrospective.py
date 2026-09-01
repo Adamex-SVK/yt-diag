@@ -66,6 +66,7 @@ import csv
 import datetime
 import io
 import json
+import math
 import os
 import re
 import sys
@@ -95,7 +96,8 @@ NO_SPEECH_PAUSE_RATIO = 0.5   # informational flag
 NO_SPEECH_VETO = 0.8          # usability veto -- see module docstring
 EN_STOPWORD_RATE = 0.15  # below this, Latin text is likely not English
 LATIN_RATIO_EN = 0.8
-CCT_RANGE = (1000.0, 20000.0)  # plausible correlated color temperature (K)
+CCT_RANGE = (1667.0, 25000.0)  # version-3 Planckian-locus support (K)
+CCT_VERSION = 3
 
 _STOPWORDS = frozenset(
     "the a an and or but of to in on for with is are was were be been it this "
@@ -556,10 +558,12 @@ def build_manifest(data_dir: str) -> list[dict[str, Any]]:
         fsize = _image_size(os.path.join(d, "frames", "frame_00.jpg"))
 
         def _in(v, lo, hi):
-            return v is None or (isinstance(v, (int, float)) and lo <= v <= hi)
-        cct_valid = (_in((vis.get("thumbnail") or {}).get("cct"), *CCT_RANGE)
+            return v is None or (isinstance(v, (int, float)) and math.isfinite(v) and lo <= v <= hi)
+        cct_valid = (vis.get("cct_version") == CCT_VERSION
+                     and _in((vis.get("thumbnail") or {}).get("cct"), *CCT_RANGE)
                      and _in(vis.get("frames_mean_cct"), *CCT_RANGE)
-                     # a std has no lower CCT bound -- only divergence is invalid
+                     # A spread is not itself a temperature; require only a
+                     # finite, nonnegative value within the full locus span.
                      and _in(vis.get("frames_std_cct"), 0.0, CCT_RANGE[1]))
 
         pause_ratio = ((aud or {}).get("pauses") or {}).get("pause_ratio")
