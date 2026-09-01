@@ -1,0 +1,322 @@
+%% YT-Diag --- DLDM final report
+%%
+%% SINGLE-FILE ON PURPOSE. The AAAI style forbids \input: "Your LaTeX source
+%% file (excluding references) must consist of a single file (use of the
+%% `input' command is not allowed)" (AAAI_formatting_reference.tex, l.71/81).
+%% So do NOT split this into sections/*.tex -- it would not be submittable.
+%% Navigate with the %% ==== banners instead.
+%%
+%% Other AAAI hard requirements, all already satisfied below:
+%%   two-column aaai.sty, letterpaper, Times (not Computer Modern),
+%%   no page numbers / headers / footers, no embedded links (so no hyperref),
+%%   PDFLaTeX only (no .eps figures), bibliography via aaai.bst.
+%%
+%% DRAFT MARKERS: \note{STATUS}{text} renders only while \drafttrue. Flip to
+%% \draftfalse before submission and every marker disappears at once.
+%%   CONFIRMED      reproduced from code output; source named in claim_evidence.md
+%%   PROVISIONAL    a decision we have made but not yet team-signed-off
+%%   PENDING        awaiting an experiment that has not run
+%%   LIMITATION     known threat to validity, must survive into the final text
+%%   SIGNOFF        Emmanuel + Adam must decide
+%%
+%% Numbers must never be typed by hand. make_tables.py rewrites the region
+%% between the <<<BEGIN GENERATED ...>>> markers from the saved results.json
+%% files -- in place, so the single-file rule still holds. Regenerate, do not
+%% edit inside a generated block.
+
+\documentclass[letterpaper]{article}
+\usepackage{aaai}
+\usepackage{times}
+\usepackage{helvet}
+\usepackage{courier}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\frenchspacing
+\setlength{\pdfpagewidth}{8.5in}
+\setlength{\pdfpageheight}{11in}
+\setcounter{secnumdepth}{0}
+
+\newif\ifdraft\drafttrue          % <-- \draftfalse before submission
+\newcommand{\note}[2]{\ifdraft{\small\textcolor{red}{[\textbf{#1}: #2]}}\fi}
+
+\pdfinfo{
+/Title (YT-Diag: Predicting and Explaining Within-Niche YouTube Video Performance)
+/Author (Adam Michalik, Emmanuel Gyabaah)}
+
+\begin{document}
+
+\title{YT-Diag: Predicting and Explaining\\Within-Niche YouTube Video Performance}
+\author{Adam Michalik \and Emmanuel Gyabaah\\
+Technical University of Munich\\
+Deep Learning and Decision Making\\
+\{go54lix, emmanuel.gyabaah\}@tum.de}
+\maketitle
+
+\begin{abstract}
+\begin{quote}
+\note{PENDING}{Write last, once test numbers exist. Draft thesis: predicting
+raw view counts is largely a channel-size readout, so we define the target as a
+within-peer-group rank and show what content features add above that floor.}
+\end{quote}
+\end{abstract}
+
+%% ==================================================================
+\section{Introduction}
+%% ==================================================================
+
+Creators receive abundant advice about thumbnails, pacing and titles, but little
+of it is measured against the confounds that dominate video performance. A video
+from a large channel outperforms a video from a small one almost regardless of
+its content, so any model trained to predict raw view counts learns channel size
+rather than craft.
+
+We ask a narrower and more answerable question: \emph{within a peer group of
+comparable channels, does the content of a video predict whether it performs in
+the top quarter of that group, and which content features are associated with
+underperformance?}
+
+Our contributions are:
+\begin{itemize}
+\item A two-cohort dataset design pairing a retrospective multimodal archive
+      with a live prospective panel that records fixed-horizon outcomes and
+      near-publication metadata.
+\item An explicit measurement of the \emph{shortcut ceiling}: how much of the
+      outcome is predictable from non-content variables alone. We argue this
+      figure should be reported before any modelling result.
+\item A label design that neutralises the three confounds we measured --- channel
+      size, video age and video format --- and evidence that failing to
+      neutralise format alone produces an apparent visual signal that is really
+      aspect-ratio detection.
+\end{itemize}
+
+%% ==================================================================
+\section{Related Work}
+%% ==================================================================
+
+\note{PENDING}{Two threads to write, sources already in 01\_Research/.}
+
+\textbf{Engagement prediction.} \cite{wu2018beyond} define relative engagement,
+calibrating watch percentage against duration at a fixed horizon, and provide
+content and channel baselines. We borrow the calibrate-by-ranking-within-strata
+method only; we cannot compute their metric because watch time is not available
+through the public API. Cite as ``inspired by'', never ``following''.
+
+\textbf{Multimodal video representation.} \cite{abu2016youtube} establish
+frame-level features aggregated temporally for large-scale video classification.
+\cite{rajaram2020unboxing} apply an attention-based approach to influencer video
+engagement, which motivates our attribution layer.
+
+%% ==================================================================
+\section{Data}
+%% ==================================================================
+
+\subsection{Two cohorts}
+
+\textbf{Retrospective archive.} 1{,}860 already-published videos across four
+categories (comedy 464, how-to 373, product reviews 482, vlogs 541), collected
+once in August 2026 from 1{,}319 distinct channels. Each video contributes
+metadata, a thumbnail, 20 sampled frames, a transcript, and engineered visual and
+audio features. This is the only cohort carrying full content modalities and is
+therefore what the multimodal model trains on.
+\note{LIMITATION}{Short of the 8{,}000 target: search.list pagination caps out
+well below its advertised result counts. Same limit the CC-availability scan hit.}
+
+\textbf{Prospective panel.} A live cohort of newly published videos discovered
+daily and snapshotted twice daily for 30 days, 11{,}256 videos at time of
+writing. It carries growth curves and, critically, the \emph{first-observed}
+title and thumbnail --- before creators edit them --- which the retrospective
+archive can never recover.
+\note{LIMITATION}{Its 30-day outcomes mature after this submission, so it is
+reported here as design and future work, not as results. Feature availability is
+two-phase: content modalities are extracted only for a sample selected after the
+cohort is frozen at the horizon.}
+
+Frames are sampled non-uniformly: 12 of 20 fall inside the first 60 seconds,
+because retention is decided early and uniform sampling would spend most frames
+on footage most viewers never reach.
+
+\subsection{Data repair}
+
+Two defects in the collected data were material enough to report.
+
+\textbf{Transcripts.} YouTube auto-captions scroll in overlapping windows, and
+the collector concatenated them, so 98\% of auto-caption transcripts repeated
+every phrase roughly three times. Word counts were inflated accordingly and every
+text statistic measured repetition. Rebuilding from the caption files reduced the
+median repeated-8-gram ratio from 0.349 to 0.000 across a 113-video validation
+sample, with word counts falling to 0.352 of their inflated values.
+\note{CONFIRMED}{notebooks/00\_project\_walkthrough.ipynb §2}
+
+\textbf{Colour temperature.} The visual feature pipeline computed correlated
+colour temperature without converting sRGB to CIE XYZ, so its chromaticity was
+normalised RGB. McCamy's denominator approached zero for green-deficient images,
+yielding values up to $5.0\times10^9$\,K and 27 negative temperatures. The
+corrected implementation gamma-decodes sRGB, applies the D65 matrix, averages in
+linear light, and rejects colours further than $\mathrm{Duv}=0.05$ from the
+Planckian locus --- because McCamy returns a number for any chromaticity, and
+without that gate pure green reports 6069\,K. All 39{,}060 images were
+recomputed; the corrected distribution spans 2{,}520--17{,}757\,K with a median
+of 5{,}671\,K.
+\note{CONFIRMED}{02\_Data/tests/test\_cct.py; D65 white = 6503.5\,K vs 6504 reference}
+
+\textbf{Text modality is not uniform.} The collector fetched only English
+captions, so non-English videos carry machine-\emph{translated} text, and the
+English-only Whisper fallback hallucinated English for non-English audio. Of
+1{,}860 videos: 944 native English, 467 translated, 391 too sparse to use, 37
+Whisper-on-non-English, 12 non-English text, 9 missing.
+\note{LIMITATION}{A native-English-only text model leaves comedy at 77 and vlogs
+at 64 videos, so the primary text cohort is native+translated with English-only
+kept as an ablation. Roughly a third of our text is machine-translated.}
+
+%% ==================================================================
+\section{Method}
+%% ==================================================================
+
+\subsection{The shortcut ceiling}
+
+Before defining a target we measured how much of it is obtainable without
+looking at content. A gradient-boosted model given only subscriber count, video
+age, duration and Shorts status predicts $\log(1+\text{views})$ at an
+out-of-fold $R^2$ of \textbf{0.584} under channel-grouped cross-validation
+(0.643 under random folds, which is the leaky comparison, not ours).
+
+We therefore make two commitments. Raw view count is never our modelling target,
+and no $R^2$ on views is reported as evidence of content signal.
+\note{CONFIRMED}{02\_Data/eda\_retrospective.py::shortcut\_ceiling}
+
+\subsection{Label}
+
+A video is labelled \emph{viral} if it falls in the top quarter of its cell,
+where a cell is the intersection of category, an age band, a channel-size band
+and video format. Bands are equal-count quantile bands assigned \emph{by value},
+so videos with identical (API-rounded) subscriber counts can never be split
+across bands, and are computed \emph{within} a format stratum. The configuration
+is $3\times3\times2$ per category, giving 1{,}854 labelled videos and a 23.6\%
+positive rate.
+
+Three design choices departed from our initial plan, each on measured evidence:
+
+\textbf{No minimum-age floor.} Our first design excluded videos under 30 days
+old, inherited from a views-per-day formulation that decays with age. Ranking
+within age bands does not share that problem, and the floor cost 861 videos
+(46\%, and a biased 46\%: 64\% Shorts against 43\% retained) while changing the
+four-confound label AUC only from 0.576 to 0.572. We tested its premise directly
+on the prospective panel, the only place a video is observed at two ages: view
+\emph{rank} is roughly 90\% settled within 24 hours (day-1 to day-5 Spearman
+0.946), while the raw count still doubles --- which is exactly why the label must
+remain a within-band ranking rather than a count threshold.
+\note{LIMITATION}{Measured to day 5 only; the panel is not yet old enough to
+confirm stability to day 30. Re-check after 2026-09-25.}
+
+\textbf{Format as a stratifier.} Unstratified, Shorts take the viral label at
+roughly twice their population share, and the label becomes predictable from
+format alone at AUC 0.596. Stratifying reduces that to 0.447.
+
+\textbf{Three bands, not four.} Adding the format dimension halves every cell, so
+$4\times4\times2$ leaves a median cell of 13 with 102 cells below our
+small-cell threshold, while $2\times2\times2$ readmits the confounds (AUC 0.660).
+\note{SIGNOFF}{Adam to confirm all three; they revise the label definition
+locked in the proposal.}
+
+\subsection{Format leakage}
+
+Video format is not something a model must infer: portrait framing recovers it
+for 99.0\% of videos, and 96.3\% of Shorts thumbnails are a blurred pillarbox.
+Thumbnail brightness, the strongest visual separator in our engineered set, is
+therefore a format detector rather than a content feature. Stratifying the label
+prevents this from inflating a score, but we report a format-only baseline
+alongside every visual result.
+
+\subsection{Evaluation protocol}
+
+Splits are channel-grouped 60/20/20 via stratified group $k$-fold; no channel
+appears in two splits, and this is asserted at runtime. The grouping is
+load-bearing: predicting the label from channel-level features alone reaches AUC
+0.644 under random folds. The test split is evaluated exactly once, at the end.
+\note{LIMITATION}{Per-category test sets are too small for per-category claims:
+roughly 6--7 positives per category per split. We report pooled metrics with
+spreads and treat per-category numbers as descriptive only.}
+
+%% ==================================================================
+\section{Experiments}
+%% ==================================================================
+
+\subsection{Baselines}
+
+%% <<<BEGIN GENERATED baselines>>>
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{l r cc}
+\toprule
+Features & $d$ & Logistic & XGBoost \\
+\midrule
+Metadata & 13 & 0.588 \tiny{$\pm$ 0.053} & 0.573 \tiny{$\pm$ 0.031} \\
++ schedule & 17 & 0.597 \tiny{$\pm$ 0.055} & 0.589 \tiny{$\pm$ 0.028} \\
++ visual & 32 & 0.598 \tiny{$\pm$ 0.051} & 0.585 \tiny{$\pm$ 0.019} \\
++ audio & 124 & 0.587 \tiny{$\pm$ 0.042} & 0.609 \tiny{$\pm$ 0.019} \\
+Visual only & 15 & 0.519 \tiny{$\pm$ 0.021} & 0.504 \tiny{$\pm$ 0.015} \\
+Audio only & 92 & 0.534 \tiny{$\pm$ 0.025} & 0.556 \tiny{$\pm$ 0.040} \\
+\midrule
+\multicolumn{4}{l}{\small Dummy (class prior): 0.500} \\
+\bottomrule
+\end{tabular}
+\caption{Validation AUC-ROC on the retrospective cohort ($n=1854$ labelled), mean $\pm$ s.d. over 5 seeds. $d$ is the number of input columns actually fitted, after all-NaN columns are dropped. Splits are channel-grouped; the test split is untouched. The visual block alone performs at chance, which is the expected consequence of stratifying video format out of the label.}
+\label{tab:baselines}
+\end{table}
+%% <<<END GENERATED baselines>>>
+
+All numbers are validation AUC averaged over seeds, with standard deviations.
+Single-seed reporting is not defensible at this sample size: logistic regression
+on metadata ranges from 0.496 to 0.660 across seeds.
+
+The dummy classifier predicts the class prior and scores 0.500 by construction;
+that is the floor every other number is read against.
+
+\subsection{Ablations}
+
+\note{PENDING}{Four planned: full vs metadata-only; minus text; minus vision;
+minus attribution. Currently only the feature-group ladder has run.}
+
+The visual block alone performs at chance (Table~\ref{tab:baselines}). This is
+the expected consequence of the label design: before format was stratified out,
+thumbnail brightness was the strongest visual separator, and it was reading
+aspect ratio rather than content. We regard this as a positive result about the
+label rather than a negative one about vision --- the engineered visual features
+were previously scoring on a confound.
+
+\subsection{Deep multimodal model}
+
+\note{PENDING}{Not yet trained. Planned: frozen DINOv2 ViT-S/14 over thumbnail
+and frames, frozen ModernBERT-base over title/description/transcript, late-fusion
+MLP, Integrated Gradients for attribution.}
+
+%% ==================================================================
+\section{Limitations}
+%% ==================================================================
+
+\note{LIMITATION}{Consolidate here; each is already marked at its point of use.}
+\begin{itemize}
+\item Labels are a cohort-relative convention, not ground truth. Across 16
+      configurations only 83 of 438 ever-viral videos are viral in all of them.
+\item Band edges and cutoffs are computed over the whole cohort before splitting,
+      making the labels transductive by construction.
+\item Frame extraction for non-CC videos sits outside YouTube's terms of service;
+      only 7 of 1{,}860 videos carry a Creative Commons licence.
+\item External factors --- platform promotion, timing, luck --- cap achievable
+      accuracy and are unobservable to us.
+\item Product reviews are a different population (median 9{,}953 views against
+      comedy's 1{,}254{,}042), an artefact of the category-mapping workaround.
+\end{itemize}
+
+%% ==================================================================
+\section{Conclusion}
+%% ==================================================================
+
+\note{PENDING}{Write last.}
+
+\bibliographystyle{aaai}
+\bibliography{references}
+
+\end{document}
