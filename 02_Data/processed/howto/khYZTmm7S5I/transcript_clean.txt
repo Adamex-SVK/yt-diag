@@ -1,0 +1,344 @@
+by the end of this video you'll have a
+basic understanding of everything that
+you need to know to convert the sun's
+energy through your solar panels into
+power that you can use in your everyday
+life whether that's on grid or off-grid
+the first and probably most important
+part of any system is the solar panels
+themselves these come in a huge variety
+of sizes powers and efficiencies like
+this panel right here for example
+produces up to 395 watts but this one
+that's almost the same size produces
+only 250 watts at best and no that's not
+because it's shattered it actually works
+quite well despite being shattered it
+just doesn't have the same capacity as
+the newer nicer ones now the more power
+they produce per area the more they tend
+to cost which could be a factor if you
+have limited space on your roof or
+wherever it is that you're placing the
+panels there are also portable panels
+like these but they tend to produce a
+lot less power they are however great
+for portability and for lower power
+needs like charging a phone i'd say the
+two main things to consider when looking
+at solar panels are the wattage output
+and also just making sure you've got the
+right voltage and nowadays you can also
+buy what are called bifacial panels like
+this one that even if the back is at all
+uncovered they absorb light from the
+back adding up to as much as 30 percent
+power output i set this one up so that
+it's not actually getting any direct
+sunlight but it's still collecting power
+from both the front and the back and
+producing about 39 watts of power not
+too shabby the second ingredient is
+inverters now inverters can either be up
+with the panels and these are called
+micro inverters or they can be
+downstream where all of the panel's
+wires are collected in what's called a
+string inverter and you can even use
+both their job is simply to convert the
+dc power that comes from the panels to
+ac power that we can use for our devices
+and appliances micro inverters typically
+connect to between two and four
+photovoltaic panels or these solar
+panels and they make it really easy to
+expand or condense if you need to your
+system you can add monitoring systems to
+these but they do have to be serviced up
+on the roof and typically underneath the
+solar panels so they can be challenging
+to get to now because micro inverters
+handle power in smaller groups if
+certain panels are shaded or under
+producing it typically has less of an
+impact on the total power production
+string inverters bring all of the panel
+wiring into a central location and they
+have a specific size rating in order to
+accommodate up to a certain number of
+panels based on wattage and voltage now
+if you have to set your panels up in
+series to accommodate your string
+inverter your panels will only be as
+productive as your least productive
+panel though power optimizers can help
+with that it's also possible to use a
+combination of micro inverters and
+string inverters if that makes sense for
+your setup now it's worth noting that
+certain string inverters actually
+require a battery to work since they're
+designed for off-grid situations so be
+sure to check out those details before
+you buy another major consideration when
+choosing between micro inverters and
+string inverters is whether or not you
+want the ability to reroute power to
+your house during a power outage to do
+that you need to disconnect it from the
+grid like we can do with this setup this
+can allow us to keep our freezers
+running in a couple of lights on for
+example in case of a blackout now not
+all inverters allow for that especially
+when you're looking at micro inverters
+now let's pause for a second to explain
+series versus parallel because that's
+something you definitely need to
+understand when connecting batteries and
+panels so series when you connect
+something in series that means the
+positive of one panel or battery is
+connected to the negative of the next
+this puts them all in line with each
+other and you can think of it like a tv
+series there are certain tv series where
+if you skip them or go out of order
+you're gonna get totally lost so you
+actually need to watch them in order
+episode one episode two three and so on
+this is also how the old christmas
+lights were set up which was super
+annoying one bulb would go out you're
+not sure which one it is and none of
+them worked and it's just horrible so
+with parallel on the other hand you're
+connecting every positive line together
+and every negative line together so you
+can pull one out of the mix and it
+really won't matter it won't affect the
+rest of them the other big thing to know
+about series versus parallel is how the
+power gets added up so the difference
+between series in parallel is one will
+add up the volts of each and the other
+one will add up the amps of each now in
+trying to come up with a good way to
+memorize this i decided to use the word
+suave and if you think about the letters
+and break them down you can say in
+series you add volts of each so in this
+case with the series the amps stay the
+same if you put for example two 250 volt
+10 amp panels together in series they'll
+produce an output of 500 volts and still
+that same 10 amps now the opposite is
+true for parallel these same two panels
+will produce the original 250 volts but
+also 20 amps of power this is really
+important in how you connect batteries
+this inverter for example can handle 24
+volts so i've connected these two 12
+volt batteries in series that means it's
+adding up their voltage to produce 24
+volts and then the amp hours stay the
+same which in this case is 150 amp hours
+this other inverter on the other hand is
+a 12 volt inverter so i connected these
+two 12 volt batteries in parallel that
+means they still add up to only 12 volts
+but they give me double the amp hours so
+300 amp hours
+it's also very common to mix and match
+series in parallel to meet your needs
+but no matter what type of circuit you
+go with you do need to understand the
+output that you'll get as a result now i
+totally understand that some of this can
+get pretty overwhelming which is why i'm
+trying to keep a little bit high level
+here and i'm not going too far into some
+of the details but if you're just
+overwhelmed by the idea of understanding
+all that goes into solar and especially
+doing it yourself there are some great
+options out there for you now this video
+is in no way sponsored but i do want to
+tell you that there are options out
+there that can save you a lot of money
+and still be a high quality installation
+as i've done my research and looking at
+my system that's almost 7 years old i
+wish i had the options that are out
+there today and when i look around one
+of the best options i see is actually
+going with tesla which does very similar
+systems to what i've got here but they
+do it for a lot lower price than what i
+paid so i've got a coupon in the
+description that you can use to save 300
+off any installation it's just a
+referral code it helps me out and it
+saves you a few bucks too so if you're
+interested in doing something that's not
+diy that's a great option that you can
+check out they actually have a
+configurator right on their site that
+you can put everything in see what the
+cost will be for you see what the loan
+options are versus paying it out of
+pocket all that good stuff so feel free
+to check that out if that's something
+that you're interested in having said
+that let's explain the rest of this
+system so you can see how this all comes
+together now just as a reminder all
+electrical work that you do of this
+nature should definitely be checked by a
+certified electrician and then you need
+to make sure to adhere to all local
+guidelines local codes and whatever it
+is that your town tells you to do with
+solar in your area all right on to our
+third ingredient which is switches and
+safety measures now there are several
+different versions of these so here i've
+got a pv combiner which is just a really
+nice box with fuses and switches to be
+able to allow you to connect multiple
+solar panels to one output you can also
+use circuit breakers there are
+disconnects involved both dc and ac
+there are fuses and each of these
+basically serves two purposes the first
+and the one they all do is they create a
+break point between one portion of your
+system and the next they make it easy to
+disable power to a section so that you
+can service it now the second one that
+almost all of these do is they also
+provide protection from surges and
+overloads an electrical code requires
+these in certain locations but it's
+always best to err on the side of having
+too many in place for safety sake the
+only one of these that does not provide
+any overload protection is the
+disconnect boxes those really are just
+an on off switch that you can use now
+when it comes to deciding how much power
+you need to generate with your solar
+system consider this analogy imagine you
+have no running water at your home but
+you do have a water tank out back you
+also have a large opening on the top of
+the tank to collect that water but it
+only rains for about four hours per day
+now you've got a water pump that pushes
+the water from your tank to your house
+so that you can actually use it now in
+this analogy the tank is your battery
+system the opening to the tank is your
+solar panel array and the pump is your
+inverter if you're not getting enough
+rain into your tank you need a bigger
+opening to collect the rain which means
+more solar panels if you're not getting
+enough water from the tank to your home
+you need a bigger or better pump which
+is in this case a better inverter and if
+you're using more water than is in your
+tank you need a bigger tank which is a
+bigger battery system on that note let's
+talk about batteries which is the fourth
+ingredient in our recipe there's a ton
+to cover with batteries so we won't get
+into all of it but there are several
+kinds of batteries out there that can be
+used to store power from a solar panel
+system for later use if you're building
+a grid tied system you don't actually
+need to use batteries unless you want to
+add protection against power outages you
+can use a tesla power wall for this or
+you can use your own batteries if you
+are building an off-grid system however
+batteries are essential for power
+storage just like with solar panels
+these can be combined for additional
+storage in addition to solution like the
+batteries that we've shown here as well
+as the tesla power wall there are even
+certain electric vehicles coming out
+that claim to be able to power your
+house like the ford f-150 lightning says
+it can power your house off the ford's
+battery to provide power for up to as
+much as a few days which would be pretty
+awesome so i'm sure we'll see a lot more
+of that sort of thing coming out over
+the next several years batteries do have
+a voltage rating like six volt 12 volt
+or 24 volt typically they also have
+different amp hours kilowatt hours cycle
+count efficiencies temperature ratings
+and more to compare so we won't get into
+all of that for now but i will say that
+you do need batteries to store power if
+you're not tied to the grid and they're
+optional if you are now the last
+ingredient is the wiring and connectors
+to connect all the pieces together there
+is again a lot to get into here but if
+you're using wires that are going to be
+outside at all they need to be outdoor
+rated or you need to use what's called
+thhn or thwn wire that goes inside of
+the electrical conduit th n wires are
+individually sheathed cables that are
+rated for exterior use inside a conduit
+a cheap alternative to using the solar
+specific panel wiring is just to use
+some 12 gauge landscape wiring this
+actually works really well you just need
+to connect your mc4 connections which is
+what most solar panels use as their
+connector mc4 connectors are great
+because they make it really easy to see
+that you've got a secure connection
+they're weatherproof and you can both
+feel and hear when they make that
+perfect connection
+now for wiring up batteries you usually
+need a much heavier gauge wire because
+there's more amperage going through so
+i'll often use this two gauge wire which
+also requires the use of either a 3 8 or
+a 5 16 copper lug and then some pretty
+heavy duty crimpers to put these
+together so those are those five
+ingredients now to put those together
+we're going to connect the solar panels
+to a fuse or a pv combiner box that gets
+connected to an inverter and then you
+can connect your inverter to either
+batteries or the grid for the off-grid
+setup this is pretty much the whole
+install right here you can connect
+outlets to this if you need to but more
+typically you'd connect this to a
+circuit breaker panel that is completely
+non-grid tied for grid tied you would
+run wiring from your inverter through an
+ac disconnect box and then into your
+main circuit breaker panel like this
+this provides power to the rest of the
+circuit breaker panel and your power
+company will install a bi-directional
+meter that measures how much power is
+coming in from solar versus how much is
+being used at your residence with that
+you've got working power to run your
+appliances and devices directly from the
+sun's rays how awesome is that i'm nils
+with learn to diy thanks for watching

@@ -1,0 +1,356 @@
+So, whenever I'm out detecting at the
+park or pretty much anywhere there's a
+crowd of people, it seems like I always
+get approached by someone who's
+interested in the hobby. And generally,
+their first question to me is, "What's a
+good detector to get started with?" Now,
+they're obviously not going to be buying
+any of these high-end units. So, I
+usually tell them to check out something
+in the $250 to $300 price range.
+something like a M Lab Extera Pro or a
+Nocta simplex or something along those
+lines. But, you know, $250 to $300 can
+still be a lot of money for somebody
+who's not even sure if they're going to
+stick with the hobby. So, that got me
+thinking, what are some good options
+that are less than
+$200? Well, over the next few months,
+I'm going to take a look at a few of
+them. I want to check out the Mine Lab
+Vanquish 340 series, uh the Knock the
+Findex series, and maybe a few others,
+but I'm not going to be looking at the
+really cheap ones on Amazon, like the uh
+$50 to $75 deals, because I've bought
+those for my grandkids in the past, and
+they were basically garbage, not even
+usable. So, anyway, today we're going to
+look at a new one from Dr. OTCH called
+the MT12. They reached out a few weeks
+ago and asked if I'd be interested in
+doing a review. And having used some of
+their other detectors in the past, I
+know they're pretty decent. So, I
+replied back and said, "You know, I
+don't do promotional videos, but if
+you're okay with an honest review where
+I point out the good and the bad, then
+yeah, send it on." Well, they did, and
+here we are. Now, they did send the
+detector for free for the purpose of the
+review, but that's not going to affect
+my opinion whatsoever. Matter of fact,
+I've already got way too many detectors,
+so I'll probably just end up doing a
+giveaway on this one in the future. They
+were also nice enough to send out their
+MT6 Pro pinpointer. And I've actually
+done a review on this one in the past,
+and I'll put a link down below if you
+want to check it out. But long story
+short, for the money, it's a really good
+pinpointer. All right, so I'll give you
+a quick look at the box, then we'll do
+an unboxing, go over the controls, maybe
+do some air test, then we'll go try it
+out in the field. All right, let me
+switch cameras and we'll get started.
+Heat up
+here.
+Heat. Heat.
+Okay, so we got it put together. Getting
+those batteries in there was kind of a
+pain in the ass, but everything else was
+pretty
+easy.
+Overall, I'd say it feels pretty good.
+It's not heavy at all. It's not super
+light. doesn't feel
+cheap. Feels like a good improvement
+over the previous
+models. Right off the bat, a couple of
+things I like is number one, they went
+with a keyed shaft. And what I mean by
+that is it's not round. For whatever
+reason, even on some of these more
+expensive detectors like this
+manor, they use a round shaft and every
+time you use it, you have to line up the
+coil, which I'm not a big fan of.
+Another improvement I see is they've
+switched from those pin locks to the cam
+locks here. And these actually feel
+really
+good. And for whatever reason, they have
+the uh little short stem here that
+connects to the coil separated from the
+other part of the lower
+shaft. I'm not sure why they did that.
+Maybe to reduce
+flex. I don't know. But it's going to
+limit you as far as how far you can
+collapse it down. Not a huge
+deal. It still collapses down pretty
+small. I believe you can collapse down
+this section, too. Let's see.
+Yeah. So, yeah, it collapses down to a
+fairly small
+package. Now, they've included some
+headphones that feel pretty decent.
+They're wired headphones.
+Looks like it has a volume control in
+line. And they give you the carrying
+bag, which I've never actually used, but
+I'm sure it's decent
+quality. And one of the things I like
+that they include with their detectors
+is these Dr. Rotek hand diggers. I've
+used these in the past, and they're
+actually really
+good. Saves you a little bit of money
+right there.
+It's about the same size
+as my other digger, which is from
+Predator
+Tools. Like I said, I've used these in
+the past and they hold up pretty well.
+So, that's a nice little extra. A lot
+better than some of the other cheaper
+detectors that only give you those
+flimsy collapsible
+shovels. All right, so let me read
+through the manual, then we'll go over
+the controls.
+Okay, we'll take just a minute to go
+over the controls. This knob on the left
+is going to power the machine on and off
+as well as adjust the
+sensitivity. Now, when you first turn it
+on, it's going to go through its system
+check, but it'll beep to let you know
+when it's
+done. There we go. Turning it clockwise,
+you can see it's increasing the
+sensitivity, counterclockwise to
+decrease. All right. On the opposite
+side is how we switch from
+discrimination mode to all metal mode as
+well as control the threshold
+volume. Switching to all metal. As we
+turn it clockwise, you'll start to hear
+the
+threshold. Okay. Also, while in all
+metal mode, if you press and hold the
+menu/ground grab key and pump the coil,
+it'll give you a ground balance as well
+as your ground balance numbers on the
+bottom right. Okay. This is obviously
+your battery meter. This is your ID
+scale across the top as well as some
+icons here at the bottom is how you go
+into pinpoint mode. Press and release
+once to go to pinpoint mode. Press and
+release again to go back to your regular
+detect
+mode. Okay. When you click menu, it's
+going to bring up the backlight, which
+has nine different
+levels. And you're obviously not going
+to be able to see it out here because
+it's too bright, but you can take my
+word for it. Press it again. Goes to
+volume. It also has nine
+levels. Okay. Press it again and it
+brings up notch width. And this is how
+you control how many numbers you want to
+notch out or notch in at one
+time. Okay. Press it again. Goes to
+notch. And this is where you actually go
+through and notch out whatever you want
+or don't want to
+detect.
+Okay, one more goes to beach mode. And
+I'm nowhere near beach, so we won't be
+testing that one out. All right, the
+only thing I think I forgot to mention
+is that the headphone jack is on the
+back side
+there. All right, guys. So, we all know
+the air tests are not going to be the
+same as targets buried in the ground,
+but I think it'll at least give us a
+general idea of what kind of depth we
+can expect, best case scenario, and what
+the target ID will be on some common
+targets. So, today I brought out a few
+coins and a few rings. I have a uh
+Indian head penny, a B- nickel, a Barber
+dime, a Barber quarter, a Barber half, a
+Morgan dollar, a small silver ring, 10
+karat wedding band, and a 14 karat ring.
+So, I've got the sensitivity about as
+high as I can go without getting too
+much EMI. It's about 3/4 of the way. I'm
+going to back it off just a little bit
+because I hear it
+chirping. Anyway, we'll take a look at
+these targets and see what we get.
+Okay, so this is a three-tone machine.
+So on iron, you're going to get a low
+grunt. On uh midc conductors, you're
+going to get a midtone. For nickels,
+probably all the way up to Indian head
+pennies. And on high conductors like
+dimes, quarters, halves, and dollars,
+you'll get a high
+tone. All right. So we'll start out with
+the Indian head penny.
+Looks like it cuts out around 6 and 12
+inches. Next up is a B-
+nickel right around 7
+in. Next up is a Barber
+dime. So it starts to cut out around 6
+in. Next up is a barber
+quarter. Cuts out around 6 and 1/2
+in. Here we have a barber
+half starts to cut out around 7
+in. Morgan
+dollar cuts out around 7 and 1/2 or 8
+in. Here we have a small silver
+ring. Cuts out around 6
+in. Here we have a 10 karat gold wedding
+band. So, we hit that out almost to 8
+in. Seems to like gold better than
+silver. Here we have a 14 karat gold
+ring.
+7 and 12 or 8 in. Now, keep in mind I'm
+in the city, so I have to keep the
+sensitivity reasonable. You might get a
+little better depth out in the
+country. I've been here at the park for
+about an hour now with the MT12. Just
+trying to get used to the machine, and
+so far it's done pretty good. I've
+already found several coins, but the uh
+the pinpoint feature seems a little bit
+wonky to me. Now, that could be just
+because I'm not used to it yet. But
+anyway, I've already marked off a few
+targets here that we can take a look at
+together. I guess a ball game just ended
+or something because there's a lot of
+people headed out, but we'll wait on
+some of this traffic to clear out before
+we
+continue. Nothing really runs all that
+deep here, but there is a lot of trash.
+So, I've got the discrimination set up
+for coin shooting. Anyway, here we are
+at the first target.
+Hopefully you can see that
+screen. That's reading 76 to
+78. I'm going to guess that's the uh
+copper penny range.
+Maybe a little too deep to hit with a
+pinpointer. This ground's really tough.
+We'll let that motorcycle
+pass. All right. So, it seems to be
+right there.
+There we go. It is a
+coin. It's going to be a copper
+penny
+memorial. All right. Next target.
+Okay, target number
+two. This one's reading solid 85
+86. I'm going to guess that's the
+quarter range.
+Okay, that one's in the plug.
+There it
+is. And it is going to be a
+quarter. All right. Two for two on the
+coins. Okay. Target number
+three. This one's reading 79 to 81. That
+might be in the dime
+range. Or it could be a copper penny.
+Little bit deeper.
+I saw it right there. It
+is. That's going to be a clad
+dime. Three for three on the coins.
+Okay, target number
+four. 86 87. That's another one in the
+quarter range.
+This ground is
+tough. Yep, there it
+is. Another
+quarter. Four for four on coins. That's
+not too
+shabby. All right, so this is obviously
+not going to be a full review, but just
+my initial impressions after a couple
+hours of use. Uh, we'll start out with a
+good. I like the new keyed shaft and cam
+locks. I like the overall feel and
+weight of the detector. Like the large
+display, the control knobs. I like that
+it remembers the settings that you last
+used. The target ID is large and easy to
+read. And the target ID is also
+stable. I like the ability to notch out
+individual numbers or ranges. I like the
+included hand digger. And one thing I
+like about this company, Dr. Protek is
+they're not afraid of a little
+constructive criticism, which I'm about
+to give right now. Okay, let's talk
+about a few things that I didn't care
+for or things I'd like to see them fix
+on future models. Number one would be
+the pinpoint mode. Now, while it did
+work, it just seemed a little bit
+strange to me. I noticed sometimes when
+I pinpoint a target and then lift the
+coil off the ground, the uh pinpoint
+audio would continue to sound off. I'll
+put up a short video so that you can see
+what I mean.
+Number two is the 9volt batteries. And
+this goes for all manufacturers that are
+still using 9volt and double A
+batteries. It's 2025. I see no reason
+why these detectors shouldn't have
+rechargeable lithium batteries. Okay.
+Number two, I'd like to see more tone
+options. Now, the tones on this detector
+are good, but they're a little bit short
+or clipped. While that's probably good
+for separation, it's not so great for
+trying to gauge the size of a target.
+So, more audio options. And finally,
+using the notch settings needs to be
+explained a little more clearly, keeping
+in mind the target audience for this
+detector is probably going to include a
+lot of beginners, and even I had trouble
+getting it set up right at
+first. All right, let's talk pricing.
+Now, this detector is going to retail
+for $199, but anybody who knows Dr. OTH
+knows that they almost always have
+coupons for 30 or $40 off. Matter of
+fact, I just checked their Amazon
+listing, and at the time of this video,
+they have a $30 off coupon plus another
+15% off, which I believe brings the
+total price to somewhere around
+$149. And when you take into
+consideration they're giving you a nice
+free handheld digger that's probably
+worth at least 25 bucks. That's not a
+bad deal. All right, I'll include links
+to the detector and the pinpointer down
+in the description if you want to check
+it out. And there you have it. That's my
+review of the Dr. OTCH MT12.

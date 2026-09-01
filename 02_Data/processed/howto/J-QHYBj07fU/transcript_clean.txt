@@ -1,0 +1,19 @@
+add the cylinder without caps in edit
+mode select all scale it along the
+z-axis and rotate it press ctrl R to add
+an edge loop press control B to bevel
+the edge loop press alt E and choose
+extrude and along normals set it to
+shade smooth now add a curved path go
+into edit mode and move the points and
+extrude more points to make it longer
+you probably need to scale the cylinder
+down add an array modifier to the
+cylinder increase the count at a curve
+modifier to the cylinder as well and
+choose the path as the object you can
+add a subdivision surface modifier to
+make it more rounded you can set it a
+curve to in front so it's easier to
+manipulate the pipe curvature
+you
