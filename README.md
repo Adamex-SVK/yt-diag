@@ -114,11 +114,13 @@ files. Verified from an empty venv on a different Python version — so a teamma
 grader needs only the clone.
 
 `notebooks/00_project_walkthrough.ipynb` runs the whole pipeline on real data and lets you
-**check the claims** in `02_Data/eda.md` yourself: the transcript repetition, the frame
-sampling, the colour-temperature fix, the Shorts confound, the channel-split leak and the
-baselines. It is a thin *interface* — every cell imports from `02_Data/` and `03_Models/`
-and calls the real functions, so it can never drift from the code that produces the
-results. Edit `notebooks/build_walkthrough.py` and regenerate rather than editing cells.
+**check the claims** in `02_Data/eda.md` and `02_Data/eda_features.md` yourself: the
+transcript repetition, frame sampling, colour-temperature fix, label-blind category ×
+format profiles for visual/audio/speech features, feature include/exclude decisions, the
+Shorts confound, channel-split leak and baselines. It is a thin *interface* — every cell
+imports from `02_Data/` and `03_Models/` and calls the real functions, so it can never
+drift from the code that produces the results. Edit `notebooks/build_walkthrough.py` and
+regenerate rather than editing cells.
 
 ### Tests
 
@@ -171,9 +173,11 @@ group of similar channel size, age and format*, and why no R² on views may be q
 that content features work.
 
 **2. The Shorts/regular format bit leaks everywhere.** `frames_portrait` recovers it for 99% of
-videos and 96% of Shorts thumbnails are a blurred pillarbox, so a vision model can score well by
-learning aspect ratio. The label stratifies on format to stop that inflating a score — but every
-vision result still needs a format-only baseline printed beside it.
+videos, and raw thumbnail brightness predicts format at direction-free AUC 0.925, largely because
+vertical source imagery is often padded/composed differently in a 16:9 thumbnail. A heuristic
+content crop lowers that to 0.559 but is not a verified pillarbox detector. The label stratifies
+on format to stop that inflating a score — and every vision result still needs a format-only
+baseline printed beside it.
 
 **3. Splits must be grouped by channel.** A plain random split lets a model reach AUC 0.86 by
 memorising which channel a video came from. `ytdiag/split.py` enforces this and asserts it.

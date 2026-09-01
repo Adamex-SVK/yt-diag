@@ -218,11 +218,12 @@ locked in the proposal.}
 \subsection{Format leakage}
 
 Video format is not something a model must infer: portrait framing recovers it
-for 99.0\% of videos, and 96.3\% of Shorts thumbnails are a blurred pillarbox.
-Thumbnail brightness, the strongest visual separator in our engineered set, is
-therefore a format detector rather than a content feature. Stratifying the label
-prevents this from inflating a score, but we report a format-only baseline
-alongside every visual result.
+for 99.0\% of videos, while raw thumbnail brightness predicts it at
+direction-free AUC 0.925, largely because vertical source imagery is often
+padded or composed differently inside a 16:9 thumbnail. A heuristic content
+crop reduces this to 0.559, but is not a verified pillarbox detector.
+Stratifying the label prevents format from inflating a score, and we report a
+format-only baseline alongside every visual result.
 
 \subsection{Evaluation protocol}
 
@@ -281,12 +282,14 @@ colour temperature without converting sRGB to CIE XYZ, so its chromaticity was
 normalised RGB. McCamy's denominator approached zero for green-deficient images,
 yielding values up to $5.0\times10^9$\,K and 27 negative temperatures. The
 corrected implementation gamma-decodes sRGB, applies the D65 matrix, averages in
-linear light, and rejects colours further than $\mathrm{Duv}=0.05$ from the
-Planckian locus --- because McCamy returns a number for any chromaticity, and
-without that gate pure green reports 6069\,K. All 39{,}060 images were
-recomputed; the corrected distribution spans 2{,}520--17{,}757\,K with a median
-of 5{,}671\,K.
-\note{CONFIRMED}{02\_Data/tests/test\_cct.py; D65 white = 6503.5\,K vs 6504 reference}
+linear light, and projects CIE 1960 UCS chromaticity to the nearest segment of a
+1\%-resolution Planckian-locus table. It rejects colours with
+$|\mathrm{Duv}|>0.05$ and projections beyond the supported
+1{,}667--25{,}000\,K endpoints rather than clipping them. All 39{,}060 images
+were recomputed; valid video-level frame means span 2{,}553--15{,}679\,K with a
+median of 5{,}666\,K. Thumbnail CCT is valid for 1{,}854/1{,}860 videos and
+36{,}652/37{,}200 frames yield valid CCT.
+\note{CONFIRMED}{02\_Data/tests/test\_cct.py; D65 white = 6500.6\,K vs approximately 6504 reference}
 
 \textbf{Text modality is not uniform.} The collector fetched only English
 captions, so non-English videos carry machine-\emph{translated} text, and the
@@ -332,9 +335,9 @@ Features & $d$ & Logistic & XGBoost \\
 \midrule
 Metadata & 13 & 0.588 \tiny{$\pm$ 0.053} & 0.573 \tiny{$\pm$ 0.031} \\
 + schedule & 17 & 0.597 \tiny{$\pm$ 0.055} & 0.589 \tiny{$\pm$ 0.028} \\
-+ visual & 32 & 0.603 \tiny{$\pm$ 0.054} & 0.584 \tiny{$\pm$ 0.028} \\
-+ audio & 124 & 0.591 \tiny{$\pm$ 0.041} & 0.609 \tiny{$\pm$ 0.022} \\
-Visual only & 15 & 0.526 \tiny{$\pm$ 0.025} & 0.504 \tiny{$\pm$ 0.010} \\
++ visual & 32 & 0.597 \tiny{$\pm$ 0.050} & 0.577 \tiny{$\pm$ 0.026} \\
++ audio & 124 & 0.587 \tiny{$\pm$ 0.042} & 0.605 \tiny{$\pm$ 0.030} \\
+Visual only & 15 & 0.519 \tiny{$\pm$ 0.020} & 0.505 \tiny{$\pm$ 0.012} \\
 Audio only & 92 & 0.534 \tiny{$\pm$ 0.025} & 0.556 \tiny{$\pm$ 0.040} \\
 \midrule
 \multicolumn{4}{l}{\small Dummy (class prior): 0.500} \\

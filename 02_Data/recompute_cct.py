@@ -20,9 +20,11 @@ contrast are left exactly as collected.
 
 EVERY value is replaced, not only the 83 extreme ones. The old values are
 uniformly wrong (the matrix was missing for all of them); the 83 are merely the
-ones where being wrong became visible. Two corrections apply at once:
+ones where being wrong became visible. Three corrections apply at once:
   1. the sRGB->XYZ matrix, and
-  2. averaging in LINEAR light rather than over gamma-encoded code values.
+  2. averaging in LINEAR light rather than over gamma-encoded code values, and
+  3. nearest-locus projection with signed-Duv and endpoint rejection rather
+     than McCamy extrapolation or boundary clipping.
 So new values are NOT comparable to old ones and no mixed analysis is valid.
 
 Provenance is written into each file (`cct_version`, `cct_recomputed_at_utc`)

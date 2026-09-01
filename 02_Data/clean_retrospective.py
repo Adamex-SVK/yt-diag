@@ -98,6 +98,7 @@ EN_STOPWORD_RATE = 0.15  # below this, Latin text is likely not English
 LATIN_RATIO_EN = 0.8
 CCT_RANGE = (1667.0, 25000.0)  # version-3 Planckian-locus support (K)
 CCT_VERSION = 3
+CCT_METHOD = "nearest_planckian_locus_cie1960uv_1pct_lut"
 
 _STOPWORDS = frozenset(
     "the a an and or but of to in on for with is are was were be been it this "
@@ -557,14 +558,44 @@ def build_manifest(data_dir: str) -> list[dict[str, Any]]:
         tsize = _image_size(thumb) if thumb else None
         fsize = _image_size(os.path.join(d, "frames", "frame_00.jpg"))
 
-        def _in(v, lo, hi):
-            return v is None or (isinstance(v, (int, float)) and math.isfinite(v) and lo <= v <= hi)
-        cct_valid = (vis.get("cct_version") == CCT_VERSION
-                     and _in((vis.get("thumbnail") or {}).get("cct"), *CCT_RANGE)
-                     and _in(vis.get("frames_mean_cct"), *CCT_RANGE)
-                     # A spread is not itself a temperature; require only a
-                     # finite, nonnegative value within the full locus span.
-                     and _in(vis.get("frames_std_cct"), 0.0, CCT_RANGE[1]))
+        def _in_or_missing(v, lo, hi):
+            return v is None or (isinstance(v, (int, float))
+                                 and math.isfinite(v) and lo <= v <= hi)
+        def _present_in(v, lo, hi):
+            return (isinstance(v, (int, float)) and math.isfinite(v)
+                    and lo <= v <= hi)
+        thumb_cct = (vis.get("thumbnail") or {}).get("cct")
+        frame_mean_cct = vis.get("frames_mean_cct")
+        frame_std_cct = vis.get("frames_std_cct")
+        cct_frames_valid = vis.get("cct_frames_valid")
+        cct_frames_total = vis.get("cct_frames_total")
+        counts_valid = (isinstance(cct_frames_valid, int)
+                        and isinstance(cct_frames_total, int)
+                        and 0 <= cct_frames_valid <= cct_frames_total)
+        cct_policy_valid = (
+            vis.get("cct_version") == CCT_VERSION
+            and vis.get("cct_method") == CCT_METHOD
+            and counts_valid
+            and _in_or_missing(thumb_cct, *CCT_RANGE)
+            and _in_or_missing(frame_mean_cct, *CCT_RANGE)
+            # A spread is not itself a temperature; require only a finite,
+            # nonnegative value within the full locus span.
+            and _in_or_missing(frame_std_cct, 0.0, CCT_RANGE[1])
+        )
+        cct_thumbnail_valid = (cct_policy_valid
+                               and bool(vis.get("cct_thumbnail_valid"))
+                               and _present_in(thumb_cct, *CCT_RANGE))
+        cct_frames_have_valid = (cct_policy_valid and cct_frames_valid > 0
+                                 and _present_in(frame_mean_cct, *CCT_RANGE))
+        # This is the model-ready aggregate triplet. Partial frame coverage is
+        # allowed but exposed separately; a missing thumbnail or frame mean is
+        # never silently called valid.
+        cct_feature_valid = (cct_thumbnail_valid and cct_frames_have_valid
+                             and _present_in(frame_std_cct, 0.0, CCT_RANGE[1]))
+        cct_frames_complete = (cct_policy_valid and cct_frames_total > 0
+                               and cct_frames_valid == cct_frames_total)
+        cct_frame_coverage = (cct_frames_valid / cct_frames_total
+                              if counts_valid and cct_frames_total else "")
 
         pause_ratio = ((aud or {}).get("pauses") or {}).get("pause_ratio")
         no_speech = isinstance(pause_ratio, (int, float)) and pause_ratio > NO_SPEECH_PAUSE_RATIO
@@ -608,7 +639,17 @@ def build_manifest(data_dir: str) -> list[dict[str, Any]]:
             "thumb_width": tsize[0] if tsize else "", "thumb_height": tsize[1] if tsize else "",
             "thumb_subhd": int(bool(tsize) and (tsize[0] < 1280 or tsize[1] < 720)),
             "frames_portrait": int(bool(fsize) and fsize[1] > fsize[0]),
-            "vis_cct_valid": int(cct_valid),
+            # `vis_cct_valid` is retained as the concise model-ready flag;
+            # policy conformance and each source of missingness are separate.
+            "vis_cct_valid": int(cct_feature_valid),
+            "vis_cct_policy_valid": int(cct_policy_valid),
+            "vis_cct_thumbnail_valid": int(cct_thumbnail_valid),
+            "vis_cct_frames_valid": cct_frames_valid if counts_valid else "",
+            "vis_cct_frames_total": cct_frames_total if counts_valid else "",
+            "vis_cct_frame_coverage": cct_frame_coverage,
+            "vis_cct_frames_complete": int(cct_frames_complete),
+            "vis_cct_any_missing": int(not cct_thumbnail_valid
+                                       or not cct_frames_complete),
             "audio_present": int(aud is not None),
             "pause_ratio": pause_ratio if pause_ratio is not None else "",
             "no_speech": int(no_speech),
@@ -662,7 +703,8 @@ def report(rows: list[dict[str, Any]]) -> None:
           f"{count(lambda r: r['is_short'] == 'false')}/{count(lambda r: r['is_short'] == '')}")
     print(f"  duration missing: {count(lambda r: r['flag_duration_missing'])}, "
           f"subs missing: {count(lambda r: r['flag_subs_missing'])}, "
-          f"cct invalid: {count(lambda r: not r['vis_cct_valid'])}, "
+          f"cct feature invalid: {count(lambda r: not r['vis_cct_valid'])}, "
+          f"cct partial/missing: {count(lambda r: r['vis_cct_any_missing'])}, "
           f"no audio features: {count(lambda r: not r['audio_present'])}, "
           f"no-speech: {count(lambda r: r['no_speech'])}")
     kinds = {}

@@ -114,20 +114,25 @@ def render(rows: list[dict[str, Any]], model_names: list[str], seeds: int,
     return "\n".join(lines)
 
 
-def _cct_version() -> "int | None":
-    """Which colour-temperature version the stored features carry.
+def _cct_provenance() -> dict[str, Any]:
+    """Which colour-temperature policy the stored visual features carry.
 
     Recorded with the results because a CCT recomputation changes the vis__
     block underneath them: numbers produced against different versions are not
-    comparable, and without this the JSON could not say which."""
+    comparable. Scan every file so a mixed-policy dataset fails loudly."""
     import glob
+    versions, methods = set(), set()
     for p in glob.glob(os.path.join(DATA, "*", "*", "visual_features.json")):
         try:
             with open(p, encoding="utf-8") as f:
-                return json.load(f).get("cct_version")
+                vis = json.load(f)
+            versions.add(vis.get("cct_version"))
+            methods.add(vis.get("cct_method"))
         except (OSError, json.JSONDecodeError):
             continue
-    return None
+    if len(versions) > 1 or len(methods) > 1:
+        raise ValueError(f"mixed CCT policies: versions={versions}, methods={methods}")
+    return {"version": next(iter(versions), None), "method": next(iter(methods), None)}
 
 
 def splice(tex: str, key: str, body: str) -> str:
@@ -156,12 +161,13 @@ def main() -> None:
         print("\n" + body)
         return
     os.makedirs(os.path.dirname(RESULTS_JSON), exist_ok=True)
+    cct = _cct_provenance()
     payload = {
         "generated_at_utc": datetime.datetime.now(datetime.timezone.utc)
                             .strftime("%Y-%m-%dT%H:%M:%SZ"),
         "seeds": args.seeds, "n_labelled": n_labelled,
         "protocol": "channel-grouped 60/20/20; VALIDATION only, test untouched",
-        "cct_version": _cct_version(),
+        "cct_version": cct["version"], "cct_method": cct["method"],
         "rows": [{"features": r["label"], "n_features": r["n_features"],
                   "auc": {m: {"mean": mu, "std": sd} for m, (mu, sd) in r["auc"].items()}}
                  for r in rows],
