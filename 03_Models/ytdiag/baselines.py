@@ -27,6 +27,10 @@ MIN_LABELED_ROWS = 50  # below this a 60/20/20 grouped split is meaningless
 
 
 def _preprocessor(cols, scale):
+    """Column-wise preparation: median-impute the numeric columns (EDA found
+    0 of 1,860 rows complete, so dropping incomplete rows is not an option),
+    one-hot the two string columns, and scale only when the model needs it --
+    logistic regression does, trees do not."""
     cat = [c for c in cols if c in CATEGORICAL]
     num = [c for c in cols if c not in CATEGORICAL]
     num_steps = [("impute", SimpleImputer(strategy="median"))]
@@ -39,6 +43,10 @@ def _preprocessor(cols, scale):
 
 
 def _boosting():
+    """(name, estimator) for the gradient-boosting baseline. XGBoost needs
+    libomp on macOS; when that wheel is missing we fall back to sklearn's
+    HistGradientBoosting rather than failing the run, and the returned NAME
+    records which one actually ran so results are never ambiguous."""
     try:
         from xgboost import XGBClassifier
         return "xgboost", XGBClassifier(n_estimators=300, max_depth=4, learning_rate=0.05,
@@ -51,17 +59,37 @@ def _boosting():
 
 
 def _metrics(y, p, threshold):
+    """AUC-ROC (primary), PR-AUC (honest under class imbalance), and F1 at a
+    threshold chosen on validation. positive_rate is carried so a reader can
+    see the class balance the numbers were computed against."""
     return {"auc_roc": float(roc_auc_score(y, p)), "pr_auc": float(average_precision_score(y, p)),
             "f1": float(f1_score(y, (p >= threshold).astype(int))), "n": int(len(y)),
             "positive_rate": float(np.mean(y))}
 
 
 def _best_threshold(y, p):
+    """Probability cut-off maximising F1, chosen on VALIDATION only. Picking it
+    on test would leak the test set into a modelling decision."""
     grid = np.linspace(0.05, 0.95, 91)
     return float(max(grid, key=lambda t: f1_score(y, (p >= t).astype(int))))
 
 
 def run_baselines(df, groups, out_dir=None, seed=0, evaluate_test=False):
+    """Fit the three baselines on `groups` and return a results dict.
+
+    `groups` is a tuple of feature-group prefixes ("meta", "sched", "vis",
+    "aud") -- every ablation in the project is a different value here rather
+    than a different code path.
+
+    The dummy_prior model is not filler: it predicts the class prior and so
+    scores AUC 0.5 by construction, which is the floor every other number must
+    be read against. EDA (2026-09-01) adds a second floor worth reporting
+    beside these -- a model given only subscriber count, age, duration and
+    is_short reaches R^2 0.584 on log views without seeing any content.
+
+    evaluate_test defaults to False on purpose: the test split is touched once,
+    at the end of the project, not on every iteration.
+    """
     total = len(df)
     df = df[df.label.notna()].reset_index(drop=True)
     if len(df) < MIN_LABELED_ROWS:
@@ -107,6 +135,8 @@ def run_baselines(df, groups, out_dir=None, seed=0, evaluate_test=False):
 
 
 def format_results(results):
+    """One-line-per-model summary for the terminal. Validation always; the test
+    column appears only for a run that explicitly asked for it."""
     lines = [f"groups={results['groups']}  features={results['n_features']}  "
              f"split={results['split_sizes']}"]
     for name, r in results["models"].items():

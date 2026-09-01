@@ -10,6 +10,17 @@ from sklearn.model_selection import StratifiedGroupKFold
 
 
 def split_indices(df, label_col="label", group_col="channel_id", seed=0):
+    """Row positions for train/val/test, as {"train": idx, "val": idx, "test": idx}.
+
+    Grouping by channel is load-bearing, not hygiene: EDA (2026-09-01) measured
+    that a plain random split lets a model score AUC 0.86 by memorising which
+    channel a video came from. Videos of one channel share a subscriber count,
+    an audience and a production style, so a channel on both sides of the split
+    is the same video in disguise.
+
+    The final assert is the guarantee: if grouping ever silently fails, the run
+    stops rather than reporting an inflated score.
+    """
     y = df[label_col].to_numpy()
     groups = df[group_col].to_numpy()
     skf = StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=seed)
