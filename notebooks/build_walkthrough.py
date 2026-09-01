@@ -49,29 +49,127 @@ on trust. Every section ends with something you can verify.
 - Nothing here writes to the dataset. The one cell that could (`clean_retrospective`)
   is run in its read-only default mode.
 
-Kernel: the project venv. If the imports below fail, run
-`.venv/bin/python -m ipykernel install --user --name ytdiag` and pick the `ytdiag`
-kernel.
+**Any Python environment works.** The next cell bootstraps: it finds the repo, installs
+whatever is missing into *this* kernel, and tells you precisely what to do if the dataset
+itself is absent. It is idempotent, so re-running costs nothing.
 """)
 
-code('''
-import os, sys, json, warnings
-warnings.filterwarnings("ignore", category=UserWarning)
+code("""
+# ---------------------------------------------------------------- BOOTSTRAP
+# Runs anywhere: the project venv, a bare python3, Colab, a grader's laptop.
+# Installs into THIS kernel (sys.executable), never a different interpreter.
+import importlib.util, os, subprocess, sys
 
-ROOT = os.path.abspath("..") if os.path.basename(os.getcwd()) == "notebooks" else os.path.abspath(".")
-sys.path.insert(0, os.path.join(ROOT, "02_Data"))
-sys.path.insert(0, os.path.join(ROOT, "03_Models"))
+AUTO_INSTALL = True          # set False to only report what is missing
+
+REQUIRED = {                 # import name -> pip requirement
+    "numpy": "numpy>=1.26", "pandas": "pandas>=2.2", "matplotlib": "matplotlib>=3.8",
+    "sklearn": "scikit-learn>=1.5", "PIL": "pillow>=10",
+}
+OPTIONAL = {                 # baselines fall back to sklearn's HistGradientBoosting
+    "xgboost": "xgboost>=2.1",
+}
+
+def _missing(mapping):
+    return {m: spec for m, spec in mapping.items() if importlib.util.find_spec(m) is None}
+
+def _install(specs):
+    print(f"installing into {sys.executable}:")
+    for s in specs: print(f"   {s}")
+    r = subprocess.run([sys.executable, "-m", "pip", "install", "-q", *specs],
+                       capture_output=True, text=True)
+    if r.returncode:
+        print(r.stdout[-1500:]); print(r.stderr[-1500:])
+        raise SystemExit("pip install failed -- install the packages above by hand")
+
+need = _missing(REQUIRED)
+if need and AUTO_INSTALL:
+    _install(list(need.values()))
+elif need:
+    raise SystemExit("missing: " + ", ".join(need.values()) + "  (set AUTO_INSTALL=True)")
+
+opt = _missing(OPTIONAL)
+if opt and AUTO_INSTALL:
+    try:
+        _install(list(opt.values()))
+    except SystemExit:
+        # xgboost needs libomp on macOS; not fatal, the baselines degrade cleanly
+        print("xgboost unavailable -- baselines will use HistGradientBoosting instead")
+
+# ------------------------------------------------------------- LOCATE REPO
+# Walk up from the working directory rather than assuming notebooks/ or root,
+# so this survives being opened from anywhere.
+def _find_root(start):
+    d = os.path.abspath(start)
+    for _ in range(6):
+        if all(os.path.isdir(os.path.join(d, x)) for x in ("02_Data", "03_Models")):
+            return d
+        parent = os.path.dirname(d)
+        if parent == d:
+            break
+        d = parent
+    return None
+
+ROOT = _find_root(os.getcwd())
+if ROOT is None:
+    print("Could not find the repo (looked for 02_Data/ and 03_Models/ above")
+    print(f"  {os.getcwd()}).")
+    print("Open this notebook from inside the clone, or in Colab run:")
+    print("    !git clone <repo-url> && %cd yt-diag")
+    raise SystemExit("repo not found")
+
+for sub in ("02_Data", "03_Models"):
+    path = os.path.join(ROOT, sub)
+    if path not in sys.path:
+        sys.path.insert(0, path)
 DATA = os.path.join(ROOT, "02_Data", "processed")
 
+import json, warnings
+warnings.filterwarnings("ignore", category=UserWarning)
 import numpy as np, pandas as pd
 import matplotlib.pyplot as plt
 
 SEED = 0                      # every random choice below uses this
 pd.set_option("display.width", 120)
 pd.set_option("display.max_columns", 40)
-print("root:", ROOT)
-print("dataset present:", os.path.isdir(DATA))
-''')
+
+# --------------------------------------------------------------- CHECK DATA
+# Packages are not enough: the images live in Git LFS, and an un-pulled clone
+# has text pointer files where JPEGs should be. Say so plainly rather than
+# failing later inside PIL.
+print(f"root   : {ROOT}")
+print(f"python : {sys.version.split()[0]}  ({sys.executable})")
+
+if not os.path.isdir(DATA):
+    print()
+    print("DATASET MISSING: 02_Data/processed/ not found.")
+    print("  The notebook's later sections need it. Fetch it, or ask a teammate.")
+else:
+    n_done = sum(1 for c in os.listdir(DATA)
+                 if os.path.isdir(os.path.join(DATA, c))
+                 for v in os.listdir(os.path.join(DATA, c))
+                 if os.path.exists(os.path.join(DATA, c, v, ".done")))
+    print(f"videos : {n_done} completed")
+    stub = None
+    for c in sorted(os.listdir(DATA)):
+        cd = os.path.join(DATA, c)
+        if not os.path.isdir(cd): continue
+        for v in sorted(os.listdir(cd))[:1]:
+            for name in ("thumbnail.webp", "thumbnail.jpg"):
+                fp = os.path.join(cd, v, name)
+                if os.path.exists(fp):
+                    with open(fp, "rb") as f:
+                        stub = f.read(40).startswith(b"version https://git-lfs")
+                    break
+        if stub is not None: break
+    if stub:
+        print()
+        print("IMAGES ARE GIT-LFS POINTERS, not real files. Run:")
+        print("    git lfs install && git lfs pull")
+        print("  (~2.8 GB. Sections 3 and 4 need it; the rest works without.)")
+    elif stub is False:
+        print("images : real files (Git LFS pulled)")
+""")
 
 # ---------------------------------------------------------- 1. one video
 md("""
