@@ -1,6 +1,6 @@
 {
   "thumbnail": {
-    "cct": 4109.303396137366,
+    "cct": 4078.2480988290245,
     "brightness": 82.888544921875,
     "saturation": 130.28284830729166,
     "contrast": 62.32246006459797,
@@ -9,8 +9,8 @@
     "max_face_area_ratio": 0.019193793402777777,
     "face_centrality": 0.18275957330591067
   },
-  "frames_mean_cct": 3963.4034144032084,
-  "frames_std_cct": 739.6326620982798,
+  "frames_mean_cct": 3942.351763414224,
+  "frames_std_cct": 725.1142383953556,
   "frames_mean_brightness": 150.94706011284723,
   "frames_mean_saturation": 118.02483680555557,
   "frames_mean_contrast": 54.73942751944927,
@@ -19,6 +19,7 @@
   "cct_thumbnail_valid": true,
   "cct_frames_valid": 20,
   "cct_frames_total": 20,
-  "cct_version": 2,
-  "cct_recomputed_at_utc": "2026-09-01T13:12:44Z"
+  "cct_version": 3,
+  "cct_recomputed_at_utc": "2026-09-01T14:08:00Z",
+  "cct_method": "nearest_planckian_locus_cie1960uv_1pct_lut"
 }

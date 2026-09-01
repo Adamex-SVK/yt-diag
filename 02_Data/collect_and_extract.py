@@ -817,7 +817,6 @@ def _analyze_image(cv2, path, detect_faces):
     if img is None:
         return None
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-    mean_bgr = img.reshape(-1, 3).mean(axis=0)
     # linear-space mean: gamma-encoded pixels are code values, not intensities
     lin = _linearise_table(np)[img[:, :, :3]].reshape(-1, 3).mean(axis=0)  # BGR order
     cct = correlated_color_temp((float(lin[2]), float(lin[1]), float(lin[0])))
@@ -846,12 +845,11 @@ def extract_visual_features(thumbnail_path: Optional[str], frame_paths: list[str
     aggregates) and return it. None means opencv is not installed and NO file
     was written -- distinct from a written file whose values are None.
 
-    Units, none of which are 0-1 unless said so: *_cct is McCamy's
-    correlated-colour-temperature approximation, nominally Kelvin, but computed
-    by _correlated_color_temp() from mean RGB fed in as CIE XYZ directly (no
-    sRGB->XYZ matrix, no gamma linearisation) -- so read it as a monotone
-    warm/cool index, not a calibrated temperature. brightness and saturation are
-    the means of the HSV V and S channels on the 0-255 byte scale; contrast is
+    Units, none of which are 0-1 unless said so: *_cct is the nearest-Planckian-
+    locus temperature in kelvin computed from the image's linear-light mean;
+    colours farther than |Duv|=0.05 from the locus yield None. It is an image
+    warm/cool descriptor, not a measurement of the scene illuminant. Brightness
+    and saturation are means of HSV V and S on the 0-255 byte scale; contrast is
     the standard deviation of V on that same 0-255 scale; *_face_area_ratio is a
     fraction of frame area; frames_has_face_ratio is the fraction of readable
     frames with at least one face.
@@ -859,9 +857,8 @@ def extract_visual_features(thumbnail_path: Optional[str], frame_paths: list[str
     A None aggregate means no frame yielded a value for that key -- it is not
     zero, and averaging it as zero would push a video toward "cold and dark".
     Aggregates are also taken only over the frames OpenCV could actually decode
-    and, per key, only over non-None values, so a mean may be over fewer than
-    len(frame_paths) frames; that count is not recorded anywhere, so denominators
-    here are not comparable across videos.
+    and, per key, only over non-None values. CCT records its valid and total
+    frame counts so a partial mean is never mistaken for a complete one.
 
     "thumbnail" is None when no thumbnail file was found or it failed to decode,
     which is why consumers must not assume the block exists.
@@ -883,10 +880,9 @@ def extract_visual_features(thumbnail_path: Optional[str], frame_paths: list[str
 
     def _std(key, source):
         vals = [s[key] for s in source if s.get(key) is not None]
-        if not vals:
-            return None
-        m = sum(vals) / len(vals)
-        return (sum((v - m) ** 2 for v in vals) / len(vals)) ** 0.5
+        return population_std(vals)
+
+    frame_ccts = [f["cct"] for f in frames if f.get("cct") is not None]
 
     features = {
         "thumbnail": thumb,
@@ -897,6 +893,11 @@ def extract_visual_features(thumbnail_path: Optional[str], frame_paths: list[str
         "frames_mean_contrast": _mean("contrast", frames),
         "frames_has_face_ratio": _mean("has_face", [{"has_face": 1.0 if f["has_face"] else 0.0} for f in frames]),
         "frames_mean_max_face_area_ratio": _mean("max_face_area_ratio", frames),
+        "cct_thumbnail_valid": bool(thumb and thumb.get("cct") is not None),
+        "cct_frames_valid": len(frame_ccts),
+        "cct_frames_total": len(frames),
+        "cct_version": CCT_VERSION,
+        "cct_method": CCT_METHOD,
     }
     with open(os.path.join(video_dir, "visual_features.json"), "w", encoding="utf-8") as f:
         json.dump(features, f, indent=2)

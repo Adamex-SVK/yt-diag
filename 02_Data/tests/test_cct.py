@@ -1,10 +1,8 @@
-"""Checks for the corrected colour-temperature computation.
+"""Checks for the version-3 colour-temperature computation.
 
-The original implementation was wrong in a way no test would have caught,
-because there was no test: it set X=r, Y=g, Z=b and skipped the sRGB->XYZ
-matrix, so its chromaticity was normalised RGB. The fix is only trustworthy
-against KNOWN answers, so these check physical reference points rather than
-"it returns a number".
+The tests cover the sRGB conversion, known illuminants, the supported
+Planckian-locus range, signed Duv, off-locus rejection, and the aggregation
+definition shared by collection and recomputation.
 
     cd 02_Data && ../.venv/bin/python tests/test_cct.py
 """
@@ -12,8 +10,12 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from collect_and_extract import (CCT_VALID_K, correlated_color_temp,  # noqa: E402
-                                 srgb_to_linear)
+from collect_and_extract import (CCT_VALID_K, MAX_DUV,  # noqa: E402
+                                 _nearest_planckian_cct_duv_uv,
+                                 _planckian_xy, _uv_1960,
+                                 correlated_color_temp,
+                                 correlated_color_temp_and_duv,
+                                 population_std, srgb_to_linear)
 
 
 def test_srgb_transfer_function_matches_the_standard():
@@ -27,10 +29,8 @@ def test_srgb_transfer_function_matches_the_standard():
     assert srgb_to_linear(0.25) < 0.25  # encoded values overstate intensity
 
 
-def test_equal_energy_white_is_d65():
-    """Equal linear RGB is the sRGB white point, D65 ~ 6504 K. This is the
-    single check that would have caught the original bug: the broken version
-    returned 5520 K for white (its n collapsed to ~0 for any neutral colour)."""
+def test_srgb_white_is_d65():
+    """Equal linear sRGB is the D65 white point, CCT approximately 6504 K."""
     cct = correlated_color_temp((1.0, 1.0, 1.0))
     assert cct is not None and abs(cct - 6504) < 30, cct
     # brightness must not change the temperature -- CCT is a chromaticity
@@ -44,6 +44,28 @@ def test_warm_and_cool_land_on_the_right_sides():
     cool = correlated_color_temp((0.6, 0.75, 1.0))  # overcast-ish
     assert warm is not None and cool is not None
     assert warm < 5000 < cool, (warm, cool)
+
+
+def test_known_planckian_points_across_the_supported_range():
+    """Every reference point on the locus maps back to its own temperature.
+
+    The 4000 K piecewise-polynomial join is the least exact point, hence the
+    2 K tolerance; all other checked points are much closer.
+    """
+    for expected in (1667, 2000, 2856, 4000, 6500, 10000, 15000, 20000, 25000):
+        x, y = _planckian_xy(expected)
+        got, duv = _nearest_planckian_cct_duv_uv(*_uv_1960(x, y))
+        assert abs(got - expected) < 2.0, (expected, got)
+        assert abs(duv) < 3e-6, (expected, duv)
+
+
+def test_duv_is_signed_and_d65_is_near_the_locus():
+    x, y = _planckian_xy(6500)
+    u, v = _uv_1960(x, y)
+    assert _nearest_planckian_cct_duv_uv(u, v + 0.005)[1] > 0
+    assert _nearest_planckian_cct_duv_uv(u, v - 0.005)[1] < 0
+    _, d65_duv = correlated_color_temp_and_duv((1.0, 1.0, 1.0))
+    assert 0 < d65_duv < MAX_DUV
 
 
 def test_degenerate_colours_return_none_rather_than_a_number():
@@ -71,15 +93,10 @@ def test_no_input_can_produce_an_impossible_temperature():
     assert checked == 11 ** 3
 
 
-def test_near_the_old_singularity_is_handled():
-    """g/(r+g+b) ~ 0.1858 is where the ORIGINAL formula blew up. In real CIE
-    space that input is unremarkable, and must either give a sane temperature
-    or None -- never a divergence."""
-    for r in [0.3, 0.5, 0.7]:
-        for b in [0.3, 0.5, 0.7]:
-            g = 0.1858 * (r + b) / (1 - 0.1858)  # makes the RGB fraction exactly 0.1858
-            v = correlated_color_temp((r, g, b))
-            assert v is None or CCT_VALID_K[0] <= v <= CCT_VALID_K[1], ((r, g, b), v)
+def test_population_std_is_shared_and_well_defined_for_one_value():
+    assert population_std([]) is None
+    assert population_std([7.0]) == 0.0
+    assert abs(population_std([1.0, 2.0, 3.0]) - (2.0 / 3.0) ** 0.5) < 1e-12
 
 
 if __name__ == "__main__":
