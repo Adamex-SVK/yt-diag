@@ -16,3 +16,9 @@ transformers>=4.48
 pillow>=10
 # EDA figures (02_Data/eda_retrospective.py); Agg backend, no GUI needed
 matplotlib>=3.8
+
+# Notebook walkthrough (notebooks/00_project_walkthrough.ipynb). The notebook is
+# an interface to the pipeline, never a second implementation -- regenerate it
+# with notebooks/build_walkthrough.py rather than hand-editing cells.
+jupyterlab>=4.0
+ipykernel>=6.29

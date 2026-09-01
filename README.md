@@ -82,6 +82,20 @@ cannot spend the day's search quota:
 .venv/bin/python 02_Data/track_new_videos.py --no-discover
 ```
 
+### Notebook walkthrough
+
+```bash
+.venv/bin/python -m ipykernel install --user --name ytdiag --display-name "YT-Diag (.venv)"
+.venv/bin/python -m jupyter lab notebooks/00_project_walkthrough.ipynb
+```
+
+`notebooks/00_project_walkthrough.ipynb` runs the whole pipeline on real data and lets you
+**check the claims** in `02_Data/eda.md` yourself: the transcript repetition, the frame
+sampling, the colour-temperature fix, the Shorts confound, the channel-split leak and the
+baselines. It is a thin *interface* — every cell imports from `02_Data/` and `03_Models/`
+and calls the real functions, so it can never drift from the code that produces the
+results. Edit `notebooks/build_walkthrough.py` and regenerate rather than editing cells.
+
 ### Tests
 
 ```bash
