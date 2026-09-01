@@ -661,22 +661,97 @@ def extract_frames(video_path: str, frames_dir: str, frame_count: int) -> list[s
 # temperature, brightness/saturation/contrast, face presence/area.
 # ---------------------------------------------------------------------------
 
-def _correlated_color_temp(mean_rgb):
-    """McCamy's approximation (additional_features.md 1.1). mean_rgb in
-    0-255, RGB order."""
-    r, g, b = (c / 255.0 for c in mean_rgb)
-    total = r + g + b
-    if total == 0:
-        return None
-    X = r
-    Y = g
-    Z = b
+# Correlated colour temperature is only meaningful near the Planckian locus,
+# and McCamy's cubic is fitted over roughly this range. Outside it the number
+# is an extrapolation of a curve fit, not a temperature -- so return None
+# rather than a value a model would happily treat as real.
+CCT_VALID_K = (1500.0, 25000.0)
+
+# Correlated colour temperature is the temperature of the blackbody whose
+# colour is CLOSEST to the sample -- which is only a meaningful description if
+# the sample is actually near that locus. Duv is that distance in CIE 1960 UCS.
+# Saturated colours sit far off it: pure green returns "6069 K" from McCamy's
+# cubic alone, which would tell a model that a green-screen frame is daylight.
+# CIE 15:2004 treats CCT as undefined beyond |Duv| = 0.05.
+MAX_DUV = 0.05
+
+# sRGB (IEC 61966-2-1) linear-RGB -> CIE XYZ, D65 white point.
+_SRGB_TO_XYZ = ((0.4124564, 0.3575761, 0.1804375),
+                (0.2126729, 0.7151522, 0.0721750),
+                (0.0193339, 0.1191920, 0.9503041))
+
+
+def srgb_to_linear(c: float) -> float:
+    """Undo the sRGB transfer function for one channel, 0-1 in and out.
+
+    Pixel values are gamma-ENCODED; averaging or matrix-multiplying them
+    directly treats a perceptual code value as a light intensity. This is the
+    step the original CCT implementation omitted."""
+    return c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
+
+
+def _planckian_xy(temp_k: float) -> "tuple[float, float]":
+    """Approximate CIE 1931 xy of a blackbody at temp_k (Kim et al. cubics,
+    valid 1667-25000 K) -- used only to measure how far a colour sits from the
+    locus, not to compute the temperature itself."""
+    t = temp_k
+    if t <= 4000.0:
+        x = (-0.2661239e9 / t ** 3 - 0.2343589e6 / t ** 2
+             + 0.8776956e3 / t + 0.179910)
+    else:
+        x = (-3.0258469e9 / t ** 3 + 2.1070379e6 / t ** 2
+             + 0.2226347e3 / t + 0.240390)
+    if t <= 2222.0:
+        y = -1.1063814 * x ** 3 - 1.34811020 * x ** 2 + 2.18555832 * x - 0.20219683
+    elif t <= 4000.0:
+        y = -0.9549476 * x ** 3 - 1.37418593 * x ** 2 + 2.09137015 * x - 0.16748867
+    else:
+        y = 3.0817580 * x ** 3 - 5.87338670 * x ** 2 + 3.75112997 * x - 0.37001483
+    return x, y
+
+
+def _uv_1960(x: float, y: float) -> "tuple[float, float]":
+    """CIE 1931 xy -> CIE 1960 UCS uv, the space Duv is defined in."""
+    d = -2.0 * x + 12.0 * y + 3.0
+    if d == 0:
+        return float("nan"), float("nan")
+    return 4.0 * x / d, 6.0 * y / d
+
+
+def correlated_color_temp(mean_linear_rgb: "tuple[float, float, float]") -> "Optional[float]":
+    """Correlated colour temperature in KELVIN via McCamy's approximation, or
+    None when the result falls outside CCT_VALID_K or the colour is black.
+
+    Takes LINEAR RGB in 0-1 (see srgb_to_linear), averaged in linear space --
+    not the mean of gamma-encoded pixel values.
+
+    Fixed 2026-09-01. The original set X=r, Y=g, Z=b, skipping the sRGB->XYZ
+    matrix entirely, so x and y were normalised RGB fractions rather than CIE
+    chromaticity. McCamy's denominator (0.1858 - y) then hit zero for
+    green-deficient images: 83 of the 1,860 collected videos carried CCT values
+    up to 5.0e9, and 27 were negative Kelvin. See KNOWN_ISSUES.md and
+    02_Data/recompute_cct.py, which backfills the corrected values."""
+    r, g, b = mean_linear_rgb
+    X = _SRGB_TO_XYZ[0][0] * r + _SRGB_TO_XYZ[0][1] * g + _SRGB_TO_XYZ[0][2] * b
+    Y = _SRGB_TO_XYZ[1][0] * r + _SRGB_TO_XYZ[1][1] * g + _SRGB_TO_XYZ[1][2] * b
+    Z = _SRGB_TO_XYZ[2][0] * r + _SRGB_TO_XYZ[2][1] * g + _SRGB_TO_XYZ[2][2] * b
     denom = X + Y + Z
+    if denom <= 0:
+        return None  # pure black: no chromaticity to speak of
     x = X / denom
     y = Y / denom
+    if abs(0.1858 - y) < 1e-6:
+        return None  # exactly on the singularity of the fit
     n = (x - 0.3320) / (0.1858 - y)
-    cct = 449 * n**3 + 3525 * n**2 + 6823.3 * n + 5520.33
-    return cct
+    cct = 449 * n ** 3 + 3525 * n ** 2 + 6823.3 * n + 5520.33
+    if not CCT_VALID_K[0] <= cct <= CCT_VALID_K[1]:
+        return None
+    # ...and the temperature only describes the colour if the colour is near
+    # the blackbody locus in the first place.
+    u, v = _uv_1960(x, y)
+    pu, pv = _uv_1960(*_planckian_xy(cct))
+    duv = ((u - pu) ** 2 + (v - pv) ** 2) ** 0.5
+    return cct if duv <= MAX_DUV else None
 
 
 def _face_detector():
@@ -721,14 +796,31 @@ def _face_detector():
         return detect
 
 
+_linearise_lut = None
+
+
+def _linearise_table(np):
+    """256-entry uint8 -> linear-light lookup table, built once.
+
+    Pixels are uint8, so the sRGB transfer function has only 256 possible
+    inputs; a table turns a per-pixel pow() into an index."""
+    global _linearise_lut
+    if _linearise_lut is None:
+        _linearise_lut = np.array([srgb_to_linear(i / 255.0) for i in range(256)],
+                                  dtype=np.float64)
+    return _linearise_lut
+
+
 def _analyze_image(cv2, path, detect_faces):
+    import numpy as np
     img = cv2.imread(path)
     if img is None:
         return None
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     mean_bgr = img.reshape(-1, 3).mean(axis=0)
-    mean_rgb = (mean_bgr[2], mean_bgr[1], mean_bgr[0])
-    cct = _correlated_color_temp(mean_rgb)
+    # linear-space mean: gamma-encoded pixels are code values, not intensities
+    lin = _linearise_table(np)[img[:, :, :3]].reshape(-1, 3).mean(axis=0)  # BGR order
+    cct = correlated_color_temp((float(lin[2]), float(lin[1]), float(lin[0])))
     brightness = float(hsv[:, :, 2].mean())
     saturation = float(hsv[:, :, 1].mean())
     contrast = float(hsv[:, :, 2].std())

@@ -1,6 +1,6 @@
 {
   "thumbnail": {
-    "cct": 5369.88092603821,
+    "cct": 6417.26536215323,
     "brightness": 96.53603949652778,
     "saturation": 14.732993706597222,
     "contrast": 61.00511742629757,
@@ -9,11 +9,16 @@
     "max_face_area_ratio": 0.0066015625,
     "face_centrality": 0.06816756876284943
   },
-  "frames_mean_cct": 5263.78047969721,
-  "frames_std_cct": 36.96594104041182,
+  "frames_mean_cct": 6403.128315161068,
+  "frames_std_cct": 25.39118688143594,
   "frames_mean_brightness": 170.8412894965278,
   "frames_mean_saturation": 19.934072916666665,
   "frames_mean_contrast": 36.1208258006359,
   "frames_has_face_ratio": 0.75,
-  "frames_mean_max_face_area_ratio": 0.015845703125
+  "frames_mean_max_face_area_ratio": 0.015845703125,
+  "cct_thumbnail_valid": true,
+  "cct_frames_valid": 20,
+  "cct_frames_total": 20,
+  "cct_version": 2,
+  "cct_recomputed_at_utc": "2026-09-01T13:12:22Z"
 }

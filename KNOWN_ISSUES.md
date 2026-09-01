@@ -65,14 +65,17 @@ consistent with it — fixing one means fixing both.
 
 ## Collection (`02_Data/collect_and_extract.py`)
 
-**6. The colour-temperature feature is not the formula it claims.** `_correlated_color_temp` sets
-X=r, Y=g, Z=b and skips the sRGB→XYZ matrix entirely, so its `x,y` are normalised RGB fractions,
-not CIE chromaticity. McCamy's approximation then diverges near y ≈ 0.1858 (a green-deficient,
-magenta-ish image), producing values up to 5.0 × 10⁹ and **negative Kelvin** on 83 videos.
-*Status:* the affected rows are already flagged `vis_cct_valid=0` in `cleaning_manifest.csv`, and
-`02_Data/eda.md` §6 specifies the treatment (NaN the out-of-range values; a std has no lower bound,
-so cap by magnitude there). The upstream formula should be corrected before any re-collection —
-recomputing it for the existing dataset only needs the stored thumbnails and frames, not the videos.
+**6. ~~The colour-temperature feature is not the formula it claims.~~ FIXED 2026-09-01.**
+`_correlated_color_temp` set X=r, Y=g, Z=b and skipped the sRGB→XYZ matrix entirely, so its `x,y`
+were normalised RGB fractions rather than CIE chromaticity; McCamy's denominator `(0.1858 − y)`
+then approached zero for green-deficient images, producing values to 5.0 × 10⁹ K and negative
+Kelvin. Replaced with a correct implementation (`correlated_color_temp` in `collect_and_extract.py`)
+that gamma-decodes sRGB, applies the D65 matrix, averages in **linear light**, and gates on
+**Duv ≤ 0.05** — because a temperature only describes a colour that is actually near the Planckian
+locus. All 39,060 images were recomputed in place by `02_Data/recompute_cct.py`, and
+`02_Data/tests/test_cct.py` pins the result to known references (D65 white = 6503.5 K against a
+textbook 6504). This was **not** cosmetic: correcting it moved the full-feature XGBoost baseline
+from 0.628 to 0.642 on seed 0.
 
 ---
 
