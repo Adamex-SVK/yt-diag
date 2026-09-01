@@ -92,9 +92,19 @@ from typing import Any, Optional
 
 OUT_DIR = os.path.join(os.path.dirname(__file__), "processed")
 VIRAL_FRACTION = 0.25  # exactly floor(n * fraction) viral per cell, min 1
-DEFAULT_MIN_AGE_DAYS = 30
-DEFAULT_AGE_BANDS = 4
-DEFAULT_SIZE_BANDS = 4
+# Defaults revised 2026-09-01 from the evidence in 02_Data/eda.md:
+#   min age 30 -> 0: the floor is a v1 inheritance (views-per-day decays with
+#     age); v2 ranks WITHIN age bands, so it was paying 861 videos (46%, and a
+#     biased 46% -- 64% Shorts vs 43% retained) for nothing measurable. With
+#     format stratified, the four-confound label AUC is 0.576 at min-age 0 vs
+#     0.572 at 7. The prospective panel confirms the premise directly: view
+#     RANK is ~90% settled within 24h (day-1 vs day-5 Spearman 0.946).
+#   4x4 -> 3x3: the format dimension halves every cell, and 4x4x2 leaves a
+#     median cell of 13 with 102 cells under SMALL_CELL_WARN. 2x2x2 has clean
+#     cells but lets the confounds back in (AUC 0.660). 3x3x2 is the knee.
+DEFAULT_MIN_AGE_DAYS = 0
+DEFAULT_AGE_BANDS = 3
+DEFAULT_SIZE_BANDS = 3
 SMALL_CELL_WARN = 20  # quartile ranking gets noisy below this many videos
 
 
@@ -120,6 +130,7 @@ def extract_row(
     video_dir: str,
     meta: dict[str, Any],
     min_age_days: int,
+    stratify_format: bool = True,
 ) -> tuple[Optional[dict[str, Any]], Optional[str]]:
     """Returns (row, None) if the video enters the labeling cohort, or
     (None, reason) if it is excluded. Exclusions are explicit and recorded --
@@ -128,7 +139,14 @@ def extract_row(
     Row keys: video_id, video_dir, days_since_upload (whole days; both sides
     are dates only -- yt-dlp's upload_date has no time -- so it carries up to
     a day of rounding), view_count, subs (channel_follower_count at
-    collection time), log_views = log(1 + view_count)."""
+    collection time), log_views = log(1 + view_count), and -- when
+    stratify_format is on -- is_short ("true"/"false", read from
+    metadata_extra.json, which the labeler does not otherwise touch).
+
+    A video with no definitive Shorts verdict is EXCLUDED rather than guessed
+    at: it cannot be placed in a format stratum, and duration is not a
+    substitute (a verified 250-second Short exists in the prospective cohort).
+    Five videos are affected, all of them deleted or private."""
     upload_date = meta.get("upload_date")
     collected_at = meta.get("collected_at")
     view_count = meta.get("view_count")
@@ -147,7 +165,18 @@ def extract_row(
     if days < min_age_days:
         return None, f"younger than --min-age-days {min_age_days} ({days}d old at collection)"
 
+    is_short = ""
+    if stratify_format:
+        try:
+            with open(os.path.join(video_dir, "metadata_extra.json"), encoding="utf-8") as f:
+                is_short = (json.load(f) or {}).get("is_short", "")
+        except (OSError, json.JSONDecodeError):
+            is_short = ""
+        if is_short not in ("true", "false"):
+            return None, "no definitive is_short verdict (cannot place in a format stratum)"
+
     return {
+        "is_short": is_short,
         "video_id": video_id,
         "video_dir": video_dir,
         "days_since_upload": days,
@@ -208,7 +237,8 @@ def label_category(category: str, cat_dir: str, args: argparse.Namespace) -> Non
         except (OSError, json.JSONDecodeError) as e:
             excluded.append({"video_id": video_id, "reason": f"unreadable metadata.json ({e})"})
             continue
-        row, reason = extract_row(video_id, video_dir, meta, args.min_age_days)
+        row, reason = extract_row(video_id, video_dir, meta, args.min_age_days,
+                                  stratify_format=not args.no_format_stratum)
         if row is None:
             excluded.append({"video_id": video_id, "reason": reason})
         else:
@@ -218,14 +248,22 @@ def label_category(category: str, cat_dir: str, args: argparse.Namespace) -> Non
         print(f"{category}: 0 labelable videos ({len(excluded)} excluded)")
         return
 
-    n_age_bands = min(args.age_bands, len(rows))
-    n_size_bands = min(args.size_bands, len(rows))
-    assign_bands(rows, "days_since_upload", n_age_bands, "age_band")
-    assign_bands(rows, "subs", n_size_bands, "size_band")
+    # Bands are quantiles WITHIN a format stratum, not across both: Shorts and
+    # regular videos have different age and subscriber distributions, so pooled
+    # band edges would put a Short and a long-form video in a cell that is only
+    # nominally comparable (eda.md 3).
+    strata = {}
+    for r in rows:
+        strata.setdefault(r.get("is_short", ""), []).append(r)
+    n_age_bands = min(args.age_bands, min(len(v) for v in strata.values()))
+    n_size_bands = min(args.size_bands, min(len(v) for v in strata.values()))
+    for fmt_rows in strata.values():
+        assign_bands(fmt_rows, "days_since_upload", n_age_bands, "age_band")
+        assign_bands(fmt_rows, "subs", n_size_bands, "size_band")
 
     cells = {}
     for r in rows:
-        cells.setdefault((r["age_band"], r["size_band"]), []).append(r)
+        cells.setdefault((r["age_band"], r["size_band"], r.get("is_short", "")), []).append(r)
 
     small_cells = boundary_tie_cells = 0
     for cell_rows in cells.values():
@@ -256,6 +294,7 @@ def label_category(category: str, cat_dir: str, args: argparse.Namespace) -> Non
             "log_views": r["log_views"],
             "age_band": r["age_band"],
             "size_band": r["size_band"],
+            "is_short": r.get("is_short", ""),
             "cell_size": r["cell_size"],
             "cell_percentile": r["cell_percentile"],
             "warnings": r.get("warnings", []),
@@ -267,11 +306,11 @@ def label_category(category: str, cat_dir: str, args: argparse.Namespace) -> Non
     with open(summary_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(["video_id", "days_since_upload", "view_count", "channel_follower_count",
-                         "log_views", "age_band", "size_band", "cell_size", "cell_percentile", "label",
+                         "log_views", "age_band", "size_band", "is_short", "cell_size", "cell_percentile", "label",
                          "warnings"])
         for r in sorted(rows, key=lambda r: r["video_id"]):
             writer.writerow([r["video_id"], r["days_since_upload"], r["view_count"], r["subs"],
-                             f"{r['log_views']:.4f}", r["age_band"], r["size_band"],
+                             f"{r['log_views']:.4f}", r["age_band"], r["size_band"], r.get("is_short", ""),
                              r["cell_size"], f"{r['cell_percentile']:.4f}", r["label"],
                              "; ".join(r.get("warnings", []))])
 
@@ -287,7 +326,8 @@ def label_category(category: str, cat_dir: str, args: argparse.Namespace) -> Non
     cell_sizes = sorted(len(c) for c in cells.values())
     print(f"{category}: {n} labeled ({viral} viral = {viral / n:.1%}), "
           f"{len(excluded)} excluded -> {summary_path}")
-    print(f"  {len(cells)} cells ({n_age_bands} age x {n_size_bands} size bands), "
+    n_strata = len({r.get("is_short", "") for r in rows})
+    print(f"  {len(cells)} cells ({n_age_bands} age x {n_size_bands} size x {n_strata} format), "
           f"sizes min/median/max = {cell_sizes[0]}/{cell_sizes[len(cell_sizes) // 2]}/{cell_sizes[-1]}")
     if small_cells:
         print(f"  WARNING: {small_cells} cells smaller than {SMALL_CELL_WARN} videos -- "
@@ -317,12 +357,19 @@ def main() -> None:
                         help="processed/ directory to label (default: 02_Data/processed)")
     parser.add_argument("--min-age-days", type=int, default=DEFAULT_MIN_AGE_DAYS,
                         help="exclude videos younger than this at collection time")
+    parser.add_argument("--no-format-stratum", action="store_true",
+                        help="do NOT stratify on is_short. Only for the sensitivity analysis: "
+                             "unstratified, Shorts take the viral label at ~2x their share and "
+                             "the format bit is 99%% readable off the frames (eda.md 3-4)")
     parser.add_argument("--age-bands", type=int, default=DEFAULT_AGE_BANDS)
     parser.add_argument("--size-bands", type=int, default=DEFAULT_SIZE_BANDS)
     args = parser.parse_args()
 
     if args.category == "all":
-        categories = sorted(os.listdir(args.data_dir)) if os.path.isdir(args.data_dir) else []
+        # directories only: processed/ also holds cleaning_manifest.csv
+        categories = sorted(d for d in os.listdir(args.data_dir)
+                            if os.path.isdir(os.path.join(args.data_dir, d))) \
+            if os.path.isdir(args.data_dir) else []
     else:
         categories = [args.category]
 

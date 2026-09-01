@@ -110,6 +110,15 @@ def run_baselines(
     cols = select_columns(df, groups)
     if not cols:
         raise ValueError(f"no input columns for groups {groups}")
+    # An all-NaN column is not a feature: the imputer silently skips it, so
+    # counting it would report an n_features the model never used (e.g.
+    # meta__definition_hd, which yt-dlp never populated retrospectively).
+    # Dropped here rather than in the registry so the registry keeps saying
+    # what the GROUP contains, and the run says what it actually fitted.
+    all_nan = [c for c in cols if df[c].isna().all()]
+    cols = [c for c in cols if c not in all_nan]
+    if not cols:
+        raise ValueError(f"every column for groups {groups} is empty in this dataset")
     idx = split_indices(df, seed=seed)
     X, y = df[cols], df.label.astype(int).to_numpy()
     boost_name, boost = _boosting()
@@ -121,6 +130,7 @@ def run_baselines(
         boost_name: Pipeline([("prep", _preprocessor(cols, scale=False)), ("clf", boost)]),
     }
     results = {"groups": list(groups), "n_features": len(cols), "seed": seed,
+               "dropped_all_nan": all_nan,
                "split_sizes": {k: int(len(v)) for k, v in idx.items()}, "models": {}}
     for name, model in models.items():
         model.fit(X.iloc[idx["train"]], y[idx["train"]])
@@ -148,6 +158,9 @@ def format_results(results: dict[str, Any]) -> str:
     column appears only for a run that explicitly asked for it."""
     lines = [f"groups={results['groups']}  features={results['n_features']}  "
              f"split={results['split_sizes']}"]
+    if results.get("dropped_all_nan"):
+        lines.append(f"  dropped {len(results['dropped_all_nan'])} all-NaN column(s): "
+                     f"{', '.join(results['dropped_all_nan'])}")
     for name, r in results["models"].items():
         v = r["val"]
         line = f"  {name:24s} val AUC {v['auc_roc']:.3f}  PR-AUC {v['pr_auc']:.3f}  F1@{r['threshold']:.2f} {v['f1']:.3f}"
