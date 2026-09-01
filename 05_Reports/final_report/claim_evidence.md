@@ -33,15 +33,18 @@ Regenerate the baseline table (never retype it):
 | Transcript kinds 944 / 467 / 391 / 37 / 12 / 9 | confirmed | `02_Data/processed/cleaning_manifest.csv`, `transcript_kind` | Data |
 | Native-English-only leaves comedy 77, vlogs 64 | confirmed | `02_Data/eda.md` §7 | Data (limitation) |
 | Old CCT reached 5.0×10⁹ K, 27 negative | confirmed | pre-fix values; `KNOWN_ISSUES.md` §6 | Data |
-| Corrected CCT: D65 white = 6503.5 K vs 6504 reference | confirmed | `cd 02_Data && ../.venv/bin/python tests/test_cct.py` | Data |
-| Corrected distribution 2,520–17,757 K, median 5,671 | confirmed | `.venv/bin/python 02_Data/recompute_cct.py --dry-run` | Data |
+| Corrected CCT (v3): nearest-Planckian-locus, 1% LUT, signed Duv | confirmed | `cd 02_Data && ../.venv/bin/python tests/test_cct.py` | Experiment |
+| v3 recovers locus reference points exactly where McCamy drifts (25,000 K: 25,000 vs 19,504) | confirmed | `_nearest_planckian_cct_duv_uv` vs McCamy, see CHANGELOG | Experiment |
+| v3 distribution 2,553–25,000 K, median 5,678; all 1,860 files `cct_version=3` | confirmed | `.venv/bin/python 02_Data/recompute_cct.py --dry-run` | Experiment |
+| v3 changed baselines only within seed noise | confirmed | `results/baselines.json` (`cct_version` recorded) | Experiment |
 | Pure green would report 6069 K without the Duv gate | confirmed | notebook §4 | Data |
 
 ## Target and label
 
 | Claim | Status | Reproduce with | In report |
 |---|---|---|---|
-| **Shortcut ceiling R² = 0.584**, channel-grouped | confirmed | `eda_retrospective.py::shortcut_ceiling`; notebook §9 | Method |
+| **Shortcut ceiling R² = 0.584**, channel-grouped | confirmed | `eda_retrospective.py::shortcut_ceiling`; notebook §9 | Methodology |
+| It is a *diagnostic*, not a leakage-free estimate — subscriber count is observed retrospectively, and a hit raises its own channel's count | limitation | reasoning, stated in Methodology | Methodology |
 | Random folds give 0.643 — the leaky comparison, not ours | confirmed | notebook §9 discussion | Method |
 | Subscribers alone reach R² ≈ 0.43 | confirmed | `eda_stats.json → shortcut_ceiling` | Method |
 | 1,854 labelled, 438 viral (23.6%) | confirmed | `.venv/bin/python 02_Data/compute_labels_v2.py --category all` | Method |
@@ -68,7 +71,7 @@ Regenerate the baseline table (never retype it):
 
 | Claim | Status | Reproduce with | In report |
 |---|---|---|---|
-| Baseline table (all cells) | confirmed | `make_tables.py --seeds 5` — writes into `main.tex` | Experiments |
+| Baseline table (all cells) | confirmed | `make_tables.py --seeds 5` — writes `results/baselines.json` **and** into `main.tex` | Experiment |
 | Visual block alone ≈ chance (0.505) | confirmed | same | Experiments |
 | LR on metadata ranges 0.496–0.660 across seeds | confirmed | same | Experiments |
 | **Test-set metrics** | **pending** | `run_baselines.py --test` — run ONCE, at the end | Experiments |
@@ -81,7 +84,9 @@ Regenerate the baseline table (never retype it):
 ## Before submission
 
 - [ ] Flip `\drafttrue` → `\draftfalse` in `main.tex`; confirm every `\note` disappears
-- [ ] Confirm the **page limit** from the course page — the AAAI template defers it to "your event"
+- [ ] Section page budget from the course guideline: Introduction ≤1p, Related Work ≤0.5p, Methodology ≤2p, Experiment ≤2p, Conclusion one paragraph, Abstract ~250 words
+- [ ] Add the 3-minute presentation video link to the report
+- [ ] Add the GitHub/drive link for dataset + source code (the guideline requires it)
 - [ ] Re-run `make_tables.py` so the table matches the final code
 - [ ] Every `pending` row above is either resolved or removed from the report
 - [ ] Compile in Overleaf and check: two columns, no page numbers, Times, fonts embedded
