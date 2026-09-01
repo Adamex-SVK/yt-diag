@@ -44,7 +44,7 @@ Computed on the thumbnail and on every sampled frame (before frame deletion), th
 
 | Feature | Definition |
 |---|---|
-| `cct` | Correlated color temperature in Kelvin (McCamy's approximation from mean RGB) — "warm vs cool" look |
+| `cct` | Correlated colour temperature in Kelvin, v3: mean linear-light sRGB → CIE XYZ/1960 UCS, projected to the nearest segment of a 1%-resolution 1,667–25,000 K Planckian-locus table; absent when black, farther than `|Duv|=0.05`, or projected beyond either endpoint. Provenance and validity counts are stored beside the aggregates. Describes proximity to a warm/cool illuminant locus, not arbitrary saturated colour. |
 | `brightness` | Mean HSV value channel (0–255) |
 | `saturation` | Mean HSV saturation channel (0–255) — color vividness |
 | `contrast` | Std of the HSV value channel |
@@ -52,7 +52,9 @@ Computed on the thumbnail and on every sampled frame (before frame deletion), th
 | `max_face_area_ratio` | Area of the largest face box ÷ image area |
 | `face_centrality` | Distance of the largest face's center from image center (0 = dead center); `null` if no face |
 
-**Aggregates across the ~20 sampled frames**: `frames_mean_cct`, `frames_std_cct`, `frames_mean_brightness`, `frames_mean_saturation`, `frames_mean_contrast`, `frames_has_face_ratio` (fraction of frames with a face), `frames_mean_max_face_area_ratio`.
+**Aggregates across the ~20 sampled frames**: `frames_mean_cct`, `frames_std_cct` (population standard deviation over valid frame CCT values), `frames_mean_brightness`, `frames_mean_saturation`, `frames_mean_contrast`, `frames_has_face_ratio` (fraction of frames with a face), `frames_mean_max_face_area_ratio`. Read CCT aggregates with `cct_thumbnail_valid`, `cct_frames_valid`, `cct_frames_total`, `cct_version`, and `cct_method`; a mean over fewer than 20 valid frames has different coverage. The cleaning manifest mirrors this distinction: `vis_cct_policy_valid` checks provenance and numeric consistency, `vis_cct_valid` means the thumbnail and frame aggregate triplet is model-ready, and `vis_cct_frame_coverage`, `vis_cct_frames_complete`, and `vis_cct_any_missing` expose partial coverage.
+
+**Descriptive/derived diagnostics** (`derived_features.py`, not yet registered as model inputs): heuristic content-crop thumbnail brightness/saturation/contrast, hashtag-stripped title length, cleaned transcript words per video minute (edited speech density), and mean frame-gap proxy. The crop flag is not a verified pillarbox label. `motion_features.py` is a negative-result audit: sparse-frame change does not support cut-rate or single-scene claims.
 
 ## 3. Audio / prosodic features — _Adam, spec 2026-08-14 (`additional_features.md` §2), implemented 2026-08-18 (`audio_features.json`)_
 

@@ -1,0 +1,45 @@
+{
+  "n_videos": 1860,
+  "n_unknown_format": 5,
+  "cct": {
+    "visual_files": 1860,
+    "versions": {
+      "3": 1860
+    },
+    "methods": {
+      "nearest_planckian_locus_cie1960uv_1pct_lut": 1860
+    },
+    "valid_thumbnail_cct": 1854,
+    "valid_frame_cct": 36652,
+    "total_frames": 37200,
+    "frame_cct_valid_pct": 98.52688172043011
+  },
+  "thumbnail_format_auc": {
+    "raw_brightness_direction_free": 0.9252867132867133,
+    "heuristic_crop_brightness_direction_free": 0.5586013986013986
+  },
+  "scope": "descriptive only; target label was dropped before analysis and never inspected",
+  "selected_for_eda": [
+    "duration by category and format",
+    "CCT with validity coverage",
+    "brightness/saturation/contrast",
+    "face presence and conditional geometry",
+    "pause diagnostics",
+    "whole-track acoustic level and variability",
+    "edited transcript word density",
+    "mean frame-sampling interval"
+  ],
+  "not_selected": {
+    "music amount": "caption tags and VAD do not quantify music reliably",
+    "cutting pace": "20 sparse frames miss cuts and confound change with sample spacing",
+    "single-scene": "zero threshold crossings among sparse frames does not establish one scene",
+    "audio quality score": "eGeMAPS describes mixed speech/music/ambience, not recording quality",
+    "label association scans": "feature selection on the full dataset would contaminate evaluation; use training data only"
+  },
+  "known_measurement_limits": {
+    "pauses": "VAD can classify music as voice; interpret as VAD silence, especially for Shorts",
+    "speaking_rate": "cleaned transcript words per video minute; edited speech density, not articulation rate",
+    "thumbnail_crop": "column-variance heuristic, not a verified pillarbox detector",
+    "faces": "OpenCV Haar detections, not identity, gaze, or composition ground truth"
+  }
+}

@@ -1,165 +1,96 @@
-# Descriptive feature EDA — what every modality actually contains
+# Descriptive feature EDA
 
-_Emmanuel, 2026-09-01. Companion to `eda.md`, which decided the label. This one profiles the
-features themselves: what they measure, how Shorts and regular video differ, and which are broken.
-Six modalities analysed, every serious finding independently re-derived before being written down;
-corrections that survived that pass are noted inline._
+_Emmanuel, 2026-09-01. Reproducible with `eda_features.py`; generated tables,
+figures and machine-readable decisions live in `02_Data/eda_features/`._
 
-## The one-sentence version
+This EDA asks what the measured modalities contain before asking whether they
+predict the target. The script drops the adapter's label column before analysis
+and never inspects it. That separation matters:
+using the full labelled dataset to choose features would leak validation/test
+information into the design. Any later outcome association analysis must use
+training data only after the channel-grouped split is frozen.
 
-Six of the features we ship measure something other than their name, and the cause is almost always
-the same: **video format leaks into everything**. The fixes are in `derived_features.py`.
+## What we added
 
----
+The checked-in tables report both formats separately and then category × format.
+They use medians and interquartile ranges for skewed quantities; CCT also gets a
+mean because an average was explicitly requested.
 
-## 1. What was broken, and what fixed it
+- Dataset composition: sample size, duration, views, subscribers, collection
+  age, transcript usability and audio coverage.
+- Visual profile: thumbnail/frame CCT and coverage, raw and heuristic-cropped
+  brightness, saturation, contrast, face presence, face count/area/centrality
+  conditional on a detected face, and frame face ratio.
+- Audio and speech profile: VAD pause ratio, pauses per minute, mean detected
+  pause, equivalent sound level, loudness level/variability, and cleaned
+  transcript words per video minute.
+- Sampling audit: the mean frame-gap proxy remains available because 20 frames
+  represent videos ranging from seconds to hours.
 
-| Feature | What it actually measured | Fix | Evidence |
-|---|---|---|---|
-| `vis__thumb_brightness` | whether the video is a Short | crop to the content region | format AUC **0.925 → 0.559**; sign reversal eliminated |
-| `aud__egemaps__VoicedSegmentsPerSec` | duration (a saturated counter) | drop it | ρ = **−0.975** with duration inside regular video |
-| `meta__title_length` | how many hashtags the title has | strip hashtags first | Shorts 71 chars raw → **31** stripped; ordering inverts |
-| `pause_*` (4 fields) | nothing, on 65% of Shorts | restrict to regular video | 65.1% of Shorts have `pause_count` exactly 0 |
-| `frames_std_cct` | partly the frame sampling interval | expose interval as a covariate | ρ ≈ +0.21…+0.24 with interval |
-| — (missing) | single-scene video was unmeasurable | new `is_single_scene` flag | 10.8% of the collection |
+The format split is essential. Median duration is 843 s for regular videos and
+37 s for Shorts. Raw thumbnail brightness is 144 versus 80 and predicts format
+at direction-free AUC 0.925; after the heuristic content crop it is 145 versus
+152 and the format AUC falls to 0.559. This supports using crop brightness as a
+candidate, but the crop flag itself is not a verified pillarbox detector: the
+heuristic also crops 45.2% of regular thumbnails.
 
-### The thumbnail fix is the important one
+CCT v3 is now complete and well covered. All 1,860 visual files use
+`nearest_planckian_locus_cie1960uv_1pct_lut`; thumbnail CCT is present for
+1,854 videos and 36,652/37,200 frames (98.53%) yield valid CCT. Median thumbnail
+CCT is 5,312 K for regular and 5,453 K for Shorts; median frame CCT is 5,762 K
+and 5,603 K respectively. The manifest now distinguishes all 1,860 files
+conforming to the frozen policy from 1,852 rows with the complete model-ready
+thumbnail/frame aggregate triplet; 172 videos have at least one missing CCT
+measurement (usually only part of their 20-frame sequence). These are
+descriptive associations, not advice to make a video warmer or cooler.
 
-**91.4% of Shorts thumbnails are pillarboxed** — a vertical frame dropped into a 16:9 box with
-blurred, darkened bars either side. Those bars are most of the image, so `vis__thumb_brightness`
-measures padding:
+The audio table must be read as whole-track acoustics, not “audio quality.”
+Shorts are about 4.7 dB higher in median equivalent level and have lower
+loudness variability. Their median detected pause ratio and pauses/minute are
+both zero; 64.7% have zero detected pauses versus 3.1% of regular videos. This
+can reflect editing, continuous speech, music being classified as voice, or a
+combination. The pause fields are therefore VAD-silence diagnostics, especially
+weak for Shorts—not literal ground-truth human pauses.
 
-|  | raw brightness | content-crop brightness |
+Cleaned transcript density is 151 words/minute for regular videos and 190 for
+Shorts. It measures words retained in the final edited video, not a speaker's
+physical articulation rate. Coverage also differs sharply (92.4% regular,
+60.2% Shorts), partly because transcript usability uses an absolute 50-word
+floor.
+
+## Features that needed correction or qualification
+
+| Existing/proposed field | Decision | Reason |
 |---|---|---|
-| regular | 144.3 | 145.1 |
-| Shorts | **80.3** | **151.8** |
-| AUC predicting format | **0.925** | **0.559** |
+| raw thumbnail brightness | keep for audit; prefer crop candidate | strong format proxy caused by thumbnail composition/padding |
+| heuristic crop flag | diagnostic only | crops many ordinary thumbnails; not geometry ground truth |
+| `VoicedSegmentsPerSec` and segment-length fields | exclude or mask in a later registry change | the openSMILE segment buffer saturates near 1,000 segments on long videos; `VoicedSegmentsPerSec` has within-regular ρ ≈ −0.975 with duration |
+| raw title length | pair with hashtag-stripped length | hashtags reverse the Shorts/regular ordering |
+| transcript words/minute | keep as edited-speech-density interpretation | cleaned text and editing density, not articulation |
+| pause fields | keep as descriptive diagnostics with coverage/masks | VAD confounds music and speech; zero is especially common for Shorts |
+| mean frame interval | keep as sampling diagnostic/covariate | fixed 20-frame budget gives very different temporal coverage |
 
-A 64-point gap collapses to 7. And it removes a genuine sign reversal:
+## What we deliberately did not add
 
-| | pooled | regular | Shorts |
-|---|---|---|---|
-| raw | **−0.036** | +0.124 | +0.112 |
-| content-crop | **+0.122** | +0.103 | +0.105 |
+- **Music amount:** caption tags and VAD cannot quantify music reliably.
+- **Cut rate/editing pace:** 20 sparse frames miss almost all cuts; dividing
+  frame differences by time reconstructs roughly `1/duration` rather than a
+  stable editing rate.
+- **Single-scene labels:** no threshold crossing among 20 sparse frames cannot
+  prove a video used one scene. The old `is_single_scene` proposal was removed.
+- **One audio-quality score:** eGeMAPS values describe a mixed track containing
+  speech, music and ambience; they do not grade microphone or mastering quality.
+- **Full-dataset label correlations:** the earlier “none predicts the label”
+  scan is exploratory only and is not used for feature selection or a reported
+  confirmatory result.
 
-Raw, the pooled number says *darker thumbnails perform better* — false in both subgroups, and
-actively harmful as advice. Cropped, pooled agrees with both strata.
+`motion_features.py` remains as a negative-result audit so the shot-rate idea is
+not repeatedly rediscovered. Its outputs are not registered as model inputs.
 
-This matters beyond one column: an attribution layer surfacing raw brightness would tell a creator
-to *"brighten your thumbnail"* when the model has actually learned *"this is a Short"*.
-
-### `VoicedSegmentsPerSec` is a capped counter
-
-It saturates at exactly 1,000 voiced segments. For the median regular video,
-`VoicedSegmentsPerSec × duration = 1000.008`; 75.1% of regular videos sit in [998, 1002] and
-capping begins at 278 s. Inside regular video it correlates **−0.975** with duration. It is a
-duration proxy dressed as prosody, and duration is already a label confound. The four
-segment-length features come off the same buffer, so for capped videos they describe only the
-first ~5 minutes.
-
----
-
-## 2. Shorts and regular video are two different populations
-
-Almost every pooled statistic in this dataset is a mixture of two distributions. Some highlights,
-all with the format split that makes them meaningful:
-
-**Duration** is a disguised format flag: ρ(duration, `is_short`) = **−0.849**. A pooled
-per-category duration median describes almost no real video, and the category ordering is
-*different* in each format — product_reviews is second-longest among Shorts but last among regular.
-
-**Audio** differs by mastering, not by delivery. Shorts are **4.6 dB louder** with about a third
-less dynamic range (loudness `stddevNorm` 0.555 vs 0.669). Pitch *level* differs but pitch *range*
-does not (p = 0.056) — so the honest phrasing is "Shorts are louder and flatter", not "Shorts
-presenters are more energetic".
-
-**Speaking rate** (new feature): 163 wpm overall, but **151 wpm regular vs 190 Shorts**, and 224 for
-vlogs Shorts where 55% exceed 220 wpm. Regular video sits squarely in the normal human 120–160
-band. The Shorts excess is not a measurement error — it is jump-cut editing removing the silence
-between sentences, so on a Short this measures **edited speech density**, not articulation rate.
-
-**Pauses do not exist on Shorts.** 65.1% have `pause_count` exactly 0, versus 3.3% of regular
-video, and duration does not explain it: duration-matched regular videos under 180 s zero out only
-16.9% of the time. Two causes, both real — jump cuts remove the silence, and the VAD scores music
-as speech (274 videos report zero silence anywhere while having no usable transcript). The pause
-fields are only measurements on regular video.
-
-**Language is confounded with format**: Shorts are 50.4% English against 78.1% for regular.
-
-**Text volume differs 15.6×.** A text encoder sees a median 1,919 words for a regular video and far
-fewer for a Short; 41.7% of Shorts are mostly hashtags, and a quarter of Shorts transcripts are
-unusable. Transcript availability itself is an artefact: the 50-word floor is absolute, so within
-Shorts it correlates **+0.58** with duration — it measures length, not quality.
-
----
-
-## 3. Things that turned out not to be measurable
-
-Recorded because they cost real time and someone will otherwise try again.
-
-**Cutting pace cannot be recovered from 20 frames.** The plan was to count shot changes by
-thresholding consecutive-frame differences. Calibration killed it: the mean consecutive difference
-has median 43.9 on a 0–255 scale, so a "large" difference is the *normal* case — at a threshold of
-25, 83% of videos exceed it on average. The frames are seconds to minutes apart, so nearly every
-consecutive pair already straddles several cuts. Real cut detection needs ~1 fps, which means
-re-downloading every video.
-
-What survives is the **zero-scene-change flag**: 200 videos (10.8%) whose 20 frames contain no
-large jump at all — locked-camera stand-up, one-angle tutorials, held photo cards. Concentrated in
-howto Shorts (29.7%). Spot-checked by eye and every sampled case was genuinely single-take.
-
-**Time-normalising frame differences does not work either.** Dividing by the elapsed gap gives a
-quantity correlating **−0.829** with duration — very nearly `1/duration`. Frame difference
-*saturates*: two unrelated frames differ by roughly a fixed ceiling however far apart they are, so
-dividing by a growing gap just reconstructs duration. `visual_diversity` itself is mildly
-duration-confounded (+0.20 pooled, +0.39 within Shorts) and needs conditioning before use.
-
----
-
-## 4. The honest headline: none of it predicts the label
-
-Across all six modalities, after conditioning on the label cells, **nothing reaches a useful
-effect size**. Speech and pause features land at AUC 0.477–0.523 pooled and stay there within
-cells. No visual feature separates the label within cells. Text is inert once conditioned
-(nothing exceeds |AUC − 0.5| = 0.043). The strongest surviving text signal is `#shorts` in the
-title — which is a format detector, not content.
-
-Two ways to read that, and the report should give both:
-
-1. **The label design is working.** These features were *supposed* to lose their apparent power,
-   because most of it was format, channel size and age. The engineered blocks scoring at chance is
-   the same result as the visual-only baseline sitting at 0.504.
-2. **Engineered features may simply be too coarse.** Fifteen numbers cannot capture what makes a
-   thumbnail compelling. This is the case *for* the deep model rather than against it — and it also
-   means the deep model has a real bar to clear rather than an easy win.
-
-The metadata baseline sits around **AUC 0.56–0.61** and that is the number to beat.
-
----
-
-## 5. What this changes
-
-**Implemented** in `derived_features.py` (all 1,860 videos, `processed/derived_features.csv`):
-content-crop thumbnail statistics, hashtag-stripped title length, speaking rate, single-scene flag,
-frame sampling interval.
-
-**Recommended for the feature registry**, not yet applied:
-
-- drop `aud__egemaps__VoicedSegmentsPerSec` and the four segment-length features, or mask them
-  above 278 s
-- replace `vis__thumb_brightness` with `thumb_crop_brightness`
-- replace `meta__title_length` with `title_chars_nohash`, and expose `title_has_shorts_tag`
-  separately as the format tell it is
-- restrict the pause block to regular video, or add an explicit `pause_measurable` mask
-- pass `frame_interval_sec` to the temporal branch as a covariate
-
-**For the report**: never print a pooled per-category duration; report Shorts and regular
-separately everywhere; and disclose that a 12,002-second video and a 4-second Short are both
-represented by 20 frames.
-
-## Reproducing
+## Reproduce
 
 ```bash
-.venv/bin/python 02_Data/derived_features.py     # the fixes -> processed/derived_features.csv
-.venv/bin/python 02_Data/motion_features.py      # frame-change statistics
+.venv/bin/python 02_Data/derived_features.py
+.venv/bin/python 02_Data/motion_features.py
+.venv/bin/python 02_Data/eda_features.py
 ```

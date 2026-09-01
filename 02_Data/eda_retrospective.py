@@ -67,7 +67,8 @@ def load(data_dir: str = DATA_DIR) -> pd.DataFrame:
     man = pd.read_csv(os.path.join(data_dir, "cleaning_manifest.csv"))
     keep = ["video_id", "age_days_at_collection", "duration_sec", "transcript_kind",
             "transcript_usable", "transcript_words", "no_speech", "audio_present",
-            "thumb_subhd", "frames_portrait", "vis_cct_valid", "lang_declared"]
+            "thumb_subhd", "frames_portrait", "vis_cct_valid",
+            "vis_cct_policy_valid", "vis_cct_any_missing", "lang_declared"]
     d = df.merge(man[keep], on="video_id", how="left")
     d["age_days"] = pd.to_numeric(d.age_days_at_collection, errors="coerce")
     d["log_views"] = np.log1p(d.view_count)
@@ -285,8 +286,8 @@ def label_leakage_stratified(d: pd.DataFrame, n_age_bands: int, n_size_bands: in
                              min_age: Optional[float] = None,
                              seed: int = 0) -> Optional[dict[str, Any]]:
     """Same, but with is_short as a THIRD stratifier dimension. Shorts and
-    regular videos are two populations (every Short here is <=180s, and 96% of
-    Shorts thumbnails are pillarboxed), so sharing a quartile cell hands Shorts
+    regular videos are two populations (every Short here is <=180s, and raw
+    thumbnail brightness strongly separates format), so sharing a quartile cell hands Shorts
     a ~2x prior on the viral label -- which the vision branch can then read
     straight off the frame geometry without learning anything about content.
 
@@ -349,7 +350,7 @@ def format_leakage(d: pd.DataFrame) -> dict[str, Any]:
     frames_portrait_matches_is_short and the duration_180s_rule recall and
     precision are fractions in [0, 1]; the spearman_* entries are rank
     correlations in [-1, 1], and two are strongly NEGATIVE on the current data
-    (thumb_brightness -0.736 -- Shorts thumbnails are pillarboxed and dark --
+    (thumb_brightness -0.736 -- raw thumbnail composition strongly encodes format --
     and thumb_saturation -0.145), so a reader assuming [0, 1] would misread the
     second-strongest format tell as near-zero. max_duration_of_a_short_sec is
     SECONDS and is a property of THIS collection rather than a rule:

@@ -1,21 +1,21 @@
 """
-Temporal-dynamics features from the stored frames: how much the picture
-actually changes over a video.
+Temporal-dynamics diagnostics from the stored frames: how much the picture
+appears to change across the 20 sparse samples.
 
 Nothing in the collected feature set measures this. `visual_features.json`
 describes each frame's appearance (brightness, colour, faces) and averages it,
 which cannot distinguish a fast-cut montage from a locked-off talking head with
-the same average brightness. Cutting pace is exactly the kind of thing the
-explanation layer is supposed to be able to talk about.
+the same average brightness. These frames cannot recover cutting pace because
+most cuts occur between samples.
 
 THE TRAP THIS MODULE EXISTS TO AVOID. The 20 frames are deliberately NOT evenly
 spaced: 12 land inside the first 60 s and 8 cover the rest (see
 compute_frame_timestamps). So a raw difference between consecutive frames is a
 difference over 5 seconds early in a long video and over several minutes later
 in it. Comparing those numbers, or averaging them, measures the sampling
-schedule as much as the content. Every rate here is therefore reported BOTH raw
-and normalised by the real elapsed time between the two frames, and the
-normalised version is the one to use across videos of different lengths.
+schedule as much as the content. Raw and time-normalised diagnostics are kept
+to document that failure; neither is approved as a cross-video editing-rate
+feature.
 
 Difference metric: mean absolute difference of 64x64 greyscale frames, 0-255.
 Downsampling is deliberate -- at full resolution the measure is dominated by
@@ -78,8 +78,8 @@ STATIC_MAD = 5.0        # below this a video is visually near-frozen
 #       4-180 s and therefore changes the frame spacing a lot. Usable, but
 #       condition on duration and format before drawing any conclusion from it.
 #
-# What survives cleanly is the STATIC flag: a video whose 20 frames barely
-# differ is a slideshow or a locked-off camera regardless of its length.
+# `is_static` means only "low change across the sparse samples". It is retained
+# for auditing, not registered as a model feature or equated with one scene.
 
 
 def _frame_array(path: str, np: Any) -> Optional[Any]:
@@ -125,9 +125,7 @@ def video_motion(video_dir: str, duration: Optional[float]) -> Optional[dict[str
         "mad_consecutive_mean": statistics.fmean(consecutive),
         "mad_consecutive_max": max(consecutive),
         "mad_allpairs_mean": statistics.fmean(allpairs),
-        # scale-free: how varied the video is overall, 0 = every frame identical
-        "visual_diversity": statistics.fmean(allpairs),
-        # time-normalised: THE cross-video comparable rate (MAD per second)
+        # time-normalised diagnostic; DO NOT interpret as editing rate
         "mad_per_second_mean": statistics.fmean(per_sec) if per_sec else None,
         "mad_per_second_max": max(per_sec) if per_sec else None,
         "is_static": statistics.fmean(allpairs) < STATIC_MAD,
@@ -163,7 +161,7 @@ def main() -> None:
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--calibrate", action="store_true",
                     help="print the consecutive-difference distribution and exit, "
-                         "so CUT_MAD can be justified from data rather than asserted")
+                         "documenting why shot-change thresholding was rejected")
     args = ap.parse_args()
 
     todo = _rows(args.data_dir, args.limit)
@@ -191,19 +189,20 @@ def main() -> None:
 
     if not results:
         sys.exit("no videos produced motion features")
+    results.sort(key=lambda r: (r["category"], r["video_id"]))
     fields = list(results[0])
     with open(args.out, "w", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=fields)
+        w = csv.DictWriter(f, fieldnames=fields, lineterminator="\n")
         w.writeheader()
         w.writerows(results)
 
-    div = sorted(r["visual_diversity"] for r in results)
+    div = sorted(r["mad_allpairs_mean"] for r in results)
     static = sum(1 for r in results if r["is_static"])
 
     print(f"\n{len(results)} videos processed")
-    print(f"  visual_diversity  median {div[len(div)//2]:.1f}  "
+    print(f"  all-pairs MAD     median {div[len(div)//2]:.1f}  "
           f"p10 {div[len(div)//10]:.1f}  p90 {div[9*len(div)//10]:.1f}")
-    print(f"  static videos (diversity < 5): {static} ({static/len(results):.1%})")
+    print(f"  low-change samples (all-pairs MAD < 5): {static} ({static/len(results):.1%})")
     print("  (shot-change counting is deliberately NOT reported -- see STATIC_MAD note)")
     print(f"wrote {args.out}")
 

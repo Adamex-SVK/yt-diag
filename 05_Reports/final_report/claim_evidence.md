@@ -35,8 +35,9 @@ Regenerate the baseline table (never retype it):
 | Old CCT reached 5.0×10⁹ K, 27 negative | confirmed | pre-fix values; `KNOWN_ISSUES.md` §6 | Data |
 | Corrected CCT (v3): nearest-Planckian-locus, 1% LUT, signed Duv | confirmed | `cd 02_Data && ../.venv/bin/python tests/test_cct.py` | Experiment |
 | v3 recovers locus reference points exactly where McCamy drifts (25,000 K: 25,000 vs 19,504) | confirmed | `_nearest_planckian_cct_duv_uv` vs McCamy, see CHANGELOG | Experiment |
-| v3 distribution 2,553–25,000 K, median 5,678; all 1,860 files `cct_version=3` | confirmed | `.venv/bin/python 02_Data/recompute_cct.py --dry-run` | Experiment |
-| v3 changed baselines only within seed noise | confirmed | `results/baselines.json` (`cct_version` recorded) | Experiment |
+| v3 frame-mean distribution 2,553–15,679 K, median 5,666; all 1,860 files carry the same v3 method | confirmed | `.venv/bin/python 02_Data/recompute_cct.py --dry-run`; `eda_features_stats.json` | Experiment |
+| v3 coverage: 1,854/1,860 thumbnails and 36,652/37,200 frames valid | confirmed | `02_Data/eda_features/eda_features_stats.json` | Experiment |
+| v3 visual/full baselines use five channel-grouped validation splits; test untouched | confirmed | `results/baselines.json` (`cct_version` recorded) | Experiment |
 | Pure green would report 6069 K without the Duv gate | confirmed | notebook §4 | Data |
 
 ## Target and label
@@ -62,7 +63,7 @@ Regenerate the baseline table (never retype it):
 | Claim | Status | Reproduce with | In report |
 |---|---|---|---|
 | `frames_portrait` recovers `is_short` for 99.0% | confirmed | `eda_stats.json → format_leakage`; notebook §6 | Method |
-| 96.3% of Shorts thumbnails are pillarboxed | confirmed | `eda.md` §4 | Method |
+| Raw thumbnail brightness predicts format at direction-free AUC 0.925; heuristic content crop reduces it to 0.559 | confirmed | `02_Data/eda_features/eda_features_stats.json` | Method |
 | Channel features alone: AUC 0.644 under random folds | confirmed | notebook §7 | Method |
 | No channel spans splits (asserted at runtime) | confirmed | `ytdiag/split.py`; notebook §7 | Method |
 | ~6–7 positives per category per test split | confirmed | `eda.md` §5 | Method (limitation) |

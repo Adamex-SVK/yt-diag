@@ -70,12 +70,14 @@ consistent with it — fixing one means fixing both.
 were normalised RGB fractions rather than CIE chromaticity; McCamy's denominator `(0.1858 − y)`
 then approached zero for green-deficient images, producing values to 5.0 × 10⁹ K and negative
 Kelvin. Replaced with a correct implementation (`correlated_color_temp` in `collect_and_extract.py`)
-that gamma-decodes sRGB, applies the D65 matrix, averages in **linear light**, and gates on
-**Duv ≤ 0.05** — because a temperature only describes a colour that is actually near the Planckian
-locus. All 39,060 images were recomputed in place by `02_Data/recompute_cct.py`, and
-`02_Data/tests/test_cct.py` pins the result to known references (D65 white = 6503.5 K against a
-textbook 6504). This was **not** cosmetic: correcting it moved the full-feature XGBoost baseline
-from 0.628 to 0.642 on seed 0.
+that gamma-decodes sRGB, applies the D65 matrix, averages in **linear light**, and projects CIE
+1960 UCS chromaticity to the nearest segment of a 1%-resolution Planckian-locus table. It rejects
+colours with **|Duv| > 0.05** and projections beyond the supported 1,667–25,000 K endpoints rather
+than clipping them to plausible-looking boundary values. All 39,060 images were recomputed in
+place by `02_Data/recompute_cct.py`; 1,854/1,860 thumbnails and 36,652/37,200 frames are valid.
+`02_Data/tests/test_cct.py` pins D65 white at 6500.6 K (reference ≈6504), checks signed Duv and
+tests both endpoint rejections. Seed-0 visual/full baselines and the five-seed table were rerun
+after recomputation; use the saved v3 results rather than the earlier intermediate comparison.
 
 ---
 
