@@ -107,6 +107,12 @@ command that reproduces it.
 .venv/bin/python -m jupyter lab notebooks/00_project_walkthrough.ipynb
 ```
 
+The notebook's first cell **bootstraps any Python environment**: it locates the repo by
+walking up from wherever it is opened, installs whatever is missing into that kernel
+(not a different interpreter), and says plainly if the Git-LFS images are still pointer
+files. Verified from an empty venv on a different Python version — so a teammate or
+grader needs only the clone.
+
 `notebooks/00_project_walkthrough.ipynb` runs the whole pipeline on real data and lets you
 **check the claims** in `02_Data/eda.md` yourself: the transcript repetition, the frame
 sampling, the colour-temperature fix, the Shorts confound, the channel-split leak and the
