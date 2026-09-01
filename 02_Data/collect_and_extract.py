@@ -661,18 +661,17 @@ def extract_frames(video_path: str, frames_dir: str, frame_count: int) -> list[s
 # temperature, brightness/saturation/contrast, face presence/area.
 # ---------------------------------------------------------------------------
 
-# Correlated colour temperature is only meaningful near the Planckian locus,
-# and McCamy's cubic is fitted over roughly this range. Outside it the number
-# is an extrapolation of a curve fit, not a temperature -- so return None
-# rather than a value a model would happily treat as real.
-CCT_VALID_K = (1500.0, 25000.0)
+# Correlated colour temperature is only meaningful near the Planckian locus.
+# The locus approximation below is valid over exactly this range; keeping one
+# shared bound prevents the old 1500-vs-1667 K mismatch.
+CCT_VALID_K = (1667.0, 25000.0)
+CCT_VERSION = 3
+CCT_METHOD = "nearest_planckian_locus_cie1960uv_1pct_lut"
 
-# Correlated colour temperature is the temperature of the blackbody whose
-# colour is CLOSEST to the sample -- which is only a meaningful description if
-# the sample is actually near that locus. Duv is that distance in CIE 1960 UCS.
-# Saturated colours sit far off it: pure green returns "6069 K" from McCamy's
-# cubic alone, which would tell a model that a green-screen frame is daylight.
-# CIE 15:2004 treats CCT as undefined beyond |Duv| = 0.05.
+# CCT is the temperature at the closest point on the Planckian locus in CIE
+# 1960 UCS. Duv is the signed distance to that closest point. Saturated colours
+# sit far off the locus, so reject them instead of assigning plausible-looking
+# temperatures to colours (such as green) that no blackbody produces.
 MAX_DUV = 0.05
 
 # sRGB (IEC 61966-2-1) linear-RGB -> CIE XYZ, D65 white point.
@@ -691,9 +690,9 @@ def srgb_to_linear(c: float) -> float:
 
 
 def _planckian_xy(temp_k: float) -> "tuple[float, float]":
-    """Approximate CIE 1931 xy of a blackbody at temp_k (Kim et al. cubics,
+    """Approximate CIE 1931 xy of a blackbody at temp_k (Kang et al. cubics,
     valid 1667-25000 K) -- used only to measure how far a colour sits from the
-    locus, not to compute the temperature itself."""
+    locus and interpolate the nearest temperature."""
     t = temp_k
     if t <= 4000.0:
         x = (-0.2661239e9 / t ** 3 - 0.2343589e6 / t ** 2
@@ -718,19 +717,67 @@ def _uv_1960(x: float, y: float) -> "tuple[float, float]":
     return 4.0 * x / d, 6.0 * y / d
 
 
-def correlated_color_temp(mean_linear_rgb: "tuple[float, float, float]") -> "Optional[float]":
-    """Correlated colour temperature in KELVIN via McCamy's approximation, or
-    None when the result falls outside CCT_VALID_K or the colour is black.
+_planckian_lut_cache = None
+
+
+def _planckian_lut() -> "list[tuple[float, float, float]]":
+    """Planckian-locus (K, u, v) table with no step wider than 1% in K.
+
+    Projecting onto its line segments finds the closest locus point rather
+    than assuming an approximate CCT first and measuring distance only there.
+    The table is built once and needs no optional colour-science dependency,
+    so collection and modelling machines execute the identical method.
+    """
+    global _planckian_lut_cache
+    if _planckian_lut_cache is None:
+        lo, hi = CCT_VALID_K
+        temperatures = [lo]
+        while temperatures[-1] < hi:
+            temperatures.append(min(hi, temperatures[-1] * 1.01))
+        _planckian_lut_cache = [
+            (temp, *_uv_1960(*_planckian_xy(temp))) for temp in temperatures
+        ]
+    return _planckian_lut_cache
+
+
+def _nearest_planckian_cct_duv_uv(u: float, v: float) -> "tuple[float, float]":
+    """Return (CCT, signed Duv) at the closest point on the locus polyline.
+
+    Positive Duv is above the Planckian locus and negative is below it. CCT is
+    interpolated in reciprocal temperature, as in Robertson-style tables.
+    """
+    best = None
+    locus = _planckian_lut()
+    for (t0, u0, v0), (t1, u1, v1) in zip(locus, locus[1:]):
+        du, dv = u1 - u0, v1 - v0
+        length2 = du * du + dv * dv
+        alpha = ((u - u0) * du + (v - v0) * dv) / length2
+        alpha = min(1.0, max(0.0, alpha))
+        qu, qv = u0 + alpha * du, v0 + alpha * dv
+        ru, rv = u - qu, v - qv
+        distance2 = ru * ru + rv * rv
+        if best is None or distance2 < best[0]:
+            reciprocal_t = (1.0 - alpha) / t0 + alpha / t1
+            cct = 1.0 / reciprocal_t
+            # The LUT runs warm-to-cool (u decreases); its right-hand normal
+            # points above the locus, which is the positive-Duv convention.
+            cross = du * rv - dv * ru
+            sign = 1.0 if cross <= 0.0 else -1.0
+            best = (distance2, cct, sign)
+    assert best is not None
+    return best[1], best[2] * best[0] ** 0.5
+
+
+def correlated_color_temp_and_duv(
+    mean_linear_rgb: "tuple[float, float, float]",
+) -> "Optional[tuple[float, float]]":
+    """Nearest-locus (CCT in kelvin, signed Duv), or None for black.
 
     Takes LINEAR RGB in 0-1 (see srgb_to_linear), averaged in linear space --
-    not the mean of gamma-encoded pixel values.
-
-    Fixed 2026-09-01. The original set X=r, Y=g, Z=b, skipping the sRGB->XYZ
-    matrix entirely, so x and y were normalised RGB fractions rather than CIE
-    chromaticity. McCamy's denominator (0.1858 - y) then hit zero for
-    green-deficient images: 83 of the 1,860 collected videos carried CCT values
-    up to 5.0e9, and 27 were negative Kelvin. See KNOWN_ISSUES.md and
-    02_Data/recompute_cct.py, which backfills the corrected values."""
+    not the mean of gamma-encoded pixel values. Version 3 replaces McCamy's
+    increasingly biased high-temperature cubic and its approximate distance
+    check with a direct closest-point search on the Planckian locus.
+    """
     r, g, b = mean_linear_rgb
     X = _SRGB_TO_XYZ[0][0] * r + _SRGB_TO_XYZ[0][1] * g + _SRGB_TO_XYZ[0][2] * b
     Y = _SRGB_TO_XYZ[1][0] * r + _SRGB_TO_XYZ[1][1] * g + _SRGB_TO_XYZ[1][2] * b
@@ -740,18 +787,27 @@ def correlated_color_temp(mean_linear_rgb: "tuple[float, float, float]") -> "Opt
         return None  # pure black: no chromaticity to speak of
     x = X / denom
     y = Y / denom
-    if abs(0.1858 - y) < 1e-6:
-        return None  # exactly on the singularity of the fit
-    n = (x - 0.3320) / (0.1858 - y)
-    cct = 449 * n ** 3 + 3525 * n ** 2 + 6823.3 * n + 5520.33
-    if not CCT_VALID_K[0] <= cct <= CCT_VALID_K[1]:
-        return None
-    # ...and the temperature only describes the colour if the colour is near
-    # the blackbody locus in the first place.
     u, v = _uv_1960(x, y)
-    pu, pv = _uv_1960(*_planckian_xy(cct))
-    duv = ((u - pu) ** 2 + (v - pv) ** 2) ** 0.5
-    return cct if duv <= MAX_DUV else None
+    if not math.isfinite(u) or not math.isfinite(v):
+        return None
+    return _nearest_planckian_cct_duv_uv(u, v)
+
+
+def correlated_color_temp(mean_linear_rgb: "tuple[float, float, float]") -> "Optional[float]":
+    """CCT in kelvin, or None when black or farther than MAX_DUV from the locus."""
+    result = correlated_color_temp_and_duv(mean_linear_rgb)
+    if result is None:
+        return None
+    cct, duv = result
+    return cct if abs(duv) <= MAX_DUV else None
+
+
+def population_std(values: "list[float]") -> "Optional[float]":
+    """Population standard deviation shared by collection and recomputation."""
+    if not values:
+        return None
+    mean = sum(values) / len(values)
+    return (sum((value - mean) ** 2 for value in values) / len(values)) ** 0.5
 
 
 def _face_detector():
