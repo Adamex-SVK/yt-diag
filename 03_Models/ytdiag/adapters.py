@@ -20,11 +20,14 @@ config decides what to use, the adapter never pretends.
       made in response to performance would leak into upload-time inputs.
       Edit counts are exposed separately as track__* columns.
 """
+from __future__ import annotations
+
 import csv
 import datetime
 import json
 import math
 import os
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -32,7 +35,7 @@ import pandas as pd
 from .features import VIS_FRAMES, VIS_THUMB, AUD_PAUSES
 
 
-def _schedule_features(published_at_utc):
+def _schedule_features(published_at_utc: Any) -> dict[str, float]:
     """sched__* from a full UTC timestamp (FEATURES.md 6). NaN if unknown."""
     if not isinstance(published_at_utc, str) or not published_at_utc:  # None / float NaN from pandas
         return {"sched__hour_sin": np.nan, "sched__hour_cos": np.nan,
@@ -43,7 +46,7 @@ def _schedule_features(published_at_utc):
             "sched__weekday": dt.weekday(), "sched__is_weekend": int(dt.weekday() >= 5)}
 
 
-def _channel_features(published_at_utc, channel_created_at, channel_video_count):
+def _channel_features(published_at_utc: Any, channel_created_at: Any, channel_video_count: Any) -> dict[str, float]:
     """meta__channel_age_days / meta__channel_video_count / meta__is_first_upload.
     Prospective: video count at FIRST observation (near-publish). Retrospective:
     CURRENT count from the backfill (post-outcome, coarse) -- disclose."""
@@ -63,7 +66,7 @@ def _channel_features(published_at_utc, channel_created_at, channel_video_count)
             "meta__is_first_upload": (int(count <= 1) if count == count else np.nan)}
 
 
-def _flag(v):
+def _flag(v: Any) -> float:
     """'true'/'false' strings (CSV written by the tracker) OR bools (pandas
     parses a pure true/false column as bool) -> 1/0; anything else NaN."""
     if isinstance(v, (bool, np.bool_)):
@@ -73,9 +76,11 @@ def _flag(v):
     return np.nan
 
 
-def _language(*candidates):
+def _language(*candidates: Any) -> Any:
     """First non-empty declared language, reduced to its primary subtag
-    ('en-US' -> 'en') so the one-hot doesn't fragment by region."""
+    ('en-US' -> 'en') so the one-hot doesn't fragment by region.
+    NaN (not a string) means nothing usable was declared -- absent, or only
+    the non-language codes below."""
     for v in candidates:
         if isinstance(v, str) and v.strip():
             base = v.strip().split("-")[0].lower()
@@ -85,14 +90,51 @@ def _language(*candidates):
     return np.nan
 
 
-def _read_json(path):
+def _read_json(path: str) -> Any:
+    """Parsed JSON, or None when the file does not exist. Every per-video
+    artifact except metadata.json is optional (a video may have no label yet,
+    no audio features, no backfill), so absence is normal and callers turn it
+    into NaN columns rather than dropping the row."""
     if not os.path.exists(path):
         return None
     with open(path, encoding="utf-8") as f:
         return json.load(f)
 
 
-def load_retrospective(processed_dir):
+def load_retrospective(processed_dir: str) -> pd.DataFrame:
+    """One row per collected video in Adam's `processed/<category>/<video_id>/`
+    tree, on the canonical table (features.py naming).
+
+    Only directories carrying the `.done` marker are read: collect_and_extract.py
+    writes it last, after the downloaded video and audio are deleted, so a
+    directory without it was interrupted mid-extraction and its visual/audio
+    JSONs may describe a partial download. A directory whose metadata.json is
+    missing or empty is skipped outright -- there is nothing to key a row on --
+    while a corrupt one raises, rather than quietly shrinking the dataset.
+
+    `label` is 1 (viral) / 0 (typical) from compute_labels_v2's label.json. NaN
+    means the video has NO v2 label -- either compute_labels_v2.py has not run,
+    or the video was excluded from the label cohort (younger than --min-age-days
+    at collection, missing dates/views, hidden subscriber count). NaN is not
+    "typical"; run_baselines drops those rows rather than treating them as the
+    negative class. `view_count` rides along for label diagnostics only, and
+    features.LABEL_ONLY keeps it out of any model input.
+
+    Everything sourced from metadata_extra.json -- sched__*, the channel
+    maturity columns, meta__language, meta__is_short, meta__caption_available --
+    is NaN until backfill_published_at.py has run, because metadata.json carries
+    a publish DATE with no time. Missing per-video JSONs likewise yield NaN
+    columns, never zeros: "not measured" and "measured as zero" have to stay
+    distinguishable (a thumbnail with no face really is face_count 0).
+
+    Two post-outcome columns to disclose rather than hide:
+    meta__channel_follower_count and meta__channel_video_count are CURRENT
+    values (collection time / backfill time), not values at upload time.
+
+    Column units and definitions: 02_Data/FEATURES.md. The prospective-only
+    columns (outcome_views, sampling_arm, track__*) do not exist here, so
+    concatenating the two tables leaves them NaN on these rows.
+    """
     rows = []
     for category in sorted(os.listdir(processed_dir)):
         cat_dir = os.path.join(processed_dir, category)
@@ -156,9 +198,10 @@ def load_retrospective(processed_dir):
     return pd.DataFrame(rows)
 
 
-def _interp_at(ages, values, horizon_h):
+def _interp_at(ages: np.ndarray, values: np.ndarray, horizon_h: float) -> float:
     """Linear interpolation of `values` at age=horizon_h from the bracketing
-    observations; NaN if the horizon is not yet bracketed (never extrapolate)."""
+    observations; NaN if the horizon is not yet bracketed (never extrapolate).
+    `ages` and `horizon_h` are hours since publish."""
     pairs = sorted((a, v) for a, v in zip(ages, values) if v == v)
     if not pairs or pairs[-1][0] < horizon_h:
         return np.nan
@@ -176,7 +219,47 @@ def _interp_at(ages, values, horizon_h):
 MIN_LABEL_GROUP = 8  # a within-category quartile over fewer main-arm videos is noise, not a label
 
 
-def load_prospective(tracking_dir, horizon_days=7):
+def load_prospective(tracking_dir: str, horizon_days: int = 7) -> pd.DataFrame:
+    """One row per cohort.csv video in Emmanuel's tracker directory, on the same
+    canonical table as load_retrospective.
+
+    `outcome_views` is the view count linearly interpolated at exactly
+    `horizon_days` * 24 hours of video age, from the two bracketing snapshots
+    with status "ok". NaN means the horizon is not bracketed yet -- the video is
+    younger than the horizon, or its snapshots do not span it -- never zero and
+    never extrapolated: an unknown outcome must not read as a bad one. 7 days is
+    the preliminary horizon; 30 is the primary one (FEATURES.md 6).
+
+    `label` is the within-category top quartile (floor(n/4), at least 1) of
+    `outcome_views` among MAIN-ARM videos (`sampling_arm == "date_window"`) that
+    reached the horizon. The comparison arms (short_form, non_english) are never
+    pooled into that quartile and never receive a label: they were admitted
+    under different rules, so their systematic differences would turn into label
+    proxies. A category with fewer than MIN_LABEL_GROUP eligible videos gets no
+    label rather than a forced "viral". A NaN label therefore means "not
+    labelable here", not "typical" -- it is a stand-in for the v2 stratified
+    label, not the same quantity.
+
+    Upload-time policy: title, description, tags and thumbnail come from the
+    FIRST "ok" observation, never the latest, because a creator who edits a
+    title after seeing the numbers would otherwise leak a post-publish reaction
+    into an upload-time input. Later edits survive only as counts
+    (track__title_changes, track__text_changes, track__thumbnail_changes = one
+    less than the stored versions, since the first capture is itself recorded as
+    a change; NaN when nothing was ever captured). Discovery can lag publication
+    by up to ~24h, so edits made before the first observation are invisible --
+    disclose that, do not model around it.
+
+    Channel columns come from the channel snapshot taken at/after the video's
+    first observation, so meta__channel_follower_count and
+    meta__channel_video_count are near-publish values here, unlike the
+    retrospective table's post-outcome ones.
+
+    This source has no audio, frames or transcript: aud__*/vis__* columns are
+    absent entirely, and asset__frames_dir / asset__transcript_path are None on
+    every row. Columns added to the tracker schema on 2026-08-27 are filled with
+    NaN for older files so both vintages load together.
+    """
     cohort = pd.read_csv(os.path.join(tracking_dir, "cohort.csv"))
     snaps = pd.read_csv(os.path.join(tracking_dir, "video_snapshots.csv"))
     chans = pd.read_csv(os.path.join(tracking_dir, "channel_snapshots.csv"))

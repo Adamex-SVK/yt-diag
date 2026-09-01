@@ -29,10 +29,13 @@ Usage:
     .venv/bin/python 02_Data/eda_retrospective.py                 # figures + stats
     .venv/bin/python 02_Data/eda_retrospective.py --no-figures    # stats only (fast)
 """
+from __future__ import annotations
+
 import argparse
 import json
 import os
 import sys
+from typing import Any, Optional
 
 import numpy as np
 import pandas as pd
@@ -50,10 +53,18 @@ CATEGORIES = ("comedy", "howto", "product_reviews", "vlogs")
 CONFOUNDS = ["meta__channel_follower_count", "age_days", "meta__duration_sec", "meta__is_short"]
 
 
-def load():
-    """Canonical table joined with the cleaning manifest's quality columns."""
-    df = load_retrospective(DATA_DIR)
-    man = pd.read_csv(os.path.join(DATA_DIR, "cleaning_manifest.csv"))
+def load(data_dir: str = DATA_DIR) -> pd.DataFrame:
+    """Canonical table joined with the cleaning manifest's quality columns.
+
+    Left join, so a video the manifest never saw keeps its canonical row with
+    NaN quality columns instead of vanishing from the counts. Two derived
+    columns are added: age_days (days between upload and collection, NaN where
+    the published_at backfill never landed for that video) and log_views =
+    log1p(view_count) -- views are power-law (pooled skew 24.4), so every
+    regression here is on the log scale.
+    """
+    df = load_retrospective(data_dir)
+    man = pd.read_csv(os.path.join(data_dir, "cleaning_manifest.csv"))
     keep = ["video_id", "age_days_at_collection", "duration_sec", "transcript_kind",
             "transcript_usable", "transcript_words", "no_speech", "audio_present",
             "thumb_subhd", "frames_portrait", "vis_cct_valid", "lang_declared"]
@@ -65,9 +76,17 @@ def load():
 
 # ----------------------------------------------------------- 1. shortcut ceiling
 
-def shortcut_ceiling(d, seed=0):
+def shortcut_ceiling(d: pd.DataFrame, seed: int = 0) -> dict[str, dict[str, Any]]:
     """R^2 of log(views) from the confounds alone, out-of-fold. This is the
-    floor any content model must beat to be saying anything about content."""
+    floor any content model must beat to be saying anything about content.
+
+    Keyed "all" plus one entry per category; a scope with fewer than 50 rows
+    that have log_views is omitted entirely rather than reported noisily, so a
+    missing category key means "not enough data", not "R^2 of zero". r2_oof is
+    unitless and may go negative (predictions worse than the mean).
+    spearman_<confound> is that confound's rank correlation with log(views) on
+    its own, or None when fewer than 11 rows carry both values.
+    """
     from sklearn.ensemble import HistGradientBoostingRegressor
     from sklearn.model_selection import GroupKFold, cross_val_predict
     out = {}
@@ -93,10 +112,24 @@ def shortcut_ceiling(d, seed=0):
 
 # ------------------------------------------------------------- 2. the age floor
 
-def rank_stability(tracking_dir, max_day=5):
+def rank_stability(tracking_dir: str, max_day: int = 5) -> dict[str, Any]:
     """Does a young video's view RANK already predict its later rank? Measured
     on the prospective panel (twice-daily snapshots), which is the only place
-    in this project where the same video is observed at two ages."""
+    in this project where the same video is observed at two ages.
+
+    Views are interpolated at exactly 24*n hours of age, and a video is dropped
+    unless its snapshots bracket every day from 1 to max_day -- nothing is ever
+    extrapolated, so n_videos is the fully-observed subset, not the cohort size.
+    Only the labelled main arm (sampling_arm == "date_window") is ranked; the
+    comparison arms are a different population. Per day, by_day["day<n>"] gives
+    spearman_vs_final (rho against day max_day), viral_quartile_agreement (the
+    fraction of a category's day-n top quartile still in its day-max_day top
+    quartile, averaged over categories with >=20 videos, None if none qualify),
+    and median_view_multiple_to_final (a ratio, ~2.0 at day 1 -- the rank settles
+    within a day, the raw count does not, which is why the label must stay a
+    within-band ranking). Stability past day 5 is untested: the cohort is not
+    old enough yet.
+    """
     snaps = pd.read_csv(os.path.join(tracking_dir, "video_snapshots.csv"))
     cohort = pd.read_csv(os.path.join(tracking_dir, "cohort.csv"))
     ok = snaps[snaps.status == "ok"].merge(
@@ -131,11 +164,20 @@ def rank_stability(tracking_dir, max_day=5):
     return res
 
 
-def assign_label(g, n_age_bands, n_size_bands):
+def assign_label(g: pd.DataFrame, n_age_bands: int,
+                 n_size_bands: int) -> tuple[pd.Series, list[int]]:
     """compute_labels_v2's assignment, vectorised: exactly the top floor(n/4)
     of each (age-band x size-band) cell by log views. Bands are equal-count
     quantile bands assigned BY VALUE (identical values never split), matching
-    the labeler; ties at the cutoff break by video_id as it does."""
+    the labeler; ties at the cutoff break by video_id as it does.
+
+    Returns (label, cell_sizes). label is a float Series of 1.0/0.0 aligned to
+    g.index. cell_sizes is the number of videos in each cell, returned alongside
+    because flooring distorts the intended 25% in small cells: max(1, ...)
+    forces a cell of three or fewer to 33-100%, while cells of 5-7 fall to
+    14-20% because int() rounds the quarter down. The label is only trustworthy
+    where the cells stayed big, so the sizes have to be inspected with it.
+    """
     ab = _bands_by_value(g.age_days, n_age_bands)
     sb = _bands_by_value(g.meta__channel_follower_count, n_size_bands)
     label = pd.Series(0, index=g.index, dtype=float)
@@ -160,7 +202,9 @@ def _bands_by_value(s, n_bands):
     return s.map(lambda v: first_rank[float(v)] * n_bands // n)
 
 
-def label_leakage(d, n_age_bands, n_size_bands=4, min_age=None, seed=0):
+def label_leakage(d: pd.DataFrame, n_age_bands: int, n_size_bands: int = 4,
+                  min_age: Optional[float] = None,
+                  seed: int = 0) -> Optional[dict[str, Any]]:
     """Can the LABEL be predicted from the confounds alone? Cross-validated
     AUC, grouped by channel. 0.5 = the stratification did its job.
 
@@ -171,6 +215,14 @@ def label_leakage(d, n_age_bands, n_size_bands=4, min_age=None, seed=0):
       auc_age  -- video age is NOT an input, but it leaks in through audio
                   timbre (r~0.36) and thumbnail resolution, so signal here is
                   reachable label noise rather than a clean confound.
+
+    min_age is the age floor in DAYS at collection (None = no floor). Labelling
+    is per category and a category under 40 usable rows is skipped; if that
+    leaves nothing, the return is None rather than an empty result. min_cell /
+    median_cell / cells_under_20 count VIDEOS per cell pooled across categories
+    (the labeler warns under 20). An auc_* is None only where a config produced
+    a single class. Format is deliberately not a stratifier here, so auc_is_short
+    measures the leak that label_leakage_stratified() closes.
     """
     from sklearn.ensemble import HistGradientBoostingClassifier
     from sklearn.model_selection import GroupKFold, cross_val_predict
@@ -212,8 +264,14 @@ def label_leakage(d, n_age_bands, n_size_bands=4, min_age=None, seed=0):
             "per_category_n": {c: int((lab.meta__category == c).sum()) for c in CATEGORIES}}
 
 
-def label_configs(d):
-    """The configuration sweep the label decision is made from."""
+def label_configs(d: pd.DataFrame) -> list[dict[str, Any]]:
+    """The configuration sweep the label decision is made from.
+
+    Up to 12 label_leakage() results -- age floors of 0/7/14/30 days crossed
+    with 4/6/8 age bands at a fixed 4 size bands -- with unlabellable configs
+    dropped, so the list can be shorter than the grid and order is the only way
+    to tell which config a row is (each result carries its own "config" string).
+    """
     out = []
     for min_age in (None, 7, 14, 30):
         for nb in (4, 6, 8):
@@ -223,12 +281,24 @@ def label_configs(d):
     return out
 
 
-def label_leakage_stratified(d, n_age_bands, n_size_bands, min_age=None, seed=0):
+def label_leakage_stratified(d: pd.DataFrame, n_age_bands: int, n_size_bands: int,
+                             min_age: Optional[float] = None,
+                             seed: int = 0) -> Optional[dict[str, Any]]:
     """Same, but with is_short as a THIRD stratifier dimension. Shorts and
     regular videos are two populations (every Short here is <=180s, and 96% of
     Shorts thumbnails are pillarboxed), so sharing a quartile cell hands Shorts
     a ~2x prior on the viral label -- which the vision branch can then read
-    straight off the frame geometry without learning anything about content."""
+    straight off the frame geometry without learning anything about content.
+
+    Same keys as label_leakage() minus auc_both, plus shorts_over_representation:
+    the Shorts share of the viral label divided by their share of the labelled
+    population, so 1.0 means the format prior is gone and 2.0 means Shorts take
+    twice their due (None if the labelled set contains no Shorts). min_age is in
+    DAYS. The third dimension halves every cell, so the age and size band counts
+    have to come down with it -- read median_cell and cells_under_20 before
+    trusting a config. Returns None if no (category, format) group cleared 8
+    videos.
+    """
     from sklearn.ensemble import HistGradientBoostingClassifier
     from sklearn.model_selection import GroupKFold, cross_val_predict
     from sklearn.metrics import roc_auc_score
@@ -271,10 +341,23 @@ def label_leakage_stratified(d, n_age_bands, n_size_bands, min_age=None, seed=0)
             "per_category_n": {c: int((lab.meta__category == c).sum()) for c in CATEGORIES}}
 
 
-def format_leakage(d):
+def format_leakage(d: pd.DataFrame) -> dict[str, Any]:
     """How readable is is_short off the content itself? If the format bit is
     trivially recoverable AND carries a label prior, the vision branch scores
-    without learning content -- the single most important thing to control."""
+    without learning content -- the single most important thing to control.
+
+    frames_portrait_matches_is_short and the duration_180s_rule recall and
+    precision are fractions in [0, 1]; the spearman_* entries are rank
+    correlations in [-1, 1], and two are strongly NEGATIVE on the current data
+    (thumb_brightness -0.736 -- Shorts thumbnails are pillarboxed and dark --
+    and thumb_saturation -0.145), so a reader assuming [0, 1] would misread the
+    second-strongest format tell as near-zero. max_duration_of_a_short_sec is
+    SECONDS and is a property of THIS collection rather than a rule:
+    the prospective cohort contains a verified 250s Short, so the duration_180s
+    recall/precision pair describes the retrospective set and must not be ported
+    to the tracker as a classifier. spearman_* correlations are computed only
+    for visual columns that exist in d, so a key can be absent.
+    """
     out = {}
     g = d.dropna(subset=["meta__is_short"])
     fp = g.dropna(subset=["frames_portrait"])
@@ -295,9 +378,18 @@ def format_leakage(d):
 
 # ---------------------------------------------------------------- 3. the Shorts
 
-def shorts_vs_regular(d):
+def shorts_vs_regular(d: pd.DataFrame) -> dict[str, Any]:
     """If Shorts and regular videos share a quartile cell, do Shorts absorb the
-    viral label? Compared against their population share, per category."""
+    viral label? Compared against their population share, per category.
+
+    over_representation is the Shorts share of the category's top log-views
+    quartile divided by their share of the category: 1.0 is proportionate, 2.0
+    is twice their due, None if the category has no Shorts. Categories under 20
+    usable videos are skipped. Median views are raw view counts, reported per
+    category on purpose -- pooled, Shorts take ~2.5x the median, but that
+    reverses inside howto, so the pooled ratio is a Simpson artifact. This is
+    the unstratified quartile, i.e. the leak, not the recommended label.
+    """
     out = {"population": {}, "viral_share": {}}
     for cat in CATEGORIES:
         g = d[(d.meta__category == cat) & d.meta__is_short.notna()].dropna(subset=["log_views"])
@@ -319,8 +411,18 @@ def shorts_vs_regular(d):
 
 # ------------------------------------------------------------------- 4. matrix
 
-def feature_matrix_profile(d):
-    """What the tabular baselines will actually consume."""
+def feature_matrix_profile(d: pd.DataFrame) -> dict[str, Any]:
+    """What the tabular baselines will actually consume.
+
+    Missingness figures are fractions of rows in [0, 1], per prefix group and
+    per column. constant_columns are numeric columns with at most one distinct
+    non-null value -- they carry nothing and will not standardise.
+    egemaps_pairs_abs_corr_over_0.95 counts unordered pairs, not columns.
+    video_age_is_an_input is a guard expected to stay False: age_days is derived
+    in load() for this analysis and carries no group prefix, so select_columns()
+    should never hand it to a model -- age is a confound the label bands out,
+    not a feature.
+    """
     cols = select_columns(d, ("meta", "sched", "vis", "aud"))
     X = d[cols]
     num = X.select_dtypes(include=[np.number])
@@ -348,7 +450,15 @@ def feature_matrix_profile(d):
 
 # ------------------------------------------------------------------- 5. figures
 
-def figures(d, stats, out_dir):
+def figures(d: pd.DataFrame, stats: dict[str, Any], out_dir: str) -> list[str]:
+    """The four figures of 02_Data/eda.md; returns the paths written, in order.
+
+    Reads the already-computed stats dict (keys rank_stability, label_configs,
+    label_configs_format_stratified, shorts) instead of recomputing anything, so
+    a figure cannot disagree with eda_stats.json. Forces the Agg backend before
+    importing pyplot -- nothing here needs a display, and matplotlib is imported
+    inside the function so --no-figures does not pay for it.
+    """
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
@@ -437,14 +547,20 @@ def figures(d, stats, out_dir):
     return made
 
 
-def main():
+def main() -> None:
+    """CLI entry: compute every statistic, write eda_stats.json (plus the
+    figures unless --no-figures) into --out-dir, and print the headline numbers.
+
+    Read-only with respect to the dataset: it writes nothing outside --out-dir,
+    so it is safe to re-run against the live cohort at any time.
+    """
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--data-dir", default=DATA_DIR)
     ap.add_argument("--out-dir", default=OUT_DIR)
     ap.add_argument("--no-figures", action="store_true")
     args = ap.parse_args()
 
-    d = load()
+    d = load(args.data_dir)
     stats = {
         "n_videos": int(len(d)),
         "by_category": {c: int((d.meta__category == c).sum()) for c in CATEGORIES},

@@ -76,6 +76,10 @@ Usage:
 Requires in project-root .env: YOUTUBE_API_KEY=... (use a dedicated key /
 Google Cloud project so tracking never competes with collection quota).
 """
+from __future__ import annotations  # PEP 563: annotations stay strings, so the
+# modern list[...]/dict[...] syntax below is safe on the python3.9 that launchd
+# actually runs this with. Never use that syntax outside an annotation here.
+
 import argparse
 import csv
 import datetime
@@ -86,6 +90,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+from typing import Any, Iterator, Optional
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import yt_shorts  # noqa: E402  -- definitive Shorts check shared with backfill_published_at.py
@@ -230,10 +235,15 @@ ENGLISH_PREFIX = "en"
 NON_LANGUAGE_CODES = ("zxx", "und")  # 'no linguistic content' / 'undetermined' -- not a declared language
 
 
-def declared_language(static):
+def declared_language(static: dict[str, Any]) -> str:
     """First declared language: audio, else metadata; codes that are not
     languages (zxx/und) are skipped. Mirrors 03_Models/ytdiag/adapters.py
-    _language() so the admission gate and the model's meta__language agree."""
+    _language() so the admission gate and the model's meta__language agree.
+
+    Returns the raw lowercased BCP-47 tag ("en", "en-us", "pt-pt"), NOT a
+    normalised language code. "" means the uploader declared nothing usable
+    (both fields empty, or only zxx/und) -- rare in practice, but it is
+    treated as not-English by is_english(), never as unknown-so-admit."""
     for key in ("default_audio_language", "default_language"):
         v = (static.get(key) or "").strip().lower()
         if v and v.split("-")[0] not in NON_LANGUAGE_CODES:
@@ -241,7 +251,13 @@ def declared_language(static):
     return ""
 
 
-def is_english(static):
+def is_english(static: dict[str, Any]) -> bool:
+    """Main-arm language gate: True when the uploader-declared language starts
+    with "en" (any region -- en, en-US, en-GB). Prefix, not equality, because
+    the region suffix carries no information the English-only text pipeline
+    (Whisper small.en, ModernBERT) can use. Undeclared is False: only ~39% of
+    API-returned candidates declared English, and relevanceLanguage=en is a
+    ranking hint, so admitting the undeclared would flood the main arm."""
     return declared_language(static).startswith(ENGLISH_PREFIX)
 # Found 2026-08-26 on the day-1 cohort: at order=date, 94% of fresh uploads
 # in our categories were <=180s (Shorts ceiling; comedy was 100%). Shorts
@@ -288,7 +304,11 @@ TEXTS_CSV_PATH = os.path.join(TRACK_DIR, "text_snapshots.csv")
 TEXT_FIELDS = ["video_id", "observed_at_utc", "sha256", "file", "changed"]
 
 
-def log(msg):
+def log(msg: str) -> None:
+    """Print one line and append it to tracker_log.txt. Its timestamp is LOCAL
+    time -- unlike every timestamp this script STORES, which is UTC -- because
+    the log is read by a human comparing it against launchd's schedule; nothing
+    parses it back."""
     line = f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] {msg}"
     print(line)
     # resolved at call time from TRACK_DIR: a test or ad-hoc run that points
@@ -299,7 +319,10 @@ def log(msg):
         f.write(line + "\n")
 
 
-def load_api_key():
+def load_api_key() -> str:
+    """First YOUTUBE_API_KEY= line in the project-root .env. Does not return on
+    a missing file or key: it sys.exit()s, so a keyless tick fails loudly before
+    touching any state (main()'s finally still releases the lock)."""
     env_path = os.path.join(ROOT, ".env")
     if not os.path.exists(env_path):
         sys.exit(f"No {env_path} -- create it with YOUTUBE_API_KEY=<your key> "
@@ -311,28 +334,43 @@ def load_api_key():
     sys.exit(f"YOUTUBE_API_KEY not found in {env_path}")
 
 
-def api_get(endpoint, params):
-    """Single YouTube Data API v3 GET. Isolated so tests can stub it."""
+def api_get(endpoint: str, params: dict[str, str]) -> dict[str, Any]:
+    """Single YouTube Data API v3 GET, returning the parsed JSON body.
+    Isolated so tests can stub it. Raises on any failure (HTTPError incl. the
+    403/429 quota responses, URLError, bad JSON): every caller catches broadly
+    and continues, so one dead call costs one batch, never the whole tick."""
     heartbeat()  # every API call proves this tick is alive, not wedged
     url = f"https://www.googleapis.com/youtube/v3/{endpoint}?" + urllib.parse.urlencode(params)
     with urllib.request.urlopen(url, timeout=30) as resp:
         return json.load(resp)
 
 
-def utcnow():
+def utcnow() -> datetime.datetime:
+    """Timezone-AWARE now in UTC. Aware on purpose: every stored timestamp is
+    UTC, so ages and gaps stay correct across DST shifts of the local scheduler,
+    and a naive/aware mix would raise instead of silently drifting."""
     return datetime.datetime.now(datetime.timezone.utc)
 
 
-def iso(dt):
+def iso(dt: datetime.datetime) -> str:
+    """Format as "YYYY-MM-DDTHH:MM:SSZ" -- the exact shape the API uses for
+    publishedAt / publishedAfter / publishedBefore, and the only shape
+    parse_iso() reads back. Sub-second precision is dropped, and dt is NOT
+    converted: passing a non-UTC datetime silently mislabels it as UTC."""
     return dt.strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def parse_iso(s):
+def parse_iso(s: str) -> datetime.datetime:
+    """Inverse of iso(): "...Z" -> aware UTC datetime. Raises ValueError on
+    anything else -- a blank published_at_utc, or a timestamp with fractional
+    seconds -- which snapshot() catches to skip rows it cannot age."""
     return datetime.datetime.strptime(s, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=datetime.timezone.utc)
 
 
-def parse_duration(d):
-    """ISO8601 duration (PT#H#M#S) -> seconds, or None if unparseable."""
+def parse_duration(d: Optional[str]) -> Optional[int]:
+    """ISO8601 duration (PT#H#M#S) -> seconds, or None if unparseable.
+    None also covers an empty/absent duration, and any form outside PT#H#M#S
+    (e.g. a day component). Callers treat None as a rejection, never as 0."""
     import re
     m = re.fullmatch(r"PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?", d or "")
     if not m:
@@ -346,14 +384,28 @@ def parse_duration(d):
 # snapshot files are append-only) plus discovery_state.json, thumbnails/, texts/
 # ---------------------------------------------------------------------------
 
-def read_csv(path):
+def read_csv(path: str) -> list[dict[str, Any]]:
+    """Whole CSV into memory as dicts, [] if the file does not exist (a
+    first-ever run, not an error). Values are normally strings, but a row
+    truncated by a killed process yields None for its missing trailing columns
+    (the key is present, so .get(k, "") returns None, not ""), and a row with
+    an extra column yields a None key mapped to a list -- hence dict[str, Any].
+    Callers use r.get(k, "") because a file written under an older schema can
+    lack a column entirely. The snapshot files are read
+    whole by design -- they are append-only, so the LAST row per video_id is
+    the newest and no sorting is needed."""
     if not os.path.exists(path):
         return []
     with open(path, newline="", encoding="utf-8") as f:
         return list(csv.DictReader(f))
 
 
-def append_rows(path, fields, rows):
+def append_rows(path: str, fields: list[str], rows: list[dict[str, Any]]) -> None:
+    """Append rows, creating the file with a header if it is new and widening
+    the header first if this code knows columns the file lacks (ensure_fields).
+    Writes with the EFFECTIVE header, not `fields`, so an older file's extra
+    columns keep their positions and every appended row stays aligned. Values
+    missing from a row are written as "" (restval), never as "None"."""
     header = ensure_fields(path, fields)
     is_new = not os.path.exists(path)
     with open(path, "a", newline="", encoding="utf-8") as f:
@@ -363,7 +415,7 @@ def append_rows(path, fields, rows):
         writer.writerows(rows)
 
 
-def ensure_fields(path, fields):
+def ensure_fields(path: str, fields: list[str]) -> list[str]:
     """Schema migration for append-only CSVs. Returns the EFFECTIVE header:
     this code's `fields` plus any extra columns the file already has. Columns
     are only ever ADDED (old rows get empty values); an older code version
@@ -393,7 +445,7 @@ def ensure_fields(path, fields):
 # Discovery
 # ---------------------------------------------------------------------------
 
-def discover(api_key, cohort, args):
+def discover(api_key: str, cohort: list[dict[str, Any]], args: argparse.Namespace) -> list[dict[str, Any]]:
     """Bounded-window discovery, order=date only. Each tick covers
     [previous window end - lookback, now] -- an explicit, recorded sampling
     frame -- and pages through every nextPageToken inside it (bounded by the
@@ -402,7 +454,13 @@ def discover(api_key, cohort, args):
     never used for the main cohort: it selects on an early version of the
     outcome and would bias an underperformance model toward established
     successes. A popularity-enrichment arm, if ever added, must carry its
-    own sampling_arm value and stay out of the representative test set."""
+    own sampling_arm value and stay out of the representative test set.
+
+    Returns cohort + the newly admitted rows (already appended to cohort.csv)
+    so the same tick snapshots them at age ~0 -- the whole point of the
+    prospective panel. The window checkpoint is advanced only when every call
+    of the tick succeeded; a partially failed window is deliberately re-covered
+    next tick, since the 2h lookback alone would not reach back over it."""
     now = utcnow()
     window_end = iso(now)
     if os.path.exists(DISCOVERY_STATE_PATH):
@@ -589,12 +647,30 @@ def discover(api_key, cohort, args):
 # Snapshots
 # ---------------------------------------------------------------------------
 
-def chunked(items, size=50):
+def chunked(items: list[Any], size: int = 50) -> Iterator[list[Any]]:
+    """Yield consecutive slices of at most `size`, in input order. The default
+    is 50 because that is the YouTube API's per-call ceiling on the `id`
+    parameter of videos.list / channels.list -- batching at 50 is what keeps a
+    15,000-video pass at ~300 one-unit calls instead of 15,000."""
     for i in range(0, len(items), size):
         yield items[i:i + size]
 
 
-def snapshot(api_key, cohort, args):
+def snapshot(api_key: str, cohort: list[dict[str, Any]], args: argparse.Namespace) -> None:
+    """One snapshot pass: for every cohort video that is due, append a video
+    row (views/likes/comments, categoryId, title, description length, tag
+    count), a channel row for its channel, and thumbnail/text change records.
+
+    Due = still within --track-days of publication (plus ONE terminal sample
+    at/after the horizon, so views_at_30d is bracketed and never extrapolated)
+    AND last observed more than --min-gap-hours ago. Due-ness is derived from
+    the recorded observed_at_utc values, never from "when this script last
+    ran" -- that is what makes a doubled run a no-op and a missed run merely a
+    gap in the curve. A video the API no longer returns gets status=missing
+    instead of being dropped: attrition is itself an outcome. Rows whose
+    published_at_utc will not parse are skipped silently -- there is nothing to
+    age them against. Everything is appended, so a crash mid-pass loses only
+    the batches it never reached."""
     now = utcnow()
     last_seen = {}
     for row in read_csv(VIDEO_SNAPSHOTS_PATH):
@@ -710,7 +786,7 @@ def snapshot(api_key, cohort, args):
 _LOCK_TOKEN = f"{os.getpid()}:{os.urandom(8).hex()}"
 
 
-def acquire_lock():
+def acquire_lock() -> bool:
     """One tick at a time: two overlapping invocations (scheduled + manual,
     or a stalled tick meeting the next one) would both read the same state,
     both consider everything due, and append duplicate rows / overwrite
@@ -718,7 +794,10 @@ def acquire_lock():
     Staleness is judged by mtime age, and the RUNNING tick heartbeats the
     lock (see heartbeat()) after every API batch -- so an old mtime means
     the owner has done nothing for STALE_LOCK_HOURS, i.e. it is dead or
-    wedged beyond usefulness, not merely slow."""
+    wedged beyond usefulness, not merely slow.
+
+    True = this process now owns the lock and must call release_lock(). False =
+    a live tick holds it, and the caller must exit WITHOUT touching state."""
     os.makedirs(TRACK_DIR, exist_ok=True)
     while True:
         try:
@@ -740,7 +819,7 @@ def acquire_lock():
             return False
 
 
-def heartbeat():
+def heartbeat() -> None:
     """Refresh the lock mtime so a long-but-alive tick is never mistaken
     for a crashed one. Called after every API/download batch."""
     try:
@@ -749,7 +828,11 @@ def heartbeat():
         pass
 
 
-def release_lock():
+def release_lock() -> None:
+    """Remove the lock only if it still carries THIS process's token. A tick
+    that overran STALE_LOCK_HOURS may have had its lock broken and retaken by
+    the next run; deleting that would let a third run start concurrently. A
+    missing or unreadable lock file is a no-op, never an error."""
     try:
         with open(LOCK_PATH, encoding="utf-8") as f:
             if f.read() != _LOCK_TOKEN:
@@ -762,9 +845,11 @@ def release_lock():
         pass
 
 
-def arm_counts(cohort):
+def arm_counts(cohort: list[dict[str, Any]]) -> dict[str, int]:
     """Row counts of every non-main sampling arm, e.g. {'short_form': 742,
-    'non_english': 1606} -- for logs that must not lump arms together."""
+    'non_english': 1606} -- for logs that must not lump arms together. The
+    main arm ("date_window") is excluded because it is the only arm bounded by
+    the caps and is always reported against its ceiling separately."""
     counts = {}
     for r in cohort:
         arm = r.get("sampling_arm", "")
@@ -773,10 +858,14 @@ def arm_counts(cohort):
     return counts
 
 
-def static_fields(item):
+def static_fields(item: dict[str, Any]) -> dict[str, str]:
     """Per-video fields that don't change: from a videos.list item with
     contentDetails+snippet. Language fields are uploader-declared and often
-    empty (defaultAudioLanguage is set more often than defaultLanguage)."""
+    empty (defaultAudioLanguage is set more often than defaultLanguage).
+    Every key is always present and every value is a string; "" means the API
+    returned no value for that field. backfill_static() therefore reads an
+    empty `definition` as "never captured" and retries the row, so a deleted or
+    private video -- which the API never returns -- stays empty forever."""
     cd = item.get("contentDetails") or {}
     sn = item.get("snippet") or {}
     return {
@@ -787,9 +876,15 @@ def static_fields(item):
     }
 
 
-def snapshot_texts(text_jobs):
+def snapshot_texts(text_jobs: list[tuple[str, str, dict[str, Any]]]) -> None:
     """Hash title+description+tags per snapshotted video; store the full
-    JSON only when the hash differs from the last stored version."""
+    JSON only when the hash differs from the last stored version.
+
+    Jobs are (video_id, observed_at_utc, {"title", "description", "tags"}).
+    A row is written for EVERY check, changed or not, so an edit's timing is
+    recoverable to the snapshot that caught it; only changed=true rows carry a
+    file name. Version _v0 is the FIRST OBSERVED text, not the at-publish text
+    -- discovery can lag publication by up to ~24h."""
     if not text_jobs:
         return
     import hashlib
@@ -820,9 +915,15 @@ def snapshot_texts(text_jobs):
     log(f"texts: {len(rows)} checked, {changed} new/changed title+description+tags stored")
 
 
-def backfill_static(api_key):
+def backfill_static(api_key: str) -> None:
     """One-off: fill STATIC_FIELDS for cohort rows admitted before they were
-    captured (cohort.csv is rewritten atomically). ~1 call per 50 videos."""
+    captured (cohort.csv is rewritten atomically). ~1 call per 50 videos.
+
+    Rows are selected by an empty `definition`, so the run is resumable and
+    re-running it is cheap. Rows the API does not return (deleted/private since
+    admission) keep their empty static fields and are retried on every later
+    run -- that emptiness is attrition, NOT evidence that the video declared no
+    language, and such rows must keep their sampling arm."""
     header = ensure_fields(COHORT_PATH, COHORT_FIELDS)
     cohort = read_csv(COHORT_PATH)
     todo = [r for r in cohort if not r.get("definition")]
@@ -858,8 +959,11 @@ def backfill_static(api_key):
 HEAL_SHORTS_PER_TICK = 200  # blank verdicts re-examined at the start of every tick
 
 
-def latest_missing_ids():
-    """video_ids whose LATEST snapshot row says status=missing (deleted/private)."""
+def latest_missing_ids() -> set[str]:
+    """video_ids whose LATEST snapshot row says status=missing (deleted/private).
+    Latest, not any: a video can be missing for one tick and return, and only
+    the current state should suppress re-probing. Empty set before the first
+    snapshot pass ever runs."""
     latest = {}
     if not os.path.exists(VIDEO_SNAPSHOTS_PATH):
         return set()  # first-ever run: nothing observed yet
@@ -868,7 +972,7 @@ def latest_missing_ids():
     return {v for v, st in latest.items() if st == "missing"}
 
 
-def check_shorts(recheck_true=False, limit=None):
+def check_shorts(recheck_true: bool = False, limit: Optional[int] = None) -> int:
     """Fill is_short for cohort rows without a verdict via the definitive
     /shorts/ URL test (no API quota; a few concurrent page fetches). Rows
     whose latest snapshot is `missing` (deleted/private: unverifiable) are
@@ -880,7 +984,12 @@ def check_shorts(recheck_true=False, limit=None):
     verdict, an inconclusive probe (None) never does. `limit` bounds the work
     (the scheduled tick heals a few hundred blanks per run). The lock is heartbeated per fetch, and the
     verdicts are merged into a FRESH read of cohort.csv right before the
-    atomic rewrite, so rows appended meanwhile are never clobbered."""
+    atomic rewrite, so rows appended meanwhile are never clobbered.
+
+    Returns the count of DEFINITIVE verdicts obtained this run ("true"/"false");
+    resolved-unknown and inconclusive probes are excluded, so 0 against a
+    non-empty todo means no verdict could be had (every page was gone, or the
+    probes were blocked) -- never that the cohort is now clean."""
     header = ensure_fields(COHORT_PATH, COHORT_FIELDS)
     cohort = read_csv(COHORT_PATH)
     todo = [r["video_id"] for r in cohort
@@ -932,18 +1041,27 @@ def check_shorts(recheck_true=False, limit=None):
     return got
 
 
-def fetch_url(url):
-    """Plain HTTP GET returning bytes. Isolated so tests can stub it."""
+def fetch_url(url: str) -> bytes:
+    """Plain HTTP GET returning the raw body bytes (a thumbnail JPEG here).
+    Isolated so tests can stub it. Raises on any network/HTTP failure; the
+    caller runs it in a worker thread and turns a failure into a skipped
+    thumbnail, never a failed tick."""
     with urllib.request.urlopen(url, timeout=30) as resp:
         return resp.read()
 
 
-def snapshot_thumbnails(thumb_jobs):
+def snapshot_thumbnails(thumb_jobs: list[tuple[str, dict[str, Any], str]]) -> None:
     """Download each due video's current thumbnail (best available quality
     from the snippet already fetched -- no extra API quota, only CDN GETs),
     hash it, and store the image ONLY when the hash differs from the last
     stored version for that video. Every check is logged as a CSV row, so
-    thumbnail-change events and their timing are recoverable exactly."""
+    thumbnail-change events and their timing are recoverable exactly.
+
+    Jobs are (video_id, snippet["thumbnails"] dict, observed_at_utc). The
+    stored quality varies per video (maxres down to default) -- compare hashes,
+    not files, across videos. A video whose snippet carried no thumbnail URL,
+    and one whose download failed, both produce NO row at all: absence here
+    means "not checked", never "unchanged"."""
     if not thumb_jobs:
         return
     import hashlib
@@ -956,10 +1074,12 @@ def snapshot_thumbnails(thumb_jobs):
         if row["changed"] == "true":
             versions[row["video_id"]] = versions.get(row["video_id"], 0) + 1
 
-    def fetch_one(job):
+    def fetch_one(job: tuple[str, dict[str, Any], str]) -> tuple[str, str, Optional[str], Optional[bytes]]:
         """Runs in a worker thread: pick best-quality URL, download, return
         (video_id, observed, quality, blob-or-None). No shared state is
-        touched here -- hashing and all writes happen in the main thread."""
+        touched here -- hashing and all writes happen in the main thread.
+        quality None = the snippet had no thumbnail URL; blob None with a
+        quality = the download failed. Both are skipped, not retried."""
         video_id, thumbnails, observed = job
         heartbeat()
         url = quality = None
@@ -985,7 +1105,7 @@ def snapshot_thumbnails(thumb_jobs):
     # completions, i.e. unbounded memory (15k maxres blobs ~ 2GB).
     import concurrent.futures
 
-    def fetched():
+    def fetched() -> Iterator[tuple[str, str, Optional[str], Optional[bytes]]]:
         """Ordered results with a BOUNDED in-flight window. pool.map would
         submit every job eagerly and retain out-of-order completions (whole
         image blobs) until the earlier jobs are yielded, so one slow early
@@ -1031,7 +1151,17 @@ def snapshot_thumbnails(thumb_jobs):
     log(f"thumbnails: {len(rows)} checked, {changed} new/changed images stored, {failed} download failures")
 
 
-def main():
+def main() -> None:
+    """One idempotent tick: take the lock, heal up to HEAL_SHORTS_PER_TICK
+    blank Shorts verdicts, discover (unless --no-discover), snapshot, release.
+
+    The one-off modes exit after their job: --check-shorts / --recheck-shorts
+    run BEFORE load_api_key() because the /shorts/ URL test needs no API key or
+    quota, and --backfill-static needs the key but no discovery. Nothing here
+    retries a failed tick -- the next scheduled run is the retry. Once the lock
+    is held every exit path releases it (finally); a hard-killed tick leaves it
+    behind and staleness breaks it, and a run that never got the lock returns
+    without touching state at all."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--max-cohort", type=int, default=DEFAULT_MAX_COHORT)
     parser.add_argument("--track-days", type=int, default=DEFAULT_TRACK_DAYS)
