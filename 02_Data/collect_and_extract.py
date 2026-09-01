@@ -740,19 +740,22 @@ def _planckian_lut() -> "list[tuple[float, float, float]]":
     return _planckian_lut_cache
 
 
-def _nearest_planckian_cct_duv_uv(u: float, v: float) -> "tuple[float, float]":
-    """Return (CCT, signed Duv) at the closest point on the locus polyline.
+def _nearest_planckian_cct_duv_uv(u: float, v: float) -> "Optional[tuple[float, float]]":
+    """Return (CCT, signed Duv) at the closest supported locus point.
 
     Positive Duv is above the Planckian locus and negative is below it. CCT is
-    interpolated in reciprocal temperature, as in Robertson-style tables.
+    interpolated in reciprocal temperature, as in Robertson-style tables. A
+    projection beyond either end returns None rather than clipping an unknown
+    out-of-range temperature to 1667 or 25000 K.
     """
     best = None
     locus = _planckian_lut()
-    for (t0, u0, v0), (t1, u1, v1) in zip(locus, locus[1:]):
+    last_segment = len(locus) - 2
+    for index, ((t0, u0, v0), (t1, u1, v1)) in enumerate(zip(locus, locus[1:])):
         du, dv = u1 - u0, v1 - v0
         length2 = du * du + dv * dv
-        alpha = ((u - u0) * du + (v - v0) * dv) / length2
-        alpha = min(1.0, max(0.0, alpha))
+        raw_alpha = ((u - u0) * du + (v - v0) * dv) / length2
+        alpha = min(1.0, max(0.0, raw_alpha))
         qu, qv = u0 + alpha * du, v0 + alpha * dv
         ru, rv = u - qu, v - qv
         distance2 = ru * ru + rv * rv
@@ -763,8 +766,14 @@ def _nearest_planckian_cct_duv_uv(u: float, v: float) -> "tuple[float, float]":
             # points above the locus, which is the positive-Duv convention.
             cross = du * rv - dv * ru
             sign = 1.0 if cross <= 0.0 else -1.0
-            best = (distance2, cct, sign)
+            beyond_supported_range = (
+                (index == 0 and raw_alpha < -1e-9)
+                or (index == last_segment and raw_alpha > 1.0 + 1e-9)
+            )
+            best = (distance2, cct, sign, beyond_supported_range)
     assert best is not None
+    if best[3]:
+        return None
     return best[1], best[2] * best[0] ** 0.5
 
 
