@@ -13,9 +13,9 @@ is NOT day-0 subs (even an hours-old observation may include video-driven
 gains, and public counts are rounded to ~3 significant figures; that is why
 hiddenSubscriberCount and the observation age are stored too).
 
-This is a FIXED, CAPPED validation cohort (--max-cohort, default 12,000 =
+This is a FIXED, CAPPED validation cohort (--max-cohort, default 16,000 =
 the budget for the 4 main categories; the backup category adds the same
-per-category cap on top, so the true main-arm ceiling is 15,000 -- see
+per-category cap on top, so the true main-arm ceiling is 20,000 -- see
 DEFAULT_MAX_COHORT), not an unbounded sweep of everything discovery can
 return: quota is
 a discovery ceiling, not a target sample size, and the multimodal extraction
@@ -58,18 +58,20 @@ video/channel/thumbnail/text snapshots), discovery_state.json, thumbnails/
 and texts/ -- when moving machines, copy ALL of it alongside this script,
 or thumbnail/text history is lost and the discovery window resets.
 
-Quota per tick: discovery is the expensive part -- up to 80 search.list
-calls at the per-arm page budgets in CATEGORIES (2 duration filters x 40
+Quota per tick: discovery is the expensive part -- up to 90 search.list
+calls at the per-arm page budgets in CATEGORIES (2 duration filters x 45
 pages, sized to where the videos are; far less once categories hit their
 caps and skip discovery), against a 100-search-calls/day budget, hence the
 run-discovery-once-a-day advice above. Snapshots are cheap per call but scale with the
 cohort: ~(cohort/50) videos.list + ~(channels/50) channels.list per pass,
-~1,200 one-unit calls/day at the mature 15,000 ceiling (~12% of budget).
+~1,600 one-unit calls/day at the mature 20,000 ceiling plus comparison arms
+(~16% of the ordinary read quota).
 
 Usage:
     python3 02_Data/track_new_videos.py                # one full tick
     python3 02_Data/track_new_videos.py --no-discover  # snapshot only
-    python3 02_Data/track_new_videos.py --max-cohort 12000 --track-days 30
+    python3 02_Data/track_new_videos.py --max-cohort 16000 --track-days 30
+    python3 02_Data/track_new_videos.py --admission-end-utc YYYY-MM-DDTHH:MM:SSZ
     python3 02_Data/track_new_videos.py --backfill-static   # one-off: fill static fields for older rows
     python3 02_Data/track_new_videos.py --check-shorts      # one-off: definitive Shorts verdict for older rows (no quota)
 
@@ -130,11 +132,14 @@ STALE_LOCK_HOURS = 2.0
 # at 119 -- budget they could not use. 2026-08-29: unboxing (24) and
 # tutorial still saturated (400/400, 250/250) while stand-up used 127/200
 # and sketch 97/150, so one page moved from each of those to unboxing and
-# tutorial. Worst-case search calls per tick = 2 x sum(pages) = 2 x 40 = 80,
-# under the 100-call daily budget. Re-tune from cohort.csv search_rank: an
+# tutorial. On 2026-09-02, fresh saturation at tutorial 300/300, tech review
+# 248/250, stand-up 149/150 and tech unboxing 149/150 justified spending the
+# final ten-call safety margin there. Worst-case search calls per tick are now
+# 2 x sum(pages) = 2 x 45 = 90, under the 100-call daily budget. Re-tune from
+# cohort.csv search_rank: an
 # arm whose max rank keeps hitting pages*50 is still truncating; one far
 # below it is over-budgeted. Note the busiest arms belong to the categories
-# closest to their 3,000 caps -- once capped they stop discovering and free
+# closest to their per-category caps -- once capped they stop discovering and free
 # their calls.
 # 2026-08-27 (evening): comedy and vlogs arms re-phrased for English yield.
 # Search has no language filter, so non-English videos consume page slots
@@ -147,39 +152,42 @@ STALE_LOCK_HOURS = 2.0
 # sketch; day-in-my-life + weekly vlogs) -- every row records its exact
 # query in discovery_source, so the two frames stay separable.
 CATEGORIES = {
-    "comedy": {"categoryId": "23", "queries": {"stand up comedy": 3, "sketch comedy": 2}},
-    "howto": {"categoryId": "26", "queries": {"tutorial": 6}},
+    "comedy": {"categoryId": "23", "queries": {"stand up comedy": 4, "sketch comedy": 2}},
+    "howto": {"categoryId": "26", "queries": {"tutorial": 8}},
     "vlogs": {"categoryId": "22", "queries": {"day in my life": 8, "weekly vlog": 2}},
     "product_reviews": {"categoryId": "24", "queries": {"product review": 1, "unboxing": 9, "first impressions": 1}},
-    "tech_reviews": {"categoryId": "28", "queries": {"review": 5, "unboxing": 3}},
+    "tech_reviews": {"categoryId": "28", "queries": {"review": 6, "unboxing": 4}},
 }
 # Per-category cap divides max_cohort by the MAIN categories only, so the
 # backup category gets the same absolute cap without shrinking the others.
 MAIN_CATEGORY_COUNT = 4
 # A uniform --discover-pages override is refused if it could exceed this many
 # search calls in one tick (the daily search budget is ~100; the per-arm
-# budgets sum to 80). Found 2026-08-27: a leftover "--discover-pages 5" on the
+# budgets sum to 90). Found 2026-08-27: a leftover "--discover-pages 5" on the
 # launchd agent would have meant 10 arms x 2 filters x 5 = 100 calls.
 MAX_SEARCH_CALLS_PER_TICK = 90
 
-# Raised 3,000 -> 12,000 on 2026-08-27 (team decision: storage/RAM are not
+# Raised 3,000 -> 12,000 on 2026-08-27 and 12,000 -> 16,000 on 2026-09-02
+# after grouped learning curves showed that the structured and score-fusion
+# models were still data-limited. Storage/RAM are not
 # binding, quota is use-it-or-lose-it, and a larger clean panel lets the
 # post-deadline extension SELECT its extraction subset instead of taking
 # whatever a small pool offers).
 #
 # ACCOUNTING (be precise -- an earlier doc claimed "12,000 total"):
 # --max-cohort is the budget for the 4 MAIN categories; each gets
-# max_cohort/4 (3,000). The backup category (tech_reviews) gets the SAME
-# per-category cap ON TOP, so the main-arm ceiling is max_cohort * 5/4 =
-# 15,000 at this default, plus the grandfathered comparison arms (742
+# max_cohort/4 (4,000). The backup category (tech_reviews) gets the SAME
+# per-category cap ON TOP, so the date-window ceiling is max_cohort * 5/4 =
+# 20,000 at this default, plus the grandfathered comparison arms (742
 # short_form, ~1,550 non_english) which are tracked but never capped.
-# Quota at that ceiling: ~315 videos.list + ~290 channels.list per
-# snapshot pass, x2 ticks/day ~= 1,200 one-unit calls/day (~12% of
-# budget); search spend is independent of the cap (<=80 calls/day). The
+# Quota at that ceiling plus comparison arms: roughly 450 videos.list +
+# 330 channels.list per snapshot pass, x2 ticks/day ~= 1,600 one-unit
+# calls/day (~16% of budget); search spend is independent of the cap
+# (<=90 calls/day). The
 # old wall-time constraint (serial thumbnail downloads) was removed by
 # parallelizing them (THUMB_WORKERS below). Scarce categories won't reach
 # their caps anyway; the raise mainly deepens comedy/howto/vlogs.
-DEFAULT_MAX_COHORT = 12000
+DEFAULT_MAX_COHORT = 16000
 THUMB_WORKERS = 8  # concurrent CDN downloads; hashing/writes stay single-threaded
 DEFAULT_TRACK_DAYS = 30
 # 8h, not 12h: the min-gap exists to make accidental doubled runs no-ops,
@@ -462,13 +470,21 @@ def discover(api_key: str, cohort: list[dict[str, Any]], args: argparse.Namespac
     of the tick succeeded; a partially failed window is deliberately re-covered
     next tick, since the 2h lookback alone would not reach back over it."""
     now = utcnow()
-    window_end = iso(now)
+    cutoff_text = getattr(args, "admission_end_utc", None)
+    cutoff = parse_iso(cutoff_text) if cutoff_text else None
     if os.path.exists(DISCOVERY_STATE_PATH):
         with open(DISCOVERY_STATE_PATH, encoding="utf-8") as f:
             prev_end = json.load(f).get("last_window_end_utc")
+        if cutoff is not None and parse_iso(prev_end) >= cutoff:
+            log(f"discover: admission window closed at {iso(cutoff)} -- snapshotting existing cohort only")
+            return cohort
+        effective_end = min(now, cutoff) if cutoff is not None else now
+        window_end = iso(effective_end)
         window_start = iso(parse_iso(prev_end) - datetime.timedelta(hours=WINDOW_LOOKBACK_HOURS))
     else:
-        window_start = iso(now - datetime.timedelta(hours=args.discover_window_hours))
+        effective_end = min(now, cutoff) if cutoff is not None else now
+        window_end = iso(effective_end)
+        window_start = iso(effective_end - datetime.timedelta(hours=args.discover_window_hours))
 
     per_category_cap = args.max_cohort // MAIN_CATEGORY_COUNT
     # Caps count only the MAIN arm -- short_form videos are tracked but must
@@ -651,7 +667,7 @@ def chunked(items: list[Any], size: int = 50) -> Iterator[list[Any]]:
     """Yield consecutive slices of at most `size`, in input order. The default
     is 50 because that is the YouTube API's per-call ceiling on the `id`
     parameter of videos.list / channels.list -- batching at 50 is what keeps a
-    15,000-video pass at ~300 one-unit calls instead of 15,000."""
+    20,000-video pass at ~400 one-unit calls instead of 20,000."""
     for i in range(0, len(items), size):
         yield items[i:i + size]
 
@@ -1167,6 +1183,8 @@ def main() -> None:
     parser.add_argument("--track-days", type=int, default=DEFAULT_TRACK_DAYS)
     parser.add_argument("--min-gap-hours", type=float, default=DEFAULT_MIN_GAP_HOURS)
     parser.add_argument("--discover-window-hours", type=float, default=DEFAULT_DISCOVER_WINDOW_HOURS)
+    parser.add_argument("--admission-end-utc", default=None,
+                        help="stop admitting videos after this UTC instant (YYYY-MM-DDTHH:MM:SSZ); existing videos keep being snapshotted")
     parser.add_argument("--discover-pages", type=int, default=None,
                         help="uniform override (>= 1) of the per-category page budgets in CATEGORIES (experiments only)")
     parser.add_argument("--min-duration-sec", type=int, default=MIN_DURATION_SEC,
@@ -1180,6 +1198,11 @@ def main() -> None:
     parser.add_argument("--recheck-shorts", action="store_true",
                         help="one-off: re-examine rows currently is_short=true (unavailable videos used to be misread as Shorts), then exit")
     args = parser.parse_args()
+    if args.admission_end_utc is not None:
+        try:
+            parse_iso(args.admission_end_utc)
+        except ValueError:
+            parser.error("--admission-end-utc must use YYYY-MM-DDTHH:MM:SSZ")
     if args.discover_pages is not None:
         if args.discover_pages < 1:
             parser.error("--discover-pages must be >= 1 (omit it to use the per-category budgets)")
