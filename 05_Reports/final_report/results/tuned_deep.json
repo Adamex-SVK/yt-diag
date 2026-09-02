@@ -1,0 +1,381 @@
+{
+  "generated_at_utc": "2026-09-02T16:49:52.583221+00:00",
+  "protocol": "channel-grouped 60/20/20 outer split; 3 inner grouped folds; per-fold grouped monitor split for epoch selection; outer validation only; test untouched",
+  "n_labelled": 1854,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "configuration": {
+    "ablations": [
+      "thumbnail_text_fields_meta_sched"
+    ],
+    "mlp_random_trials": 8,
+    "mlp_candidates_including_fixed": 9,
+    "search_seed": 2026,
+    "max_epochs": 60,
+    "patience": 8
+  },
+  "embedding_provenance": {
+    "text": {
+      "schema": 1,
+      "kind": "text_v2_units",
+      "model": "nomic-ai/modernbert-embed-base",
+      "revision": "d556a88e332558790b210f7bdbe87da2fa94a8d8",
+      "config": {
+        "prefix": "search_document: ",
+        "pooling": "attention_masked_mean_then_l2",
+        "matryoshka_dim": 256,
+        "title": {
+          "max_length": 128,
+          "overlap": 0,
+          "max_chunks": 1
+        },
+        "description": {
+          "max_length": 384,
+          "overlap": 0,
+          "max_chunks": 1
+        },
+        "transcript": {
+          "max_length": 384,
+          "overlap": 64,
+          "max_chunks": 4
+        }
+      },
+      "attention_implementation": "sdpa",
+      "source_fingerprint": "3a837e14db1731363a364cfd4106db7307ed209715906ee77af7972339b477fa",
+      "n_units": 6870
+    },
+    "thumbnail": {
+      "kind": "thumbnail",
+      "model": "facebook/dinov2-small",
+      "pooling": "cls",
+      "preprocess": {
+        "center_crop": [
+          224,
+          224
+        ],
+        "convert_rgb": true,
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "resample": "bicubic",
+        "rescale_factor": 0.00392156862745098,
+        "resize_shortest_edge": 256,
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ]
+      },
+      "revision": "ed25f3a31f01632728cabb09d1542f84ab7b0056",
+      "schema": 1,
+      "source_fingerprint": "1fa57150b885cc10d23581f90e9db4a54384da4ea978423b358b0fd260e98c33"
+    }
+  },
+  "aggregate": {
+    "thumbnail_text_fields_meta_sched": {
+      "linear_probe": {
+        "auc_roc": {
+          "mean": 0.5868984863866549,
+          "std": 0.033571117247132395,
+          "values": [
+            0.5865570599613154,
+            0.6340588570962746,
+            0.6052842916800514,
+            0.5760563380281689,
+            0.5325358851674641
+          ]
+        },
+        "pr_auc": {
+          "mean": 0.32936849206364255,
+          "std": 0.038055584103534226,
+          "values": [
+            0.2995512486465236,
+            0.3732549374490259,
+            0.35598540528137956,
+            0.34703799331664076,
+            0.27101287562464305
+          ]
+        },
+        "accuracy": {
+          "mean": 0.4335900535747941,
+          "std": 0.05238956776937201,
+          "values": [
+            0.36486486486486486,
+            0.5094850948509485,
+            0.4716981132075472,
+            0.4304812834224599,
+            0.3914209115281501
+          ]
+        },
+        "balanced_accuracy": {
+          "mean": 0.5582707167433286,
+          "std": 0.025131079747957256,
+          "values": [
+            0.5520631850419084,
+            0.5956224015651749,
+            0.5714945390298747,
+            0.5528951486697966,
+            0.5192783094098883
+          ]
+        },
+        "precision": {
+          "mean": 0.2685653990607386,
+          "std": 0.01561641007464402,
+          "values": [
+            0.26058631921824105,
+            0.2920353982300885,
+            0.2768595041322314,
+            0.2679245283018868,
+            0.2454212454212454
+          ]
+        },
+        "recall": {
+          "mean": 0.7958655520724485,
+          "std": 0.05768292546806633,
+          "values": [
+            0.9090909090909091,
+            0.7586206896551724,
+            0.7613636363636364,
+            0.7888888888888889,
+            0.7613636363636364
+          ]
+        },
+        "specificity": {
+          "mean": 0.32067588141420855,
+          "std": 0.08238662506951602,
+          "values": [
+            0.1950354609929078,
+            0.4326241134751773,
+            0.38162544169611307,
+            0.31690140845070425,
+            0.2771929824561403
+          ]
+        },
+        "f1": {
+          "mean": 0.4008080545101064,
+          "std": 0.016498726006682937,
+          "values": [
+            0.4050632911392405,
+            0.4217252396166134,
+            0.40606060606060607,
+            0.4,
+            0.37119113573407203
+          ]
+        },
+        "selected_parameters": [
+          {
+            "C": 0.001,
+            "class_weight": "balanced"
+          },
+          {
+            "C": 0.001,
+            "class_weight": null
+          },
+          {
+            "C": 0.001,
+            "class_weight": "balanced"
+          },
+          {
+            "C": 0.001,
+            "class_weight": null
+          },
+          {
+            "C": 0.001,
+            "class_weight": null
+          }
+        ]
+      },
+      "late_fusion_mlp": {
+        "auc_roc": {
+          "mean": 0.5975866534605836,
+          "std": 0.03652337932332404,
+          "values": [
+            0.5963088330109607,
+            0.6589223118936985,
+            0.6064086090587857,
+            0.5782472613458529,
+            0.5480462519936203
+          ]
+        },
+        "pr_auc": {
+          "mean": 0.3200818689924139,
+          "std": 0.040026163345538636,
+          "values": [
+            0.3200057192146528,
+            0.38616869785355834,
+            0.3024501150815188,
+            0.3287698687984446,
+            0.263014944013895
+          ]
+        },
+        "accuracy": {
+          "mean": 0.4087359015398794,
+          "std": 0.13810118965627605,
+          "values": [
+            0.3054054054054054,
+            0.3956639566395664,
+            0.633423180592992,
+            0.4732620320855615,
+            0.2359249329758713
+          ]
+        },
+        "balanced_accuracy": {
+          "mean": 0.5323451266433926,
+          "std": 0.01852958238553566,
+          "values": [
+            0.5325999355254675,
+            0.5569210075813157,
+            0.5404754256344362,
+            0.5317292644757434,
+            0.5
+          ]
+        },
+        "precision": {
+          "mean": 0.25894082603068347,
+          "std": 0.016285173055767297,
+          "values": [
+            0.25073746312684364,
+            0.26223776223776224,
+            0.2857142857142857,
+            0.2600896860986547,
+            0.2359249329758713
+          ]
+        },
+        "recall": {
+          "mean": 0.7672117729014281,
+          "std": 0.23690242622228133,
+          "values": [
+            0.9659090909090909,
+            0.8620689655172413,
+            0.36363636363636365,
+            0.6444444444444445,
+            1.0
+          ]
+        },
+        "specificity": {
+          "mean": 0.29747848038535707,
+          "std": 0.2533353403178377,
+          "values": [
+            0.09929078014184398,
+            0.25177304964539005,
+            0.7173144876325088,
+            0.41901408450704225,
+            0.0
+          ]
+        },
+        "f1": {
+          "mean": 0.37453140128754,
+          "std": 0.029532435018112604,
+          "values": [
+            0.3981264637002342,
+            0.40214477211796246,
+            0.32,
+            0.3706070287539936,
+            0.38177874186550975
+          ]
+        },
+        "selected_parameters": [
+          {
+            "weight_decay": 0.01,
+            "projection_dim": 64,
+            "positive_weight": true,
+            "learning_rate": 0.003,
+            "hidden_dim": 32,
+            "dropout": 0.35,
+            "batch_size": 128
+          },
+          {
+            "weight_decay": 0.01,
+            "projection_dim": 32,
+            "positive_weight": false,
+            "learning_rate": 0.001,
+            "hidden_dim": 32,
+            "dropout": 0.2,
+            "batch_size": 32
+          },
+          {
+            "weight_decay": 0.01,
+            "projection_dim": 64,
+            "positive_weight": true,
+            "learning_rate": 0.003,
+            "hidden_dim": 32,
+            "dropout": 0.35,
+            "batch_size": 128
+          },
+          {
+            "weight_decay": 0.01,
+            "projection_dim": 32,
+            "positive_weight": false,
+            "learning_rate": 0.001,
+            "hidden_dim": 32,
+            "dropout": 0.2,
+            "batch_size": 32
+          },
+          {
+            "weight_decay": 0.01,
+            "projection_dim": 32,
+            "positive_weight": false,
+            "learning_rate": 0.001,
+            "hidden_dim": 32,
+            "dropout": 0.2,
+            "batch_size": 32
+          }
+        ]
+      }
+    }
+  },
+  "comparisons": {
+    "linear_probe": {
+      "fixed": {
+        "mean": 0.5872799512115826,
+        "std": 0.03328130941205265,
+        "values": [
+          0.5922388781431335,
+          0.6340588570962746,
+          0.6015097976228718,
+          0.5760563380281689,
+          0.5325358851674641
+        ]
+      },
+      "tuned_minus_fixed_mean": -0.00038146482492771303,
+      "tuned_wins_vs_fixed": 1,
+      "tuned_minus_structured_mean": -0.03210462745723728,
+      "tuned_wins_vs_structured": 1
+    },
+    "late_fusion_mlp": {
+      "fixed": {
+        "mean": 0.5999669979537585,
+        "std": 0.026221311979336612,
+        "values": [
+          0.5720099935525467,
+          0.6404173799625011,
+          0.6172903951172503,
+          0.5967918622848201,
+          0.5733253588516747
+        ]
+      },
+      "tuned_minus_fixed_mean": -0.002380344493174924,
+      "tuned_wins_vs_fixed": 2,
+      "tuned_minus_structured_mean": -0.02141646038330851,
+      "tuned_wins_vs_structured": 2
+    }
+  },
+  "tuned_metadata_schedule_xgboost": {
+    "mean": 0.6190031138438922,
+    "std": 0.02206759973056436,
+    "values": [
+      0.6460348162475822,
+      0.6453900709219857,
+      0.6008874076453582,
+      0.606670579029734,
+      0.5960326953748006
+    ]
+  }
+}
