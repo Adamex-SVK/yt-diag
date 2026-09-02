@@ -10,6 +10,8 @@ If a number is in the report and not in this table, it is unsourced and must not
 Regenerate the baseline table (never retype it):
 ```bash
 .venv/bin/python 05_Reports/final_report/make_tables.py --seeds 5
+.venv/bin/python 05_Reports/final_report/make_deep_table.py
+.venv/bin/python 05_Reports/final_report/make_text_v2_table.py
 ```
 
 ---
@@ -64,6 +66,8 @@ Regenerate the baseline table (never retype it):
 |---|---|---|---|
 | `frames_portrait` recovers `is_short` for 99.0% | confirmed | `eda_stats.json → format_leakage`; notebook §6 | Method |
 | Raw thumbnail brightness predicts format at direction-free AUC 0.925; heuristic content crop reduces it to 0.559 | confirmed | `02_Data/eda_features/eda_features_stats.json` | Method |
+| Training-partition dashboard: subscriber count is the strongest pooled association with log views (Spearman rho = 0.705); duration reverses from weakly negative pooled to positive within both formats | confirmed | `02_Data/eda_features.py`; `eda_features/feature_outcome_associations_train_seed0.csv`; notebook section 5 | Experiment (descriptive) |
+| Usable transcript coverage differs by format (92.4% regular vs 60.2% Shorts); 23 eGeMAPS pairs have absolute Spearman rho above 0.95 | confirmed | `eda_features/modality_coverage_by_category_format.csv`; `eda_features/audio_spearman.csv`; notebook section 5 | Experiment (descriptive) |
 | Channel features alone: AUC 0.644 under random folds | confirmed | notebook §7 | Method |
 | No channel spans splits (asserted at runtime) | confirmed | `ytdiag/split.py`; notebook §7 | Method |
 | ~6–7 positives per category per test split | confirmed | `eda.md` §5 | Method (limitation) |
@@ -73,11 +77,21 @@ Regenerate the baseline table (never retype it):
 | Claim | Status | Reproduce with | In report |
 |---|---|---|---|
 | Baseline table (all cells) | confirmed | `make_tables.py --seeds 5` — writes `results/baselines.json` **and** into `main.tex` | Experiment |
+| Nested tuned metadata/schedule XGBoost = 0.619 ± 0.022; tuned full engineered = 0.614 ± 0.023 | confirmed | `run_tuned_baselines.py`; `publish_tuned_baselines.py`; `results/tuned_baselines.json` | Experiment |
+| Tuning and F1-threshold selection use only four inner channel-grouped training folds; outer validation is evaluation-only and test is untouched | confirmed | `ytdiag/tuning.py`; `test_tuning.py`; exact trials in gitignored run result | Method, Experiment |
 | Visual block alone ≈ chance (0.505) | confirmed | same | Experiments |
 | LR on metadata ranges 0.496–0.660 across seeds | confirmed | same | Experiments |
-| **Test-set metrics** | **pending** | `run_baselines.py --test` — run ONCE, at the end | Experiments |
-| **Deep multimodal model** | **pending** | not yet implemented | Experiments |
-| **Four planned ablations** | **pending** | only the feature ladder has run | Experiments |
+| Frozen thumbnail/text/full linear AUC = 0.563/0.523/0.570; full MLP = 0.554 | confirmed | `run_deep_multimodal.py --seeds 0,1,2,3,4`; `results/deep_multimodal.json` | Experiments |
+| Full deep fusion does not beat tuned metadata+schedule XGBoost (0.619) or tuned engineered XGBoost (0.614) | confirmed | `results/deep_multimodal.json`; `results/tuned_baselines.json` | Experiments |
+| Only 1,404/1,860 transcripts pass the cleaning-manifest usability gate; unusable files are withheld from the encoder | confirmed | `cleaning_manifest.csv`; `test_adapter_withholds_manifest_unusable_transcript` | Method, Experiments |
+| Full linear fusion ranges 0.496–0.632 across seeds | confirmed | `results/deep_multimodal.json → aggregate.thumbnail_text_meta_sched.linear_probe` | Experiments |
+| Text-v2 all-text linear/MLP AUC = 0.568/0.571; text+meta/schedule MLP = 0.581 | confirmed | `run_text_v2.py --seeds 0,1,2,3,4`; `results/text_v2.json` | Experiments |
+| Text-v2 thumbnail+text+meta/schedule MLP = 0.600 ± 0.026 | confirmed | `results/text_v2.json → aggregate.thumbnail_text_fields_meta_sched` | Experiments |
+| Best text-v2 model vs tuned metadata/schedule XGBoost: -0.019 mean, 1/5 paired wins; vs tuned full engineered: -0.014, 3/5 wins | confirmed | `results/text_v2.json`, exact seed arrays under `aggregate` and `references` | Experiments |
+| Nested tuned deep linear/MLP = 0.587 ± 0.034 / 0.598 ± 0.037; MLP does not improve the pre-specified 0.600 ± 0.026 head (2/5 wins) | confirmed | `run_tuned_deep.py`; `publish_tuned_deep.py`; `results/tuned_deep.json` | Experiments |
+| Deep tuning uses fold-local preprocessing, inner grouped hyperparameter folds, and a further grouped epoch-monitor split; test untouched | confirmed | `ytdiag/deep_tuning.py`; `test_deep_tuning.py` | Method, Experiments |
+| **Test-set metrics** | **pending** | evaluate the frozen selected model ONCE after the modelling policy is final | Experiments |
+| **Frozen frame aggregation** | **pending** | justified as the next bounded experiment by text v2; not yet run | Experiments |
 | **Attribution examples** | **pending** | Integrated Gradients not implemented | Experiments |
 
 ---
