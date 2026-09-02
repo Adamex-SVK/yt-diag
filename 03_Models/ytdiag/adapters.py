@@ -101,6 +101,20 @@ def _read_json(path: str) -> Any:
         return json.load(f)
 
 
+def _transcript_quality(processed_dir: str) -> dict[str, dict[str, Any]]:
+    """Quality rows from cleaning_manifest.csv, keyed by video id.
+
+    The manifest is optional so synthetic and not-yet-cleaned trees still load.
+    When present, its explicit usability verdict controls whether the deep text
+    adapter exposes a transcript path; title and description remain available.
+    """
+    path = os.path.join(processed_dir, "cleaning_manifest.csv")
+    if not os.path.exists(path):
+        return {}
+    with open(path, newline="", encoding="utf-8") as f:
+        return {row["video_id"]: row for row in csv.DictReader(f)}
+
+
 def load_retrospective(processed_dir: str) -> pd.DataFrame:
     """One row per collected video in Adam's `processed/<category>/<video_id>/`
     tree, on the canonical table (features.py naming).
@@ -136,6 +150,7 @@ def load_retrospective(processed_dir: str) -> pd.DataFrame:
     concatenating the two tables leaves them NaN on these rows.
     """
     rows = []
+    transcript_quality = _transcript_quality(processed_dir)
     for category in sorted(os.listdir(processed_dir)):
         cat_dir = os.path.join(processed_dir, category)
         if not os.path.isdir(cat_dir):
@@ -152,6 +167,15 @@ def load_retrospective(processed_dir: str) -> pd.DataFrame:
             vis = _read_json(os.path.join(d, "visual_features.json")) or {}
             aud = _read_json(os.path.join(d, "audio_features.json")) or {}
             tinfo = _read_json(os.path.join(d, "transcript_info.json")) or {}
+            quality = transcript_quality.get(vid, {})
+            usable_raw = quality.get("transcript_usable")
+            transcript_usable = ({"1": 1.0, "0": 0.0}.get(str(usable_raw), np.nan)
+                                 if usable_raw not in (None, "") else np.nan)
+            transcript_path = next(
+                (os.path.join(d, f) for f in ("transcript_clean.txt", "transcript.txt")
+                 if os.path.exists(os.path.join(d, f))), None)
+            if transcript_usable == 0:
+                transcript_path = None
             row = {
                 "dataset": "retrospective", "video_id": vid, "channel_id": meta.get("channel_id"),
                 "label": {"viral": 1, "typical": 0}.get(label.get("label"), np.nan),
@@ -179,9 +203,9 @@ def load_retrospective(processed_dir: str) -> pd.DataFrame:
                 # cleaned transcript first (clean_retrospective.py --fix-transcripts):
                 # raw auto-caption text repeats every phrase ~3x (rolling SRT
                 # windows), which distorts any text feature computed from it
-                "asset__transcript_path": next(
-                    (os.path.join(d, f) for f in ("transcript_clean.txt", "transcript.txt")
-                     if os.path.exists(os.path.join(d, f))), None),
+                "asset__transcript_path": transcript_path,
+                "asset__transcript_usable": transcript_usable,
+                "asset__transcript_kind": quality.get("transcript_kind") or np.nan,
                 "asset__title": meta.get("title"), "asset__description": meta.get("description"),
             }
             thumb = vis.get("thumbnail") or {}
