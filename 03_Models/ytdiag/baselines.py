@@ -6,8 +6,11 @@ Protocol: channel-grouped 60/20/20 split; models fit on train, threshold
 picked on val (max F1), reported on val; the TEST split is evaluated only
 when `evaluate_test=True` -- touch it once, at the end (MILESTONES.md).
 """
+from __future__ import annotations
+
 import json
 import os
+from typing import Any, Optional, Sequence
 
 import numpy as np
 import pandas as pd
@@ -26,7 +29,11 @@ CATEGORICAL = ("meta__category", "meta__language")
 MIN_LABELED_ROWS = 50  # below this a 60/20/20 grouped split is meaningless
 
 
-def _preprocessor(cols, scale):
+def _preprocessor(cols: Sequence[str], scale: bool) -> ColumnTransformer:
+    """Column-wise preparation: median-impute the numeric columns (EDA found
+    0 of 1,860 rows complete, so dropping incomplete rows is not an option),
+    one-hot the two string columns, and scale only when the model needs it --
+    logistic regression does, trees do not."""
     cat = [c for c in cols if c in CATEGORICAL]
     num = [c for c in cols if c not in CATEGORICAL]
     num_steps = [("impute", SimpleImputer(strategy="median"))]
@@ -38,7 +45,11 @@ def _preprocessor(cols, scale):
     ])
 
 
-def _boosting():
+def _boosting() -> tuple[str, Any]:
+    """(name, estimator) for the gradient-boosting baseline. XGBoost needs
+    libomp on macOS; when that wheel is missing we fall back to sklearn's
+    HistGradientBoosting rather than failing the run, and the returned NAME
+    records which one actually ran so results are never ambiguous."""
     try:
         from xgboost import XGBClassifier
         return "xgboost", XGBClassifier(n_estimators=300, max_depth=4, learning_rate=0.05,
@@ -50,18 +61,44 @@ def _boosting():
                                                                         max_iter=300, random_state=0)
 
 
-def _metrics(y, p, threshold):
+def _metrics(y: np.ndarray, p: np.ndarray, threshold: float) -> dict[str, float]:
+    """AUC-ROC (primary), PR-AUC (honest under class imbalance), and F1 at a
+    threshold chosen on validation. positive_rate is carried so a reader can
+    see the class balance the numbers were computed against."""
     return {"auc_roc": float(roc_auc_score(y, p)), "pr_auc": float(average_precision_score(y, p)),
             "f1": float(f1_score(y, (p >= threshold).astype(int))), "n": int(len(y)),
             "positive_rate": float(np.mean(y))}
 
 
-def _best_threshold(y, p):
+def _best_threshold(y: np.ndarray, p: np.ndarray) -> float:
+    """Probability cut-off maximising F1, chosen on VALIDATION only. Picking it
+    on test would leak the test set into a modelling decision."""
     grid = np.linspace(0.05, 0.95, 91)
     return float(max(grid, key=lambda t: f1_score(y, (p >= t).astype(int))))
 
 
-def run_baselines(df, groups, out_dir=None, seed=0, evaluate_test=False):
+def run_baselines(
+    df: pd.DataFrame,
+    groups: Sequence[str],
+    out_dir: Optional[str] = None,
+    seed: int = 0,
+    evaluate_test: bool = False,
+) -> dict[str, Any]:
+    """Fit the three baselines on `groups` and return a results dict.
+
+    `groups` is a tuple of feature-group prefixes ("meta", "sched", "vis",
+    "aud") -- every ablation in the project is a different value here rather
+    than a different code path.
+
+    The dummy_prior model is not filler: it predicts the class prior and so
+    scores AUC 0.5 by construction, which is the floor every other number must
+    be read against. EDA (2026-09-01) adds a second floor worth reporting
+    beside these -- a model given only subscriber count, age, duration and
+    is_short reaches R^2 0.584 on log views without seeing any content.
+
+    evaluate_test defaults to False on purpose: the test split is touched once,
+    at the end of the project, not on every iteration.
+    """
     total = len(df)
     df = df[df.label.notna()].reset_index(drop=True)
     if len(df) < MIN_LABELED_ROWS:
@@ -73,6 +110,15 @@ def run_baselines(df, groups, out_dir=None, seed=0, evaluate_test=False):
     cols = select_columns(df, groups)
     if not cols:
         raise ValueError(f"no input columns for groups {groups}")
+    # An all-NaN column is not a feature: the imputer silently skips it, so
+    # counting it would report an n_features the model never used (e.g.
+    # meta__definition_hd, which yt-dlp never populated retrospectively).
+    # Dropped here rather than in the registry so the registry keeps saying
+    # what the GROUP contains, and the run says what it actually fitted.
+    all_nan = [c for c in cols if df[c].isna().all()]
+    cols = [c for c in cols if c not in all_nan]
+    if not cols:
+        raise ValueError(f"every column for groups {groups} is empty in this dataset")
     idx = split_indices(df, seed=seed)
     X, y = df[cols], df.label.astype(int).to_numpy()
     boost_name, boost = _boosting()
@@ -84,6 +130,7 @@ def run_baselines(df, groups, out_dir=None, seed=0, evaluate_test=False):
         boost_name: Pipeline([("prep", _preprocessor(cols, scale=False)), ("clf", boost)]),
     }
     results = {"groups": list(groups), "n_features": len(cols), "seed": seed,
+               "dropped_all_nan": all_nan,
                "split_sizes": {k: int(len(v)) for k, v in idx.items()}, "models": {}}
     for name, model in models.items():
         model.fit(X.iloc[idx["train"]], y[idx["train"]])
@@ -106,9 +153,14 @@ def run_baselines(df, groups, out_dir=None, seed=0, evaluate_test=False):
     return results
 
 
-def format_results(results):
+def format_results(results: dict[str, Any]) -> str:
+    """One-line-per-model summary for the terminal. Validation always; the test
+    column appears only for a run that explicitly asked for it."""
     lines = [f"groups={results['groups']}  features={results['n_features']}  "
              f"split={results['split_sizes']}"]
+    if results.get("dropped_all_nan"):
+        lines.append(f"  dropped {len(results['dropped_all_nan'])} all-NaN column(s): "
+                     f"{', '.join(results['dropped_all_nan'])}")
     for name, r in results["models"].items():
         v = r["val"]
         line = f"  {name:24s} val AUC {v['auc_roc']:.3f}  PR-AUC {v['pr_auc']:.3f}  F1@{r['threshold']:.2f} {v['f1']:.3f}"

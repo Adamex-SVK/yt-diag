@@ -1,0 +1,488 @@
+{
+  "n_videos": 1860,
+  "by_category": {
+    "comedy": 464,
+    "howto": 373,
+    "product_reviews": 482,
+    "vlogs": 541
+  },
+  "shortcut_ceiling": {
+    "all": {
+      "n": 1860,
+      "r2_oof": 0.5838,
+      "spearman_meta__channel_follower_count": 0.708,
+      "spearman_age_days": 0.151,
+      "spearman_meta__duration_sec": -0.042,
+      "spearman_meta__is_short": 0.153
+    },
+    "comedy": {
+      "n": 464,
+      "r2_oof": 0.4278,
+      "spearman_meta__channel_follower_count": 0.444,
+      "spearman_age_days": 0.625,
+      "spearman_meta__duration_sec": -0.081,
+      "spearman_meta__is_short": 0.167
+    },
+    "howto": {
+      "n": 373,
+      "r2_oof": 0.6212,
+      "spearman_meta__channel_follower_count": 0.563,
+      "spearman_age_days": 0.544,
+      "spearman_meta__duration_sec": 0.097,
+      "spearman_meta__is_short": -0.173
+    },
+    "product_reviews": {
+      "n": 482,
+      "r2_oof": 0.5186,
+      "spearman_meta__channel_follower_count": 0.425,
+      "spearman_age_days": 0.147,
+      "spearman_meta__duration_sec": -0.169,
+      "spearman_meta__is_short": 0.31
+    },
+    "vlogs": {
+      "n": 541,
+      "r2_oof": 0.6475,
+      "spearman_meta__channel_follower_count": 0.736,
+      "spearman_age_days": 0.204,
+      "spearman_meta__duration_sec": -0.016,
+      "spearman_meta__is_short": 0.038
+    }
+  },
+  "rank_stability": {
+    "n_videos": 1257,
+    "max_day": 5,
+    "by_day": {
+      "day1": {
+        "spearman_vs_final": 0.946,
+        "viral_quartile_agreement": 0.893,
+        "median_view_multiple_to_final": 2.12
+      },
+      "day2": {
+        "spearman_vs_final": 0.984,
+        "viral_quartile_agreement": 0.932,
+        "median_view_multiple_to_final": 1.41
+      },
+      "day3": {
+        "spearman_vs_final": 0.994,
+        "viral_quartile_agreement": 0.974,
+        "median_view_multiple_to_final": 1.16
+      },
+      "day4": {
+        "spearman_vs_final": 0.999,
+        "viral_quartile_agreement": 0.991,
+        "median_view_multiple_to_final": 1.05
+      }
+    }
+  },
+  "label_configs": [
+    {
+      "config": "4age x 4size",
+      "n_labelled": 1859,
+      "viral_rate": 0.236,
+      "min_cell": 10,
+      "median_cell": 28,
+      "cells_under_20": 13,
+      "auc_age": 0.539,
+      "auc_subs": 0.504,
+      "auc_both": 0.536,
+      "auc_is_short": 0.596,
+      "auc_all_confounds": 0.646,
+      "per_category_n": {
+        "comedy": 464,
+        "howto": 373,
+        "product_reviews": 481,
+        "vlogs": 541
+      }
+    },
+    {
+      "config": "6age x 4size",
+      "n_labelled": 1859,
+      "viral_rate": 0.23,
+      "min_cell": 3,
+      "median_cell": 19,
+      "cells_under_20": 54,
+      "auc_age": 0.529,
+      "auc_subs": 0.504,
+      "auc_both": 0.523,
+      "auc_is_short": 0.601,
+      "auc_all_confounds": 0.647,
+      "per_category_n": {
+        "comedy": 464,
+        "howto": 373,
+        "product_reviews": 481,
+        "vlogs": 541
+      }
+    },
+    {
+      "config": "8age x 4size",
+      "n_labelled": 1859,
+      "viral_rate": 0.225,
+      "min_cell": 2,
+      "median_cell": 14,
+      "cells_under_20": 104,
+      "auc_age": 0.541,
+      "auc_subs": 0.467,
+      "auc_both": 0.507,
+      "auc_is_short": 0.593,
+      "auc_all_confounds": 0.63,
+      "per_category_n": {
+        "comedy": 464,
+        "howto": 373,
+        "product_reviews": 481,
+        "vlogs": 541
+      }
+    },
+    {
+      "config": "4age x 4size, min_age=7",
+      "n_labelled": 1451,
+      "viral_rate": 0.234,
+      "min_cell": 8,
+      "median_cell": 22,
+      "cells_under_20": 19,
+      "auc_age": 0.517,
+      "auc_subs": 0.488,
+      "auc_both": 0.52,
+      "auc_is_short": 0.625,
+      "auc_all_confounds": 0.671,
+      "per_category_n": {
+        "comedy": 327,
+        "howto": 306,
+        "product_reviews": 403,
+        "vlogs": 415
+      }
+    },
+    {
+      "config": "6age x 4size, min_age=7",
+      "n_labelled": 1451,
+      "viral_rate": 0.225,
+      "min_cell": 3,
+      "median_cell": 15,
+      "cells_under_20": 80,
+      "auc_age": 0.5,
+      "auc_subs": 0.498,
+      "auc_both": 0.486,
+      "auc_is_short": 0.607,
+      "auc_all_confounds": 0.618,
+      "per_category_n": {
+        "comedy": 327,
+        "howto": 306,
+        "product_reviews": 403,
+        "vlogs": 415
+      }
+    },
+    {
+      "config": "8age x 4size, min_age=7",
+      "n_labelled": 1451,
+      "viral_rate": 0.218,
+      "min_cell": 1,
+      "median_cell": 11,
+      "cells_under_20": 124,
+      "auc_age": 0.492,
+      "auc_subs": 0.503,
+      "auc_both": 0.497,
+      "auc_is_short": 0.595,
+      "auc_all_confounds": 0.611,
+      "per_category_n": {
+        "comedy": 327,
+        "howto": 306,
+        "product_reviews": 403,
+        "vlogs": 415
+      }
+    },
+    {
+      "config": "4age x 4size, min_age=14",
+      "n_labelled": 1162,
+      "viral_rate": 0.23,
+      "min_cell": 4,
+      "median_cell": 18,
+      "cells_under_20": 37,
+      "auc_age": 0.51,
+      "auc_subs": 0.484,
+      "auc_both": 0.494,
+      "auc_is_short": 0.575,
+      "auc_all_confounds": 0.624,
+      "per_category_n": {
+        "comedy": 248,
+        "howto": 302,
+        "product_reviews": 381,
+        "vlogs": 231
+      }
+    },
+    {
+      "config": "6age x 4size, min_age=14",
+      "n_labelled": 1162,
+      "viral_rate": 0.224,
+      "min_cell": 2,
+      "median_cell": 12,
+      "cells_under_20": 90,
+      "auc_age": 0.478,
+      "auc_subs": 0.506,
+      "auc_both": 0.491,
+      "auc_is_short": 0.577,
+      "auc_all_confounds": 0.603,
+      "per_category_n": {
+        "comedy": 248,
+        "howto": 302,
+        "product_reviews": 381,
+        "vlogs": 231
+      }
+    },
+    {
+      "config": "8age x 4size, min_age=14",
+      "n_labelled": 1162,
+      "viral_rate": 0.214,
+      "min_cell": 1,
+      "median_cell": 9,
+      "cells_under_20": 127,
+      "auc_age": 0.505,
+      "auc_subs": 0.469,
+      "auc_both": 0.517,
+      "auc_is_short": 0.568,
+      "auc_all_confounds": 0.623,
+      "per_category_n": {
+        "comedy": 248,
+        "howto": 302,
+        "product_reviews": 381,
+        "vlogs": 231
+      }
+    },
+    {
+      "config": "4age x 4size, min_age=30",
+      "n_labelled": 998,
+      "viral_rate": 0.226,
+      "min_cell": 3,
+      "median_cell": 16,
+      "cells_under_20": 43,
+      "auc_age": 0.517,
+      "auc_subs": 0.432,
+      "auc_both": 0.51,
+      "auc_is_short": 0.56,
+      "auc_all_confounds": 0.581,
+      "per_category_n": {
+        "comedy": 193,
+        "howto": 296,
+        "product_reviews": 367,
+        "vlogs": 142
+      }
+    },
+    {
+      "config": "6age x 4size, min_age=30",
+      "n_labelled": 998,
+      "viral_rate": 0.217,
+      "min_cell": 1,
+      "median_cell": 11,
+      "cells_under_20": 91,
+      "auc_age": 0.503,
+      "auc_subs": 0.472,
+      "auc_both": 0.47,
+      "auc_is_short": 0.555,
+      "auc_all_confounds": 0.547,
+      "per_category_n": {
+        "comedy": 193,
+        "howto": 296,
+        "product_reviews": 367,
+        "vlogs": 142
+      }
+    },
+    {
+      "config": "8age x 4size, min_age=30",
+      "n_labelled": 998,
+      "viral_rate": 0.217,
+      "min_cell": 1,
+      "median_cell": 7,
+      "cells_under_20": 126,
+      "auc_age": 0.468,
+      "auc_subs": 0.45,
+      "auc_both": 0.45,
+      "auc_is_short": 0.551,
+      "auc_all_confounds": 0.514,
+      "per_category_n": {
+        "comedy": 193,
+        "howto": 296,
+        "product_reviews": 367,
+        "vlogs": 142
+      }
+    }
+  ],
+  "label_configs_format_stratified": [
+    {
+      "config": "3age x 3size x 2format",
+      "n_labelled": 1854,
+      "viral_rate": 0.236,
+      "min_cell": 8,
+      "median_cell": 24,
+      "cells_under_20": 22,
+      "auc_age": 0.566,
+      "auc_subs": 0.531,
+      "auc_is_short": 0.447,
+      "auc_all_confounds": 0.576,
+      "shorts_over_representation": 0.99,
+      "per_category_n": {
+        "comedy": 463,
+        "howto": 373,
+        "product_reviews": 480,
+        "vlogs": 538
+      }
+    },
+    {
+      "config": "3age x 3size x 2format, min_age=7",
+      "n_labelled": 1448,
+      "viral_rate": 0.23,
+      "min_cell": 8,
+      "median_cell": 19,
+      "cells_under_20": 37,
+      "auc_age": 0.535,
+      "auc_subs": 0.531,
+      "auc_is_short": 0.466,
+      "auc_all_confounds": 0.572,
+      "shorts_over_representation": 1.0,
+      "per_category_n": {
+        "comedy": 327,
+        "howto": 306,
+        "product_reviews": 403,
+        "vlogs": 412
+      }
+    },
+    {
+      "config": "4age x 4size x 2format",
+      "n_labelled": 1854,
+      "viral_rate": 0.227,
+      "min_cell": 1,
+      "median_cell": 13,
+      "cells_under_20": 102,
+      "auc_age": 0.553,
+      "auc_subs": 0.48,
+      "auc_is_short": 0.449,
+      "auc_all_confounds": 0.529,
+      "shorts_over_representation": 1.01,
+      "per_category_n": {
+        "comedy": 463,
+        "howto": 373,
+        "product_reviews": 480,
+        "vlogs": 538
+      }
+    },
+    {
+      "config": "2age x 2size x 2format",
+      "n_labelled": 1854,
+      "viral_rate": 0.243,
+      "min_cell": 30,
+      "median_cell": 52,
+      "cells_under_20": 0,
+      "auc_age": 0.599,
+      "auc_subs": 0.599,
+      "auc_is_short": 0.446,
+      "auc_all_confounds": 0.66,
+      "shorts_over_representation": 1.0,
+      "per_category_n": {
+        "comedy": 463,
+        "howto": 373,
+        "product_reviews": 480,
+        "vlogs": 538
+      }
+    }
+  ],
+  "format_leakage": {
+    "frames_portrait_matches_is_short": 0.9898,
+    "max_duration_of_a_short_sec": 180.0,
+    "duration_180s_rule": {
+      "recall": 1.0,
+      "precision": 0.942
+    },
+    "spearman_vis__thumb_brightness_vs_is_short": -0.736,
+    "spearman_vis__thumb_saturation_vs_is_short": -0.145,
+    "spearman_vis__frames_mean_brightness_vs_is_short": 0.231
+  },
+  "shorts": {
+    "population": {
+      "comedy": {
+        "n": 463,
+        "shorts": 265,
+        "regular": 198,
+        "shorts_share": 0.572,
+        "median_views_shorts": 1730567.0,
+        "median_views_regular": 807284.0
+      },
+      "howto": {
+        "n": 373,
+        "shorts": 229,
+        "regular": 144,
+        "shorts_share": 0.614,
+        "median_views_shorts": 541613.0,
+        "median_views_regular": 1387603.5
+      },
+      "product_reviews": {
+        "n": 481,
+        "shorts": 177,
+        "regular": 304,
+        "shorts_share": 0.368,
+        "median_views_shorts": 28771.0,
+        "median_views_regular": 6708.5
+      },
+      "vlogs": {
+        "n": 538,
+        "shorts": 304,
+        "regular": 234,
+        "shorts_share": 0.565,
+        "median_views_shorts": 336781.5,
+        "median_views_regular": 253435.5
+      }
+    },
+    "viral_share": {
+      "comedy": {
+        "viral_n": 115,
+        "shorts_in_viral": 0.8,
+        "over_representation": 1.4
+      },
+      "howto": {
+        "viral_n": 93,
+        "shorts_in_viral": 0.613,
+        "over_representation": 1.0
+      },
+      "product_reviews": {
+        "viral_n": 120,
+        "shorts_in_viral": 0.65,
+        "over_representation": 1.77
+      },
+      "vlogs": {
+        "viral_n": 134,
+        "shorts_in_viral": 0.649,
+        "over_representation": 1.15
+      }
+    }
+  },
+  "feature_matrix": {
+    "n_input_columns": 125,
+    "by_prefix": {
+      "meta": {
+        "n_columns": 14,
+        "mean_missing": 0.0724,
+        "max_missing": 1.0
+      },
+      "sched": {
+        "n_columns": 4,
+        "mean_missing": 0.0032,
+        "max_missing": 0.0032
+      },
+      "vis": {
+        "n_columns": 15,
+        "mean_missing": 0.0192,
+        "max_missing": 0.2876
+      },
+      "aud": {
+        "n_columns": 92,
+        "mean_missing": 0.0227,
+        "max_missing": 0.3726
+      }
+    },
+    "constant_columns": [
+      "meta__definition_hd"
+    ],
+    "columns_missing_over_50pct": [
+      "meta__definition_hd"
+    ],
+    "egemaps_pairs_abs_corr_over_0.95": 12,
+    "egemaps_n": 88,
+    "video_age_is_an_input": false
+  }
+}

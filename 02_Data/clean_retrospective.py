@@ -60,17 +60,20 @@ but does not parse is a FATAL error, never merged over -- a crash mid-write
 must stay visible and recoverable, not silently cement data loss (review
 2026-08-31).
 """
+from __future__ import annotations
 import argparse
 import csv
 import datetime
 import io
 import json
+import math
 import os
 import re
 import sys
 import urllib.error
 import urllib.parse
 import urllib.request
+from typing import Any, Iterator, Optional
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import yt_shorts  # noqa: E402  -- definitive Shorts verdict, shared with tracker/backfill
@@ -93,7 +96,9 @@ NO_SPEECH_PAUSE_RATIO = 0.5   # informational flag
 NO_SPEECH_VETO = 0.8          # usability veto -- see module docstring
 EN_STOPWORD_RATE = 0.15  # below this, Latin text is likely not English
 LATIN_RATIO_EN = 0.8
-CCT_RANGE = (1000.0, 20000.0)  # plausible correlated color temperature (K)
+CCT_RANGE = (1667.0, 25000.0)  # version-3 Planckian-locus support (K)
+CCT_VERSION = 3
+CCT_METHOD = "nearest_planckian_locus_cie1960uv_1pct_lut"
 
 _STOPWORDS = frozenset(
     "the a an and or but of to in on for with is are was were be been it this "
@@ -105,7 +110,7 @@ _SRT_MARKUP = re.compile(r"<[^>]+>")
 
 # ---------------------------------------------------------------- transcripts
 
-def parse_srt_text_lines(path, keep_tags=False):
+def parse_srt_text_lines(path: str, keep_tags: bool = False) -> list[str]:
     """Cue text lines of an SRT, in order: markup and the literal WebVTT/ASS
     hard-space escape stripped, YouTube's `>>` speaker prefix removed, and
     bracket-only cues ([Music], [Applause]) dropped unless keep_tags -- the
@@ -134,7 +139,7 @@ def parse_srt_text_lines(path, keep_tags=False):
     return lines
 
 
-def dedup_rolling_lines(lines):
+def dedup_rolling_lines(lines: list[str]) -> list[str]:
     """Collapse YouTube auto-caption rolling windows: consecutive cues repeat
     the previous cue's tail line before appending one new line. A line is
     dropped if it equals the previously kept line, or if the previously kept
@@ -159,11 +164,15 @@ def dedup_rolling_lines(lines):
     return kept
 
 
-def words_of(text):
+def words_of(text: str) -> list[str]:
+    """Whitespace tokens -- the one word definition behind MIN_WORDS,
+    transcript_words and dup8_ratio, so those three always count the same
+    thing. Punctuation stays attached and case is preserved; script_profile
+    normalises separately for the checks where token identity matters."""
     return text.split()
 
 
-def dup8_ratio(words):
+def dup8_ratio(words: list[str]) -> float:
     """Fraction of 8-grams that are repeats of an earlier 8-gram (0 for <9
     words). The audit's repetition metric: ~0.35 on raw auto captions."""
     if len(words) < 9:
@@ -172,8 +181,12 @@ def dup8_ratio(words):
     return 1.0 - len(set(grams)) / len(grams)
 
 
-def script_profile(text):
-    """(latin_ratio among letters, english_stopword_rate among tokens)."""
+def script_profile(text: str) -> tuple[float, float]:
+    """(latin_ratio among letters, english_stopword_rate among tokens), both
+    fractions in 0..1. Text with no letters at all scores (0.0, 0.0), i.e.
+    indistinguishable from non-Latin script; that only reaches a verdict in
+    classify_transcript after the MIN_WORDS gate, where it is a genuine 'not
+    English' rather than an empty-input artefact."""
     letters = [c for c in text if c.isalpha()]
     if not letters:
         return 0.0, 0.0
@@ -187,7 +200,7 @@ def script_profile(text):
 _BRACKETED = re.compile(r"[\[(][^\])]*[\])]")
 
 
-def tag_token_ratio(text):
+def tag_token_ratio(text: str) -> float:
     """Fraction of tokens sitting inside [Music]/(laughs)-style brackets.
 
     Counted over TOKENS, not lines: SRT-derived text is one line per cue while
@@ -202,7 +215,7 @@ def tag_token_ratio(text):
     return min(1.0, tagged / total)
 
 
-def rebuild_transcript(video_dir):
+def rebuild_transcript(video_dir: str) -> Optional[str]:
     """transcript_clean.txt from captions.en.srt where the SRT is the better
     source: the transcript came from auto captions (rolling-window artifact),
     or the whisper output is missing/under the word bar. Returns the action
@@ -256,7 +269,14 @@ def _read_text(path):
         return f.read()
 
 
-def done_videos(data_dir):
+def done_videos(data_dir: str) -> Iterator[tuple[str, str, str]]:
+    """Yield (category, video_id, video_dir) for every COMPLETED video, sorted
+    by category then id so runs are reproducible.
+
+    The `.done` sentinel is the collector's last write for a video; a directory
+    without it is a half-downloaded video whose missing files would otherwise
+    show up in the manifest as data-quality defects rather than as an
+    unfinished download."""
     for category in sorted(os.listdir(data_dir)):
         cat_dir = os.path.join(data_dir, category)
         if not os.path.isdir(cat_dir):
@@ -308,7 +328,10 @@ def _image_size(path):
 
 # ---------------------------------------------------------------- API fixups
 
-def load_api_key():
+def load_api_key() -> str:
+    """YOUTUBE_API_KEY from the repo-root .env (never committed). Exits instead
+    of returning empty: --api-fixups has nothing to do without a key, and a
+    silent no-key run would look like 'nothing to fix'."""
     env_path = os.path.join(ROOT, ".env")
     if not os.path.exists(env_path):
         sys.exit(f"No {env_path} -- create it with YOUTUBE_API_KEY=<your key>")
@@ -333,7 +356,7 @@ def _iso8601_duration_sec(s):
     return d * 86400 + h * 3600 + mi * 60 + sec
 
 
-def api_fixups(data_dir):
+def api_fixups(data_dir: str) -> None:
     """Recover metadata.json nulls that the labeler/features need (duration,
     channel_follower_count) from the API into metadata_extra.json -- Adam's
     metadata.json is never edited. Generic: finds every affected done row."""
@@ -388,7 +411,7 @@ def api_fixups(data_dir):
 
 # ------------------------------------------------------------- shorts reprobe
 
-def reprobe_shorts(data_dir):
+def reprobe_shorts(data_dir: str) -> None:
     """Re-run the definitive /shorts/ URL test (no API quota) on doubtful
     is_short=false rows: <=60s duration, or portrait frames. A definitive
     verdict (either way) replaces the stored one; inconclusive probes change
@@ -436,8 +459,21 @@ def reprobe_shorts(data_dir):
 
 # ------------------------------------------------------------------ manifest
 
-def classify_transcript(final_text, source, lang, speechless):
-    """`speechless` is the usability veto (pause_ratio >= NO_SPEECH_VETO), not
+def classify_transcript(
+    final_text: Optional[str],
+    source: Optional[str],
+    lang: str,
+    speechless: bool,
+) -> tuple[str, bool, int, float, float, float, float]:
+    """Returns (kind, usable, words, dup8, latin_ratio, en_stopword_rate,
+    tag_token_ratio) -- `kind` one of the six values listed in the module
+    docstring, the last four fractions in 0..1, `words` a count after tag
+    removal. `final_text` None means no transcript exists at all (kind
+    'missing'); `lang` "" means the video declares no audio language, which is
+    treated as English because that is what the collector's English-only
+    pipeline assumed.
+
+    `speechless` is the usability veto (pause_ratio >= NO_SPEECH_VETO), not
     the informational no_speech flag -- see the module docstring.
 
     Word counts, script and stopword rates are all measured on the text with
@@ -468,7 +504,20 @@ def classify_transcript(final_text, source, lang, speechless):
     return kind, usable, n, dup8, latin, stop, tags
 
 
-def build_manifest(data_dir):
+def build_manifest(data_dir: str) -> list[dict[str, Any]]:
+    """One row per .done video, in done_videos order, ready for csv.DictWriter
+    (every row carries the same keys in the same order).
+
+    Values are CSV-shaped, not Python-shaped: an absent number is the empty
+    string, not 0, so a 0 in the CSV means measured-as-0 (duration, pause_ratio
+    and age_days all have legitimate near-zero values). channel_follower_count
+    is the one exception -- a falsy count and an absent one both come out ""
+    with flag_subs_missing=1. Duration and subscriber count prefer
+    metadata.json and fall back to the --api-fixups values, with a *_source
+    column recording which one was used.
+
+    Purely descriptive: nothing here excludes a video. Which rows a labeling
+    cohort drops is decided downstream, with this manifest as the evidence."""
     rows = []
     for category, vid, d in done_videos(data_dir):
         unreadable = []
@@ -509,12 +558,44 @@ def build_manifest(data_dir):
         tsize = _image_size(thumb) if thumb else None
         fsize = _image_size(os.path.join(d, "frames", "frame_00.jpg"))
 
-        def _in(v, lo, hi):
-            return v is None or (isinstance(v, (int, float)) and lo <= v <= hi)
-        cct_valid = (_in((vis.get("thumbnail") or {}).get("cct"), *CCT_RANGE)
-                     and _in(vis.get("frames_mean_cct"), *CCT_RANGE)
-                     # a std has no lower CCT bound -- only divergence is invalid
-                     and _in(vis.get("frames_std_cct"), 0.0, CCT_RANGE[1]))
+        def _in_or_missing(v, lo, hi):
+            return v is None or (isinstance(v, (int, float))
+                                 and math.isfinite(v) and lo <= v <= hi)
+        def _present_in(v, lo, hi):
+            return (isinstance(v, (int, float)) and math.isfinite(v)
+                    and lo <= v <= hi)
+        thumb_cct = (vis.get("thumbnail") or {}).get("cct")
+        frame_mean_cct = vis.get("frames_mean_cct")
+        frame_std_cct = vis.get("frames_std_cct")
+        cct_frames_valid = vis.get("cct_frames_valid")
+        cct_frames_total = vis.get("cct_frames_total")
+        counts_valid = (isinstance(cct_frames_valid, int)
+                        and isinstance(cct_frames_total, int)
+                        and 0 <= cct_frames_valid <= cct_frames_total)
+        cct_policy_valid = (
+            vis.get("cct_version") == CCT_VERSION
+            and vis.get("cct_method") == CCT_METHOD
+            and counts_valid
+            and _in_or_missing(thumb_cct, *CCT_RANGE)
+            and _in_or_missing(frame_mean_cct, *CCT_RANGE)
+            # A spread is not itself a temperature; require only a finite,
+            # nonnegative value within the full locus span.
+            and _in_or_missing(frame_std_cct, 0.0, CCT_RANGE[1])
+        )
+        cct_thumbnail_valid = (cct_policy_valid
+                               and bool(vis.get("cct_thumbnail_valid"))
+                               and _present_in(thumb_cct, *CCT_RANGE))
+        cct_frames_have_valid = (cct_policy_valid and cct_frames_valid > 0
+                                 and _present_in(frame_mean_cct, *CCT_RANGE))
+        # This is the model-ready aggregate triplet. Partial frame coverage is
+        # allowed but exposed separately; a missing thumbnail or frame mean is
+        # never silently called valid.
+        cct_feature_valid = (cct_thumbnail_valid and cct_frames_have_valid
+                             and _present_in(frame_std_cct, 0.0, CCT_RANGE[1]))
+        cct_frames_complete = (cct_policy_valid and cct_frames_total > 0
+                               and cct_frames_valid == cct_frames_total)
+        cct_frame_coverage = (cct_frames_valid / cct_frames_total
+                              if counts_valid and cct_frames_total else "")
 
         pause_ratio = ((aud or {}).get("pauses") or {}).get("pause_ratio")
         no_speech = isinstance(pause_ratio, (int, float)) and pause_ratio > NO_SPEECH_PAUSE_RATIO
@@ -558,7 +639,17 @@ def build_manifest(data_dir):
             "thumb_width": tsize[0] if tsize else "", "thumb_height": tsize[1] if tsize else "",
             "thumb_subhd": int(bool(tsize) and (tsize[0] < 1280 or tsize[1] < 720)),
             "frames_portrait": int(bool(fsize) and fsize[1] > fsize[0]),
-            "vis_cct_valid": int(cct_valid),
+            # `vis_cct_valid` is retained as the concise model-ready flag;
+            # policy conformance and each source of missingness are separate.
+            "vis_cct_valid": int(cct_feature_valid),
+            "vis_cct_policy_valid": int(cct_policy_valid),
+            "vis_cct_thumbnail_valid": int(cct_thumbnail_valid),
+            "vis_cct_frames_valid": cct_frames_valid if counts_valid else "",
+            "vis_cct_frames_total": cct_frames_total if counts_valid else "",
+            "vis_cct_frame_coverage": cct_frame_coverage,
+            "vis_cct_frames_complete": int(cct_frames_complete),
+            "vis_cct_any_missing": int(not cct_thumbnail_valid
+                                       or not cct_frames_complete),
             "audio_present": int(aud is not None),
             "pause_ratio": pause_ratio if pause_ratio is not None else "",
             "no_speech": int(no_speech),
@@ -579,7 +670,14 @@ def build_manifest(data_dir):
     return rows
 
 
-def write_manifest(rows, data_dir):
+def write_manifest(rows: list[dict[str, Any]], data_dir: str) -> str:
+    """Write rows to <data_dir>/cleaning_manifest.csv; returns the path.
+
+    The header comes from rows[0], so `rows` must be non-empty and homogeneous
+    (build_manifest builds every row from one literal; main exits on an empty
+    manifest rather than truncating the file to nothing). Rendered in memory
+    first and then written atomically: a crash must leave the previous
+    manifest, not a half-CSV that pandas would parse without complaint."""
     path = os.path.join(data_dir, MANIFEST_NAME)
     buf = io.StringIO()
     w = csv.DictWriter(buf, fieldnames=list(rows[0].keys()), lineterminator="\n")
@@ -589,7 +687,13 @@ def write_manifest(rows, data_dir):
     return path
 
 
-def report(rows):
+def report(rows: list[dict[str, Any]]) -> None:
+    """Print the audit summary for a manifest to stdout; writes nothing.
+
+    Every line is informational except the last: flag_clean_shadows_raw means a
+    rebuilt transcript is a suspected truncated write fragment, which needs a
+    re-run of --fix-transcripts before the manifest is trusted. Requires a
+    non-empty `rows` (the usable percentage divides by len)."""
     n = len(rows)
     def count(pred):
         return sum(1 for r in rows if pred(r))
@@ -599,7 +703,8 @@ def report(rows):
           f"{count(lambda r: r['is_short'] == 'false')}/{count(lambda r: r['is_short'] == '')}")
     print(f"  duration missing: {count(lambda r: r['flag_duration_missing'])}, "
           f"subs missing: {count(lambda r: r['flag_subs_missing'])}, "
-          f"cct invalid: {count(lambda r: not r['vis_cct_valid'])}, "
+          f"cct feature invalid: {count(lambda r: not r['vis_cct_valid'])}, "
+          f"cct partial/missing: {count(lambda r: r['vis_cct_any_missing'])}, "
           f"no audio features: {count(lambda r: not r['audio_present'])}, "
           f"no-speech: {count(lambda r: r['no_speech'])}")
     kinds = {}
@@ -615,7 +720,10 @@ def report(rows):
               f"likely truncated write fragments; re-run --fix-transcripts and re-check")
 
 
-def main():
+def main() -> None:
+    """CLI entry point. The mode flags are composable and always run BEFORE the
+    manifest is rebuilt, so a single invocation ends with a manifest that
+    describes the post-fix state rather than the state the run started in."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data-dir", default=DATA_DIR)
     parser.add_argument("--fix-transcripts", action="store_true",

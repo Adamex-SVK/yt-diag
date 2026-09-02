@@ -1,4 +1,13 @@
 """
+SUPERSEDED -- this is label v1, replaced by compute_labels_v2.py (CHANGELOG.md
+2026-08-26) and kept only as a reference for what the original CLAUDE.md label
+was. Do not run it on the real cohort. Two flaws found in review: views/day
+assumes linear view accumulation, so the score decays with video age and the
+label partly encodes how new a video is; and the subscriber-count denominator
+is post-outcome (a viral video grows its own denominator, and subs is itself a
+model feature -- target leakage), with the subs=1 fallback below near-
+deterministically labeling hidden-subscriber videos viral.
+
 Label computation for YT-Diag (CLAUDE.md label definition):
 
     "viral" = top quartile of views-per-day-since-upload, normalized by
@@ -15,29 +24,51 @@ Usage:
     python3 02_Data/compute_labels.py --category comedy
     python3 02_Data/compute_labels.py --category all
 """
+from __future__ import annotations
+
 import argparse
 import csv
 import datetime
 import json
 import os
+from typing import Any, Optional
 
 OUT_DIR = os.path.join(os.path.dirname(__file__), "processed")
 QUARTILE_CUTOFF = 0.75
 
 
-def is_done(video_dir):
+def is_done(video_dir: str) -> bool:
+    """True once collect_and_extract.py has fully processed this video
+    directory: the .done marker is written last, after every artifact. v1
+    (superseded); compute_labels_v2.py has the same check."""
     return os.path.exists(os.path.join(video_dir, ".done"))
 
 
-def load_metadata(video_dir):
+def load_metadata(video_dir: str) -> dict[str, Any]:
+    """collect_and_extract.py's metadata.json for one video. v1 (superseded):
+    unlike v2 this raises out of label_category on an unreadable file instead
+    of recording the video as an exclusion."""
     with open(os.path.join(video_dir, "metadata.json")) as f:
         return json.load(f)
 
 
-def compute_rate(meta):
+def compute_rate(meta: dict[str, Any]) -> tuple[Optional[dict[str, Any]], list[str]]:
     """views-per-day-since-upload, normalized by subscriber count.
     Returns (rate, warnings) -- warnings flag assumptions made for missing
-    or degenerate inputs, so they're visible in the output, not silent."""
+    or degenerate inputs, so they're visible in the output, not silent.
+
+    v1, SUPERSEDED: both quantities below are the reason (see the module
+    docstring) -- views_per_day decays with age, and dividing by a
+    post-outcome subscriber count is reverse causality.
+
+    rate is None (with the reason in warnings) when upload_date or
+    collected_at is missing, i.e. the rate is uncomputable and the caller
+    must skip the video. Otherwise its keys are: days_since_upload (whole
+    days, floored at 1 so the division is safe -- a same-day collection
+    reports 1, not 0), views_per_day (views per day, lifetime average),
+    normalized_rate (views per day per subscriber, the ranked score; with
+    subs substituted by 1 when the count is hidden or zero, which makes that
+    video's score incomparable to the rest of the cohort)."""
     warnings = []
     upload_date = meta.get("upload_date")
     collected_at = meta.get("collected_at")
@@ -63,7 +94,18 @@ def compute_rate(meta):
     return {"days_since_upload": days, "views_per_day": views_per_day, "normalized_rate": normalized}, warnings
 
 
-def label_category(category):
+def label_category(category: str) -> list[dict[str, Any]]:
+    """Label one category under OUT_DIR (v1 has no --data-dir option) and
+    write label.json per video plus labels_summary.csv. Returns the labeled
+    rows, or an empty list when the category has no processed/ folder or no
+    .done videos -- an empty list is "nothing to rank", never "all typical".
+
+    v1, SUPERSEDED by compute_labels_v2.py. Two things to know before reading
+    any number this produced: the whole category is ranked as one pool (no age
+    or channel-size strata, so the ranking is confounded by both), and the
+    cutoff is percentile >= QUARTILE_CUTOFF, which includes the boundary video
+    and therefore labels slightly more than a quarter viral (26 of 100, 6 of
+    20). v2 takes exactly the top floor(n/4) per cell instead."""
     cat_dir = os.path.join(OUT_DIR, category)
     if not os.path.isdir(cat_dir):
         print(f"{category}: no processed/ folder, skipping")
@@ -117,7 +159,12 @@ def label_category(category):
     return rows
 
 
-def main():
+def main() -> None:
+    """CLI entry point for the v1 label -- SUPERSEDED, run
+    compute_labels_v2.py on the real cohort instead. --category all labels
+    every subdirectory of OUT_DIR as its own pool. Overwrites the same
+    label.json / labels_summary.csv files v2 writes, so running this after v2
+    silently replaces v2 labels with v1 ones."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--category", required=True)
     args = parser.parse_args()

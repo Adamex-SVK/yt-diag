@@ -34,11 +34,14 @@ Usage:
 
 Requires in project-root .env: YOUTUBE_API_KEY=...
 """
+from __future__ import annotations
+
 import argparse
 import json
 import os
 import sys
 import time
+from typing import Any, Iterator, Optional
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -52,7 +55,11 @@ EXTRA_NAME = "metadata_extra.json"
 _known_verdicts = {}  # video_id -> "true"/"false" already in metadata_extra.json (never re-probed or overwritten)
 
 
-def load_api_key():
+def load_api_key() -> str:
+    """YOUTUBE_API_KEY from the project-root .env (first matching line, value
+    taken verbatim after the '='). Exits the process rather than returning
+    None when the file or the key is missing: without a key every batch would
+    fail and the run would report thousands of videos as "still pending"."""
     env_path = os.path.join(ROOT, ".env")
     if not os.path.exists(env_path):
         sys.exit(f"No {env_path} -- create it with YOUTUBE_API_KEY=<your key>")
@@ -63,16 +70,34 @@ def load_api_key():
     sys.exit(f"YOUTUBE_API_KEY not found in {env_path}")
 
 
-def api_get(endpoint, params):
-    """Single YouTube Data API v3 GET. Isolated so tests can stub it."""
+def api_get(endpoint: str, params: dict[str, str]) -> dict[str, Any]:
+    """Single YouTube Data API v3 GET. Isolated so tests can stub it.
+    Returns the parsed JSON body. Raises urllib.error.URLError /
+    json.JSONDecodeError; callers must treat those as transient and leave the
+    affected videos pending, since a swallowed failure here becomes permanent
+    missing data in the dataset."""
     url = f"https://www.googleapis.com/youtube/v3/{endpoint}?" + urllib.parse.urlencode(params)
     with urllib.request.urlopen(url, timeout=30) as resp:
         return json.load(resp)
 
 
-def pending_videos(data_dir, only_category):
+def pending_videos(data_dir: str, only_category: Optional[str]) -> list[tuple[str, str, str]]:
     """(video_id, video_dir, channel_id) for every .done video without an
-    extra file yet. channel_id comes from the existing metadata.json."""
+    extra file yet. channel_id comes from the existing metadata.json.
+    only_category=None means every category under data_dir.
+
+    channel_id is "" when metadata.json has none -- those videos still get
+    backfilled, just without the channel fields. A video whose metadata.json
+    is missing or unreadable is left out entirely (a re-run picks it up if the
+    file appears), so len() of this is not the count of .done videos.
+
+    Side effect: rebuilds the module-level _known_verdicts cache from the
+    metadata_extra.json files as it scans, which is how main() knows never to
+    re-probe or overwrite an is_short verdict that already exists. Call this
+    before using that cache; it is cleared on every call.
+
+    Exits the process if data_dir does not exist -- an empty result there
+    would look like "nothing to do" rather than "wrong machine"."""
     pending = []
     _known_verdicts.clear()  # rebuilt from the files on every scan
     if not os.path.isdir(data_dir):
@@ -123,9 +148,23 @@ def _write_extra(video_dir, extra):
         json.dump(merged, f, indent=2)
 
 
-def shorts_only(data_dir, only_category, recheck=False):
+def shorts_only(data_dir: str, only_category: Optional[str], recheck: bool = False) -> None:
     """Definitive Shorts verdict for every .done video without one, written
-    (merged) into metadata_extra.json. No API quota: one page fetch each."""
+    (merged) into metadata_extra.json. No API quota: one page fetch each.
+    only_category=None means every category under data_dir.
+
+    is_short is stored as a string, not a bool: "true" / "false" (definitive)
+    or "" (resolved unknown -- the page says the video is deleted or private,
+    so no verdict is possible). An INCONCLUSIVE probe (yt_shorts returns None
+    for a consent page, network error or rate limit) writes nothing and
+    withdraws nothing, so a broken connection can never be recorded as data;
+    re-run to retry those.
+
+    recheck=True re-examines videos currently marked is_short="true" (an
+    earlier classifier read unavailable pages as Shorts) and is the only mode
+    that withdraws a stored verdict -- and only on a run the breaker did not
+    abort, because in an aborted run "deleted/private" is indistinguishable
+    from "we were being blocked"."""
     todo = []
     for category in sorted(os.listdir(data_dir)):
         if only_category and category != only_category:
@@ -171,12 +210,30 @@ def shorts_only(data_dir, only_category, recheck=False):
           + (", withdrawn)" if recheck and not aborted else ")") + f", {inconclusive} inconclusive (re-run to retry)")
 
 
-def chunked(items, size=50):
+def chunked(items: list[Any], size: int = 50) -> Iterator[list[Any]]:
+    """Successive slices of at most `size` items (the last one is short).
+    The default is the YouTube Data API's per-call limit for a comma-joined
+    id list, so one chunk is exactly one videos.list / channels.list call --
+    do not raise it above 50."""
     for i in range(0, len(items), size):
         yield items[i:i + size]
 
 
-def main():
+def main() -> None:
+    """CLI entry point: --shorts-only runs just the quota-free /shorts/ URL
+    test, otherwise the full API backfill into metadata_extra.json.
+
+    Every transport failure resolves to "stays pending", never to a file
+    written with holes: a failed channels.list batch holds back all of that
+    channel's videos (they would otherwise be recorded permanently without
+    channel_country and never revisited, since the resume scan only looks for
+    published_at_utc), and a failed videos.list batch skips its own videos.
+    The only thing recorded as final is a video the API no longer returns --
+    status "missing_from_api", i.e. deleted or made private since collection,
+    written precisely so the resume scan stops retrying it forever.
+
+    A stored is_short verdict is never re-probed or overwritten here, and an
+    unknown never clears one; that is the job of --shorts-only --recheck."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--category", help="backfill only this category")
     parser.add_argument("--data-dir", default=OUT_DIR)

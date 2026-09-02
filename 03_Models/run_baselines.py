@@ -8,6 +8,8 @@
 Results go to 04_Experiments/runs/<name>/results.json (gitignored). --test
 evaluates the held-out test split: do that ONCE, at the end.
 """
+from __future__ import annotations
+
 import argparse
 import os
 import sys
@@ -22,7 +24,21 @@ from ytdiag.synthetic import generate  # noqa: E402
 RUNS_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "04_Experiments", "runs")
 
 
-def main():
+def main() -> None:
+    """Parse the CLI, load one dataset, run the baselines, print the summary.
+
+    Prints the labeled-row count and the groups that actually carry data before
+    fitting, because the two usual mistakes here do not raise. Asking for a
+    group the source lacks entirely (aud/vis on prospective rows) silently fits
+    FEWER features than requested -- those columns are absent, so nothing warns.
+    Asking for a group whose columns exist but are all NaN (sched on
+    retrospective rows collected before the backfill) leaves columns the
+    imputer drops, so n_features counts features the model never used. Compare
+    that line against --groups.
+
+    Results overwrite 04_Experiments/runs/<name>/results.json, so a rerun with
+    the same --name and different --groups replaces the earlier numbers.
+    """
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--source", choices=["retrospective", "prospective"], default="retrospective")
     ap.add_argument("--data", help="processed/ dir (retrospective) or tracking/ dir (prospective)")

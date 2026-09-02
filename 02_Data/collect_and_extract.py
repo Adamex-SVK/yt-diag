@@ -47,6 +47,8 @@ Requires in project-root .env: YOUTUBE_API_KEY=... (discovery only).
 Requires in venv (requirements.txt): opencv-python-headless, numpy,
 opensmile, openai-whisper.
 """
+from __future__ import annotations
+
 import argparse
 import concurrent.futures
 import csv
@@ -59,6 +61,7 @@ import subprocess
 import sys
 import threading
 import time
+from typing import Any, Optional
 import urllib.parse
 import urllib.request
 
@@ -113,7 +116,13 @@ _optional_import_warned = set()
 _io_lock = threading.Lock()  # guards log/manifest file writes across worker threads
 
 
-def log(msg):
+def log(msg: str) -> None:
+    """Timestamped line to stdout and appended to collection_log.txt.
+
+    Held under _io_lock because worker threads log concurrently: the log is the
+    only post-hoc account of a multi-day unattended run, and interleaved partial
+    writes would make it unreadable exactly when a run went wrong.
+    """
     line = f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] {msg}"
     print(line)
     with _io_lock, open(LOG_PATH, "a", encoding="utf-8") as f:
@@ -169,7 +178,14 @@ def _note_result(success, err_text=""):
             f"Refresh cookies.txt and re-run with --resume.")
 
 
-def check_dependencies():
+def check_dependencies() -> None:
+    """Verify yt-dlp/ffmpeg/ffprobe/deno are on PATH before any work starts.
+
+    sys.exit()s with an install hint rather than raising: a missing binary would
+    otherwise surface as thousands of identical CalledProcessError rows in the
+    manifest, i.e. a whole run's worth of videos marked "failed" for a reason
+    that has nothing to do with the videos.
+    """
     for tool in ("yt-dlp", "ffmpeg", "ffprobe"):
         if shutil.which(tool) is None:
             sys.exit(f"Missing required tool on PATH: {tool}. Install it before running this script.")
@@ -182,7 +198,13 @@ def check_dependencies():
                   "Install with: brew install deno (macOS) or see https://deno.land for other platforms.")
 
 
-def load_api_key():
+def load_api_key() -> str:
+    """YOUTUBE_API_KEY from the project-root .env.
+
+    Used for discovery only -- yt-dlp never sees it -- so a run driven by
+    --input-ids does not call this at all. Raises RuntimeError if the key is
+    missing, which is the right failure: without discovery there are no jobs.
+    """
     env_path = os.path.join(ROOT, ".env")
     with open(env_path, encoding="utf-8") as f:
         for line in f:
@@ -191,7 +213,16 @@ def load_api_key():
     raise RuntimeError(f"YOUTUBE_API_KEY not found in {env_path}")
 
 
-def warn_once(name, msg):
+def warn_once(name: str, msg: str) -> None:
+    """Log `msg` the first time this `name` is seen, then never again.
+
+    Optional-dependency warnings live on a per-video code path, so without this
+    a single missing package emits one line per video -- 8,000 copies that bury
+    the real failures. `name` is the dedup key, not the message text.
+
+    Not locked: a duplicate warning under a thread race is harmless, and taking
+    _io_lock here would nest it inside log()'s own acquisition of the same lock.
+    """
     if name not in _optional_import_warned:
         _optional_import_warned.add(name)
         log(f"WARNING: {msg}")
@@ -201,7 +232,21 @@ def warn_once(name, msg):
 # Discovery (YouTube Data API search.list -- video IDs only, no license filter)
 # ---------------------------------------------------------------------------
 
-def discover_video_ids(api_key, category_id, q, target_count):
+def discover_video_ids(api_key: str, category_id: Optional[str], q: Optional[str],
+                       target_count: int) -> list[str]:
+    """Up to `target_count` unique video IDs from search.list, in API order.
+
+    Returns FEWER than target_count without error, and that is the normal case,
+    not a failure: search.list stops issuing pageTokens long before the
+    pageInfo.totalResults estimate is exhausted (cc_availability_scan_findings.md
+    measured the gap). Callers must size the run off len() of this, never off
+    what they asked for.
+
+    IDs are deduplicated across pages because search.list repeats them, and both
+    filters are omitted when falsy -- but note a bare videoCategoryId with no `q`
+    returns 0 results on the live API, which is why every CATEGORIES entry
+    carries a keyword.
+    """
     seen = []
     seen_set = set()
     page_token = None
@@ -244,7 +289,14 @@ def discover_video_ids(api_key, category_id, q, target_count):
 # Manifest (human-readable progress log, one row per video)
 # ---------------------------------------------------------------------------
 
-def manifest_append(video_id, category, status, error=""):
+def manifest_append(video_id: str, category: str, status: str, error: str = "") -> None:
+    """Append one row to collection_manifest.csv, writing the header if the file
+    is new. `status` is "done" or "failed"; `error` is the truncated stderr.
+
+    Append-only and locked across threads on purpose: this is the audit trail
+    used to reconcile what was attempted against what landed on disk, so a video
+    that fails twice across two runs correctly appears twice.
+    """
     with _io_lock:
         is_new = not os.path.exists(MANIFEST_PATH)
         with open(MANIFEST_PATH, "a", newline="", encoding="utf-8") as f:
@@ -254,7 +306,14 @@ def manifest_append(video_id, category, status, error=""):
             writer.writerow([video_id, category, status, error, time.strftime("%Y-%m-%d %H:%M:%S")])
 
 
-def is_done(video_dir):
+def is_done(video_dir: str) -> bool:
+    """True if the .done marker exists -- the only signal --resume trusts.
+
+    process_video() writes .done last, after the temp video and audio are
+    deleted, so its presence means every artefact is on disk. A directory that
+    exists but has no marker is therefore a partial video, and is redone from
+    scratch rather than repaired.
+    """
     return os.path.exists(os.path.join(video_dir, ".done"))
 
 
@@ -262,11 +321,33 @@ def is_done(video_dir):
 # Per-video processing -- metadata, thumbnail, captions, video/frames
 # ---------------------------------------------------------------------------
 
-def run(cmd, **kwargs):
+def run(cmd: list[str], **kwargs: Any) -> subprocess.CompletedProcess[str]:
+    """subprocess.run with check=True and captured text output.
+
+    Every external-tool call goes through here so that a non-zero exit raises
+    CalledProcessError with stderr attached to it -- process_video() writes that
+    stderr into the manifest, and _note_result() pattern-matches it to detect a
+    dead cookies session. Both depend on the message surviving; a bare
+    subprocess.run that let output go to the terminal would lose it.
+    """
     return subprocess.run(cmd, check=True, capture_output=True, text=True, **kwargs)
 
 
-def fetch_metadata(video_id, video_dir):
+def fetch_metadata(video_id: str, video_dir: str) -> dict[str, Any]:
+    """Write the kept subset of yt-dlp's --dump-json to metadata.json, and
+    return the same dict.
+
+    Only the baseline's fields are kept; the rest of the dump is mostly playback
+    URLs that expire within hours and would be dead weight in the dataset.
+
+    Every count here (view/like/comment/channel_follower) is a value AS OF
+    collected_at, not a property of the video: they keep rising afterwards, so
+    any label computed from them must age-normalise against collected_at rather
+    than against the time the model is trained. `duration` is seconds. Fields
+    absent from the dump are stored as None, so a null in metadata.json means
+    "YouTube did not report it" (likes hidden by the creator, for instance), not
+    zero.
+    """
     url = f"https://www.youtube.com/watch?v={video_id}"
     result = run(["yt-dlp", *YT_DLP_EXTRA_ARGS, "--dump-json", "--skip-download", url])
     data = json.loads(result.stdout)
@@ -298,7 +379,14 @@ def fetch_metadata(video_id, video_dir):
     return keep
 
 
-def fetch_thumbnail(video_id, video_dir):
+def fetch_thumbnail(video_id: str, video_dir: str) -> None:
+    """Download the thumbnail into video_dir as thumbnail.<ext>.
+
+    The extension is whatever YouTube served (.webp as often as .jpg), so
+    consumers must glob for "thumbnail.*" -- process_video() and the adapters
+    both do. Raises CalledProcessError on failure, which fails the whole video:
+    a thumbnail is a required modality, not an optional extra.
+    """
     url = f"https://www.youtube.com/watch?v={video_id}"
     run([
         "yt-dlp", *YT_DLP_EXTRA_ARGS, "--write-thumbnail", "--skip-download",
@@ -307,7 +395,7 @@ def fetch_thumbnail(video_id, video_dir):
     ])
 
 
-def fetch_captions(video_id, video_dir):
+def fetch_captions(video_id: str, video_dir: str) -> Optional[str]:
     """Returns the path to captions.en.srt if yt-dlp produced one, else None
     -- absence is expected for many videos, not fatal on its own (see
     transcribe() below for the Whisper fallback that covers that case)."""
@@ -328,8 +416,22 @@ def fetch_captions(video_id, video_dir):
 _SRT_TAG_RE = None  # set on first use, avoids importing re at module load for a one-off
 
 
-def srt_to_text(srt_path):
-    """Strips SRT index/timestamp lines, returns plain caption text."""
+def srt_to_text(srt_path: str) -> list[str]:
+    """Caption LINES with SRT index and timestamp lines stripped -- a list, not
+    a joined string.
+
+    Callers join it themselves because the per-line split is load-bearing:
+    caption_quality_ok() counts bare [Music]-style tag lines against the line
+    total, and process_video() drops those same lines before joining.
+
+    Side effect callers depend on: compiles the module-level _SRT_TAG_RE on
+    first use. Anything touching _SRT_TAG_RE directly must have called this
+    first, or it is still None.
+
+    Decode errors are ignored rather than raised -- auto-caption SRTs are
+    occasionally mis-encoded, and losing a character is cheaper than losing the
+    video's entire transcript.
+    """
     import re
     global _SRT_TAG_RE
     if _SRT_TAG_RE is None:
@@ -344,9 +446,14 @@ def srt_to_text(srt_path):
     return lines
 
 
-def caption_quality_ok(srt_path):
+def caption_quality_ok(srt_path: str) -> bool:
     """data_retrieval.md #4.3 heuristic: word count > 50, no more than 20%
-    of lines are bare [Music]/[Applause]-style tags."""
+    of lines are bare [Music]/[Applause]-style tags.
+
+    False means "use Whisper instead", not "this video has no speech" -- an
+    empty or unreadable file also returns False. The 50-word floor is what keeps
+    a music video's two spoken lines from being accepted as a transcript.
+    """
     lines = srt_to_text(srt_path)
     if not lines:
         return False
@@ -375,7 +482,7 @@ _whisper_available = True  # set False by preload_whisper() if openai-whisper is
 # over at call time) to avoid N instances each trying to grab all 96 threads.
 
 
-def preload_whisper(num_instances=1):
+def preload_whisper(num_instances: int = 1) -> None:
     """Load Whisper/torch BEFORE any worker threads exist -- must be called
     from main(), single-threaded, prior to creating the ThreadPoolExecutor.
 
@@ -394,7 +501,13 @@ def preload_whisper(num_instances=1):
     resident, later loads from any thread just bump a refcount, no re-init.
     Loading all `num_instances` copies here (still single-threaded, still
     before the ThreadPoolExecutor exists) keeps that guarantee for all of
-    them, not just the first."""
+    them, not just the first.
+
+    A missing openai-whisper is degradation, not failure: _whisper_available
+    goes False after one warning, and every video that would have needed the
+    fallback finishes with transcript_source "none" and no transcript.txt. Such
+    a run still marks those videos .done, so the gap is invisible afterwards
+    except in transcript_info.json -- check the warning at the top of the log."""
     global _whisper_pool, _whisper_available
     try:
         import torch
@@ -414,11 +527,26 @@ def preload_whisper(num_instances=1):
         _whisper_pool.put(whisper.load_model("small.en"))
 
 
-def transcribe_with_whisper(audio_path):
+def transcribe_with_whisper(audio_path: str) -> Optional[str]:
     """data_retrieval.md #4.2/#4.3 fallback for missing/poor auto-captions.
     Assumes preload_whisper() already ran in main() before any worker
     threads started. Borrows one instance from the pool for the duration of
-    the call so up to `num_instances` transcriptions run concurrently."""
+    the call so up to `num_instances` transcriptions run concurrently.
+
+    None and "" mean different things and process_video() records the
+    difference: None is "openai-whisper is not installed, no attempt was made"
+    (transcript_source "none"), while "" is "Whisper ran and heard nothing"
+    (transcript_source "whisper", no transcript.txt written).
+
+    The instance is returned to the pool in a finally block -- a transcription
+    that raises must not permanently shrink the pool, since after
+    `num_instances` such failures every remaining video would block forever on
+    an empty queue.
+
+    English-only (small.en), which is why discovery constrains
+    relevanceLanguage=en: a non-English video reaching here produces confident
+    nonsense rather than an empty result.
+    """
     if not _whisper_available:
         return None
     model = _whisper_pool.get()
@@ -429,7 +557,19 @@ def transcribe_with_whisper(audio_path):
     return result["text"].strip()
 
 
-def download_video(video_id, tmp_path):
+def download_video(video_id: str, tmp_path: str) -> None:
+    """Download the video muxed with its audio to `tmp_path`, capped at
+    MAX_HEIGHT pixels of vertical resolution.
+
+    The file is temporary by contract, not by convenience: process_video()
+    deletes it on both the success and failure paths, so no video file is ever
+    retained (the TOS constraint in the module docstring). Anything that needs
+    pixels or audio must extract it before that deletion.
+
+    Raises CalledProcessError on failure; the stderr it carries is what the
+    auth-break breaker reads to tell a dead cookies session from a genuinely
+    unavailable video.
+    """
     # bestvideo+bestaudio (not bestvideo alone) -- audio track is required
     # for the eGeMAPS/prosody features below, not just the video frames.
     url = f"https://www.youtube.com/watch?v={video_id}"
@@ -441,7 +581,17 @@ def download_video(video_id, tmp_path):
     ])
 
 
-def probe_duration(video_path):
+def probe_duration(video_path: str) -> float:
+    """Duration of the file on disk, in SECONDS.
+
+    Deliberately measured from the downloaded container rather than reused from
+    metadata.json's `duration`: the two disagree when yt-dlp merges a slightly
+    short stream, and frame timestamps computed from the advertised length would
+    then seek past the end and hand ffmpeg a failing frame.
+
+    Raises ValueError if ffprobe reports no parseable duration (some live-stream
+    remnants), which fails the video rather than sampling it at nonsense times.
+    """
     result = run([
         "ffprobe", "-v", "error", "-show_entries", "format=duration",
         "-of", "default=noprint_wrappers=1:nokey=1", video_path,
@@ -449,11 +599,22 @@ def probe_duration(video_path):
     return float(result.stdout.strip())
 
 
-def compute_frame_timestamps(duration, frame_count):
+def compute_frame_timestamps(duration: float, frame_count: int) -> list[float]:
     """16-24 frames, denser in the first DENSE_WINDOW_SEC seconds (locked
     in the Architecture Digest: 'engagement signal concentrates' there).
     Falls back to plain uniform sampling for videos shorter than the
-    dense window, where the split is meaningless."""
+    dense window, where the split is meaningless.
+
+    `duration` and the returned timestamps are both in SECONDS. Positions are
+    bin midpoints, so no timestamp is ever 0.0 or exactly `duration` -- both
+    ends of a video are routinely black or a fade, and a black frame's mean
+    colour is not a feature.
+
+    Consequence for downstream models: the frames are NOT uniformly spaced, so
+    frame index is not proportional to time. Anything treating the 20 frames as
+    an evenly sampled sequence is wrong for any video longer than
+    DENSE_WINDOW_SEC.
+    """
     if duration <= DENSE_WINDOW_SEC:
         return [(i + 0.5) / frame_count * duration for i in range(frame_count)]
 
@@ -466,7 +627,21 @@ def compute_frame_timestamps(duration, frame_count):
     return dense_ts + sparse_ts
 
 
-def extract_frames(video_path, frames_dir, frame_count):
+def extract_frames(video_path: str, frames_dir: str, frame_count: int) -> list[str]:
+    """Write `frame_count` JPEGs as frames/frame_NN.jpg and return their paths
+    in time order (index order == sampling order, but see
+    compute_frame_timestamps(): the spacing is not uniform).
+
+    One ffmpeg call per frame, with -ss BEFORE -i so ffmpeg seeks to the nearest
+    keyframe instead of decoding the file from the start; a single-pass select
+    filter would decode every frame of a 20-minute video to keep 20 of them.
+    The cost is `frame_count` process spawns per video, which is why this is
+    still the slow step on a low-core machine.
+
+    Raises CalledProcessError if any single frame fails, so a video is never
+    marked done with a short frame set that a later consumer would read as a
+    complete one.
+    """
     os.makedirs(frames_dir, exist_ok=True)
     duration = probe_duration(video_path)
     timestamps = compute_frame_timestamps(duration, frame_count)
@@ -486,22 +661,162 @@ def extract_frames(video_path, frames_dir, frame_count):
 # temperature, brightness/saturation/contrast, face presence/area.
 # ---------------------------------------------------------------------------
 
-def _correlated_color_temp(mean_rgb):
-    """McCamy's approximation (additional_features.md 1.1). mean_rgb in
-    0-255, RGB order."""
-    r, g, b = (c / 255.0 for c in mean_rgb)
-    total = r + g + b
-    if total == 0:
+# Correlated colour temperature is only meaningful near the Planckian locus.
+# The locus approximation below is valid over exactly this range; keeping one
+# shared bound prevents the old 1500-vs-1667 K mismatch.
+CCT_VALID_K = (1667.0, 25000.0)
+CCT_VERSION = 3
+CCT_METHOD = "nearest_planckian_locus_cie1960uv_1pct_lut"
+
+# CCT is the temperature at the closest point on the Planckian locus in CIE
+# 1960 UCS. Duv is the signed distance to that closest point. Saturated colours
+# sit far off the locus, so reject them instead of assigning plausible-looking
+# temperatures to colours (such as green) that no blackbody produces.
+MAX_DUV = 0.05
+
+# sRGB (IEC 61966-2-1) linear-RGB -> CIE XYZ, D65 white point.
+_SRGB_TO_XYZ = ((0.4124564, 0.3575761, 0.1804375),
+                (0.2126729, 0.7151522, 0.0721750),
+                (0.0193339, 0.1191920, 0.9503041))
+
+
+def srgb_to_linear(c: float) -> float:
+    """Undo the sRGB transfer function for one channel, 0-1 in and out.
+
+    Pixel values are gamma-ENCODED; averaging or matrix-multiplying them
+    directly treats a perceptual code value as a light intensity. This is the
+    step the original CCT implementation omitted."""
+    return c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
+
+
+def _planckian_xy(temp_k: float) -> "tuple[float, float]":
+    """Approximate CIE 1931 xy of a blackbody at temp_k (Kang et al. cubics,
+    valid 1667-25000 K) -- used only to measure how far a colour sits from the
+    locus and interpolate the nearest temperature."""
+    t = temp_k
+    if t <= 4000.0:
+        x = (-0.2661239e9 / t ** 3 - 0.2343589e6 / t ** 2
+             + 0.8776956e3 / t + 0.179910)
+    else:
+        x = (-3.0258469e9 / t ** 3 + 2.1070379e6 / t ** 2
+             + 0.2226347e3 / t + 0.240390)
+    if t <= 2222.0:
+        y = -1.1063814 * x ** 3 - 1.34811020 * x ** 2 + 2.18555832 * x - 0.20219683
+    elif t <= 4000.0:
+        y = -0.9549476 * x ** 3 - 1.37418593 * x ** 2 + 2.09137015 * x - 0.16748867
+    else:
+        y = 3.0817580 * x ** 3 - 5.87338670 * x ** 2 + 3.75112997 * x - 0.37001483
+    return x, y
+
+
+def _uv_1960(x: float, y: float) -> "tuple[float, float]":
+    """CIE 1931 xy -> CIE 1960 UCS uv, the space Duv is defined in."""
+    d = -2.0 * x + 12.0 * y + 3.0
+    if d == 0:
+        return float("nan"), float("nan")
+    return 4.0 * x / d, 6.0 * y / d
+
+
+_planckian_lut_cache = None
+
+
+def _planckian_lut() -> "list[tuple[float, float, float]]":
+    """Planckian-locus (K, u, v) table with no step wider than 1% in K.
+
+    Projecting onto its line segments finds the closest locus point rather
+    than assuming an approximate CCT first and measuring distance only there.
+    The table is built once and needs no optional colour-science dependency,
+    so collection and modelling machines execute the identical method.
+    """
+    global _planckian_lut_cache
+    if _planckian_lut_cache is None:
+        lo, hi = CCT_VALID_K
+        temperatures = [lo]
+        while temperatures[-1] < hi:
+            temperatures.append(min(hi, temperatures[-1] * 1.01))
+        _planckian_lut_cache = [
+            (temp, *_uv_1960(*_planckian_xy(temp))) for temp in temperatures
+        ]
+    return _planckian_lut_cache
+
+
+def _nearest_planckian_cct_duv_uv(u: float, v: float) -> "Optional[tuple[float, float]]":
+    """Return (CCT, signed Duv) at the closest supported locus point.
+
+    Positive Duv is above the Planckian locus and negative is below it. CCT is
+    interpolated in reciprocal temperature, as in Robertson-style tables. A
+    projection beyond either end returns None rather than clipping an unknown
+    out-of-range temperature to 1667 or 25000 K.
+    """
+    best = None
+    locus = _planckian_lut()
+    last_segment = len(locus) - 2
+    for index, ((t0, u0, v0), (t1, u1, v1)) in enumerate(zip(locus, locus[1:])):
+        du, dv = u1 - u0, v1 - v0
+        length2 = du * du + dv * dv
+        raw_alpha = ((u - u0) * du + (v - v0) * dv) / length2
+        alpha = min(1.0, max(0.0, raw_alpha))
+        qu, qv = u0 + alpha * du, v0 + alpha * dv
+        ru, rv = u - qu, v - qv
+        distance2 = ru * ru + rv * rv
+        if best is None or distance2 < best[0]:
+            reciprocal_t = (1.0 - alpha) / t0 + alpha / t1
+            cct = 1.0 / reciprocal_t
+            # The LUT runs warm-to-cool (u decreases); its right-hand normal
+            # points above the locus, which is the positive-Duv convention.
+            cross = du * rv - dv * ru
+            sign = 1.0 if cross <= 0.0 else -1.0
+            beyond_supported_range = (
+                (index == 0 and raw_alpha < -1e-9)
+                or (index == last_segment and raw_alpha > 1.0 + 1e-9)
+            )
+            best = (distance2, cct, sign, beyond_supported_range)
+    assert best is not None
+    if best[3]:
         return None
-    X = r
-    Y = g
-    Z = b
+    return best[1], best[2] * best[0] ** 0.5
+
+
+def correlated_color_temp_and_duv(
+    mean_linear_rgb: "tuple[float, float, float]",
+) -> "Optional[tuple[float, float]]":
+    """Nearest-locus (CCT in kelvin, signed Duv), or None for black.
+
+    Takes LINEAR RGB in 0-1 (see srgb_to_linear), averaged in linear space --
+    not the mean of gamma-encoded pixel values. Version 3 replaces McCamy's
+    increasingly biased high-temperature cubic and its approximate distance
+    check with a direct closest-point search on the Planckian locus.
+    """
+    r, g, b = mean_linear_rgb
+    X = _SRGB_TO_XYZ[0][0] * r + _SRGB_TO_XYZ[0][1] * g + _SRGB_TO_XYZ[0][2] * b
+    Y = _SRGB_TO_XYZ[1][0] * r + _SRGB_TO_XYZ[1][1] * g + _SRGB_TO_XYZ[1][2] * b
+    Z = _SRGB_TO_XYZ[2][0] * r + _SRGB_TO_XYZ[2][1] * g + _SRGB_TO_XYZ[2][2] * b
     denom = X + Y + Z
+    if denom <= 0:
+        return None  # pure black: no chromaticity to speak of
     x = X / denom
     y = Y / denom
-    n = (x - 0.3320) / (0.1858 - y)
-    cct = 449 * n**3 + 3525 * n**2 + 6823.3 * n + 5520.33
-    return cct
+    u, v = _uv_1960(x, y)
+    if not math.isfinite(u) or not math.isfinite(v):
+        return None
+    return _nearest_planckian_cct_duv_uv(u, v)
+
+
+def correlated_color_temp(mean_linear_rgb: "tuple[float, float, float]") -> "Optional[float]":
+    """CCT in kelvin, or None when black or farther than MAX_DUV from the locus."""
+    result = correlated_color_temp_and_duv(mean_linear_rgb)
+    if result is None:
+        return None
+    cct, duv = result
+    return cct if abs(duv) <= MAX_DUV else None
+
+
+def population_std(values: "list[float]") -> "Optional[float]":
+    """Population standard deviation shared by collection and recomputation."""
+    if not values:
+        return None
+    mean = sum(values) / len(values)
+    return (sum((value - mean) ** 2 for value in values) / len(values)) ** 0.5
 
 
 def _face_detector():
@@ -546,14 +861,30 @@ def _face_detector():
         return detect
 
 
+_linearise_lut = None
+
+
+def _linearise_table(np):
+    """256-entry uint8 -> linear-light lookup table, built once.
+
+    Pixels are uint8, so the sRGB transfer function has only 256 possible
+    inputs; a table turns a per-pixel pow() into an index."""
+    global _linearise_lut
+    if _linearise_lut is None:
+        _linearise_lut = np.array([srgb_to_linear(i / 255.0) for i in range(256)],
+                                  dtype=np.float64)
+    return _linearise_lut
+
+
 def _analyze_image(cv2, path, detect_faces):
+    import numpy as np
     img = cv2.imread(path)
     if img is None:
         return None
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-    mean_bgr = img.reshape(-1, 3).mean(axis=0)
-    mean_rgb = (mean_bgr[2], mean_bgr[1], mean_bgr[0])
-    cct = _correlated_color_temp(mean_rgb)
+    # linear-space mean: gamma-encoded pixels are code values, not intensities
+    lin = _linearise_table(np)[img[:, :, :3]].reshape(-1, 3).mean(axis=0)  # BGR order
+    cct = correlated_color_temp((float(lin[2]), float(lin[1]), float(lin[0])))
     brightness = float(hsv[:, :, 2].mean())
     saturation = float(hsv[:, :, 1].mean())
     contrast = float(hsv[:, :, 2].std())
@@ -573,7 +904,30 @@ def _analyze_image(cv2, path, detect_faces):
     }
 
 
-def extract_visual_features(thumbnail_path, frame_paths, video_dir):
+def extract_visual_features(thumbnail_path: Optional[str], frame_paths: list[str],
+                            video_dir: str) -> Optional[dict[str, Any]]:
+    """Write visual_features.json (a "thumbnail" block plus across-frame
+    aggregates) and return it. None means opencv is not installed and NO file
+    was written -- distinct from a written file whose values are None.
+
+    Units, none of which are 0-1 unless said so: *_cct is the nearest-Planckian-
+    locus temperature in kelvin computed from the image's linear-light mean;
+    colours farther than |Duv|=0.05 from the locus yield None. It is an image
+    warm/cool descriptor, not a measurement of the scene illuminant. Brightness
+    and saturation are means of HSV V and S on the 0-255 byte scale; contrast is
+    the standard deviation of V on that same 0-255 scale; *_face_area_ratio is a
+    fraction of frame area; frames_has_face_ratio is the fraction of readable
+    frames with at least one face.
+
+    A None aggregate means no frame yielded a value for that key -- it is not
+    zero, and averaging it as zero would push a video toward "cold and dark".
+    Aggregates are also taken only over the frames OpenCV could actually decode
+    and, per key, only over non-None values. CCT records its valid and total
+    frame counts so a partial mean is never mistaken for a complete one.
+
+    "thumbnail" is None when no thumbnail file was found or it failed to decode,
+    which is why consumers must not assume the block exists.
+    """
     try:
         import cv2
     except ImportError:
@@ -591,10 +945,9 @@ def extract_visual_features(thumbnail_path, frame_paths, video_dir):
 
     def _std(key, source):
         vals = [s[key] for s in source if s.get(key) is not None]
-        if not vals:
-            return None
-        m = sum(vals) / len(vals)
-        return (sum((v - m) ** 2 for v in vals) / len(vals)) ** 0.5
+        return population_std(vals)
+
+    frame_ccts = [f["cct"] for f in frames if f.get("cct") is not None]
 
     features = {
         "thumbnail": thumb,
@@ -605,6 +958,11 @@ def extract_visual_features(thumbnail_path, frame_paths, video_dir):
         "frames_mean_contrast": _mean("contrast", frames),
         "frames_has_face_ratio": _mean("has_face", [{"has_face": 1.0 if f["has_face"] else 0.0} for f in frames]),
         "frames_mean_max_face_area_ratio": _mean("max_face_area_ratio", frames),
+        "cct_thumbnail_valid": bool(thumb and thumb.get("cct") is not None),
+        "cct_frames_valid": len(frame_ccts),
+        "cct_frames_total": len(frames),
+        "cct_version": CCT_VERSION,
+        "cct_method": CCT_METHOD,
     }
     with open(os.path.join(video_dir, "visual_features.json"), "w", encoding="utf-8") as f:
         json.dump(features, f, indent=2)
@@ -616,7 +974,18 @@ def extract_visual_features(thumbnail_path, frame_paths, video_dir):
 # opensmile, extracted from the audio track of the video already on disk.
 # ---------------------------------------------------------------------------
 
-def extract_audio_track(video_path, audio_path):
+def extract_audio_track(video_path: str, audio_path: str) -> None:
+    """Demux to 16 kHz mono signed-16-bit PCM WAV at `audio_path`.
+
+    That exact format is a hard requirement, not a default: webrtcvad
+    (_pause_stats) accepts only 8/16/32/48 kHz mono 16-bit PCM and raises
+    otherwise, and Whisper resamples everything to 16 kHz anyway, so writing it
+    once here serves both consumers. wave.open() in _pause_stats also assumes
+    2-byte samples when it slices frames.
+
+    Raises CalledProcessError when the video has no audio stream at all, which
+    fails the whole video.
+    """
     run([
         "ffmpeg", "-y", "-i", video_path, "-vn",
         "-acodec", "pcm_s16le", "-ar", "16000", "-ac", "1",
@@ -624,7 +993,23 @@ def extract_audio_track(video_path, audio_path):
     ])
 
 
-def extract_audio_features(audio_path, video_dir):
+def extract_audio_features(audio_path: str, video_dir: str) -> Optional[dict[str, Any]]:
+    """Write audio_features.json as {"egemaps": {...}, "pauses": {...}} and
+    return it. None means opensmile is not installed and no file was written.
+
+    "egemaps" is the eGeMAPSv02 Functionals set: ~88 named scalars summarising
+    the WHOLE track with no time axis, so it describes a video's average voice,
+    never its dynamics. Anything wanting "the intro is loud, the rest is flat"
+    has to come from somewhere else.
+
+    "pauses" is None inside an otherwise-complete result when webrtcvad is
+    missing -- a partial success, not a failure, so callers must null-check the
+    inner key as well as the return value.
+
+    Dumped with default=float because opensmile returns numpy scalars, which
+    json cannot encode; that also silently coerces any NaN to the literal NaN,
+    which is not valid JSON for strict parsers.
+    """
     try:
         import opensmile
     except ImportError:
@@ -693,7 +1078,27 @@ def _pause_stats(audio_path):
 
 # ---------------------------------------------------------------------------
 
-def process_video(video_id, category, frame_count, resume):
+def process_video(video_id: str, category: str, frame_count: int, resume: bool) -> None:
+    """Run the whole per-video pipeline into processed/<category>/<video_id>/
+    and record the outcome in the manifest.
+
+    Returns None on success, on failure, and on a skip -- deliberately, since a
+    ThreadPoolExecutor task that raises would only surface when the future is
+    read, and nothing reads these futures. Everything from fetch_metadata()
+    onward is caught, logged, written to the manifest as "failed" and fed to
+    _note_result(), so one poisonous video cannot end a multi-day run. The
+    manifest, not a return value, is how a caller learns what happened.
+
+    Ordering is the resumability contract: the temp video and audio are deleted
+    on BOTH paths (so a crash never leaves full videos on disk), and .done is
+    written last, after those deletions. A directory without .done is therefore
+    always safe to overwrite, which is what makes --resume idempotent.
+
+    `resume` only skips already-.done work; it never repairs a partial
+    directory. Skips are also silent when the auth-break breaker has tripped --
+    those videos are left for a later run rather than being recorded as failures
+    they did not have.
+    """
     video_dir = os.path.join(OUT_DIR, category, video_id)
     if resume and is_done(video_dir):
         log(f"skip (already done): {video_id}")
@@ -764,7 +1169,29 @@ def process_video(video_id, category, frame_count, resume):
 
 # ---------------------------------------------------------------------------
 
-def main():
+def main() -> None:
+    """CLI entry point: parse args, build the job list (discovery or
+    --input-ids), and process it across --workers threads.
+
+    Three orderings here are load-bearing rather than stylistic:
+
+    - --cookies/--cookies-from-browser are appended to the module-level
+      YT_DLP_EXTRA_ARGS, so they reach every yt-dlp call in the process, not
+      just the download. This mutates module state; a second main() in one
+      process would append them twice.
+    - preload_whisper() runs before the ThreadPoolExecutor is created. See its
+      docstring -- doing it lazily inside a worker raises the failure rate to
+      25-35% on Windows purely from the number of live threads.
+    - Submissions are staggered by --pacing/--workers instead of being queued
+      back-to-back, because burst traffic is precisely what triggered YouTube's
+      bot check on a school network. The sleep is in the submitting thread, so
+      it paces starts, not throughput.
+
+    Discovery asks for --target IDs per category but search.list usually returns
+    fewer; the run processes what it got and does not retry to reach the target.
+    If the auth-break breaker trips, submission stops early and the remainder of
+    the queue is deliberately left unsubmitted for a later --resume.
+    """
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--category", required=True, choices=list(CATEGORIES) + ["all"])
     parser.add_argument("--target", type=int, default=DEFAULT_TARGET_PER_CATEGORY, help="videos to collect per category")
