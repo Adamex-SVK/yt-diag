@@ -185,8 +185,9 @@ the corpus comes from those singletons; the largest channel has 19.
 - **Listwise deletion is impossible**: 0 of 1,860 rows are complete. Missingness is structural and
   blocky (all 92 `aud__` columns absent together for 35 videos; `face_centrality` null exactly when
   no face). Use explicit missing-indicators plus imputation, and prefer models that handle NaN.
-- eGeMAPS is redundant — 12 feature pairs correlate above 0.95. Consider a PCA block, or accept it
-  and use a tree model.
+- eGeMAPS is redundant — the original Pearson audit found 12 feature pairs above 0.95; the later
+  clustered dashboard finds 23 pairs above 0.95 in absolute Spearman correlation. Consider a PCA
+  block, or accept the redundancy and use strong regularisation or a tree model.
 - **Events per variable ≈ 2** at 125 columns and ~430 positives. The tabular baseline is
   under-powered as specified; feature-group selection is not optional.
 

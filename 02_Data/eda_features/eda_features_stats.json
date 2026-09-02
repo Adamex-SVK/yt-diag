@@ -1,6 +1,42 @@
 {
   "n_videos": 1860,
   "n_unknown_format": 5,
+  "dashboard": {
+    "correlation": "pairwise Spearman; seed-0 channel-grouped training partition only",
+    "training_seed": 0,
+    "training_rows": 1113,
+    "training_channels": 798,
+    "interpretable_features": [
+      "log1p views",
+      "log1p subscribers",
+      "log1p age (days)",
+      "log1p duration (s)",
+      "Shorts indicator",
+      "thumbnail CCT (K)",
+      "frame CCT (K)",
+      "thumbnail brightness (crop)",
+      "frame brightness",
+      "thumbnail saturation",
+      "thumbnail contrast",
+      "thumbnail face present",
+      "thumbnail face area",
+      "frame face prevalence",
+      "pause ratio",
+      "pauses/min",
+      "sound level (dBp)",
+      "loudness variability",
+      "edited speech density"
+    ],
+    "strongest_absolute_pooled_view_association": {
+      "feature": "log1p subscribers",
+      "rho": 0.7052641337883453
+    },
+    "egemaps_features": 88,
+    "egemaps_pairs_abs_rho_over_0_95": 23,
+    "format_sign_reversals": 7,
+    "pooled_vs_format_sign_reversals": 9,
+    "outcome_panels_policy": "descriptive only; never used to select features or tune models"
+  },
   "cct": {
     "visual_files": 1860,
     "versions": {
@@ -18,7 +54,7 @@
     "raw_brightness_direction_free": 0.9252867132867133,
     "heuristic_crop_brightness_direction_free": 0.5586013986013986
   },
-  "scope": "descriptive only; target label was dropped before analysis and never inspected",
+  "scope": "core tables are label-blind; view associations use only the seed-0 channel-grouped training partition and are descriptive, never feature-selection evidence",
   "selected_for_eda": [
     "duration by category and format",
     "CCT with validity coverage",
@@ -27,14 +63,19 @@
     "pause diagnostics",
     "whole-track acoustic level and variability",
     "edited transcript word density",
-    "mean frame-sampling interval"
+    "mean frame-sampling interval",
+    "category-format pivot table",
+    "modality coverage heatmap",
+    "interpretable Spearman heatmap on the seed-0 training partition",
+    "clustered eGeMAPS redundancy heatmap",
+    "training-only shortcut scatterplots and outcome associations"
   ],
   "not_selected": {
     "music amount": "caption tags and VAD do not quantify music reliably",
     "cutting pace": "20 sparse frames miss cuts and confound change with sample spacing",
     "single-scene": "zero threshold crossings among sparse frames does not establish one scene",
     "audio quality score": "eGeMAPS describes mixed speech/music/ambience, not recording quality",
-    "label association scans": "feature selection on the full dataset would contaminate evaluation; use training data only"
+    "full-dataset label association scans": "feature selection on the full dataset would contaminate evaluation; dashboard associations are training-only and descriptive"
   },
   "known_measurement_limits": {
     "pauses": "VAD can classify music as voice; interpret as VAD silence, especially for Shorts",
