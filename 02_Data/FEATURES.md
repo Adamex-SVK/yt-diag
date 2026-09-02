@@ -96,7 +96,7 @@ All **label machinery — never model inputs**. Produced by the v2 stratified la
 
 | Feature | Role | Definition / plan | Status |
 |---|---|---|---|
-| `published_at` | model input (derived) | Full UTC publish timestamp — `videos.list snippet.publishedAt`; `metadata.json` only has the date. Backfill for all collected videos: ~38 batched calls (plus ~38 `channels.list`) for the 1,860 collected videos — not yet run | `backfill_published_at.py` built 2026-08-26 — run on the collected data |
+| `published_at` | model input (derived) | Full UTC publish timestamp — `videos.list snippet.publishedAt`; `metadata.json` only has the date. Backfilled 2026-08-30 (38 `videos.list` + 28 `channels.list` batches = 66 quota units): 1,854 of 1,860 videos have the full timestamp; 6 deleted/private since collection are `missing_from_api` | **done** — `backfill_published_at.py` run 2026-08-30 on all 1,860 collected videos |
 | `publish_hour_utc` (sin/cos) | model input | UTC hour as sine/cosine cyclical encoding (hour 23 and 0 are neighbors); local-time interpretation only where timezone is known | after backfill |
 | `publish_weekday` | model input | Day of week (Mon–Sun) from `published_at` — robust to timezone error | after backfill |
 | `is_weekend` | model input | Sat/Sun flag | after backfill |

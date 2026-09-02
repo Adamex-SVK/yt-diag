@@ -36,6 +36,26 @@ def test_retrospective_adapter_and_registry():
         pass
 
 
+def test_adapter_prefers_the_cleaned_transcript():
+    """Raw auto-caption text repeats every phrase ~3x; the deep stage must get
+    transcript_clean.txt (clean_retrospective.py) wherever it exists."""
+    import shutil
+    from ytdiag.synthetic import generate
+    tmp = tempfile.mkdtemp(prefix="ytdiag_clean_")
+    try:
+        root = generate(tmp, n=8, seed=1)
+        df = load_retrospective(root)
+        assert df.asset__transcript_path.str.endswith("transcript.txt").all()
+        d = os.path.dirname(df.asset__transcript_path.iloc[0])
+        with open(os.path.join(d, "transcript_clean.txt"), "w", encoding="utf-8") as f:
+            f.write("cleaned text\n")
+        after = load_retrospective(root)
+        picked = after.loc[after.video_id == df.video_id.iloc[0], "asset__transcript_path"].iloc[0]
+        assert picked.endswith("transcript_clean.txt")
+    finally:
+        shutil.rmtree(tmp)
+
+
 def test_split_is_channel_grouped_and_sized():
     df = _synthetic_df()
     idx = split_indices(df, seed=3)
@@ -172,7 +192,9 @@ def test_prospective_adapter_on_live_tracking_dir_if_present():
     df = load_prospective(tracking, horizon_days=7)
     assert len(df) > 0 and "sched" in available_groups(df) and "meta" in available_groups(df)
     assert df.asset__thumbnail_path.notna().mean() > 0.9
-    assert (df.track__n_snapshots >= 1).all()
+    # a video deleted/private before its first successful snapshot has 0 ok
+    # rows (status 'missing' only) -- legitimate attrition, must stay rare
+    assert (df.track__n_snapshots >= 1).mean() > 0.99
     # labels exist only for main-arm videos past the horizon (none at the time of writing); must not crash
     main_reached = df.outcome_views.notna() & (df.sampling_arm == "date_window")
     assert df[~main_reached].label.isna().all()

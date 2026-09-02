@@ -1,4 +1,15 @@
 {
   "is_short": "false",
-  "is_short_checked_at_utc": "2026-08-29T15:27:00Z"
+  "is_short_checked_at_utc": "2026-08-30T21:30:13Z",
+  "published_at_utc": "2019-09-17T19:30:01Z",
+  "caption_available": true,
+  "youtube_category_id": "26",
+  "default_language": "en",
+  "default_audio_language": "en",
+  "status": "ok",
+  "channel_country": "US",
+  "hidden_subscriber_count": false,
+  "channel_created_at": "2007-07-16T20:56:26Z",
+  "channel_video_count": "295",
+  "backfilled_at_utc": "2026-08-30T21:30:13Z"
 }
