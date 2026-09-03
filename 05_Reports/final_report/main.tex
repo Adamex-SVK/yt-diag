@@ -65,12 +65,11 @@ whether observable content distinguishes videos in the top quarter of a peer
 group matched on category, channel size, age and format. Our retrospective
 dataset contains 1,860 videos with metadata, thumbnails, transcripts, audio and
 20 sampled frames; a separate prospective panel records fixed-horizon growth
-and near-publication metadata for future evaluation. Data validation uncovered
-two consequential measurement errors: overlapping caption windows had
-triplicated most transcripts, and an invalid colour-temperature conversion
-produced values outside any physical interpretation. After repair, we compare
-structured XGBoost baselines with frozen DINOv2, CLIP and ModernBERT
-representations using channel-grouped splits. Tuned metadata and schedule
+and near-publication metadata for future evaluation. We encode thumbnails and
+all 20 frames with frozen DINOv2, CLIP and ResNet-50 backbones, while title,
+description and quality-gated transcripts are encoded separately with
+ModernBERT. Structured XGBoost baselines and multimodal representations are
+evaluated using channel-grouped splits. Tuned metadata and schedule
 features achieve $0.619\pm0.022$ validation AUC. The best observed content model,
 combining field-aware text with CLIP thumbnail and frame aggregates, reaches
 $0.613\pm0.044$ and exceeds the structured model on two of five matched
@@ -273,23 +272,22 @@ Frames are sampled non-uniformly: 12 of 20 fall inside the first 60 seconds,
 reflecting our design hypothesis that the opening contains disproportionate
 information about presentation; the remaining eight cover the rest of the video.
 
-\subsection{Pre-processing and data repair}
+\subsection{Pre-processing}
 
-Two repairs changed the meaning of entire feature blocks.
-
-\textbf{Transcripts.} Concatenating overlapping auto-caption windows triplicated
-phrases in 98\% of auto-caption transcripts. Rebuilding from timed cues reduced
-the median repeated-8-gram ratio from 0.349 to 0.000 in a 113-video audit sample;
-word counts fell to 35.2\% of their inflated values. Transcript provenance then
+\textbf{Transcripts.} YouTube's automatic captions use rolling display windows,
+so adjacent timed cues contain overlapping text. We reconstruct transcripts from
+the timed cues before encoding them. In a 113-video audit sample this reduced
+the median repeated-8-gram ratio from 0.349 to 0.000; reconstructed word counts
+were 35.2\% of the naively concatenated counts. Transcript provenance then
 separates 944 native-English and 467 translated-English files from 449 sparse,
 wrong-language or missing files, which are withheld from the encoder.
 
-\textbf{Colour temperature.} The original calculation treated gamma-encoded
-RGB values as CIE coordinates, producing values up to
-$5.0\times10^9$\,K and 27 negative temperatures. Recomputing all 39{,}060
-images in linear light against the Planckian locus yields valid thumbnail CCT
-for 1{,}854 videos and valid estimates for 36{,}652/37{,}200 frames. This repair
-matters because the erroneous values had already changed visual-model scores.
+\textbf{Colour temperature.} RGB samples are averaged in linear light, mapped
+through the D65 sRGB-to-CIE-XYZ transform, and compared with a Planckian-locus
+lookup table in CIE 1960 UCS space. Estimates farther than $D_{uv}=0.05$ from
+the locus are treated as missing rather than assigned a misleading temperature.
+This yields valid thumbnail CCT for 1{,}854 videos and valid estimates for
+36{,}652/37{,}200 frames.
 
 \subsection{Descriptive analysis}
 

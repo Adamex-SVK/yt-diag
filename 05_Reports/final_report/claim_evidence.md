@@ -28,21 +28,17 @@ Regenerate the baseline table (never retype it):
 | 20 frames/video, 12 inside the first 60 s | confirmed | `compute_frame_timestamps()`; notebook §3 | Data |
 | Collection fell short of the 8,000 target (pagination cap) | limitation | `02_Data/cc_availability_scan_findings.md` | Data |
 
-## Data repair
+## Pre-processing
 
 | Claim | Status | Reproduce with | In report |
 |---|---|---|---|
-| 98% of auto-caption transcripts repeat each phrase ~3× | confirmed | notebook §2 (113-video sample) | Data |
 | dup8 median 0.349 → 0.000; word ratio 0.352 | confirmed | notebook §2 | Data |
 | Transcript kinds 944 / 467 / 391 / 37 / 12 / 9 | confirmed | `02_Data/processed/cleaning_manifest.csv`, `transcript_kind` | Data |
 | Native-English-only leaves comedy 77, vlogs 64 | confirmed | `02_Data/eda.md` §7 | Data (limitation) |
-| Old CCT reached 5.0×10⁹ K, 27 negative | confirmed | pre-fix values; `KNOWN_ISSUES.md` §6 | Data |
-| Corrected CCT (v3): nearest-Planckian-locus, 1% LUT, signed Duv | confirmed | `cd 02_Data && ../.venv/bin/python tests/test_cct.py` | Experiment |
-| v3 recovers locus reference points exactly where McCamy drifts (25,000 K: 25,000 vs 19,504) | confirmed | `_nearest_planckian_cct_duv_uv` vs McCamy, see CHANGELOG | Experiment |
+| CCT (v3): linear-light sRGB-to-XYZ, nearest Planckian-locus lookup, estimates with Duv > 0.05 missing | confirmed | `cd 02_Data && ../.venv/bin/python tests/test_cct.py` | Experiment |
 | v3 frame-mean distribution 2,553–15,679 K, median 5,666; all 1,860 files carry the same v3 method | confirmed | `.venv/bin/python 02_Data/recompute_cct.py --dry-run`; `eda_features_stats.json` | Experiment |
 | v3 coverage: 1,854/1,860 thumbnails and 36,652/37,200 frames valid | confirmed | `02_Data/eda_features/eda_features_stats.json` | Experiment |
 | v3 visual/full baselines use five channel-grouped validation splits; test untouched | confirmed | `results/baselines.json` (`cct_version` recorded) | Experiment |
-| Pure green would report 6069 K without the Duv gate | confirmed | notebook §4 | Data |
 
 ## Target and label
 
