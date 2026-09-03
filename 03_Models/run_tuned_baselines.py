@@ -5,7 +5,8 @@ Example:
     --feature-sets 'meta,sched;meta,sched,vis,aud' --seeds 0,1,2,3,4
 
 All selection occurs inside each outer training fold. Results are reported on
-outer validation; the held-out test split is never evaluated by this command.
+outer validation. The unused fold within a run is not a globally unseen test
+because rows are reassigned across development seeds.
 """
 from __future__ import annotations
 
@@ -79,7 +80,7 @@ def main() -> None:
         "protocol": (
             f"channel-grouped 60/20/20 outer split; {args.inner_splits} channel-grouped inner folds; "
             "hyperparameters selected by inner AUC; threshold selected from inner OOF predictions; "
-            "outer validation reported; test untouched"
+            "outer validation reported; no globally unseen retrospective test"
         ),
         "n_labelled": int(df.label.notna().sum()),
         "seeds": seeds,

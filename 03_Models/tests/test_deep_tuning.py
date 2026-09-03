@@ -31,7 +31,7 @@ def test_candidate_search_is_frozen_and_contains_old_head():
     assert first[0] == DEFAULT_MLP_PARAMETERS and len(first) == 4
 
 
-def test_nested_deep_tuning_runs_and_keeps_test_sealed():
+def test_nested_deep_tuning_runs_and_scores_validation_only():
     df, blocks = _data()
     result = run_tuned_deep_seed(
         df, blocks, seed=1,

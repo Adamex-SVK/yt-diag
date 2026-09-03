@@ -95,7 +95,7 @@ def main() -> None:
             search_seed=args.search_seed, max_epochs=args.max_epochs, patience=args.patience,
         )
         runs.append(run)
-        print(f"seed {seed} (test untouched)")
+        print(f"seed {seed} (development validation)")
         for name, result in run["ablations"].items():
             linear = result["linear_probe"]["val"]["auc_roc"]
             mlp = result["late_fusion_mlp"]["val"]["auc_roc"]
@@ -105,7 +105,7 @@ def main() -> None:
         "generated_at_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
         "protocol": (
             f"channel-grouped 60/20/20 outer split; {args.inner_splits} inner grouped folds; "
-            "per-fold grouped monitor split for epoch selection; outer validation only; test untouched"
+            "per-fold grouped monitor split for epoch selection; outer validation only"
         ),
         "n_labelled": len(df), "seeds": seeds,
         "configuration": {

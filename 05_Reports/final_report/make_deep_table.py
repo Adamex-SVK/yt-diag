@@ -41,7 +41,7 @@ def _atomic_json(path: str, payload: dict) -> None:
 
 def compact(full: dict) -> dict:
     """Keep evidence needed for every reported number, including seed values."""
-    if full.get("protocol") != "channel-grouped 60/20/20; validation only; test untouched":
+    if full.get("protocol") != "repeated channel-grouped 60/20/20 development splits; validation only":
         raise ValueError(f"unexpected evaluation protocol: {full.get('protocol')}")
     if full.get("seeds") != [0, 1, 2, 3, 4]:
         raise ValueError("the report requires the frozen five-seed run (0..4)")
@@ -50,6 +50,7 @@ def compact(full: dict) -> dict:
     return {
         "generated_at_utc": full["generated_at_utc"],
         "protocol": full["protocol"],
+        "metric_note": "AUC and PR-AUC are valid; historical F1 used a validation-selected threshold and is not reported. Current fusion.py selects thresholds inside training.",
         "n_labelled": full["n_labelled"],
         "seeds": full["seeds"],
         "configuration": full["configuration"],

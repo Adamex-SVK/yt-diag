@@ -1,6 +1,6 @@
 {
   "generated_at_utc": "2026-09-02T12:07:07.364182+00:00",
-  "protocol": "channel-grouped 60/20/20 outer split; four channel-grouped inner folds; hyperparameters selected by inner AUC; threshold selected from inner OOF predictions; outer validation reported; test untouched",
+  "protocol": "repeated channel-grouped 60/20/20 development splits; four channel-grouped inner folds; hyperparameters selected by inner AUC; threshold selected from inner OOF predictions; validation reported; no independent retrospective test",
   "n_labelled": 1854,
   "seeds": [
     0,

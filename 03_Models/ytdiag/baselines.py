@@ -3,8 +3,8 @@ regression, gradient boosting (XGBoost; sklearn HistGradientBoosting if
 xgboost is unavailable) on any selection of feature groups.
 
 Protocol: channel-grouped 60/20/20 split; models fit on train, threshold
-picked on val (max F1), reported on val; the TEST split is evaluated only
-when `evaluate_test=True` -- touch it once, at the end (MILESTONES.md).
+picked on validation (max F1), and reported on validation. The optional third
+fold is not a globally independent retrospective test when seeds are changed.
 """
 from __future__ import annotations
 
@@ -96,8 +96,9 @@ def run_baselines(
     beside these -- a model given only subscriber count, age, duration and
     is_short reaches R^2 0.584 on log views without seeing any content.
 
-    evaluate_test defaults to False on purpose: the test split is touched once,
-    at the end of the project, not on every iteration.
+    The optional third-fold evaluation is diagnostic only. It must not be
+    reported as an independent retrospective test when multiple seeds have
+    reassigned rows during development.
     """
     total = len(df)
     df = df[df.label.notna()].reset_index(drop=True)

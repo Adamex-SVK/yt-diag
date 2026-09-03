@@ -1,8 +1,8 @@
 """Frozen DINOv2 + ModernBERT ablations and a small late-fusion classifier.
 
-The command reports validation results over channel-grouped splits.  It has no
-test-evaluation option by design: the project test set remains sealed until the
-architecture and report protocol are frozen.
+The command reports repeated validation results over channel-grouped development
+splits. It has no test-evaluation option; the retrospective rows have all been
+used in development under at least one split seed.
 
 Example:
   .venv/bin/python 03_Models/run_deep_multimodal.py --seeds 0,1,2,3,4
@@ -121,7 +121,7 @@ def main() -> None:
     aggregate = aggregate_runs(runs)
     results = {
         "generated_at_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
-        "protocol": "channel-grouped 60/20/20; validation only; test untouched",
+        "protocol": "repeated channel-grouped 60/20/20 development splits; validation only",
         "n_labelled": int(len(df)),
         "seeds": seeds,
         "configuration": {

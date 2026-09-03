@@ -6,10 +6,10 @@ them as reproducible reference points and adds a separate protocol:
 1. make the project's channel-grouped 60/20/20 outer split;
 2. tune only on channel-grouped folds inside the outer training rows;
 3. choose the F1 threshold from out-of-fold predictions on those training rows;
-4. refit on all outer-training rows and report the untouched outer validation.
+4. refit on all outer-training rows and report the outer validation.
 
-The outer test fold is deliberately not exposed by this module.  It remains
-sealed until the complete modelling policy has been frozen.
+The nominal outer test fold is deliberately not exposed by this module. It is
+not a globally sealed test, because seeded development partitions overlap.
 """
 from __future__ import annotations
 

@@ -234,7 +234,7 @@ def main() -> None:
     aggregate = aggregate_runs(runs)
     payload = {
         "generated_at_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
-        "protocol": "channel-grouped 60/20/20; nested training selection; validation only; test untouched",
+        "protocol": "repeated channel-grouped 60/20/20 development splits; nested training selection; validation only",
         "n_labelled": int(len(df)), "seeds": seeds, "variants": requested,
         "embedding_provenance": provenance, "runs": runs, "aggregate": aggregate,
     }
