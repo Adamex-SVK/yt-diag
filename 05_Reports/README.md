@@ -14,7 +14,7 @@ Project deliverables: final paper, presentation slides, figures, and supplementa
 
 | File | Purpose | Status |
 |------|---------|--------|
-| `final_report/` | **The report.** AAAI two-column, single-file `main.tex` (the style forbids `\input`, so do not split it into sections). `claim_evidence.md` maps every number to the command that reproduces it; `make_tables.py` writes the results table into `main.tex` so numbers are never retyped. Draft markers vanish when `\drafttrue` becomes `\draftfalse`. | Scaffolded 2026-09-01 |
+| `final_report/` | **The report.** AAAI two-column, single-file `main.tex` (the style forbids `\input`, so do not split it into sections). `claim_evidence.md` maps every number to a reproducing command; publisher scripts insert baselines, Tier-1, and text-v2 results. Draft markers vanish when `\drafttrue` becomes `\draftfalse`. | Active draft; validation results populated |
 | `paper/` | Draft and final versions of the project paper | superseded by `final_report/` |
 | `presentation/` | Slides for course presentation | TBD |
 | `figures/` | Exported publication-quality figures | TBD |

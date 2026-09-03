@@ -57,6 +57,7 @@ VIS_COLUMNS = [f"vis__thumb_{c}" for c in VIS_THUMB] + [f"vis__{c}" for c in VIS
 AUD_PAUSES = ["pause_count", "total_pause_sec", "pause_ratio", "mean_pause_sec"]
 # eGeMAPS names are taken from the data (88 columns, openSMILE naming).
 ASSET_COLUMNS = ["asset__thumbnail_path", "asset__frames_dir", "asset__transcript_path",
+                 "asset__transcript_usable", "asset__transcript_kind",
                  "asset__title", "asset__description"]
 
 

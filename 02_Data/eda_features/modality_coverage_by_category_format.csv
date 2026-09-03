@@ -1,0 +1,11 @@
+category,format,n,thumbnail_pct,frames_pct,audio_pct,usable_transcript_pct,valid_cct_pct,pause_measurement_pct,speech_density_pct,face_measurement_pct
+all,regular,880,100.0,100.0,96.8,92.4,99.3,96.8,92.4,100.0
+all,Shorts,975,100.0,100.0,99.3,60.2,99.8,99.3,60.2,100.0
+comedy,regular,198,100.0,100.0,93.4,87.9,98.5,93.4,87.9,100.0
+comedy,Shorts,265,100.0,100.0,100.0,57.0,100.0,100.0,57.0,100.0
+howto,regular,144,100.0,100.0,95.8,97.2,99.3,95.8,97.2,100.0
+howto,Shorts,229,100.0,100.0,98.7,45.4,99.1,98.7,45.4,100.0
+product_reviews,regular,304,100.0,100.0,98.7,95.1,99.3,98.7,95.1,100.0
+product_reviews,Shorts,177,100.0,100.0,99.4,65.0,100.0,99.4,65.0,100.0
+vlogs,regular,234,100.0,100.0,97.9,89.7,100.0,97.9,89.7,100.0
+vlogs,Shorts,304,100.0,100.0,99.0,71.4,100.0,99.0,71.4,100.0

@@ -32,9 +32,10 @@ engineered features. This is the only source with frames, audio and transcripts,
 deep multimodal model trains on. Outcome = the view count observed at collection.
 
 **2. The prospective panel** — `02_Data/tracking/`
-A live cohort of newly published videos, discovered daily and snapshotted **twice a day for 30
-days** by two launchd agents (09:05 and 21:05). 11,256 videos so far (8,961 in the main arm, plus
-`short_form` and `non_english` comparison arms). No frames or audio — but it has something the
+A live, fixed-cap cohort of newly published videos, discovered daily and snapshotted **twice a day for 30
+days** by two launchd agents (09:05 and 21:05). On 2026-09-02 it held 12,738 videos (10,443 in the
+date-window arm, plus `short_form` and `non_english` comparison arms); the frozen date-window ceiling is
+20,000 videos (4,000 for each of four principal categories plus 4,000 for the backup category). No frames or audio — but it has something the
 archive never can: a *growth curve* per video, and the first-observed near-publish thumbnail and
 title, before creators edit them.
 
@@ -67,12 +68,16 @@ Order matters. Later steps assume earlier ones ran.
 # 4. EDA -- stats + figures behind 02_Data/eda.md                        (done 2026-09-01)
 .venv/bin/python 02_Data/eda_retrospective.py
 
-# 5. LABEL -- decide which videos count as "viral"                       (NOT YET RUN)
+# 5. LABEL -- materialise the frozen retrospective target                (done 2026-09-01)
 .venv/bin/python 02_Data/compute_labels_v2.py --category all
 
 # 6. BASELINES -- metadata-only models, the bar the deep model must beat
 .venv/bin/python 03_Models/run_baselines.py --source retrospective --groups meta
 .venv/bin/python 03_Models/run_baselines.py --source retrospective --groups meta,sched,vis,aud
+
+# 7. FROZEN CONTENT -- cached Tier-1 and field-aware text-v2 experiments
+.venv/bin/python 03_Models/run_deep_multimodal.py --seeds 0,1,2,3,4
+.venv/bin/python 03_Models/run_text_v2.py --seeds 0,1,2,3,4
 ```
 
 The prospective tracker runs itself on a schedule; a manual tick must pass `--no-discover` so it
@@ -92,6 +97,8 @@ curl -sL "https://yihui.org/tinytex/install-bin-unix.sh" | sh
 brew install poppler          # optional: enables the AAAI font checks in build.sh
 
 .venv/bin/python 05_Reports/final_report/make_tables.py --seeds 5   # numbers first
+.venv/bin/python 05_Reports/final_report/make_deep_table.py
+.venv/bin/python 05_Reports/final_report/make_text_v2_table.py
 ./05_Reports/final_report/build.sh                                  # then compile
 ```
 
@@ -116,8 +123,10 @@ grader needs only the clone.
 `notebooks/00_project_walkthrough.ipynb` runs the whole pipeline on real data and lets you
 **check the claims** in `02_Data/eda.md` and `02_Data/eda_features.md` yourself: the
 transcript repetition, frame sampling, colour-temperature fix, label-blind category ×
-format profiles for visual/audio/speech features, feature include/exclude decisions, the
-Shorts confound, channel-split leak and baselines. It is a thin *interface* — every cell
+format profiles and pivot tables for visual/audio/speech features, correlation and
+modality-coverage heatmaps, training-only shortcut/outcome plots, feature include/exclude decisions, the
+Shorts confound, channel-split leak, baselines, and both tracked five-seed frozen deep-model
+results. It is a thin *interface* — every cell
 imports from `02_Data/` and `03_Models/` and calls the real functions, so it can never
 drift from the code that produces the results. Edit `notebooks/build_walkthrough.py` and
 regenerate rather than editing cells.
@@ -128,10 +137,13 @@ regenerate rather than editing cells.
 .venv/bin/python tests/test_docs_and_compat.py                          # repo-wide guards
 (cd 02_Data   && ../.venv/bin/python tests/test_clean_retrospective.py)
 (cd 02_Data   && ../.venv/bin/python tests/test_tracker_backfill.py)
+.venv/bin/python 02_Data/tests/test_eda_features.py
 (cd 03_Models && ../.venv/bin/python tests/test_pipeline.py)
+(cd 03_Models && ../.venv/bin/python tests/test_deep_multimodal.py)
 ```
 
-The three suites use stubbed APIs and temp directories — no network, no key, no risk to real data.
+The suites use stubbed APIs, synthetic embeddings and temp directories — no network, no key,
+no risk to real data.
 `tests/test_docs_and_compat.py` is the guard that keeps documentation from rotting: it fails if a
 public function loses its docstring or type annotations, and — more importantly — if any script the
 launchd agents run stops being **Python 3.9 compatible**. Those agents invoke `/usr/bin/python3`
@@ -157,7 +169,10 @@ production break: the tick dies at 09:05 and that day's snapshot is lost.
   ytdiag/features.py        feature groups; refuses to hand out label-only columns
   ytdiag/split.py           channel-grouped train/val/test
   ytdiag/baselines.py       dummy floor, logistic regression, XGBoost
+  ytdiag/embed.py           frozen DINOv2/ModernBERT embeddings + safe caches
+  ytdiag/fusion.py          linear probes + regularised late-fusion MLP
   run_baselines.py          the CLI
+  run_deep_multimodal.py    five-seed frozen-content ablations
 
 04_Experiments/   run outputs (gitignored)
 05_Reports/       paper, slides, deliverables
@@ -182,7 +197,7 @@ baseline printed beside it.
 **3. Splits must be grouped by channel.** A plain random split lets a model reach AUC 0.86 by
 memorising which channel a video came from. `ytdiag/split.py` enforces this and asserts it.
 
-## Current state (2026-09-01)
+## Current state (2026-09-02)
 
 - **Data collection** — done: 1,860 videos (comedy 464, howto 373, product_reviews 482, vlogs 541).
   Short of the original 8,000 target because `search.list` pagination caps out well below its
@@ -190,8 +205,19 @@ memorising which channel a video came from. `ytdiag/split.py` enforces this and 
 - **Prospective tracking** — live and healthy since 2026-08-26; first 7-day outcomes 2026-09-02,
   first 30-day outcomes 2026-09-25.
 - **Cleaning** — done. **EDA** — done, with three label changes recommended and awaiting sign-off.
-- **Next** — preprocessing, feature engineering, then baselines. The deep multimodal model
-  (frozen DINOv2 + ModernBERT, late fusion, Integrated Gradients attribution) follows.
+- **Baselines** — complete over five channel-grouped validation seeds. The fixed full-engineered
+  XGBoost reaches AUC 0.605 ± 0.030; nested tuning makes metadata+schedule XGBoost the strongest
+  comparator at 0.619 ± 0.022, with test still sealed.
+- **Frozen deep Tier 1** — complete for thumbnail + quality-gated text. The best full linear fusion reaches
+  0.570 ± 0.051 and the MLP 0.554 ± 0.022, so neither beats the structured baselines; test is
+  untouched.
+- **Field-aware text v2** — complete. Separate field/chunk embeddings lift the best MLP to
+  0.600 ± 0.026, but it is 0.019 below tuned metadata+schedule XGBoost and wins only one of five
+  paired splits. Test remains untouched; frozen-frame aggregation is at most a bounded follow-up,
+  not a reason to begin end-to-end fine-tuning.
+- **Deep-head tuning** — complete. Nested selection across nine MLP heads reaches 0.598 ± 0.037,
+  slightly below and more variable than the pre-specified 0.600 ± 0.026 head. This negative result
+  reinforces that end-to-end encoder fine-tuning is not justified on the current cohort.
 
 ## A note on conventions
 

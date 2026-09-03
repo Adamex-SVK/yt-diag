@@ -358,9 +358,11 @@ plt.tight_layout(); plt.show()
 md("""
 ## 5. Label-blind descriptive EDA
 
-The feature EDA describes what the modalities contain **before** asking whether they
-predict the target. Its loader drops the label before any join or summary, and every
-table separates regular videos from Shorts. This prevents two common mistakes:
+The feature EDA first describes what the modalities contain **before** asking whether they
+predict the target. Its core loader drops the label before any join or summary, and every
+table separates regular videos from Shorts. Outcome-aware dashboard panels are confined to
+the pre-specified seed-0 channel-grouped training partition and are descriptive only. This
+prevents two common mistakes:
 
 1. selecting features after looking at outcomes across the full dataset; and
 2. reporting a pooled average that is actually just a Shorts-versus-regular difference.
@@ -371,13 +373,18 @@ grouping or summary logic into the notebook. Values are medians unless stated ot
 
 code('''
 from eda_features import (load as load_feature_eda, dataset_table,
-                          visual_table, audio_speech_table)
+                          visual_table, audio_speech_table,
+                          category_format_pivot, modality_coverage_table,
+                          training_partition, correlation_tables,
+                          audio_correlation_table, outcome_association_table)
 
 feature_eda = load_feature_eda(DATA)
 assert "label" not in feature_eda.columns
 dataset_eda = dataset_table(feature_eda)
 visual_eda = visual_table(feature_eda)
 audio_eda = audio_speech_table(feature_eda)
+pivot_eda = category_format_pivot(feature_eda)
+coverage_eda = modality_coverage_table(feature_eda)
 
 print(f"label-blind EDA rows: {len(feature_eda)}; label present: {'label' in feature_eda.columns}")
 print("\\noverall dataset profile by format:")
@@ -385,6 +392,38 @@ overall = dataset_eda[dataset_eda.category == "all"]
 print(overall[["format", "n", "duration_sec_median", "age_days_median",
                "transcript_usable_pct", "audio_present_pct"]]
       .round(1).to_string(index=False))
+''')
+
+code('''
+print("compact category × format pivot table:")
+key_columns = [
+    "category", "n__regular", "n__shorts",
+    "views_median__regular", "views_median__shorts",
+    "duration_sec_median__regular", "duration_sec_median__shorts",
+    "usable_transcript_pct__regular", "usable_transcript_pct__shorts",
+    "thumb_brightness_median__regular", "thumb_brightness_median__shorts",
+    "thumb_cct_k_median__regular", "thumb_cct_k_median__shorts",
+]
+display(pivot_eda[key_columns].round(1))
+print("The complete CSV also includes subscribers, faces, pauses, speech density and modality coverage.")
+''')
+
+code('''
+# Outcome-aware EDA is confined to one pre-specified channel-grouped training
+# partition. It is descriptive only and is never used to choose model inputs.
+eda_train = training_partition(feature_eda, DATA, seed=0)
+correlation_eda, correlation_n = correlation_tables(eda_train)
+audio_correlation_eda = audio_correlation_table(feature_eda)
+outcome_eda = outcome_association_table(eda_train)
+
+print(f"correlation rows: {len(eda_train)} videos from {eda_train.channel_id.nunique()} channels")
+print("\\nstrongest pooled rank associations with log1p views:")
+display(outcome_eda[["feature", "rho_overall", "rho_regular", "rho_shorts",
+                     "format_sign_reversal", "pooled_vs_format_reversal"]]
+        .head(10).round(3))
+upper = np.triu_indices_from(audio_correlation_eda, k=1)
+print(f"\\neGeMAPS pairs with |Spearman rho| > 0.95: "
+      f"{int((audio_correlation_eda.abs().to_numpy()[upper] > 0.95).sum())}")
 ''')
 
 code('''
@@ -427,7 +466,12 @@ code('''
 EDA_OUT = os.path.join(ROOT, "02_Data", "eda_features")
 for filename in ("duration_by_category_format.png",
                  "visual_profiles_by_format.png",
-                 "audio_speech_by_format.png"):
+                 "audio_speech_by_format.png",
+                 "correlation_heatmap_train_seed0.png",
+                 "audio_correlation_clustered.png",
+                 "modality_coverage_heatmap.png",
+                 "shortcut_scatterplots_train_seed0.png",
+                 "outcome_associations_train_seed0.png"):
     path = os.path.join(EDA_OUT, filename)
     if not os.path.exists(path):
         raise FileNotFoundError(f"missing {path}; run: python 02_Data/eda_features.py")
@@ -611,9 +655,149 @@ abl = pd.DataFrame(rows).pivot_table(index="groups", columns="model",
 print(abl.round(3).to_string())
 ''')
 
-# ------------------------------------------------ 10. the shortcut ceiling
 md("""
-## 10. The most important number in the project
+### Nested tuning changes the baseline to beat
+
+The table above keeps the original fixed configurations as reproducible floors.
+The final comparator uses four channel-grouped folds inside each outer training
+set to select hyperparameters and its F1 threshold. Outer validation is used only
+for evaluation and the test split remains sealed.
+
+**Claim to verify:** tuning helps XGBoost, not every model, and makes
+metadata+schedule the strongest structured feature set.
+""")
+
+code('''
+TUNED_RESULTS = os.path.join(ROOT, "05_Reports", "final_report", "results", "tuned_baselines.json")
+with open(TUNED_RESULTS, encoding="utf-8") as f:
+    tuned = json.load(f)
+
+rows = []
+for feature_set, result in tuned["feature_sets"].items():
+    for model in ("logistic_regression", "xgboost"):
+        fixed = result["untuned_reference"][model]
+        selected = result["aggregate"][model]["auc_roc"]
+        rows.append({
+            "features": feature_set, "model": model,
+            "fixed_auc": f"{fixed['mean']:.3f} ± {fixed['std']:.3f}",
+            "tuned_auc": f"{selected['mean']:.3f} ± {selected['std']:.3f}",
+        })
+print(pd.DataFrame(rows).set_index(["features", "model"]).to_string())
+print("\\nselection: inner channel-grouped training folds; test untouched")
+''')
+
+# ---------------------------------------------- 10. frozen deep multimodal
+md("""
+## 10. Frozen deep multimodal result
+
+The encoders are intentionally **not** rerun inside this walkthrough: generating
+DINOv2 and 1,024-token ModernBERT embeddings is a one-time accelerated job, not
+a notebook check. This cell reads the tracked five-seed evidence produced by
+`run_deep_multimodal.py` and shows whether raw content beat the tabular bar.
+
+**Claim to verify:** the frozen thumbnail/text model did not beat the engineered
+baseline, and its nonlinear fusion was more variable rather than better.
+""")
+
+code('''
+DEEP_RESULTS = os.path.join(ROOT, "05_Reports", "final_report", "results", "deep_multimodal.json")
+with open(DEEP_RESULTS, encoding="utf-8") as f:
+    deep = json.load(f)
+
+rows = []
+for inputs, models in deep["aggregate"].items():
+    row = {"inputs": inputs}
+    for model in ("linear_probe", "late_fusion_mlp"):
+        auc = models[model]["auc_roc"]
+        row[model] = f"{auc['mean']:.3f} ± {auc['std']:.3f}"
+    rows.append(row)
+print(pd.DataFrame(rows).set_index("inputs").to_string())
+
+refs = {
+    "tuned_metadata_schedule_xgboost": tuned["feature_sets"]["meta+sched"]["aggregate"]["xgboost"]["auc_roc"],
+    "tuned_full_engineered_xgboost": tuned["feature_sets"]["meta+sched+vis+aud"]["aggregate"]["xgboost"]["auc_roc"],
+}
+print("\\nbaselines to beat:")
+for name, result in refs.items():
+    print(f"  {name:30s} {result['mean']:.3f} ± {result['std']:.3f}")
+full = deep["aggregate"]["thumbnail_text_meta_sched"]["late_fusion_mlp"]["auc_roc"]["values"]
+print(f"\\nfull MLP seed range: {min(full):.3f}–{max(full):.3f}; test untouched")
+''')
+
+md("""
+### Targeted field-aware text follow-up
+
+The generic concatenated text result justified one controlled retry, not a
+larger end-to-end model. The follow-up uses an embedding-trained ModernBERT,
+encodes title, description and quality-gated transcript separately, and samples
+long transcripts across up to four chunks. This cell reads the tracked evidence;
+it does not rerun the encoder.
+
+**Claim to verify:** text v2 adds measurable content signal but remains below the
+strongest tuned baseline; the five paired seeds do not support a content-model win.
+""")
+
+code('''
+TEXT_V2_RESULTS = os.path.join(ROOT, "05_Reports", "final_report", "results", "text_v2.json")
+with open(TEXT_V2_RESULTS, encoding="utf-8") as f:
+    text_v2 = json.load(f)
+
+show = ["title_description", "transcript", "text_fields",
+        "text_fields_meta_sched", "thumbnail_text_fields_meta_sched"]
+rows = []
+for inputs in show:
+    models = text_v2["aggregate"][inputs]
+    row = {"inputs": inputs}
+    for model in ("linear_probe", "late_fusion_mlp"):
+        auc = models[model]["auc_roc"]
+        row[model] = f"{auc['mean']:.3f} ± {auc['std']:.3f}"
+    rows.append(row)
+print(pd.DataFrame(rows).set_index("inputs").to_string())
+
+best = text_v2["aggregate"]["thumbnail_text_fields_meta_sched"]["late_fusion_mlp"]["auc_roc"]
+for name in ("metadata_schedule_xgboost", "full_engineered_xgboost"):
+    ref = text_v2["references"][name]
+    diffs = np.asarray(best["values"]) - np.asarray(ref["values"])
+    print(f"\\n{name}: mean delta {diffs.mean():+.3f}; paired wins {(diffs > 0).sum()}/5")
+print("test untouched")
+''')
+
+md("""
+### Did hyperparameter tuning rescue the deep head?
+
+This post-hoc robustness check expands both the linear regularisation grid and
+the trainable MLP head while keeping all encoders frozen. Each outer seed uses
+three inner grouped folds for model selection and a further grouped monitor
+split for epoch selection.
+
+**Claim to verify:** the larger search does not improve the pre-specified head
+and increases split-to-split variability.
+""")
+
+code('''
+TUNED_DEEP_RESULTS = os.path.join(ROOT, "05_Reports", "final_report", "results", "tuned_deep.json")
+with open(TUNED_DEEP_RESULTS, encoding="utf-8") as f:
+    tuned_deep = json.load(f)
+
+name = "thumbnail_text_fields_meta_sched"
+rows = []
+for model in ("linear_probe", "late_fusion_mlp"):
+    tuned_auc = tuned_deep["aggregate"][name][model]["auc_roc"]
+    comparison = tuned_deep["comparisons"][model]
+    fixed_auc = comparison["fixed"]
+    rows.append({
+        "head": model,
+        "pre_specified": f"{fixed_auc['mean']:.3f} ± {fixed_auc['std']:.3f}",
+        "nested_tuned": f"{tuned_auc['mean']:.3f} ± {tuned_auc['std']:.3f}",
+        "tuned_wins": f"{comparison['tuned_wins_vs_fixed']}/5",
+    })
+print(pd.DataFrame(rows).set_index("head").to_string())
+print("\\nencoders frozen; outer validation only; test untouched")
+''')
+
+# ------------------------------------------------ 11. the shortcut ceiling
+md("""
+## 11. The most important number in the project
 
 **Claim to verify:** a model given only subscriber count, video age, duration and
 Shorts-status — **no content at all** — already predicts log(views) well. That is why
@@ -639,8 +823,12 @@ md("""
 
 - `02_Data/eda.md` — the label analysis and the three decisions it settled
 - `02_Data/eda_features.md` — the label-blind modality EDA and measurement limits
+- `05_Reports/final_report/results/tuned_baselines.json` — nested tuned comparators
+- `05_Reports/final_report/results/deep_multimodal.json` — the frozen-content result
+- `05_Reports/final_report/results/text_v2.json` — the field-aware text follow-up
+- `05_Reports/final_report/results/tuned_deep.json` — nested fusion-head search
 - `KNOWN_ISSUES.md` — real defects found but not yet fixed
-- `tests/` — the guards; all three suites run offline in seconds
+- `tests/` — the guards; all pipeline, tuning, and deep suites run offline
 
 If you change anything in `02_Data/` or `03_Models/`, re-run the tests rather than
 re-running this notebook: the notebook demonstrates, the tests verify.

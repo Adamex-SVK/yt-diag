@@ -50,8 +50,8 @@ PRETTY = {"dummy_prior": "Dummy", "logistic_regression": "Logistic",
           "xgboost": "XGBoost", "hist_gradient_boosting": "HistGB"}
 
 
-def collect(seeds: int) -> tuple[list[dict[str, Any]], list[str]]:
-    """Run every ladder rung over `seeds` seeds; return rows and model names."""
+def collect(seeds: int) -> tuple[list[dict[str, Any]], list[str], int]:
+    """Run every ladder rung; return rows, model names, and labelled sample count."""
     from ytdiag.adapters import load_retrospective
     from ytdiag.baselines import run_baselines
 
@@ -68,7 +68,9 @@ def collect(seeds: int) -> tuple[list[dict[str, Any]], list[str]]:
                 per.setdefault(name, []).append(v["val"]["auc_roc"])
         model_names = list(per)
         rows.append({"label": pretty, "n_features": n_feat,
-                     "auc": {m: (float(np.mean(v)), float(np.std(v))) for m, v in per.items()}})
+                     "auc": {m: (float(np.mean(v)), float(np.std(v))) for m, v in per.items()},
+                     "auc_values": {m: [float(value) for value in values]
+                                    for m, values in per.items()}})
         print(f"  {pretty:14s} n_feat={n_feat:3d}  " +
               "  ".join(f"{PRETTY.get(m, m)} {np.mean(v):.3f}+-{np.std(v):.3f}"
                         for m, v in per.items() if m != "dummy_prior"))
@@ -165,11 +167,14 @@ def main() -> None:
     payload = {
         "generated_at_utc": datetime.datetime.now(datetime.timezone.utc)
                             .strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "seeds": args.seeds, "n_labelled": n_labelled,
+        "seeds": args.seeds, "seed_ids": list(range(args.seeds)),
+        "n_labelled": n_labelled,
         "protocol": "channel-grouped 60/20/20; VALIDATION only, test untouched",
         "cct_version": cct["version"], "cct_method": cct["method"],
         "rows": [{"features": r["label"], "n_features": r["n_features"],
-                  "auc": {m: {"mean": mu, "std": sd} for m, (mu, sd) in r["auc"].items()}}
+                  "auc": {m: {"mean": mu, "std": sd,
+                              "values": r["auc_values"][m]}
+                          for m, (mu, sd) in r["auc"].items()}}
                  for r in rows],
     }
     with open(RESULTS_JSON, "w", encoding="utf-8") as f:

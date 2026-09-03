@@ -3,12 +3,13 @@
 _Emmanuel, 2026-09-01. Reproducible with `eda_features.py`; generated tables,
 figures and machine-readable decisions live in `02_Data/eda_features/`._
 
-This EDA asks what the measured modalities contain before asking whether they
-predict the target. The script drops the adapter's label column before analysis
-and never inspects it. That separation matters:
-using the full labelled dataset to choose features would leak validation/test
-information into the design. Any later outcome association analysis must use
-training data only after the channel-grouped split is frozen.
+This EDA first asks what the measured modalities contain before asking whether
+they predict the target. The core tables drop the adapter's label column and
+remain label-blind. The dashboard's correlation and view-association panels are
+the explicit exception: they use only the pre-specified seed-0,
+channel-grouped outer training partition and are descriptive, not a feature
+selection procedure. Full-dataset outcome scans would leak validation/test
+information into the design and remain prohibited.
 
 ## What we added
 
@@ -26,6 +27,42 @@ mean because an average was explicitly requested.
   transcript words per video minute.
 - Sampling audit: the mean frame-gap proxy remains available because 20 frames
   represent videos ranging from seconds to hours.
+
+## Correlation dashboard and pivot table
+
+The familiar EDA layer is now reproducible rather than assembled by hand:
+
+- `category_format_pivot.csv` places category on rows and regular/Shorts
+  measurements on columns: counts, median views/subscribers/duration,
+  brightness, CCT, face prevalence, pause ratio, speech density and modality
+  coverage.
+- `correlation_heatmap_train_seed0.png` is a 19-variable Spearman matrix over
+  1,113 training videos from 798 channels. Spearman is used because counts and
+  durations are extremely skewed; categorical names are not converted into
+  meaningless integer codes.
+- `audio_correlation_clustered.png` separates all 88 eGeMAPS variables from the
+  interpretable matrix. It reveals 23 feature pairs with absolute Spearman
+  correlation above 0.95, supporting dimensionality reduction or strong
+  regularisation for the audio block.
+- `modality_coverage_heatmap.png` makes structural missingness visible by
+  category and format. The largest gap is usable transcript coverage: 92% for
+  regular videos versus 60% for Shorts, while stored thumbnails and frames are
+  complete.
+- `shortcut_scatterplots_train_seed0.png` facets subscriber/view and age/view
+  relationships by category, while
+  `outcome_associations_train_seed0.png` contrasts pooled, regular-only and
+  Shorts-only rank correlations.
+
+The correlation matrix quantifies several redundancies that a model can exploit:
+duration identifies format (ρ = −0.848), pause ratio and pauses/minute are almost
+the same signal (ρ = 0.98), thumbnail and frame CCT move together (ρ = 0.53),
+cropped-thumbnail and frame brightness move together (ρ = 0.63), and detected
+face presence is strongly tied to detected face area (ρ = 0.79). Subscriber
+count is by far the strongest pooled association with log views (ρ = 0.705).
+Duration is a useful Simpson warning: its pooled association with views is
+slightly negative, while it is positive within both regular videos and Shorts.
+These are associations in one exploratory training partition, not causal advice
+and not justification for selecting features after looking at validation data.
 
 The format split is essential. Median duration is 843 s for regular videos and
 37 s for Shorts. Raw thumbnail brightness is 144 versus 80 and predicts format

@@ -10,8 +10,14 @@
 #   ~/Library/TinyTeX/bin/universal-darwin/tlmgr install psnfss booktabs \
 #       xcolor graphics graphics-def epstopdf-pkg times helvetic courier amsmath
 #
-# Regenerate the results table BEFORE building, so the numbers match the code:
+# Regenerate result tables BEFORE building, so the numbers match the code. The
+# tuned publisher must precede text-v2 because that comparison reads the tuned
+# structured reference:
 #   .venv/bin/python 05_Reports/final_report/make_tables.py --seeds 5
+#   .venv/bin/python 05_Reports/final_report/publish_tuned_baselines.py
+#   .venv/bin/python 05_Reports/final_report/make_deep_table.py
+#   .venv/bin/python 05_Reports/final_report/make_text_v2_table.py
+#   .venv/bin/python 05_Reports/final_report/publish_tuned_deep.py
 set -e
 
 cd "$(dirname "$0")"

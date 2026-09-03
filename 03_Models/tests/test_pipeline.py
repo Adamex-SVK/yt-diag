@@ -5,6 +5,7 @@ import sys
 import tempfile
 
 import numpy as np
+import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(HERE))
@@ -52,6 +53,28 @@ def test_adapter_prefers_the_cleaned_transcript():
         after = load_retrospective(root)
         picked = after.loc[after.video_id == df.video_id.iloc[0], "asset__transcript_path"].iloc[0]
         assert picked.endswith("transcript_clean.txt")
+    finally:
+        shutil.rmtree(tmp)
+
+
+def test_adapter_withholds_manifest_unusable_transcript():
+    """A file can exist but be known sparse/wrong-language; do not encode it."""
+    import csv
+    import shutil
+    tmp = tempfile.mkdtemp(prefix="ytdiag_quality_")
+    try:
+        root = generate(tmp, n=8, seed=2)
+        before = load_retrospective(root)
+        video_id = before.video_id.iloc[0]
+        with open(os.path.join(root, "cleaning_manifest.csv"), "w", newline="", encoding="utf-8") as f:
+            writer = csv.DictWriter(f, fieldnames=["video_id", "transcript_usable", "transcript_kind"])
+            writer.writeheader()
+            writer.writerow({"video_id": video_id, "transcript_usable": 0, "transcript_kind": "sparse"})
+        after = load_retrospective(root)
+        row = after[after.video_id == video_id].iloc[0]
+        assert pd.isna(row.asset__transcript_path)
+        assert row.asset__transcript_usable == 0 and row.asset__transcript_kind == "sparse"
+        assert after[after.video_id != video_id].asset__transcript_path.notna().all()
     finally:
         shutil.rmtree(tmp)
 

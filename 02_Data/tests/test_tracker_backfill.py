@@ -256,6 +256,25 @@ assert all(len(c) <= 3 for c in CLASSIFY_CALLS), [len(c) for c in CLASSIFY_CALLS
 MANY_ADMISSIBLE[0] = False
 print("cap test OK: cap = max-cohort/4 -> exactly 1 per category, backup uncapped by main total")
 
+# Admission cutoff: the first tick after the boundary covers the final partial
+# window exactly through the cutoff; subsequent ticks make no discovery calls.
+shutil.rmtree(tdir); os.makedirs(tdir)
+cutoff = NOW[0] - datetime.timedelta(hours=1)
+with open(trk.DISCOVERY_STATE_PATH, "w") as f:
+    json.dump({"last_window_end_utc": trk.iso(cutoff - datetime.timedelta(hours=6))}, f)
+args_cutoff = argparse.Namespace(max_cohort=3000, track_days=30, min_gap_hours=12,
+                                 discover_window_hours=24, discover_pages=1, min_duration_sec=240,
+                                 admission_end_utc=trk.iso(cutoff))
+calls.clear()
+cohort = trk.discover("KEY", [], args_cutoff)
+search_calls = [params for endpoint, params in calls if endpoint == "search"]
+assert search_calls and all(params["publishedBefore"] == trk.iso(cutoff) for params in search_calls)
+assert json.load(open(trk.DISCOVERY_STATE_PATH))["last_window_end_utc"] == trk.iso(cutoff)
+calls.clear()
+assert trk.discover("KEY", cohort, args_cutoff) == cohort
+assert calls == [], "closed admission window still made API calls"
+print("admission-cutoff test OK: final partial window covered once, later discovery skipped")
+
 # Failure test: a failed search call must NOT advance the discovery checkpoint
 import urllib.error
 state_before = json.load(open(trk.DISCOVERY_STATE_PATH))
@@ -488,7 +507,7 @@ for _, prm in calls:
     per_cat[prm["videoCategoryId"]] = per_cat.get(prm["videoCategoryId"], 0) + 1
 expected = {spec["categoryId"]: 2 * sum(spec["queries"].values()) for spec in trk.CATEGORIES.values()}
 assert per_cat == expected, (per_cat, expected)
-assert sum(per_cat.values()) == 80, sum(per_cat.values())
+assert sum(per_cat.values()) == 90, sum(per_cat.values())
 trk.api_get = fake_api
 print(f"page-budget test OK: search calls per category {per_cat} == 2 x sum(per-arm pages); worst case {sum(per_cat.values())}")
 

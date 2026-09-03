@@ -18,6 +18,7 @@ venv/
 02_Data/frames/
 02_Data/videos/
 03_Models/checkpoints/
+03_Models/cache/
 03_Models/*.pt
 03_Models/*.pth
 03_Models/*.ckpt

@@ -68,15 +68,17 @@ predicting views, we predict whether a video ranks in the top quarter of a peer
 group matched on category, channel size, video age and format, and we report the
 non-content baseline explicitly so that any content result is read against it.
 We assemble two cohorts --- a retrospective multimodal archive of 1,860 videos
-and a live prospective panel of 11,256 videos with twice-daily outcome tracking
+and a prospective panel of 12,738 videos as of 2 September, with twice-daily outcome tracking
 --- and map both onto a single feature table so that every ablation is a choice
 of feature groups rather than a separate pipeline. On the resulting label,
-metadata baselines reach \note{PENDING}{final AUC} and the engineered visual
-block performs at chance. We show the latter is a consequence of the design
-rather than a failure of vision: before video format was stratified out of the
-label, thumbnail brightness was the strongest visual predictor, and it was
-detecting the letterboxing of vertical videos rather than anything about
-content.
+after nested selection, metadata+schedule XGBoost reaches validation AUC
+$0.619\pm0.022$, while our best frozen field-aware text, thumbnail and metadata
+fusion reaches $0.600\pm0.026$ and the tuned full engineered baseline reaches
+$0.614\pm0.023$ over five channel-grouped seeds; the test set remains sealed. Engineered vision alone
+performs at chance. We show why this is a design success rather than a failure
+of vision: before video format was stratified out of the label, thumbnail
+brightness was detecting the composition of vertical videos rather than
+content quality.
 \end{quote}
 \end{abstract}
 
@@ -235,6 +237,35 @@ load-bearing: predicting the label from channel-level features alone reaches AUC
 roughly 6--7 positives per category per split. We report pooled metrics with
 spreads and treat per-category numbers as descriptive only.}
 
+\subsection{Frozen multimodal model}
+
+We first test the smallest deep model that can establish whether raw content
+adds value. A revision-pinned DINOv2 ViT-S/14 maps the 224-pixel centre crop of
+each thumbnail to its frozen 384-dimensional class token. A revision-pinned
+ModernBERT-base maps the title, cleaned transcript and description (in that
+priority order under a 1{,}024-token cap) to a frozen 768-dimensional
+attention-mask-weighted mean. Separate presence masks distinguish missing
+transcripts or descriptions from measured zeros. The cleaning manifest exposes
+only 1{,}404 transcripts as usable; the remaining 456 sparse or wrong-language
+transcripts are withheld while their title and description remain.
+
+We evaluate both an L2 logistic probe and a late-fusion MLP. The MLP projects
+each modality to 32 dimensions, concatenates the projections, and applies a
+32-unit head with GELU and 0.5 dropout. Logistic regularisation and the MLP
+epoch are selected on a channel-grouped split wholly inside the training fold;
+the selected model is refitted on the outer training fold before validation.
+The encoders never train. Frames are deliberately deferred until this cheaper
+thumbnail/text stage demonstrates stable added value.
+
+The generic representation is followed by one targeted text experiment. An
+embedding-trained ModernBERT variant encodes title, description and transcript
+separately, using the model's document prefix and masked-mean pooling. Long
+transcripts contribute up to four evenly distributed, overlapping 384-token
+chunks rather than only their opening; field and chunk embeddings are
+L2-normalised and reduced to the model's 256-dimensional Matryoshka
+representation. This policy is fixed before the five-seed run and the encoder
+remains frozen.
+
 %% ==================================================================
 \section{Experiment}
 
@@ -317,8 +348,10 @@ scoring function $f$ over positives $\mathcal{P}$ and negatives $\mathcal{N}$,
 \noindent i.e.\ the probability that a randomly chosen viral video is scored
 above a randomly chosen typical one; 0.5 is chance. We report PR-AUC alongside
 it because roughly 24\% of videos are positive, and average precision is the
-more honest summary under imbalance. $F_1 = 2PR/(P+R)$ is reported at a
-threshold chosen on the validation split only.
+more honest summary under imbalance. $F_1 = 2PR/(P+R)$. The fixed reference
+table chooses its displayed threshold on validation; the nested-tuning results
+choose it from inner out-of-fold training predictions so outer validation remains
+evaluation-only. AUC-ROC and PR-AUC are threshold-free.
 
 \subsection{Results}
 %% ==================================================================
@@ -348,6 +381,28 @@ Audio only & 92 & 0.534 \tiny{$\pm$ 0.025} & 0.556 \tiny{$\pm$ 0.040} \\
 \end{table}
 %% <<<END GENERATED baselines>>>
 
+%% <<<BEGIN GENERATED tuned-baselines>>>
+\begin{table}[t]
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{l l cc}
+\toprule
+Features & Model & Fixed & Nested tuned \\
+\midrule
+Metadata + schedule & Logistic & 0.597 \tiny{$\pm$ 0.055} & 0.590 \tiny{$\pm$ 0.048} \\
+ & XGBoost & 0.589 \tiny{$\pm$ 0.028} & 0.619 \tiny{$\pm$ 0.022} \\
+Full engineered & Logistic & 0.587 \tiny{$\pm$ 0.042} & 0.595 \tiny{$\pm$ 0.032} \\
+ & XGBoost & 0.605 \tiny{$\pm$ 0.030} & 0.614 \tiny{$\pm$ 0.023} \\
+\bottomrule
+\end{tabular}
+\caption{Nested tuning on the retrospective cohort. Hyperparameters are selected by four channel-grouped folds inside each outer training set; the F1 threshold comes from inner out-of-fold predictions. Cells are outer-validation AUC-ROC, mean $\pm$ s.d. over five split seeds; test remains untouched.}
+\label{tab:tuned-baselines}
+\end{table}
+
+Nested tuning changes the strongest comparator. Metadata+schedule XGBoost improves from $0.589\pm0.028$ to $0.619\pm0.022$ and wins on four of five paired outer splits. The tuned full engineered model reaches $0.614\pm0.023$; visual and audio features therefore do not improve the strongest tuned structured model. The best model's inner-thresholded balanced accuracy is $0.585\pm0.015$, precision $0.300\pm0.014$, recall $0.633\pm0.119$ and F1 $0.403\pm0.023$. These five overlapping split-seed comparisons are descriptive, not confidence intervals or a significance test.
+%% <<<END GENERATED tuned-baselines>>>
+
 All numbers are validation AUC averaged over seeds, with standard deviations.
 Single-seed reporting is not defensible at this sample size: logistic regression
 on metadata ranges from 0.496 to 0.660 across seeds.
@@ -357,8 +412,10 @@ that is the floor every other number is read against.
 
 \subsection{Ablations}
 
-\note{PENDING}{Four planned: full vs metadata-only; minus text; minus vision;
-minus attribution. Currently only the feature-group ladder has run.}
+The frozen-content experiment isolates thumbnail, text, their combination, and
+their combination with metadata and schedule (Table~\ref{tab:deep}). Attribution
+is not yet an ablation because the content model has not earned the complexity
+of an explanation layer.
 
 The visual block alone performs at chance (Table~\ref{tab:baselines}). This is
 the expected consequence of the label design: before format was stratified out,
@@ -369,9 +426,63 @@ were previously scoring on a confound.
 
 \subsection{Deep multimodal model}
 
-\note{PENDING}{Not yet trained. Planned: frozen DINOv2 ViT-S/14 over thumbnail
-and frames, frozen ModernBERT-base over title/description/transcript, late-fusion
-MLP, Integrated Gradients for attribution.}
+%% <<<BEGIN GENERATED deep-model>>>
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{l cc}
+\toprule
+Inputs & Linear probe & Late-fusion MLP \\
+\midrule
+Thumbnail (DINOv2) & 0.563 \tiny{$\pm$ 0.032} & 0.547 \tiny{$\pm$ 0.019} \\
+Text (ModernBERT) & 0.523 \tiny{$\pm$ 0.038} & 0.512 \tiny{$\pm$ 0.055} \\
+Thumbnail + text & 0.551 \tiny{$\pm$ 0.041} & 0.531 \tiny{$\pm$ 0.033} \\
++ metadata + schedule & 0.570 \tiny{$\pm$ 0.051} & 0.554 \tiny{$\pm$ 0.022} \\
+\bottomrule
+\end{tabular}
+\caption{Validation AUC-ROC for frozen deep representations, mean $\pm$ s.d. over five channel-grouped split seeds. ModernBERT uses title, cleaned transcript and description up to 1{,}024 tokens. Model selection occurs inside the training fold; test is untouched.}
+\label{tab:deep}
+\end{table}
+%% <<<END GENERATED deep-model>>>
+
+The best deep configuration is the full linear fusion at
+$0.570\pm0.051$, below both tuned metadata+schedule XGBoost
+($0.619\pm0.022$) and tuned full engineered XGBoost ($0.614\pm0.023$).
+The nonlinear fusion head is not better ($0.554\pm0.022$). The full linear
+fusion still ranges from 0.496 to 0.632 across the same five seeds. This is evidence
+against escalating immediately to a temporal frame transformer. Frozen generic
+content representations do not add reliable signal beyond the structured
+features under this label and sample size; the next justified experiment is a
+training-fold-only text adaptation or a stronger embedding-trained text
+encoder, not a larger fusion head.
+
+We therefore ran that single targeted follow-up without opening the test set.
+
+%% <<<BEGIN GENERATED text-v2>>>
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{l cc}
+\toprule
+Inputs & Linear probe & Late-fusion MLP \\
+\midrule
+Title + description & 0.531 \tiny{$\pm$ 0.045} & 0.528 \tiny{$\pm$ 0.036} \\
+Transcript & 0.562 \tiny{$\pm$ 0.028} & 0.537 \tiny{$\pm$ 0.016} \\
+All three text fields & 0.568 \tiny{$\pm$ 0.018} & 0.571 \tiny{$\pm$ 0.004} \\
++ metadata + schedule & 0.581 \tiny{$\pm$ 0.023} & 0.581 \tiny{$\pm$ 0.020} \\
++ thumbnail & 0.587 \tiny{$\pm$ 0.033} & 0.600 \tiny{$\pm$ 0.026} \\
+\bottomrule
+\end{tabular}
+\caption{Validation AUC-ROC for the field-aware text follow-up, mean $\pm$ s.d. over five channel-grouped split seeds. Title, description and quality-gated transcript chunks are encoded separately; model selection occurs inside the training fold and test is untouched.}
+\label{tab:textv2}
+\end{table}
+
+The field-aware representation reverses the Tier-1 text result. All text fields reach $0.568\pm0.018$ with the linear probe and $0.571\pm0.004$ with the MLP; adding metadata and schedule raises the MLP to $0.581\pm0.020$. The strongest content model adds the thumbnail and reaches $0.600\pm0.026$, an average $-0.019$ over metadata+schedule XGBoost ($0.619\pm0.022$), but wins on only 1/5 paired split seeds. It is $-0.014$ relative to full engineered XGBoost ($0.614\pm0.023$), with 3/5 paired wins. With five overlapping split seeds these are descriptive paired comparisons, not confidence intervals or evidence of statistical significance. Adding the full engineered block to learned content reaches only $0.574\pm0.030$, so it does not improve the result. Content carries measurable signal but does not beat the strongest tuned baseline. If resources permit, the next bounded content experiment is frozen frame aggregation; end-to-end encoder fine-tuning is not justified.
+%% <<<END GENERATED text-v2>>>
+
+%% <<<BEGIN GENERATED tuned-deep>>>
+\paragraph{Nested fusion-head tuning.} As a post-hoc robustness check, we expanded the linear regularisation grid and evaluated nine MLP heads varying projection and hidden width, dropout, learning rate, weight decay, batch size and positive-class weighting. Three channel-grouped folds inside each outer training set select hyperparameters; a further grouped monitor split selects epochs. The expanded linear probe remains $0.587\pm0.034$ AUC. The selected MLP reaches $0.598\pm0.037$ versus $0.600\pm0.026$ for the pre-specified head, winning 2/5 paired outer splits. It remains $0.021$ below tuned metadata+schedule XGBoost ($0.619\pm0.022$). Thus head tuning does not rescue the content model and strengthens the case against end-to-end encoder fine-tuning on this cohort. Test remains untouched.
+%% <<<END GENERATED tuned-deep>>>
 
 %% ==================================================================
 \subsection{Limitations}
@@ -395,7 +506,18 @@ MLP, Integrated Gradients for attribution.}
 \section{Conclusion}
 %% ==================================================================
 
-\note{PENDING}{Write last.}
+Predicting raw YouTube views rewards shortcut learning, so we instead define a
+peer-relative target, group evaluation by channel, and require content models
+to beat explicit non-content baselines. Data repair proved as important as
+architecture: overlapping captions and invalid colour-temperature calculations
+materially changed the available signals. Generic frozen content embeddings
+failed this test, while field-aware text and thumbnail fusion improved to
+$0.600\pm0.026$ validation AUC but remained below tuned metadata+schedule
+XGBoost at $0.619\pm0.022$. Engineered visual and audio features also failed to
+improve that tuned comparator. This permits at most a bounded frozen-frame
+follow-up, not an immediate jump to end-to-end fine-tuning. The prospective cohort will provide the stronger final
+test of the methodology once fixed-horizon outcomes and publication-time
+metadata mature.
 
 \bibliographystyle{aaai}
 \bibliography{references}
