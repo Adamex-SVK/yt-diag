@@ -51,7 +51,7 @@ PRETTY = {"dummy_prior": "Dummy", "logistic_regression": "Logistic",
 
 
 def collect(seeds: int) -> tuple[list[dict[str, Any]], list[str], int]:
-    """Run every ladder rung over `seeds` seeds; return rows and model names."""
+    """Run every ladder rung; return rows, model names, and labelled sample count."""
     from ytdiag.adapters import load_retrospective
     from ytdiag.baselines import run_baselines
 

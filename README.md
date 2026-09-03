@@ -34,8 +34,8 @@ deep multimodal model trains on. Outcome = the view count observed at collection
 **2. The prospective panel** — `02_Data/tracking/`
 A live, fixed-cap cohort of newly published videos, discovered daily and snapshotted **twice a day for 30
 days** by two launchd agents (09:05 and 21:05). On 2026-09-02 it held 12,738 videos (10,443 in the
-date-window arm, plus `short_form` and `non_english` comparison arms); the frozen ceiling is now
-4,000 per category, or 20,000 date-window videos. No frames or audio — but it has something the
+date-window arm, plus `short_form` and `non_english` comparison arms); the frozen date-window ceiling is
+20,000 videos (4,000 for each of four principal categories plus 4,000 for the backup category). No frames or audio — but it has something the
 archive never can: a *growth curve* per video, and the first-observed near-publish thumbnail and
 title, before creators edit them.
 

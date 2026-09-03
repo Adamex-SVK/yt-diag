@@ -70,7 +70,7 @@ def pipeline_overview(path: str) -> None:
     _arrow(ax, 0.242, 0.753, 0.242, 0.732, RETRO)
 
     _box(ax, 0.54, 0.62, 0.44, 0.30, "", PROSP, face="#f0f7f6", fontsize=7)
-    ax.text(0.76, 0.885, "PROSPECTIVE  n=11,256, twice daily / 30 d",
+    ax.text(0.76, 0.885, "PROSPECTIVE  n=12,738 on Sep. 2, twice daily / 30 d",
             ha="center", fontsize=6.8, color=PROSP, weight="bold")
     _box(ax, 0.565, 0.755, 0.185, 0.10, "discovery at\nage < 24 h", PROSP, fontsize=6.6)
     _box(ax, 0.775, 0.755, 0.185, 0.10, "snapshot views,\ntitle, thumbnail", PROSP, fontsize=6.6)
