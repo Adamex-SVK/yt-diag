@@ -77,8 +77,8 @@ def collect(seeds: int) -> tuple[list[dict[str, Any]], list[str], int]:
     return rows, model_names, n_labelled
 
 
-def render(rows: list[dict[str, Any]], model_names: list[str], seeds: int,
-           n_labelled: int) -> str:
+def _render_table(rows: list[dict[str, Any]], model_names: list[str], seeds: int,
+                  n_labelled: int) -> str:
     """LaTeX for the baseline table. booktabs, two-column safe."""
     models = [m for m in model_names if m != "dummy_prior"]
     dummy = rows[0]["auc"].get("dummy_prior", (0.5, 0.0))[0]
@@ -107,13 +107,34 @@ def render(rows: list[dict[str, Any]], model_names: list[str], seeds: int,
         "\\caption{Validation AUC-ROC on the retrospective cohort "
         f"($n={n_labelled}$ labelled), mean $\\pm$ s.d. over {seeds} seeds. "
         "$d$ is the number of input columns actually fitted, after all-NaN "
-        "columns are dropped. Splits are channel-grouped; the test split is "
-        "untouched. The visual block alone performs at chance, which is the "
+        "columns are dropped. Splits are channel-grouped repeated development "
+        "partitions. The visual block alone performs at chance, which is the "
         "expected consequence of stratifying video format out of the label.}",
         "\\label{tab:baselines}",
         "\\end{table}",
     ]
     return "\n".join(lines)
+
+
+def render(rows: list[dict[str, Any]], model_names: list[str], seeds: int,
+           n_labelled: int) -> str:
+    """Compact fixed-ladder summary; full row-level values remain in JSON."""
+    del model_names, seeds
+    dummy = rows[0]["auc"].get("dummy_prior", (0.5, 0.0))[0]
+    by_label = {row["label"]: row for row in rows}
+
+    def cell(label: str, model: str) -> str:
+        mean, std = by_label[label]["auc"][model]
+        return f"${mean:.3f}\\pm{std:.3f}$"
+
+    return (
+        f"\\paragraph{{Fixed feature ladder.}} Across {n_labelled:,} labelled videos, "
+        f"the class-prior floor is {dummy:.3f}. Visual-only logistic/XGBoost score "
+        f"{cell('Visual only', 'logistic_regression')}/{cell('Visual only', 'xgboost')} AUC, "
+        f"and audio-only score {cell('Audio only', 'logistic_regression')}/"
+        f"{cell('Audio only', 'xgboost')}. Combining all engineered groups reaches "
+        f"{cell('+ audio', 'logistic_regression')}/{cell('+ audio', 'xgboost')}."
+    )
 
 
 def _cct_provenance() -> dict[str, Any]:
@@ -169,7 +190,8 @@ def main() -> None:
                             .strftime("%Y-%m-%dT%H:%M:%SZ"),
         "seeds": args.seeds, "seed_ids": list(range(args.seeds)),
         "n_labelled": n_labelled,
-        "protocol": "channel-grouped 60/20/20; VALIDATION only, test untouched",
+        "protocol": "repeated channel-grouped 60/20/20 development splits; validation only",
+        "metric_note": "This historical fixed-ladder artifact is used for AUC only; its displayed F1 threshold was selected on validation.",
         "cct_version": cct["version"], "cct_method": cct["method"],
         "rows": [{"features": r["label"], "n_features": r["n_features"],
                   "auc": {m: {"mean": mu, "std": sd,

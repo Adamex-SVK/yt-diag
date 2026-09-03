@@ -207,13 +207,12 @@ memorising which channel a video came from. `ytdiag/split.py` enforces this and 
 - **Cleaning** — done. **EDA** — done, with three label changes recommended and awaiting sign-off.
 - **Baselines** — complete over five channel-grouped validation seeds. The fixed full-engineered
   XGBoost reaches AUC 0.605 ± 0.030; nested tuning makes metadata+schedule XGBoost the strongest
-  comparator at 0.619 ± 0.022, with test still sealed.
+  comparator at 0.619 ± 0.022.
 - **Frozen deep Tier 1** — complete for thumbnail + quality-gated text. The best full linear fusion reaches
-  0.570 ± 0.051 and the MLP 0.554 ± 0.022, so neither beats the structured baselines; test is
-  untouched.
+  0.570 ± 0.051 and the MLP 0.554 ± 0.022, so neither beats the structured baselines.
 - **Field-aware text v2** — complete. Separate field/chunk embeddings lift the best MLP to
   0.600 ± 0.026, but it is 0.019 below tuned metadata+schedule XGBoost and wins only one of five
-  paired splits. Test remains untouched.
+  paired splits.
 - **Deep-head tuning** — complete. Nested selection across nine MLP heads reaches 0.598 ± 0.037,
   slightly below and more variable than the pre-specified 0.600 ± 0.026 head.
 - **Visual ablation** — complete for thumbnails and all 20 frames with DINOv2-small/base, CLIP and
@@ -221,6 +220,11 @@ memorising which channel a video came from. `ytdiag/split.py` enforces this and 
   thumbnail reaches 0.606 ± 0.040. The best observed full fusion combines CLIP thumbnail/frames,
   field-aware text, metadata and schedule at 0.613 ± 0.044, still 0.006 below tuned
   metadata+schedule XGBoost and ahead on two of five paired splits. ResNet-50 remains weak.
+
+These are repeated development results, not a final test estimate. Although each split is
+channel-disjoint internally, changing the split seed reassigns videos: every nominal retrospective
+test row appears in training or validation under another seed. The prospective cohort will provide
+the genuinely unseen external evaluation after its fixed-horizon outcomes mature.
 
 ## A note on conventions
 

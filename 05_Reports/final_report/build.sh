@@ -19,6 +19,7 @@
 #   .venv/bin/python 05_Reports/final_report/make_text_v2_table.py
 #   .venv/bin/python 05_Reports/final_report/publish_tuned_deep.py
 #   .venv/bin/python 05_Reports/final_report/publish_visual_ablation.py
+#   .venv/bin/python 05_Reports/final_report/publish_attribution.py
 set -e
 
 cd "$(dirname "$0")"
