@@ -60,32 +60,20 @@ def compact(full: dict) -> dict:
 
 
 def render(summary: dict) -> str:
-    lines = [
-        "\\begin{table}[t]",
-        "\\centering",
-        "\\small",
-        "\\begin{tabular}{l cc}",
-        "\\toprule",
-        "Inputs & Linear probe & Late-fusion MLP \\\\",
-        "\\midrule",
-    ]
-    for key, models in summary["aggregate"].items():
-        cells = []
-        for model in ("linear_probe", "late_fusion_mlp"):
-            auc = models[model]["auc_roc"]
-            cells.append(f"{auc['mean']:.3f} \\tiny{{$\\pm$ {auc['std']:.3f}}}")
-        lines.append(f"{LABELS[key]} & " + " & ".join(cells) + " \\\\")
-    lines += [
-        "\\bottomrule",
-        "\\end{tabular}",
-        "\\caption{Validation AUC-ROC for frozen deep representations, mean "
-        "$\\pm$ s.d. over five channel-grouped split seeds. ModernBERT uses "
-        "title, cleaned transcript and description up to 1{,}024 tokens. Model "
-        "selection occurs inside the training fold; test is untouched.}",
-        "\\label{tab:deep}",
-        "\\end{table}",
-    ]
-    return "\n".join(lines)
+    thumbnail = summary["aggregate"]["thumbnail"]["linear_probe"]["auc_roc"]
+    text = summary["aggregate"]["text"]["linear_probe"]["auc_roc"]
+    full_linear = summary["aggregate"]["thumbnail_text_meta_sched"]["linear_probe"]["auc_roc"]
+    full_mlp = summary["aggregate"]["thumbnail_text_meta_sched"]["late_fusion_mlp"]["auc_roc"]
+    return (
+        "\\paragraph{Initial frozen representations.} With one centre-cropped "
+        f"DINOv2-S thumbnail, the linear probe reaches ${thumbnail['mean']:.3f}"
+        f"\\pm{thumbnail['std']:.3f}$ AUC; concatenated ModernBERT text reaches "
+        f"${text['mean']:.3f}\\pm{text['std']:.3f}$. Combining both with metadata "
+        f"and schedule reaches ${full_linear['mean']:.3f}\\pm{full_linear['std']:.3f}$ "
+        f"for the linear probe and ${full_mlp['mean']:.3f}\\pm{full_mlp['std']:.3f}$ "
+        "for the MLP. This motivates the field-aware text and controlled visual "
+        "ablations below."
+    )
 
 
 def splice(tex: str, body: str) -> str:

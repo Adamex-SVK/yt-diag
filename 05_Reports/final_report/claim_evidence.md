@@ -12,6 +12,7 @@ Regenerate the baseline table (never retype it):
 .venv/bin/python 05_Reports/final_report/make_tables.py --seeds 5
 .venv/bin/python 05_Reports/final_report/make_deep_table.py
 .venv/bin/python 05_Reports/final_report/make_text_v2_table.py
+.venv/bin/python 05_Reports/final_report/publish_visual_ablation.py
 ```
 
 ---
@@ -22,25 +23,22 @@ Regenerate the baseline table (never retype it):
 |---|---|---|---|
 | 1,860 videos; comedy 464 / howto 373 / product_reviews 482 / vlogs 541 | confirmed | `eda_retrospective.py` → `by_category` in `02_Data/eda/eda_stats.json` | Data |
 | 1,319 distinct channels, 81.7% contributing one video | confirmed | notebook §7 | Data, Method |
-| 11,256 prospective cohort videos | confirmed | `wc -l 02_Data/tracking/cohort.csv` | Data |
+| 12,738 prospective videos as of 2026-09-02; 10,443 in the date-window arm | confirmed | dated tracker audit; top-level `README.md` | Data |
+| 20,000 date-window ceiling = 4 principal categories × 4,000 plus 1 backup category × 4,000 | confirmed | tracker collection policy; top-level `README.md` | Data |
 | 20 frames/video, 12 inside the first 60 s | confirmed | `compute_frame_timestamps()`; notebook §3 | Data |
 | Collection fell short of the 8,000 target (pagination cap) | limitation | `02_Data/cc_availability_scan_findings.md` | Data |
 
-## Data repair
+## Pre-processing
 
 | Claim | Status | Reproduce with | In report |
 |---|---|---|---|
-| 98% of auto-caption transcripts repeat each phrase ~3× | confirmed | notebook §2 (113-video sample) | Data |
 | dup8 median 0.349 → 0.000; word ratio 0.352 | confirmed | notebook §2 | Data |
 | Transcript kinds 944 / 467 / 391 / 37 / 12 / 9 | confirmed | `02_Data/processed/cleaning_manifest.csv`, `transcript_kind` | Data |
 | Native-English-only leaves comedy 77, vlogs 64 | confirmed | `02_Data/eda.md` §7 | Data (limitation) |
-| Old CCT reached 5.0×10⁹ K, 27 negative | confirmed | pre-fix values; `KNOWN_ISSUES.md` §6 | Data |
-| Corrected CCT (v3): nearest-Planckian-locus, 1% LUT, signed Duv | confirmed | `cd 02_Data && ../.venv/bin/python tests/test_cct.py` | Experiment |
-| v3 recovers locus reference points exactly where McCamy drifts (25,000 K: 25,000 vs 19,504) | confirmed | `_nearest_planckian_cct_duv_uv` vs McCamy, see CHANGELOG | Experiment |
+| CCT (v3): linear-light sRGB-to-XYZ, nearest Planckian-locus lookup, estimates with Duv > 0.05 missing | confirmed | `cd 02_Data && ../.venv/bin/python tests/test_cct.py` | Experiment |
 | v3 frame-mean distribution 2,553–15,679 K, median 5,666; all 1,860 files carry the same v3 method | confirmed | `.venv/bin/python 02_Data/recompute_cct.py --dry-run`; `eda_features_stats.json` | Experiment |
 | v3 coverage: 1,854/1,860 thumbnails and 36,652/37,200 frames valid | confirmed | `02_Data/eda_features/eda_features_stats.json` | Experiment |
 | v3 visual/full baselines use five channel-grouped validation splits; test untouched | confirmed | `results/baselines.json` (`cct_version` recorded) | Experiment |
-| Pure green would report 6069 K without the Duv gate | confirmed | notebook §4 | Data |
 
 ## Target and label
 
@@ -90,8 +88,12 @@ Regenerate the baseline table (never retype it):
 | Best text-v2 model vs tuned metadata/schedule XGBoost: -0.019 mean, 1/5 paired wins; vs tuned full engineered: -0.014, 3/5 wins | confirmed | `results/text_v2.json`, exact seed arrays under `aggregate` and `references` | Experiments |
 | Nested tuned deep linear/MLP = 0.587 ± 0.034 / 0.598 ± 0.037; MLP does not improve the pre-specified 0.600 ± 0.026 head (2/5 wins) | confirmed | `run_tuned_deep.py`; `publish_tuned_deep.py`; `results/tuned_deep.json` | Experiments |
 | Deep tuning uses fold-local preprocessing, inner grouped hyperparameter folds, and a further grouped epoch-monitor split; test untouched | confirmed | `ytdiag/deep_tuning.py`; `test_deep_tuning.py` | Method, Experiments |
+| Thumbnail linear AUC: DINOv2-S 0.563 ± 0.032, DINOv2-B 0.551 ± 0.031, CLIP ViT-B/32 0.570 ± 0.047, ResNet-50 0.520 ± 0.013 | confirmed | `run_visual_ablation.py --seeds 0,1,2,3,4`; `publish_visual_ablation.py`; `results/visual_ablation.json` | Experiments |
+| All-frame visual results: DINOv2-S MLP 0.589 ± 0.023; DINOv2-B MLP 0.602 ± 0.026; CLIP linear 0.605 ± 0.028; ResNet-50 MLP 0.548 ± 0.018 | confirmed | same visual-ablation evidence | Experiments |
+| CLIP thumbnail + frames linear = 0.606 ± 0.040 | confirmed | `results/visual_ablation.json → aggregate.thumbnail_frames_clip` | Experiments |
+| CLIP thumbnail + frames + field-aware text + metadata/schedule linear = 0.613 ± 0.044; -0.006 vs tuned metadata/schedule XGBoost and 2/5 paired wins | confirmed | `results/visual_ablation.json`, exact seed arrays under `aggregate` and `comparison` | Abstract, Experiments, Conclusion |
+| Visual ablation changes backbone, encoder size, crop/padding, pooling, and frame aggregation while reusing the same five grouped splits; test untouched | confirmed | `ytdiag/visual_ablation.py`; `run_visual_ablation.py`; `test_visual_ablation.py` | Method, Experiments |
 | **Test-set metrics** | **pending** | evaluate the frozen selected model ONCE after the modelling policy is final | Experiments |
-| **Frozen frame aggregation** | **pending** | justified as the next bounded experiment by text v2; not yet run | Experiments |
 | **Attribution examples** | **pending** | Integrated Gradients not implemented | Experiments |
 
 ---
@@ -105,5 +107,5 @@ Regenerate the baseline table (never retype it):
 - [ ] Re-run `make_tables.py` so the table matches the final code
 - [ ] Every `pending` row above is either resolved or removed from the report
 - [ ] Compile in Overleaf and check: two columns, no page numbers, Times, fonts embedded
-- [ ] `references.bib` populated (currently three entries needed: Wu 2018, Abu-El-Haija 2016, Rajaram 2020)
+- [x] `references.bib` populated for every cited work
 - [ ] Adam's sign-off recorded on the three label changes

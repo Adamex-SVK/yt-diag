@@ -104,13 +104,13 @@ def render(summary: dict) -> str:
     engineered, engineered_delta, engineered_wins = comparisons[1]
     lines += [
         "",
-        "The field-aware representation reverses the Tier-1 text result. All text fields "
+        "Separating the text fields improves on the original concatenated-text representation. All text fields "
         f"reach ${all_text['linear_probe']['auc_roc']['mean']:.3f}\\pm"
         f"{all_text['linear_probe']['auc_roc']['std']:.3f}$ with the linear probe and "
         f"${all_text['late_fusion_mlp']['auc_roc']['mean']:.3f}\\pm"
         f"{all_text['late_fusion_mlp']['auc_roc']['std']:.3f}$ with the MLP; adding "
         f"metadata and schedule raises the MLP to ${text_meta['mean']:.3f}\\pm{text_meta['std']:.3f}$. "
-        f"The strongest content model adds the thumbnail and reaches ${best['mean']:.3f}\\pm{best['std']:.3f}$, "
+        f"The strongest configuration in this text experiment adds the thumbnail and reaches ${best['mean']:.3f}\\pm{best['std']:.3f}$, "
         f"an average ${meta_delta:+.3f}$ over metadata+schedule XGBoost "
         f"(${meta['mean']:.3f}\\pm{meta['std']:.3f}$), but wins on only {meta_wins}/5 paired split seeds. "
         f"It is ${engineered_delta:+.3f}$ relative to full engineered XGBoost "
@@ -118,8 +118,8 @@ def render(summary: dict) -> str:
         "With five overlapping split seeds these are descriptive paired comparisons, not confidence intervals "
         "or evidence of statistical significance. Adding the full engineered block to learned content reaches "
         f"only ${engineered_fusion['mean']:.3f}\\pm{engineered_fusion['std']:.3f}$, so it does not improve the result. "
-        "Content carries measurable signal but does not beat the strongest tuned baseline. If resources permit, the "
-        "next bounded content experiment is frozen frame aggregation; end-to-end encoder fine-tuning is not justified.",
+        "Content carries measurable signal but does not beat the strongest tuned baseline. "
+        "The visual ablation below tests whether sampled frames or a different thumbnail encoder close that gap.",
     ]
     return "\n".join(lines)
 
