@@ -104,7 +104,7 @@ def render(summary: dict) -> str:
     engineered, engineered_delta, engineered_wins = comparisons[1]
     lines += [
         "",
-        "The field-aware representation reverses the Tier-1 text result. All text fields "
+        "Separating the text fields improves on the original concatenated-text representation. All text fields "
         f"reach ${all_text['linear_probe']['auc_roc']['mean']:.3f}\\pm"
         f"{all_text['linear_probe']['auc_roc']['std']:.3f}$ with the linear probe and "
         f"${all_text['late_fusion_mlp']['auc_roc']['mean']:.3f}\\pm"
@@ -118,8 +118,8 @@ def render(summary: dict) -> str:
         "With five overlapping split seeds these are descriptive paired comparisons, not confidence intervals "
         "or evidence of statistical significance. Adding the full engineered block to learned content reaches "
         f"only ${engineered_fusion['mean']:.3f}\\pm{engineered_fusion['std']:.3f}$, so it does not improve the result. "
-        "Content carries measurable signal but does not beat the strongest tuned baseline. If resources permit, the "
-        "next bounded content experiment is frozen frame aggregation; end-to-end encoder fine-tuning is not justified.",
+        "Content carries measurable signal but does not beat the strongest tuned baseline. "
+        "The visual ablation below tests whether sampled frames or a different thumbnail encoder close that gap.",
     ]
     return "\n".join(lines)
 

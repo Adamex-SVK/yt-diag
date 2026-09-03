@@ -86,8 +86,8 @@ def render(summary: dict) -> str:
         f"winning {comparison['tuned_wins_vs_fixed']}/5 paired outer splits. It remains "
         f"${abs(comparison['tuned_minus_structured_mean']):.3f}$ below tuned "
         f"metadata+schedule XGBoost (${structured['mean']:.3f}\\pm{structured['std']:.3f}$). "
-        "Thus head tuning does not rescue the content model and strengthens the case "
-        "against end-to-end encoder fine-tuning on this cohort. Test remains untouched."
+        "The result attributes the remaining gap less to the fusion-head settings than "
+        "to the information in the frozen representations and this cohort. Test remains untouched."
     )
 
 

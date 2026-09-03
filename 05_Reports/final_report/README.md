@@ -16,9 +16,10 @@ claims reproducible.
 | `make_deep_table.py` | Validates the five-seed deep run, publishes compact evidence, and inserts its table | Passing |
 | `make_text_v2_table.py` | Validates and publishes the field-aware text follow-up | Passing |
 | `publish_tuned_deep.py` | Publishes the nested frozen-head tuning robustness check | Passing |
+| `publish_visual_ablation.py` | Publishes the controlled visual-backbone and sampled-frame ablation | Passing |
 | `make_figures.py` | Generates report figures from tracked analysis outputs | Passing |
-| `results/` | Compact tracked experiment evidence used by the report | Fixed/tuned baseline + Tier-1 + text-v2 + tuned-head results present |
-| `build.sh` | Multi-pass LaTeX build plus font/page checks | Passing; draft is five pages |
+| `results/` | Compact tracked experiment evidence used by the report | Fixed/tuned baseline + text + tuned-head + visual-ablation results present |
+| `build.sh` | Multi-pass LaTeX build plus font/page checks | Passing; five pages including references |
 
 Generated LaTeX files and `main.pdf` are ignored. Set `\draftfalse` only for the
 submission build after every pending claim is resolved or removed.

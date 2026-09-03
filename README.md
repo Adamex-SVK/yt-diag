@@ -197,7 +197,7 @@ baseline printed beside it.
 **3. Splits must be grouped by channel.** A plain random split lets a model reach AUC 0.86 by
 memorising which channel a video came from. `ytdiag/split.py` enforces this and asserts it.
 
-## Current state (2026-09-02)
+## Current state (2026-09-03)
 
 - **Data collection** — done: 1,860 videos (comedy 464, howto 373, product_reviews 482, vlogs 541).
   Short of the original 8,000 target because `search.list` pagination caps out well below its
@@ -213,11 +213,14 @@ memorising which channel a video came from. `ytdiag/split.py` enforces this and 
   untouched.
 - **Field-aware text v2** — complete. Separate field/chunk embeddings lift the best MLP to
   0.600 ± 0.026, but it is 0.019 below tuned metadata+schedule XGBoost and wins only one of five
-  paired splits. Test remains untouched; frozen-frame aggregation is at most a bounded follow-up,
-  not a reason to begin end-to-end fine-tuning.
+  paired splits. Test remains untouched.
 - **Deep-head tuning** — complete. Nested selection across nine MLP heads reaches 0.598 ± 0.037,
-  slightly below and more variable than the pre-specified 0.600 ± 0.026 head. This negative result
-  reinforces that end-to-end encoder fine-tuning is not justified on the current cohort.
+  slightly below and more variable than the pre-specified 0.600 ± 0.026 head.
+- **Visual ablation** — complete. DINOv2-base does not improve on DINOv2-small, CLIP is only
+  marginally stronger for thumbnails, and ResNet-50 is near chance. Averaging DINOv2-small features
+  over the 20 stored frames is more useful (MLP AUC 0.589 ± 0.023). The best frozen fusion combines
+  thumbnail, frames, field-aware text, metadata and schedule at 0.609 ± 0.026, still 0.010 below
+  tuned metadata+schedule XGBoost and ahead on only one of five paired splits.
 
 ## A note on conventions
 
