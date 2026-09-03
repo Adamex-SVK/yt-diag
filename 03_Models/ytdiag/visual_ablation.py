@@ -41,6 +41,11 @@ CLIP_MEAN = (0.48145466, 0.4578275, 0.40821073)
 CLIP_STD = (0.26862954, 0.26130258, 0.27577711)
 
 VISUAL_SPECS = {
+    "dino_small_center_cls": VisualSpec(
+        "dino_small_center_cls", "facebook/dinov2-small",
+        "ed25f3a31f01632728cabb09d1542f84ab7b0056", "dino",
+        256, 224, IMAGENET_MEAN, IMAGENET_STD,
+    ),
     "dino_small_center_mean": VisualSpec(
         "dino_small_center_mean", "facebook/dinov2-small",
         "ed25f3a31f01632728cabb09d1542f84ab7b0056", "dino",
@@ -247,17 +252,14 @@ def thumbnail_embeddings_variant(
 def frame_mean_embeddings(
     df: pd.DataFrame,
     cache_dir: str,
+    spec_name: str = "dino_small_center_cls",
     batch_size: int = 64,
     device: str = "auto",
     force: bool = False,
     progress: Callable[[str], None] = print,
 ) -> EmbeddingSet:
-    """Mean-pool frozen DINOv2-small CLS vectors across each videos stored frames."""
-    spec = VisualSpec(
-        "dino_small_center_cls", "facebook/dinov2-small",
-        "ed25f3a31f01632728cabb09d1542f84ab7b0056", "dino",
-        256, 224, IMAGENET_MEAN, IMAGENET_STD,
-    )
+    """Mean-pool one frozen representation across each video's stored frames."""
+    spec = VISUAL_SPECS[spec_name]
     paths = []
     for value in df.asset__frames_dir:
         if not isinstance(value, str) or not os.path.isdir(value):
@@ -269,6 +271,6 @@ def frame_mean_embeddings(
         ])
     return _extract(
         df.video_id.astype(str).to_numpy(), paths, spec,
-        os.path.join(cache_dir, "visual_dino_small_center_cls_frames_mean.npz"),
+        os.path.join(cache_dir, f"visual_{spec.name}_frames_mean.npz"),
         "mean_over_stored_frames", batch_size, device, force, progress,
     )

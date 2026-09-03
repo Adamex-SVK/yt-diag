@@ -71,9 +71,9 @@ triplicated most transcripts, and an invalid colour-temperature conversion
 produced values outside any physical interpretation. After repair, we compare
 structured XGBoost baselines with frozen DINOv2, CLIP and ModernBERT
 representations using channel-grouped splits. Tuned metadata and schedule
-features achieve $0.619\pm0.022$ validation AUC. The strongest content model,
-combining field-aware text, thumbnails and frame aggregates, reaches
-$0.609\pm0.026$ and exceeds the structured model on only one of five matched
+features achieve $0.619\pm0.022$ validation AUC. The best observed content model,
+combining field-aware text with CLIP thumbnail and frame aggregates, reaches
+$0.613\pm0.044$ and exceeds the structured model on two of five matched
 splits. Larger DINOv2 features do not improve thumbnail performance, whereas
 video frames are more informative than thumbnails alone. These results do not
 show that content is unimportant; they show that, at this sample size and with
@@ -411,7 +411,7 @@ All three text fields & 0.568 \tiny{$\pm$ 0.018} & 0.571 \tiny{$\pm$ 0.004} \\
 \label{tab:textv2}
 \end{table}
 
-Separating the text fields improves on the original concatenated-text representation. All text fields reach $0.568\pm0.018$ with the linear probe and $0.571\pm0.004$ with the MLP; adding metadata and schedule raises the MLP to $0.581\pm0.020$. The strongest content model adds the thumbnail and reaches $0.600\pm0.026$, an average $-0.019$ over metadata+schedule XGBoost ($0.619\pm0.022$), but wins on only 1/5 paired split seeds. It is $-0.014$ relative to full engineered XGBoost ($0.614\pm0.023$), with 3/5 paired wins. With five overlapping split seeds these are descriptive paired comparisons, not confidence intervals or evidence of statistical significance. Adding the full engineered block to learned content reaches only $0.574\pm0.030$, so it does not improve the result. Content carries measurable signal but does not beat the strongest tuned baseline. The visual ablation below tests whether sampled frames or a different thumbnail encoder close that gap.
+Separating the text fields improves on the original concatenated-text representation. All text fields reach $0.568\pm0.018$ with the linear probe and $0.571\pm0.004$ with the MLP; adding metadata and schedule raises the MLP to $0.581\pm0.020$. The strongest configuration in this text experiment adds the thumbnail and reaches $0.600\pm0.026$, an average $-0.019$ over metadata+schedule XGBoost ($0.619\pm0.022$), but wins on only 1/5 paired split seeds. It is $-0.014$ relative to full engineered XGBoost ($0.614\pm0.023$), with 3/5 paired wins. With five overlapping split seeds these are descriptive paired comparisons, not confidence intervals or evidence of statistical significance. Adding the full engineered block to learned content reaches only $0.574\pm0.030$, so it does not improve the result. Content carries measurable signal but does not beat the strongest tuned baseline. The visual ablation below tests whether sampled frames or a different thumbnail encoder close that gap.
 %% <<<END GENERATED text-v2>>>
 
 %% <<<BEGIN GENERATED tuned-deep>>>
@@ -427,20 +427,21 @@ Separating the text fields improves on the original concatenated-text representa
 \toprule
 Frozen visual representation & Linear & MLP \\
 \midrule
-DINOv2-S thumbnail (CLS) & 0.563 \tiny{$\pm$ 0.032} & 0.547 \tiny{$\pm$ 0.019} \\
-DINOv2-S thumbnail (patch mean) & 0.565 \tiny{$\pm$ 0.035} & 0.520 \tiny{$\pm$ 0.041} \\
-DINOv2-S full thumbnail (CLS) & 0.556 \tiny{$\pm$ 0.051} & 0.541 \tiny{$\pm$ 0.039} \\
-DINOv2-B thumbnail (CLS) & 0.551 \tiny{$\pm$ 0.031} & 0.547 \tiny{$\pm$ 0.050} \\
+DINOv2-S thumbnail & 0.563 \tiny{$\pm$ 0.032} & 0.547 \tiny{$\pm$ 0.019} \\
+DINOv2-S, 20 frames & 0.582 \tiny{$\pm$ 0.039} & 0.589 \tiny{$\pm$ 0.023} \\
+DINOv2-B thumbnail & 0.551 \tiny{$\pm$ 0.031} & 0.547 \tiny{$\pm$ 0.050} \\
+DINOv2-B, 20 frames & 0.587 \tiny{$\pm$ 0.052} & 0.602 \tiny{$\pm$ 0.026} \\
 CLIP ViT-B/32 thumbnail & 0.570 \tiny{$\pm$ 0.047} & 0.548 \tiny{$\pm$ 0.037} \\
+CLIP ViT-B/32, 20 frames & 0.605 \tiny{$\pm$ 0.028} & 0.582 \tiny{$\pm$ 0.020} \\
 ResNet-50 thumbnail & 0.520 \tiny{$\pm$ 0.013} & 0.521 \tiny{$\pm$ 0.045} \\
-DINOv2-S mean of 20 frames & 0.582 \tiny{$\pm$ 0.039} & 0.589 \tiny{$\pm$ 0.023} \\
+ResNet-50, 20 frames & 0.529 \tiny{$\pm$ 0.024} & 0.548 \tiny{$\pm$ 0.018} \\
 \bottomrule
 \end{tabular}
 \caption{Visual-only validation AUC-ROC over the same five channel-grouped splits. The controlled changes isolate encoder size, framing, pooling and pretraining; frame vectors are averaged over the 20 stored samples.}
 \label{tab:visual-ablation}
 \end{table}
 
-Increasing DINOv2 from ViT-S to ViT-B changes the linear-probe AUC from $0.563$ to $0.551$; model capacity therefore does not explain the weak thumbnail result. CLIP is the strongest thumbnail-only linear representation at $0.570\pm0.047$, whereas mean-pooled frame features reach $0.589\pm0.023$ with the MLP. Adding both thumbnails and frames to field-aware text and metadata reaches $0.609\pm0.026$, still $0.010$ below tuned metadata+schedule XGBoost ($0.619\pm0.022$) and higher on 1/5 matched splits.
+Using all 20 frames changes the backbone ranking. The strongest head for DINOv2-S, DINOv2-B and ResNet-50 reaches $0.589$, $0.602$ and $0.548$, respectively. CLIP frame features reach $0.605\pm0.028$ with the linear probe, and adding its thumbnail yields $0.606\pm0.040$. The best observed full content model uses CLIP thumbnail and frame features with field-aware text and metadata (linear probe), reaching $0.613\pm0.044$, still $0.006$ below tuned metadata+schedule XGBoost ($0.619\pm0.022$) and higher on 2/5 matched splits.
 %% <<<END GENERATED visual-ablation>>>
 
 %% ==================================================================
@@ -474,11 +475,11 @@ Public view counts make it easy to build a predictor that mostly recognizes
 channel scale and publication context. After controlling those factors through
 a peer-relative label and channel-grouped evaluation, tuned metadata+schedule
 XGBoost reaches $0.619\pm0.022$ validation AUC. Frozen content representations
-are informative but do not improve reliably on that comparator: the strongest
-text, thumbnail and frame fusion reaches $0.609\pm0.026$ and wins one of five
-matched splits. Controlled ablations show that a larger DINOv2 encoder is not
-the missing ingredient, while sampling video frames is more useful than changing
-the thumbnail backbone. The result is therefore a limitation on what can be
+are informative but do not improve reliably on that comparator: the best
+observed CLIP, text and metadata fusion reaches $0.613\pm0.044$ and wins two of
+five matched splits. Controlled ablations show that all-frame CLIP features are
+the strongest visual representation, while ResNet-50 remains weak and the larger
+DINOv2 encoder does not improve the full fusion. The result is therefore a limitation on what can be
 diagnosed from this retrospective public dataset, not evidence that content has
 no effect on viewers. Fixed-horizon prospective outcomes are needed to separate
 content from post-publication edits and platform exposure.

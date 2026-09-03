@@ -216,11 +216,11 @@ memorising which channel a video came from. `ytdiag/split.py` enforces this and 
   paired splits. Test remains untouched.
 - **Deep-head tuning** — complete. Nested selection across nine MLP heads reaches 0.598 ± 0.037,
   slightly below and more variable than the pre-specified 0.600 ± 0.026 head.
-- **Visual ablation** — complete. DINOv2-base does not improve on DINOv2-small, CLIP is only
-  marginally stronger for thumbnails, and ResNet-50 is near chance. Averaging DINOv2-small features
-  over the 20 stored frames is more useful (MLP AUC 0.589 ± 0.023). The best frozen fusion combines
-  thumbnail, frames, field-aware text, metadata and schedule at 0.609 ± 0.026, still 0.010 below
-  tuned metadata+schedule XGBoost and ahead on only one of five paired splits.
+- **Visual ablation** — complete for thumbnails and all 20 frames with DINOv2-small/base, CLIP and
+  ResNet-50. CLIP is strongest visually: frame-only linear AUC is 0.605 ± 0.028 and adding its
+  thumbnail reaches 0.606 ± 0.040. The best observed full fusion combines CLIP thumbnail/frames,
+  field-aware text, metadata and schedule at 0.613 ± 0.044, still 0.006 below tuned
+  metadata+schedule XGBoost and ahead on two of five paired splits. ResNet-50 remains weak.
 
 ## A note on conventions
 

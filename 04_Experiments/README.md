@@ -153,19 +153,23 @@ ResNet-50, and mean aggregation of the 20 stored video frames.
 | Frozen visual input | Linear probe AUC | Late-fusion MLP AUC |
 |---|---:|---:|
 | DINOv2-S thumbnail, CLS | 0.563 ± 0.032 | 0.547 ± 0.019 |
-| DINOv2-S thumbnail, patch mean | 0.565 ± 0.035 | 0.520 ± 0.041 |
-| DINOv2-S full-thumbnail pad, CLS | 0.556 ± 0.051 | 0.541 ± 0.039 |
+| DINOv2-S mean of 20 frames | 0.582 ± 0.039 | 0.589 ± 0.023 |
 | DINOv2-B thumbnail, CLS | 0.551 ± 0.031 | 0.547 ± 0.050 |
-| CLIP ViT-B/32 thumbnail | **0.570 ± 0.047** | 0.548 ± 0.037 |
+| DINOv2-B mean of 20 frames | 0.587 ± 0.052 | **0.602 ± 0.026** |
+| CLIP ViT-B/32 thumbnail | 0.570 ± 0.047 | 0.548 ± 0.037 |
+| CLIP ViT-B/32 mean of 20 frames | **0.605 ± 0.028** | 0.582 ± 0.020 |
 | ResNet-50 thumbnail | 0.520 ± 0.013 | 0.521 ± 0.045 |
-| DINOv2-S mean of 20 frames | 0.582 ± 0.039 | **0.589 ± 0.023** |
+| ResNet-50 mean of 20 frames | 0.529 ± 0.024 | 0.548 ± 0.018 |
 
-DINOv2-base being worse than DINOv2-small rules out backbone size as the main
-explanation for the weak thumbnail model. CLIP provides a small thumbnail-only
-gain, but sampled frames contribute more. The best full frozen fusion
-(thumbnail + frames + field-aware text + metadata/schedule) reaches
-0.609 ± 0.026, 0.010 below tuned metadata+schedule XGBoost and higher on one of
-five matched splits. Full per-seed evidence is gitignored under
+DINOv2-base is worse on thumbnails but improves over DINOv2-small on the
+all-frame MLP. CLIP produces the strongest frame-only linear result; adding its
+thumbnail reaches 0.606 ± 0.040. The best observed full frozen fusion uses CLIP
+thumbnail and frame features with field-aware text and metadata/schedule,
+reaching 0.613 ± 0.044. This is 0.006 below tuned metadata+schedule XGBoost and
+higher on two of five matched splits. The CLIP full-fusion MLP has a lower mean
+(0.606 ± 0.028) despite winning three splits, illustrating the remaining split
+sensitivity. DINOv2-S patch-mean pooling and aspect-preserving thumbnail padding
+do not improve its original thumbnail result. Full per-seed evidence is gitignored under
 `runs/visual_ablation/results.json`; the compact report evidence is
 `05_Reports/final_report/results/visual_ablation.json`. Test remains untouched.
 

@@ -15,13 +15,21 @@ SUMMARY = os.path.join(HERE, "results", "visual_ablation.json")
 MAIN_TEX = os.path.join(HERE, "main.tex")
 
 ROWS = (
-    ("dino_small_center_cls", "DINOv2-S thumbnail (CLS)"),
-    ("dino_small_center_mean", "DINOv2-S thumbnail (patch mean)"),
-    ("dino_small_fit_cls", "DINOv2-S full thumbnail (CLS)"),
-    ("dino_base_center_cls", "DINOv2-B thumbnail (CLS)"),
+    ("dino_small_center_cls", "DINOv2-S thumbnail"),
+    ("frames_dino_small_mean", "DINOv2-S, 20 frames"),
+    ("dino_base_center_cls", "DINOv2-B thumbnail"),
+    ("frames_dino_base_mean", "DINOv2-B, 20 frames"),
     ("clip_base_center", "CLIP ViT-B/32 thumbnail"),
+    ("frames_clip_base_mean", "CLIP ViT-B/32, 20 frames"),
     ("resnet50_center", "ResNet-50 thumbnail"),
-    ("frames_dino_small_mean", "DINOv2-S mean of 20 frames"),
+    ("frames_resnet50_mean", "ResNet-50, 20 frames"),
+)
+
+FULL_FUSIONS = (
+    "thumbnail_frames_text_fields_meta_sched",
+    "dino_base_thumbnail_frames_text_fields_meta_sched",
+    "clip_thumbnail_frames_text_fields_meta_sched",
+    "resnet50_thumbnail_frames_text_fields_meta_sched",
 )
 
 
@@ -47,9 +55,14 @@ def compact(full: dict, baselines: dict) -> dict:
     if any(run.get("test_evaluated") is not False for run in full["runs"]):
         raise ValueError("refusing to publish a run that evaluated test")
     structured = baselines["feature_sets"]["meta+sched"]["aggregate"]["xgboost"]["auc_roc"]
-    selected = full["aggregate"]["thumbnail_frames_text_fields_meta_sched"][
-        "late_fusion_mlp"
-    ]["auc_roc"]
+    candidates = [
+        (key, model, full["aggregate"][key][model]["auc_roc"])
+        for key in FULL_FUSIONS
+        for model in ("linear_probe", "late_fusion_mlp")
+    ]
+    selected_key, selected_head, selected = max(
+        candidates, key=lambda candidate: candidate[2]["mean"],
+    )
     differences = [value - reference for value, reference in zip(
         selected["values"], structured["values"],
     )]
@@ -62,7 +75,7 @@ def compact(full: dict, baselines: dict) -> dict:
         "embedding_provenance": full["embedding_provenance"],
         "aggregate": full["aggregate"],
         "comparison": {
-            "selected_model": "thumbnail_frames_text_fields_meta_sched/late_fusion_mlp",
+            "selected_model": f"{selected_key}/{selected_head}",
             "tuned_metadata_schedule_xgboost": structured,
             "selected_minus_structured_mean": sum(differences) / len(differences),
             "selected_wins": sum(value > 0 for value in differences),
@@ -92,22 +105,25 @@ def render(summary: dict) -> str:
         "\\label{tab:visual-ablation}", "\\end{table}",
     ]
     aggregate = summary["aggregate"]
-    small = aggregate["dino_small_center_cls"]["linear_probe"]["auc_roc"]
-    base = aggregate["dino_base_center_cls"]["linear_probe"]["auc_roc"]
-    clip = aggregate["clip_base_center"]["linear_probe"]["auc_roc"]
-    frames = aggregate["frames_dino_small_mean"]["late_fusion_mlp"]["auc_roc"]
-    multimodal = aggregate["thumbnail_frames_text_fields_meta_sched"]["late_fusion_mlp"]["auc_roc"]
+    small = aggregate["frames_dino_small_mean"]["late_fusion_mlp"]["auc_roc"]
+    base = aggregate["frames_dino_base_mean"]["late_fusion_mlp"]["auc_roc"]
+    clip = aggregate["frames_clip_base_mean"]["linear_probe"]["auc_roc"]
+    resnet = aggregate["frames_resnet50_mean"]["late_fusion_mlp"]["auc_roc"]
+    clip_pair = aggregate["thumbnail_frames_clip"]["linear_probe"]["auc_roc"]
     comparison = summary["comparison"]
+    selected_key, selected_head = comparison["selected_model"].split("/")
+    multimodal = aggregate[selected_key][selected_head]["auc_roc"]
     structured = comparison["tuned_metadata_schedule_xgboost"]
     lines += [
         "",
-        f"Increasing DINOv2 from ViT-S to ViT-B changes the linear-probe AUC from "
-        f"${small['mean']:.3f}$ to ${base['mean']:.3f}$; model capacity therefore does "
-        "not explain the weak thumbnail result. CLIP is the strongest thumbnail-only "
-        f"linear representation at ${clip['mean']:.3f}\\pm{clip['std']:.3f}$, whereas "
-        f"mean-pooled frame features reach ${frames['mean']:.3f}\\pm{frames['std']:.3f}$ "
-        "with the MLP. Adding both thumbnails and frames to field-aware text and metadata "
-        f"reaches ${multimodal['mean']:.3f}\\pm{multimodal['std']:.3f}$, still "
+        "Using all 20 frames changes the backbone ranking. The strongest head for "
+        f"DINOv2-S, DINOv2-B and ResNet-50 reaches ${small['mean']:.3f}$, "
+        f"${base['mean']:.3f}$ and ${resnet['mean']:.3f}$, respectively. CLIP frame "
+        f"features reach ${clip['mean']:.3f}\\pm{clip['std']:.3f}$ with the linear probe, "
+        f"and adding its thumbnail yields ${clip_pair['mean']:.3f}\\pm{clip_pair['std']:.3f}$. "
+        "The best observed full content model uses CLIP thumbnail and frame features with "
+        f"field-aware text and metadata ({selected_head.replace('_', ' ')}), reaching "
+        f"${multimodal['mean']:.3f}\\pm{multimodal['std']:.3f}$, still "
         f"${abs(comparison['selected_minus_structured_mean']):.3f}$ below tuned "
         f"metadata+schedule XGBoost (${structured['mean']:.3f}\\pm{structured['std']:.3f}$) "
         f"and higher on {comparison['selected_wins']}/5 matched splits.",

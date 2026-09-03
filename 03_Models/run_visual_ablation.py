@@ -34,8 +34,14 @@ DEFAULT_VARIANTS = (
     "dino_small_center_cls", "dino_small_center_mean", "dino_small_fit_cls",
     "dino_base_center_cls", "clip_base_center", "resnet50_center",
     "frames_dino_small_mean", "thumbnail_frames_dino_small",
+    "frames_dino_base_mean", "thumbnail_frames_dino_base",
+    "frames_clip_base_mean", "thumbnail_frames_clip",
+    "frames_resnet50_mean", "thumbnail_frames_resnet50",
     "thumbnail_text_fields_meta_sched", "clip_text_fields_meta_sched",
     "frames_text_fields_meta_sched", "thumbnail_frames_text_fields_meta_sched",
+    "dino_base_thumbnail_frames_text_fields_meta_sched",
+    "clip_thumbnail_frames_text_fields_meta_sched",
+    "resnet50_thumbnail_frames_text_fields_meta_sched",
 )
 
 TEXT_FUSIONS = {
@@ -43,6 +49,34 @@ TEXT_FUSIONS = {
     "clip_text_fields_meta_sched",
     "frames_text_fields_meta_sched",
     "thumbnail_frames_text_fields_meta_sched",
+    "dino_base_thumbnail_frames_text_fields_meta_sched",
+    "clip_thumbnail_frames_text_fields_meta_sched",
+    "resnet50_thumbnail_frames_text_fields_meta_sched",
+}
+
+BACKBONES = {
+    "dino_small": ("dino_small_center_cls", "frames_dino_small_mean"),
+    "dino_base": ("dino_base_center_cls", "frames_dino_base_mean"),
+    "clip": ("clip_base_center", "frames_clip_base_mean"),
+    "resnet50": ("resnet50_center", "frames_resnet50_mean"),
+}
+
+COMPOSITE_ABLATIONS = {
+    "thumbnail_frames_dino_small": ("dino_small_center_cls", "frames_dino_small_mean"),
+    "thumbnail_frames_dino_base": ("dino_base_center_cls", "frames_dino_base_mean"),
+    "thumbnail_frames_clip": ("clip_base_center", "frames_clip_base_mean"),
+    "thumbnail_frames_resnet50": ("resnet50_center", "frames_resnet50_mean"),
+}
+
+FULL_FUSIONS = {
+    "thumbnail_frames_text_fields_meta_sched":
+        ("dino_small_center_cls", "frames_dino_small_mean"),
+    "dino_base_thumbnail_frames_text_fields_meta_sched":
+        ("dino_base_center_cls", "frames_dino_base_mean"),
+    "clip_thumbnail_frames_text_fields_meta_sched":
+        ("clip_base_center", "frames_clip_base_mean"),
+    "resnet50_thumbnail_frames_text_fields_meta_sched":
+        ("resnet50_center", "frames_resnet50_mean"),
 }
 
 
@@ -75,7 +109,7 @@ def main() -> None:
     parser.add_argument("--seeds", default="0,1,2,3,4")
     parser.add_argument("--device", default="auto", choices=["auto", "cpu", "mps", "cuda"])
     parser.add_argument("--batch-size", type=int, default=32)
-    parser.add_argument("--frame-batch-size", type=int, default=64)
+    parser.add_argument("--frame-batch-size", type=int, default=32)
     parser.add_argument("--epochs", type=int, default=60)
     parser.add_argument("--force-embeddings", action="store_true")
     args = parser.parse_args()
@@ -84,10 +118,24 @@ def main() -> None:
     unknown = set(requested) - set(DEFAULT_VARIANTS)
     if unknown:
         raise ValueError(f"unknown variants: {sorted(unknown)}")
-    frame_requested = bool({
-        "frames_dino_small_mean", "thumbnail_frames_dino_small",
-        "frames_text_fields_meta_sched", "thumbnail_frames_text_fields_meta_sched",
-    } & set(requested))
+    requested_set = set(requested)
+    needed_backbones = set()
+    for backbone, (thumbnail_key, frame_key) in BACKBONES.items():
+        related = {thumbnail_key, frame_key, f"thumbnail_frames_{backbone}"}
+        related.update(name for name, pair in FULL_FUSIONS.items() if frame_key in pair)
+        if related & requested_set:
+            needed_backbones.add(backbone)
+    if "thumbnail_text_fields_meta_sched" in requested_set:
+        needed_backbones.add("dino_small")
+    if "clip_text_fields_meta_sched" in requested_set:
+        needed_backbones.add("clip")
+    frame_requested = any(
+        BACKBONES[backbone][1] in requested_set
+        or f"thumbnail_frames_{backbone}" in requested_set
+        or any(name in requested_set and BACKBONES[backbone][1] in pair
+               for name, pair in FULL_FUSIONS.items())
+        for backbone in needed_backbones
+    )
     text_requested = bool(TEXT_FUSIONS & set(requested))
 
     df = load_retrospective(args.data)
@@ -100,10 +148,11 @@ def main() -> None:
     }
     provenance = {"dino_small_center_cls": current.provenance}
     representation_requests = set(requested) & set(VISUAL_SPECS)
-    if "clip_text_fields_meta_sched" in requested:
-        representation_requests.add("clip_base_center")
+    representation_requests.update(
+        BACKBONES[backbone][0] for backbone in needed_backbones
+    )
     for name in representation_requests:
-        if name in {"dino_small_center_cls", "frames_dino_small_mean", "thumbnail_frames_dino_small"}:
+        if name == "dino_small_center_cls":
             continue
         bundle = thumbnail_embeddings_variant(
             df, args.cache_dir, name, batch_size=args.batch_size, device=args.device,
@@ -114,15 +163,26 @@ def main() -> None:
         ]).astype(np.float32)
         provenance[name] = bundle.provenance
     if frame_requested:
-        frames = frame_mean_embeddings(
-            df, args.cache_dir, batch_size=args.frame_batch_size, device=args.device,
-            force=args.force_embeddings,
-        )
-        blocks["frames_dino_small_mean"] = np.column_stack([
-            frames.values, frames.masks["visual_present"],
-            np.log1p(frames.masks["images_aggregated"]),
-        ]).astype(np.float32)
-        provenance["frames_dino_small_mean"] = frames.provenance
+        for backbone in sorted(needed_backbones):
+            thumbnail_key, frame_key = BACKBONES[backbone]
+            needs_frames = (
+                frame_key in requested_set
+                or f"thumbnail_frames_{backbone}" in requested_set
+                or any(name in requested_set and frame_key in pair
+                       for name, pair in FULL_FUSIONS.items())
+            )
+            if not needs_frames:
+                continue
+            frames = frame_mean_embeddings(
+                df, args.cache_dir, spec_name=thumbnail_key,
+                batch_size=args.frame_batch_size, device=args.device,
+                force=args.force_embeddings,
+            )
+            blocks[frame_key] = np.column_stack([
+                frames.values, frames.masks["visual_present"],
+                np.log1p(frames.masks["images_aggregated"]),
+            ]).astype(np.float32)
+            provenance[frame_key] = frames.provenance
 
     if text_requested:
         fields, text_provenance = field_text_embeddings(
@@ -135,13 +195,13 @@ def main() -> None:
         })
         provenance["text_fields"] = text_provenance
 
-    ablation_map = {
-        name: (name,) for name in requested if name != "thumbnail_frames_dino_small"
-    }
-    if "thumbnail_frames_dino_small" in requested:
-        ablation_map["thumbnail_frames_dino_small"] = (
-            "dino_small_center_cls", "frames_dino_small_mean",
-        )
+    composite_names = set(COMPOSITE_ABLATIONS) | set(FULL_FUSIONS)
+    composite_names.update({"thumbnail_text_fields_meta_sched", "clip_text_fields_meta_sched",
+                            "frames_text_fields_meta_sched"})
+    ablation_map = {name: (name,) for name in requested if name not in composite_names}
+    for name, pair in COMPOSITE_ABLATIONS.items():
+        if name in requested_set:
+            ablation_map[name] = pair
     shared_text = ("title", "description", "transcript")
     if "thumbnail_text_fields_meta_sched" in requested:
         ablation_map["thumbnail_text_fields_meta_sched"] = (
@@ -155,10 +215,9 @@ def main() -> None:
         ablation_map["frames_text_fields_meta_sched"] = (
             "frames_dino_small_mean", *shared_text, "meta_sched",
         )
-    if "thumbnail_frames_text_fields_meta_sched" in requested:
-        ablation_map["thumbnail_frames_text_fields_meta_sched"] = (
-            "dino_small_center_cls", "frames_dino_small_mean", *shared_text, "meta_sched",
-        )
+    for name, pair in FULL_FUSIONS.items():
+        if name in requested_set:
+            ablation_map[name] = (*pair, *shared_text, "meta_sched")
     seeds = [int(value) for value in args.seeds.split(",") if value.strip()]
     runs = []
     for seed in seeds:

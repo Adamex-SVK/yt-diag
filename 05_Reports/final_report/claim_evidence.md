@@ -93,8 +93,9 @@ Regenerate the baseline table (never retype it):
 | Nested tuned deep linear/MLP = 0.587 ± 0.034 / 0.598 ± 0.037; MLP does not improve the pre-specified 0.600 ± 0.026 head (2/5 wins) | confirmed | `run_tuned_deep.py`; `publish_tuned_deep.py`; `results/tuned_deep.json` | Experiments |
 | Deep tuning uses fold-local preprocessing, inner grouped hyperparameter folds, and a further grouped epoch-monitor split; test untouched | confirmed | `ytdiag/deep_tuning.py`; `test_deep_tuning.py` | Method, Experiments |
 | Thumbnail linear AUC: DINOv2-S 0.563 ± 0.032, DINOv2-B 0.551 ± 0.031, CLIP ViT-B/32 0.570 ± 0.047, ResNet-50 0.520 ± 0.013 | confirmed | `run_visual_ablation.py --seeds 0,1,2,3,4`; `publish_visual_ablation.py`; `results/visual_ablation.json` | Experiments |
-| Mean DINOv2-S representation over 20 frames reaches 0.582 ± 0.039 linear / 0.589 ± 0.023 MLP | confirmed | same visual-ablation evidence | Experiments |
-| Thumbnail + frames + field-aware text + metadata/schedule MLP = 0.609 ± 0.026; -0.010 vs tuned metadata/schedule XGBoost and 1/5 paired wins | confirmed | `results/visual_ablation.json`, exact seed arrays under `aggregate` and `comparison` | Abstract, Experiments, Conclusion |
+| All-frame visual results: DINOv2-S MLP 0.589 ± 0.023; DINOv2-B MLP 0.602 ± 0.026; CLIP linear 0.605 ± 0.028; ResNet-50 MLP 0.548 ± 0.018 | confirmed | same visual-ablation evidence | Experiments |
+| CLIP thumbnail + frames linear = 0.606 ± 0.040 | confirmed | `results/visual_ablation.json → aggregate.thumbnail_frames_clip` | Experiments |
+| CLIP thumbnail + frames + field-aware text + metadata/schedule linear = 0.613 ± 0.044; -0.006 vs tuned metadata/schedule XGBoost and 2/5 paired wins | confirmed | `results/visual_ablation.json`, exact seed arrays under `aggregate` and `comparison` | Abstract, Experiments, Conclusion |
 | Visual ablation changes backbone, encoder size, crop/padding, pooling, and frame aggregation while reusing the same five grouped splits; test untouched | confirmed | `ytdiag/visual_ablation.py`; `run_visual_ablation.py`; `test_visual_ablation.py` | Method, Experiments |
 | **Test-set metrics** | **pending** | evaluate the frozen selected model ONCE after the modelling policy is final | Experiments |
 | **Attribution examples** | **pending** | Integrated Gradients not implemented | Experiments |

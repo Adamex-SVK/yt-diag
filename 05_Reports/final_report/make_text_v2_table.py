@@ -110,7 +110,7 @@ def render(summary: dict) -> str:
         f"${all_text['late_fusion_mlp']['auc_roc']['mean']:.3f}\\pm"
         f"{all_text['late_fusion_mlp']['auc_roc']['std']:.3f}$ with the MLP; adding "
         f"metadata and schedule raises the MLP to ${text_meta['mean']:.3f}\\pm{text_meta['std']:.3f}$. "
-        f"The strongest content model adds the thumbnail and reaches ${best['mean']:.3f}\\pm{best['std']:.3f}$, "
+        f"The strongest configuration in this text experiment adds the thumbnail and reaches ${best['mean']:.3f}\\pm{best['std']:.3f}$, "
         f"an average ${meta_delta:+.3f}$ over metadata+schedule XGBoost "
         f"(${meta['mean']:.3f}\\pm{meta['std']:.3f}$), but wins on only {meta_wins}/5 paired split seeds. "
         f"It is ${engineered_delta:+.3f}$ relative to full engineered XGBoost "
