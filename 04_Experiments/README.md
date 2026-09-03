@@ -9,7 +9,7 @@ Experiment tracking: configurations, run logs, results, and analysis. One subfol
 2. **Text-only model** — pretrained transformer on title + description + transcript. Tests text signal alone.
 3. **Vision-only model** — vision backbone on thumbnail + sampled frames. Tests visual signal alone.
 4. **Full multimodal (frozen encoders)** — all three modalities, fusion layer trained, encoders frozen. Simpler, faster.
-5. **Full multimodal (fine-tuned)** — all three modalities, end-to-end fine-tuned. Expected best but heaviest.
+5. **Full multimodal (fine-tuned)** — optional end-to-end follow-up whose value must be established empirically; it is substantially heavier and more prone to overfitting here.
 6. **Ablation studies** — remove one modality at a time to measure marginal contribution.
 7. **Attribution quality** — human evaluation of explanation quality (does the attribution layer surface plausible reasons?).
 
@@ -117,8 +117,8 @@ The strongest v2 model is -0.019 AUC below tuned metadata+schedule XGBoost and
 wins only 1/5 paired seeds. It is -0.014 below tuned full engineered XGBoost
 while winning 3/5 seeds. These five overlapping split-seed comparisons
 are descriptive, not confidence intervals or significance tests. Adding the
-engineered block to v2 does not help. Frozen frame aggregation remains a bounded
-optional follow-up; end-to-end fine-tuning is not justified.
+engineered block to v2 does not help. The controlled visual experiment below
+tests frame aggregation and alternative thumbnail representations directly.
 
 ## Nested deep-head tuning (2026-09-02)
 
@@ -141,6 +141,33 @@ paired splits. This is not evidence that tuning damaged a true effect; it says
 the inner folds cannot select a head that generalises consistently across held-
 out channels. Escalating to end-to-end encoder fine-tuning is not justified.
 Full trials are under gitignored `runs/tuned_deep/results.json`.
+
+## Controlled visual ablation (2026-09-03)
+
+The visual follow-up changes one representation choice at a time while keeping
+the labelled cohort, five channel-grouped outer splits and downstream heads
+fixed. It compares DINOv2 model size, CLS versus patch-mean pooling, centre crop
+versus aspect-preserving padding, language-supervised CLIP, convolutional
+ResNet-50, and mean aggregation of the 20 stored video frames.
+
+| Frozen visual input | Linear probe AUC | Late-fusion MLP AUC |
+|---|---:|---:|
+| DINOv2-S thumbnail, CLS | 0.563 ± 0.032 | 0.547 ± 0.019 |
+| DINOv2-S thumbnail, patch mean | 0.565 ± 0.035 | 0.520 ± 0.041 |
+| DINOv2-S full-thumbnail pad, CLS | 0.556 ± 0.051 | 0.541 ± 0.039 |
+| DINOv2-B thumbnail, CLS | 0.551 ± 0.031 | 0.547 ± 0.050 |
+| CLIP ViT-B/32 thumbnail | **0.570 ± 0.047** | 0.548 ± 0.037 |
+| ResNet-50 thumbnail | 0.520 ± 0.013 | 0.521 ± 0.045 |
+| DINOv2-S mean of 20 frames | 0.582 ± 0.039 | **0.589 ± 0.023** |
+
+DINOv2-base being worse than DINOv2-small rules out backbone size as the main
+explanation for the weak thumbnail model. CLIP provides a small thumbnail-only
+gain, but sampled frames contribute more. The best full frozen fusion
+(thumbnail + frames + field-aware text + metadata/schedule) reaches
+0.609 ± 0.026, 0.010 below tuned metadata+schedule XGBoost and higher on one of
+five matched splits. Full per-seed evidence is gitignored under
+`runs/visual_ablation/results.json`; the compact report evidence is
+`05_Reports/final_report/results/visual_ablation.json`. Test remains untouched.
 
 ## Notes
 - Always log: what you changed, what you expected, what actually happened.
