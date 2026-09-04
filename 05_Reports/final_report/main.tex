@@ -133,17 +133,26 @@ YouTube view trajectories. Such observations are powerful predictors but are
 available only after release; our question is whether upload content adds
 signal without using early views. Khosla et al.~\cite{khosla2014image}
 combine image content with social context at scale, motivating our explicit
-content-versus-context ablations.
+content-versus-context ablations. Hessel et al.~\cite{hessel2017cats} isolate
+content from confounds directly, ranking Reddit posts submitted within seconds
+of one another to compare multimodal content against author and timing context
+in predicting relative popularity; our peer-relative, within-category label
+pursues the same isolation at the cohort level rather than by pairwise timing.
 
 Wu et al.~\cite{wu2018beyond} distinguish engagement from raw popularity by
 calibrating watch percentage against video duration. Their formulation is the
 closest motivation for our peer-relative outcome, but it requires watch time,
 which is unavailable through the public API. Rajaram and
-Manchanda~\cite{rajaram2020unboxing} combine video and creator characteristics
-to study engagement in influencer videos. In contrast, our principal question
-is incremental: whether content adds predictive value after an explicit
-metadata baseline, rather than whether all available variables predict an
-absolute platform outcome.
+Manchanda~\cite{rajaram2020unboxing} fuse text, audio and visual signals
+through an attention-based framework to attribute engagement in influencer
+videos. In contrast, our principal question is incremental: whether content
+adds predictive value after an explicit metadata baseline, rather than whether
+all available variables predict an absolute platform outcome. Liu et
+al.~\cite{liu2026survey} survey this convergence toward frozen-encoder,
+gradient-boosted multimodal pipelines across the wider popularity-prediction
+literature; unlike the work they review, which predicts raw or time-normalized
+engagement, we predict a category-relative label so that content signal is
+measured net of audience-size confounds such as subscriber count.
 
 \subsection{Multimodal representation}
 YouTube-8M~\cite{abu2016youtube} demonstrates large-scale video classification
@@ -155,7 +164,26 @@ representation. We keep these encoders frozen because the labelled cohort is
 small, then compare their features with ResNet-50~\cite{he2016resnet} and with
 XGBoost~\cite{chen2016xgboost} on engineered metadata. Unlike work targeting
 video classification, our output is relative performance and our central test
-is whether multimodal content improves over contextual shortcuts.
+is whether multimodal content improves over contextual shortcuts. Wang et
+al.~\cite{wang2023hierarchical} fuse ResNet-50 image features with text and
+structured context attributes for popularity prediction and find context
+features alone outperform either content modality in isolation -- the
+comparison our metadata baseline is designed to run directly. Lin and
+Lee~\cite{lin2024mmf} fuse frozen per-modality encoders through cross-attention
+in the 2024 Social Media Popularity Prediction challenge and report that a
+single creator's posts carry strongly correlated popularity (79\% with
+standard deviation below one), the same leakage risk our channel-grouped
+splitting is designed to prevent.
+
+\subsection{Confound control and evaluation protocol}
+Rosenblatt et al.~\cite{rosenblatt2024leakage} show, across several forms of
+leakage in connectome-based prediction, that covariate correction performed
+outside the cross-validation loop biases how much a model appears to explain
+beyond confounds, and that grouping related samples across train and test
+inflates performance the same way. Our channel-grouped splits and
+metadata-only baseline follow the same discipline: whether content explains
+virality beyond subscriber-count confounds is evaluated without ever letting a
+channel's identity cross a fold boundary.
 
 %% ==================================================================
 \section{Methodology}
