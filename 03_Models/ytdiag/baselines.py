@@ -3,7 +3,8 @@ regression, gradient boosting (XGBoost; sklearn HistGradientBoosting if
 xgboost is unavailable) on any selection of feature groups.
 
 Protocol: channel-grouped 60/20/20 split; models fit on train, threshold
-picked on validation (max F1), and reported on validation. The optional third
+picked on an inner validation split carved out of train (never on the fold
+the F1 is then reported on), and reported on validation. The optional third
 fold is not a globally independent retrospective test when seeds are changed.
 """
 from __future__ import annotations
@@ -19,6 +20,7 @@ from sklearn.dummy import DummyClassifier
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import average_precision_score, f1_score, roc_auc_score
+from sklearn.model_selection import StratifiedGroupKFold
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
@@ -77,6 +79,20 @@ def _best_threshold(y: np.ndarray, p: np.ndarray) -> float:
     return float(max(grid, key=lambda t: f1_score(y, (p >= t).astype(int))))
 
 
+def _inner_split(df: pd.DataFrame, outer_train: np.ndarray, seed: int) -> tuple[np.ndarray, np.ndarray]:
+    """A channel-grouped 75/25 split wholly inside the outer training fold, so
+    the F1 threshold can be picked without ever touching the fold it is then
+    scored on (mirrors fusion.py's `_inner_split`)."""
+    subset = df.iloc[outer_train]
+    splitter = StratifiedGroupKFold(n_splits=4, shuffle=True, random_state=seed)
+    folds = [test for _, test in splitter.split(
+        np.zeros(len(subset)), subset.label.astype(int), subset.channel_id
+    )]
+    inner_val_local = folds[0]
+    inner_train_local = np.concatenate(folds[1:])
+    return outer_train[inner_train_local], outer_train[inner_val_local]
+
+
 def run_baselines(
     df: pd.DataFrame,
     groups: Sequence[str],
@@ -121,22 +137,33 @@ def run_baselines(
     if not cols:
         raise ValueError(f"every column for groups {groups} is empty in this dataset")
     idx = split_indices(df, seed=seed)
+    inner_train_idx, inner_val_idx = _inner_split(df, idx["train"], seed=seed)
     X, y = df[cols], df.label.astype(int).to_numpy()
-    boost_name, boost = _boosting()
-    models = {
-        "dummy_prior": Pipeline([("prep", _preprocessor(cols, scale=False)),
-                                 ("clf", DummyClassifier(strategy="prior"))]),
-        "logistic_regression": Pipeline([("prep", _preprocessor(cols, scale=True)),
-                                         ("clf", LogisticRegression(max_iter=2000, C=1.0))]),
-        boost_name: Pipeline([("prep", _preprocessor(cols, scale=False)), ("clf", boost)]),
-    }
+
+    def _build_models() -> dict[str, Pipeline]:
+        boost_name, boost = _boosting()
+        return {
+            "dummy_prior": Pipeline([("prep", _preprocessor(cols, scale=False)),
+                                     ("clf", DummyClassifier(strategy="prior"))]),
+            "logistic_regression": Pipeline([("prep", _preprocessor(cols, scale=True)),
+                                             ("clf", LogisticRegression(max_iter=2000, C=1.0))]),
+            boost_name: Pipeline([("prep", _preprocessor(cols, scale=False)), ("clf", boost)]),
+        }
+
+    inner_models = _build_models()
+    models = _build_models()
     results = {"groups": list(groups), "n_features": len(cols), "seed": seed,
                "dropped_all_nan": all_nan,
                "split_sizes": {k: int(len(v)) for k, v in idx.items()}, "models": {}}
     for name, model in models.items():
+        # Threshold is selected on an inner split carved out of train, never on
+        # the val/test rows the F1 is then reported on -- picking it on the
+        # same rows being scored (as before) inflates F1 by construction.
+        inner_models[name].fit(X.iloc[inner_train_idx], y[inner_train_idx])
+        p_inner_val = inner_models[name].predict_proba(X.iloc[inner_val_idx])[:, 1]
+        thr = _best_threshold(y[inner_val_idx], p_inner_val)
         model.fit(X.iloc[idx["train"]], y[idx["train"]])
         p_val = model.predict_proba(X.iloc[idx["val"]])[:, 1]
-        thr = _best_threshold(y[idx["val"]], p_val)
         res = {"val": _metrics(y[idx["val"]], p_val, thr), "threshold": thr}
         cats = df.meta__category.iloc[idx["val"]].to_numpy()
         res["val_auc_by_category"] = {
