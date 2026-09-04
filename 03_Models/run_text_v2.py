@@ -1,4 +1,4 @@
-"""Field-aware Nomic ModernBERT text experiment under the sealed-test protocol.
+"""Field-aware Nomic ModernBERT text experiment on grouped development splits.
 
 This is the controlled follow-up to the generic ModernBERT result. It encodes
 title, description and quality-gated transcript chunks separately, then runs
@@ -144,7 +144,7 @@ def main() -> None:
             )
     payload = {
         "generated_at_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
-        "protocol": "channel-grouped 60/20/20; nested training-fold selection; validation only; test untouched",
+        "protocol": "repeated channel-grouped 60/20/20 development splits; nested training-fold selection; validation only",
         "n_labelled": int(len(df)), "seeds": seeds,
         "configuration": {"ablations": ablations, "epochs": args.epochs, "batch_size": args.batch_size},
         "text_provenance": text_provenance,

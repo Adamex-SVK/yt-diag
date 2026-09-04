@@ -29,8 +29,8 @@ Each experiment subfolder: `YYYY-MM-DD_Experiment_Name/`
 ## Current baseline status (2026-09-01)
 
 The retrospective tabular ladder has been run on the v3 CCT dataset with five
-channel-grouped 60/20/20 split seeds. These are validation results only; the
-test split is untouched. The tracked source of truth is
+channel-grouped 60/20/20 split seeds. These are repeated development results,
+not an independent test estimate. The tracked source of truth is
 `05_Reports/final_report/results/baselines.json`, including CCT version/method.
 
 | Feature set | Logistic AUC | XGBoost AUC |
@@ -75,7 +75,7 @@ ModernBERT-base embeddings of title + cleaned transcript + description. A
 linear probe and a regularised late-fusion MLP were evaluated over the same five
 channel-grouped split seeds. Logistic C and MLP epoch selection occur on an
 inner channel-grouped split of the training fold; outer validation is not used
-for model selection and test remains untouched.
+for model selection within a run.
 
 | Inputs | Linear probe AUC | Late-fusion MLP AUC |
 |---|---:|---:|
@@ -103,7 +103,8 @@ The pre-declared follow-up replaces generic concatenation with an
 embedding-trained ModernBERT encoder, separate title/description/transcript
 fields, and up to four evenly distributed overlapping transcript chunks. The
 encoder is frozen and revision-pinned; model selection remains nested inside
-the outer training fold and the test split remains untouched.
+each training partition. Rows change roles across seeds, so this is not a
+globally sealed retrospective test.
 
 | Inputs | Linear probe AUC | Late-fusion MLP AUC |
 |---|---:|---:|

@@ -1,9 +1,10 @@
-"""Channel-grouped, label-stratified train/val/test split (60/20/20).
+"""Channel-grouped, label-stratified development split (60/20/20).
 
 No channel may appear in more than one split (evaluation_and_planning.md;
 FEATURES.md: `channel_id` drives the split). Implemented with
-StratifiedGroupKFold(5): folds 0-2 train, 3 val, 4 test -- deterministic
-for a given seed, stratified on the label as far as grouping allows.
+StratifiedGroupKFold(5): folds 0-2 train, 3 validation, 4 unused-in-that-run.
+The latter is retained for compatibility and must not be described as a
+globally sealed test: changing the seed reassigns retrospective rows.
 """
 from __future__ import annotations
 

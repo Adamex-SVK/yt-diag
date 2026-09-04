@@ -69,6 +69,7 @@ def compact(full: dict, baselines: dict) -> dict:
     return {
         "generated_at_utc": full["generated_at_utc"],
         "protocol": full["protocol"],
+        "metric_note": "AUC and PR-AUC are valid; historical F1 used a validation-selected threshold and is not reported. The finalist F1 in attribution.json uses inner-training thresholds.",
         "n_labelled": full["n_labelled"],
         "seeds": full["seeds"],
         "variants": full["variants"],
