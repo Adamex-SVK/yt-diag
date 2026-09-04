@@ -97,6 +97,11 @@ Regenerate the baseline table (never retype it):
 | Linear CLIP fusion logits are exactly decomposed into six standardized input-block contributions | confirmed | `results/attribution.json`; `ytdiag/attribution.py`; reconstruction test | Method, Experiment |
 | **Test-set metrics** | **pending** | evaluate the frozen selected model ONCE after the modelling policy is final | Experiments |
 | **Attribution examples** | **pending** | Integrated Gradients not implemented | Experiments |
+| Post-freeze audio ablation: meta+sched 0.614 ± 0.022 → meta+sched+aud (88-col eGeMAPS) 0.632 ± 0.028, tuned XGBoost, same 5 seeds | confirmed | `run_audio_ablation.py --seeds 0,1,2,3,4`; `publish_audio_ablation.py`; `results/audio_ablation.json` | Experiments |
+| Correlation-reduced audio (49 eGeMAPS representatives, |ρ|>0.75 clustering, + 4 pause features = 53 cols) reproduces the lift within noise: 0.633 ± 0.030 | confirmed | same run; `results/audio_ablation.json → reduced_audio` | Experiments |
+| Gain-based importance is diffuse across acoustic families (formants 16%, spectral slope 15%, MFCC 15%, F0 pitch 15%), each ahead of metadata+schedule's own 12% share — not concentrated in a few columns | confirmed | `results/audio_ablation.json → gain_family_share` | Experiments |
+| **Not part of the frozen finalist** — computed 2026-09 after `final_model_policy.json` froze (2026-09-03); uses only already-approved retrospective `aud__` columns inside the existing nested channel-grouped protocol; does not touch the sealed test split or the prospective panel | limitation | `run_audio_ablation.py` docstring | Experiments, Limitations |
+| Whether this warrants reopening the freeze or stays a reported post-hoc finding | **signoff** | Emmanuel + Adam | Experiments |
 
 ---
 

@@ -1,0 +1,105 @@
+{
+  "generated_at_utc": "2026-09-04T14:30:41.981080+00:00",
+  "protocol": "channel-grouped 60/20/20 outer split; four channel-grouped inner folds; hyperparameters and F1 threshold selected by inner AUC; outer validation reported; test untouched. Post-freeze exploratory ablation -- not part of final_model_policy.json.",
+  "n_labelled": 1854,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "search_seed": 2026,
+  "xgb_random_trials": 16,
+  "reference_meta_sched": {
+    "aggregate": {
+      "logistic_regression": {
+        "mean": 0.5904983923131417,
+        "std": 0.04847568541763908,
+        "values": [
+          0.613555770470664,
+          0.6352408901932013,
+          0.594282043045294,
+          0.6123239436619718,
+          0.4970893141945773
+        ]
+      },
+      "xgboost": {
+        "mean": 0.6138177276172604,
+        "std": 0.02178009825698896,
+        "values": [
+          0.6256044487427467,
+          0.642149669845928,
+          0.6008070992611629,
+          0.6214006259780908,
+          0.5791267942583732
+        ]
+      }
+    }
+  },
+  "full_audio_88col": {
+    "aggregate": {
+      "logistic_regression": {
+        "mean": 0.5887640555435867,
+        "std": 0.03316251802276154,
+        "values": [
+          0.6143214055448097,
+          0.6150240482595581,
+          0.6180934789592034,
+          0.5494913928012519,
+          0.54688995215311
+        ]
+      },
+      "xgboost": {
+        "mean": 0.6318717189683223,
+        "std": 0.027691860134734667,
+        "values": [
+          0.6703336557059961,
+          0.6519116328360642,
+          0.6232332155477033,
+          0.6247652582159624,
+          0.5891148325358853
+        ]
+      }
+    }
+  },
+  "reduced_audio": {
+    "aggregate": {
+      "logistic_regression": {
+        "mean": 0.5932858479677051,
+        "std": 0.0377586324602272,
+        "values": [
+          0.6214136041263701,
+          0.632306187331866,
+          0.6165274654673948,
+          0.5578247261345853,
+          0.5383572567783094
+        ]
+      },
+      "xgboost": {
+        "mean": 0.6326020778852601,
+        "std": 0.02995078486190608,
+        "values": [
+          0.6856463571889104,
+          0.6444118366348741,
+          0.6132348217153871,
+          0.6176838810641628,
+          0.6020334928229665
+        ]
+      }
+    },
+    "n_columns": 53
+  },
+  "gain_family_share": {
+    "metadata/schedule": 0.11672895621696543,
+    "pitch (F0) dynamics": 0.14473915268200435,
+    "loudness": 0.1122426919789173,
+    "spectral balance/slope": 0.15328572586950803,
+    "MFCC (timbre)": 0.14866823855217362,
+    "voice quality (HNR/shimmer)": 0.03913802403211127,
+    "formants": 0.16211001065152086,
+    "voicing rate/segment length": 0.04699744302173657,
+    "pauses/dead-air": 0.03388237629398558,
+    "other/uncategorized": 0.04220738070107694
+  }
+}
