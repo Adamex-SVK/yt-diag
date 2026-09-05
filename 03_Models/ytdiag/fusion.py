@@ -76,7 +76,7 @@ def prepare_named_blocks(
     details: dict[str, Any] = {}
     blocks: dict[str, np.ndarray] = {}
     for name in block_names:
-        if name in ("meta_sched", "engineered"):
+        if name in ("meta_sched", "engineered", "audio"):
             continue
         if name not in raw:
             raise ValueError(f"no frozen feature block named {name!r}")
@@ -88,6 +88,7 @@ def prepare_named_blocks(
     for tabular_name, groups in (
         ("meta_sched", ("meta", "sched")),
         ("engineered", ("meta", "sched", "vis", "aud")),
+        ("audio", ("aud",)),
     ):
         if tabular_name not in block_names:
             continue

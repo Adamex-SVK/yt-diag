@@ -18,6 +18,7 @@ import tempfile
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 RUN_RESULTS = os.path.join(ROOT, "04_Experiments", "runs", "audio_ablation", "results.json")
+SIGNIFICANCE_RESULTS = os.path.join(ROOT, "04_Experiments", "runs", "ablation_significance", "results.json")
 SUMMARY = os.path.join(HERE, "results", "audio_ablation.json")
 MAIN_TEX = os.path.join(HERE, "main.tex")
 
@@ -61,13 +62,16 @@ def compact(full: dict) -> dict:
     }
 
 
-def render(summary: dict) -> str:
+def render(summary: dict, significance: dict) -> str:
     reference = summary["reference_meta_sched"]["aggregate"]["xgboost"]
     full = summary["full_audio_88col"]["aggregate"]["xgboost"]
     reduced = summary["reduced_audio"]["aggregate"]["xgboost"]
     n_reduced = summary["reduced_audio"]["n_columns"]
     shares = sorted(summary["gain_family_share"].items(), key=lambda kv: kv[1], reverse=True)
     top_families = ", ".join(f"{name} ({value * 100:.0f}\\%)" for name, value in shares[:4])
+    sig = significance["audio_isolated_vs_reference"]
+    ci_low, ci_high = sig["bootstrap_95ci"]
+    p_value = sig["p_value_one_sided_not_better"]
     lines = [
         "\\paragraph{Post-freeze audio ablation.} Isolating audio from visual "
         "-- a combination the fixed and tuned engineered ladders never test in "
@@ -90,10 +94,17 @@ def render(summary: dict) -> str:
         "tuning protocol; it does not touch the sealed test split or the "
         "frozen multimodal finalist, and is reported as a candidate for "
         "external validation rather than a change to the frozen comparator. "
-        "\\note{CONFIRMED}{Emmanuel + Adam, 2026-09-05: reported as a "
+        f"A paired bootstrap over validation-fold videos (held-fixed, already-"
+        f"tuned hyperparameters; not a re-search) puts the lift at "
+        f"${sig['point_estimate_mean_auc_diff']:+.3f}$ AUC, 95\\% CI "
+        f"$[{ci_low:+.3f}, {ci_high:+.3f}]$ -- the interval includes zero, so "
+        f"this does not clear conventional significance (one-sided "
+        f"$p={p_value:.3f}$ for `not better'). "
+        "\\note{PROVISIONAL}{Emmanuel + Adam, 2026-09-05: reported as a "
         "standalone post-hoc finding, not a trigger for a follow-up freeze "
         "cycle -- it stays outside the sealed test split and the frozen "
-        "multimodal finalist.}",
+        "multimodal finalist. Direction is consistent but not yet "
+        "statistically confirmed; revisit once the prospective panel matures.}",
     ]
     return "\n".join(lines)
 
@@ -113,10 +124,12 @@ def splice(document: str, body: str) -> str:
 def main() -> None:
     with open(RUN_RESULTS, encoding="utf-8") as stream:
         summary = compact(json.load(stream))
+    with open(SIGNIFICANCE_RESULTS, encoding="utf-8") as stream:
+        significance = json.load(stream)
     _atomic_json(SUMMARY, summary)
     with open(MAIN_TEX, encoding="utf-8") as stream:
         document = stream.read()
-    updated = splice(document, render(summary))
+    updated = splice(document, render(summary, significance))
     with open(MAIN_TEX + ".tmp", "w", encoding="utf-8") as stream:
         stream.write(updated)
     os.replace(MAIN_TEX + ".tmp", MAIN_TEX)
