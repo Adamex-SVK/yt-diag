@@ -378,6 +378,10 @@ chosen inside the corresponding training partition.
 \paragraph{Nested structured tuning.} Four channel-grouped folds inside each training partition select hyperparameters and the F1 threshold. Metadata+schedule XGBoost improves from $0.589\pm0.028$ to $0.619\pm0.022$. The tuned full engineered model reaches $0.614\pm0.023$; visual and audio features therefore do not improve the strongest tuned structured model. These five overlapping split-seed comparisons are descriptive, not confidence intervals or a significance test.
 %% <<<END GENERATED tuned-baselines>>>
 
+%% <<<BEGIN GENERATED audio-ablation>>>
+\paragraph{Post-freeze audio ablation.} Isolating audio from visual -- a combination the fixed and tuned engineered ladders never test in isolation -- changes the picture. Tuned metadata+schedule XGBoost reaches $0.614\pm0.022$ on these seeds; adding the full 88-column eGeMAPS block reaches $0.632\pm0.028$, exceeding it on every seed. Because 23 eGeMAPS pairs correlate at $|\rho|>0.95$ (\texttt{eda\_features/audio\_spearman.csv}), gain-based feature importance is nearly flat across all 109 model columns; grouping by acoustic family shows the lift is diffuse rather than concentrated, led by formants (16\%), spectral balance/slope (15\%), MFCC (timbre) (15\%), pitch (F0) dynamics (14\%), each ahead of metadata+schedule's own 12\% share. Clustering correlated eGeMAPS columns to one representative per cluster ($|\rho|>0.75$) reduces 88 columns to 49 plus the 4 pause features (53 total) at no cost: $0.633\pm0.030$. This ablation was computed after the 2026-09-03 model freeze using only already-approved retrospective columns and the existing nested tuning protocol; it does not touch the sealed test split or the frozen multimodal finalist, and is reported as a candidate for external validation rather than a change to the frozen comparator. \note{SIGNOFF}{Emmanuel + Adam: does this warrant a follow-up freeze cycle, or does it stay a reported post-hoc finding?}
+%% <<<END GENERATED audio-ablation>>>
+
 \subsection{Content and visual ablations}
 
 %% <<<BEGIN GENERATED deep-model>>>
@@ -467,19 +471,21 @@ CLIP--text linear fusion & 0.613 \tiny{$\pm$ 0.044} & 0.340 \tiny{$\pm$ 0.040} &
 
 \begin{itemize}
 \item Labels are a cohort-relative convention, not ground truth. Across 16
-      configurations only 83 of 438 videos ever labelled top-quartile retain
-      that label throughout. Band edges are computed over the full cohort,
-      making the labels transductive before splitting.
-\item Reuse permission was not established for most source videos, so the raw
-      media cannot be redistributed. Promotion and timing remain unobserved;
-      the category workaround makes product reviews a different population.
-\item The retrospective thumbnails and subscriber counts may reflect changes
-      made after publication. The prospective panel was designed to remove this
-      ambiguity but does not mature before submission.
-\item The five validation partitions overlap and their standard deviation is not
-      a confidence interval. Because rows change roles across seeds, there is no
-      independent retrospective test estimate; model-family selection may make
-      the repeated-validation result optimistic.
+      configurations only 83 of 438 ever-viral videos are viral in all of them.
+\item Band edges and cutoffs are computed over the whole cohort before splitting,
+      making the labels transductive by construction.
+\item Frame extraction for non-CC videos sits outside YouTube's terms of service;
+      only 7 of 1{,}860 videos carry a Creative Commons licence.
+\item External factors --- platform promotion, timing, luck --- cap achievable
+      accuracy and are unobservable to us.
+\item Product reviews are a different population (median 9{,}953 views against
+      comedy's 1{,}254{,}042), an artefact of the category-mapping workaround.
+\item A post-freeze ablation found that audio, isolated from visual, exceeds
+      tuned metadata+schedule XGBoost ($0.632\pm0.028$ vs.\ $0.614\pm0.022$;
+      see Results). This was discovered after the 2026-09-03 model freeze, is
+      not part of the frozen finalist, and inherits the same overlapping-split
+      caveat as every other repeated-validation number in this report --- it
+      is a reported finding, not a change to the frozen comparator.
 \end{itemize}
 
 %% ==================================================================
@@ -494,7 +500,11 @@ are informative but do not improve reliably on that comparator: the best
 observed CLIP, text and metadata fusion reaches $0.613\pm0.044$ and wins two of
 five matched splits. Controlled ablations show that all-frame CLIP features are
 the strongest visual representation, while ResNet-50 remains weak and the larger
-DINOv2 encoder does not improve the full fusion. The result is therefore a limitation on what can be
+DINOv2 encoder does not improve the full fusion. Engineered visual features, and
+audio when bundled with them, likewise failed to improve the tuned structured
+comparator; isolating audio alone in a post-freeze ablation did improve it
+(Results, Limitations), a finding not yet incorporated into the frozen policy.
+The result is therefore a limitation on what can be
 diagnosed from this retrospective public dataset, not evidence that content has
 no effect on viewers. Exact attribution shows that visual blocks move the
 linear model, but a matched error pair shows that predictive explanations are
