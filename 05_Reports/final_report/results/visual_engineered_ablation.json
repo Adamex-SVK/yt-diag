@@ -1,0 +1,81 @@
+{
+  "generated_at_utc": "2026-09-05T20:47:02.219841+00:00",
+  "protocol": "channel-grouped 60/20/20 outer split; four channel-grouped inner folds; hyperparameters and F1 threshold selected by inner AUC; outer validation reported; test untouched. Post-freeze exploratory ablation, mirrors run_audio_ablation.py -- not part of final_model_policy.json.",
+  "n_labelled": 1854,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "reference_meta_sched": {
+    "aggregate": {
+      "logistic_regression": {
+        "mean": 0.5904983923131417,
+        "std": 0.04847568541763908,
+        "values": [
+          0.613555770470664,
+          0.6352408901932013,
+          0.594282043045294,
+          0.6123239436619718,
+          0.4970893141945773
+        ]
+      },
+      "xgboost": {
+        "mean": 0.6138177276172604,
+        "std": 0.02178009825698896,
+        "values": [
+          0.6256044487427467,
+          0.642149669845928,
+          0.6008070992611629,
+          0.6214006259780908,
+          0.5791267942583732
+        ]
+      }
+    }
+  },
+  "full_visual_15col": {
+    "aggregate": {
+      "logistic_regression": {
+        "mean": 0.5884855470327702,
+        "std": 0.04721267124685866,
+        "values": [
+          0.5997340425531914,
+          0.6270481780386403,
+          0.598217153870864,
+          0.6206181533646321,
+          0.49681020733652315
+        ]
+      },
+      "xgboost": {
+        "mean": 0.5906625114074238,
+        "std": 0.02779474633487369,
+        "values": [
+          0.6064635718891038,
+          0.6040189125295508,
+          0.537584323803405,
+          0.6154929577464788,
+          0.5897527910685805
+        ]
+      }
+    }
+  },
+  "gain_share_within_visual": {
+    "num__vis__frames_mean_max_face_area_ratio": 0.08678828714117634,
+    "num__vis__thumb_face_centrality": 0.07460803615226415,
+    "num__vis__frames_std_cct": 0.0734057548001242,
+    "num__vis__thumb_saturation": 0.07239954239526218,
+    "num__vis__thumb_brightness": 0.06905835125385865,
+    "num__vis__frames_mean_brightness": 0.06877084925709975,
+    "num__vis__thumb_contrast": 0.06790264787604025,
+    "num__vis__thumb_cct": 0.06783458806953432,
+    "num__vis__frames_has_face_ratio": 0.06761261291525004,
+    "num__vis__frames_mean_saturation": 0.06691159320551714,
+    "num__vis__thumb_face_count": 0.06469791488222078,
+    "num__vis__thumb_max_face_area_ratio": 0.06284344969936086,
+    "num__vis__frames_mean_contrast": 0.061166011649749934,
+    "num__vis__frames_mean_cct": 0.06051121777793087,
+    "num__vis__thumb_has_face": 0.03548914292461055
+  }
+}
