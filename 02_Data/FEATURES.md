@@ -90,9 +90,11 @@ All **label machinery — never model inputs**. Produced by the v2 stratified la
 | `age_band` / `size_band` | Equal-count quantile band indices (default 4×4 per category) by age / subscriber count, **assigned by value** — identical (API-rounded) values always share a band |
 | `cell_size` / `cell_percentile` | Number of videos in the video's stratification cell / rank percentile within it (diagnostic) |
 | `warnings` | Per-video flags, e.g. exact view-count tie at the cell's viral cutoff (broken deterministically by `video_id`) |
-| `labels_excluded.csv` | Videos excluded from the cohort with reasons (< 30 days old, missing dates/views, hidden subs) — excluded, never imputed |
+| `labels_excluded.csv` | Videos excluded from the cohort with reasons (missing dates/views, hidden subs) — excluded, never imputed. **No minimum-age floor** (`--min-age-days` defaults to 0): a 30-day floor was evaluated and rejected — it would discard 861 videos, disproportionately Shorts, for a negligible AUC change (0.576→0.572) |
 
 > Known limitations (disclose in the report): the coarse subscriber stratifier *reduces, does not eliminate,* the post-outcome-subs problem; models still see exact age/subs values, so stratification removes direct band shortcuts without guaranteeing performance comes from content; labels are a retrospective cohort-relative ranking computed on the full cohort before any split (transductive). Planned sensitivity checks: halved-subs band-crossing rate; train-only band edges.
+>
+> **Sign-off**: the base design above plus three later refinements — no age floor (see table row above), format added as a stratification dimension (unstratified format alone predicts the label at AUC 0.596; stratifying drops this to 0.447), and three age/size bands rather than four or two (four bands leave 102 undersized cells; two bands leave AUC 0.660 of residual band-driven confounding) — were **signed off by Adam on 2026-09-05**. Current final design: category × age-band(3) × channel-size-band(3) × format(2), documented in `05_Reports/final_report/main.tex` §Methodology and `05_Reports/final_report/claim_evidence.md`.
 
 ## 6. Planned features (not yet collected) — _Emmanuel, 2026-08-26_
 

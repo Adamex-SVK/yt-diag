@@ -55,7 +55,7 @@ Regenerate the baseline table (never retype it):
 | Stability beyond day 5 untested (panel too young) | limitation | — re-check after 2026-09-25 | Method |
 | Format unstratified: label AUC from `is_short` 0.596 → 0.447 | confirmed | `eda_stats.json`, both config blocks | Method |
 | 4×4×2 → median cell 13, 102 small cells; 2×2×2 → AUC 0.660 | confirmed | `eda_stats.json → label_configs_format_stratified` | Method |
-| Three label changes revise the locked proposal definition | **signoff** | Adam | Method |
+| Three label changes revise the locked proposal definition | **confirmed** — signed off by Adam 2026-09-05 (no age floor: 861-video cost vs. AUC 0.576→0.572; format stratification: AUC 0.596→0.447; three bands: 4-band gives 102 undersized cells, 2-band leaves AUC 0.660 residual confounding) | Adam | Method |
 | Only 83 of 438 videos ever labelled top-quartile retain that label in all 16 configurations | confirmed | EDA config sweep | Limitations |
 
 ## Leakage and protocol
@@ -115,4 +115,4 @@ Regenerate the baseline table (never retype it):
 - [ ] Every `pending` row above is either resolved or removed from the report
 - [ ] Compile in Overleaf and check: two columns, no page numbers, Times, fonts embedded
 - [x] `references.bib` populated for every cited work
-- [ ] Adam's sign-off recorded on the three label changes
+- [x] Adam's sign-off recorded on the three label changes (2026-09-05)
