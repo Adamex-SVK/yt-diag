@@ -173,17 +173,13 @@ Lee~\cite{lin2024mmf} fuse frozen per-modality encoders through cross-attention
 in the 2024 Social Media Popularity Prediction challenge and report that a
 single creator's posts carry strongly correlated popularity (79\% with
 standard deviation below one), the same leakage risk our channel-grouped
-splitting is designed to prevent.
-
-\subsection{Confound control and evaluation protocol}
-Rosenblatt et al.~\cite{rosenblatt2024leakage} show, across several forms of
-leakage in connectome-based prediction, that covariate correction performed
-outside the cross-validation loop biases how much a model appears to explain
-beyond confounds, and that grouping related samples across train and test
-inflates performance the same way. Our channel-grouped splits and
-metadata-only baseline follow the same discipline: whether content explains
-virality beyond subscriber-count confounds is evaluated without ever letting a
-channel's identity cross a fold boundary.
+splitting is designed to prevent. Rosenblatt et al.~\cite{rosenblatt2024leakage}
+show that covariate correction performed outside the cross-validation loop, and
+grouping related samples across train and test, both inflate apparent
+performance in connectome-based prediction; our channel-grouped splits and
+metadata-only baseline follow the same discipline, evaluating content's
+incremental value without ever letting a channel's identity cross a fold
+boundary.
 
 %% ==================================================================
 \section{Methodology}
@@ -488,12 +484,16 @@ CLIP--text linear fusion & 0.613 \tiny{$\pm$ 0.044} & 0.340 \tiny{$\pm$ 0.040} &
       accuracy and are unobservable to us.
 \item Product reviews are a different population (median 9{,}953 views against
       comedy's 1{,}254{,}042), an artefact of the category-mapping workaround.
-\item A post-freeze ablation found that audio, isolated from visual, exceeds
-      tuned metadata+schedule XGBoost ($0.632\pm0.028$ vs.\ $0.614\pm0.022$;
-      see Results). This was discovered after the 2026-09-03 model freeze, is
-      not part of the frozen finalist, and inherits the same overlapping-split
-      caveat as every other repeated-validation number in this report --- it
-      is a reported finding, not a change to the frozen comparator.
+\item A post-freeze ablation found that audio, isolated from visual, reaches
+      higher mean AUC than tuned metadata+schedule XGBoost ($0.632\pm0.028$
+      vs.\ $0.614\pm0.022$; see Results), but a paired bootstrap over
+      validation-fold videos puts the lift at $+0.018$ AUC with a 95\% CI of
+      $[-0.009, +0.044]$ (one-sided $p=0.089$) --- directionally consistent but
+      not statistically significant. This was discovered after the 2026-09-03
+      model freeze, is not part of the frozen finalist, and inherits the same
+      overlapping-split caveat as every other repeated-validation number in
+      this report --- it is a reported, unconfirmed finding, not a change to
+      the frozen comparator.
 \item The same isolate-and-tune treatment applied to engineered visual
       features, not just audio, rules out isolation itself as the explanation:
       metadata+schedule+visual reaches only $0.591\pm0.028$, below the
@@ -516,8 +516,10 @@ five matched splits. Controlled ablations show that all-frame CLIP features are
 the strongest visual representation, while ResNet-50 remains weak and the larger
 DINOv2 encoder does not improve the full fusion. Engineered visual features, and
 audio when bundled with them, likewise failed to improve the tuned structured
-comparator; isolating audio alone in a post-freeze ablation did improve it
-(Results, Limitations), a finding not yet incorporated into the frozen policy.
+comparator; isolating audio alone in a post-freeze ablation raised mean AUC
+(Results, Limitations), though a paired bootstrap shows this lift is not yet
+statistically significant, a finding not yet incorporated into the frozen
+policy.
 The result is therefore a limitation on what can be
 diagnosed from this retrospective public dataset, not evidence that content has
 no effect on viewers. Exact attribution shows that visual blocks move the
