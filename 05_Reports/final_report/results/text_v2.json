@@ -1,6 +1,7 @@
 {
   "generated_at_utc": "2026-09-02T08:26:23.960167+00:00",
-  "protocol": "channel-grouped 60/20/20; nested training-fold selection; validation only; test untouched",
+  "protocol": "repeated channel-grouped 60/20/20 development splits; nested training-fold selection; validation only",
+  "metric_note": "AUC and PR-AUC are valid; historical F1 used a validation-selected threshold and is not reported. The finalist F1 in attribution.json uses inner-training thresholds.",
   "n_labelled": 1854,
   "seeds": [
     0,

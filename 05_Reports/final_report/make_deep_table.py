@@ -41,7 +41,7 @@ def _atomic_json(path: str, payload: dict) -> None:
 
 def compact(full: dict) -> dict:
     """Keep evidence needed for every reported number, including seed values."""
-    if full.get("protocol") != "channel-grouped 60/20/20; validation only; test untouched":
+    if full.get("protocol") != "repeated channel-grouped 60/20/20 development splits; validation only":
         raise ValueError(f"unexpected evaluation protocol: {full.get('protocol')}")
     if full.get("seeds") != [0, 1, 2, 3, 4]:
         raise ValueError("the report requires the frozen five-seed run (0..4)")
@@ -50,6 +50,7 @@ def compact(full: dict) -> dict:
     return {
         "generated_at_utc": full["generated_at_utc"],
         "protocol": full["protocol"],
+        "metric_note": "AUC and PR-AUC are valid; historical F1 used a validation-selected threshold and is not reported. Current fusion.py selects thresholds inside training.",
         "n_labelled": full["n_labelled"],
         "seeds": full["seeds"],
         "configuration": full["configuration"],
@@ -60,32 +61,20 @@ def compact(full: dict) -> dict:
 
 
 def render(summary: dict) -> str:
-    lines = [
-        "\\begin{table}[t]",
-        "\\centering",
-        "\\small",
-        "\\begin{tabular}{l cc}",
-        "\\toprule",
-        "Inputs & Linear probe & Late-fusion MLP \\\\",
-        "\\midrule",
-    ]
-    for key, models in summary["aggregate"].items():
-        cells = []
-        for model in ("linear_probe", "late_fusion_mlp"):
-            auc = models[model]["auc_roc"]
-            cells.append(f"{auc['mean']:.3f} \\tiny{{$\\pm$ {auc['std']:.3f}}}")
-        lines.append(f"{LABELS[key]} & " + " & ".join(cells) + " \\\\")
-    lines += [
-        "\\bottomrule",
-        "\\end{tabular}",
-        "\\caption{Validation AUC-ROC for frozen deep representations, mean "
-        "$\\pm$ s.d. over five channel-grouped split seeds. ModernBERT uses "
-        "title, cleaned transcript and description up to 1{,}024 tokens. Model "
-        "selection occurs inside the training fold; test is untouched.}",
-        "\\label{tab:deep}",
-        "\\end{table}",
-    ]
-    return "\n".join(lines)
+    thumbnail = summary["aggregate"]["thumbnail"]["linear_probe"]["auc_roc"]
+    text = summary["aggregate"]["text"]["linear_probe"]["auc_roc"]
+    full_linear = summary["aggregate"]["thumbnail_text_meta_sched"]["linear_probe"]["auc_roc"]
+    full_mlp = summary["aggregate"]["thumbnail_text_meta_sched"]["late_fusion_mlp"]["auc_roc"]
+    return (
+        "\\paragraph{Initial frozen representations.} With one centre-cropped "
+        f"DINOv2-S thumbnail, the linear probe reaches ${thumbnail['mean']:.3f}"
+        f"\\pm{thumbnail['std']:.3f}$ AUC; concatenated ModernBERT text reaches "
+        f"${text['mean']:.3f}\\pm{text['std']:.3f}$. Combining both with metadata "
+        f"and schedule reaches ${full_linear['mean']:.3f}\\pm{full_linear['std']:.3f}$ "
+        f"for the linear probe and ${full_mlp['mean']:.3f}\\pm{full_mlp['std']:.3f}$ "
+        "for the MLP. This motivates the field-aware text and controlled visual "
+        "ablations below."
+    )
 
 
 def splice(tex: str, body: str) -> str:

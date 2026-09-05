@@ -15,11 +15,9 @@ TUNED_SUMMARY = os.path.join(HERE, "results", "tuned_baselines.json")
 MAIN_TEX = os.path.join(HERE, "main.tex")
 
 ROWS = (
-    ("title_description", "Title + description"),
     ("transcript", "Transcript"),
     ("text_fields", "All three text fields"),
-    ("text_fields_meta_sched", "+ metadata + schedule"),
-    ("thumbnail_text_fields_meta_sched", "+ thumbnail"),
+    ("thumbnail_text_fields_meta_sched", "+ metadata + thumbnail"),
 )
 
 
@@ -38,8 +36,8 @@ def _atomic_json(path: str, payload: dict) -> None:
 
 def compact(full: dict, tuned: dict) -> dict:
     expected = (
-        "channel-grouped 60/20/20; nested training-fold selection; "
-        "validation only; test untouched"
+        "repeated channel-grouped 60/20/20 development splits; "
+        "nested training-fold selection; validation only"
     )
     if full.get("protocol") != expected:
         raise ValueError(f"unexpected evaluation protocol: {full.get('protocol')}")
@@ -59,6 +57,7 @@ def compact(full: dict, tuned: dict) -> dict:
     return {
         "generated_at_utc": full["generated_at_utc"],
         "protocol": full["protocol"],
+        "metric_note": "AUC and PR-AUC are valid; historical F1 used a validation-selected threshold and is not reported. The finalist F1 in attribution.json uses inner-training thresholds.",
         "n_labelled": full["n_labelled"],
         "seeds": full["seeds"],
         "configuration": full["configuration"],
@@ -87,7 +86,7 @@ def render(summary: dict) -> str:
         "\\caption{Validation AUC-ROC for the field-aware text follow-up, mean "
         "$\\pm$ s.d. over five channel-grouped split seeds. Title, description "
         "and quality-gated transcript chunks are encoded separately; model "
-        "selection occurs inside the training fold and test is untouched.}",
+        "selection occurs inside each training partition.}",
         "\\label{tab:textv2}", "\\end{table}",
     ]
     aggregate = summary["aggregate"]
@@ -104,22 +103,15 @@ def render(summary: dict) -> str:
     engineered, engineered_delta, engineered_wins = comparisons[1]
     lines += [
         "",
-        "The field-aware representation reverses the Tier-1 text result. All text fields "
-        f"reach ${all_text['linear_probe']['auc_roc']['mean']:.3f}\\pm"
-        f"{all_text['linear_probe']['auc_roc']['std']:.3f}$ with the linear probe and "
+        "Field separation raises the all-text MLP to "
         f"${all_text['late_fusion_mlp']['auc_roc']['mean']:.3f}\\pm"
-        f"{all_text['late_fusion_mlp']['auc_roc']['std']:.3f}$ with the MLP; adding "
-        f"metadata and schedule raises the MLP to ${text_meta['mean']:.3f}\\pm{text_meta['std']:.3f}$. "
-        f"The strongest content model adds the thumbnail and reaches ${best['mean']:.3f}\\pm{best['std']:.3f}$, "
-        f"an average ${meta_delta:+.3f}$ over metadata+schedule XGBoost "
-        f"(${meta['mean']:.3f}\\pm{meta['std']:.3f}$), but wins on only {meta_wins}/5 paired split seeds. "
-        f"It is ${engineered_delta:+.3f}$ relative to full engineered XGBoost "
-        f"(${engineered['mean']:.3f}\\pm{engineered['std']:.3f}$), with {engineered_wins}/5 paired wins. "
-        "With five overlapping split seeds these are descriptive paired comparisons, not confidence intervals "
-        "or evidence of statistical significance. Adding the full engineered block to learned content reaches "
-        f"only ${engineered_fusion['mean']:.3f}\\pm{engineered_fusion['std']:.3f}$, so it does not improve the result. "
-        "Content carries measurable signal but does not beat the strongest tuned baseline. If resources permit, the "
-        "next bounded content experiment is frozen frame aggregation; end-to-end encoder fine-tuning is not justified.",
+        f"{all_text['late_fusion_mlp']['auc_roc']['std']:.3f}$ AUC; metadata and schedule raise it to "
+        f"${text_meta['mean']:.3f}\\pm{text_meta['std']:.3f}$. Adding the thumbnail reaches "
+        f"${best['mean']:.3f}\\pm{best['std']:.3f}$, ${meta_delta:+.3f}$ versus tuned "
+        f"metadata+schedule XGBoost (${meta['mean']:.3f}\\pm{meta['std']:.3f}$) with "
+        f"{meta_wins}/5 paired wins. Adding engineered visual/audio features reaches only "
+        f"${engineered_fusion['mean']:.3f}\\pm{engineered_fusion['std']:.3f}$. These overlapping "
+        "split comparisons are descriptive rather than confidence intervals.",
     ]
     return "\n".join(lines)
 

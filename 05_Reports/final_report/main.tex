@@ -56,29 +56,29 @@ Deep Learning and Decision Making\\
 
 \begin{abstract}
 \begin{quote}
-Creators are told that thumbnails, pacing and titles drive video performance,
-but such advice is rarely measured against the variables that actually dominate
-outcomes. Predicting raw view counts is largely a channel-size readout: we show
-that a model given only subscriber count, video age, duration and video format
---- with no access to content --- reaches an out-of-fold $R^2$ of 0.584 on
-$\log(1+\mathrm{views})$. Existing engagement work either predicts absolute
-popularity, which inherits this confound, or relies on watch-time signals that
-the public API does not expose. We therefore reformulate the task: rather than
-predicting views, we predict whether a video ranks in the top quarter of a peer
-group matched on category, channel size, video age and format, and we report the
-non-content baseline explicitly so that any content result is read against it.
-We assemble two cohorts --- a retrospective multimodal archive of 1,860 videos
-and a prospective panel of 12,738 videos as of 2 September, with twice-daily outcome tracking
---- and map both onto a single feature table so that every ablation is a choice
-of feature groups rather than a separate pipeline. On the resulting label,
-after nested selection, metadata+schedule XGBoost reaches validation AUC
-$0.619\pm0.022$, while our best frozen field-aware text, thumbnail and metadata
-fusion reaches $0.600\pm0.026$ and the tuned full engineered baseline reaches
-$0.614\pm0.023$ over five channel-grouped seeds; the test set remains sealed. Engineered vision alone
-performs at chance. We show why this is a design success rather than a failure
-of vision: before video format was stratified out of the label, thumbnail
-brightness was detecting the composition of vertical videos rather than
-content quality.
+Public YouTube data make video-performance prediction deceptively easy: views
+strongly reflect channel size, time online and video format, while the platform
+does not expose impressions, click-through rate or watch time. On our data, four
+non-content variables explain 58.4\% of the variance in log views under
+channel-grouped cross-validation. We therefore study a narrower question:
+whether observable content distinguishes videos in the top quarter of a peer
+group matched on category, channel size, age and format. Our retrospective
+dataset contains 1,860 videos with metadata, thumbnails, transcripts, audio and
+20 sampled frames; a separate prospective panel records fixed-horizon growth
+and near-publication metadata for future evaluation. We encode thumbnails and
+all 20 frames with frozen DINOv2, CLIP and ResNet-50 backbones, while title,
+description and quality-gated transcripts are encoded separately with
+ModernBERT. Structured XGBoost baselines and multimodal representations are
+evaluated using repeated channel-grouped development splits. Tuned metadata and schedule
+features achieve $0.619\pm0.022$ validation AUC. The best observed content model,
+combining field-aware text with CLIP thumbnail and frame aggregates, reaches
+$0.613\pm0.044$ and exceeds the structured model on two of five matched
+splits. Larger DINOv2 does not help, while frames beat thumbnails. Exact linear-logit
+decomposition identifies which modality blocks move individual predictions,
+without treating those associations as causes. These results do not
+show that content is unimportant; they show that, at this sample size and with
+public outcomes, content features provide no reliable incremental prediction
+beyond contextual metadata.
 \end{quote}
 \end{abstract}
 
@@ -86,29 +86,39 @@ content quality.
 \section{Introduction}
 %% ==================================================================
 
-Creators receive abundant advice about thumbnails, pacing and titles, but little
-of it is measured against the confounds that dominate video performance. A video
-from a large channel outperforms a video from a small one almost regardless of
-its content, so any model trained to predict raw view counts learns channel size
-rather than craft.
+Advice to online-video creators commonly attributes performance to thumbnails,
+titles, speaking style and editing. Testing those claims from public data is
+difficult because the observed outcome is produced jointly by content,
+audience size, recommendation exposure and time. A model can therefore predict
+views accurately while learning little about the video itself. Such a model is
+unsuitable for diagnosis: telling a creator that subscriber count was important
+does not identify an actionable property of the upload.
 
-We ask a narrower and more answerable question: \emph{within a peer group of
-comparable channels, does the content of a video predict whether it performs in
-the top quarter of that group, and which content features are associated with
-underperformance?}
+We ask: \emph{after matching videos on observable context, do thumbnail, text,
+audio and frame representations predict relative performance beyond metadata?}
+The question is important both practically and methodologically. A useful
+diagnostic must add information beyond channel and publication shortcuts, and
+its evaluation must prevent the same channel from appearing in training and
+validation. Public data create a further challenge because impressions,
+click-through rate, retention and recommendation exposure are unavailable.
 
-Our contributions are:
+Prior work predicts engagement using content and channel features or studies
+large-scale video representations, but often uses absolute outcomes or private
+interaction signals. We instead construct a peer-relative binary outcome,
+measure the non-content baseline explicitly, and compare engineered features
+with frozen visual and language representations.
+
+Our main contributions are:
 \begin{itemize}
-\item A two-cohort dataset design pairing a retrospective multimodal archive
-      with a live prospective panel that records fixed-horizon outcomes and
-      near-publication metadata.
-\item An explicit measurement of the \emph{shortcut ceiling}: how much of the
-      outcome is predictable from non-content variables alone. We argue this
-      figure should be reported before any modelling result.
-\item A label design that neutralises the three confounds we measured --- channel
-      size, video age and video format --- and evidence that failing to
-      neutralise format alone produces an apparent visual signal that is really
-      aspect-ratio detection.
+\item A cleaned multimodal dataset and an auditable peer-relative label that
+      controls category, channel size, video age and format.
+\item A channel-grouped evaluation in which every content model is compared
+      with the same non-content baseline.
+\item Evidence that generic frozen content features do carry signal, but do not
+      improve consistently over tuned metadata; controlled visual ablations
+      further rule out DINOv2 model size as the main explanation.
+\item Exact block explanations showing where predictive similarity fails to
+      explain different outcomes.
 \end{itemize}
 
 %% ==================================================================
@@ -116,17 +126,64 @@ Our contributions are:
 %% ==================================================================
 
 \subsection{Predicting video performance}
-\textbf{Engagement prediction.} \cite{wu2018beyond} define relative engagement,
-calibrating watch percentage against duration at a fixed horizon, and provide
-content and channel baselines. We borrow the calibrate-by-ranking-within-strata
-method only; we cannot compute their metric because watch time is not available
-through the public API. Cite as ``inspired by'', never ``following''.
+Early-view forecasting establishes a strong but different task. Szabo and
+Huberman~\cite{szabo2010predicting} show that early attention predicts later
+popularity, and Pinto et al.~\cite{pinto2013early} model the shape of early
+YouTube view trajectories. Such observations are powerful predictors but are
+available only after release; our question is whether upload content adds
+signal without using early views. Khosla et al.~\cite{khosla2014image}
+combine image content with social context at scale, motivating our explicit
+content-versus-context ablations. Hessel et al.~\cite{hessel2017cats} isolate
+content from confounds directly, ranking Reddit posts submitted within seconds
+of one another to compare multimodal content against author and timing context
+in predicting relative popularity; our peer-relative, within-category label
+pursues the same isolation at the cohort level rather than by pairwise timing.
+
+Wu et al.~\cite{wu2018beyond} distinguish engagement from raw popularity by
+calibrating watch percentage against video duration. Their formulation is the
+closest motivation for our peer-relative outcome, but it requires watch time,
+which is unavailable through the public API. Rajaram and
+Manchanda~\cite{rajaram2020unboxing} fuse text, audio and visual signals
+through an attention-based framework to attribute engagement in influencer
+videos. In contrast, our principal question is incremental: whether content
+adds predictive value after an explicit metadata baseline, rather than whether
+all available variables predict an absolute platform outcome. Liu et
+al.~\cite{liu2026survey} survey this convergence toward frozen-encoder,
+gradient-boosted multimodal pipelines across the wider popularity-prediction
+literature; unlike the work they review, which predicts raw or time-normalized
+engagement, we predict a category-relative label so that content signal is
+measured net of audience-size confounds such as subscriber count.
 
 \subsection{Multimodal representation}
-\textbf{Frame-level video features.} \cite{abu2016youtube} establish
-frame-level features aggregated temporally for large-scale video classification.
-\cite{rajaram2020unboxing} apply an attention-based approach to influencer video
-engagement, which motivates our attribution layer.
+YouTube-8M~\cite{abu2016youtube} demonstrates large-scale video classification
+from temporally aggregated frame and audio features. DINOv2~\cite{oquab2023dinov2}
+learns general visual representations without labels, while CLIP~\cite{radford2021clip}
+uses image--text supervision and consequently offers a relevant alternative for
+text-heavy thumbnails. ModernBERT~\cite{warner2024modernbert} supplies the text
+representation. We keep these encoders frozen because the labelled cohort is
+small, then compare their features with ResNet-50~\cite{he2016resnet} and with
+XGBoost~\cite{chen2016xgboost} on engineered metadata. Unlike work targeting
+video classification, our output is relative performance and our central test
+is whether multimodal content improves over contextual shortcuts. Wang et
+al.~\cite{wang2023hierarchical} fuse ResNet-50 image features with text and
+structured context attributes for popularity prediction and find context
+features alone outperform either content modality in isolation -- the
+comparison our metadata baseline is designed to run directly. Lin and
+Lee~\cite{lin2024mmf} fuse frozen per-modality encoders through cross-attention
+in the 2024 Social Media Popularity Prediction challenge and report that a
+single creator's posts carry strongly correlated popularity (79\% with
+standard deviation below one), the same leakage risk our channel-grouped
+splitting is designed to prevent.
+
+\subsection{Confound control and evaluation protocol}
+Rosenblatt et al.~\cite{rosenblatt2024leakage} show, across several forms of
+leakage in connectome-based prediction, that covariate correction performed
+outside the cross-validation loop biases how much a model appears to explain
+beyond confounds, and that grouping related samples across train and test
+inflates performance the same way. Our channel-grouped splits and
+metadata-only baseline follow the same discipline: whether content explains
+virality beyond subscriber-count confounds is evaluated without ever letting a
+channel's identity cross a fold boundary.
 
 %% ==================================================================
 \section{Methodology}
@@ -134,47 +191,39 @@ engagement, which motivates our attribution layer.
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.86\textwidth]{figures/pipeline.pdf}
-\caption{Both cohorts are mapped onto one canonical feature table, so every
-model and ablation is a selection of column groups rather than a separate
-pipeline. The retrospective cohort is the only source of frames, transcripts
-and audio; the prospective panel is the only source of growth curves and
-first-observed (pre-edit) titles and thumbnails.}
-\label{fig:pipeline}
+\includegraphics[width=0.90\textwidth]{figures/architecture.pdf}
+\caption{The selected multimodal architecture and structured comparator.
+Frozen encoders produce one block per modality; train-fitted standardisation
+precedes linear late fusion. The same logit is decomposed exactly for predictive
+attribution.}
+\label{fig:architecture}
 \end{figure*}
 
-Figure~\ref{fig:pipeline} gives the overall pipeline.
+\subsection{Problem formulation}
+
+For video $v$, let $x_v^{m}$ denote structured metadata and schedule features
+and $x_v^{c}$ the available content modalities. We estimate
+$p(y_v=1\mid x_v^{m},x_v^{c})$, but the scientific comparison is against
+$p(y_v=1\mid x_v^{m})$. Content is useful only if it improves held-out
+performance over this structured baseline. Figure~\ref{fig:architecture}
+shows the selected architecture.
 
 \subsection{The shortcut ceiling}
 
-Before defining a target we measured how much of it is obtainable without
-looking at content. A gradient-boosted model given only subscriber count, video
-age, duration and Shorts status predicts $\log(1+\text{views})$ at an
-out-of-fold $R^2$ of \textbf{0.584} under channel-grouped cross-validation
-(0.643 under random folds, which is the leaky comparison, not ours).
-
-Two caveats matter for how this number is read. The folds are grouped by
-channel, so it is not inflated by channel memorisation --- a random-fold split
-gives a higher 0.643. But subscriber count is observed \emph{retrospectively},
-after the videos accumulated their views, and a successful video raises its own
-channel's subscriber count. This is therefore a diagnostic of how much of the
-outcome is explained by non-content variables in our data, not a leakage-free
-prospective estimate. The prospective cohort exists partly to remove exactly
-this circularity, by recording subscriber count near publication.
-
-We therefore make two commitments. Raw view count is never our modelling target,
-and no $R^2$ on views is reported as evidence of content signal.
-\note{CONFIRMED}{02\_Data/eda\_retrospective.py::shortcut\_ceiling}
+Before constructing the label, we fit a diagnostic gradient-boosted regressor
+to $\log(1+\mathrm{views})$ using only subscriber count, video age, duration and
+format. It obtains channel-grouped out-of-fold $R^2=0.584$; random folds increase
+this to 0.643. Moreover, retrospective subscriber count may itself have grown
+after a successful upload. We consequently treat raw-view prediction as a
+measurement of confounding, not as evidence that content has been modelled.
 
 \subsection{Label}
 
-A video is labelled \emph{viral} if it falls in the top quarter of its cell,
-where a cell is the intersection of category, an age band, a channel-size band
-and video format. Bands are equal-count quantile bands assigned \emph{by value},
-so videos with identical (API-rounded) subscriber counts can never be split
-across bands, and are computed \emph{within} a format stratum. The configuration
-is $3\times3\times2$ per category, giving 1{,}854 labelled videos and a 23.6\%
-positive rate.
+A video is positive if it belongs to the top quarter of a peer cell defined by
+category, video-age band, channel-size band and format. Age and size use three
+equal-count bands per category; identical rounded subscriber counts remain in
+the same band. The resulting $3\times3\times2$ design labels 1{,}854 videos,
+23.6\% positive.
 
 Formally, let $c(v)$ denote the cell of video $v$, defined by the tuple
 (category, age band, channel-size band, format). Within each cell we rank by
@@ -187,84 +236,57 @@ y(v) &= \mathbf{1}\!\left[\, \mathrm{rank}_{c(v)}\big(s(v)\big) > |c(v)| - k_{c(
 \end{split}
 \end{equation}
 
-\noindent so exactly $k_c$ videos in each cell of size $|c|$ are positive. The $\log$ is monotone and therefore does not change
-the within-cell ranking; it is retained because the stored score is also a
-readable quantity for analysis. Bands are equal-count quantile bands assigned
-\emph{by value}, so videos sharing an (API-rounded) subscriber count can never
-fall in different size bands.
-
-Three design choices departed from our initial plan, each on measured evidence:
-
-\textbf{No minimum-age floor.} Our first design excluded videos under 30 days
-old, inherited from a views-per-day formulation that decays with age. Ranking
-within age bands does not share that problem, and the floor cost 861 videos
-(46\%, and a biased 46\%: 64\% Shorts against 43\% retained) while changing the
-four-confound label AUC only from 0.576 to 0.572. We tested its premise directly
-on the prospective panel, the only place a video is observed at two ages: view
-\emph{rank} is roughly 90\% settled within 24 hours (day-1 to day-5 Spearman
-0.946), while the raw count still doubles --- which is exactly why the label must
-remain a within-band ranking rather than a count threshold.
-\note{LIMITATION}{Measured to day 5 only; the panel is not yet old enough to
-confirm stability to day 30. Re-check after 2026-09-25.}
-
-\textbf{Format as a stratifier.} Unstratified, Shorts take the viral label at
-roughly twice their population share, and the label becomes predictable from
-format alone at AUC 0.596. Stratifying reduces that to 0.447.
-
-\textbf{Three bands, not four.} Adding the format dimension halves every cell, so
-$4\times4\times2$ leaves a median cell of 13 with 102 cells below our
-small-cell threshold, while $2\times2\times2$ readmits the confounds (AUC 0.660).
-\note{SIGNOFF}{Adam to confirm all three; they revise the label definition
-locked in the proposal.}
+\noindent so each cell contributes approximately one-quarter positives. The log
+does not change rank. Three empirical checks determine the configuration. A
+30-day minimum-age rule would discard 861 videos and disproportionately remove
+Shorts; day-1 and day-5 ranks in the prospective panel already correlate at
+0.946, although stability beyond day 5 is not yet known. Without format
+stratification, format alone predicts the label at AUC 0.596; stratification
+reduces this to 0.447. Finally, four age and size bands create 102 undersized
+cells, whereas two bands leave stronger residual confounding. These checks
+motivate three bands, separate formats and no age floor.
 
 \subsection{Format leakage}
 
-Video format is not something a model must infer: portrait framing recovers it
-for 99.0\% of videos, while raw thumbnail brightness predicts it at
-direction-free AUC 0.925, largely because vertical source imagery is often
-padded or composed differently inside a 16:9 thumbnail. A heuristic content
-crop reduces this to 0.559, but is not a verified pillarbox detector.
-Stratifying the label prevents format from inflating a score, and we report a
-format-only baseline alongside every visual result.
+Portrait framing identifies format for 99.0\% of videos, and raw thumbnail
+brightness separates formats at direction-free AUC 0.925. These measurements
+could make a visual model appear predictive simply by recognizing Shorts.
+Format-stratified labels remove that reward; visual results must therefore be
+interpreted as performance beyond this shortcut.
 
 \subsection{Evaluation protocol}
 
-Splits are channel-grouped 60/20/20 via stratified group $k$-fold; no channel
-appears in two splits, and this is asserted at runtime. The grouping is
-load-bearing: predicting the label from channel-level features alone reaches AUC
-0.644 under random folds. The test split is evaluated exactly once, at the end.
-\note{LIMITATION}{Per-category test sets are too small for per-category claims:
-roughly 6--7 positives per category per split. We report pooled metrics with
-spreads and treat per-category numbers as descriptive only.}
+We use five repeated 60/20/20 channel-grouped development partitions and assert
+zero channel overlap within every run. Hyperparameters and decision thresholds
+are selected inside each 60\% training partition; the 20\% validation partition
+is evaluation-only for that run. However, changing the seed reassigns videos:
+every nominal test row appears in training or validation in another run. We
+therefore report these results as repeated validation, not an independent test,
+and reserve final external evaluation for new prospective videos.
 
 \subsection{Frozen multimodal model}
 
-We first test the smallest deep model that can establish whether raw content
-adds value. A revision-pinned DINOv2 ViT-S/14 maps the 224-pixel centre crop of
-each thumbnail to its frozen 384-dimensional class token. A revision-pinned
-ModernBERT-base maps the title, cleaned transcript and description (in that
-priority order under a 1{,}024-token cap) to a frozen 768-dimensional
-attention-mask-weighted mean. Separate presence masks distinguish missing
-transcripts or descriptions from measured zeros. The cleaning manifest exposes
-only 1{,}404 transcripts as usable; the remaining 456 sparse or wrong-language
-transcripts are withheld while their title and description remain.
+Visual inputs are encoded by frozen DINOv2 or CLIP transformers; ResNet-50 is a
+convolutional control. We compare DINOv2-S and DINOv2-B, centre crop and
+aspect-preserving padding, CLS and patch-mean pooling, and the mean representation
+of all 20 stored frames. Text uses frozen ModernBERT embeddings. Title,
+description and quality-gated transcript are encoded separately; long
+transcripts contribute four evenly spaced overlapping chunks. Only 1{,}404
+transcripts pass the cleaning gate, and missing-modality masks prevent an absent
+transcript from being represented as measured text.
 
-We evaluate both an L2 logistic probe and a late-fusion MLP. The MLP projects
-each modality to 32 dimensions, concatenates the projections, and applies a
-32-unit head with GELU and 0.5 dropout. Logistic regularisation and the MLP
-epoch are selected on a channel-grouped split wholly inside the training fold;
-the selected model is refitted on the outer training fold before validation.
-The encoders never train. Frames are deliberately deferred until this cheaper
-thumbnail/text stage demonstrates stable added value.
+For modality $j$, the late-fusion model computes
+$h_j=\mathrm{GELU}(W_jx_j+b_j)$, concatenates the projected representations and
+predicts $\hat y=\sigma(W_h[h_1;\ldots;h_J]+b_h)$. We compare this MLP with an
+L2-regularised linear probe. Encoder weights remain fixed; regularisation,
+architecture and stopping choices are selected using grouped folds inside the
+training partition.
 
-The generic representation is followed by one targeted text experiment. An
-embedding-trained ModernBERT variant encodes title, description and transcript
-separately, using the model's document prefix and masked-mean pooling. Long
-transcripts contribute up to four evenly distributed, overlapping 384-token
-chunks rather than only their opening; field and chunk embeddings are
-L2-normalised and reduced to the model's 256-dimensional Matryoshka
-representation. This policy is fixed before the five-seed run and the encoder
-remains frozen.
+For the selected linear fusion, standardised block $\tilde{x}_j$ contributes
+exactly $a_j=w_j^\top\tilde{x}_j$ to
+$z=b+\sum_j a_j$, with $\hat y=\sigma(z)$. This is a faithful explanation of
+the model score, but not evidence that changing a block would change audience
+behaviour.
 
 %% ==================================================================
 \section{Experiment}
@@ -279,57 +301,52 @@ once in August 2026 from 1{,}319 distinct channels. Each video contributes
 metadata, a thumbnail, 20 sampled frames, a transcript, and engineered visual and
 audio features. This is the only cohort carrying full content modalities and is
 therefore what the multimodal model trains on.
-\note{LIMITATION}{Short of the 8{,}000 target: search.list pagination caps out
-well below its advertised result counts. Same limit the CC-availability scan hit.}
+The intended 8{,}000-video sample was not reached because YouTube search
+pagination returned far fewer retrievable results than its reported totals.
 
-\textbf{Prospective panel.} A live cohort of newly published videos discovered
-daily and snapshotted twice daily for 30 days, 11{,}256 videos at time of
-writing. It carries growth curves and, critically, the \emph{first-observed}
-title and thumbnail --- before creators edit them --- which the retrospective
-archive can never recover.
-\note{LIMITATION}{Its 30-day outcomes mature after this submission, so it is
-reported here as design and future work, not as results. Feature availability is
-two-phase: content modalities are extracted only for a sample selected after the
-cohort is frozen at the horizon.}
+\textbf{Prospective panel.} A live cohort of 12{,}738 newly published videos
+(2 September snapshot) records twice-daily growth and first-observed assets.
+Its 30-day outcomes mature after submission, so it is reserved for the frozen
+external evaluation and contributes no result in this paper.
 
 Frames are sampled non-uniformly: 12 of 20 fall inside the first 60 seconds,
-because retention is decided early and uniform sampling would spend most frames
-on footage most viewers never reach.
+reflecting our design hypothesis that the opening contains disproportionate
+information about presentation; the remaining eight cover the rest of the video.
 
-\subsection{Pre-processing and data repair}
+\textbf{Availability.} Code, video identifiers, metadata and reproducible
+derived tables are available at \texttt{github.com/Adamex-SVK/yt-diag}. Raw
+videos and extracted imagery are not redistributed because reuse permission was
+not established for most source videos.
 
-Two defects in the collected data were material enough to report.
+\subsection{Pre-processing}
 
-\textbf{Transcripts.} YouTube auto-captions scroll in overlapping windows, and
-the collector concatenated them, so 98\% of auto-caption transcripts repeated
-every phrase roughly three times. Word counts were inflated accordingly and every
-text statistic measured repetition. Rebuilding from the caption files reduced the
-median repeated-8-gram ratio from 0.349 to 0.000 across a 113-video validation
-sample, with word counts falling to 0.352 of their inflated values.
-\note{CONFIRMED}{notebooks/00\_project\_walkthrough.ipynb §2}
+\textbf{Transcripts.} YouTube's automatic captions use rolling display windows,
+so adjacent timed cues contain overlapping text. We reconstruct transcripts from
+the timed cues before encoding them. In a 113-video audit sample this reduced
+the median repeated-8-gram ratio from 0.349 to 0.000; reconstructed word counts
+were 35.2\% of the naively concatenated counts. Transcript provenance then
+separates 944 native-English and 467 translated-English files from 449 sparse,
+wrong-language or missing files, which are withheld from the encoder.
 
-\textbf{Colour temperature.} The visual feature pipeline computed correlated
-colour temperature without converting sRGB to CIE XYZ, so its chromaticity was
-normalised RGB. McCamy's denominator approached zero for green-deficient images,
-yielding values up to $5.0\times10^9$\,K and 27 negative temperatures. The
-corrected implementation gamma-decodes sRGB, applies the D65 matrix, averages in
-linear light, and projects CIE 1960 UCS chromaticity to the nearest segment of a
-1\%-resolution Planckian-locus table. It rejects colours with
-$|\mathrm{Duv}|>0.05$ and projections beyond the supported
-1{,}667--25{,}000\,K endpoints rather than clipping them. All 39{,}060 images
-were recomputed; valid video-level frame means span 2{,}553--15{,}679\,K with a
-median of 5{,}666\,K. Thumbnail CCT is valid for 1{,}854/1{,}860 videos and
-36{,}652/37{,}200 frames yield valid CCT.
-\note{CONFIRMED}{02\_Data/tests/test\_cct.py; D65 white = 6500.6\,K vs approximately 6504 reference}
+\textbf{Colour temperature.} RGB samples are averaged in linear light, mapped
+through the D65 sRGB-to-CIE-XYZ transform, and compared with a Planckian-locus
+lookup table in CIE 1960 UCS space. Estimates farther than $D_{uv}=0.05$ from
+the locus are treated as missing rather than assigned a misleading temperature.
+This yields valid thumbnail CCT for 1{,}854 videos and valid estimates for
+36{,}652/37{,}200 frames.
 
-\textbf{Text modality is not uniform.} The collector fetched only English
-captions, so non-English videos carry machine-\emph{translated} text, and the
-English-only Whisper fallback hallucinated English for non-English audio. Of
-1{,}860 videos: 944 native English, 467 translated, 391 too sparse to use, 37
-Whisper-on-non-English, 12 non-English text, 9 missing.
-\note{LIMITATION}{A native-English-only text model leaves comedy at 77 and vlogs
-at 64 videos, so the primary text cohort is native+translated with English-only
-kept as an ablation. Roughly a third of our text is machine-translated.}
+\subsection{Descriptive analysis}
+
+The dataset is not a balanced collection of interchangeable modalities.
+Regular videos have median duration 843 seconds compared with 37 seconds for
+Shorts. Usable transcript coverage is 92.4\% for regular videos but 60.2\% for
+Shorts. Subscriber count has the strongest training-partition association with
+log views (Spearman $\rho=0.705$). Duration illustrates why pooled summaries are
+unsafe: its view association is $-0.048$ overall but $0.250$ within regular
+videos and $0.095$ within Shorts. The 88 acoustic features are also highly
+redundant, with 23 pairs satisfying $|\rho|>0.95$. Consequently, results are
+reported by format where sample size permits, and missingness is retained as
+information rather than handled through listwise deletion.
 
 %% ==================================================================
 
@@ -345,118 +362,27 @@ scoring function $f$ over positives $\mathcal{P}$ and negatives $\mathcal{N}$,
 \mathbf{1}\!\left[f(x_i) > f(x_j)\right],
 \end{equation}
 
-\noindent i.e.\ the probability that a randomly chosen viral video is scored
+\noindent i.e.\ the probability that a randomly chosen top-quartile video is scored
 above a randomly chosen typical one; 0.5 is chance. We report PR-AUC alongside
 it because roughly 24\% of videos are positive, and average precision is the
-more honest summary under imbalance. $F_1 = 2PR/(P+R)$. The fixed reference
-table chooses its displayed threshold on validation; the nested-tuning results
-choose it from inner out-of-fold training predictions so outer validation remains
-evaluation-only. AUC-ROC and PR-AUC are threshold-free.
+more honest summary under imbalance. $F_1 = 2PR/(P+R)$; finalist thresholds are
+chosen inside the corresponding training partition.
 
-\subsection{Results}
-%% ==================================================================
-
-\subsection{Baselines}
+\subsection{Baselines and model comparison}
 
 %% <<<BEGIN GENERATED baselines>>>
-\begin{table}[t]
-\centering
-\small
-\begin{tabular}{l r cc}
-\toprule
-Features & $d$ & Logistic & XGBoost \\
-\midrule
-Metadata & 13 & 0.588 \tiny{$\pm$ 0.053} & 0.573 \tiny{$\pm$ 0.031} \\
-+ schedule & 17 & 0.597 \tiny{$\pm$ 0.055} & 0.589 \tiny{$\pm$ 0.028} \\
-+ visual & 32 & 0.597 \tiny{$\pm$ 0.050} & 0.577 \tiny{$\pm$ 0.026} \\
-+ audio & 124 & 0.587 \tiny{$\pm$ 0.042} & 0.605 \tiny{$\pm$ 0.030} \\
-Visual only & 15 & 0.519 \tiny{$\pm$ 0.020} & 0.505 \tiny{$\pm$ 0.012} \\
-Audio only & 92 & 0.534 \tiny{$\pm$ 0.025} & 0.556 \tiny{$\pm$ 0.040} \\
-\midrule
-\multicolumn{4}{l}{\small Dummy (class prior): 0.500} \\
-\bottomrule
-\end{tabular}
-\caption{Validation AUC-ROC on the retrospective cohort ($n=1854$ labelled), mean $\pm$ s.d. over 5 seeds. $d$ is the number of input columns actually fitted, after all-NaN columns are dropped. Splits are channel-grouped; the test split is untouched. The visual block alone performs at chance, which is the expected consequence of stratifying video format out of the label.}
-\label{tab:baselines}
-\end{table}
+\paragraph{Fixed feature ladder.} Across 1,854 labelled videos, the class-prior floor is 0.500. Visual-only logistic/XGBoost score $0.519\pm0.020$/$0.505\pm0.012$ AUC, and audio-only score $0.534\pm0.025$/$0.556\pm0.040$. Combining all engineered groups reaches $0.587\pm0.042$/$0.605\pm0.030$.
 %% <<<END GENERATED baselines>>>
 
 %% <<<BEGIN GENERATED tuned-baselines>>>
-\begin{table}[t]
-\centering
-\small
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{l l cc}
-\toprule
-Features & Model & Fixed & Nested tuned \\
-\midrule
-Metadata + schedule & Logistic & 0.597 \tiny{$\pm$ 0.055} & 0.590 \tiny{$\pm$ 0.048} \\
- & XGBoost & 0.589 \tiny{$\pm$ 0.028} & 0.619 \tiny{$\pm$ 0.022} \\
-Full engineered & Logistic & 0.587 \tiny{$\pm$ 0.042} & 0.595 \tiny{$\pm$ 0.032} \\
- & XGBoost & 0.605 \tiny{$\pm$ 0.030} & 0.614 \tiny{$\pm$ 0.023} \\
-\bottomrule
-\end{tabular}
-\caption{Nested tuning on the retrospective cohort. Hyperparameters are selected by four channel-grouped folds inside each outer training set; the F1 threshold comes from inner out-of-fold predictions. Cells are outer-validation AUC-ROC, mean $\pm$ s.d. over five split seeds; test remains untouched.}
-\label{tab:tuned-baselines}
-\end{table}
-
-Nested tuning changes the strongest comparator. Metadata+schedule XGBoost improves from $0.589\pm0.028$ to $0.619\pm0.022$ and wins on four of five paired outer splits. The tuned full engineered model reaches $0.614\pm0.023$; visual and audio features therefore do not improve the strongest tuned structured model. The best model's inner-thresholded balanced accuracy is $0.585\pm0.015$, precision $0.300\pm0.014$, recall $0.633\pm0.119$ and F1 $0.403\pm0.023$. These five overlapping split-seed comparisons are descriptive, not confidence intervals or a significance test.
+\paragraph{Nested structured tuning.} Four channel-grouped folds inside each training partition select hyperparameters and the F1 threshold. Metadata+schedule XGBoost improves from $0.589\pm0.028$ to $0.619\pm0.022$. The tuned full engineered model reaches $0.614\pm0.023$; visual and audio features therefore do not improve the strongest tuned structured model. These five overlapping split-seed comparisons are descriptive, not confidence intervals or a significance test.
 %% <<<END GENERATED tuned-baselines>>>
 
-All numbers are validation AUC averaged over seeds, with standard deviations.
-Single-seed reporting is not defensible at this sample size: logistic regression
-on metadata ranges from 0.496 to 0.660 across seeds.
-
-The dummy classifier predicts the class prior and scores 0.500 by construction;
-that is the floor every other number is read against.
-
-\subsection{Ablations}
-
-The frozen-content experiment isolates thumbnail, text, their combination, and
-their combination with metadata and schedule (Table~\ref{tab:deep}). Attribution
-is not yet an ablation because the content model has not earned the complexity
-of an explanation layer.
-
-The visual block alone performs at chance (Table~\ref{tab:baselines}). This is
-the expected consequence of the label design: before format was stratified out,
-thumbnail brightness was the strongest visual separator, and it was reading
-aspect ratio rather than content. We regard this as a positive result about the
-label rather than a negative one about vision --- the engineered visual features
-were previously scoring on a confound.
-
-\subsection{Deep multimodal model}
+\subsection{Content and visual ablations}
 
 %% <<<BEGIN GENERATED deep-model>>>
-\begin{table}[t]
-\centering
-\small
-\begin{tabular}{l cc}
-\toprule
-Inputs & Linear probe & Late-fusion MLP \\
-\midrule
-Thumbnail (DINOv2) & 0.563 \tiny{$\pm$ 0.032} & 0.547 \tiny{$\pm$ 0.019} \\
-Text (ModernBERT) & 0.523 \tiny{$\pm$ 0.038} & 0.512 \tiny{$\pm$ 0.055} \\
-Thumbnail + text & 0.551 \tiny{$\pm$ 0.041} & 0.531 \tiny{$\pm$ 0.033} \\
-+ metadata + schedule & 0.570 \tiny{$\pm$ 0.051} & 0.554 \tiny{$\pm$ 0.022} \\
-\bottomrule
-\end{tabular}
-\caption{Validation AUC-ROC for frozen deep representations, mean $\pm$ s.d. over five channel-grouped split seeds. ModernBERT uses title, cleaned transcript and description up to 1{,}024 tokens. Model selection occurs inside the training fold; test is untouched.}
-\label{tab:deep}
-\end{table}
+\paragraph{Initial frozen representations.} With one centre-cropped DINOv2-S thumbnail, the linear probe reaches $0.563\pm0.032$ AUC; concatenated ModernBERT text reaches $0.523\pm0.038$. Combining both with metadata and schedule reaches $0.570\pm0.051$ for the linear probe and $0.554\pm0.022$ for the MLP. This motivates the field-aware text and controlled visual ablations below.
 %% <<<END GENERATED deep-model>>>
-
-The best deep configuration is the full linear fusion at
-$0.570\pm0.051$, below both tuned metadata+schedule XGBoost
-($0.619\pm0.022$) and tuned full engineered XGBoost ($0.614\pm0.023$).
-The nonlinear fusion head is not better ($0.554\pm0.022$). The full linear
-fusion still ranges from 0.496 to 0.632 across the same five seeds. This is evidence
-against escalating immediately to a temporal frame transformer. Frozen generic
-content representations do not add reliable signal beyond the structured
-features under this label and sample size; the next justified experiment is a
-training-fold-only text adaptation or a stronger embedding-trained text
-encoder, not a larger fusion head.
-
-We therefore ran that single targeted follow-up without opening the test set.
 
 %% <<<BEGIN GENERATED text-v2>>>
 \begin{table}[t]
@@ -466,60 +392,118 @@ We therefore ran that single targeted follow-up without opening the test set.
 \toprule
 Inputs & Linear probe & Late-fusion MLP \\
 \midrule
-Title + description & 0.531 \tiny{$\pm$ 0.045} & 0.528 \tiny{$\pm$ 0.036} \\
 Transcript & 0.562 \tiny{$\pm$ 0.028} & 0.537 \tiny{$\pm$ 0.016} \\
 All three text fields & 0.568 \tiny{$\pm$ 0.018} & 0.571 \tiny{$\pm$ 0.004} \\
-+ metadata + schedule & 0.581 \tiny{$\pm$ 0.023} & 0.581 \tiny{$\pm$ 0.020} \\
-+ thumbnail & 0.587 \tiny{$\pm$ 0.033} & 0.600 \tiny{$\pm$ 0.026} \\
++ metadata + thumbnail & 0.587 \tiny{$\pm$ 0.033} & 0.600 \tiny{$\pm$ 0.026} \\
 \bottomrule
 \end{tabular}
-\caption{Validation AUC-ROC for the field-aware text follow-up, mean $\pm$ s.d. over five channel-grouped split seeds. Title, description and quality-gated transcript chunks are encoded separately; model selection occurs inside the training fold and test is untouched.}
+\caption{Validation AUC-ROC for the field-aware text follow-up, mean $\pm$ s.d. over five channel-grouped split seeds. Title, description and quality-gated transcript chunks are encoded separately; model selection occurs inside each training partition.}
 \label{tab:textv2}
 \end{table}
 
-The field-aware representation reverses the Tier-1 text result. All text fields reach $0.568\pm0.018$ with the linear probe and $0.571\pm0.004$ with the MLP; adding metadata and schedule raises the MLP to $0.581\pm0.020$. The strongest content model adds the thumbnail and reaches $0.600\pm0.026$, an average $-0.019$ over metadata+schedule XGBoost ($0.619\pm0.022$), but wins on only 1/5 paired split seeds. It is $-0.014$ relative to full engineered XGBoost ($0.614\pm0.023$), with 3/5 paired wins. With five overlapping split seeds these are descriptive paired comparisons, not confidence intervals or evidence of statistical significance. Adding the full engineered block to learned content reaches only $0.574\pm0.030$, so it does not improve the result. Content carries measurable signal but does not beat the strongest tuned baseline. If resources permit, the next bounded content experiment is frozen frame aggregation; end-to-end encoder fine-tuning is not justified.
+Field separation raises the all-text MLP to $0.571\pm0.004$ AUC; metadata and schedule raise it to $0.581\pm0.020$. Adding the thumbnail reaches $0.600\pm0.026$, $-0.019$ versus tuned metadata+schedule XGBoost ($0.619\pm0.022$) with 1/5 paired wins. Adding engineered visual/audio features reaches only $0.574\pm0.030$. These overlapping split comparisons are descriptive rather than confidence intervals.
 %% <<<END GENERATED text-v2>>>
 
 %% <<<BEGIN GENERATED tuned-deep>>>
-\paragraph{Nested fusion-head tuning.} As a post-hoc robustness check, we expanded the linear regularisation grid and evaluated nine MLP heads varying projection and hidden width, dropout, learning rate, weight decay, batch size and positive-class weighting. Three channel-grouped folds inside each outer training set select hyperparameters; a further grouped monitor split selects epochs. The expanded linear probe remains $0.587\pm0.034$ AUC. The selected MLP reaches $0.598\pm0.037$ versus $0.600\pm0.026$ for the pre-specified head, winning 2/5 paired outer splits. It remains $0.021$ below tuned metadata+schedule XGBoost ($0.619\pm0.022$). Thus head tuning does not rescue the content model and strengthens the case against end-to-end encoder fine-tuning on this cohort. Test remains untouched.
+\paragraph{Fusion-head robustness.} Nested selection over 12 linear and nine MLP configurations does not rescue the field-aware model. The expanded linear probe remains $0.587\pm0.034$ AUC. The selected MLP reaches $0.598\pm0.037$ versus $0.600\pm0.026$ for the pre-specified head, winning 2/5 paired splits and remaining $0.021$ below tuned metadata+schedule XGBoost ($0.619\pm0.022$).
 %% <<<END GENERATED tuned-deep>>>
+
+%% <<<BEGIN GENERATED visual-ablation>>>
+\begin{table}[t]
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{l cc}
+\toprule
+Frozen visual representation & Linear & MLP \\
+\midrule
+DINOv2-S thumbnail & 0.563 \tiny{$\pm$ 0.032} & 0.547 \tiny{$\pm$ 0.019} \\
+DINOv2-S, 20 frames & 0.582 \tiny{$\pm$ 0.039} & 0.589 \tiny{$\pm$ 0.023} \\
+DINOv2-B thumbnail & 0.551 \tiny{$\pm$ 0.031} & 0.547 \tiny{$\pm$ 0.050} \\
+DINOv2-B, 20 frames & 0.587 \tiny{$\pm$ 0.052} & 0.602 \tiny{$\pm$ 0.026} \\
+CLIP ViT-B/32 thumbnail & 0.570 \tiny{$\pm$ 0.047} & 0.548 \tiny{$\pm$ 0.037} \\
+CLIP ViT-B/32, 20 frames & 0.605 \tiny{$\pm$ 0.028} & 0.582 \tiny{$\pm$ 0.020} \\
+ResNet-50 thumbnail & 0.520 \tiny{$\pm$ 0.013} & 0.521 \tiny{$\pm$ 0.045} \\
+ResNet-50, 20 frames & 0.529 \tiny{$\pm$ 0.024} & 0.548 \tiny{$\pm$ 0.018} \\
+\bottomrule
+\end{tabular}
+\caption{Visual-only validation AUC-ROC over the same five channel-grouped splits. The controlled changes isolate encoder size, framing, pooling and pretraining; frame vectors are averaged over the 20 stored samples.}
+\label{tab:visual-ablation}
+\end{table}
+
+Using all 20 frames changes the backbone ranking. The strongest head for DINOv2-S, DINOv2-B and ResNet-50 reaches $0.589$, $0.602$ and $0.548$, respectively. CLIP frame features reach $0.605\pm0.028$ with the linear probe, and adding its thumbnail yields $0.606\pm0.040$. The best observed full content model uses CLIP thumbnail and frame features with field-aware text and metadata (linear probe), reaching $0.613\pm0.044$, still $0.006$ below tuned metadata+schedule XGBoost ($0.619\pm0.022$) and higher on 2/5 matched splits.
+%% <<<END GENERATED visual-ablation>>>
+
+%% <<<BEGIN GENERATED attribution>>>
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.96\columnwidth]{figures/attribution.pdf}
+\caption{Exact attribution for the CLIP--text linear fusion. Top: mean absolute-contribution shares. Bottom: signed contributions for four seed-0 examples; positive values favour the top-quartile class.}
+\label{fig:attribution}
+\end{figure}
+
+\begin{table}[t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{l ccc}
+\toprule
+Finalist & AUC-ROC & PR-AUC & F1 \\
+\midrule
+Structured XGBoost & 0.619 \tiny{$\pm$ 0.022} & 0.335 \tiny{$\pm$ 0.029} & 0.403 \tiny{$\pm$ 0.023} \\
+CLIP--text linear fusion & 0.613 \tiny{$\pm$ 0.044} & 0.340 \tiny{$\pm$ 0.040} & 0.402 \tiny{$\pm$ 0.036} \\
+\bottomrule
+\end{tabular}
+\caption{Repeated channel-grouped development performance. Hyperparameters and F1 thresholds are selected inside each training partition. These rows are model-selection evidence, not an independent test estimate.}
+\label{tab:finalists}
+\end{table}
+
+\paragraph{Predictive attribution and error analysis.} The linear fusion permits an exact decomposition of every logit by input block (Figure~\ref{fig:attribution}). Mean absolute-contribution shares are thumbnail 22.0\%, frames 21.9\%, description 17.7\%, transcript 16.3\%, title 16.0\%, metadata+schedule 6.2\%. They are not modality-importance estimates: block dimensionality (513 thumbnail, 514 frames, 257--258 per text field, versus 47--52 transformed metadata/schedule inputs), correlated coordinates, standardisation and the shared L2 penalty all affect the allocation. In seed 0, both a true-positive and false-positive latte-art Short receive their largest positive contribution from frames. The model recognises similar content but cannot explain their different outcomes; attribution reveals what moved the prediction, not what moved viewers.
+%% <<<END GENERATED attribution>>>
 
 %% ==================================================================
 \subsection{Limitations}
 %% ==================================================================
 
-\note{LIMITATION}{Consolidate here; each is already marked at its point of use.}
 \begin{itemize}
 \item Labels are a cohort-relative convention, not ground truth. Across 16
-      configurations only 83 of 438 ever-viral videos are viral in all of them.
-\item Band edges and cutoffs are computed over the whole cohort before splitting,
-      making the labels transductive by construction.
-\item Frame extraction for non-CC videos sits outside YouTube's terms of service;
-      only 7 of 1{,}860 videos carry a Creative Commons licence.
-\item External factors --- platform promotion, timing, luck --- cap achievable
-      accuracy and are unobservable to us.
-\item Product reviews are a different population (median 9{,}953 views against
-      comedy's 1{,}254{,}042), an artefact of the category-mapping workaround.
+      configurations only 83 of 438 videos ever labelled top-quartile retain
+      that label throughout. Band edges are computed over the full cohort,
+      making the labels transductive before splitting.
+\item Reuse permission was not established for most source videos, so the raw
+      media cannot be redistributed. Promotion and timing remain unobserved;
+      the category workaround makes product reviews a different population.
+\item The retrospective thumbnails and subscriber counts may reflect changes
+      made after publication. The prospective panel was designed to remove this
+      ambiguity but does not mature before submission.
+\item The five validation partitions overlap and their standard deviation is not
+      a confidence interval. Because rows change roles across seeds, there is no
+      independent retrospective test estimate; model-family selection may make
+      the repeated-validation result optimistic.
 \end{itemize}
 
 %% ==================================================================
 \section{Conclusion}
 %% ==================================================================
 
-Predicting raw YouTube views rewards shortcut learning, so we instead define a
-peer-relative target, group evaluation by channel, and require content models
-to beat explicit non-content baselines. Data repair proved as important as
-architecture: overlapping captions and invalid colour-temperature calculations
-materially changed the available signals. Generic frozen content embeddings
-failed this test, while field-aware text and thumbnail fusion improved to
-$0.600\pm0.026$ validation AUC but remained below tuned metadata+schedule
-XGBoost at $0.619\pm0.022$. Engineered visual and audio features also failed to
-improve that tuned comparator. This permits at most a bounded frozen-frame
-follow-up, not an immediate jump to end-to-end fine-tuning. The prospective cohort will provide the stronger final
-test of the methodology once fixed-horizon outcomes and publication-time
-metadata mature.
+Public view counts make it easy to build a predictor that mostly recognizes
+channel scale and publication context. After controlling those factors through
+a peer-relative label and channel-grouped evaluation, tuned metadata+schedule
+XGBoost reaches $0.619\pm0.022$ validation AUC. Frozen content representations
+are informative but do not improve reliably on that comparator: the best
+observed CLIP, text and metadata fusion reaches $0.613\pm0.044$ and wins two of
+five matched splits. Controlled ablations show that all-frame CLIP features are
+the strongest visual representation, while ResNet-50 remains weak and the larger
+DINOv2 encoder does not improve the full fusion. The result is therefore a limitation on what can be
+diagnosed from this retrospective public dataset, not evidence that content has
+no effect on viewers. Exact attribution shows that visual blocks move the
+linear model, but a matched error pair shows that predictive explanations are
+not causal diagnoses.
+Fixed-horizon prospective outcomes are needed to separate content from
+post-publication edits and platform exposure.
 
 \bibliographystyle{aaai}
+\footnotesize
 \bibliography{references}
 
 \end{document}

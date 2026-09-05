@@ -9,7 +9,7 @@ Experiment tracking: configurations, run logs, results, and analysis. One subfol
 2. **Text-only model** — pretrained transformer on title + description + transcript. Tests text signal alone.
 3. **Vision-only model** — vision backbone on thumbnail + sampled frames. Tests visual signal alone.
 4. **Full multimodal (frozen encoders)** — all three modalities, fusion layer trained, encoders frozen. Simpler, faster.
-5. **Full multimodal (fine-tuned)** — all three modalities, end-to-end fine-tuned. Expected best but heaviest.
+5. **Full multimodal (fine-tuned)** — optional end-to-end follow-up whose value must be established empirically; it is substantially heavier and more prone to overfitting here.
 6. **Ablation studies** — remove one modality at a time to measure marginal contribution.
 7. **Attribution quality** — human evaluation of explanation quality (does the attribution layer surface plausible reasons?).
 
@@ -29,8 +29,8 @@ Each experiment subfolder: `YYYY-MM-DD_Experiment_Name/`
 ## Current baseline status (2026-09-01)
 
 The retrospective tabular ladder has been run on the v3 CCT dataset with five
-channel-grouped 60/20/20 split seeds. These are validation results only; the
-test split is untouched. The tracked source of truth is
+channel-grouped 60/20/20 split seeds. These are repeated development results,
+not an independent test estimate. The tracked source of truth is
 `05_Reports/final_report/results/baselines.json`, including CCT version/method.
 
 | Feature set | Logistic AUC | XGBoost AUC |
@@ -75,7 +75,7 @@ ModernBERT-base embeddings of title + cleaned transcript + description. A
 linear probe and a regularised late-fusion MLP were evaluated over the same five
 channel-grouped split seeds. Logistic C and MLP epoch selection occur on an
 inner channel-grouped split of the training fold; outer validation is not used
-for model selection and test remains untouched.
+for model selection within a run.
 
 | Inputs | Linear probe AUC | Late-fusion MLP AUC |
 |---|---:|---:|
@@ -103,7 +103,8 @@ The pre-declared follow-up replaces generic concatenation with an
 embedding-trained ModernBERT encoder, separate title/description/transcript
 fields, and up to four evenly distributed overlapping transcript chunks. The
 encoder is frozen and revision-pinned; model selection remains nested inside
-the outer training fold and the test split remains untouched.
+each training partition. Rows change roles across seeds, so this is not a
+globally sealed retrospective test.
 
 | Inputs | Linear probe AUC | Late-fusion MLP AUC |
 |---|---:|---:|
@@ -117,8 +118,8 @@ The strongest v2 model is -0.019 AUC below tuned metadata+schedule XGBoost and
 wins only 1/5 paired seeds. It is -0.014 below tuned full engineered XGBoost
 while winning 3/5 seeds. These five overlapping split-seed comparisons
 are descriptive, not confidence intervals or significance tests. Adding the
-engineered block to v2 does not help. Frozen frame aggregation remains a bounded
-optional follow-up; end-to-end fine-tuning is not justified.
+engineered block to v2 does not help. The controlled visual experiment below
+tests frame aggregation and alternative thumbnail representations directly.
 
 ## Nested deep-head tuning (2026-09-02)
 
@@ -141,6 +142,37 @@ paired splits. This is not evidence that tuning damaged a true effect; it says
 the inner folds cannot select a head that generalises consistently across held-
 out channels. Escalating to end-to-end encoder fine-tuning is not justified.
 Full trials are under gitignored `runs/tuned_deep/results.json`.
+
+## Controlled visual ablation (2026-09-03)
+
+The visual follow-up changes one representation choice at a time while keeping
+the labelled cohort, five channel-grouped outer splits and downstream heads
+fixed. It compares DINOv2 model size, CLS versus patch-mean pooling, centre crop
+versus aspect-preserving padding, language-supervised CLIP, convolutional
+ResNet-50, and mean aggregation of the 20 stored video frames.
+
+| Frozen visual input | Linear probe AUC | Late-fusion MLP AUC |
+|---|---:|---:|
+| DINOv2-S thumbnail, CLS | 0.563 ± 0.032 | 0.547 ± 0.019 |
+| DINOv2-S mean of 20 frames | 0.582 ± 0.039 | 0.589 ± 0.023 |
+| DINOv2-B thumbnail, CLS | 0.551 ± 0.031 | 0.547 ± 0.050 |
+| DINOv2-B mean of 20 frames | 0.587 ± 0.052 | **0.602 ± 0.026** |
+| CLIP ViT-B/32 thumbnail | 0.570 ± 0.047 | 0.548 ± 0.037 |
+| CLIP ViT-B/32 mean of 20 frames | **0.605 ± 0.028** | 0.582 ± 0.020 |
+| ResNet-50 thumbnail | 0.520 ± 0.013 | 0.521 ± 0.045 |
+| ResNet-50 mean of 20 frames | 0.529 ± 0.024 | 0.548 ± 0.018 |
+
+DINOv2-base is worse on thumbnails but improves over DINOv2-small on the
+all-frame MLP. CLIP produces the strongest frame-only linear result; adding its
+thumbnail reaches 0.606 ± 0.040. The best observed full frozen fusion uses CLIP
+thumbnail and frame features with field-aware text and metadata/schedule,
+reaching 0.613 ± 0.044. This is 0.006 below tuned metadata+schedule XGBoost and
+higher on two of five matched splits. The CLIP full-fusion MLP has a lower mean
+(0.606 ± 0.028) despite winning three splits, illustrating the remaining split
+sensitivity. DINOv2-S patch-mean pooling and aspect-preserving thumbnail padding
+do not improve its original thumbnail result. Full per-seed evidence is gitignored under
+`runs/visual_ablation/results.json`; the compact report evidence is
+`05_Reports/final_report/results/visual_ablation.json`. Test remains untouched.
 
 ## Notes
 - Always log: what you changed, what you expected, what actually happened.

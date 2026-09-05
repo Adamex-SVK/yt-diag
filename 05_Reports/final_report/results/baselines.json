@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-09-02T23:15:42Z",
+  "generated_at_utc": "2026-09-03T17:07:01Z",
   "seeds": 5,
   "seed_ids": [
     0,
@@ -9,7 +9,8 @@
     4
   ],
   "n_labelled": 1854,
-  "protocol": "channel-grouped 60/20/20; VALIDATION only, test untouched",
+  "protocol": "repeated channel-grouped 60/20/20 development splits; validation only",
+  "metric_note": "This historical fixed-ladder artifact is used for AUC only; its displayed F1 threshold was selected on validation.",
   "cct_version": 3,
   "cct_method": "nearest_planckian_locus_cie1960uv_1pct_lut",
   "rows": [

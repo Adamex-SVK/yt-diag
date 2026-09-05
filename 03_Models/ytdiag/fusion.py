@@ -1,8 +1,9 @@
 """Linear probes and a small late-fusion MLP over frozen deep embeddings.
 
-Only the projection/fusion layers train.  Preprocessing is fitted on each
-outer training split; validation rows are used solely for reported metrics and
-the held-out test fold is never evaluated here.
+Only the projection/fusion layers train. Preprocessing is fitted on each
+outer training split and validation rows are used solely for reported metrics.
+The seeded development partitions overlap across runs, so this module does not
+describe any one retrospective fold as a globally unseen test set.
 """
 from __future__ import annotations
 
@@ -110,8 +111,10 @@ def _best_threshold(y: np.ndarray, probabilities: np.ndarray) -> float:
     return float(max(grid, key=lambda value: f1_score(y, probabilities >= value)))
 
 
-def _metrics(y: np.ndarray, probabilities: np.ndarray) -> dict[str, float]:
-    threshold = _best_threshold(y, probabilities)
+def _metrics(
+    y: np.ndarray, probabilities: np.ndarray, threshold: float,
+) -> dict[str, float]:
+    """Score predictions at a threshold selected without using these rows."""
     return {
         "auc_roc": float(roc_auc_score(y, probabilities)),
         "pr_auc": float(average_precision_score(y, probabilities)),
@@ -151,19 +154,23 @@ def linear_probe(
     matrix = np.column_stack(list(blocks.values()))
     candidates = (0.001, 0.01, 0.1, 1.0)
     scores = {}
+    inner_probabilities = {}
     for candidate in candidates:
         trial = LogisticRegression(max_iter=3000, C=candidate, random_state=0)
         trial.fit(matrix[inner_train_idx], y[inner_train_idx])
-        scores[candidate] = float(roc_auc_score(
-            y[inner_val_idx], trial.predict_proba(matrix[inner_val_idx])[:, 1]
-        ))
+        candidate_probabilities = trial.predict_proba(matrix[inner_val_idx])[:, 1]
+        inner_probabilities[candidate] = candidate_probabilities
+        scores[candidate] = float(roc_auc_score(y[inner_val_idx], candidate_probabilities))
     selected = max(candidates, key=lambda value: (scores[value], -value))
+    threshold = _best_threshold(y[inner_val_idx], inner_probabilities[selected])
     model = LogisticRegression(max_iter=3000, C=selected, random_state=0)
     model.fit(matrix[train_idx], y[train_idx])
     probabilities = model.predict_proba(matrix[val_idx])[:, 1]
     return probabilities, {
         "n_parameters": int(model.coef_.size + model.intercept_.size),
         "selected_C": float(selected),
+        "threshold": float(threshold),
+        "threshold_source": "inner validation",
         "inner_validation_auc_by_C": {str(key): value for key, value in scores.items()},
     }
 
@@ -269,6 +276,13 @@ def mlp_probe(
         return model, best_epoch, final_loss, (best_auc if monitor is not None else None)
 
     inner_model, selected_epoch, _, inner_auc = fit(inner_train_idx, epochs, monitor=inner_val_idx)
+    inner_model.eval()
+    with torch.inference_mode():
+        inner_logits = inner_model([
+            value[inner_val_idx].to(resolved_device) for value in tensors
+        ])
+        inner_probabilities = torch.sigmoid(inner_logits).float().cpu().numpy()
+    threshold = _best_threshold(y[inner_val_idx], inner_probabilities)
     del inner_model
     gc.collect()
     if resolved_device == "mps":
@@ -288,6 +302,7 @@ def mlp_probe(
         "projection_dim": int(projection_dim), "hidden_dim": int(hidden_dim),
         "dropout": float(dropout), "learning_rate": float(learning_rate),
         "weight_decay": float(weight_decay), "loss": "positive-weighted BCEWithLogitsLoss",
+        "threshold": float(threshold), "threshold_source": "inner validation",
         "final_train_loss": final_loss, "device": resolved_device,
     }
     del model
@@ -358,12 +373,12 @@ def run_named_blocks_seed(
             "blocks": list(block_names),
             "preprocessing": preprocessing,
             "linear_probe": {
-                "val": _metrics(y[idx["val"]], probe_p),
+                "val": _metrics(y[idx["val"]], probe_p, probe_details["threshold"]),
                 "val_auc_by_category": _by_category(df, idx["val"], y[idx["val"]], probe_p),
                 **probe_details,
             },
             "late_fusion_mlp": {
-                "val": _metrics(y[idx["val"]], mlp_p),
+                "val": _metrics(y[idx["val"]], mlp_p, mlp_details["threshold"]),
                 "val_auc_by_category": _by_category(df, idx["val"], y[idx["val"]], mlp_p),
                 **mlp_details,
             },

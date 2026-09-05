@@ -1,0 +1,701 @@
+{
+  "generated_at_utc": "2026-09-03T16:53:25.703940+00:00",
+  "protocol": "five repeated channel-grouped development splits; C and F1 threshold selected inside each training partition; validation only; no independent retrospective test",
+  "explanation_scope": "exact decomposition of the linear model logit by standardized input block; predictive attribution, not causal attribution",
+  "n_labelled": 1854,
+  "blocks": [
+    "thumbnail",
+    "frames",
+    "title",
+    "description",
+    "transcript",
+    "metadata_schedule"
+  ],
+  "aggregate": {
+    "auc_roc": {
+      "mean": 0.6125770687426774,
+      "std": 0.04404133877842296,
+      "values": [
+        0.6026353965183753,
+        0.6777940816825629,
+        0.6422863796980405,
+        0.5907276995305164,
+        0.5494417862838916
+      ]
+    },
+    "pr_auc": {
+      "mean": 0.34006692397285004,
+      "std": 0.04038427786148051,
+      "values": [
+        0.31783941870715765,
+        0.4026098545526985,
+        0.370317759589854,
+        0.3178959575103039,
+        0.2916716295042361
+      ]
+    },
+    "f1": {
+      "mean": 0.4017337091332169,
+      "std": 0.03585719392911517,
+      "values": [
+        0.4195804195804196,
+        0.4276729559748428,
+        0.4377104377104377,
+        0.3837837837837838,
+        0.33992094861660077
+      ]
+    }
+  },
+  "share_of_absolute_logit_contribution": {
+    "thumbnail": {
+      "mean": 0.21956023731917482,
+      "std": 0.02571334670920733,
+      "median": 0.2229792721267264,
+      "values": [
+        0.19587314675431464,
+        0.2229792721267264,
+        0.22978389415189931,
+        0.18867878235336602,
+        0.2604860912095677
+      ]
+    },
+    "frames": {
+      "mean": 0.2187155334161846,
+      "std": 0.011843726157355646,
+      "median": 0.2250596925576559,
+      "values": [
+        0.2250596925576559,
+        0.23028809768280015,
+        0.22759870309607455,
+        0.1986384314445579,
+        0.21199274229983436
+      ]
+    },
+    "title": {
+      "mean": 0.15996182535230355,
+      "std": 0.013851201167833825,
+      "median": 0.15477661949150404,
+      "values": [
+        0.14308490529440088,
+        0.17181289434800662,
+        0.15477661949150404,
+        0.14998455897305793,
+        0.18015014865454831
+      ]
+    },
+    "description": {
+      "mean": 0.17688713303912013,
+      "std": 0.022869922175457358,
+      "median": 0.1735912822623156,
+      "values": [
+        0.1735912822623156,
+        0.15010970439658627,
+        0.19987544146327704,
+        0.20625318000006226,
+        0.15460605707335934
+      ]
+    },
+    "transcript": {
+      "mean": 0.16278329738266414,
+      "std": 0.027439863335863214,
+      "median": 0.17167197252094102,
+      "values": [
+        0.1871865960067029,
+        0.17167197252094102,
+        0.13056022233377493,
+        0.19427464334917668,
+        0.1302230527027253
+      ]
+    },
+    "metadata_schedule": {
+      "mean": 0.062091973490552774,
+      "std": 0.007406522911928745,
+      "median": 0.06217040387977921,
+      "values": [
+        0.07520437712461008,
+        0.053138058924939544,
+        0.0574051194634701,
+        0.06217040387977921,
+        0.06254190805996494
+      ]
+    }
+  },
+  "qualitative_seed": 0,
+  "qualitative_examples": [
+    {
+      "kind": "true positive",
+      "video_id": "2Nvm9p_kPoo",
+      "title": "Latte Art Rose: Level 1 VS Level 99 #shorts #latteart #tutorial",
+      "category": "howto",
+      "format": "Short",
+      "label": 1,
+      "probability": 0.5906056761741638,
+      "predicted_label": 1,
+      "contributions": {
+        "thumbnail": 0.38603296875953674,
+        "frames": 0.6637117862701416,
+        "title": 0.18970230221748352,
+        "description": 0.2687687873840332,
+        "transcript": 0.09490727633237839,
+        "metadata_schedule": 0.06142918020486832
+      },
+      "top_positive_block": "frames",
+      "top_negative_block": "metadata_schedule"
+    },
+    {
+      "kind": "true negative",
+      "video_id": "H35bMrQLI5o",
+      "title": "Katherine Blanford | Catholic Cowgirl (Full Comedy Special)",
+      "category": "comedy",
+      "format": "regular",
+      "label": 0,
+      "probability": 0.042252317070961,
+      "predicted_label": 0,
+      "contributions": {
+        "thumbnail": -0.18156492710113525,
+        "frames": -0.5259230136871338,
+        "title": -0.391208291053772,
+        "description": -0.43707776069641113,
+        "transcript": -0.17917513847351074,
+        "metadata_schedule": -0.10789357125759125
+      },
+      "top_positive_block": "metadata_schedule",
+      "top_negative_block": "frames"
+    },
+    {
+      "kind": "false positive",
+      "video_id": "QXO1fG4QnMY",
+      "title": "Latte Art Tutorial: Winged Heart #shorts #latteart #tutorial",
+      "category": "howto",
+      "format": "Short",
+      "label": 0,
+      "probability": 0.6832981705665588,
+      "predicted_label": 1,
+      "contributions": {
+        "thumbnail": 0.507616400718689,
+        "frames": 0.795168399810791,
+        "title": 0.12411235272884369,
+        "description": 0.5321192741394043,
+        "transcript": 0.09490727633237839,
+        "metadata_schedule": 0.013129642233252525
+      },
+      "top_positive_block": "frames",
+      "top_negative_block": "metadata_schedule"
+    },
+    {
+      "kind": "false negative",
+      "video_id": "gztOE7GP_Ug",
+      "title": "A Little Day in My Life \ud83c\udf37 #minivlog #vlog #studyvlog #ytshorts #morningroutine #",
+      "category": "vlogs",
+      "format": "Short",
+      "label": 1,
+      "probability": 0.0782494768500328,
+      "predicted_label": 0,
+      "contributions": {
+        "thumbnail": -0.4033639430999756,
+        "frames": -0.37935692071914673,
+        "title": 0.03355395793914795,
+        "description": -0.0970081016421318,
+        "transcript": -0.33689942955970764,
+        "metadata_schedule": 0.014784492552280426
+      },
+      "top_positive_block": "title",
+      "top_negative_block": "thumbnail"
+    }
+  ],
+  "runs": [
+    {
+      "seed": 0,
+      "split_sizes": {
+        "train": 1113,
+        "val": 370,
+        "test": 371
+      },
+      "metrics": {
+        "auc_roc": 0.6026353965183753,
+        "pr_auc": 0.31783941870715765,
+        "f1": 0.4195804195804196,
+        "n": 370
+      },
+      "selected_C": 0.001,
+      "threshold": 0.19999999999999996,
+      "threshold_source": "inner validation",
+      "intercept": -1.2980825901031494,
+      "mean_absolute_logit_contribution": {
+        "thumbnail": 0.19185633957386017,
+        "frames": 0.22044435143470764,
+        "title": 0.14015063643455505,
+        "description": 0.17003141343593597,
+        "transcript": 0.1833479255437851,
+        "metadata_schedule": 0.07366214692592621
+      },
+      "share_of_absolute_logit_contribution": {
+        "thumbnail": 0.19587314675431464,
+        "frames": 0.2250596925576559,
+        "title": 0.14308490529440088,
+        "description": 0.1735912822623156,
+        "transcript": 0.1871865960067029,
+        "metadata_schedule": 0.07520437712461008
+      },
+      "preprocessing": {
+        "thumbnail": {
+          "input_dim": 513,
+          "scaler": "train-only StandardScaler"
+        },
+        "frames": {
+          "input_dim": 514,
+          "scaler": "train-only StandardScaler"
+        },
+        "title": {
+          "input_dim": 257,
+          "scaler": "train-only StandardScaler"
+        },
+        "description": {
+          "input_dim": 257,
+          "scaler": "train-only StandardScaler"
+        },
+        "transcript": {
+          "input_dim": 258,
+          "scaler": "train-only StandardScaler"
+        },
+        "meta_sched": {
+          "input_dim": 51,
+          "source_columns": [
+            "meta__duration_sec",
+            "meta__title_length",
+            "meta__description_length",
+            "meta__tag_count",
+            "meta__channel_follower_count",
+            "meta__caption_available",
+            "meta__auto_captions",
+            "meta__category",
+            "meta__language",
+            "meta__is_short",
+            "sched__hour_sin",
+            "sched__hour_cos",
+            "sched__weekday",
+            "sched__is_weekend",
+            "meta__channel_age_days",
+            "meta__channel_video_count",
+            "meta__is_first_upload"
+          ],
+          "dropped_all_nan": [
+            "meta__definition_hd"
+          ],
+          "preprocessing": "train-only median imputation, scaling, one-hot encoding"
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "split_sizes": {
+        "train": 1112,
+        "val": 369,
+        "test": 373
+      },
+      "metrics": {
+        "auc_roc": 0.6777940816825629,
+        "pr_auc": 0.4026098545526985,
+        "f1": 0.4276729559748428,
+        "n": 369
+      },
+      "selected_C": 0.001,
+      "threshold": 0.18,
+      "threshold_source": "inner validation",
+      "intercept": -1.2868725061416626,
+      "mean_absolute_logit_contribution": {
+        "thumbnail": 0.20012977719306946,
+        "frames": 0.20668964087963104,
+        "title": 0.15420660376548767,
+        "description": 0.13472741842269897,
+        "transcript": 0.1540801227092743,
+        "metadata_schedule": 0.047692809253931046
+      },
+      "share_of_absolute_logit_contribution": {
+        "thumbnail": 0.2229792721267264,
+        "frames": 0.23028809768280015,
+        "title": 0.17181289434800662,
+        "description": 0.15010970439658627,
+        "transcript": 0.17167197252094102,
+        "metadata_schedule": 0.053138058924939544
+      },
+      "preprocessing": {
+        "thumbnail": {
+          "input_dim": 513,
+          "scaler": "train-only StandardScaler"
+        },
+        "frames": {
+          "input_dim": 514,
+          "scaler": "train-only StandardScaler"
+        },
+        "title": {
+          "input_dim": 257,
+          "scaler": "train-only StandardScaler"
+        },
+        "description": {
+          "input_dim": 257,
+          "scaler": "train-only StandardScaler"
+        },
+        "transcript": {
+          "input_dim": 258,
+          "scaler": "train-only StandardScaler"
+        },
+        "meta_sched": {
+          "input_dim": 51,
+          "source_columns": [
+            "meta__duration_sec",
+            "meta__title_length",
+            "meta__description_length",
+            "meta__tag_count",
+            "meta__channel_follower_count",
+            "meta__caption_available",
+            "meta__auto_captions",
+            "meta__category",
+            "meta__language",
+            "meta__is_short",
+            "sched__hour_sin",
+            "sched__hour_cos",
+            "sched__weekday",
+            "sched__is_weekend",
+            "meta__channel_age_days",
+            "meta__channel_video_count",
+            "meta__is_first_upload"
+          ],
+          "dropped_all_nan": [
+            "meta__definition_hd"
+          ],
+          "preprocessing": "train-only median imputation, scaling, one-hot encoding"
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "split_sizes": {
+        "train": 1114,
+        "val": 371,
+        "test": 369
+      },
+      "metrics": {
+        "auc_roc": 0.6422863796980405,
+        "pr_auc": 0.370317759589854,
+        "f1": 0.4377104377104377,
+        "n": 371
+      },
+      "selected_C": 0.001,
+      "threshold": 0.19,
+      "threshold_source": "inner validation",
+      "intercept": -1.2882674932479858,
+      "mean_absolute_logit_contribution": {
+        "thumbnail": 0.22511805593967438,
+        "frames": 0.22297723591327667,
+        "title": 0.1516338288784027,
+        "description": 0.19581690430641174,
+        "transcript": 0.12790915369987488,
+        "metadata_schedule": 0.05623948946595192
+      },
+      "share_of_absolute_logit_contribution": {
+        "thumbnail": 0.22978389415189931,
+        "frames": 0.22759870309607455,
+        "title": 0.15477661949150404,
+        "description": 0.19987544146327704,
+        "transcript": 0.13056022233377493,
+        "metadata_schedule": 0.0574051194634701
+      },
+      "preprocessing": {
+        "thumbnail": {
+          "input_dim": 513,
+          "scaler": "train-only StandardScaler"
+        },
+        "frames": {
+          "input_dim": 514,
+          "scaler": "train-only StandardScaler"
+        },
+        "title": {
+          "input_dim": 257,
+          "scaler": "train-only StandardScaler"
+        },
+        "description": {
+          "input_dim": 257,
+          "scaler": "train-only StandardScaler"
+        },
+        "transcript": {
+          "input_dim": 258,
+          "scaler": "train-only StandardScaler"
+        },
+        "meta_sched": {
+          "input_dim": 47,
+          "source_columns": [
+            "meta__duration_sec",
+            "meta__title_length",
+            "meta__description_length",
+            "meta__tag_count",
+            "meta__channel_follower_count",
+            "meta__caption_available",
+            "meta__auto_captions",
+            "meta__category",
+            "meta__language",
+            "meta__is_short",
+            "sched__hour_sin",
+            "sched__hour_cos",
+            "sched__weekday",
+            "sched__is_weekend",
+            "meta__channel_age_days",
+            "meta__channel_video_count",
+            "meta__is_first_upload"
+          ],
+          "dropped_all_nan": [
+            "meta__definition_hd"
+          ],
+          "preprocessing": "train-only median imputation, scaling, one-hot encoding"
+        }
+      }
+    },
+    {
+      "seed": 3,
+      "split_sizes": {
+        "train": 1111,
+        "val": 374,
+        "test": 369
+      },
+      "metrics": {
+        "auc_roc": 0.5907276995305164,
+        "pr_auc": 0.3178959575103039,
+        "f1": 0.3837837837837838,
+        "n": 374
+      },
+      "selected_C": 0.001,
+      "threshold": 0.14999999999999997,
+      "threshold_source": "inner validation",
+      "intercept": -1.313934564590454,
+      "mean_absolute_logit_contribution": {
+        "thumbnail": 0.19010725617408752,
+        "frames": 0.20014230906963348,
+        "title": 0.15112008154392242,
+        "description": 0.20781470835208893,
+        "transcript": 0.19574548304080963,
+        "metadata_schedule": 0.06264109164476395
+      },
+      "share_of_absolute_logit_contribution": {
+        "thumbnail": 0.18867878235336602,
+        "frames": 0.1986384314445579,
+        "title": 0.14998455897305793,
+        "description": 0.20625318000006226,
+        "transcript": 0.19427464334917668,
+        "metadata_schedule": 0.06217040387977921
+      },
+      "preprocessing": {
+        "thumbnail": {
+          "input_dim": 513,
+          "scaler": "train-only StandardScaler"
+        },
+        "frames": {
+          "input_dim": 514,
+          "scaler": "train-only StandardScaler"
+        },
+        "title": {
+          "input_dim": 257,
+          "scaler": "train-only StandardScaler"
+        },
+        "description": {
+          "input_dim": 257,
+          "scaler": "train-only StandardScaler"
+        },
+        "transcript": {
+          "input_dim": 258,
+          "scaler": "train-only StandardScaler"
+        },
+        "meta_sched": {
+          "input_dim": 52,
+          "source_columns": [
+            "meta__duration_sec",
+            "meta__title_length",
+            "meta__description_length",
+            "meta__tag_count",
+            "meta__channel_follower_count",
+            "meta__caption_available",
+            "meta__auto_captions",
+            "meta__category",
+            "meta__language",
+            "meta__is_short",
+            "sched__hour_sin",
+            "sched__hour_cos",
+            "sched__weekday",
+            "sched__is_weekend",
+            "meta__channel_age_days",
+            "meta__channel_video_count",
+            "meta__is_first_upload"
+          ],
+          "dropped_all_nan": [
+            "meta__definition_hd"
+          ],
+          "preprocessing": "train-only median imputation, scaling, one-hot encoding"
+        }
+      }
+    },
+    {
+      "seed": 4,
+      "split_sizes": {
+        "train": 1112,
+        "val": 373,
+        "test": 369
+      },
+      "metrics": {
+        "auc_roc": 0.5494417862838916,
+        "pr_auc": 0.2916716295042361,
+        "f1": 0.33992094861660077,
+        "n": 373
+      },
+      "selected_C": 1.0,
+      "threshold": 0.05,
+      "threshold_source": "inner validation",
+      "intercept": -4.280606269836426,
+      "mean_absolute_logit_contribution": {
+        "thumbnail": 2.6931955814361572,
+        "frames": 2.191817283630371,
+        "title": 1.8625930547714233,
+        "description": 1.598489761352539,
+        "transcript": 1.3463910818099976,
+        "metadata_schedule": 0.6466279625892639
+      },
+      "share_of_absolute_logit_contribution": {
+        "thumbnail": 0.2604860912095677,
+        "frames": 0.21199274229983436,
+        "title": 0.18015014865454831,
+        "description": 0.15460605707335934,
+        "transcript": 0.1302230527027253,
+        "metadata_schedule": 0.06254190805996494
+      },
+      "preprocessing": {
+        "thumbnail": {
+          "input_dim": 513,
+          "scaler": "train-only StandardScaler"
+        },
+        "frames": {
+          "input_dim": 514,
+          "scaler": "train-only StandardScaler"
+        },
+        "title": {
+          "input_dim": 257,
+          "scaler": "train-only StandardScaler"
+        },
+        "description": {
+          "input_dim": 257,
+          "scaler": "train-only StandardScaler"
+        },
+        "transcript": {
+          "input_dim": 258,
+          "scaler": "train-only StandardScaler"
+        },
+        "meta_sched": {
+          "input_dim": 52,
+          "source_columns": [
+            "meta__duration_sec",
+            "meta__title_length",
+            "meta__description_length",
+            "meta__tag_count",
+            "meta__channel_follower_count",
+            "meta__caption_available",
+            "meta__auto_captions",
+            "meta__category",
+            "meta__language",
+            "meta__is_short",
+            "sched__hour_sin",
+            "sched__hour_cos",
+            "sched__weekday",
+            "sched__is_weekend",
+            "meta__channel_age_days",
+            "meta__channel_video_count",
+            "meta__is_first_upload"
+          ],
+          "dropped_all_nan": [
+            "meta__definition_hd"
+          ],
+          "preprocessing": "train-only median imputation, scaling, one-hot encoding"
+        }
+      }
+    }
+  ],
+  "embedding_provenance": {
+    "thumbnail": {
+      "aggregation": "single_thumbnail",
+      "kind": "visual_ablation",
+      "schema": 1,
+      "source_fingerprint": "936d5c6af84242e8815912cafde155ff8a82ac7e0dbb953d015bd7750f79f814",
+      "spec": {
+        "crop_size": 224,
+        "family": "clip",
+        "framing": "center_crop",
+        "mean": [
+          0.48145466,
+          0.4578275,
+          0.40821073
+        ],
+        "model": "openai/clip-vit-base-patch32",
+        "name": "clip_base_center",
+        "pooling": "cls",
+        "resize_shortest_edge": 224,
+        "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+        "std": [
+          0.26862954,
+          0.26130258,
+          0.27577711
+        ]
+      }
+    },
+    "frames": {
+      "aggregation": "mean_over_stored_frames",
+      "kind": "visual_ablation",
+      "schema": 1,
+      "source_fingerprint": "b57d00347c4088cecd9c415013908d26f3f74a98d14eb79fbf0d72ecb2f0d3a4",
+      "spec": {
+        "crop_size": 224,
+        "family": "clip",
+        "framing": "center_crop",
+        "mean": [
+          0.48145466,
+          0.4578275,
+          0.40821073
+        ],
+        "model": "openai/clip-vit-base-patch32",
+        "name": "clip_base_center",
+        "pooling": "cls",
+        "resize_shortest_edge": 224,
+        "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+        "std": [
+          0.26862954,
+          0.26130258,
+          0.27577711
+        ]
+      }
+    },
+    "text": {
+      "schema": 1,
+      "kind": "text_v2_units",
+      "model": "nomic-ai/modernbert-embed-base",
+      "revision": "d556a88e332558790b210f7bdbe87da2fa94a8d8",
+      "config": {
+        "prefix": "search_document: ",
+        "pooling": "attention_masked_mean_then_l2",
+        "matryoshka_dim": 256,
+        "title": {
+          "max_length": 128,
+          "overlap": 0,
+          "max_chunks": 1
+        },
+        "description": {
+          "max_length": 384,
+          "overlap": 0,
+          "max_chunks": 1
+        },
+        "transcript": {
+          "max_length": 384,
+          "overlap": 64,
+          "max_chunks": 4
+        }
+      },
+      "attention_implementation": "sdpa",
+      "source_fingerprint": "3a837e14db1731363a364cfd4106db7307ed209715906ee77af7972339b477fa",
+      "n_units": 6870
+    }
+  }
+}

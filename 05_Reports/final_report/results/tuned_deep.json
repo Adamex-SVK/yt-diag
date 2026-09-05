@@ -1,6 +1,6 @@
 {
   "generated_at_utc": "2026-09-02T16:49:52.583221+00:00",
-  "protocol": "channel-grouped 60/20/20 outer split; 3 inner grouped folds; per-fold grouped monitor split for epoch selection; outer validation only; test untouched",
+  "protocol": "repeated channel-grouped 60/20/20 development splits; 3 inner grouped folds; per-fold grouped monitor split for epoch selection; validation only",
   "n_labelled": 1854,
   "seeds": [
     0,

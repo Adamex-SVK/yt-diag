@@ -74,20 +74,15 @@ def render(summary: dict) -> str:
     fixed = comparison["fixed"]
     structured = summary["tuned_metadata_schedule_xgboost"]
     return (
-        "\\paragraph{Nested fusion-head tuning.} As a post-hoc robustness check, "
-        "we expanded the linear regularisation grid and evaluated nine MLP heads "
-        "varying projection and hidden width, dropout, learning rate, weight decay, "
-        "batch size and positive-class weighting. Three channel-grouped folds inside "
-        "each outer training set select hyperparameters; a further grouped monitor "
-        "split selects epochs. The expanded linear probe remains "
+        "\\paragraph{Fusion-head robustness.} Nested selection over 12 linear "
+        "and nine MLP configurations does not rescue the field-aware model. "
+        "The expanded linear probe remains "
         f"${linear['mean']:.3f}\\pm{linear['std']:.3f}$ AUC. The selected MLP reaches "
         f"${mlp['mean']:.3f}\\pm{mlp['std']:.3f}$ versus "
         f"${fixed['mean']:.3f}\\pm{fixed['std']:.3f}$ for the pre-specified head, "
-        f"winning {comparison['tuned_wins_vs_fixed']}/5 paired outer splits. It remains "
+        f"winning {comparison['tuned_wins_vs_fixed']}/5 paired splits and remaining "
         f"${abs(comparison['tuned_minus_structured_mean']):.3f}$ below tuned "
-        f"metadata+schedule XGBoost (${structured['mean']:.3f}\\pm{structured['std']:.3f}$). "
-        "Thus head tuning does not rescue the content model and strengthens the case "
-        "against end-to-end encoder fine-tuning on this cohort. Test remains untouched."
+        f"metadata+schedule XGBoost (${structured['mean']:.3f}\\pm{structured['std']:.3f}$)."
     )
 
 

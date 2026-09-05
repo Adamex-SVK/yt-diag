@@ -32,7 +32,7 @@ def test_inner_folds_cover_outer_train_without_channel_leakage():
         assert not set(val) & set(outer["test"])
 
 
-def test_logistic_tuning_is_reproducible_and_keeps_test_sealed():
+def test_logistic_tuning_is_reproducible_and_scores_validation_only():
     df = _data()
     grid = (
         {"C": 0.01, "class_weight": None},

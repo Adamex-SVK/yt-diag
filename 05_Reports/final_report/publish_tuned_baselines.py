@@ -61,46 +61,18 @@ def compact(full: dict) -> dict:
 
 
 def render(summary: dict) -> str:
-    lines = [
-        "\\begin{table}[t]", "\\centering", "\\small",
-        "\\setlength{\\tabcolsep}{3pt}",
-        "\\begin{tabular}{l l cc}", "\\toprule",
-        "Features & Model & Fixed & Nested tuned \\\\", "\\midrule",
-    ]
-    for key, label in FEATURES:
-        feature = summary["feature_sets"][key]
-        for index, model in enumerate(("logistic_regression", "xgboost")):
-            fixed = feature["untuned_reference"][model]
-            tuned = feature["aggregate"][model]["auc_roc"]
-            model_label = "Logistic" if model == "logistic_regression" else "XGBoost"
-            feature_label = label if index == 0 else ""
-            lines.append(
-                f"{feature_label} & {model_label} & "
-                f"{fixed['mean']:.3f} \\tiny{{$\\pm$ {fixed['std']:.3f}}} & "
-                f"{tuned['mean']:.3f} \\tiny{{$\\pm$ {tuned['std']:.3f}}} \\\\"
-            )
     best = summary["feature_sets"]["meta+sched"]["aggregate"]["xgboost"]
     full = summary["feature_sets"]["meta+sched+vis+aud"]["aggregate"]["xgboost"]
-    lines += [
-        "\\bottomrule", "\\end{tabular}",
-        "\\caption{Nested tuning on the retrospective cohort. Hyperparameters "
-        "are selected by four channel-grouped folds inside each outer training "
-        "set; the F1 threshold comes from inner out-of-fold predictions. Cells "
-        "are outer-validation AUC-ROC, mean $\\pm$ s.d. over five split seeds; "
-        "test remains untouched.}",
-        "\\label{tab:tuned-baselines}", "\\end{table}", "",
-        "Nested tuning changes the strongest comparator. Metadata+schedule "
+    lines = [
+        "\\paragraph{Nested structured tuning.} Four channel-grouped folds "
+        "inside each training partition select hyperparameters and the F1 "
+        "threshold. Metadata+schedule "
         f"XGBoost improves from ${summary['feature_sets']['meta+sched']['untuned_reference']['xgboost']['mean']:.3f}"
         f"\\pm{summary['feature_sets']['meta+sched']['untuned_reference']['xgboost']['std']:.3f}$ to "
-        f"${best['auc_roc']['mean']:.3f}\\pm{best['auc_roc']['std']:.3f}$ and wins on four of five "
-        "paired outer splits. The tuned full engineered model reaches "
+        f"${best['auc_roc']['mean']:.3f}\\pm{best['auc_roc']['std']:.3f}$. The tuned full engineered model reaches "
         f"${full['auc_roc']['mean']:.3f}\\pm{full['auc_roc']['std']:.3f}$; visual and audio "
         "features therefore do not improve the strongest tuned structured model. "
-        "The best model's inner-thresholded balanced accuracy is "
-        f"${best['balanced_accuracy']['mean']:.3f}\\pm{best['balanced_accuracy']['std']:.3f}$, "
-        f"precision ${best['precision']['mean']:.3f}\\pm{best['precision']['std']:.3f}$, recall "
-        f"${best['recall']['mean']:.3f}\\pm{best['recall']['std']:.3f}$ and F1 "
-        f"${best['f1']['mean']:.3f}\\pm{best['f1']['std']:.3f}$. These five overlapping "
+        "These five overlapping "
         "split-seed comparisons are descriptive, not confidence intervals or a significance test.",
     ]
     return "\n".join(lines)

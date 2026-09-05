@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "status": "frozen_pending_external_outcomes",
+  "frozen_on": "2026-09-03",
+  "development_evidence": {
+    "dataset": "retrospective archive, 1854 labelled videos",
+    "protocol": "five repeated channel-grouped development splits",
+    "warning": "There is no independent retrospective test: every nominal test row appears in training or validation under another seed.",
+    "primary_metric": "AUC-ROC",
+    "secondary_metrics": [
+      "PR-AUC",
+      "F1 at a training-only threshold"
+    ]
+  },
+  "structured_comparator": {
+    "model": "XGBoost classifier",
+    "features": [
+      "meta",
+      "sched"
+    ],
+    "parameters": {
+      "n_estimators": 300,
+      "max_depth": 2,
+      "learning_rate": 0.05,
+      "min_child_weight": 10,
+      "subsample": 0.6,
+      "colsample_bytree": 1.0,
+      "reg_alpha": 1.0,
+      "reg_lambda": 10.0,
+      "gamma": 0.1,
+      "scale_pos_weight": 1.0,
+      "random_state": 0
+    },
+    "selection_reason": "modal nested-tuning choice in 3 of 5 development splits",
+    "f1_threshold": 0.19,
+    "threshold_source": "five-fold channel-grouped out-of-fold predictions over the full retrospective development cohort; random_state 20260903"
+  },
+  "multimodal_finalist": {
+    "model": "L2 logistic late fusion",
+    "C": 0.001,
+    "selection_reason": "selected in 4 of 5 nested development splits",
+    "blocks_in_order": [
+      "CLIP thumbnail",
+      "mean of 20 CLIP frame embeddings",
+      "ModernBERT title",
+      "ModernBERT description",
+      "ModernBERT quality-gated transcript",
+      "metadata and schedule"
+    ],
+    "visual_encoder": {
+      "model": "openai/clip-vit-base-patch32",
+      "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+      "framing": "center_crop",
+      "pooling": "CLS",
+      "frame_aggregation": "arithmetic mean of all available stored samples, target 20"
+    },
+    "text_encoder": {
+      "model": "nomic-ai/modernbert-embed-base",
+      "revision": "d556a88e332558790b210f7bdbe87da2fa94a8d8",
+      "dimension": 256,
+      "pooling": "attention-masked mean then L2 normalisation",
+      "title_max_tokens": 128,
+      "description_max_tokens": 384,
+      "transcript_max_tokens_per_chunk": 384,
+      "transcript_chunks": 4,
+      "transcript_overlap_tokens": 64
+    },
+    "preprocessing": "fit each block's imputation, encoding and standardisation on retrospective training data only",
+    "f1_threshold": 0.19,
+    "threshold_source": "five-fold channel-grouped out-of-fold predictions over the full retrospective development cohort; random_state 20260903",
+    "explanation": "exact standardized input-block decomposition of the linear logit; predictive, not causal"
+  },
+  "external_test": {
+    "dataset": "prospective date-window arm",
+    "admission_start_utc": "2026-09-04T00:00:00Z",
+    "eligibility": [
+      "English-language video in one of the four principal categories",
+      "regular-format video",
+      "first observed less than 24 hours after publication",
+      "channel absent from the retrospective archive",
+      "30-day outcome available without extrapolation"
+    ],
+    "outcome": "view count at 30 days, interpolated only between bracketing snapshots",
+    "label": "top quartile within category by first-observed channel-size tertile; tertiles and quartiles computed on the eligible external cohort",
+    "media_policy": "download and extract the frozen content modalities only after the 30-day tracking window",
+    "primary_comparison": "multimodal AUC-ROC minus structured-comparator AUC-ROC on the same eligible videos",
+    "uncertainty": "2000 channel-level bootstrap replicates, random_state 20260903",
+    "inspection_rule": "Do not inspect external labels, per-video predictions, aggregate metrics, or attribution examples until both fitted models and the eligible video manifest are locked.",
+    "status": "not yet mature; no external-test metric has been computed"
+  }
+}

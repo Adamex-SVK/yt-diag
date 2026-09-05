@@ -661,7 +661,8 @@ md("""
 The table above keeps the original fixed configurations as reproducible floors.
 The final comparator uses four channel-grouped folds inside each outer training
 set to select hyperparameters and its F1 threshold. Outer validation is used only
-for evaluation and the test split remains sealed.
+for evaluation within each run. Across seeds, rows change roles, so these are
+repeated development estimates rather than an independent test.
 
 **Claim to verify:** tuning helps XGBoost, not every model, and makes
 metadata+schedule the strongest structured feature set.
@@ -683,7 +684,7 @@ for feature_set, result in tuned["feature_sets"].items():
             "tuned_auc": f"{selected['mean']:.3f} ± {selected['std']:.3f}",
         })
 print(pd.DataFrame(rows).set_index(["features", "model"]).to_string())
-print("\\nselection: inner channel-grouped training folds; test untouched")
+print("\\nselection: inner channel-grouped training folds; repeated development validation")
 ''')
 
 # ---------------------------------------------- 10. frozen deep multimodal
@@ -721,7 +722,7 @@ print("\\nbaselines to beat:")
 for name, result in refs.items():
     print(f"  {name:30s} {result['mean']:.3f} ± {result['std']:.3f}")
 full = deep["aggregate"]["thumbnail_text_meta_sched"]["late_fusion_mlp"]["auc_roc"]["values"]
-print(f"\\nfull MLP seed range: {min(full):.3f}–{max(full):.3f}; test untouched")
+print(f"\\nfull MLP seed range: {min(full):.3f}–{max(full):.3f}; development validation")
 ''')
 
 md("""
@@ -759,7 +760,7 @@ for name in ("metadata_schedule_xgboost", "full_engineered_xgboost"):
     ref = text_v2["references"][name]
     diffs = np.asarray(best["values"]) - np.asarray(ref["values"])
     print(f"\\n{name}: mean delta {diffs.mean():+.3f}; paired wins {(diffs > 0).sum()}/5")
-print("test untouched")
+print("repeated channel-grouped development validation")
 ''')
 
 md("""
@@ -792,7 +793,35 @@ for model in ("linear_probe", "late_fusion_mlp"):
         "tuned_wins": f"{comparison['tuned_wins_vs_fixed']}/5",
     })
 print(pd.DataFrame(rows).set_index("head").to_string())
-print("\\nencoders frozen; outer validation only; test untouched")
+print("\\nencoders frozen; repeated channel-grouped development validation")
+''')
+
+md("""
+### Exact predictive attribution for the linear finalist
+
+Because the selected CLIP/text fusion is linear after train-fitted block
+standardisation, its logit decomposes exactly into thumbnail, frames, title,
+description, transcript and metadata/schedule contributions. These are
+model-specific predictive explanations—not causal effects or comparable
+scientific importance scores. Block dimension and the shared L2 penalty affect
+their magnitudes.
+""")
+
+code('''
+ATTRIBUTION_RESULTS = os.path.join(ROOT, "05_Reports", "final_report", "results", "attribution.json")
+with open(ATTRIBUTION_RESULTS, encoding="utf-8") as f:
+    attribution = json.load(f)
+
+metrics = attribution["aggregate"]
+print("linear CLIP/text finalist:")
+for metric in ("auc_roc", "pr_auc", "f1"):
+    value = metrics[metric]
+    print(f"  {metric:8s} {value['mean']:.3f} ± {value['std']:.3f}")
+shares = attribution["share_of_absolute_logit_contribution"]
+display(pd.DataFrame({name: value["mean"] for name, value in shares.items()},
+                     index=["mean absolute-logit share"]).T.sort_values(
+                     "mean absolute-logit share", ascending=False))
+print("\\nExact logit decomposition; not causal modality importance.")
 ''')
 
 # ------------------------------------------------ 11. the shortcut ceiling
@@ -827,6 +856,8 @@ md("""
 - `05_Reports/final_report/results/deep_multimodal.json` — the frozen-content result
 - `05_Reports/final_report/results/text_v2.json` — the field-aware text follow-up
 - `05_Reports/final_report/results/tuned_deep.json` — nested fusion-head search
+- `05_Reports/final_report/results/attribution.json` — exact linear-fusion explanations
+- `03_Models/final_model_policy.json` — frozen finalists and external-test protocol
 - `KNOWN_ISSUES.md` — real defects found but not yet fixed
 - `tests/` — the guards; all pipeline, tuning, and deep suites run offline
 

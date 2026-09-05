@@ -95,7 +95,7 @@ def test_baselines_recover_planted_signal():
     val = {k: v["val"]["auc_roc"] for k, v in res["models"].items()}
     assert abs(val["dummy_prior"] - 0.5) < 1e-9
     assert val["logistic_regression"] > 0.62, val  # planted signal is recoverable
-    assert "test" not in res["models"]["logistic_regression"]  # test untouched by default
+    assert "test" not in res["models"]["logistic_regression"]  # third fold not scored by default
     res_meta = run_baselines(df, ("meta",), seed=0)
     assert res_meta["n_features"] == 14
 

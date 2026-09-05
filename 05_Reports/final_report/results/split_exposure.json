@@ -1,0 +1,55 @@
+{
+  "dataset": "retrospective",
+  "n_labelled": 1854,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "per_seed": [
+    {
+      "seed": 0,
+      "nominal_test_rows": 371,
+      "seen_in_other_training": 350,
+      "seen_in_other_validation": 221,
+      "seen_in_other_development": 371,
+      "development_exposure_fraction": 1.0
+    },
+    {
+      "seed": 1,
+      "nominal_test_rows": 373,
+      "seen_in_other_training": 354,
+      "seen_in_other_validation": 246,
+      "seen_in_other_development": 373,
+      "development_exposure_fraction": 1.0
+    },
+    {
+      "seed": 2,
+      "nominal_test_rows": 369,
+      "seen_in_other_training": 354,
+      "seen_in_other_validation": 223,
+      "seen_in_other_development": 369,
+      "development_exposure_fraction": 1.0
+    },
+    {
+      "seed": 3,
+      "nominal_test_rows": 369,
+      "seen_in_other_training": 354,
+      "seen_in_other_validation": 209,
+      "seen_in_other_development": 369,
+      "development_exposure_fraction": 1.0
+    },
+    {
+      "seed": 4,
+      "nominal_test_rows": 369,
+      "seen_in_other_training": 346,
+      "seen_in_other_validation": 217,
+      "seen_in_other_development": 369,
+      "development_exposure_fraction": 1.0
+    }
+  ],
+  "rows_never_used_for_training_or_validation": 0,
+  "conclusion": "no globally unseen retrospective test set exists"
+}
