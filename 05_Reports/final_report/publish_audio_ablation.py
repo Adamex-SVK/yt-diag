@@ -90,8 +90,10 @@ def render(summary: dict) -> str:
         "tuning protocol; it does not touch the sealed test split or the "
         "frozen multimodal finalist, and is reported as a candidate for "
         "external validation rather than a change to the frozen comparator. "
-        "\\note{SIGNOFF}{Emmanuel + Adam: does this warrant a follow-up "
-        "freeze cycle, or does it stay a reported post-hoc finding?}",
+        "\\note{CONFIRMED}{Emmanuel + Adam, 2026-09-05: reported as a "
+        "standalone post-hoc finding, not a trigger for a follow-up freeze "
+        "cycle -- it stays outside the sealed test split and the frozen "
+        "multimodal finalist.}",
     ]
     return "\n".join(lines)
 
