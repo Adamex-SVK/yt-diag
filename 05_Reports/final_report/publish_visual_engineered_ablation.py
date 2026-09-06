@@ -60,23 +60,17 @@ def render(summary: dict, significance: dict) -> str:
     sig = significance["visual_engineered_vs_reference"]
     ci_low, ci_high = sig["bootstrap_95ci"]
     lines = [
-        "\\paragraph{Post-freeze visual ablation.} The audio result above raises "
-        "an obvious question: was audio's lift a property of \\emph{isolating} a "
-        "block, or a property of audio specifically? The engineered visual block "
-        "(15 thumbnail and frame-aggregate colour/face columns) had only "
-        "appeared bundled with audio in the tuned ladder, or alone but untuned "
-        "in the fixed ladder ($0.505$--$0.519$). Giving it the identical "
-        "isolate-and-tune treatment answers the question: metadata+schedule "
-        f"XGBoost reaches ${reference['mean']:.3f}\\pm{reference['std']:.3f}$ on "
-        f"these seeds; adding the 15-column visual block reaches only "
-        f"${full['mean']:.3f}\\pm{full['std']:.3f}$ -- \\emph{{below}} the "
-        "reference, not above it. Gain-based importance across the 15 columns "
-        f"is flat ({spread} of the visual gain each), consistent with noise "
-        "rather than a masked signal. Unlike audio's lift, this drop is "
-        f"statistically solid: the same paired bootstrap gives a 95\\% CI of "
-        f"$[{ci_low:+.3f}, {ci_high:+.3f}]$, entirely below zero. Isolation was "
-        "therefore not the fix on its own; audio specifically carries signal "
-        "that engineered visual features do not.",
+        "\\emph{Isolating visual instead:} the same treatment applied to the "
+        "15-column engineered-visual block (colour/face aggregates, previously "
+        "only seen bundled with audio or untuned) answers whether isolation "
+        f"alone explains audio's lift. It does not: visual reaches only "
+        f"${full['mean']:.3f}\\pm{full['std']:.3f}$ against the "
+        f"${reference['mean']:.3f}\\pm{reference['std']:.3f}$ reference -- "
+        f"\\emph{{below}} it, not above -- with flat gain importance ({spread} "
+        "each, consistent with noise) and a bootstrap CI of "
+        f"$[{ci_low:+.3f}, {ci_high:+.3f}]$, entirely below zero and therefore "
+        "statistically solid. Audio's lift is specific to that modality, not an "
+        "artefact of testing blocks in isolation.",
     ]
     return "\n".join(lines)
 

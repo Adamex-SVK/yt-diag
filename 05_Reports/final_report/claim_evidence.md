@@ -114,7 +114,7 @@ Regenerate the baseline table (never retype it):
 ## Before submission
 
 - [ ] Flip `\drafttrue` → `\draftfalse` in `main.tex`; confirm every `\note` disappears
-- [ ] Section page budget from the course guideline: Introduction ≤1p, Related Work ≤0.5p, Methodology ≤2p, Experiment ≤2p, Conclusion one paragraph, Abstract ~250 words
+- [ ] Section page budget from the course guideline: Introduction ≤1p, Related Work ≤0.5p, Methodology ≤2p, Experiment ≤2p, Conclusion one paragraph, Abstract ~250 words. Checked 2026-09-06 with a throwaway Tectonic compile (not the submission toolchain — draft `\note`s and `\pdfinfo` were stripped for this check only): Introduction and Methodology comfortable, Conclusion compliant (one paragraph), Abstract 255 words. Related Work still runs slightly past 0.5p even after folding its third subsection in. Experiment was ~2.7–2.8p before trimming the three post-freeze ablation paragraphs (they repeated the same bootstrap-protocol framing three times and restated the audio-isolation numbers in both Limitations and Conclusion); tightened to ~2.4–2.5p, still somewhat over. Re-verify against the real Overleaf compile, not this estimate.
 - [ ] Add the 3-minute presentation video link to the report
 - [ ] Add the GitHub/drive link for dataset + source code (the guideline requires it)
 - [ ] Re-run `make_tables.py` so the table matches the final code
