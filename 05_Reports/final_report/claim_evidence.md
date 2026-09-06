@@ -96,7 +96,7 @@ Regenerate the baseline table (never retype it):
 | Every nominal retrospective test row appears in training or validation under at least one other seed, so there is no globally sealed retrospective test set | confirmed | `results/split_exposure.json`; `audit_split_exposure.py` | Evaluation protocol, Limitations |
 | Linear CLIP fusion logits are exactly decomposed into six standardized input-block contributions | confirmed | `results/attribution.json`; `ytdiag/attribution.py`; reconstruction test | Method, Experiment |
 | **Test-set metrics** | **pending** | evaluate the frozen selected model ONCE after the modelling policy is final | Experiments |
-| **Attribution examples** | **pending** | Integrated Gradients not implemented | Experiments |
+| Attribution examples | confirmed | superseded by exact linear decomposition (row above); qualitative true/false-positive seed-0 examples ship in Figure 2 and the "Predictive attribution and error analysis" paragraph — this row was stale since the project pivoted away from Integrated Gradients | Experiments |
 | Post-freeze audio ablation: meta+sched 0.614 ± 0.022 → meta+sched+aud (88-col eGeMAPS) 0.632 ± 0.028, tuned XGBoost, same 5 seeds | confirmed | `run_audio_ablation.py --seeds 0,1,2,3,4`; `publish_audio_ablation.py`; `results/audio_ablation.json` | Experiments |
 | Correlation-reduced audio (49 eGeMAPS representatives, |ρ|>0.75 clustering, + 4 pause features = 53 cols) reproduces the lift within noise: 0.633 ± 0.030 | confirmed | same run; `results/audio_ablation.json → reduced_audio` | Experiments |
 | Gain-based importance is diffuse across acoustic families (formants 16%, spectral slope 15%, MFCC 15%, F0 pitch 15%), each ahead of metadata+schedule's own 12% share — not concentrated in a few columns | confirmed | `results/audio_ablation.json → gain_family_share` | Experiments |
@@ -115,10 +115,10 @@ Regenerate the baseline table (never retype it):
 
 - [ ] Flip `\drafttrue` → `\draftfalse` in `main.tex`; confirm every `\note` disappears
 - [ ] Section page budget from the course guideline: Introduction ≤1p, Related Work ≤0.5p, Methodology ≤2p, Experiment ≤2p, Conclusion one paragraph, Abstract ~250 words. Checked 2026-09-06 against a real Overleaf/AAAI compile (6 pages total): Introduction, Methodology, Conclusion and Abstract (255 words) all comfortably compliant; Related Work now fits within its 0.5p budget after the subsection fold. Experiment is still over budget at an estimated ~2.5–2.6p, carrying two tables, two figures, the baseline ladder, three post-freeze stress tests and a 6-bullet Limitations subsection. Adam has accepted this as a known, bounded overage (figures/tables inherently cost space) rather than cutting further scientific content; tightened the "Fusion-head robustness" paragraph and merged the two post-freeze Limitations bullets into one on 2026-09-06 as the last low-risk trims (no data dropped).
-- [ ] Add the 3-minute presentation video link to the report
-- [ ] Add the GitHub/drive link for dataset + source code (the guideline requires it)
-- [ ] Re-run `make_tables.py` so the table matches the final code
-- [ ] Every `pending` row above is either resolved or removed from the report
-- [ ] Compile in Overleaf and check: two columns, no page numbers, Times, fonts embedded
+- [x] Add the 3-minute presentation video link to the report (2026-09-06, `youtu.be/ubHz_r4QHgU`, Availability paragraph)
+- [x] Add the GitHub/drive link for dataset + source code (the guideline requires it) — repo made public 2026-09-05
+- [ ] Re-run `make_tables.py`/`make_deep_table.py`/`make_text_v2_table.py` so the tables match the final code — deliberately not run 2026-09-06 (full retrain/re-eval, unknown runtime, risk of last-minute drift); the only code change since these were last generated (the baseline F1-threshold leakage fix, 2026-09-04) is confirmed inert for AUC, which is all these tables consume. Emmanuel: re-run only if you've touched `ytdiag/{baselines,tuning,deep_tuning}.py` since 2026-09-04.
+- [ ] Every `pending` row above is either resolved or removed from the report — only `Test-set metrics` remains, genuinely blocked on Emmanuel's frozen external evaluation; not something Adam can close
+- [x] Compile in Overleaf and check: two columns, no page numbers, Times, fonts embedded — Adam compiled 2026-09-06, 6 pages, clean
 - [x] `references.bib` populated for every cited work
 - [x] Adam's sign-off recorded on the three label changes (2026-09-05)
