@@ -415,7 +415,7 @@ Field separation raises the all-text MLP to $0.571\pm0.004$ AUC; metadata and sc
 %% <<<END GENERATED text-v2>>>
 
 %% <<<BEGIN GENERATED tuned-deep>>>
-\paragraph{Fusion-head robustness.} Nested selection over 12 linear and nine MLP configurations does not rescue the field-aware model. The expanded linear probe remains $0.587\pm0.034$ AUC. The selected MLP reaches $0.598\pm0.037$ versus $0.600\pm0.026$ for the pre-specified head, winning 2/5 paired splits and remaining $0.021$ below tuned metadata+schedule XGBoost ($0.619\pm0.022$).
+\paragraph{Fusion-head robustness.} A nested search over 12 linear and nine MLP configurations does not rescue the field-aware model: the best linear probe reaches $0.587\pm0.034$, the best MLP $0.598\pm0.037$ against $0.600\pm0.026$ for the pre-specified head (2/5 paired wins) -- still $0.021$ below tuned metadata+schedule XGBoost ($0.619\pm0.022$).
 %% <<<END GENERATED tuned-deep>>>
 
 %% <<<BEGIN GENERATED visual-ablation>>>
@@ -488,13 +488,10 @@ CLIP--text linear fusion & 0.613 \tiny{$\pm$ 0.044} & 0.340 \tiny{$\pm$ 0.040} &
       comedy's 1{,}254{,}042), an artefact of the category-mapping workaround.
 \item A post-freeze ablation found that audio, isolated from visual, raises
       mean AUC over tuned metadata+schedule XGBoost, but the lift is not
-      statistically significant and inherits the same overlapping-split caveat
-      as every other repeated-validation number here (see Results); it is a
-      reported, unconfirmed finding, not part of the frozen finalist.
-\item The same isolate-and-tune treatment applied to engineered visual
-      features instead of audio produces a statistically solid \emph{drop}
-      (see Results), ruling out isolation itself as the explanation for
-      audio's lift.
+      statistically significant and is a reported, unconfirmed finding, not
+      part of the frozen finalist; the same treatment on engineered visual
+      features instead produces a statistically solid \emph{drop}, ruling out
+      isolation itself as the explanation (see Results).
 \end{itemize}
 
 %% ==================================================================

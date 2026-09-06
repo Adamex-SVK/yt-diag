@@ -74,13 +74,12 @@ def render(summary: dict) -> str:
     fixed = comparison["fixed"]
     structured = summary["tuned_metadata_schedule_xgboost"]
     return (
-        "\\paragraph{Fusion-head robustness.} Nested selection over 12 linear "
-        "and nine MLP configurations does not rescue the field-aware model. "
-        "The expanded linear probe remains "
-        f"${linear['mean']:.3f}\\pm{linear['std']:.3f}$ AUC. The selected MLP reaches "
-        f"${mlp['mean']:.3f}\\pm{mlp['std']:.3f}$ versus "
-        f"${fixed['mean']:.3f}\\pm{fixed['std']:.3f}$ for the pre-specified head, "
-        f"winning {comparison['tuned_wins_vs_fixed']}/5 paired splits and remaining "
+        "\\paragraph{Fusion-head robustness.} A nested search over 12 linear "
+        "and nine MLP configurations does not rescue the field-aware model: the "
+        f"best linear probe reaches ${linear['mean']:.3f}\\pm{linear['std']:.3f}$, "
+        f"the best MLP ${mlp['mean']:.3f}\\pm{mlp['std']:.3f}$ against "
+        f"${fixed['mean']:.3f}\\pm{fixed['std']:.3f}$ for the pre-specified head "
+        f"({comparison['tuned_wins_vs_fixed']}/5 paired wins) -- still "
         f"${abs(comparison['tuned_minus_structured_mean']):.3f}$ below tuned "
         f"metadata+schedule XGBoost (${structured['mean']:.3f}\\pm{structured['std']:.3f}$)."
     )
