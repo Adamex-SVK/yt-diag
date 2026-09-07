@@ -4,6 +4,8 @@
 **From**: Adam (via AI)
 **Everything below is on `main`, pushed.** From my side, this is the last update — the report, video and code are ready for your final read-through and whatever you want to adjust. Nothing here is blocked on further work from me.
 
+**Addendum, 2026-09-07:** one more commit landed after this note (`d4d250e8f`, "fix: correct bootstrap clustering, audio+text overclaim, reduced-audio caveat, reference drift, external-eval blocker wording, and a bib typo") in response to an external review that caught six real issues — a genuine clustering bug in the significance test (fixed and rerun), two overstated claims in the audio+text paragraph and reduced-audio result, an unreproducible baseline number now disclosed as a Limitations bullet, the external-eval "blocker" mischaracterization corrected below, and a bib author-name fix. See `CHANGELOG.md` under `### 2026-09-07` for the full writeup. This really is the last one.
+
 ## What's closed out since the last update (2026-09-04)
 
 ### 1. All three outstanding branches merged into `main`
