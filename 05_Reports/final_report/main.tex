@@ -38,7 +38,7 @@
 \setlength{\pdfpageheight}{11in}
 \setcounter{secnumdepth}{0}
 
-\newif\ifdraft\drafttrue          % <-- \draftfalse before submission
+\newif\ifdraft\draftfalse         % flipped for submission 2026-09-07; change false->true to restore review notes
 \newcommand{\note}[2]{\ifdraft{\small\textcolor{red}{[\textbf{#1}: #2]}}\fi}
 
 \pdfinfo{

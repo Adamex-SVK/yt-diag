@@ -60,4 +60,4 @@ fi
 
 echo
 echo "built main.pdf"
-grep -q '\\drafttrue' main.tex && printf 'NOTE: still in DRAFT mode -- draft markers are rendered.\n      Set \\draftfalse in main.tex before submitting.\n'
+grep -q '^\\newif\\ifdraft\\drafttrue' main.tex && printf 'NOTE: still in DRAFT mode -- draft markers are rendered.\n      Set \\draftfalse in main.tex before submitting.\n'
