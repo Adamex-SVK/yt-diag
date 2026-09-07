@@ -376,17 +376,17 @@ chosen inside the corresponding training partition.
 %% <<<END GENERATED tuned-baselines>>>
 
 %% <<<BEGIN GENERATED audio-ablation>>>
-\paragraph{Post-freeze stress tests.} Three checks, computed after the 2026-09-03 model freeze on already-approved retrospective columns and sharing one paired-bootstrap protocol (validation-fold videos resampled, hyperparameters held at their already-tuned values -- no re-search), probe whether isolating a block from the bundled ``full engineered'' ladder was itself the source of any apparent lift. None touches the sealed test split or the frozen finalist.
+\paragraph{Post-freeze stress tests.} Three checks, computed after the 2026-09-03 model freeze on already-approved retrospective columns and sharing one cluster-bootstrap protocol (channels resampled within each validation fold -- videos cluster by channel, so resampling channels rather than individual videos preserves that structure -- with hyperparameters held at their already-tuned values, no re-search), probe whether isolating a block from the bundled ``full engineered'' ladder was itself the source of any apparent lift. None touches the sealed test split or the frozen finalist.
 
-\emph{Isolating audio:} adding the full 88-column eGeMAPS block to tuned metadata+schedule XGBoost raises AUC from $0.614\pm0.022$ to $0.632\pm0.028$, exceeding it on every seed. Because 23 eGeMAPS pairs correlate at $|\rho|>0.95$ (\texttt{eda\_features/audio\_spearman.csv}), gain is diffuse across acoustic families (formants (16\%), spectral balance/slope (15\%), MFCC (timbre) (15\%), pitch (F0) dynamics (14\%), each ahead of metadata+schedule's own 12\%); clustering to 53 representative columns reproduces the lift at $0.633\pm0.030$. The bootstrap puts the lift at $+0.018$ AUC, 95\% CI $[-0.009, +0.044]$ (one-sided $p=0.089$) -- directionally consistent but not significant. \note{PROVISIONAL}{Emmanuel + Adam, 2026-09-05: reported as a standalone post-hoc finding, not a trigger for a follow-up freeze cycle. Revisit once the prospective panel matures.}
+\emph{Isolating audio:} adding the full 88-column eGeMAPS block to tuned metadata+schedule XGBoost raises AUC from $0.614\pm0.022$ to $0.632\pm0.028$, exceeding it on every seed. Because 23 eGeMAPS pairs correlate at $|\rho|>0.95$ (\texttt{eda\_features/audio\_spearman.csv}), gain is diffuse across acoustic families (formants (16\%), spectral balance/slope (15\%), MFCC (timbre) (15\%), pitch (F0) dynamics (14\%), each ahead of metadata+schedule's own 12\%); clustering to 53 representative columns reproduces the lift at $0.633\pm0.030$, though that reduced set was selected once from whole-dataset correlations and gain rather than independently inside each outer fold, so is optimistic relative to the unaffected 88-column result. The channel-level bootstrap puts the lift at $+0.018$ AUC, 95\% CI $[-0.011, +0.046]$ -- the interval spans zero, so this remains a directionally consistent but unconfirmed descriptive comparison, not a significance test. \note{PROVISIONAL}{Emmanuel + Adam, 2026-09-05: reported as a standalone post-hoc finding, not a trigger for a follow-up freeze cycle. Revisit once the prospective panel matures.}
 %% <<<END GENERATED audio-ablation>>>
 
 %% <<<BEGIN GENERATED visual-engineered-ablation>>>
-\emph{Isolating visual instead:} the same treatment applied to the 15-column engineered-visual block (colour/face aggregates, previously only seen bundled with audio or untuned) answers whether isolation alone explains audio's lift. It does not: visual reaches only $0.591\pm0.028$ against the $0.614\pm0.022$ reference -- \emph{below} it, not above -- with flat gain importance (8.7\%\ldots3.5\% each, consistent with noise) and a bootstrap CI of $[-0.042, -0.004]$, entirely below zero and therefore statistically solid. Audio's lift is specific to that modality, not an artefact of testing blocks in isolation.
+\emph{Isolating visual instead:} the same treatment applied to the 15-column engineered-visual block (colour/face aggregates, previously only seen bundled with audio or untuned) answers whether isolation alone explains audio's lift. It does not: visual reaches only $0.591\pm0.028$ against the $0.614\pm0.022$ reference -- \emph{below} it, not above -- with flat gain importance (8.7\%\ldots3.5\% each, consistent with noise) and a channel-level bootstrap CI of $[-0.045, -0.002]$, entirely below zero -- a consistent drop, unlike audio's inconclusive lift. Audio's lift is specific to that modality, not an artefact of testing blocks in isolation.
 %% <<<END GENERATED visual-engineered-ablation>>>
 
 %% <<<BEGIN GENERATED audio-text-fusion>>>
-\emph{Combining audio with text:} field-aware text (\S\ref{tab:textv2}) and audio, individually weak-to-moderate, fused via the same linear/MLP architecture used for text and vision reach $0.581\pm0.023$/$0.578\pm0.032$ (text) and $0.608\pm0.043$/$0.585\pm0.029$ (audio) -- both well below audio's $0.632$ under tuned XGBoost, so its edge is tied to tree-based modelling of tabular features, not portable to this fusion architecture. Combined, they reach only $0.578\pm0.027$/$0.597\pm0.029$, below tuned metadata+schedule ($0.619$) and below audio alone -- text adds nothing, echoing the earlier visual+audio bundling pattern. \note{PROVISIONAL}{Hypothesis test, not a search; it failed. Does not change the frozen finalist or the audio-ablation finding.}
+\emph{Combining audio with text:} field-aware text (\S\ref{tab:textv2}) and audio, individually weak-to-moderate, fused via the same linear/MLP architecture used for text and vision reach $0.581\pm0.023$/$0.578\pm0.032$ (text) and $0.608\pm0.043$/$0.585\pm0.029$ (audio). Adding text is architecture-dependent, not uniformly harmful: for the linear probe it falls to $0.578\pm0.027$ (1/5 paired wins vs. audio alone), but for the MLP it rises modestly to $0.597\pm0.029$ (4/5 paired wins). Neither head reaches audio's $0.632$ under tuned XGBoost or tuned metadata+schedule ($0.619$); this fusion architecture does not recover audio's tabular-tree advantage, though the comparison does not by itself establish that the advantage is specifically tied to tree-based modelling. \note{PROVISIONAL}{Hypothesis test, not a search; it failed to beat the tuned structured comparator. Does not change the frozen finalist or the audio-ablation finding.}
 %% <<<END GENERATED audio-text-fusion>>>
 
 \subsection{Content and visual ablations}
@@ -488,11 +488,22 @@ CLIP--text linear fusion & 0.613 \tiny{$\pm$ 0.044} & 0.340 \tiny{$\pm$ 0.040} &
 \item Product reviews are a different population (median 9{,}953 views against
       comedy's 1{,}254{,}042), an artefact of the category-mapping workaround.
 \item A post-freeze ablation found that audio, isolated from visual, raises
-      mean AUC over tuned metadata+schedule XGBoost, but the lift is not
-      statistically significant and is a reported, unconfirmed finding, not
-      part of the frozen finalist; the same treatment on engineered visual
-      features instead produces a statistically solid \emph{drop}, ruling out
-      isolation itself as the explanation (see Results).
+      mean AUC over tuned metadata+schedule XGBoost, but a channel-level
+      cluster bootstrap gives a 95\% CI that spans zero, so this is a
+      directionally consistent but unconfirmed, reported finding, not part of
+      the frozen finalist; the same treatment on engineered visual features
+      instead produces a CI entirely below zero, ruling out isolation itself
+      as the explanation (see Results).
+\item The tuned metadata+schedule XGBoost reference recomputed inside the
+      audio-ablation run ($0.614\pm0.022$) differs from the headline tuned
+      baseline reported elsewhere ($0.619\pm0.022$) despite an identical
+      protocol and feature set; \texttt{requirements-ml.txt} does not pin
+      exact \texttt{scikit-learn}/\texttt{xgboost} versions, and the two runs
+      were generated two days apart, so dependency or minor split-construction
+      drift is the likely cause. Each post-freeze comparison is internally
+      paired (reference and augmented model refit in the same run, same
+      environment), so within-run deltas are unaffected, but the two absolute
+      reference numbers should not be read as interchangeable.
 \end{itemize}
 
 %% ==================================================================
@@ -509,9 +520,9 @@ five matched splits. Controlled ablations show that all-frame CLIP features are
 the strongest visual representation, while ResNet-50 remains weak and the larger
 DINOv2 encoder does not improve the full fusion. Engineered visual features, and
 audio when bundled with them, likewise failed to improve the tuned structured
-comparator; audio alone showed a post-freeze lift that is not yet statistically
-significant (Results, Limitations) and is not incorporated into the frozen
-policy.
+comparator; audio alone showed a post-freeze lift whose channel-level bootstrap
+interval spans zero (Results, Limitations) and is not incorporated into the
+frozen policy.
 The result is therefore a limitation on what can be
 diagnosed from this retrospective public dataset, not evidence that content has
 no effect on viewers. Exact attribution shows that visual blocks move the

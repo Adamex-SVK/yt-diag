@@ -236,5 +236,13 @@
       "mean": 0.632,
       "std": 0.028
     }
+  },
+  "comparisons": {
+    "linear_probe": {
+      "combined_vs_audio_alone_wins": 1
+    },
+    "late_fusion_mlp": {
+      "combined_vs_audio_alone_wins": 4
+    }
   }
 }

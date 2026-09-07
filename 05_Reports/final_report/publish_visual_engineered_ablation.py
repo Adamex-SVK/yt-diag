@@ -67,10 +67,10 @@ def render(summary: dict, significance: dict) -> str:
         f"${full['mean']:.3f}\\pm{full['std']:.3f}$ against the "
         f"${reference['mean']:.3f}\\pm{reference['std']:.3f}$ reference -- "
         f"\\emph{{below}} it, not above -- with flat gain importance ({spread} "
-        "each, consistent with noise) and a bootstrap CI of "
-        f"$[{ci_low:+.3f}, {ci_high:+.3f}]$, entirely below zero and therefore "
-        "statistically solid. Audio's lift is specific to that modality, not an "
-        "artefact of testing blocks in isolation.",
+        "each, consistent with noise) and a channel-level bootstrap CI of "
+        f"$[{ci_low:+.3f}, {ci_high:+.3f}]$, entirely below zero -- a consistent "
+        "drop, unlike audio's inconclusive lift. Audio's lift is specific to "
+        "that modality, not an artefact of testing blocks in isolation.",
     ]
     return "\n".join(lines)
 

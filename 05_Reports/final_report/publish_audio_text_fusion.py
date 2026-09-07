@@ -34,19 +34,35 @@ def _atomic_json(path: str, payload: dict) -> None:
             os.unlink(temporary)
 
 
+def _paired_wins(combined: list[float], reference: list[float]) -> int:
+    return int(sum(c > r for c, r in zip(combined, reference)))
+
+
 def compact(full: dict) -> dict:
     if full.get("seeds") != [0, 1, 2, 3, 4]:
         raise ValueError("the report requires the frozen five-seed run (0..4)")
     for run in full["runs"]:
         if run.get("test_evaluated", False) is not False:
             raise ValueError("refusing to publish a run that evaluated test")
+    aggregate = full["aggregate"]
+    audio_only = aggregate["audio_meta_sched"]
+    combined = aggregate["text_fields_audio_meta_sched"]
+    comparisons = {
+        model: {
+            "combined_vs_audio_alone_wins": _paired_wins(
+                combined[model]["auc_roc"]["values"], audio_only[model]["auc_roc"]["values"],
+            ),
+        }
+        for model in ("linear_probe", "late_fusion_mlp")
+    }
     return {
         "generated_at_utc": full["generated_at_utc"],
         "protocol": full["protocol"],
         "n_labelled": full["n_labelled"],
         "seeds": full["seeds"],
-        "aggregate": full["aggregate"],
+        "aggregate": aggregate,
         "references": full["references"],
+        "comparisons": comparisons,
     }
 
 
@@ -57,6 +73,7 @@ def render(summary: dict) -> str:
     combined = aggregate["text_fields_audio_meta_sched"]
     ref_meta = summary["references"]["metadata_schedule_xgboost_tuned"]
     ref_audio = summary["references"]["metadata_schedule_audio_xgboost_isolated"]
+    wins = summary["comparisons"]
     lines = [
         "\\emph{Combining audio with text:} field-aware text "
         "(\\S\\ref{tab:textv2}) and audio, individually weak-to-moderate, fused "
@@ -68,18 +85,23 @@ def render(summary: dict) -> str:
         f"${audio_only['linear_probe']['auc_roc']['mean']:.3f}"
         f"\\pm{audio_only['linear_probe']['auc_roc']['std']:.3f}$/"
         f"${audio_only['late_fusion_mlp']['auc_roc']['mean']:.3f}"
-        f"\\pm{audio_only['late_fusion_mlp']['auc_roc']['std']:.3f}$ (audio) -- "
-        f"both well below audio's ${ref_audio['mean']:.3f}$ under tuned "
-        "XGBoost, so its edge is tied to tree-based modelling of tabular "
-        "features, not portable to this fusion architecture. Combined, they "
-        f"reach only ${combined['linear_probe']['auc_roc']['mean']:.3f}"
-        f"\\pm{combined['linear_probe']['auc_roc']['std']:.3f}$/"
+        f"\\pm{audio_only['late_fusion_mlp']['auc_roc']['std']:.3f}$ (audio). "
+        "Adding text is architecture-dependent, not uniformly harmful: for the "
+        f"linear probe it falls to ${combined['linear_probe']['auc_roc']['mean']:.3f}"
+        f"\\pm{combined['linear_probe']['auc_roc']['std']:.3f}$ "
+        f"({wins['linear_probe']['combined_vs_audio_alone_wins']}/5 paired wins vs. "
+        "audio alone), but for the MLP it rises modestly to "
         f"${combined['late_fusion_mlp']['auc_roc']['mean']:.3f}"
-        f"\\pm{combined['late_fusion_mlp']['auc_roc']['std']:.3f}$, below tuned "
-        f"metadata+schedule (${ref_meta['mean']:.3f}$) and below audio alone -- "
-        "text adds nothing, echoing the earlier visual+audio bundling pattern. "
-        "\\note{PROVISIONAL}{Hypothesis test, not a search; it failed. Does not "
-        "change the frozen finalist or the audio-ablation finding.}",
+        f"\\pm{combined['late_fusion_mlp']['auc_roc']['std']:.3f}$ "
+        f"({wins['late_fusion_mlp']['combined_vs_audio_alone_wins']}/5 paired wins). "
+        f"Neither head reaches audio's ${ref_audio['mean']:.3f}$ under tuned XGBoost "
+        f"or tuned metadata+schedule (${ref_meta['mean']:.3f}$); this fusion "
+        "architecture does not recover audio's tabular-tree advantage, though the "
+        "comparison does not by itself establish that the advantage is specifically "
+        "tied to tree-based modelling. "
+        "\\note{PROVISIONAL}{Hypothesis test, not a search; it failed to beat the "
+        "tuned structured comparator. Does not change the frozen finalist or the "
+        "audio-ablation finding.}",
     ]
     return "\n".join(lines)
 

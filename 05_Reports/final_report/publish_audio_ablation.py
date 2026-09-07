@@ -71,15 +71,16 @@ def render(summary: dict, significance: dict) -> str:
     top_families = ", ".join(f"{name} ({value * 100:.0f}\\%)" for name, value in shares[:4])
     sig = significance["audio_isolated_vs_reference"]
     ci_low, ci_high = sig["bootstrap_95ci"]
-    p_value = sig["p_value_one_sided_not_better"]
     lines = [
         "\\paragraph{Post-freeze stress tests.} Three checks, computed after the "
         "2026-09-03 model freeze on already-approved retrospective columns and "
-        "sharing one paired-bootstrap protocol (validation-fold videos "
-        "resampled, hyperparameters held at their already-tuned values -- no "
-        "re-search), probe whether isolating a block from the bundled "
-        "``full engineered'' ladder was itself the source of any apparent lift. "
-        "None touches the sealed test split or the frozen finalist.",
+        "sharing one cluster-bootstrap protocol (channels resampled within each "
+        "validation fold -- videos cluster by channel, so resampling channels "
+        "rather than individual videos preserves that structure -- with "
+        "hyperparameters held at their already-tuned values, no re-search), "
+        "probe whether isolating a block from the bundled ``full engineered'' "
+        "ladder was itself the source of any apparent lift. None touches the "
+        "sealed test split or the frozen finalist.",
         "",
         "\\emph{Isolating audio:} adding the full 88-column eGeMAPS block to "
         f"tuned metadata+schedule XGBoost raises AUC from "
@@ -90,10 +91,14 @@ def render(summary: dict, significance: dict) -> str:
         f"acoustic families ({top_families}, each ahead of metadata+schedule's own "
         f"{summary['gain_family_share']['metadata/schedule'] * 100:.0f}\\%); "
         f"clustering to {n_reduced} representative columns reproduces the lift "
-        f"at ${reduced['mean']:.3f}\\pm{reduced['std']:.3f}$. The bootstrap puts "
-        f"the lift at ${sig['point_estimate_mean_auc_diff']:+.3f}$ AUC, 95\\% CI "
-        f"$[{ci_low:+.3f}, {ci_high:+.3f}]$ (one-sided $p={p_value:.3f}$) -- "
-        "directionally consistent but not significant. "
+        f"at ${reduced['mean']:.3f}\\pm{reduced['std']:.3f}$, though that reduced "
+        "set was selected once from whole-dataset correlations and gain rather "
+        "than independently inside each outer fold, so is optimistic relative to "
+        f"the unaffected 88-column result. The channel-level bootstrap puts the "
+        f"lift at ${sig['point_estimate_mean_auc_diff']:+.3f}$ AUC, 95\\% CI "
+        f"$[{ci_low:+.3f}, {ci_high:+.3f}]$ -- the interval spans zero, so this "
+        "remains a directionally consistent but unconfirmed descriptive "
+        "comparison, not a significance test. "
         "\\note{PROVISIONAL}{Emmanuel + Adam, 2026-09-05: reported as a "
         "standalone post-hoc finding, not a trigger for a follow-up freeze "
         "cycle. Revisit once the prospective panel matures.}",

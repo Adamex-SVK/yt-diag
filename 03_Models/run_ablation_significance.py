@@ -61,9 +61,24 @@ def _fit_predict(df: pd.DataFrame, groups: tuple, seed: int, parameters: dict,
 
 
 def _paired_bootstrap(per_seed: list[dict], n_boot: int, rng: np.random.Generator) -> dict:
-    """Resample videos within each seed's validation fold; average the 5
-    seed-level AUC differences per draw. Returns the point estimate, a 95% CI,
-    and a one-sided p-value for 'the augmented model is not better'."""
+    """Cluster-bootstrap by channel within each seed's validation fold, then
+    average the 5 seed-level AUC differences per draw.
+
+    Videos are not exchangeable: they cluster by channel (shared subscriber
+    count, audience, production style -- the same reason splits are
+    channel-grouped in the first place, see ytdiag/split.py). Resampling
+    individual videos, as an earlier version of this script did, treats
+    within-channel videos as independent draws and understates the true
+    sampling variance. Here each draw resamples *channels* with replacement
+    (same number of unique channels as the fold) and takes every video
+    belonging to a sampled channel, so channel-level correlation is preserved
+    in the resampling distribution.
+
+    The reported one-sided value is the bootstrap-based proportion of draws
+    at or below zero -- a descriptive tail probability under this resampling
+    scheme, not a null-centered hypothesis-test p-value (the bootstrap
+    distribution is centered on the observed point estimate, not on zero).
+    Report it as such."""
     point_diffs = [roc_auc_score(s["y"], s["p_alt"]) - roc_auc_score(s["y"], s["p_ref"]) for s in per_seed]
     point_estimate = float(np.mean(point_diffs))
 
@@ -71,9 +86,11 @@ def _paired_bootstrap(per_seed: list[dict], n_boot: int, rng: np.random.Generato
     for b in range(n_boot):
         seed_diffs = np.empty(len(per_seed), dtype=float)
         for i, s in enumerate(per_seed):
-            n = len(s["y"])
+            unique_channels = s["unique_channels"]
+            n_channels = len(unique_channels)
             for _ in range(50):  # retry until both classes are present
-                sample = rng.integers(0, n, size=n)
+                sampled_channels = unique_channels[rng.integers(0, n_channels, size=n_channels)]
+                sample = np.concatenate([s["by_channel"][c] for c in sampled_channels])
                 if len(np.unique(s["y"][sample])) == 2:
                     break
             auc_ref = roc_auc_score(s["y"][sample], s["p_ref"][sample])
@@ -86,9 +103,10 @@ def _paired_bootstrap(per_seed: list[dict], n_boot: int, rng: np.random.Generato
     return {
         "point_estimate_mean_auc_diff": point_estimate,
         "bootstrap_95ci": [float(ci_low), float(ci_high)],
-        "p_value_one_sided_not_better": p_not_better,
+        "bootstrap_tail_prob_not_better": p_not_better,
         "n_bootstrap": n_boot,
         "per_seed_point_diffs": point_diffs,
+        "resampling_unit": "channel",
     }
 
 
@@ -109,7 +127,13 @@ def _compare(df: pd.DataFrame, seeds: list[int], reference_runs: list[dict],
         p_ref = _fit_predict(df, ("meta", "sched"), seed, ref_params, outer["train"], outer["val"])
         p_alt = _fit_predict(df, augmented_groups, seed, alt_params, outer["train"], outer["val"])
         y_val = df.label.astype(int).to_numpy()[outer["val"]]
-        per_seed.append({"seed": seed, "y": y_val, "p_ref": p_ref, "p_alt": p_alt})
+        channel_val = df.channel_id.to_numpy()[outer["val"]]
+        unique_channels = np.unique(channel_val)
+        by_channel = {c: np.flatnonzero(channel_val == c) for c in unique_channels}
+        per_seed.append({
+            "seed": seed, "y": y_val, "p_ref": p_ref, "p_alt": p_alt,
+            "unique_channels": unique_channels, "by_channel": by_channel,
+        })
     return _paired_bootstrap(per_seed, n_boot, rng)
 
 
@@ -133,7 +157,7 @@ def main() -> None:
     )
     print(f"  point estimate: {audio_result['point_estimate_mean_auc_diff']:+.4f} AUC")
     print(f"  95% CI: [{audio_result['bootstrap_95ci'][0]:+.4f}, {audio_result['bootstrap_95ci'][1]:+.4f}]")
-    print(f"  P(not better) one-sided: {audio_result['p_value_one_sided_not_better']:.4f}")
+    print(f"  bootstrap tail prob (not better): {audio_result['bootstrap_tail_prob_not_better']:.4f}")
 
     visual = _load_run("visual_engineered_ablation")
     seeds_v = visual["seeds"]
@@ -144,15 +168,20 @@ def main() -> None:
     )
     print(f"  point estimate: {visual_result['point_estimate_mean_auc_diff']:+.4f} AUC")
     print(f"  95% CI: [{visual_result['bootstrap_95ci'][0]:+.4f}, {visual_result['bootstrap_95ci'][1]:+.4f}]")
-    print(f"  P(not better) one-sided: {visual_result['p_value_one_sided_not_better']:.4f}")
+    print(f"  bootstrap tail prob (not better): {visual_result['bootstrap_tail_prob_not_better']:.4f}")
 
     output = {
         "method": (
-            "Paired bootstrap over validation-fold videos, resampled within each "
-            "of the 5 channel-grouped seeds independently; the mean AUC difference "
-            "across seeds is recomputed per bootstrap draw. Hyperparameters are "
-            "held fixed at their already-tuned values (no re-tuning inside the "
-            "bootstrap) so this cannot manufacture significance by searching harder."
+            "Cluster bootstrap over channels within each of the 5 channel-grouped "
+            "seeds' validation folds independently (videos are not resampled "
+            "individually -- they cluster by channel, the same reason splits are "
+            "channel-grouped); the mean AUC difference across seeds is recomputed "
+            "per bootstrap draw. Hyperparameters are held fixed at their "
+            "already-tuned values (no re-tuning inside the bootstrap) so this "
+            "cannot manufacture significance by searching harder. The reported "
+            "tail probability is descriptive (bootstrap distribution centered on "
+            "the point estimate, not on zero), not a null-centered hypothesis-test "
+            "p-value."
         ),
         "n_boot": args.n_boot,
         "rng_seed": args.rng_seed,

@@ -34,10 +34,10 @@ The "Attribution examples — pending (Integrated Gradients not implemented)" ro
 
 ## What's genuinely still open (yours, not blocked on me)
 
-- **Frozen external test-set evaluation.** The only remaining `pending` row in `claim_evidence.md`. Nothing downstream (final proofread, `\draftfalse`) can happen until this lands.
+- **Frozen external test-set evaluation.** The only remaining `pending` row in `claim_evidence.md` — but it's post-submission, not a blocker: the frozen prospective cohort started 2026-09-04, so its earliest 30-day maturity is ~2026-10-04. Final proofread and the `\draftfalse` flip do not need to wait on it (correction from an earlier draft of this note, 2026-09-07).
 - **`\drafttrue` → `\draftfalse` flip.** Deliberately left as-is so you can still see the two `PROVISIONAL` notes (audio ablation, audio+text fusion) during your read-through. Flip it right before the actual submission build — every `\note` should vanish when you do.
 - **`make_tables.py`/`make_deep_table.py`/`make_text_v2_table.py` re-run.** Deliberately not run — full retrain/re-eval, unknown runtime, and the only code change since these were last generated (the baseline F1-threshold leakage fix) is confirmed inert for AUC, which is all these tables read. Only re-run if you've touched `ytdiag/{baselines,tuning,deep_tuning}.py` since 2026-09-04.
-- **Final proofread and submission-format check** — waiting on the frozen eval above.
+- **Final proofread and submission-format check** — not actually blocked on the frozen eval (see correction above); go ahead whenever you're ready.
 
 ## Not touched
 `05_Reports/presentation/script.md` and `slides_outline.md` — didn't edit, those are mine and already used to record the video above.
